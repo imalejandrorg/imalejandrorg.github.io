@@ -6,11 +6,7 @@ navbar:
     - text: "Inicio"
       href: index.html
     - text: "Curso de R"
-      menu: 
-        - text: "Lecciones"
-          href: R_curso.html
-        - text: "Bases de datos"
-          href: Bases_datos.html
+      href: Curso_R/Curso_R/index.html
 output:
   html_document:
     theme: cosmo
