@@ -1,0 +1,12 @@
+name: "ecosistematica"
+output_dir: "."
+navbar:
+  title: "Laboratorio de Ecosistemática"
+  left:
+    - text: "Inicio"
+      href: index.html
+    - text: "Aves del CVC"
+      href: Aves_CVC.html
+output:
+  html_document:
+    theme: cosmo

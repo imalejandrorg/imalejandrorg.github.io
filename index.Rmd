@@ -1,0 +1,9 @@
+---
+title: "Inicio"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+¡Hola! Bienvenidos a la página web del Laboratorio de Ecosistemática del Centro Universitario de Ciencias Biológicas y Agropecuarias.

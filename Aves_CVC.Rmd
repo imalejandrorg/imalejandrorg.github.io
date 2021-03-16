@@ -1,0 +1,69 @@
+---
+title: "Aves del CVC"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warnings = FALSE, fig.align = 'center')
+library(tidyverse)
+library(kableExtra)
+```
+
+#### Rangos de abundancias de las aves del Complejo Volcánico de Colima
+La información de las especies de aves fue corroborada en la página de [Birds of the World](https://birdsoftheworld.org/) del **laboratorio de
+Ornitología de Cornell.**
+
+Para hacer este análisis se utilizó el siguiente código:
+
+1) Cargamos las librerías necesarias para realizar el análisis.
+```{r Chunk_1}
+library(vegan)
+library(BiodiversityR)
+```
+
+2) Cargamos las bases de datos y hacemos el filtrado correspondiente.
+```{r Chunk_2, echo=TRUE}
+Datos <- readr::read_csv("https://raw.githubusercontent.com/imalejandrorg/R_para_biologos/master/Bases_de_datos/Base%20de%20Datos%20Aves.csv") %>% data.frame()
+Aves <- dplyr::select(Datos, Aegolius.acadicus:Xiphorhynchus.flavigaster)
+Sitios <- dplyr::select(Datos, 1)
+```
+
+Estos datos están basados en las capturas con redes de niebla.
+```{r Chunk_3, echo=FALSE}
+kable(Datos, caption = "Abundancias de aves por vegetación") %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = FALSE) %>% scroll_box(width = "910px")
+```
+
+El número de especies presentes en el CVC es de **`r Datos %>% ncol - 1` aves** de acuerdo al archivo ["Base de Datos Aves.csv"](https://raw.githubusercontent.com/imalejandrorg/R_para_biologos/master/Bases_de_datos/Base%20de%20Datos%20Aves.csv) del [repositorio de Github.](https://github.com/imalejandrorg/R_para_biologos)
+
+3) Realizamos el análisis de rangos con la función *rankabundance()* del paquete de BiodiversityR.
+```{r Chunk_4, echo=TRUE}
+Rangos <- rankabundance(Aves)
+kable(Rangos, caption = "Rangos de abundancia") %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = FALSE) %>% scroll_box(width = "910px")
+```
+
+4) Hacemos el gráfico correspondiente para todos los tipos de vegetación con la función *rankabunplot*.
+```{r Chunk_5, echo=TRUE}
+rankabunplot(Rangos, scale = "abundance", specnames = c(1:8), srt = 2)
+```
+
+5) Para hacer los gráficos por cada uno de los tipos de vegetación, tenemos que usar el dataframe de los Sitios. Primero lo transformamos los sitios en factores y luego utilizamos la función *rankabuncomp*. 
+
+```{r Chunk_6, message=FALSE, warning=FALSE}
+Sitios$Veg <- factor(Sitios$Veg)
+Rangos.sitios <- rankabuncomp(Aves, y = Sitios, factor = "Veg", scale = "abundance", specnames = c(1:2), legend = FALSE)
+```
+
+
+5) **OPCIONAL:** Podemos usar las librerías de ggplot2 y ggrepel para crear mejores gráficos.
+```{r Chunk_7, fig.height=10, fig.width=14}
+library(ggplot2)
+library(ggrepel)
+
+ggplot(data = Rangos.sitios, aes(x = rank, y = abundance)) +
+  geom_line(aes(colour = Grouping), size = 0.3) +
+  geom_point(aes(colour = Grouping, shape = Grouping), size = 2, alpha = 0.5) +
+  geom_text_repel(data = subset(Rangos.sitios, labelit == TRUE),
+                  aes(colour = Grouping, label = species),
+                  angle = 6, nudge_x = 1, nudge_y = 1, show.legend = FALSE) +
+  labs(x = "Rango", y = "Abundancia", color = "Vegetación", shape = "Vegetación")
+```
+
