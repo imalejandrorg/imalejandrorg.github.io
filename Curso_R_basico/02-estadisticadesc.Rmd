@@ -1,0 +1,12 @@
+# Estadística descriptiva
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(vegan)
+library(tidyverse)
+library(kableExtra)
+```
+
+En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos medidas de tendencia central como la media, mediana y moda y medidas de dispersión como varianza, desviación estándar e intervalos de confianza.
+
+## 
