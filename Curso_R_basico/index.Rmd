@@ -22,6 +22,15 @@ Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programa
 
 Para descargar R podemos acceder al link de [esta página.](https://cran.r-project.org/bin/windows/base/)
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.asp = 5}
+  knitr::include_graphics("descargaR.png", dpi = 100)
+```
+
+
 Una vez descargado e instalado R, procedemos a descargar RStudio desde [esta página.](https://rstudio.com/products/rstudio/download/#download)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.asp = 5}
+  knitr::include_graphics("descargaRStudio.png", dpi = 120)
+```
 
 Con estas herramientas podemos comenzar a trabajar en RStudio.

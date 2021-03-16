@@ -5,4 +5,4 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Curso de R básico</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
