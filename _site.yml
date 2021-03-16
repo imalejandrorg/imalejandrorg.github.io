@@ -5,6 +5,10 @@ navbar:
   left:
     - text: "Inicio"
       href: index.html
+    - text: "Cursos"
+        menu:
+        - text: "Curso de R básico"
+        href: Curso_R/_book/index.html
 output:
   html_document:
     theme: cosmo
