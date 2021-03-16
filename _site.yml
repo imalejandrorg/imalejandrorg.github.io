@@ -9,5 +9,5 @@ navbar:
       href: Aves_CVC.html
 output:
   html_document:
-    theme: united
-    highlight: textmate
+    theme: sandstone
+    highlight: tango
