@@ -1,4 +1,4 @@
-name: "ecosistematica"
+name: "my-website"
 output_dir: "."
 navbar:
   title: "Laboratorio de Ecosistemática"
@@ -9,4 +9,5 @@ navbar:
       href: Aves_CVC.html
 output:
   html_document:
-    theme: cosmo
+    theme: united
+    highlight: textmate

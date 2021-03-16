@@ -6,4 +6,5 @@ title: "Inicio"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-¡Hola! Bienvenidos a la página web del Laboratorio de Ecosistemática del Centro Universitario de Ciencias Biológicas y Agropecuarias.
+##Bienvenida
+¡Hola! Bienvenidos a la página web del Laboratorio de Ecosistemática del Centro Universitario de Ciencias Biológicas y Agropecuarias. Esta es una previsualización de la página web.
