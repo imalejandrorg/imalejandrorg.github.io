@@ -13,5 +13,5 @@ navbar:
           href: Bases_datos.html
 output:
   html_document:
-    theme: sandstone
+    theme: cosmo
     highlight: textmate
