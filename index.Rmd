@@ -8,4 +8,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Bienvenida
 
-¡Hola! Bienvenidos a la página web del Laboratorio de Ecosistemática del Centro Universitario de Ciencias Biológicas y Agropecuarias. Esta es una previsualización de la página web.
+¡Hola! Bienvenidos a la página web.

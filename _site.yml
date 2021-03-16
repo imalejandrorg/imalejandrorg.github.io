@@ -1,12 +1,16 @@
 name: "my-website"
 output_dir: "."
 navbar:
-  title: "Laboratorio de Ecosistemática"
+  title: "Alejandro Ruiz"
   left:
     - text: "Inicio"
       href: index.html
-    - text: "Aves del CVC"
-      href: Aves_CVC.html
+    - text: "Curso de R"
+      menu: 
+        - text: "Lecciones"
+          href: R_curso.html
+        - text: "Bases de datos"
+          href: Bases_datos.html
 output:
   html_document:
     theme: sandstone

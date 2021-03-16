@@ -1,0 +1,12 @@
+---
+title: "Bases de datos"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Aquí podran descargar las bases de datos para las correspondientes lecciones.
+
+## Lección 1
+Base de datos de la lección 1.
