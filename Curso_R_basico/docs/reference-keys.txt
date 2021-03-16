@@ -9,7 +9,13 @@ comentarios
 exportar-datos
 pedir-ayuda
 estadística-descriptiva
-section
+medidas-de-tendencia-central
+media-en-r
+mediana-en-r
+la-función-summary
+visualización-básica-de-datos
+valores-atípicos
+el-uso-de-la-librería-dplyr
 methods
 applications
 example-one

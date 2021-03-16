@@ -9,4 +9,248 @@ library(kableExtra)
 
 En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos medidas de tendencia central como la media, mediana y moda y medidas de dispersión como varianza, desviación estándar e intervalos de confianza.
 
-## 
+## Medidas de tendencia central
+Los estadísticos descriptivos sirven para describir parte de la información de nuestros datos. Las tres medidas de tendencia central más utilizadas son:
+
+* **Moda:** Es el valor que más se repite en un conjunto de datos. Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella.
+
+* **Media:** Mide el promedio del valor de nuestros datos. Se calcula como la suma de las observaciones dividida entre el número de observaciones.
+
+$$
+  \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
+$$
+Donde $\sum_{i=1}^{n}{x_i}$ representa la sumatoria de los valores de todas nuestras observaciones y $n$ es el número de observaciones.
+
+* **Mediana:** Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos.
+$$
+1, 2, 3, 4, 5
+$$
+
+En este caso, la mediana es igual al número 3 que se encuentra justo por la mitad de los datos. En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
+$$
+5, 6, 7, 8, 9, 10
+$$
+
+En este caso nuestros valores centrales son 7 y 8. Estos simplemente se promedian.
+$$
+\tilde{x} = \frac{7 + 8}{2} = 7.5
+$$
+
+### Media en R
+El cálculo de la media en R para un conjunto de datos es relativamente sencillo. Para ello implementamos la función *mean()*.
+```{r}
+library(vegan)
+data("iris")
+mean(iris$Sepal.Length)
+```
+
+Hemos calculado la media o el promedio para la longitud del sepalo del grupo de datos "iris" que viene incluida en el paquete *vegan*. Como en esta base de datos tenemos numerosas variables, nos referimos a una variable específica utilizando el símbolo $ seguido del nombre de la variable de interés.
+
+Si quisiéramos podemos almacenar el promedio de la longitud y el ancho de los sépalos en una variable nueva.
+```{r}
+Long.Prom <- mean(iris$Sepal.Length)
+Long.Prom
+
+Ancho.Prom <- mean(iris$Sepal.Width)
+Ancho.Prom
+
+Sepalos <- data.frame(Long.Prom, Ancho.Prom)
+Sepalos
+```
+
+De esta manera obtenemos nuestra matriz con los promedios del largo y ancho de los sépalos. Si tuviéramos muestras de distintas poblaciones, podríamos generar una tabla con la media de cada población.
+
+Es importante que especifiquemos de qué variable queremos estimar el promedio con el símbolo $, de lo contrario podemos obtener errores.
+
+### Mediana en R
+La mediana sigue una lógica muy similar a la media. Simplemente utilizamos la función *median()* para obtener nuestro valor de interés.
+```{r}
+median(iris$Sepal.Length)
+```
+
+De nuevo, podemos hacer una matriz de datos con las medianas de nuestras observaciones.
+```{r}
+Long.Median <- median(iris$Sepal.Length)
+Long.Median
+
+Ancho.Median <- median(iris$Sepal.Width)
+Ancho.Median
+
+Sepalos2 <- data.frame(Long.Median, Ancho.Median)
+Sepalos2
+```
+
+Incluso podríamos combinar ambas matrices (promedio y mediana) en una sola.
+
+```{r}
+Sepalos.Resumen <- data.frame(Sepalos, Sepalos2)
+Sepalos.Resumen
+```
+
+También podríamos optar por escribir directamente las nuevas variables de la mediana sobre la matriz de datos que ya habíamos generado para las medias.
+```{r}
+Sepalos$Long.Median <- median(iris$Sepal.Length)
+Sepalos$Ancho.Median <- median(iris$Sepal.Width)
+Sepalos
+```
+
+Como podemos ver, el resultado es el mismo. Al nosotros escribir Sépalos$Long.Median y asignarle una función, estamos generando una nueva variable en la matriz de datos preexistente aunque en dicha matriz no existía previamente la variable Long.Median. Ambas son técnicas distintas de llegar al mismo resultado y ambas son perfectamente válidas.
+
+```{r}
+Sepalos
+Sepalos.Resumen
+```
+
+Incluso podemos calcular la media y la mediana para los valores de los pétalos y resumir todo en una sola matriz.
+```{r}
+Pet.Long.Mean <- mean(iris$Petal.Length)
+Pet.Ancho.Mean <- mean(iris$Petal.Width)
+Pet.Long.Median <- median(iris$Petal.Length)
+Pet.Ancho.Median <- median(iris$Petal.Width)
+Resumen.iris <- data.frame(Sepalos, Pet.Long.Mean, Pet.Ancho.Mean, Pet.Long.Median, Pet.Ancho.Median)
+Resumen.iris
+```
+
+Lo ideal sería cambiar el nombre a las primeras 4 columnas para indicar que se trata de sépalos. También podemos hacer esto.
+```{r}
+colnames(Resumen.iris)[colnames(Resumen.iris) %in% c("Long.Prom", "Ancho.Prom", "Long.Median", "Ancho.Median")] <- c("Sep.Long.Prom", "Sep.Ancho.Prom", "Sep.Long.Median", "Sep.Ancho.Median")
+Resumen.iris
+```
+
+El operador %in% sirve para subsetear datos. En este caso, le indicamos que queremos que a las variables con nombre "Long.Prom", "Ancho.Prom", "Long.Median", "Ancho.Median" les asigne un nuevo nombre, indicado con <- y la función de concatenar *c*.
+
+### La función *summary*
+Como pudimos observar, hacer todos estos cálculos uno por uno harían que nuestro script sea demasiado largo. Debido a esto, podemos utilizar una función llamada *summary()* que nos da estos mismos estadísticos y otros adicionales que serán de mucha ayuda.
+```{r}
+summary(iris)
+```
+
+Esta función además de darnos la media y la mediana, nos da los valores mínimos y máximos, además del primer y tercer cuartil (utilizados para generar gráficos de boxplot) y nos dice cuántas observaciones tenemos de cada una de las especies.
+
+Podríamos guardar este resumen en una variable.
+```{r}
+summ.iris <- summary(iris)
+summ.iris
+```
+
+### Visualización básica de datos
+Podemos graficar, por ejemplo, la base de datos iris.
+```{r}
+plot(iris)
+```
+
+Como podemos ver, tenemos una gráfica compleja donde no se pueden apreciar del todo bien los datos. Para hacer una gráfica de, por ejemplo, la longitud de los sépalos de cada una de las especies, tenemos que agregar ciertos argumentos a la función *plot()*.
+```{r}
+plot(iris, x = iris$Species, y = iris$Sepal.Length)
+```
+También podemos graficar la relación entre dos variables para observar como estas van cambiando.
+```{r}
+plot(x = iris$Petal.Length, y = iris$Petal.Width)
+```
+
+Por ejemplo, graficamos la relación que existe entre la longitud del petal y su ancho. A primera vista parece existir una correlación positiva entre ambos.
+
+Podemos agregar más argumentos a nuestro gráfico para hacerlo más presentable.
+```{r}
+plot(x = iris$Petal.Length, y = iris$Petal.Width, main = "Gráfico de relación entre la longitud y el ancho del petalo",
+     sub = "Datos obtenidos de la base de datos iris", xlab = "Longitud del petalo", ylab = "Ancho del petalo")
+```
+
+Los argumentos *main* y *sub* sirven para darle un título y un subtítulo a nuestro gráfico, respectivamente. Los argumentos *xlab* y *ylab* sirven para nombrar los ejes x y y.
+
+
+Otros argumentos con los que podemos modificar la forma, color y contorno de los puntos son *pch*, *bg* y *col*, respectivamente. Con el argumento *cex* podemos modificar el tamaño de los puntos.
+```{r}
+plot(x = iris$Petal.Length, y = iris$Petal.Width, main = "Gráfico de relación entre la longitud y el ancho del petalo",
+     sub = "Datos obtenidos de la base de datos iris", xlab = "Longitud del petalo", ylab = "Ancho del petalo", cex = 0.8,
+     col = iris$Species, pch = 20)
+```
+
+Es necesario que para que el relleno (argumento *bg*) sea visible, se necesitan *pch = 21:25*, en este caso utilizamos pch = 20. Al no poner ningún valor para *col* el contorno de los puntos es negro.
+
+Las leyendas con los comandos R de base no son muy bonitas y son poco intuitivas. Para esto utilizaremos una librería más adelante llamada *ggplot2*.
+
+### Valores atípicos
+```{r echo=FALSE}
+plot(iris, x = iris$Species, y = iris$Sepal.Length)
+```
+
+Como podemos ver en el gráfico anterior, en el eje de las ordenadas tenemos a las tres especies: *Iris setosa, I. versicolor e I. virginica*. Esta es una gráfica llamada boxplot y se construye a partir de los datos que tenemos en nuestro resumen. La parte inferior de la caja corresponde al primer cuartil, la línea negra central corresponde a la mediana y la parte superior de la caja corresponde al tercer cuartil. Las líneas que salen de la caja corresponden a los valores máximos y mínimos que no son valores atípicos o *outliers*. Un valor atípico es aquel que se sale de la cerca superior e inferior, pero, ¿cómo se definen estos límites?
+
+Para el calculo de estas cercas se implementan las siguientes fórmulas:
+$$
+Cerca_i = Q_1 - 1.5 * IQR \\
+Cerca_s = Q_3 + 1.5 * IQR
+$$
+
+Donde $Cerca_i$ y $Cerca_s$ corresponden a la cerca inferior y superior, respectivamente, y el valor de $IQR$ corresponde al rango intercuartil (diferencia entre el primer y tercer cuartil $IQR = Q_3 - Q_1$). Por ejemplo, para la especies *I. virginica* el $IQR$ de la longitud del sepalo es el siguiente:
+$$
+IQR = 6.9 - 6.225 = 0.675
+$$
+
+Y las cercas correspondientes son:
+$$
+Cerca_i = 6.225 - 1.5*0.675 = 5.2125 \\
+Cerca_s = 6.9 + 1.5*0.675 = 7.9125
+$$
+
+Aunque no están incluidas en el boxplot, nuestras cercas inferior y superior son 5.2125 y 7.9125, respectivamente. Cualquier valor por encima o por debajo de este límite será considerado un valor atípico o *outlier*. Aunque las cercas no se incluyen en el boxplot, este sí gráfica los puntos cuando estos son considerados como valores atípicos, como en el caso del punto que podemos observar en *I. virginica*, que tiene un valor menor a 5.2125, específicamente, tiene un valor de 4.9. Incluso nosotros podríamos buscar este valor utilizando una serie de filtros.
+```{r}
+iris %>% dplyr::filter(Sepal.Length <= 5.2125)
+```
+
+Como podemos ver, la mayoría de las especies con valores inferiores a 5.2125 corresponden a otras especies, sin embargo, tenemos una única observación de la especies *I. virginica* con estas características. Los valores atípicos nos pueden indicar errores en la medición, en nuestra instrumentación, entre otras 
+
+### El uso de la librería *dplyr*
+Para facilitar aún más las cosas podemos utilizar las herramientas de la librería *dplyr* que vienen incluidas en el paquete de *tidyverse*.
+```{r}
+library(tidyverse)
+```
+
+Las funciones más importantes de este paquete son:
+
+* **group_by:** agrupa datos.
+
+* **summarize** o **summarise:** resumen de datos agrupados.
+
+* **filter:** encuentra filas con ciertas condiciones.
+
+* **select:** junto a 'starts_with', 'ends_with' o 'contains'
+
+* **mutate:** genera nuevas variables.
+
+* **%>%:** pipeline.
+
+* **arrange:** ordena.
+
+Con *dplyr* la extracción de la media y la mediana es a través de la función *summarise* y sería así:
+```{r}
+data("iris")
+resum.iris <- summarise(iris, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
+resum.iris
+```
+
+Pero supongamos que quiero extraer estos valores de cada una de las especies. Para esto utilizamos la función *group_by*:
+```{r}
+iris.especies <- group_by(iris, Species) #Aparentemente esta función no cambia la matriz de datos, sin embargo si hacemos un summarise estos se ordenarán por la forma en que los agrupamos.
+resum.iris.especies <- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
+resum.iris.especies
+```
+
+Con la función *mutate* nosotros podemos crear nuevas variables. Por ejemplo, la relación entre longitud del pétalo-ancho del pétalo.
+```{r}
+iris <- mutate(iris, Petal.Leng.Wid.Ratio = Petal.Length/Petal.Width)
+iris$Petal.Leng.Wid.Ratio
+```
+
+Para realizar operaciones de manera secuencial utilizamos el *pipeline %>%*. En lugar de escribir el siguiente código y asignar dos variables, podemos hacer todo de una.
+```{r}
+#iris.especies <- group_by(iris, Species)
+#resum.iris.especies <- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length)) 
+
+resum.iris.especies2 <- iris %>%
+  group_by(Species) %>% 
+  summarise(Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
+resum.iris.especies2
+```
+
