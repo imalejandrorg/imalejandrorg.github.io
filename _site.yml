@@ -10,4 +10,4 @@ navbar:
 output:
   html_document:
     theme: sandstone
-    highlight: tango
+    highlight: textmate
