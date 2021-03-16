@@ -1,14 +1,14 @@
-name: "my-website"
-output_dir: "."
+name: "Alejandro Ruiz"
 navbar:
   title: "Alejandro Ruiz"
   left:
     - text: "Inicio"
       href: index.html
     - text: "Cursos"
-        menu:
-        - text: "Curso de R básico"
-        href: Curso_R/_book/index.html
+      menu:
+      - text: "Curso de R básico"
+        href: Curso_R_basico/docs/index.html
+output_dir: "."
 output:
   html_document:
     theme: cosmo
