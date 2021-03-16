@@ -6,7 +6,7 @@ navbar:
     - text: "Inicio"
       href: index.html
     - text: "Curso de R"
-      href: Curso_R/Curso_R/index.html
+      href: Curso_R/_book/index.html
 output:
   html_document:
     theme: cosmo
