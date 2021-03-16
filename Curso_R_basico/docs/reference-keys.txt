@@ -1,6 +1,5 @@
 fig:nice-fig
 tab:nice-tab
-prerequisites
 intro
 literature
 methods
@@ -8,3 +7,7 @@ applications
 example-one
 example-two
 final-words
+introducción
+descargando-r
+descargando-r-y-rstudio
+descargando-r-y-rstudio-1
