@@ -143,7 +143,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
-<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.4</b> Importar datos a R</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.5</b> Comentarios</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.6</b> Exportar datos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
 <li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
@@ -175,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introducción-a-r" class="section level1" number="1">
 <h1><span class="header-section-number">Lección 1</span> Introducción a R</h1>
-<p>En esta lección veremos las nociones más básicas de R y RStudio y podremos realizar análisis simples.</p>
+<p>En esta lección veremos las nociones más básicas de R y RStudio, cómo escribir tablas, cómo importar datos, entre otras cosas.</p>
 <div id="interfaz" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Interfaz</h2>
 <p>R Studio cuenta con 4 ventanas esenciales:</p>
@@ -197,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="NProj.png" width="431" style="display: block; margin: auto;" /></p>
 <p>Creamos un nuevo directorio que se guarda por defecto en la carpeta de <em>Documentos</em> de nuestro ordenador.</p>
 <p>SE RECOMIENDA NO DEJAR ESPACIOS EN EL NOMBRE. En su lugar, podemos utilizar guión bajo (_), el símbolo de menos (-) o un punto (.).
-Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shitf + N. Deberíamos tener un ambiente de trabajo más o menos así.</p>
+Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shift + N. Deberíamos tener un ambiente de trabajo más o menos así.</p>
 <p><img src="Proj1.png" width="1536" style="display: block; margin: auto;" />
 Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, así como las bases de datos y demás archivos que vayamos a utilizar.</p>
 <p>Para saber cuál es la carpeta de nuestro proyecto, podemos teclear el siguiente comando en la consola.</p>
@@ -2174,13 +2176,25 @@ Callcusp
 </table>
 </div>
 </div>
-<div id="importar-datos-a-r" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Importar datos a R</h2>
-<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
+<div id="instalar-paquetes" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Instalar paquetes</h2>
+<p>Una de las herramientas más útiles de R es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.</p>
+<p>Por ejemplo, uno de los paquetes más utilizados es el de <em>vegan</em>, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vegan&quot;</span>)</span></code></pre></div>
+<p>Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escrito con una v minúscula. Tenemos que entender que instalar un paquete no es lo mismo que <em>llamarlo</em>. Para esto último utilizamos la siguiente función.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
+<p>Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <em>install.package()</em> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
+<img src="Package1.png" width="543" style="display: block; margin: auto;" /></p>
+<p>Damos clic en Install y escribimos el nombre del paquete.
+<img src="Package2.png" width="307" style="display: block; margin: auto;" /></p>
+<p>Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
+<img src="Package3.png" width="307" style="display: block; margin: auto;" />
+## Importar datos a R
+La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
 <p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <em>read.table()</em>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span>
-<span id="cb35-2"><a href="introducción-a-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(Aves)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span>
+<span id="cb37-2"><a href="introducción-a-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(Aves)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:910px; ">
 <table class="table table-striped table-bordered table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -6256,18 +6270,42 @@ arbustal
 </table>
 </div>
 <p>También podemos importar archivos .csv utilizando la función <em>read.csv()</em>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>)</span></code></pre></div>
 <p>Así obtendríamos la misma tabla anterior.</p>
 <p>En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería <em>readxl</em>. En caso de ya tener instalado el paquete no es necesario que pongan la función <em>install.packages(“readxl”)</em>, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;readxl&quot;)</span></span>
-<span id="cb37-2"><a href="introducción-a-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb37-3"><a href="introducción-a-r.html#cb37-3" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Aves.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;readxl&quot;)</span></span>
+<span id="cb39-2"><a href="introducción-a-r.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb39-3"><a href="introducción-a-r.html#cb39-3" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Aves.xlsx&quot;</span>)</span></code></pre></div>
 <p>Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada <em>tibble</em>. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.</p>
 <p>Para hacer esto podemos escribir el siguiente código</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aves_xlsx)</span>
-<span id="cb38-2"><a href="introducción-a-r.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introducción-a-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aves_xlsx)</span>
+<span id="cb40-2"><a href="introducción-a-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <p>Básicamente le estamos diciendo a R que escriba un data frame con el mismo nombre que el data frame de subtipo tibble. De esta manera sobrescribimos el primer archivo y mantenemos limpio nuestro espacio de trabajo.</p>
+<p>También se puede importar desde el botón <em>Import Dataset</em> que aparece en la ventana de nuestro Environment.
+<img src="Import.png" width="542" style="display: block; margin: auto;" /></p>
+<p>De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.</p>
+</div>
+<div id="comentarios" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Comentarios</h2>
+<p>Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introducción-a-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esta función sirve para importar archivos.</span></span>
+<span id="cb42-2"><a href="introducción-a-r.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span></code></pre></div>
+<p>Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.</p>
+</div>
+<div id="exportar-datos" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Exportar datos</h2>
+<p>En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función <em>write</em>, por ejemplo.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtramos nuestro archivo para tener solo las abundancias.</span></span>
+<span id="cb43-2"><a href="introducción-a-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a>Abun <span class="ot">&lt;-</span> Aves[,<span class="dv">4</span><span class="sc">:</span><span class="dv">35</span>]</span>
+<span id="cb43-3"><a href="introducción-a-r.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="introducción-a-r.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportamos nuestro archivo en formato .csv</span></span>
+<span id="cb43-5"><a href="introducción-a-r.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introducción-a-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Como podemos ver, el archivo fue escrito en la dirección indicada.
+<img src="SaveTable.png" width="537" style="display: block; margin: auto;" /></p>
+<p><img src="SaveTable2.png" width="1843" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

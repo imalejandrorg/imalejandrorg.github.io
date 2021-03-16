@@ -7,7 +7,7 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-En esta lección veremos las nociones más básicas de R y RStudio y podremos realizar análisis simples.
+En esta lección veremos las nociones más básicas de R y RStudio, cómo escribir tablas, cómo importar datos, entre otras cosas.
 
 ## Interfaz
 R Studio cuenta con 4 ventanas esenciales: 
@@ -43,7 +43,7 @@ knitr::include_graphics("NProj.png", dpi = 120)
 Creamos un nuevo directorio que se guarda por defecto en la carpeta de *Documentos* de nuestro ordenador.
 
 SE RECOMIENDA NO DEJAR ESPACIOS EN EL NOMBRE. En su lugar, podemos utilizar guión bajo (_), el símbolo de menos (-) o un punto (.).
-Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shitf + N. Deberíamos tener un ambiente de trabajo más o menos así.
+Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shift + N. Deberíamos tener un ambiente de trabajo más o menos así.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
 knitr::include_graphics("Proj1.png", dpi = 120)
@@ -103,6 +103,33 @@ class(dune)
 knitr::kable(dune) %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = TRUE) %>% scroll_box(width = "910px")
 ```
 
+## Instalar paquetes
+Una de las herramientas más útiles de R es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.
+
+Por ejemplo, uno de los paquetes más utilizados es el de *vegan*, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.
+```{r warning=FALSE}
+install.packages("vegan")
+```
+
+Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escrito con una v minúscula. Tenemos que entender que instalar un paquete no es lo mismo que *llamarlo*. Para esto último utilizamos la siguiente función.
+```{r}
+library(vegan)
+```
+
+Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función *install.package()* puede arrojarnos error. Una alternativa es utilizar la ventana de *Packages* del panel inferior derecho.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("Package1.png", dpi = 120)
+```
+
+Damos clic en Install y escribimos el nombre del paquete.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("Package2.png", dpi = 120)
+```
+
+Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("Package3.png", dpi = 120)
+```
 ## Importar datos a R
 La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de @Palacio2020. Utilizaremos una base de datos de aves del capítulo 6 del libro de @Palacio2020.
 
@@ -141,3 +168,44 @@ class(Aves_xlsx)
 ```
 
 Básicamente le estamos diciendo a R que escriba un data frame con el mismo nombre que el data frame de subtipo tibble. De esta manera sobrescribimos el primer archivo y mantenemos limpio nuestro espacio de trabajo.
+
+También se puede importar desde el botón *Import Dataset* que aparece en la ventana de nuestro Environment.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("Import.png", dpi = 120)
+```
+
+De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.
+
+## Comentarios
+Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.
+```{r}
+#Esta función sirve para importar archivos.
+Aves <- read.table("Aves.txt")
+```
+
+Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.
+
+## Exportar datos
+En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función *write*, por ejemplo.
+```{r}
+#Filtramos nuestro archivo para tener solo las abundancias.
+Abun <- Aves[,4:35]
+
+#Exportamos nuestro archivo en formato .csv
+write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE, col.names = FALSE)
+```
+
+De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.
+
+```{r}
+write.table(Abun, file = "O:/Documentos/R_Basico/Lección_1/Abundancias.csv", sep = ",", row.names = FALSE, col.names = FALSE)
+```
+
+Como podemos ver, el archivo fue escrito en la dirección indicada.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("SaveTable.png", dpi = 120)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("SaveTable2.png", dpi = 100)
+```
