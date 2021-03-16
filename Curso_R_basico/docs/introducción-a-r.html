@@ -144,8 +144,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
 <li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
-<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.5</b> Comentarios</a></li>
-<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.6</b> Exportar datos</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
 <li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
@@ -2188,9 +2190,11 @@ Callcusp
 <p>Damos clic en Install y escribimos el nombre del paquete.
 <img src="Package2.png" width="307" style="display: block; margin: auto;" /></p>
 <p>Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
-<img src="Package3.png" width="307" style="display: block; margin: auto;" />
-## Importar datos a R
-La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
+<img src="Package3.png" width="307" style="display: block; margin: auto;" /></p>
+</div>
+<div id="importar-datos-a-r" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Importar datos a R</h2>
+<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
 <p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <em>read.table()</em>.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span>
@@ -6286,15 +6290,15 @@ arbustal
 <img src="Import.png" width="542" style="display: block; margin: auto;" /></p>
 <p>De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.</p>
 </div>
-<div id="comentarios" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Comentarios</h2>
+<div id="comentarios" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Comentarios</h2>
 <p>Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introducción-a-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esta función sirve para importar archivos.</span></span>
 <span id="cb42-2"><a href="introducción-a-r.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span></code></pre></div>
 <p>Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.</p>
 </div>
-<div id="exportar-datos" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Exportar datos</h2>
+<div id="exportar-datos" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Exportar datos</h2>
 <p>En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función <em>write</em>, por ejemplo.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtramos nuestro archivo para tener solo las abundancias.</span></span>
 <span id="cb43-2"><a href="introducción-a-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a>Abun <span class="ot">&lt;-</span> Aves[,<span class="dv">4</span><span class="sc">:</span><span class="dv">35</span>]</span>
@@ -6306,6 +6310,13 @@ arbustal
 <p>Como podemos ver, el archivo fue escrito en la dirección indicada.
 <img src="SaveTable.png" width="537" style="display: block; margin: auto;" /></p>
 <p><img src="SaveTable2.png" width="1843" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pedir-ayuda" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Pedir ayuda</h2>
+<p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación ?.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-r.html#cb45-1" aria-hidden="true" tabindex="-1"></a>?specaccum</span></code></pre></div>
+<p>Cuando nosotros escribimos esto, se abrirá la ventana de <em>Help</em> en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.</p>
+<p><img src="help.png" width="542" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

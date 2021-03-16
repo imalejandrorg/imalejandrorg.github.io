@@ -4,8 +4,10 @@ interfaz
 creando-nuestro-primer-proyecto
 objetos-y-variables
 instalar-paquetes
+importar-datos-a-r
 comentarios
 exportar-datos
+pedir-ayuda
 literature
 methods
 applications

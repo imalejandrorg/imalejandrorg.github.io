@@ -34,6 +34,7 @@ knitr::include_graphics("Apariencia.png", dpi = 120)
 
 Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema **Material**.
 
+
 ## Creando nuestro primer proyecto
 Una vez que nos familiarizamos con la interfaz, es momento de crear nuestro primer proyecto. Para esto, debemos dar clic en ***File -> New Project*** para que nos aparezca una ventana como la siguiente.
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
@@ -60,6 +61,7 @@ setwd("O:/Documentos/R_Basico")
 getwd()
 ```
 De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas Ctrl + S. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.
+
 
 ## Objetos y variables
 Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos *<-* o *=* (cuyo atajo de escritura es Alt + -). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.
@@ -103,6 +105,7 @@ class(dune)
 knitr::kable(dune) %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = TRUE) %>% scroll_box(width = "910px")
 ```
 
+
 ## Instalar paquetes
 Una de las herramientas más útiles de R es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.
 
@@ -130,6 +133,7 @@ Nos irán apareciendo opciones con el nombre del paquete de interés. Lo selecci
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
 knitr::include_graphics("Package3.png", dpi = 120)
 ```
+
 ## Importar datos a R
 La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de @Palacio2020. Utilizaremos una base de datos de aves del capítulo 6 del libro de @Palacio2020.
 
@@ -176,6 +180,7 @@ knitr::include_graphics("Import.png", dpi = 120)
 
 De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.
 
+
 ## Comentarios
 Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.
 ```{r}
@@ -184,6 +189,7 @@ Aves <- read.table("Aves.txt")
 ```
 
 Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.
+
 
 ## Exportar datos
 En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función *write*, por ejemplo.
@@ -208,4 +214,17 @@ knitr::include_graphics("SaveTable.png", dpi = 120)
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
 knitr::include_graphics("SaveTable2.png", dpi = 100)
+```
+
+
+## Pedir ayuda
+En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación ?.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+?specaccum
+```
+
+Cuando nosotros escribimos esto, se abrirá la ventana de *Help* en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+knitr::include_graphics("help.png", dpi = 120)
 ```
