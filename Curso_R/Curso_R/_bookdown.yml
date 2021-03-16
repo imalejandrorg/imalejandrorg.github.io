@@ -1,0 +1,6 @@
+book_filename: "Curso_R"
+delete_merged_file: true
+outpit_dir: "docs"
+language:
+  ui:
+    chapter_name: "Chapter "
