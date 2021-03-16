@@ -1,5 +1,9 @@
 descarga-de-r-y-rstudio
 introducción-a-r
+interfaz
+creando-nuestro-primer-proyecto
+objetos-y-variables
+importar-datos-a-r
 literature
 methods
 applications

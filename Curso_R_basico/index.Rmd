@@ -7,14 +7,18 @@ bibliography:
 - book.bib
 - packages.bib
 biblio-style: apalike
+csl: apa.csl
 link-citations: yes
 description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 library(knitr)
 library(bookdown)
-knitr::opts_chunk$set(echo = TRUE)
+library(vegan)
+library(tidyverse)
+library(kableExtra)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 # Requisitos {-}
@@ -25,7 +29,7 @@ Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programa
 
 Para descargar R podemos acceder al link de [esta página.](https://cran.r-project.org/bin/windows/base/)
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.asp = 5}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.asp = 5}
   knitr::include_graphics("descargaR.png", dpi = 100)
 ```
 
