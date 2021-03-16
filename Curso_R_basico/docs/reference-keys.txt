@@ -1,8 +1,7 @@
-descargando-r-y-rstudio-1
+introducción-a-r
 literature
 methods
 applications
 example-one
 example-two
 final-words
-fig:unnamed-chunk-1
