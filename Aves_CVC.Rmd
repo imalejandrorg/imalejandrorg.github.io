@@ -22,7 +22,8 @@ library(BiodiversityR)
 
 2) Cargamos las bases de datos y hacemos el filtrado correspondiente.
 ```{r Chunk_2, echo=TRUE}
-Datos <- readr::read_csv("https://raw.githubusercontent.com/imalejandrorg/R_para_biologos/master/Bases_de_datos/Base%20de%20Datos%20Aves.csv") %>% data.frame()
+Datos <- readr::read_csv(
+  "https://raw.githubusercontent.com/imalejandrorg/R_para_biologos/master/Bases_de_datos/Base%20de%20Datos%20Aves.csv") %>% data.frame()
 Aves <- dplyr::select(Datos, Aegolius.acadicus:Xiphorhynchus.flavigaster)
 Sitios <- dplyr::select(Datos, 1)
 ```
@@ -37,7 +38,8 @@ El número de especies presentes en el CVC es de **`r Datos %>% ncol - 1` aves**
 3) Realizamos el análisis de rangos con la función *rankabundance()* del paquete de BiodiversityR.
 ```{r Chunk_4, echo=TRUE}
 Rangos <- rankabundance(Aves)
-kable(Rangos, caption = "Rangos de abundancia") %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = FALSE) %>% scroll_box(width = "910px")
+kable(Rangos, caption = "Rangos de abundancia") %>%
+  kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = FALSE) %>% scroll_box(width = "910px")
 ```
 
 4) Hacemos el gráfico correspondiente para todos los tipos de vegetación con la función *rankabunplot*.
@@ -49,7 +51,8 @@ rankabunplot(Rangos, scale = "abundance", specnames = c(1:8), srt = 2)
 
 ```{r Chunk_6, message=FALSE, warning=FALSE}
 Sitios$Veg <- factor(Sitios$Veg)
-Rangos.sitios <- rankabuncomp(Aves, y = Sitios, factor = "Veg", scale = "abundance", specnames = c(1:2), legend = FALSE)
+Rangos.sitios <- rankabuncomp(Aves, y = Sitios, factor = "Veg", scale = "abundance",
+                              specnames = c(1:2), legend = FALSE)
 ```
 
 
