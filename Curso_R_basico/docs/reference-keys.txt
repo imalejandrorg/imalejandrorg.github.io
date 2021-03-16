@@ -1,13 +1,7 @@
-fig:nice-fig
-tab:nice-tab
-intro
+descargando-r-y-rstudio-1
 literature
 methods
 applications
 example-one
 example-two
 final-words
-introducción
-descargando-r
-descargando-r-y-rstudio
-descargando-r-y-rstudio-1

@@ -13,6 +13,7 @@ description: Curso de R cubriendo los aspectos básicos para el análisis de dat
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(bookdown)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,9 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programación y RStudio es el ambiente de trabajo donde utilizamos este lenguaje de programación.
 
 Para descargar R podemos acceder al link de [esta página.](https://cran.r-project.org/bin/windows/base/)
-```{r Imagen1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
-  knitr::include_graphics("O:/Documentos/Universidad/Images/Curso_R_basico/1.png")
-```
-
 
 Una vez descargado e instalado R, procedemos a descargar RStudio desde [esta página.](https://rstudio.com/products/rstudio/download/#download)
+
+Con estas herramientas podemos comenzar a trabajar en RStudio.
