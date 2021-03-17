@@ -40,6 +40,7 @@ $$
 
 ### Media en R
 El cálculo de la media en R para un conjunto de datos es relativamente sencillo. Para ello implementamos la función `mean()`. Podemos ver un resumen de los primeros 10 datos con la función `head()`.
+
 ```{r}
 library(vegan)
 data("iris")
@@ -50,6 +51,7 @@ mean(iris$Sepal.Length)
 Hemos calculado la media o el promedio para la longitud del sepalo del grupo de datos `iris` que viene incluida en el paquete `vegan`. Como en esta base de datos tenemos numerosas variables, nos referimos a una variable específica utilizando el símbolo $ seguido del nombre de la variable de interés.
 
 Si quisiéramos podemos almacenar el promedio de la longitud y el ancho de los sépalos en una variable nueva.
+
 ```{r}
 Long.Prom <- mean(iris$Sepal.Length)
 Long.Prom
@@ -67,6 +69,7 @@ Es importante que especifiquemos de qué variable queremos estimar el promedio c
 
 ### Mediana en R
 La mediana sigue una lógica muy similar a la media. Simplemente utilizamos la función `median()` para obtener nuestro valor de interés.
+
 ```{r}
 median(iris$Sepal.Length)
 ```
@@ -124,6 +127,7 @@ El operador %in% sirve para subsetear datos. En este caso, le indicamos que quer
 
 ### La función `summary`
 Como pudimos observar, hacer todos estos cálculos uno por uno harían que nuestro script sea demasiado largo. Debido a esto, podemos utilizar una función llamada `summary()` que nos da estos mismos estadísticos y otros adicionales que serán de mucha ayuda.
+
 ```{r}
 summary(iris)
 ```
@@ -138,6 +142,7 @@ summ.iris
 
 ### Visualización básica de datos
 Podemos graficar, por ejemplo, la base de datos iris.
+
 ```{r}
 plot(iris)
 ```
@@ -237,6 +242,7 @@ Una medida derivad de la desviación estándar es la varianza. Se obtiene de for
 
 ### Rango en R
 El rango es simplemente la diferencia entre el valor más grande y el más chico. Su calculo en R se puede hacer con la función `range()`.
+
 ```{r}
 range(iris$Petal.Length)
 ```
@@ -251,7 +257,8 @@ Rango <- max(iris$Petal.Length) - min(iris$Petal.Length)
 Rango
 ```
 ### Desviación estándar en R
-Para obtener la desviación estándar en R lo único que necesitamos es utilizar la fución `sd()`. 
+Para obtener la desviación estándar en R lo único que necesitamos es utilizar la fución `sd()`.
+
 ```{r}
 SD <- sd(iris$Petal.Length)
 SD
@@ -276,6 +283,7 @@ Podemos hacer también el calculo de medidas de posición como las siguientes:
 \end{equation}
 
 En este caso, utilizaremos la base de datos de aves que vimos en la lección anterior.
+
 ```{r}
 Aves <- read.table("Aves.txt", header = TRUE)
 ```
@@ -320,6 +328,7 @@ Las funciones más importantes de este paquete son:
 * `arrange:` ordena.
 
 Con `dplyr` la extracción de la media y la mediana es a través de la función `summarise` y sería así:
+
 ```{r}
 data("iris")
 resum.iris <- summarise(iris, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
@@ -406,4 +415,9 @@ Petals <- iris %>% dplyr::select(Petal.Length, Petal.Width, Species)
 Petals
 ```
 
-En este caso, eliminamos los datos de los sépalos y nos quedamos con los datos solamente de los pétalos. 
+En este caso, eliminamos los datos de los sépalos y nos quedamos con los datos solamente de los pétalos. Otra forma de seleccionar las variables es con el argumento `starts_with()`, por ejemplo, para seleccionar solamente las variables que empiecen con la palabra "Petal".
+
+```{r}
+Petals2 <- iris %>% dplyr::select(starts_with("Petal"), Species)
+Petals2
+```

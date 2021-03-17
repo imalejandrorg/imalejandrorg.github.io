@@ -27,3 +27,4 @@ rango-en-r
 desviación-estándar-en-r
 medidas-de-posición
 el-uso-de-la-librería-dplyr
+tab:unnamed-chunk-35
