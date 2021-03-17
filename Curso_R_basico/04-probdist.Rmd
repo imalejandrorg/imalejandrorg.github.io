@@ -1,0 +1,22 @@
+---
+title: "Análisis de Varianza"
+author: "Alejandro Ruiz-García"
+date: "16/3/2021"
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+---
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(vegan)
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Distribuciones de probabilidad
+## Distribución binomial

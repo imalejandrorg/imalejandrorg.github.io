@@ -55,3 +55,7 @@ histogramas-y-gráficos-de-densidad
 r-y-ggplot2
 histogramas-y-gráficos-de-densidad-en-r
 histogramas-y-gráficos-de-densidad-en-ggplot2
+fig:unnamed-chunk-3
+fig:unnamed-chunk-9
+fig:unnamed-chunk-11
+fig:unnamed-chunk-12
