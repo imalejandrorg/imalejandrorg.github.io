@@ -1,3 +1,10 @@
+eq:mean
+eq:fence
+eq:range
+eq:sd
+eq:var
+eq:frecr
+tab:unnamed-chunk-71
 descarga-de-r-y-rstudio
 introducción-a-r
 interfaz
@@ -15,9 +22,8 @@ mediana-en-r
 la-función-summary
 visualización-básica-de-datos
 valores-atípicos
+medidas-de-dispersión
+rango-en-r
+desviación-estándar-en-r
+medidas-de-posición
 el-uso-de-la-librería-dplyr
-methods
-applications
-example-one
-example-two
-final-words

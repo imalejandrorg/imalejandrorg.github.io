@@ -7,7 +7,7 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-En esta lección veremos las nociones más básicas de R y RStudio, cómo escribir tablas, cómo importar datos, entre otras cosas.
+En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas.
 
 ## Interfaz
 R Studio cuenta con 4 ventanas esenciales: 
@@ -32,7 +32,7 @@ knitr::include_graphics("GlobalOptions.png", dpi = 100)
 knitr::include_graphics("Apariencia.png", dpi = 120)
 ```
 
-Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema **Material**.
+Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema `Material`.
 
 
 ## Creando nuestro primer proyecto
@@ -60,11 +60,11 @@ Para cambiar el directorio de trabajo, simplemente tecleamos en la consola la si
 setwd("O:/Documentos/R_Basico")
 getwd()
 ```
-De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas Ctrl + S. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.
+De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas `Ctrl` + `S`. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.
 
 
 ## Objetos y variables
-Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos *<-* o *=* (cuyo atajo de escritura es Alt + -). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.
+Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos `<-` o `=` (cuyo atajo de escritura es `Alt` + `-`). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 5 + 5
 ```
@@ -90,13 +90,13 @@ De nuevo se agregará esta variable a nuestro *Environment*.
 knitr::include_graphics("Variable2.png", dpi = 120)
 ```
 
-Para corroborar el tipo de dato que tenemos podemos utilizar la función *class(x)* donde x es el nombre de nuestra variable.
+Para corroborar el tipo de dato que tenemos podemos utilizar la función `class(x)` donde x es el nombre de nuestra variable.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 class(letraA)
 class(suma)
 ```
 
-Para los análisis de datos de naturaleza biológica normalmente se trabaja con matrices de datos con múltiples caracteres tanto categóricos como cuantitativos, que en R corresponde a un data frame. Por ejemplo, los datos de una matriz llamada *dune* del paquete **vegan** corresponde a una matriz de datos.
+Para los análisis de datos de naturaleza biológica normalmente se trabaja con matrices de datos con múltiples caracteres tanto categóricos como cuantitativos, que en R corresponde a un data frame. Por ejemplo, los datos de una matriz llamada `dune` del paquete `vegan` corresponde a una matriz de datos.
 ```{r echo=TRUE}
 data("dune")
 class(dune)
@@ -107,9 +107,9 @@ knitr::kable(dune) %>% kable_styling(bootstrap_options = c("striped", "bordered"
 
 
 ## Instalar paquetes
-Una de las herramientas más útiles de R es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.
+Una de las herramientas más útiles de `R` es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.
 
-Por ejemplo, uno de los paquetes más utilizados es el de *vegan*, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.
+Por ejemplo, uno de los paquetes más utilizados es el de `vegan`, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.
 ```{r warning=FALSE}
 install.packages("vegan")
 ```
@@ -119,7 +119,7 @@ Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escr
 library(vegan)
 ```
 
-Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función *install.package()* puede arrojarnos error. Una alternativa es utilizar la ventana de *Packages* del panel inferior derecho.
+Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función `install.package()` puede arrojarnos error. Una alternativa es utilizar la ventana de *Packages* del panel inferior derecho.
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
 knitr::include_graphics("Package1.png", dpi = 120)
 ```
@@ -139,9 +139,9 @@ La mayor parte del tiempo lo que queremos hacer es importar nuestros propios dat
 
 **Descargar:** ["Aves.txt"](https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt)
 
-Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función *read.table()*.
+Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función `read.table()`.
 ```{r}
-Aves <- read.table("Aves.txt")
+Aves <- read.table("Aves.txt", header = TRUE)
 View(Aves)
 ```
 
@@ -149,21 +149,21 @@ View(Aves)
 knitr::kable(Aves) %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover", "condensed"), full_width = TRUE) %>% scroll_box(width = "910px")
 ```
 
-También podemos importar archivos .csv utilizando la función *read.csv()*.
+También podemos importar archivos .csv utilizando la función `read.csv()`.
 ```{r}
-Aves_csv <- read.csv("Aves.csv")
+Aves_csv <- read.csv("Aves.csv", header = TRUE)
 ```
 
 Así obtendríamos la misma tabla anterior.
 
-En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería *readxl*. En caso de ya tener instalado el paquete no es necesario que pongan la función *install.packages("readxl")*, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.
+En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería `readxl`. En caso de ya tener instalado el paquete no es necesario que pongan la función `install.packages("readxl")`, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.
 ```{r}
 #install.packages("readxl")
 library(readxl)
 Aves_xlsx <- read_excel("Aves.xlsx")
 ```
 
-Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada *tibble*. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.
+Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada `tibble`. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.
 
 Para hacer esto podemos escribir el siguiente código
 ```{r}
@@ -185,26 +185,26 @@ De igual manera se recomienda copiar el código al script para saber exactamente
 Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.
 ```{r}
 #Esta función sirve para importar archivos.
-Aves <- read.table("Aves.txt")
+Aves <- read.table("Aves.txt", header = TRUE)
 ```
 
 Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.
 
 
 ## Exportar datos
-En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función *write*, por ejemplo.
+En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función `write.table()`, por ejemplo.
 ```{r}
 #Filtramos nuestro archivo para tener solo las abundancias.
 Abun <- Aves[,4:35]
 
 #Exportamos nuestro archivo en formato .csv
-write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE, col.names = FALSE)
+write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE)
 ```
 
 De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.
 
 ```{r}
-write.table(Abun, file = "O:/Documentos/R_Basico/Lección_1/Abundancias.csv", sep = ",", row.names = FALSE, col.names = FALSE)
+write.table(Abun, file = "O:/Documentos/R_Basico/Lección_1/Abundancias.csv", sep = ",", row.names = FALSE)
 ```
 
 Como podemos ver, el archivo fue escrito en la dirección indicada.
@@ -218,7 +218,7 @@ knitr::include_graphics("SaveTable2.png", dpi = 100)
 
 
 ## Pedir ayuda
-En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación ?.
+En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación `?` segudio de la función sobre la cuál tengamos una duda.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ?specaccum
 ```

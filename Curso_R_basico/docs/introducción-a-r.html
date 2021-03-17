@@ -155,19 +155,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media-en-r"><i class="fa fa-check"></i><b>2.1.1</b> Media en R</a></li>
 <li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana-en-r"><i class="fa fa-check"></i><b>2.1.2</b> Mediana en R</a></li>
-<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#la-función-summary"><i class="fa fa-check"></i><b>2.1.3</b> La función <em>summary</em></a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#la-función-summary"><i class="fa fa-check"></i><b>2.1.3</b> La función <code>summary</code></a></li>
 <li class="chapter" data-level="2.1.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#visualización-básica-de-datos"><i class="fa fa-check"></i><b>2.1.4</b> Visualización básica de datos</a></li>
 <li class="chapter" data-level="2.1.5" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-atípicos"><i class="fa fa-check"></i><b>2.1.5</b> Valores atípicos</a></li>
-<li class="chapter" data-level="2.1.6" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.1.6</b> El uso de la librería <em>dplyr</em></a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
-<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a>
+<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
-<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango-en-r"><i class="fa fa-check"></i><b>2.2.1</b> Rango en R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar-en-r"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar en R</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
+<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -190,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introducción-a-r" class="section level1" number="1">
 <h1><span class="header-section-number">Lección 1</span> Introducción a R</h1>
-<p>En esta lección veremos las nociones más básicas de R y RStudio, cómo escribir tablas, cómo importar datos, entre otras cosas.</p>
+<p>En esta lección veremos las nociones más básicas de <code>R</code> y <code>RStudio</code>, cómo escribir tablas, cómo importar datos, entre otras cosas.</p>
 <div id="interfaz" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Interfaz</h2>
 <p>R Studio cuenta con 4 ventanas esenciales:</p>
@@ -204,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Adicionalmente, en la ventana de <strong><em>Tools -&gt; Global Options -&gt; Appearance</em></strong> podemos configurar los colores de nuestra interfaz, el tamaño de la fuente, el zoom, el tema del editor y la tipografía.
 <img src="GlobalOptions.png" width="392" style="display: block; margin: auto;" /></p>
 <p><img src="Apariencia.png" width="475" style="display: block; margin: auto;" /></p>
-<p>Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema <strong>Material</strong>.</p>
+<p>Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema <code>Material</code>.</p>
 </div>
 <div id="creando-nuestro-primer-proyecto" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Creando nuestro primer proyecto</h2>
@@ -222,11 +221,11 @@ Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, 
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="introducción-a-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;O:/Documentos/R_Basico&quot;</span>)</span>
 <span id="cb22-2"><a href="introducción-a-r.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;O:/Documentos/R_Basico&quot;</code></pre>
-<p>De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas Ctrl + S. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.</p>
+<p>De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas <code>Ctrl</code> + <code>S</code>. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.</p>
 </div>
 <div id="objetos-y-variables" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Objetos y variables</h2>
-<p>Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos <em>&lt;-</em> o <em>=</em> (cuyo atajo de escritura es Alt + -). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.</p>
+<p>Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos <code>&lt;-</code> o <code>=</code> (cuyo atajo de escritura es <code>Alt</code> + <code>-</code>). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="introducción-a-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>Sin embargo, si queremos almacenar este resultado necesitamos nombrar a una variable con este resultado. Por ejemplo, una variable llamada “suma.”</p>
@@ -239,12 +238,12 @@ Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, 
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introducción-a-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a>letraA <span class="ot">&lt;-</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
 <p>De nuevo se agregará esta variable a nuestro <em>Environment</em>.
 <img src="Variable2.png" width="542" style="display: block; margin: auto;" /></p>
-<p>Para corroborar el tipo de dato que tenemos podemos utilizar la función <em>class(x)</em> donde x es el nombre de nuestra variable.</p>
+<p>Para corroborar el tipo de dato que tenemos podemos utilizar la función <code>class(x)</code> donde x es el nombre de nuestra variable.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introducción-a-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letraA)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introducción-a-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(suma)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<p>Para los análisis de datos de naturaleza biológica normalmente se trabaja con matrices de datos con múltiples caracteres tanto categóricos como cuantitativos, que en R corresponde a un data frame. Por ejemplo, los datos de una matriz llamada <em>dune</em> del paquete <strong>vegan</strong> corresponde a una matriz de datos.</p>
+<p>Para los análisis de datos de naturaleza biológica normalmente se trabaja con matrices de datos con múltiples caracteres tanto categóricos como cuantitativos, que en R corresponde a un data frame. Por ejemplo, los datos de una matriz llamada <code>dune</code> del paquete <code>vegan</code> corresponde a una matriz de datos.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;dune&quot;</span>)</span>
 <span id="cb33-2"><a href="introducción-a-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dune)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
@@ -2191,12 +2190,12 @@ Callcusp
 </div>
 <div id="instalar-paquetes" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Instalar paquetes</h2>
-<p>Una de las herramientas más útiles de R es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.</p>
-<p>Por ejemplo, uno de los paquetes más utilizados es el de <em>vegan</em>, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.</p>
+<p>Una de las herramientas más útiles de <code>R</code> es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.</p>
+<p>Por ejemplo, uno de los paquetes más utilizados es el de <code>vegan</code>, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vegan&quot;</span>)</span></code></pre></div>
 <p>Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escrito con una v minúscula. Tenemos que entender que instalar un paquete no es lo mismo que <em>llamarlo</em>. Para esto último utilizamos la siguiente función.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
-<p>Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <em>install.package()</em> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
+<p>Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <code>install.package()</code> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
 <img src="Package1.png" width="543" style="display: block; margin: auto;" /></p>
 <p>Damos clic en Install y escribimos el nombre del paquete.
 <img src="Package2.png" width="307" style="display: block; margin: auto;" /></p>
@@ -2207,230 +2206,123 @@ Callcusp
 <h2><span class="header-section-number">1.5</span> Importar datos a R</h2>
 <p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
-<p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <em>read.table()</em>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span>
+<p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <code>read.table()</code>.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb37-2"><a href="introducción-a-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(Aves)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:910px; ">
 <table class="table table-striped table-bordered table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
-V1
+<th style="text-align:right;">
+sitio
 </th>
 <th style="text-align:left;">
-V2
+estacion
 </th>
 <th style="text-align:left;">
-V3
+ambiente
 </th>
-<th style="text-align:left;">
-V4
+<th style="text-align:right;">
+agebad
 </th>
-<th style="text-align:left;">
-V5
+<th style="text-align:right;">
+amabra
 </th>
-<th style="text-align:left;">
-V6
+<th style="text-align:right;">
+rupmag
 </th>
-<th style="text-align:left;">
-V7
+<th style="text-align:right;">
+spimag
 </th>
-<th style="text-align:left;">
-V8
+<th style="text-align:right;">
+chlluc
 </th>
-<th style="text-align:left;">
-V9
+<th style="text-align:right;">
+colmel
 </th>
-<th style="text-align:left;">
-V10
+<th style="text-align:right;">
+patpic
 </th>
-<th style="text-align:left;">
-V11
+<th style="text-align:right;">
+cycguj
 </th>
-<th style="text-align:left;">
-V12
+<th style="text-align:right;">
+elapar
 </th>
-<th style="text-align:left;">
-V13
+<th style="text-align:right;">
+furruf
 </th>
-<th style="text-align:left;">
-V14
+<th style="text-align:right;">
+geoaeq
 </th>
-<th style="text-align:left;">
-V15
+<th style="text-align:right;">
+ictcay
 </th>
-<th style="text-align:left;">
-V16
+<th style="text-align:right;">
+lepang
 </th>
-<th style="text-align:left;">
-V17
+<th style="text-align:right;">
+mimsat
 </th>
-<th style="text-align:left;">
-V18
+<th style="text-align:right;">
+molbon
 </th>
-<th style="text-align:left;">
-V19
+<th style="text-align:right;">
+myimac
 </th>
-<th style="text-align:left;">
-V20
+<th style="text-align:right;">
+myimon
 </th>
-<th style="text-align:left;">
-V21
+<th style="text-align:right;">
+pacpol
 </th>
-<th style="text-align:left;">
-V22
+<th style="text-align:right;">
+phastr
 </th>
-<th style="text-align:left;">
-V23
+<th style="text-align:right;">
+pitsul
 </th>
-<th style="text-align:left;">
-V24
+<th style="text-align:right;">
+poldum
 </th>
-<th style="text-align:left;">
-V25
+<th style="text-align:right;">
+poomel
 </th>
-<th style="text-align:left;">
-V26
+<th style="text-align:right;">
+rossoc
 </th>
-<th style="text-align:left;">
-V27
+<th style="text-align:right;">
+sicfla
 </th>
-<th style="text-align:left;">
-V28
+<th style="text-align:right;">
+siclut
 </th>
-<th style="text-align:left;">
-V29
+<th style="text-align:right;">
+spocae
 </th>
-<th style="text-align:left;">
-V30
+<th style="text-align:right;">
+synspi
 </th>
-<th style="text-align:left;">
-V31
+<th style="text-align:right;">
+troaed
 </th>
-<th style="text-align:left;">
-V32
+<th style="text-align:right;">
+turruf
 </th>
-<th style="text-align:left;">
-V33
+<th style="text-align:right;">
+viroli
 </th>
-<th style="text-align:left;">
-V34
+<th style="text-align:right;">
+zenaur
 </th>
-<th style="text-align:left;">
-V35
+<th style="text-align:right;">
+zoncap
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-sitio
-</td>
-<td style="text-align:left;">
-estacion
-</td>
-<td style="text-align:left;">
-ambiente
-</td>
-<td style="text-align:left;">
-agebad
-</td>
-<td style="text-align:left;">
-amabra
-</td>
-<td style="text-align:left;">
-rupmag
-</td>
-<td style="text-align:left;">
-spimag
-</td>
-<td style="text-align:left;">
-chlluc
-</td>
-<td style="text-align:left;">
-colmel
-</td>
-<td style="text-align:left;">
-patpic
-</td>
-<td style="text-align:left;">
-cycguj
-</td>
-<td style="text-align:left;">
-elapar
-</td>
-<td style="text-align:left;">
-furruf
-</td>
-<td style="text-align:left;">
-geoaeq
-</td>
-<td style="text-align:left;">
-ictcay
-</td>
-<td style="text-align:left;">
-lepang
-</td>
-<td style="text-align:left;">
-mimsat
-</td>
-<td style="text-align:left;">
-molbon
-</td>
-<td style="text-align:left;">
-myimac
-</td>
-<td style="text-align:left;">
-myimon
-</td>
-<td style="text-align:left;">
-pacpol
-</td>
-<td style="text-align:left;">
-phastr
-</td>
-<td style="text-align:left;">
-pitsul
-</td>
-<td style="text-align:left;">
-poldum
-</td>
-<td style="text-align:left;">
-poomel
-</td>
-<td style="text-align:left;">
-rossoc
-</td>
-<td style="text-align:left;">
-sicfla
-</td>
-<td style="text-align:left;">
-siclut
-</td>
-<td style="text-align:left;">
-spocae
-</td>
-<td style="text-align:left;">
-synspi
-</td>
-<td style="text-align:left;">
-troaed
-</td>
-<td style="text-align:left;">
-turruf
-</td>
-<td style="text-align:left;">
-viroli
-</td>
-<td style="text-align:left;">
-zenaur
-</td>
-<td style="text-align:left;">
-zoncap
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
@@ -2439,105 +2331,105 @@ inv
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
@@ -2546,105 +2438,105 @@ oto
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
@@ -2653,105 +2545,105 @@ pri
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
@@ -2760,105 +2652,105 @@ ver
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
@@ -2867,105 +2759,105 @@ inv
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
@@ -2974,105 +2866,105 @@ oto
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
@@ -3081,105 +2973,105 @@ pri
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
@@ -3188,105 +3080,105 @@ ver
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
@@ -3295,105 +3187,105 @@ inv
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 14
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
@@ -3402,105 +3294,105 @@ oto
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
@@ -3509,105 +3401,105 @@ pri
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
@@ -3616,105 +3508,105 @@ ver
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:left;">
@@ -3723,105 +3615,105 @@ inv
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:left;">
@@ -3830,105 +3722,105 @@ oto
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 37
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:left;">
@@ -3937,105 +3829,105 @@ pri
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:left;">
@@ -4044,105 +3936,105 @@ ver
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
@@ -4151,105 +4043,105 @@ inv
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
@@ -4258,105 +4150,105 @@ oto
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
@@ -4365,105 +4257,105 @@ pri
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
@@ -4472,105 +4364,105 @@ ver
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
@@ -4579,105 +4471,105 @@ inv
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 16
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
@@ -4686,105 +4578,105 @@ oto
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
@@ -4793,105 +4685,105 @@ pri
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
@@ -4900,105 +4792,105 @@ ver
 <td style="text-align:left;">
 bosque
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
@@ -5007,105 +4899,105 @@ inv
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
@@ -5114,105 +5006,105 @@ oto
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
@@ -5221,105 +5113,105 @@ pri
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
@@ -5328,105 +5220,105 @@ ver
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
 <td style="text-align:left;">
@@ -5435,105 +5327,105 @@ inv
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 13
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
 <td style="text-align:left;">
@@ -5542,105 +5434,105 @@ oto
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
 <td style="text-align:left;">
@@ -5649,105 +5541,105 @@ pri
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 5
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 9
 </td>
 <td style="text-align:left;">
@@ -5756,105 +5648,105 @@ ver
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 11
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 6
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 31
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
 <td style="text-align:left;">
@@ -5863,105 +5755,105 @@ inv
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 14
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
 <td style="text-align:left;">
@@ -5970,105 +5862,105 @@ oto
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 4
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
 <td style="text-align:left;">
@@ -6077,105 +5969,105 @@ pri
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 11
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:right;">
 10
 </td>
 <td style="text-align:left;">
@@ -6184,114 +6076,114 @@ ver
 <td style="text-align:left;">
 arbustal
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 7
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 3
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 8
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 12
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>También podemos importar archivos .csv utilizando la función <em>read.csv()</em>.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>)</span></code></pre></div>
+<p>También podemos importar archivos .csv utilizando la función <code>read.csv()</code>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Así obtendríamos la misma tabla anterior.</p>
-<p>En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería <em>readxl</em>. En caso de ya tener instalado el paquete no es necesario que pongan la función <em>install.packages(“readxl”)</em>, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.</p>
+<p>En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería <code>readxl</code>. En caso de ya tener instalado el paquete no es necesario que pongan la función <code>install.packages("readxl")</code>, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;readxl&quot;)</span></span>
 <span id="cb39-2"><a href="introducción-a-r.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb39-3"><a href="introducción-a-r.html#cb39-3" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Aves.xlsx&quot;</span>)</span></code></pre></div>
-<p>Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada <em>tibble</em>. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.</p>
+<p>Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada <code>tibble</code>. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.</p>
 <p>Para hacer esto podemos escribir el siguiente código</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introducción-a-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aves_xlsx)</span>
 <span id="cb40-2"><a href="introducción-a-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
@@ -6305,26 +6197,26 @@ arbustal
 <h2><span class="header-section-number">1.6</span> Comentarios</h2>
 <p>Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introducción-a-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esta función sirve para importar archivos.</span></span>
-<span id="cb42-2"><a href="introducción-a-r.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>)</span></code></pre></div>
+<span id="cb42-2"><a href="introducción-a-r.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.</p>
 </div>
 <div id="exportar-datos" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> Exportar datos</h2>
-<p>En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función <em>write</em>, por ejemplo.</p>
+<p>En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función <code>write.table()</code>, por ejemplo.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtramos nuestro archivo para tener solo las abundancias.</span></span>
 <span id="cb43-2"><a href="introducción-a-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a>Abun <span class="ot">&lt;-</span> Aves[,<span class="dv">4</span><span class="sc">:</span><span class="dv">35</span>]</span>
 <span id="cb43-3"><a href="introducción-a-r.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-4"><a href="introducción-a-r.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportamos nuestro archivo en formato .csv</span></span>
-<span id="cb43-5"><a href="introducción-a-r.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb43-5"><a href="introducción-a-r.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introducción-a-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introducción-a-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Como podemos ver, el archivo fue escrito en la dirección indicada.
 <img src="SaveTable.png" width="537" style="display: block; margin: auto;" /></p>
 <p><img src="SaveTable2.png" width="1843" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pedir-ayuda" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> Pedir ayuda</h2>
-<p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación ?.</p>
+<p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación <code>?</code> segudio de la función sobre la cuál tengamos una duda.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-r.html#cb45-1" aria-hidden="true" tabindex="-1"></a>?specaccum</span></code></pre></div>
 <p>Cuando nosotros escribimos esto, se abrirá la ventana de <em>Help</em> en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.</p>
 <p><img src="help.png" width="542" style="display: block; margin: auto;" /></p>
