@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 1 Introducción a R | Curso de R básico</title>
+  <title>Lección 1 Introducción a R | Análisis de Varianza</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 1 Introducción a R | Curso de R básico" />
+  <meta property="og:title" content="Lección 1 Introducción a R | Análisis de Varianza" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 1 Introducción a R | Curso de R básico" />
+  <meta name="twitter:title" content="Lección 1 Introducción a R | Análisis de Varianza" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -167,6 +167,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
 <li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>3</b> Histogramas y gráficos de densidad</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>3.1</b> R y <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>3.1.1</b> Histogramas y gráficos de densidad en R</a></li>
+<li class="chapter" data-level="3.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>3.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -179,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de Varianza</a>
           </h1>
         </div>
 
@@ -197,23 +205,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>La <em>consola</em>, que es donde se ejecutan los comandos y se visualizan los outputs de nuestros análisis.</p></li>
 <li><p>Los <em>scripts</em>, que corresponde a la ventana superior izquierda. No solamente se visualizan scripts, también se pueden trabajar otros formatos, aunque generalmente será donde nosotros escribamos los comandos que la consola va a ejecutar.</p></li>
 <li><p>El <em>Envirnoment</em> y el <em>History</em> que corresponden a la ventana superior derecha, aunque también cuenta con otras herramientas útiles como <em>Build</em> y <em>Git</em> que se utilizan en cuestiones más avanzadas.</p></li>
-<li><p>Los <em>Files</em>, <em>Packages</em> y <em>Plots</em> así como la ventana de <em>Help</em> que corresponden a la esquina inferior derecha. Básicamente estas son las 4 pestañas de esta ventana que estaremos utilizando.
-<img src="RStudio.png" width="960" style="display: block; margin: auto;" /></p></li>
+<li><p>Los <em>Files</em>, <em>Packages</em> y <em>Plots</em> así como la ventana de <em>Help</em> que corresponden a la esquina inferior derecha. Básicamente estas son las 4 pestañas de esta ventana que estaremos utilizando.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="RStudio.png" alt="Interfaz de RStudio" width="960" />
+<p class="caption">
+Figura 1.1: Interfaz de RStudio
+</p>
+</div></li>
 </ol>
-<p>Adicionalmente, en la ventana de <strong><em>Tools -&gt; Global Options -&gt; Appearance</em></strong> podemos configurar los colores de nuestra interfaz, el tamaño de la fuente, el zoom, el tema del editor y la tipografía.
-<img src="GlobalOptions.png" width="392" style="display: block; margin: auto;" /></p>
-<p><img src="Apariencia.png" width="475" style="display: block; margin: auto;" /></p>
+Adicionalmente, en la ventana de <strong><em>Tools -&gt; Global Options -&gt; Appearance</em></strong> podemos configurar los colores de nuestra interfaz, el tamaño de la fuente, el zoom, el tema del editor y la tipografía.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="GlobalOptions.png" alt="Para abrir las opciones globales nos vamos a ***Tools -&gt; Global Options***." width="392" />
+<p class="caption">
+Figura 1.2: Para abrir las opciones globales nos vamos a <strong><em>Tools -&gt; Global Options</em></strong>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="Apariencia.png" alt="Ventana de *Appearance* dentro de las Opciones Globales de RStudio" width="475" />
+<p class="caption">
+Figura 1.3: Ventana de <em>Appearance</em> dentro de las Opciones Globales de RStudio
+</p>
+</div>
 <p>Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema <code>Material</code>.</p>
 </div>
 <div id="creando-nuestro-primer-proyecto" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Creando nuestro primer proyecto</h2>
-<p>Una vez que nos familiarizamos con la interfaz, es momento de crear nuestro primer proyecto. Para esto, debemos dar clic en <strong><em>File -&gt; New Project</em></strong> para que nos aparezca una ventana como la siguiente.
-<img src="NProj.png" width="431" style="display: block; margin: auto;" /></p>
+Una vez que nos familiarizamos con la interfaz, es momento de crear nuestro primer proyecto. Para esto, debemos dar clic en <strong><em>File -&gt; New Project</em></strong> para que nos aparezca una ventana como la siguiente.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="NProj.png" alt="Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control." width="431" />
+<p class="caption">
+Figura 1.4: Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control.
+</p>
+</div>
 <p>Creamos un nuevo directorio que se guarda por defecto en la carpeta de <em>Documentos</em> de nuestro ordenador.</p>
 <p>SE RECOMIENDA NO DEJAR ESPACIOS EN EL NOMBRE. En su lugar, podemos utilizar guión bajo (_), el símbolo de menos (-) o un punto (.).
 Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shift + N. Deberíamos tener un ambiente de trabajo más o menos así.</p>
-<p><img src="Proj1.png" width="1536" style="display: block; margin: auto;" />
-Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, así como las bases de datos y demás archivos que vayamos a utilizar.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="Proj1.png" alt="Ventana con el ambiente de trabajo básico en RStudio." width="1536" />
+<p class="caption">
+Figura 1.5: Ventana con el ambiente de trabajo básico en RStudio.
+</p>
+</div>
+<p>Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, así como las bases de datos y demás archivos que vayamos a utilizar.</p>
 <p>Para saber cuál es la carpeta de nuestro proyecto, podemos teclear el siguiente comando en la consola.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="introducción-a-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico&quot;</code></pre>
@@ -232,12 +265,22 @@ Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, 
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introducción-a-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a>suma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span>
 <span id="cb26-2"><a href="introducción-a-r.html#cb26-2" aria-hidden="true" tabindex="-1"></a>suma</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<p>Como podemos ver en ambos casos obtenemos los mismos resultados. Sin embargo, en el segundo caso encontraremos una variable llamada “suma” en nuestro <em>Environment</em> en el panel superior derecho.
-<img src="Variable.png" width="542" style="display: block; margin: auto;" /></p>
+Como podemos ver en ambos casos obtenemos los mismos resultados. Sin embargo, en el segundo caso encontraremos una variable llamada “suma” en nuestro <em>Environment</em> en el panel superior derecho.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="Variable.png" alt="Panel *Environment* en el cual podremos encontrar las variables que vayamos generando." width="542" />
+<p class="caption">
+Figura 1.6: Panel <em>Environment</em> en el cual podremos encontrar las variables que vayamos generando.
+</p>
+</div>
 <p>En caso de que estemos interesados en asignar valores categóricos, estos deben estar encomillados.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introducción-a-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a>letraA <span class="ot">&lt;-</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
-<p>De nuevo se agregará esta variable a nuestro <em>Environment</em>.
-<img src="Variable2.png" width="542" style="display: block; margin: auto;" /></p>
+De nuevo se agregará esta variable a nuestro <em>Environment</em>.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="Variable2.png" alt="Tras definir la variable *A* esta se suma a la ventana de *Environment*." width="542" />
+<p class="caption">
+Figura 1.7: Tras definir la variable <em>A</em> esta se suma a la ventana de <em>Environment</em>.
+</p>
+</div>
 <p>Para corroborar el tipo de dato que tenemos podemos utilizar la función <code>class(x)</code> donde x es el nombre de nuestra variable.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introducción-a-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letraA)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -2195,12 +2238,27 @@ Callcusp
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vegan&quot;</span>)</span></code></pre></div>
 <p>Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escrito con una v minúscula. Tenemos que entender que instalar un paquete no es lo mismo que <em>llamarlo</em>. Para esto último utilizamos la siguiente función.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
-<p>Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <code>install.package()</code> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
-<img src="Package1.png" width="543" style="display: block; margin: auto;" /></p>
-<p>Damos clic en Install y escribimos el nombre del paquete.
-<img src="Package2.png" width="307" style="display: block; margin: auto;" /></p>
-<p>Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
-<img src="Package3.png" width="307" style="display: block; margin: auto;" /></p>
+Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <code>install.package()</code> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
+<img src="Package1.png" alt="Ventana de *Packages* donde podremos encontrar los paquetes instalados." width="543" />
+<p class="caption">
+Figura 1.8: Ventana de <em>Packages</em> donde podremos encontrar los paquetes instalados.
+</p>
+</div>
+Damos clic en Install y escribimos el nombre del paquete.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="Package2.png" alt="Al hacer clic sobre el botón `Install` en la ventana de *Packages* aparece esta pequeña ventana donde podremos buscar la librería deseada." width="307" />
+<p class="caption">
+Figura 1.9: Al hacer clic sobre el botón <code>Install</code> en la ventana de <em>Packages</em> aparece esta pequeña ventana donde podremos buscar la librería deseada.
+</p>
+</div>
+Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="Package3.png" alt="En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares." width="307" />
+<p class="caption">
+Figura 1.10: En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares.
+</p>
+</div>
 </div>
 <div id="importar-datos-a-r" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Importar datos a R</h2>
@@ -6189,8 +6247,13 @@ arbustal
 <span id="cb40-2"><a href="introducción-a-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <p>Básicamente le estamos diciendo a R que escriba un data frame con el mismo nombre que el data frame de subtipo tibble. De esta manera sobrescribimos el primer archivo y mantenemos limpio nuestro espacio de trabajo.</p>
-<p>También se puede importar desde el botón <em>Import Dataset</em> que aparece en la ventana de nuestro Environment.
-<img src="Import.png" width="542" style="display: block; margin: auto;" /></p>
+También se puede importar desde el botón <em>Import Dataset</em> que aparece en la ventana de nuestro Environment.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="Import.png" alt="En el panel *Environment* podemos hacer clic sobre la ventana`Import Dataset` para importar archivos de distintos formatos." width="542" />
+<p class="caption">
+Figura 1.11: En el panel <em>Environment</em> podemos hacer clic sobre la ventana<code>Import Dataset</code> para importar archivos de distintos formatos.
+</p>
+</div>
 <p>De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.</p>
 </div>
 <div id="comentarios" class="section level2" number="1.6">
@@ -6210,16 +6273,31 @@ arbustal
 <span id="cb43-5"><a href="introducción-a-r.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introducción-a-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p>Como podemos ver, el archivo fue escrito en la dirección indicada.
-<img src="SaveTable.png" width="537" style="display: block; margin: auto;" /></p>
-<p><img src="SaveTable2.png" width="1843" style="display: block; margin: auto;" /></p>
+Como podemos ver, el archivo fue escrito en la dirección indicada.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<img src="SaveTable.png" alt="Dirección a en la cual hemos decidido guardar el archivo *Abundancias.csv*." width="537" />
+<p class="caption">
+Figura 1.12: Dirección a en la cual hemos decidido guardar el archivo <em>Abundancias.csv</em>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<img src="SaveTable2.png" alt="Archivo *Abundancias.csv* visto en Excel." width="1843" />
+<p class="caption">
+Figura 1.13: Archivo <em>Abundancias.csv</em> visto en Excel.
+</p>
+</div>
 </div>
 <div id="pedir-ayuda" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> Pedir ayuda</h2>
-<p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación <code>?</code> segudio de la función sobre la cuál tengamos una duda.</p>
+<p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación <code>?</code> seguido de la función sobre la cuál tengamos una duda.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-r.html#cb45-1" aria-hidden="true" tabindex="-1"></a>?specaccum</span></code></pre></div>
 <p>Cuando nosotros escribimos esto, se abrirá la ventana de <em>Help</em> en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.</p>
-<p><img src="help.png" width="542" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="help.png" alt="Ventana de ayuda en la pestaña *Help* para la función que en este caso fue `?specaccum`." width="542" />
+<p class="caption">
+Figura 1.14: Ventana de ayuda en la pestaña <em>Help</em> para la función que en este caso fue <code>?specaccum</code>.
+</p>
+</div>
 
 </div>
 </div>

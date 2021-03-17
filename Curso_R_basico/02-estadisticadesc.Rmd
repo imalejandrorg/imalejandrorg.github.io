@@ -1,3 +1,11 @@
+---
+title: "Estadística descriptiva"
+author: "Alejandro Ruiz-García"
+date: "16/3/2021"
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+---
 # Estadística descriptiva
 ```{r include=FALSE}
 library(knitr)
@@ -215,7 +223,7 @@ iris %>% dplyr::filter(Sepal.Length <= 5.2125)
 Como podemos ver, la mayoría de las especies con valores inferiores a 5.2125 corresponden a otras especies, sin embargo, tenemos una única observación de la especies *I. virginica* con estas características. Los valores atípicos nos pueden indicar errores en la medición, en nuestra instrumentación, entre otras 
 
 ## Medidas de dispersión
-A diferencia de los estadísticos de tendencia central, los estadísticos de dispresión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Algunas medidas de dispersión son:
+A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Algunas medidas de dispersión son:
 
 * **Rango:** La diferencia entre el valor máximo y el valor mínimo de un conjunto de datos. Para obtener el valor del rango utilizamos la ecuación \@ref(eq:range).
 
@@ -257,7 +265,7 @@ Rango <- max(iris$Petal.Length) - min(iris$Petal.Length)
 Rango
 ```
 ### Desviación estándar en R
-Para obtener la desviación estándar en R lo único que necesitamos es utilizar la fución `sd()`.
+Para obtener la desviación estándar en R lo único que necesitamos es utilizar la función `sd()`.
 
 ```{r}
 SD <- sd(iris$Petal.Length)
@@ -299,11 +307,11 @@ Frecab <- table(Aves$ambiente)
 prop.table(Frecab)
 ```
 
-Para facilitar la lectura vamos a transformar las frecuencias relativas a porcentajes multiplicando por 100 y utilizando la función `round()` para redondear los valores a 2 digitos.
+Para facilitar la lectura vamos a transformar las frecuencias relativas a porcentajes multiplicando por 100 y utilizando la función `round()` para redondear los valores a 2 dígitos.
 ```{r}
 round((prop.table(Frecab) * 100), 2)
 ```
-Podemos ver que el 55.56% de las aves son de habitos arbustivos mientras que el 44.44% prefieren los bosques.
+Podemos ver que el 55.56% de las aves son de hábitos arbustivos mientras que el 44.44% prefieren los bosques.
 
 ## El uso de la librería `dplyr`
 Para facilitar aún más las cosas podemos utilizar las herramientas de la librería `dplyr` que vienen incluidas en el paquete de `tidyverse`.
@@ -402,7 +410,7 @@ Frecuencias <- Frecuencias %>% mutate(Frecuencia_relativa = Frecuencia_absoluta 
 Frecuencias
 ```
 
-Y si quisieramos obtener el porcentaje, de nuevo podemos utilizar la función `mutate` y multiplicando la varaible `Frecuencia_relativa` por 100%.
+Y si quisiéramos obtener el porcentaje, de nuevo podemos utilizar la función `mutate` y multiplicando la variable `Frecuencia_relativa` por 100%.
 ```{r}
 Frecuencias <- Frecuencias %>% mutate(Porcentaje = Frecuencia_relativa*100)
 Frecuencias

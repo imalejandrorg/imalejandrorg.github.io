@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 2 Estadística descriptiva | Curso de R básico</title>
+  <title>Lección 2 Estadística descriptiva | Análisis de Varianza</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 2 Estadística descriptiva | Curso de R básico" />
+  <meta property="og:title" content="Lección 2 Estadística descriptiva | Análisis de Varianza" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 2 Estadística descriptiva | Curso de R básico" />
+  <meta name="twitter:title" content="Lección 2 Estadística descriptiva | Análisis de Varianza" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="introducción-a-r.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="histogramas-y-gráficos-de-densidad.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -167,6 +167,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
 <li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>3</b> Histogramas y gráficos de densidad</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>3.1</b> R y <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>3.1.1</b> Histogramas y gráficos de densidad en R</a></li>
+<li class="chapter" data-level="3.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>3.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -179,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de Varianza</a>
           </h1>
         </div>
 
@@ -219,9 +227,9 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 <div id="media-en-r" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Media en R</h3>
 <p>El cálculo de la media en R para un conjunto de datos es relativamente sencillo. Para ello implementamos la función <code>mean()</code>. Podemos ver un resumen de los primeros 10 datos con la función <code>head()</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="estadística-descriptiva.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
-<span id="cb1-2"><a href="estadística-descriptiva.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb1-3"><a href="estadística-descriptiva.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estadística-descriptiva.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb46-2"><a href="estadística-descriptiva.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb46-3"><a href="estadística-descriptiva.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
@@ -229,18 +237,18 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="estadística-descriptiva.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="estadística-descriptiva.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <pre><code>## [1] 5.843333</code></pre>
 <p>Hemos calculado la media o el promedio para la longitud del sepalo del grupo de datos <code>iris</code> que viene incluida en el paquete <code>vegan</code>. Como en esta base de datos tenemos numerosas variables, nos referimos a una variable específica utilizando el símbolo $ seguido del nombre de la variable de interés.</p>
 <p>Si quisiéramos podemos almacenar el promedio de la longitud y el ancho de los sépalos en una variable nueva.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="estadística-descriptiva.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Long.Prom <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length)</span>
-<span id="cb5-2"><a href="estadística-descriptiva.html#cb5-2" aria-hidden="true" tabindex="-1"></a>Long.Prom</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="estadística-descriptiva.html#cb50-1" aria-hidden="true" tabindex="-1"></a>Long.Prom <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length)</span>
+<span id="cb50-2"><a href="estadística-descriptiva.html#cb50-2" aria-hidden="true" tabindex="-1"></a>Long.Prom</span></code></pre></div>
 <pre><code>## [1] 5.843333</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="estadística-descriptiva.html#cb7-1" aria-hidden="true" tabindex="-1"></a>Ancho.Prom <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Width)</span>
-<span id="cb7-2"><a href="estadística-descriptiva.html#cb7-2" aria-hidden="true" tabindex="-1"></a>Ancho.Prom</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="estadística-descriptiva.html#cb52-1" aria-hidden="true" tabindex="-1"></a>Ancho.Prom <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb52-2"><a href="estadística-descriptiva.html#cb52-2" aria-hidden="true" tabindex="-1"></a>Ancho.Prom</span></code></pre></div>
 <pre><code>## [1] 3.057333</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="estadística-descriptiva.html#cb9-1" aria-hidden="true" tabindex="-1"></a>Sepalos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Long.Prom, Ancho.Prom)</span>
-<span id="cb9-2"><a href="estadística-descriptiva.html#cb9-2" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="estadística-descriptiva.html#cb54-1" aria-hidden="true" tabindex="-1"></a>Sepalos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Long.Prom, Ancho.Prom)</span>
+<span id="cb54-2"><a href="estadística-descriptiva.html#cb54-2" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom
 ## 1  5.843333   3.057333</code></pre>
 <p>De esta manera obtenemos nuestra matriz con los promedios del largo y ancho de los sépalos. Si tuviéramos muestras de distintas poblaciones, podríamos generar una tabla con la media de cada población.</p>
@@ -249,51 +257,51 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 <div id="mediana-en-r" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Mediana en R</h3>
 <p>La mediana sigue una lógica muy similar a la media. Simplemente utilizamos la función <code>median()</code> para obtener nuestro valor de interés.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="estadística-descriptiva.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="estadística-descriptiva.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <pre><code>## [1] 5.8</code></pre>
 <p>De nuevo, podemos hacer una matriz de datos con las medianas de nuestras observaciones.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="estadística-descriptiva.html#cb13-1" aria-hidden="true" tabindex="-1"></a>Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span>
-<span id="cb13-2"><a href="estadística-descriptiva.html#cb13-2" aria-hidden="true" tabindex="-1"></a>Long.Median</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="estadística-descriptiva.html#cb58-1" aria-hidden="true" tabindex="-1"></a>Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span>
+<span id="cb58-2"><a href="estadística-descriptiva.html#cb58-2" aria-hidden="true" tabindex="-1"></a>Long.Median</span></code></pre></div>
 <pre><code>## [1] 5.8</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="estadística-descriptiva.html#cb15-1" aria-hidden="true" tabindex="-1"></a>Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Width)</span>
-<span id="cb15-2"><a href="estadística-descriptiva.html#cb15-2" aria-hidden="true" tabindex="-1"></a>Ancho.Median</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="estadística-descriptiva.html#cb60-1" aria-hidden="true" tabindex="-1"></a>Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb60-2"><a href="estadística-descriptiva.html#cb60-2" aria-hidden="true" tabindex="-1"></a>Ancho.Median</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="estadística-descriptiva.html#cb17-1" aria-hidden="true" tabindex="-1"></a>Sepalos2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Long.Median, Ancho.Median)</span>
-<span id="cb17-2"><a href="estadística-descriptiva.html#cb17-2" aria-hidden="true" tabindex="-1"></a>Sepalos2</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="estadística-descriptiva.html#cb62-1" aria-hidden="true" tabindex="-1"></a>Sepalos2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Long.Median, Ancho.Median)</span>
+<span id="cb62-2"><a href="estadística-descriptiva.html#cb62-2" aria-hidden="true" tabindex="-1"></a>Sepalos2</span></code></pre></div>
 <pre><code>##   Long.Median Ancho.Median
 ## 1         5.8            3</code></pre>
 <p>Incluso podríamos combinar ambas matrices (promedio y mediana) en una sola.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="estadística-descriptiva.html#cb19-1" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Sepalos, Sepalos2)</span>
-<span id="cb19-2"><a href="estadística-descriptiva.html#cb19-2" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="estadística-descriptiva.html#cb64-1" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Sepalos, Sepalos2)</span>
+<span id="cb64-2"><a href="estadística-descriptiva.html#cb64-2" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom Long.Median Ancho.Median
 ## 1  5.843333   3.057333         5.8            3</code></pre>
 <p>También podríamos optar por escribir directamente las nuevas variables de la mediana sobre la matriz de datos que ya habíamos generado para las medias.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="estadística-descriptiva.html#cb21-1" aria-hidden="true" tabindex="-1"></a>Sepalos<span class="sc">$</span>Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span>
-<span id="cb21-2"><a href="estadística-descriptiva.html#cb21-2" aria-hidden="true" tabindex="-1"></a>Sepalos<span class="sc">$</span>Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Width)</span>
-<span id="cb21-3"><a href="estadística-descriptiva.html#cb21-3" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="estadística-descriptiva.html#cb66-1" aria-hidden="true" tabindex="-1"></a>Sepalos<span class="sc">$</span>Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span>
+<span id="cb66-2"><a href="estadística-descriptiva.html#cb66-2" aria-hidden="true" tabindex="-1"></a>Sepalos<span class="sc">$</span>Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb66-3"><a href="estadística-descriptiva.html#cb66-3" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom Long.Median Ancho.Median
 ## 1  5.843333   3.057333         5.8            3</code></pre>
 <p>Como podemos ver, el resultado es el mismo. Al nosotros escribir Sépalos$Long.Median y asignarle una función, estamos generando una nueva variable en la matriz de datos preexistente aunque en dicha matriz no existía previamente la variable Long.Median. Ambas son técnicas distintas de llegar al mismo resultado y ambas son perfectamente válidas.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="estadística-descriptiva.html#cb23-1" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="estadística-descriptiva.html#cb68-1" aria-hidden="true" tabindex="-1"></a>Sepalos</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom Long.Median Ancho.Median
 ## 1  5.843333   3.057333         5.8            3</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="estadística-descriptiva.html#cb25-1" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="estadística-descriptiva.html#cb70-1" aria-hidden="true" tabindex="-1"></a>Sepalos.Resumen</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom Long.Median Ancho.Median
 ## 1  5.843333   3.057333         5.8            3</code></pre>
 <p>Incluso podemos calcular la media y la mediana para los valores de los pétalos y resumir todo en una sola matriz.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="estadística-descriptiva.html#cb27-1" aria-hidden="true" tabindex="-1"></a>Pet.Long.Mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span>
-<span id="cb27-2"><a href="estadística-descriptiva.html#cb27-2" aria-hidden="true" tabindex="-1"></a>Pet.Ancho.Mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Width)</span>
-<span id="cb27-3"><a href="estadística-descriptiva.html#cb27-3" aria-hidden="true" tabindex="-1"></a>Pet.Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Petal.Length)</span>
-<span id="cb27-4"><a href="estadística-descriptiva.html#cb27-4" aria-hidden="true" tabindex="-1"></a>Pet.Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Petal.Width)</span>
-<span id="cb27-5"><a href="estadística-descriptiva.html#cb27-5" aria-hidden="true" tabindex="-1"></a>Resumen.iris <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Sepalos, Pet.Long.Mean, Pet.Ancho.Mean, Pet.Long.Median, Pet.Ancho.Median)</span>
-<span id="cb27-6"><a href="estadística-descriptiva.html#cb27-6" aria-hidden="true" tabindex="-1"></a>Resumen.iris</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="estadística-descriptiva.html#cb72-1" aria-hidden="true" tabindex="-1"></a>Pet.Long.Mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb72-2"><a href="estadística-descriptiva.html#cb72-2" aria-hidden="true" tabindex="-1"></a>Pet.Ancho.Mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Width)</span>
+<span id="cb72-3"><a href="estadística-descriptiva.html#cb72-3" aria-hidden="true" tabindex="-1"></a>Pet.Long.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb72-4"><a href="estadística-descriptiva.html#cb72-4" aria-hidden="true" tabindex="-1"></a>Pet.Ancho.Median <span class="ot">&lt;-</span> <span class="fu">median</span>(iris<span class="sc">$</span>Petal.Width)</span>
+<span id="cb72-5"><a href="estadística-descriptiva.html#cb72-5" aria-hidden="true" tabindex="-1"></a>Resumen.iris <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Sepalos, Pet.Long.Mean, Pet.Ancho.Mean, Pet.Long.Median, Pet.Ancho.Median)</span>
+<span id="cb72-6"><a href="estadística-descriptiva.html#cb72-6" aria-hidden="true" tabindex="-1"></a>Resumen.iris</span></code></pre></div>
 <pre><code>##   Long.Prom Ancho.Prom Long.Median Ancho.Median Pet.Long.Mean Pet.Ancho.Mean
 ## 1  5.843333   3.057333         5.8            3         3.758       1.199333
 ##   Pet.Long.Median Pet.Ancho.Median
 ## 1            4.35              1.3</code></pre>
 <p>Lo ideal sería cambiar el nombre a las primeras 4 columnas para indicar que se trata de sépalos. También podemos hacer esto.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="estadística-descriptiva.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Resumen.iris)[<span class="fu">colnames</span>(Resumen.iris) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Long.Prom&quot;</span>, <span class="st">&quot;Ancho.Prom&quot;</span>, <span class="st">&quot;Long.Median&quot;</span>, <span class="st">&quot;Ancho.Median&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sep.Long.Prom&quot;</span>, <span class="st">&quot;Sep.Ancho.Prom&quot;</span>, <span class="st">&quot;Sep.Long.Median&quot;</span>, <span class="st">&quot;Sep.Ancho.Median&quot;</span>)</span>
-<span id="cb29-2"><a href="estadística-descriptiva.html#cb29-2" aria-hidden="true" tabindex="-1"></a>Resumen.iris</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="estadística-descriptiva.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Resumen.iris)[<span class="fu">colnames</span>(Resumen.iris) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Long.Prom&quot;</span>, <span class="st">&quot;Ancho.Prom&quot;</span>, <span class="st">&quot;Long.Median&quot;</span>, <span class="st">&quot;Ancho.Median&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sep.Long.Prom&quot;</span>, <span class="st">&quot;Sep.Ancho.Prom&quot;</span>, <span class="st">&quot;Sep.Long.Median&quot;</span>, <span class="st">&quot;Sep.Ancho.Median&quot;</span>)</span>
+<span id="cb74-2"><a href="estadística-descriptiva.html#cb74-2" aria-hidden="true" tabindex="-1"></a>Resumen.iris</span></code></pre></div>
 <pre><code>##   Sep.Long.Prom Sep.Ancho.Prom Sep.Long.Median Sep.Ancho.Median Pet.Long.Mean
 ## 1      5.843333       3.057333             5.8                3         3.758
 ##   Pet.Ancho.Mean Pet.Long.Median Pet.Ancho.Median
@@ -303,7 +311,7 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 <div id="la-función-summary" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> La función <code>summary</code></h3>
 <p>Como pudimos observar, hacer todos estos cálculos uno por uno harían que nuestro script sea demasiado largo. Debido a esto, podemos utilizar una función llamada <code>summary()</code> que nos da estos mismos estadísticos y otros adicionales que serán de mucha ayuda.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estadística-descriptiva.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="estadística-descriptiva.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
 ##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
 ##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
@@ -320,8 +328,8 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 ## </code></pre>
 <p>Esta función además de darnos la media y la mediana, nos da los valores mínimos y máximos, además del primer y tercer cuartil (utilizados para generar gráficos de boxplot) y nos dice cuántas observaciones tenemos de cada una de las especies.</p>
 <p>Podríamos guardar este resumen en una variable.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estadística-descriptiva.html#cb33-1" aria-hidden="true" tabindex="-1"></a>summ.iris <span class="ot">&lt;-</span> <span class="fu">summary</span>(iris)</span>
-<span id="cb33-2"><a href="estadística-descriptiva.html#cb33-2" aria-hidden="true" tabindex="-1"></a>summ.iris</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="estadística-descriptiva.html#cb78-1" aria-hidden="true" tabindex="-1"></a>summ.iris <span class="ot">&lt;-</span> <span class="fu">summary</span>(iris)</span>
+<span id="cb78-2"><a href="estadística-descriptiva.html#cb78-2" aria-hidden="true" tabindex="-1"></a>summ.iris</span></code></pre></div>
 <pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
 ##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
 ##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
@@ -340,31 +348,31 @@ Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> representa la sum
 <div id="visualización-básica-de-datos" class="section level3" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> Visualización básica de datos</h3>
 <p>Podemos graficar, por ejemplo, la base de datos iris.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estadística-descriptiva.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris)</span></code></pre></div>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="estadística-descriptiva.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris)</span></code></pre></div>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Como podemos ver, tenemos una gráfica compleja donde no se pueden apreciar del todo bien los datos. Para hacer una gráfica de, por ejemplo, la longitud de los sépalos de cada una de las especies, tenemos que agregar ciertos argumentos a la función <code>plot()</code>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="estadística-descriptiva.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris, <span class="at">x =</span> iris<span class="sc">$</span>Species, <span class="at">y =</span> iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="estadística-descriptiva.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris, <span class="at">x =</span> iris<span class="sc">$</span>Species, <span class="at">y =</span> iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>También podemos graficar la relación entre dos variables para observar como estas van cambiando.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estadística-descriptiva.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width)</span></code></pre></div>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="estadística-descriptiva.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width)</span></code></pre></div>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Por ejemplo, graficamos la relación que existe entre la longitud del petal y su ancho. A primera vista parece existir una correlación positiva entre ambos.</p>
 <p>Podemos agregar más argumentos a nuestro gráfico para hacerlo más presentable.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estadística-descriptiva.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width, <span class="at">main =</span> <span class="st">&quot;Gráfico de relación entre la longitud y el ancho del petalo&quot;</span>,</span>
-<span id="cb38-2"><a href="estadística-descriptiva.html#cb38-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="st">&quot;Datos obtenidos de la base de datos iris&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Longitud del petalo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ancho del petalo&quot;</span>)</span></code></pre></div>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="estadística-descriptiva.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width, <span class="at">main =</span> <span class="st">&quot;Gráfico de relación entre la longitud y el ancho del petalo&quot;</span>,</span>
+<span id="cb83-2"><a href="estadística-descriptiva.html#cb83-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="st">&quot;Datos obtenidos de la base de datos iris&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Longitud del petalo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ancho del petalo&quot;</span>)</span></code></pre></div>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Los argumentos <code>main</code> y <code>sub</code> sirven para darle un título y un subtítulo a nuestro gráfico, respectivamente. Los argumentos <code>xlab</code> y <code>ylab</code> sirven para nombrar los ejes x y y.</p>
 <p>Otros argumentos con los que podemos modificar la forma, color y contorno de los puntos son <em>pch</em>, <em>bg</em> y <em>col</em>, respectivamente. Con el argumento <code>cex</code> podemos modificar el tamaño de los puntos.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estadística-descriptiva.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width, <span class="at">main =</span> <span class="st">&quot;Gráfico de relación entre la longitud y el ancho del petalo&quot;</span>,</span>
-<span id="cb39-2"><a href="estadística-descriptiva.html#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="st">&quot;Datos obtenidos de la base de datos iris&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Longitud del petalo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ancho del petalo&quot;</span>, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb39-3"><a href="estadística-descriptiva.html#cb39-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="estadística-descriptiva.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width, <span class="at">main =</span> <span class="st">&quot;Gráfico de relación entre la longitud y el ancho del petalo&quot;</span>,</span>
+<span id="cb84-2"><a href="estadística-descriptiva.html#cb84-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="st">&quot;Datos obtenidos de la base de datos iris&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Longitud del petalo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ancho del petalo&quot;</span>, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb84-3"><a href="estadística-descriptiva.html#cb84-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Es necesario que para que el relleno (argumento <code>bg</code>) sea visible, se necesitan <code>pch = 21:25</code>, en este caso utilizamos <code>pch = 20</code>. Al no poner ningún valor para <code>col</code> el contorno de los puntos es negro.</p>
 <p>Las leyendas con los comandos R de base no son muy bonitas y son poco intuitivas. Para esto utilizaremos una librería más adelante llamada <code>ggplot2</code>.</p>
 </div>
 <div id="valores-atípicos" class="section level3" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Valores atípicos</h3>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Como podemos ver en el gráfico anterior, en el eje de las ordenadas tenemos a las tres especies: <em>Iris setosa, I. versicolor e I. virginica</em>. Esta es una gráfica llamada boxplot y se construye a partir de los datos que tenemos en nuestro resumen. La parte inferior de la caja corresponde al primer cuartil, la línea negra central corresponde a la mediana y la parte superior de la caja corresponde al tercer cuartil. Las líneas que salen de la caja corresponden a los valores máximos y mínimos que no son valores atípicos o <em>outliers</em>. Un valor atípico es aquel que se sale de la cerca superior e inferior, pero, ¿cómo se definen estos límites?</p>
 <p>Para el calculo de estas cercas se implementan las siguientes ecuaciones <a href="estadística-descriptiva.html#eq:fence">(2.2)</a>.</p>
 <p><span class="math display" id="eq:fence">\[\begin{equation}
@@ -384,7 +392,7 @@ Cerca_i = 6.225 - 1.5*0.675 = 5.2125 \\
 Cerca_s = 6.9 + 1.5*0.675 = 7.9125
 \]</span></p>
 <p>Aunque no están incluidas en el boxplot, nuestras cercas inferior y superior son 5.2125 y 7.9125, respectivamente. Cualquier valor por encima o por debajo de este límite será considerado un valor atípico o <em>outlier</em>. Aunque las cercas no se incluyen en el boxplot, este sí gráfica los puntos cuando estos son considerados como valores atípicos, como en el caso del punto que podemos observar en <em>I. virginica</em>, que tiene un valor menor a 5.2125, específicamente, tiene un valor de 4.9. Incluso nosotros podríamos buscar este valor utilizando una serie de filtros.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estadística-descriptiva.html#cb40-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Sepal.Length <span class="sc">&lt;=</span> <span class="fl">5.2125</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="estadística-descriptiva.html#cb85-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Sepal.Length <span class="sc">&lt;=</span> <span class="fl">5.2125</span>)</span></code></pre></div>
 <pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 1           5.1         3.5          1.4         0.2     setosa
 ## 2           4.9         3.0          1.4         0.2     setosa
@@ -436,7 +444,7 @@ Cerca_s = 6.9 + 1.5*0.675 = 7.9125
 </div>
 <div id="medidas-de-dispersión" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Medidas de dispersión</h2>
-<p>A diferencia de los estadísticos de tendencia central, los estadísticos de dispresión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Algunas medidas de dispersión son:</p>
+<p>A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Algunas medidas de dispersión son:</p>
 <ul>
 <li><strong>Rango:</strong> La diferencia entre el valor máximo y el valor mínimo de un conjunto de datos. Para obtener el valor del rango utilizamos la ecuación <a href="estadística-descriptiva.html#eq:range">(2.3)</a>.</li>
 </ul>
@@ -460,26 +468,26 @@ Cerca_s = 6.9 + 1.5*0.675 = 7.9125
 <div id="rango-en-r" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Rango en R</h3>
 <p>El rango es simplemente la diferencia entre el valor más grande y el más chico. Su calculo en R se puede hacer con la función <code>range()</code>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="estadística-descriptiva.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(iris<span class="sc">$</span>Petal.Length)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="estadística-descriptiva.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(iris<span class="sc">$</span>Petal.Length)</span></code></pre></div>
 <pre><code>## [1] 1.0 6.9</code></pre>
 <p>A partir del output de está función podemos hacer el cálculo del rango.
 <span class="math display">\[
 Rango = 6.9 - 1 = 5.9
 \]</span></p>
 <p>Otra forma de hacer el cálculo de manera directa es con las funciones <code>min()</code> y <code>max()</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estadística-descriptiva.html#cb44-1" aria-hidden="true" tabindex="-1"></a>Rango <span class="ot">&lt;-</span> <span class="fu">max</span>(iris<span class="sc">$</span>Petal.Length) <span class="sc">-</span> <span class="fu">min</span>(iris<span class="sc">$</span>Petal.Length)</span>
-<span id="cb44-2"><a href="estadística-descriptiva.html#cb44-2" aria-hidden="true" tabindex="-1"></a>Rango</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="estadística-descriptiva.html#cb89-1" aria-hidden="true" tabindex="-1"></a>Rango <span class="ot">&lt;-</span> <span class="fu">max</span>(iris<span class="sc">$</span>Petal.Length) <span class="sc">-</span> <span class="fu">min</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb89-2"><a href="estadística-descriptiva.html#cb89-2" aria-hidden="true" tabindex="-1"></a>Rango</span></code></pre></div>
 <pre><code>## [1] 5.9</code></pre>
 </div>
 <div id="desviación-estándar-en-r" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Desviación estándar en R</h3>
-<p>Para obtener la desviación estándar en R lo único que necesitamos es utilizar la fución <code>sd()</code>.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estadística-descriptiva.html#cb46-1" aria-hidden="true" tabindex="-1"></a>SD <span class="ot">&lt;-</span> <span class="fu">sd</span>(iris<span class="sc">$</span>Petal.Length)</span>
-<span id="cb46-2"><a href="estadística-descriptiva.html#cb46-2" aria-hidden="true" tabindex="-1"></a>SD</span></code></pre></div>
+<p>Para obtener la desviación estándar en R lo único que necesitamos es utilizar la función <code>sd()</code>.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="estadística-descriptiva.html#cb91-1" aria-hidden="true" tabindex="-1"></a>SD <span class="ot">&lt;-</span> <span class="fu">sd</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb91-2"><a href="estadística-descriptiva.html#cb91-2" aria-hidden="true" tabindex="-1"></a>SD</span></code></pre></div>
 <pre><code>## [1] 1.765298</code></pre>
 <p>En caso de querer obtener la varianza, simplemente elevamos nuestro valor al cuadrado.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="estadística-descriptiva.html#cb48-1" aria-hidden="true" tabindex="-1"></a>Var <span class="ot">&lt;-</span> SD<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb48-2"><a href="estadística-descriptiva.html#cb48-2" aria-hidden="true" tabindex="-1"></a>Var</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="estadística-descriptiva.html#cb93-1" aria-hidden="true" tabindex="-1"></a>Var <span class="ot">&lt;-</span> SD<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb93-2"><a href="estadística-descriptiva.html#cb93-2" aria-hidden="true" tabindex="-1"></a>Var</span></code></pre></div>
 <pre><code>## [1] 3.116278</code></pre>
 </div>
 </div>
@@ -495,29 +503,29 @@ Rango = 6.9 - 1 = 5.9
 \tag{2.6}
 \end{equation}\]</span></p>
 <p>En este caso, utilizaremos la base de datos de aves que vimos en la lección anterior.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="estadística-descriptiva.html#cb50-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="estadística-descriptiva.html#cb95-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Para obtener la frecuencia absoluta utilizamos al función <code>table()</code> y el argumento <code>Aves$ambiente</code> para obtener la frecuencia de aves del bosque y aves de arbustales.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="estadística-descriptiva.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Aves<span class="sc">$</span>ambiente)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="estadística-descriptiva.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Aves<span class="sc">$</span>ambiente)</span></code></pre></div>
 <pre><code>## 
 ## arbustal   bosque 
 ##       20       16</code></pre>
 <p>En caso de querer las frecuencias relativas, podemos usar la función <code>prop.table()</code> y el mismo argumento de <code>Aves$ambiente</code>. Para esto debemos tener las frecuencias absolutas guardadas en una variable.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="estadística-descriptiva.html#cb53-1" aria-hidden="true" tabindex="-1"></a>Frecab <span class="ot">&lt;-</span> <span class="fu">table</span>(Aves<span class="sc">$</span>ambiente)</span>
-<span id="cb53-2"><a href="estadística-descriptiva.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(Frecab)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="estadística-descriptiva.html#cb98-1" aria-hidden="true" tabindex="-1"></a>Frecab <span class="ot">&lt;-</span> <span class="fu">table</span>(Aves<span class="sc">$</span>ambiente)</span>
+<span id="cb98-2"><a href="estadística-descriptiva.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(Frecab)</span></code></pre></div>
 <pre><code>## 
 ##  arbustal    bosque 
 ## 0.5555556 0.4444444</code></pre>
-<p>Para facilitar la lectura vamos a transformar las frecuencias relativas a porcentajes multiplicando por 100 y utilizando la función <code>round()</code> para redondear los valores a 2 digitos.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="estadística-descriptiva.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">prop.table</span>(Frecab) <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">2</span>)</span></code></pre></div>
+<p>Para facilitar la lectura vamos a transformar las frecuencias relativas a porcentajes multiplicando por 100 y utilizando la función <code>round()</code> para redondear los valores a 2 dígitos.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="estadística-descriptiva.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">prop.table</span>(Frecab) <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## 
 ## arbustal   bosque 
 ##    55.56    44.44</code></pre>
-<p>Podemos ver que el 55.56% de las aves son de habitos arbustivos mientras que el 44.44% prefieren los bosques.</p>
+<p>Podemos ver que el 55.56% de las aves son de hábitos arbustivos mientras que el 44.44% prefieren los bosques.</p>
 </div>
 <div id="el-uso-de-la-librería-dplyr" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> El uso de la librería <code>dplyr</code></h2>
 <p>Para facilitar aún más las cosas podemos utilizar las herramientas de la librería <code>dplyr</code> que vienen incluidas en el paquete de <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="estadística-descriptiva.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="estadística-descriptiva.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Las funciones más importantes de este paquete son:</p>
 <ul>
 <li><p><code>group_by:</code> agrupa datos.</p></li>
@@ -529,15 +537,15 @@ Rango = 6.9 - 1 = 5.9
 <li><p><code>arrange:</code> ordena.</p></li>
 </ul>
 <p>Con <code>dplyr</code> la extracción de la media y la mediana es a través de la función <code>summarise</code> y sería así:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="estadística-descriptiva.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb58-2"><a href="estadística-descriptiva.html#cb58-2" aria-hidden="true" tabindex="-1"></a>resum.iris <span class="ot">&lt;-</span> <span class="fu">summarise</span>(iris, <span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
-<span id="cb58-3"><a href="estadística-descriptiva.html#cb58-3" aria-hidden="true" tabindex="-1"></a>resum.iris</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="estadística-descriptiva.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb103-2"><a href="estadística-descriptiva.html#cb103-2" aria-hidden="true" tabindex="-1"></a>resum.iris <span class="ot">&lt;-</span> <span class="fu">summarise</span>(iris, <span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
+<span id="cb103-3"><a href="estadística-descriptiva.html#cb103-3" aria-hidden="true" tabindex="-1"></a>resum.iris</span></code></pre></div>
 <pre><code>##   Petal.Length.Mean Petal.Length.Median
 ## 1             3.758                4.35</code></pre>
 <p>Pero supongamos que quiero extraer estos valores de cada una de las especies. Para esto utilizamos la función <code>group_by</code>:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="estadística-descriptiva.html#cb60-1" aria-hidden="true" tabindex="-1"></a>iris.especies <span class="ot">&lt;-</span> <span class="fu">group_by</span>(iris, Species) <span class="co">#Aparentemente esta función no cambia la matriz de datos, sin embargo si hacemos un summarise estos se ordenarán por la forma en que los agrupamos.</span></span>
-<span id="cb60-2"><a href="estadística-descriptiva.html#cb60-2" aria-hidden="true" tabindex="-1"></a>resum.iris.especies <span class="ot">&lt;-</span> <span class="fu">summarise</span>(iris.especies, <span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
-<span id="cb60-3"><a href="estadística-descriptiva.html#cb60-3" aria-hidden="true" tabindex="-1"></a>resum.iris.especies</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="estadística-descriptiva.html#cb105-1" aria-hidden="true" tabindex="-1"></a>iris.especies <span class="ot">&lt;-</span> <span class="fu">group_by</span>(iris, Species) <span class="co">#Aparentemente esta función no cambia la matriz de datos, sin embargo si hacemos un summarise estos se ordenarán por la forma en que los agrupamos.</span></span>
+<span id="cb105-2"><a href="estadística-descriptiva.html#cb105-2" aria-hidden="true" tabindex="-1"></a>resum.iris.especies <span class="ot">&lt;-</span> <span class="fu">summarise</span>(iris.especies, <span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
+<span id="cb105-3"><a href="estadística-descriptiva.html#cb105-3" aria-hidden="true" tabindex="-1"></a>resum.iris.especies</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    Petal.Length.Mean Petal.Length.Median
 ##   &lt;fct&gt;                  &lt;dbl&gt;               &lt;dbl&gt;
@@ -545,8 +553,8 @@ Rango = 6.9 - 1 = 5.9
 ## 2 versicolor              4.26                4.35
 ## 3 virginica               5.55                5.55</code></pre>
 <p>Con la función <code>mutate</code> nosotros podemos crear nuevas variables. Por ejemplo, la relación entre longitud del pétalo-ancho del pétalo.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="estadística-descriptiva.html#cb62-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> <span class="fu">mutate</span>(iris, <span class="at">Petal.Leng.Wid.Ratio =</span> Petal.Length<span class="sc">/</span>Petal.Width)</span>
-<span id="cb62-2"><a href="estadística-descriptiva.html#cb62-2" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Petal.Leng.Wid.Ratio</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="estadística-descriptiva.html#cb107-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> <span class="fu">mutate</span>(iris, <span class="at">Petal.Leng.Wid.Ratio =</span> Petal.Length<span class="sc">/</span>Petal.Width)</span>
+<span id="cb107-2"><a href="estadística-descriptiva.html#cb107-2" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Petal.Leng.Wid.Ratio</span></code></pre></div>
 <pre><code>##   [1]  7.000000  7.000000  6.500000  7.500000  7.000000  4.250000  4.666667
 ##   [8]  7.500000  7.000000 15.000000  7.500000  8.000000 14.000000 11.000000
 ##  [15]  6.000000  3.750000  3.250000  4.666667  5.666667  5.000000  8.500000
@@ -570,13 +578,13 @@ Rango = 6.9 - 1 = 5.9
 ## [141]  2.333333  2.217391  2.684211  2.565217  2.280000  2.260870  2.631579
 ## [148]  2.600000  2.347826  2.833333</code></pre>
 <p>Para realizar operaciones de manera secuencial utilizamos el <code>pipeline %&gt;%</code>. En lugar de escribir el siguiente código y asignar dos variables, podemos hacer todo de una.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="estadística-descriptiva.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#iris.especies &lt;- group_by(iris, Species)</span></span>
-<span id="cb64-2"><a href="estadística-descriptiva.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co">#resum.iris.especies &lt;- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length)) </span></span>
-<span id="cb64-3"><a href="estadística-descriptiva.html#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="estadística-descriptiva.html#cb64-4" aria-hidden="true" tabindex="-1"></a>resum.iris.especies2 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb64-5"><a href="estadística-descriptiva.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb64-6"><a href="estadística-descriptiva.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
-<span id="cb64-7"><a href="estadística-descriptiva.html#cb64-7" aria-hidden="true" tabindex="-1"></a>resum.iris.especies2</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="estadística-descriptiva.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#iris.especies &lt;- group_by(iris, Species)</span></span>
+<span id="cb109-2"><a href="estadística-descriptiva.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co">#resum.iris.especies &lt;- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length)) </span></span>
+<span id="cb109-3"><a href="estadística-descriptiva.html#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="estadística-descriptiva.html#cb109-4" aria-hidden="true" tabindex="-1"></a>resum.iris.especies2 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb109-5"><a href="estadística-descriptiva.html#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb109-6"><a href="estadística-descriptiva.html#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Petal.Length.Mean =</span> <span class="fu">mean</span>(Petal.Length), <span class="at">Petal.Length.Median =</span> <span class="fu">median</span>(Petal.Length))</span>
+<span id="cb109-7"><a href="estadística-descriptiva.html#cb109-7" aria-hidden="true" tabindex="-1"></a>resum.iris.especies2</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    Petal.Length.Mean Petal.Length.Median
 ##   &lt;fct&gt;                  &lt;dbl&gt;               &lt;dbl&gt;
@@ -585,8 +593,8 @@ Rango = 6.9 - 1 = 5.9
 ## 3 virginica               5.55                5.55</code></pre>
 <p>Trabajar de esta forma es más cómodo y más claro.</p>
 <p>Para hacer filtros utilizamos la función <code>filter</code>. Sin embargo, como posiblemente hay otros paquetes que han nombrado una función igual, para evitar conflictos agregamos <code>dplyr::</code> antes de la función <code>filter</code> para especificar que queremos trabajar con el <code>filter</code> del paquete de <code>dplyr</code>. Hagamos un ejemplo de filtrado de la matriz de datos <code>iris</code> para obtener solamente las especies de <em>I. versicolor</em>.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="estadística-descriptiva.html#cb66-1" aria-hidden="true" tabindex="-1"></a>iris.versicolor <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;versicolor&quot;</span>)</span>
-<span id="cb66-2"><a href="estadística-descriptiva.html#cb66-2" aria-hidden="true" tabindex="-1"></a>iris.versicolor</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="estadística-descriptiva.html#cb111-1" aria-hidden="true" tabindex="-1"></a>iris.versicolor <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;versicolor&quot;</span>)</span>
+<span id="cb111-2"><a href="estadística-descriptiva.html#cb111-2" aria-hidden="true" tabindex="-1"></a>iris.versicolor</span></code></pre></div>
 <pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 1           7.0         3.2          4.7         1.4 versicolor
 ## 2           6.4         3.2          4.5         1.5 versicolor
@@ -692,7 +700,7 @@ Rango = 6.9 - 1 = 5.9
 <p>Como podemos ver, hemos filtrado a todas las especies pertenecientes a <em>I. versicolor</em>.</p>
 <table class="table table-striped table-bordered table-hover" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-35">Tabla 2.1: </span>Símbolos utilizados con la función filter
+<span id="tab:unnamed-chunk-71">Tabla 2.1: </span>Símbolos utilizados con la función filter
 </caption>
 <thead>
 <tr>
@@ -788,18 +796,18 @@ O, Y
 </tbody>
 </table>
 <p>Habíamos visto un individuo de la especie de <em>I. virginica</em> que tenía un valor en la longitud del sépalo menor a la cerca inferior de 5.2125 por lo que se le consideraba un valor atípico. Podemos encontrar este valor utilizando la función <code>dplyr::filter()</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="estadística-descriptiva.html#cb68-1" aria-hidden="true" tabindex="-1"></a>outlier <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;virginica&quot;</span>, Sepal.Length <span class="sc">&lt;=</span> <span class="fl">5.2125</span>)</span>
-<span id="cb68-2"><a href="estadística-descriptiva.html#cb68-2" aria-hidden="true" tabindex="-1"></a>outlier</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="estadística-descriptiva.html#cb113-1" aria-hidden="true" tabindex="-1"></a>outlier <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;virginica&quot;</span>, Sepal.Length <span class="sc">&lt;=</span> <span class="fl">5.2125</span>)</span>
+<span id="cb113-2"><a href="estadística-descriptiva.html#cb113-2" aria-hidden="true" tabindex="-1"></a>outlier</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 ## 1          4.9         2.5          4.5         1.7 virginica
 ##   Petal.Leng.Wid.Ratio
 ## 1             2.647059</code></pre>
 <p>Así podemos corroborar las otras medidas que este valor presenta, para verificar que no sean atípica en sus correspondientes cuartiles.</p>
 <p>Podemos utilizar otra función llamada <code>n()</code> junto con <code>summarise()</code> para obtener las frecuencias absolutas de nuestros datos.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="estadística-descriptiva.html#cb70-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb70-2"><a href="estadística-descriptiva.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href="estadística-descriptiva.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Frecuencia_absoluta =</span> <span class="fu">n</span>())</span>
-<span id="cb70-4"><a href="estadística-descriptiva.html#cb70-4" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="estadística-descriptiva.html#cb115-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="estadística-descriptiva.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-3"><a href="estadística-descriptiva.html#cb115-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Frecuencia_absoluta =</span> <span class="fu">n</span>())</span>
+<span id="cb115-4"><a href="estadística-descriptiva.html#cb115-4" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   Species    Frecuencia_absoluta
 ##   &lt;fct&gt;                    &lt;int&gt;
@@ -807,17 +815,17 @@ O, Y
 ## 2 versicolor                  50
 ## 3 virginica                   50</code></pre>
 <p>Para obtener la frecuencia relativa utilizamos la función <code>mutate</code> para agregar una nueva variable llamada <code>Frecuencia_relativa</code> junto con la función <code>sum</code> para obtener el número total de observaciones <span class="math inline">\(N\)</span> de la ecuación <a href="estadística-descriptiva.html#eq:frecr">(2.6)</a> para nuestros datos.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="estadística-descriptiva.html#cb72-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> Frecuencias <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Frecuencia_relativa =</span> Frecuencia_absoluta <span class="sc">/</span> <span class="fu">sum</span>(Frecuencia_absoluta))</span>
-<span id="cb72-2"><a href="estadística-descriptiva.html#cb72-2" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="estadística-descriptiva.html#cb117-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> Frecuencias <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Frecuencia_relativa =</span> Frecuencia_absoluta <span class="sc">/</span> <span class="fu">sum</span>(Frecuencia_absoluta))</span>
+<span id="cb117-2"><a href="estadística-descriptiva.html#cb117-2" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    Frecuencia_absoluta Frecuencia_relativa
 ##   &lt;fct&gt;                    &lt;int&gt;               &lt;dbl&gt;
 ## 1 setosa                      50               0.333
 ## 2 versicolor                  50               0.333
 ## 3 virginica                   50               0.333</code></pre>
-<p>Y si quisieramos obtener el porcentaje, de nuevo podemos utilizar la función <code>mutate</code> y multiplicando la varaible <code>Frecuencia_relativa</code> por 100%.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="estadística-descriptiva.html#cb74-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> Frecuencias <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> Frecuencia_relativa<span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb74-2"><a href="estadística-descriptiva.html#cb74-2" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
+<p>Y si quisiéramos obtener el porcentaje, de nuevo podemos utilizar la función <code>mutate</code> y multiplicando la variable <code>Frecuencia_relativa</code> por 100%.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="estadística-descriptiva.html#cb119-1" aria-hidden="true" tabindex="-1"></a>Frecuencias <span class="ot">&lt;-</span> Frecuencias <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> Frecuencia_relativa<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb119-2"><a href="estadística-descriptiva.html#cb119-2" aria-hidden="true" tabindex="-1"></a>Frecuencias</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   Species    Frecuencia_absoluta Frecuencia_relativa Porcentaje
 ##   &lt;fct&gt;                    &lt;int&gt;               &lt;dbl&gt;      &lt;dbl&gt;
@@ -825,8 +833,8 @@ O, Y
 ## 2 versicolor                  50               0.333       33.3
 ## 3 virginica                   50               0.333       33.3</code></pre>
 <p>Con la función <code>select</code> podemos elegir unas cuantas variables para trabajar. Esto es útil para bases de datos con muchas variables como matrices de abundancias.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="estadística-descriptiva.html#cb76-1" aria-hidden="true" tabindex="-1"></a>Petals <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Petal.Length, Petal.Width, Species)</span>
-<span id="cb76-2"><a href="estadística-descriptiva.html#cb76-2" aria-hidden="true" tabindex="-1"></a>Petals</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="estadística-descriptiva.html#cb121-1" aria-hidden="true" tabindex="-1"></a>Petals <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Petal.Length, Petal.Width, Species)</span>
+<span id="cb121-2"><a href="estadística-descriptiva.html#cb121-2" aria-hidden="true" tabindex="-1"></a>Petals</span></code></pre></div>
 <pre><code>##     Petal.Length Petal.Width    Species
 ## 1            1.4         0.2     setosa
 ## 2            1.4         0.2     setosa
@@ -979,8 +987,8 @@ O, Y
 ## 149          5.4         2.3  virginica
 ## 150          5.1         1.8  virginica</code></pre>
 <p>En este caso, eliminamos los datos de los sépalos y nos quedamos con los datos solamente de los pétalos. Otra forma de seleccionar las variables es con el argumento <code>starts_with()</code>, por ejemplo, para seleccionar solamente las variables que empiecen con la palabra “Petal.”</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="estadística-descriptiva.html#cb78-1" aria-hidden="true" tabindex="-1"></a>Petals2 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Petal&quot;</span>), Species)</span>
-<span id="cb78-2"><a href="estadística-descriptiva.html#cb78-2" aria-hidden="true" tabindex="-1"></a>Petals2</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="estadística-descriptiva.html#cb123-1" aria-hidden="true" tabindex="-1"></a>Petals2 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Petal&quot;</span>), Species)</span>
+<span id="cb123-2"><a href="estadística-descriptiva.html#cb123-2" aria-hidden="true" tabindex="-1"></a>Petals2</span></code></pre></div>
 <pre><code>##     Petal.Length Petal.Width Petal.Leng.Wid.Ratio    Species
 ## 1            1.4         0.2             7.000000     setosa
 ## 2            1.4         0.2             7.000000     setosa
@@ -1141,7 +1149,7 @@ O, Y
         </div>
       </div>
 <a href="introducción-a-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="histogramas-y-gráficos-de-densidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

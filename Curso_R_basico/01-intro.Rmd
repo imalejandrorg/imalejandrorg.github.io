@@ -1,3 +1,12 @@
+---
+title: "Análisis de Varianza"
+author: "Alejandro Ruiz-García"
+date: "16/3/2021"
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+---
+
 # Introducción a R
 ```{r include=FALSE}
 library(knitr)
@@ -19,16 +28,16 @@ R Studio cuenta con 4 ventanas esenciales:
 3) El *Envirnoment* y el *History* que corresponden a la ventana superior derecha, aunque también cuenta con otras herramientas útiles como *Build* y *Git* que se utilizan en cuestiones más avanzadas.
 
 4) Los *Files*, *Packages* y *Plots* así como la ventana de *Help* que corresponden a la esquina inferior derecha. Básicamente estas son las 4 pestañas de esta ventana que estaremos utilizando.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Interfaz de RStudio" }
 knitr::include_graphics("RStudio.png")
 ```
 
 Adicionalmente, en la ventana de ***Tools -> Global Options -> Appearance*** podemos configurar los colores de nuestra interfaz, el tamaño de la fuente, el zoom, el tema del editor y la tipografía.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Para abrir las opciones globales nos vamos a ***Tools -> Global Options***."}
 knitr::include_graphics("GlobalOptions.png", dpi = 100)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Ventana de *Appearance* dentro de las Opciones Globales de RStudio"}
 knitr::include_graphics("Apariencia.png", dpi = 120)
 ```
 
@@ -37,7 +46,7 @@ Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso
 
 ## Creando nuestro primer proyecto
 Una vez que nos familiarizamos con la interfaz, es momento de crear nuestro primer proyecto. Para esto, debemos dar clic en ***File -> New Project*** para que nos aparezca una ventana como la siguiente.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control."}
 knitr::include_graphics("NProj.png", dpi = 120)
 ```
 
@@ -46,7 +55,7 @@ Creamos un nuevo directorio que se guarda por defecto en la carpeta de *Document
 SE RECOMIENDA NO DEJAR ESPACIOS EN EL NOMBRE. En su lugar, podemos utilizar guión bajo (_), el símbolo de menos (-) o un punto (.).
 Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shift + N. Deberíamos tener un ambiente de trabajo más o menos así.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Ventana con el ambiente de trabajo básico en RStudio."}
 knitr::include_graphics("Proj1.png", dpi = 120)
 ```
 Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, así como las bases de datos y demás archivos que vayamos a utilizar.
@@ -76,7 +85,7 @@ suma
 ```
 
 Como podemos ver en ambos casos obtenemos los mismos resultados. Sin embargo, en el segundo caso encontraremos una variable llamada "suma" en nuestro *Environment* en el panel superior derecho.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Panel *Environment* en el cual podremos encontrar las variables que vayamos generando."}
 knitr::include_graphics("Variable.png", dpi = 120)
 ```
 
@@ -86,7 +95,7 @@ letraA <- "A"
 ```
 
 De nuevo se agregará esta variable a nuestro *Environment*.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Tras definir la variable *A* esta se suma a la ventana de *Environment*."}
 knitr::include_graphics("Variable2.png", dpi = 120)
 ```
 
@@ -120,17 +129,17 @@ library(vegan)
 ```
 
 Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función `install.package()` puede arrojarnos error. Una alternativa es utilizar la ventana de *Packages* del panel inferior derecho.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Ventana de *Packages* donde podremos encontrar los paquetes instalados."}
 knitr::include_graphics("Package1.png", dpi = 120)
 ```
 
 Damos clic en Install y escribimos el nombre del paquete.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Al hacer clic sobre el botón `Install` en la ventana de *Packages* aparece esta pequeña ventana donde podremos buscar la librería deseada."}
 knitr::include_graphics("Package2.png", dpi = 120)
 ```
 
 Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares."}
 knitr::include_graphics("Package3.png", dpi = 120)
 ```
 
@@ -174,7 +183,7 @@ class(Aves_xlsx)
 Básicamente le estamos diciendo a R que escriba un data frame con el mismo nombre que el data frame de subtipo tibble. De esta manera sobrescribimos el primer archivo y mantenemos limpio nuestro espacio de trabajo.
 
 También se puede importar desde el botón *Import Dataset* que aparece en la ventana de nuestro Environment.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "En el panel *Environment* podemos hacer clic sobre la ventana`Import Dataset` para importar archivos de distintos formatos."}
 knitr::include_graphics("Import.png", dpi = 120)
 ```
 
@@ -208,23 +217,23 @@ write.table(Abun, file = "O:/Documentos/R_Basico/Lección_1/Abundancias.csv", se
 ```
 
 Como podemos ver, el archivo fue escrito en la dirección indicada.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Dirección a en la cual hemos decidido guardar el archivo *Abundancias.csv*."}
 knitr::include_graphics("SaveTable.png", dpi = 120)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Archivo *Abundancias.csv* visto en Excel."}
 knitr::include_graphics("SaveTable2.png", dpi = 100)
 ```
 
 
 ## Pedir ayuda
-En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación `?` segudio de la función sobre la cuál tengamos una duda.
+En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación `?` seguido de la función sobre la cuál tengamos una duda.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ?specaccum
 ```
 
 Cuando nosotros escribimos esto, se abrirá la ventana de *Help* en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Ventana de ayuda en la pestaña *Help* para la función que en este caso fue `?specaccum`."}
 knitr::include_graphics("help.png", dpi = 120)
 ```
