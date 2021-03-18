@@ -1,5 +1,5 @@
 ---
-title: "Análisis de Varianza"
+title: "Introducción"
 author: "Alejandro Ruiz-García"
 date: "16/3/2021"
 output:

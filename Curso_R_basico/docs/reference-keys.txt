@@ -77,3 +77,4 @@ dbinom
 pbinom
 qbinom
 rbinom
+fig:unnamed-chunk-3
