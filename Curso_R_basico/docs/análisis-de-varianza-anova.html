@@ -329,7 +329,7 @@ Figura 3.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 <span id="cb148-2"><a href="análisis-de-varianza-anova.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos)</span></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;Control&quot;,&quot;Tratamiento1&quot;,..: 2 3 1</code></pre>
 <p>Cuando nos referimos a un <em>ANOVA de una vía</em> decimos que solamente consideramos una variable predictora o independiente. También se le conoce como <em>ANOVA de un factor</em>. En este caso, para la base de datos de <code>PlantGrowth</code> solo estamos considerando el tratamiento, por lo tanto lo lógico es hacer un ANOVA de una vía. Sin emabrgo, si además del tratamiento tuvieramos otra variable como la cantidad de luz, podríamos considerar hacer un <em>ANOVA de dos vías</em>.</p>
-<p>El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir <span class="math inline">\(H_0\)</span>: Las medias de todas las muestras son iguales: <span class="math inline">\(\mu = \mu_2 = \mu_3 = ... = \mu_n\)</span>. <span class="math inline">\(H_A\)</span>: Al menos una de las medias de las muestras es distinta: <span class="math inline">\(\mu_1 \neq \mu_n\)</span>.</p>
+<p>El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir <span class="math inline">\(H_0\)</span>: Las medias de todas las muestras son iguales: <span class="math inline">\(\mu_1 = \mu_2 = \mu_3 = ... = \mu_n\)</span>. <span class="math inline">\(H_A\)</span>: Al menos una de las medias de las muestras es distinta: <span class="math inline">\(\mu_1 \neq \mu_n\)</span>.</p>
 <p>Antes de empezar a hacer el análisis recordemos un poco los fundamentos del ANOVA. Empecemos con cierta notación que nos será útil.</p>
 <ul>
 <li><span class="math inline">\(k\)</span> = número de grupos/poblaciones/tratamientos.</li>
@@ -340,7 +340,7 @@ Figura 3.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 <li><span class="math inline">\(n\)</span> = el número total de muestras/observaciones independientemente del grupo.</li>
 <li><span class="math inline">\(\overline{x}\)</span> = la media global de todos los grupos/poblaciones/tratamientos independientemente del grupo.</li>
 </ul>
-<p>El estadístico calculado para el ANOVA se conoce como <span class="math inline">\(F_{ratio}\)</span>, ya que es una relación entre dos valores: los <strong>cuadrados medios entre grupos</strong> (<span class="math inline">\(CM_{entre}\)</span>) y los <strong>cuadrados medios dentro de los grupos</strong> (<span class="math inline">\(MS_{dentro}\)</span>).</p>
+<p>El estadístico que calcula el ANOVA se conoce como <span class="math inline">\(F_{ratio}\)</span>, ya que es una relación entre dos valores: los <strong>cuadrados medios entre grupos</strong> (<span class="math inline">\(CM_{entre}\)</span>) y los <strong>cuadrados medios dentro de los grupos</strong> (<span class="math inline">\(MS_{dentro}\)</span>). Para calcular el <span class="math inline">\(F_{ratio}\)</span> utilizamos la ecuación (eq:Fratio).</p>
 <p><span class="math display" id="eq:Fratio">\[\begin{equation}
 F_{ratio} = \frac{CM_{entre}}{CM_{dentro}}
 \tag{3.1}

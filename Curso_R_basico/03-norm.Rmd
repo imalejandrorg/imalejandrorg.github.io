@@ -132,7 +132,7 @@ str(datos)
 
 Cuando nos referimos a un *ANOVA de una vía* decimos que solamente consideramos una variable predictora o independiente. También se le conoce como *ANOVA de un factor*. En este caso, para la base de datos de `PlantGrowth` solo estamos considerando el tratamiento, por lo tanto lo lógico es hacer un ANOVA de una vía. Sin emabrgo, si además del tratamiento tuvieramos otra variable como la cantidad de luz, podríamos considerar hacer un *ANOVA de dos vías*.
 
-El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir $H_0$: Las medias de todas las muestras son iguales: $\mu = \mu_2 = \mu_3 = ... = \mu_n$. $H_A$: Al menos una de las medias de las muestras es distinta: $\mu_1 \neq \mu_n$.
+El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir $H_0$: Las medias de todas las muestras son iguales: $\mu_1 = \mu_2 = \mu_3 = ... = \mu_n$. $H_A$: Al menos una de las medias de las muestras es distinta: $\mu_1 \neq \mu_n$.
 
 Antes de empezar a hacer el análisis recordemos un poco los fundamentos del ANOVA. Empecemos con cierta notación que nos será útil.
 
@@ -144,7 +144,7 @@ Antes de empezar a hacer el análisis recordemos un poco los fundamentos del ANO
 - $n$ = el número total de muestras/observaciones independientemente del grupo.
 - $\overline{x}$ = la media global de todos los grupos/poblaciones/tratamientos independientemente del grupo.
 
-El estadístico calculado para el ANOVA se conoce como $F_{ratio}$, ya que es una relación entre dos valores: los **cuadrados medios entre grupos** ($CM_{entre}$) y los **cuadrados medios dentro de los grupos** ($MS_{dentro}$). 
+El estadístico que calcula el ANOVA se conoce como $F_{ratio}$, ya que es una relación entre dos valores: los **cuadrados medios entre grupos** ($CM_{entre}$) y los **cuadrados medios dentro de los grupos** ($MS_{dentro}$). Para calcular el $F_{ratio}$ utilizamos la ecuación \ref@(eq:Fratio).
 
 \begin{equation}
 F_{ratio} = \frac{CM_{entre}}{CM_{dentro}}
