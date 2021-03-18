@@ -1,7 +1,4 @@
 ---
-title: "Estadística descriptiva"
-author: "Alejandro Ruiz-García"
-date: "16/3/2021"
 output:
   bookdown::html_document2:
     fig.caption: yes

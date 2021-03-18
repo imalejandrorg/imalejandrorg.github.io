@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 1 Introducción a R | Análisis de Varianza</title>
+  <title>Lección 1 Introducción a R | Curso de R básico</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 1 Introducción a R | Análisis de Varianza" />
+  <meta property="og:title" content="Lección 1 Introducción a R | Curso de R básico" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 1 Introducción a R | Análisis de Varianza" />
+  <meta name="twitter:title" content="Lección 1 Introducción a R | Curso de R básico" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -173,24 +173,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="4" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>4</b> Histogramas y gráficos de densidad</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>4.1</b> R y <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>4.1.1</b> Histogramas y gráficos de densidad en R</a></li>
-<li class="chapter" data-level="4.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>4.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html"><i class="fa fa-check"></i><b>5</b> Distribuciones de probabilidad</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>5.1</b> Distribución binomial</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#dbinom"><i class="fa fa-check"></i><b>5.1.1</b> <code>dbinom</code></a></li>
-<li class="chapter" data-level="5.1.2" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#pbinom"><i class="fa fa-check"></i><b>5.1.2</b> <code>pbinom</code></a></li>
-<li class="chapter" data-level="5.1.3" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#qbinom"><i class="fa fa-check"></i><b>5.1.3</b> <code>qbinom</code></a></li>
-<li class="chapter" data-level="5.1.4" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#rbinom"><i class="fa fa-check"></i><b>5.1.4</b> rbinom</a></li>
-</ul></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -202,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de Varianza</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
           </h1>
         </div>
 
@@ -2277,7 +2259,7 @@ Figura 1.10: En este caso, solo con escribir las primeras letras del paquete des
 </div>
 <div id="importar-datos-a-r" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Importar datos a R</h2>
-<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="distribuciones-de-probabilidad.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="distribuciones-de-probabilidad.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="distribuciones-de-probabilidad.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="distribuciones-de-probabilidad.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
 <p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <code>read.table()</code>.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
