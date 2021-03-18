@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lección 3 Introducción al análisis de varianza | Estadística descriptiva</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lección 3 Introducción al análisis de varianza | Estadística descriptiva" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lección 3 Introducción al análisis de varianza | Estadística descriptiva" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estadística-descriptiva.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Requisitos</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>0.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media-en-r"><i class="fa fa-check"></i><b>2.1.1</b> Media en R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana-en-r"><i class="fa fa-check"></i><b>2.1.2</b> Mediana en R</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#la-función-summary"><i class="fa fa-check"></i><b>2.1.3</b> La función <code>summary</code></a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#visualización-básica-de-datos"><i class="fa fa-check"></i><b>2.1.4</b> Visualización básica de datos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-atípicos"><i class="fa fa-check"></i><b>2.1.5</b> Valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango-en-r"><i class="fa fa-check"></i><b>2.2.1</b> Rango en R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar-en-r"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar en R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
+<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-al-análisis-de-varianza.html"><a href="introducción-al-análisis-de-varianza.html"><i class="fa fa-check"></i><b>3</b> Introducción al análisis de varianza</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introducción-al-análisis-de-varianza.html"><a href="introducción-al-análisis-de-varianza.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>3.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="3.2" data-path="introducción-al-análisis-de-varianza.html"><a href="introducción-al-análisis-de-varianza.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>4</b> Histogramas y gráficos de densidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>4.1</b> R y <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>4.1.1</b> Histogramas y gráficos de densidad en R</a></li>
+<li class="chapter" data-level="4.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>4.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html"><i class="fa fa-check"></i><b>5</b> Distribuciones de probabilidad</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>5.1</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#dbinom"><i class="fa fa-check"></i><b>5.1.1</b> <code>dbinom</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#pbinom"><i class="fa fa-check"></i><b>5.1.2</b> <code>pbinom</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#qbinom"><i class="fa fa-check"></i><b>5.1.3</b> <code>qbinom</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#rbinom"><i class="fa fa-check"></i><b>5.1.4</b> rbinom</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística descriptiva</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introducción-al-análisis-de-varianza" class="section level1" number="3">
+<h1><span class="header-section-number">Lección 3</span> Introducción al análisis de varianza</h1>
+<p>Para realizar un <strong>análisis de varianza</strong> o <strong>ANOVA</strong> es necesario cumplir con ciertos supuestos. Estos supuestos son similares para otro tipo de pruebas y se encuentran descritas en la sigueinte lista:</p>
+<ul>
+<li>Distribución normal de los datos.</li>
+<li>Homocedasticidad (varianzas iguales).</li>
+<li>Datos independientes.</li>
+</ul>
+<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias (<span class="math inline">\(\mu\)</span>)</strong> de las muestras.</p>
+<p>Antes de hacer el ANOVa debemos buscar una manera de comprobar la distribución normal y la homocedasticidad de los datos. Esto es relativamente sencillo de hacer.</p>
+<div id="prueba-de-normalidad" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Prueba de normalidad</h2>
+<p>Una de las pruebas de normalidad más utilizadas es la prueba de Shapiro-Wilk. El resultado de la prueba de Shapiro-Wilk es un valor-<em>p</em> que se puede interpretar de la siguiente manera:</p>
+<ul>
+<li>Valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.01: No normalidad.</li>
+<li>Valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05: No normalidad.</li>
+<li>Valor-<em>p</em> <span class="math inline">\(\ge\)</span> 0.05: Sin evidencia concluyente de no normalidad.</li>
+</ul>
+<p>Usualmente un valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05 es suficiente para indicar que nuestros datos no se distribuyen de manera normal. Esta base de datos incluye 2 variables, los valores del peso y el tratamiento que recibieron las plantas.</p>
+<p>Para esta ocasión vamos a trabajar con la base de datos <code>PlantGrowth</code> que viene incluida en R.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción-al-análisis-de-varianza.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span></code></pre></div>
+<p>Vamos a realizar una gráfica de nuestros datos para darnos una idea de su comportamiento.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introducción-al-análisis-de-varianza.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="introducción-al-análisis-de-varianza.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="introducción-al-análisis-de-varianza.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(group, weight, <span class="at">color =</span> group)) <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="introducción-al-análisis-de-varianza.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="introducción-al-análisis-de-varianza.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="introducción-al-análisis-de-varianza.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="introducción-al-análisis-de-varianza.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-3-1.png" alt="Gráfica con los distintos tratamientos." width="672" />
+<p class="caption">
+Figura 3.1: Gráfica con los distintos tratamientos.
+</p>
+</div>
+<p>Otra forma de visualizar los datos es con un boxplot que puede ir dándonos idea más o menos de cómo se distribuyen nuestros datos.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción-al-análisis-de-varianza.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="introducción-al-análisis-de-varianza.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="introducción-al-análisis-de-varianza.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(group, weight, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="introducción-al-análisis-de-varianza.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="introducción-al-análisis-de-varianza.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="introducción-al-análisis-de-varianza.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="introducción-al-análisis-de-varianza.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-4-1.png" alt="Graficos de boxplot para visualización de las distribuciones de los datos." width="672" />
+<p class="caption">
+Figura 3.2: Graficos de boxplot para visualización de las distribuciones de los datos.
+</p>
+</div>
+<p>Computar la prueba de normalidad de Shapiro-Wilk sumamente sencillo y se hace con la función <code>shapiro_test()</code> de la librería <code>rstatix</code>. Para esto primero tenemos que agrupar nuestros datos por tratamientos con la función <code>group_by()</code> del paquete de <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introducción-al-análisis-de-varianza.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="introducción-al-análisis-de-varianza.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<pre><code>## Warning: package &#39;rstatix&#39; was built under R version 4.0.4</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rstatix&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introducción-al-análisis-de-varianza.html#cb8-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(weight) <span class="co">#Agrupamos los datos por tratamiento.</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   group variable statistic     p
+##   &lt;fct&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
+## 1 ctrl  weight       0.957 0.747
+## 2 trt1  weight       0.930 0.452
+## 3 trt2  weight       0.941 0.564</code></pre>
+<p>Tanto el control como los dos tratamientos tienen un valor-<em>p</em> <span class="math inline">\(&gt;\)</span> 0.05, lo que indica que se distribuyen de manera normal. El estadístico que obtenemos se conoce como <span class="math inline">\(W\)</span> y entre más cercano sea su valor a 1 más evidencia existe de que se trata de datos que se distribuyen de manera normal.</p>
+<p>Otra opción es realizar la prueba de Shapiro-Wilk con la función integrada en R, de nombre bastante similar, llamada <code>shapiro.test()</code>. Para esta prueba no es necesario agrupar los datos por tratamiento.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introducción-al-análisis-de-varianza.html#cb10-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth<span class="sc">$</span>weight <span class="sc">%&gt;%</span> shapiro.test</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  .
+## W = 0.98268, p-value = 0.8915</code></pre>
+<p>Como podemos ver, el valor-<em>p</em> = 0.8915, lo que indica que nuestros datos se distribuyen de manera normal.</p>
+<p>Algo importante a tener en consideración es que para muestras con <span class="math inline">\(n &gt; 50\)</span> es recomendable utilizar otra prueba ya que la prueba de Shapiro-Wilk es sensible a pequeñas desviaciones de la normalidad para muestras grandes. Una alternativa es la utilización de <strong>gráficos Q-Q</strong> o <strong>Q-Q plot</strong>. Los gráficos Q-Q nos muestran la correlación que existe entre una muestra dada y la distribución normal. Utilizaremos la librería <code>ggpubr</code> y la función <code>ggqqplot()</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introducción-al-análisis-de-varianza.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggpubr&#39; was built under R version 4.0.4</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introducción-al-análisis-de-varianza.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(PlantGrowth<span class="sc">$</span>weight) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="introducción-al-análisis-de-varianza.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="introducción-al-análisis-de-varianza.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Muestra&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-7-1.png" alt="Gráfico Q-Q que muestra la distribución normal de datos." width="672" />
+<p class="caption">
+Figura 3.3: Gráfico Q-Q que muestra la distribución normal de datos.
+</p>
+</div>
+<p>Este gráfico nos muestra una distribución normal teórica vs. la de nuestros datos. Como podemos ver, todos los puntos caen dentro del intervalo de confianza al 95% de la recta, lo que quiere decir que nuestros datos se distribuyen de manera normal. Esto confirma los resultados obtenidos con la prueba de Shapiro-Wilk. Otra opción sería ver la <strong>gráfica de densidad</strong> para identificar la forma de la distribución.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-al-análisis-de-varianza.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(PlantGrowth<span class="sc">$</span>weight, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="introducción-al-análisis-de-varianza.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="introducción-al-análisis-de-varianza.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-8-1.png" alt="Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos." width="672" />
+<p class="caption">
+Figura 3.4: Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos.
+</p>
+</div>
+</div>
+<div id="prueba-de-homocedasticidad" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Prueba de homocedasticidad</h2>
+<p>Para la prueba de homocedasticidad existen varias aproximaciones. En este caso veremos pruebas estadísticas, ya que existen pruebas que se pueden realizar una vez realizamos el ANOVA.</p>
+<p>La prueba a utilizar es la prueba de Bartlett, que en R se escribe <code>bartlett.test()</code>. Es una prueba relativamente sencilla de realizar.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="introducción-al-análisis-de-varianza.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  weight by group
+## Bartlett&#39;s K-squared = 2.8786, df = 2, p-value = 0.2371</code></pre>
+<p>Indicamos que la variable <code>weight</code> va a ser evaluada bajo la variable <code>group</code>. Como resultados tenemos el estadístico Bartlett, los grados de libertad y el valor-<em>p</em>, que en este caso resulto ser valor-<em>p</em> <span class="math inline">\(&gt;\)</span> 0.05 lo que significa que aceptamos la hipótesis de que nuestros datos tienen varianzas iguales. Un valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05 indicaría que nuestros datos NO tienen varianzas iguales.</p>
+<p>Otra prueba que podemos utilizar que viene en la librería <code>car</code> es la prueba de Levene. Utilizamos la función <code>leveneTest()</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="introducción-al-análisis-de-varianza.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb18-2"><a href="introducción-al-análisis-de-varianza.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="introducción-al-análisis-de-varianza.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> group, PlantGrowth, mean)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
+##       Df F value Pr(&gt;F)
+## group  2   1.237 0.3062
+##       27</code></pre>
+<p>En este caso nuestro valor-<em>p</em> es mayor a 0.05 (indicado en el outpot como <code>Pr(&gt;F)</code>) lo que indica que no hay diferencias en las varianzas de nuestras muestras.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estadística-descriptiva.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

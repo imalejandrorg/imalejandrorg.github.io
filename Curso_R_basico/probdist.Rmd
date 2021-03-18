@@ -1,0 +1,227 @@
+---
+title: "Análisis de Varianza"
+author: "Alejandro Ruiz-García"
+date: "16/3/2021"
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+---
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(vegan)
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Distribuciones de probabilidad
+En esta lección veremos algunas nociones de probabilidad y su distribución correspondiente.
+
+## Distribución binomial
+En este tipo de distribución se toma en cuenta un tipo muy particular de variable discreta llamada **binomial**. Una variable binomial es simplemente aquella en la que tenemos solo dos resultados posibles (proceso dicotómico), por ejemplo, el lanzamiento de una moneda al aire.
+
+Cada "*corrida*" o prueba que se experimenta tiene dos posibles resultados: *éxito* o *fracaso* (cabe aclarar que estos términos son subjetivos). La probabilidad de cada éxito es escrita como $p$ y se mantiene constante con cada prueba (es decir, no es afectada por las veces que hagamos el experimento). Además, cada prueba es independiente de la anterior, es decir los resultados no se ven afectados por las pruebas anteriores. El número total de pruebas que hacemos se escribe con la letra $n$.
+
+Una **variable binomial aleatoria** cumple con los siguientes requisitos:
+
+* **Resultados binarios:** Hay dos posibles resultados para cada prueba; *éxito* o *fracaso*. 
+* **Pruebas independientes:** Los resultados de cada prueba son independientes ya que los resultados de pruebas anteriores no afectan a las siguientes pruebas.
+* **El valor de** $n$ **es fijo:** Se determina anteriormente el número de intentos que se van a realizar.
+* **Mismo valor de** $p$**:** La probabilidad de *éxito* en cada una de las pruebas es igual durante todo el experimento.
+
+Para calcular el número de éxitos de una variable binomial aleatoria utilizamos la fórmula binomial como se representa en la ecuación \@ref(eq:binom).
+
+\begin{equation}
+p\left(x\right) = \binom{n}{x} p^x\left(1-p\right)^{n-x}
+(\#eq:binom)
+\end{equation}
+
+Donde $n$, como se dijo anteriormente, es el número de pruebas que se realizan, $p$ es la probabilidad de éxito de cada una prueba y $x$ es el número de éxitos en la serie de pruebas y $1-p$ es la probabilidad de un fallo. $\binom{n}{x}$ se conce como el **coeficiente binomial** y se puede calcular a partir de la ecuación \@ref(eq:binomco).
+
+\begin{equation}
+\binom{n}{x} = \frac{n!}{x!(n-x)!}
+(\#eq:binomco)
+\end{equation}
+
+Donde $n!$ es equivalente al factorial del número de pruebas y $x!$ es el factorial del número de éxitos.
+
+### `dbinom`
+Como observamos en el ejemplo anterior, la función `dbinom()` nos regresa la $p(x)$ haciendo uso de la fórmula binomial \@ref(eq:binom). Los argumentos que usa la función `dbinom()` son tres, `x`: número de éxitos; `size`: número de pruebas; `prob`: probabilidad de éxito.
+
+Supongamos que lanzamos una moneda no trucada, es decir, tanto la probabilidad de cara o de cruz es de 50% (`prob` o $p = 0.5$). Repetimos 10 lanzamientos (`size` o $n = 10$) y queremos conocer la probabilidad de obtener cara exactamente 5 veces (`x` o $x = 5$).
+```{r}
+dbinom(5, 10, 0.5)
+```
+Vemos que existe una probabilidad de más o menos 0.25 de obtener exactamente cara 5 veces. En caso de querer obtener el porcentaje simplemente multiplicamos nuestro resultado por 100.
+```{r}
+dbinom(5, 10, 0.5) * 100
+```
+
+Podemos representar esto de manera gráfica utilizando la librería de `ggplot2`. La variable `n` contendrá el número de pruebas a realizar, la variable `x` contendrá el número de éxitos, que en el caso de este gráfico queremos que sean desde 0 hasta la n-ésima prueba y la variable `p` la probabilidad de éxito. A partir de esto construimos un `dataframe` con dos valores, $x$ y $p(x)$ (que será calculada a partir de la función `dbinom()`). Posteriormente construimos nuestro gráfico con las herramientas de `ggplot2`. 
+```{r fig.cap = "Distribución de probabilidad para lanzamiento de monedas."}
+n <- 10
+x <- 0:n
+prob <- 0.5
+
+df <- data.frame(x, px = dbinom(x, n, prob))
+
+ggplot(df, aes(x, px)) + 
+  geom_col(fill = "lightblue") +
+  xlab("Número de éxitos, x") +
+  ylab("Probabilidad de éxito, p(x)") +
+  labs(title = paste("Distribución de probabilidad para",n,"pruebas,","p=",prob)) +
+  theme_classic()
+```
+
+> **Ejemplo:**
+
+La probabilidad de que alguien acierte en el blanco es de 1/4 o 0.25. Si una persona dispara 10 veces.
+
+1. ¿Cuál es la probabilidad de que acierte exactamente en tres ocasiones?
+
+Empecemos por definir los valores que ingresaremos a la función `dbinom()`. La probabilidad de acertar es de 1/4, por lo tanto $p = \frac{1}{4}$. Como disparas 10 veces, $n = 10$. El número de éxitos estará definido por la pregunta en cuestión. En este caso buscamos que se acierte exactamente 3 veces, por lo tanto $x = 3$.
+```{r}
+dbinom(3, 10, 1/4)
+```
+
+Como podemos ver, la probabilidad de que se acierte exactamente 3 veces es de 0.25 o 25%. En caso que de queramos graficar la distribución de probabilidad utilizamos el siguiente script.
+```{r pdist, fig.cap = "Distribución de probabilidad para el ejercicio anterior, x = 3, n = 10, p = 1/4."}
+n <- 10
+x <- 0:n
+prob <- 1/4
+
+ej1 <- data.frame(x, px = dbinom(x, n, prob))
+
+ggplot(ej1, aes(x, px)) + 
+  geom_col(fill = "lightblue") +
+  xlab("Número de disparos acertados, x") +
+  ylab("Probabilidad de acertar, p(x)") +
+  labs(title = paste("Distribución de probabilidad para",n,"disparos,","p=",prob)) +
+  theme_classic()
+```
+
+Como se puede observar en la gráfica, acertar los 10 blancos es sumamente improbable y su valor es tan bajo que ni siquiera se muestra en el histograma.
+
+### `pbinom`
+Esta función es la versión acumulativa de la fórmula binomial. Si quisiéramos del ejercicio anterior saber cuál es la probabilidad de que se acierten al menos 2 disparos, $x \le 2$ necesitamos encontrar las probabilidades de acertar 0, 1 y 2 disparos y sumarlas. Esto con la función `dbinom` se puede hacer de la siguiente manera.
+```{r}
+dbinom(0:2, 10, 1/4)
+```
+
+Y a estos resultados simplemente se les realiza una suma. Además, vamos a redondear el resultado a 4 dígitos (Para este tipo de operaciones el `dplyr` y el pipeline `%>%` vienen de maravilla).
+```{r}
+library(dplyr)
+dbinom(0:2, 10, 1/4) %>% sum() %>% round(4)
+```
+
+El resultado es más o menos 0.5256 o 52.56%. Sin embargo, existe una forma muchísimo más sencillo de hacer esto, a través de la función `pbinom()`, la cual esta basada en la ecuación \@ref(eq:pbinom).
+
+\begin{equation}
+p\left(x\right) = \sum_{i = 0}^{x}{\binom{n}{x} p^x\left(1-p\right)^{n-x}}
+(\#eq:pbinom)
+\end{equation}
+
+Con el mismo ejercicio anterior, vamos a calcular la probabilidad de acertar por lo menos dos tiros $x \le 2$. La función `pbinom()` utiliza los argumentos `q`: cuartil del cuál queremos saber la probabilidad (en este caso, 0, 1 y 2); `size`: número de intentos o pruebas; `prob`: la probabilidad individual de éxito y `lower.tail`: si se deja en `TRUE`, obtenemos la probabilidad acumulada hasta el cuartil indicado ($p(x) \le x$), si se deja en `FALSE` obtenemos el valor contrario, es decir, la probabilidad de obtener un valor mayor al del cuartil ($p(x) \ge x$). De nuevo, vamos a redondear a 4 dígitos.
+```{r}
+pbinom(2, 10, 1/4, lower.tail = TRUE) %>% round(4)
+```
+
+Como podemos ver, obtenemos el mismo resultado que con el método anterior, pero sin utilizar tantas funciones. Podemos graficar de nueva cuenta cuál es la probabilidad acumulada con el siguiente script.
+
+```{r fig.cap = "Distribución de probabilidad acumulada para acertar al menos 2 disparos."}
+n <- 10
+x <- 0:n
+prob <- 1/4
+disparos <- c(rep("aciertos", 3), rep("fallos", 8))
+
+ej2 <- data.frame(x, px = pbinom(x, n, prob), disp = disparos)
+
+ggplot(ej2, aes(x, px)) + 
+  geom_col(aes(fill = disp)) +
+  xlab("Número de disparos acertados, x") +
+  ylab("Probabilidad de acertar, p(x)") +
+  labs(title = paste("Distribución de probabilidad para",n,"disparos,","p=",prob)) +
+  theme_classic()
+```
+
+En esta gráfica el color salmón representa la probabilidad acumulada y el color turquesa representa la probabilidad restante. Como corresponde, la probabilidad acumulada alcanza un poco más del 50%, valor que calculamos con la función `pbinom()`.
+
+Si la pregunta fuese ¿Qué tan probable es que una persona acierte más de 6 disparos? Para esta pregunta podemos hacer el calculo con el argumento `lower.tail = FALSE`.
+
+```{r}
+pbinom(6, 10, 1/4, lower.tail = FALSE) %>% round(4)
+```
+
+Esto quiere decir que la probabilidad de acertar 6 o más disparos es de 0.0035 o 0.35%, por lo que posiblemente la persona disparando sea alguien con entrenamiento y su probabilidad de éxito individual $p$ sea mayor que $\frac{1}{4}$. Si graficamos esto se vería de la siguiente manera.
+
+```{r fig.cap = "Distribución de probabilidad acumulada para acertar al menos 2 disparos."}
+n <- 10
+x <- 0:n
+prob <- 1/4
+disparos <- c(rep("fallos", 6), rep("aciertos", 5))
+
+ej3 <- data.frame(x, px = pbinom(x, n, prob, lower.tail = FALSE), disp = disparos)
+
+ggplot(ej3, aes(x, px)) + 
+  geom_col(aes(fill = disp)) +
+  xlab("Número de disparos acertados, x") +
+  ylab("Probabilidad de acertar, p(x)") +
+  labs(title = paste("Distribución de probabilidad para",n,"disparos,","p=",prob)) +
+  theme_classic()
+```
+
+Se observa que la probabilidad de acertar 6 o más disparos es muy baja, tanto que casi ni se aprecia el color salmón en el gráfico.
+
+### `qbinom`
+`qinom()` es la función inversa de `pbinom()` y nos da como resultado el número de éxitos en un rango de probabilidad. En este caso, el argumento `q` es reemplazado por el argumento `p`, que hace referencia a una probabilidad.
+
+Supongamos que queremos saber cuántos aciertos se dan dentro del 50% de la distribución de la probabilidad. Nosotros sabemos que ese resultado es 2 debido al ejercicio anterior. Sin embargo, vamos a corroborarlo.
+```{r}
+qbinom(0.50, 10, 1/4)
+```
+
+Vamos a graficar esto con el siguiente script.
+```{r fig.cap = "Gráfica de la función `qbinom`."}
+p <- seq(0, 1, 0.01)
+n <- 10
+prob <- 1/4
+
+ej4 <- data.frame(p, q=qbinom(p, n, prob)) 
+
+ggplot(ej4, aes(p, q)) + 
+  geom_col(fill="lightblue") +
+  xlab("Probabilidad de acertar, p(x)") +
+  ylab("Número de disparos acertados, x") +
+  labs(title = paste("Aciertos para la probabilidad acumulada de",n,"disparos,","p =",prob)) +
+  theme_classic()
+```
+
+Como se puede observar, con solo 5 disparos acertados estamos abarcando cerca del 100% de toda la probabilidad de los datos, lo que hace que acertar 6 o más disparos sea sumamente improbable. En caso de tener un resultado de 6 aciertos o más, como se mencionó anteriormente, posiblemente se trate de una persona con entrenamiento y su probabilidad de acertar es mayor.
+
+### rbinom
+Esta función simula de manera aleatoria $n$ pruebas. El resultado es el número de éxitos por prueba. Por ejemplo, vamos a simular que una persona dispara 10 veces, con la probabilidad de $\frac{1}{4}$ que vimos anteriormente. Para hacer esto vamos a reemplazar el argumento `x` de la función con el argumento `n` que hace referencia al número de observaciones (en este caso, como solo una persona dispara, decimos que n es 1). 
+```{r}
+rbinom(1, 10, 1/4)
+```
+
+Cada que hagamos esto obtendremos un resultado distinto que se encontrará dentro de los rangos más probables. Imaginemos ahora que queremos hacer que 10,000 personas disparen 10 veces y registrar su número de éxitos. Esto lo podemos graficar ya que el resultado en la consola va a consistir de 10,000 números. Para hacer el gráfico utilizamos el siguiente script.
+```{r fig.cap = "Número de aciertos de una simulación con 10,000 personas disparando un total de 10 veces."}
+reps <- 10000
+size <- 10
+prob <- 1/4
+
+ej5 <- data.frame(x = rbinom(reps, size, prob))
+
+ggplot(ej5, aes(x)) + 
+  stat_count(fill = "lightblue") +
+  xlab("Número de disparos acertados, x")+
+  ylab("Personas")+
+  labs(title = paste("Aciertos de",reps,"personas, ","p =",prob)) +
+  theme_classic()
+```
+
+Si comparamos este gráfico, podemos ver que se asemeja mucho al de la figura \@ref(fig:pdist). De hecho entre más simulaciones corramos más se van a asemejar ambos gráficos.
