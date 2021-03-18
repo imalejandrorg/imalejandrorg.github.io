@@ -116,5 +116,115 @@ En este caso nuestro valor-*p* es mayor a 0.05 (indicado en el outpot como `Pr(>
 leveneTest(weight ~ group, PlantGrowth)
 ```
 
-Podemos ver que medida de tendencia central utilizó en la consola, después del título de la prueba. Una vez que hemos corroborado que nuestros datos presentan *homocedasticidad*, *distribución normal* y sabemos que son *independientes*, podemos proceder a hacer el ANOVA.
-## 
+Podemos ver que medida de tendencia central utilizó en la consola, después del título de la prueba. Una vez que hemos corroborado que nuestros datos presentan **homocedasticidad**, **distribución normal** y sabemos que son **independientes**, podemos proceder a hacer el ANOVA.
+
+## Análisis de varianza (ANOVA de una vía)
+Algo importante es que R requiere que las variables predictoras sean clasificadas como grupos de factores. Si corroboramos en nuestros datos de `PlantGrowth` veremos que efectivamente la variable predictora (el tratamiento) se encuentra como factor.
+```{r}
+str(PlantGrowth)
+```
+
+En caso de que nuestros datos no se encuentren como factores podemos transformarlos con la función `as.factor()` o `as_factor()`.
+```{r}
+datos <- as.factor(c("Tratamiento1", "Tratamiento2", "Control"))
+str(datos)
+```
+
+Cuando nos referimos a un *ANOVA de una vía* decimos que solamente consideramos una variable predictora o independiente. También se le conoce como *ANOVA de un factor*. En este caso, para la base de datos de `PlantGrowth` solo estamos considerando el tratamiento, por lo tanto lo lógico es hacer un ANOVA de una vía. Sin emabrgo, si además del tratamiento tuvieramos otra variable como la cantidad de luz, podríamos considerar hacer un *ANOVA de dos vías*.
+
+El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir $H_0$: Las medias de todas las muestras son iguales: $\mu = \mu_2 = \mu_3 = ... = \mu_n$. $H_A$: Al menos una de las medias de las muestras es distinta: $\mu_1 \neq \mu_n$.
+
+Antes de empezar a hacer el análisis recordemos un poco los fundamentos del ANOVA. Empecemos con cierta notación que nos será útil.
+
+- $k$ = número de grupos/poblaciones/tratamientos.
+- $n_i$ = número de muestras en el grupo/tratamiento *i*.
+- $x_{ij}$ = el *j*-ésimo valor en el *i*-ésimo grupo/tratamiento.
+- $\overline{x}_i$ = la media del *i*-ésimo grupo/tratamiento.
+- $s_i$ = la desviación estándar del *i*-ésimo grupo/tratamiento.
+- $n$ = el número total de muestras/observaciones independientemente del grupo.
+- $\overline{x}$ = la media global de todos los grupos/poblaciones/tratamientos independientemente del grupo.
+
+El estadístico calculado para el ANOVA se conoce como $F_{ratio}$, ya que es una relación entre dos valores: los **cuadrados medios entre grupos** ($CM_{entre}$) y los **cuadrados medios dentro de los grupos** ($MS_{dentro}$). 
+
+\begin{equation}
+F_{ratio} = \frac{CM_{entre}}{CM_{dentro}}
+(\#eq:Fratio)
+\end{equation}
+
+Cada uno de estos términos tiene su propia fórmula.
+
+\begin{equation}
+CM_{entre} = \frac{SC_{entre}}{gl_{entre}}
+(\#eq:CMentre)
+\end{equation}
+
+Dónde $gl_{entre}$ hace referencia a los grados de libertad entre grupos y $SC_{entre}$ hace referencia a la suma de cuadrados entre grupos.
+
+\begin{equation}
+CM_{dentro} = \frac{SC_{dentro}}{gl_{dentro}}
+(\#eq:CMdentro)
+\end{equation}
+
+Dónde $gl_{dentro}$ hace referencia a los grados de libertad dentro de los grupos** y $SC_{dentro}$ hace referencia a la suma de cuadrados dentro de los grupos.
+
+Para calcular la **suma de cuadrados total** usamos la siguiente ecuación. La suma de cuadrados total hace referencia a la variación de todos los datos respecto de la media global ($\overline{x}$). 
+
+\begin{equation}
+SC_{total} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij}-\overline{x})^2 = SC_{entre} + SC_{dentro}
+(\#eq:SCtotal)
+\end{equation}
+
+Pues esta suma de cuadrados total está compuesta de dos valores: la suma de cuadrados entre grupos ($SC_{entre}$) y la suma de cuadrados dentro de los grupos ($SC_{dentro}$) aunque también se le conoce como el error o los residuales.
+
+Para calcular la **suma de cuadrados entre grupos** usamos la siguiente ecuación. Este valor hace referencia a la variación de las medias de cada grupo ($\overline{x}_i$) cada grupo respecto de la media global ($\overline{x}$). 
+
+\begin{equation}
+SC_{entre} = \sum_{i = 1}^{k}n_{i}(\overline{x}_{i} - \overline{x})^2
+(\#eq:SCentre)
+\end{equation}
+
+Para calcular la **suma de cuadrados dentro de los grupos** usamos la siguiente ecuación. Este valor hace referencia a la variación de cada muestra u observación dentro de un grupo respecto de la media de ese grupo ($\overline{x}_i$). 
+
+\begin{equation}
+SC_{dentro} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij} - \overline{x}_{i})^2 =  \sum_{i = 1}^{k}(n_i - 1)s_i^2 = SC_{total} - SC_{entre}
+(\#eq:SCdentro)
+\end{equation}
+
+El calculo de los **grados de libertad** es algo relativamente sencillo y se puede hacer de la siguiente manera.
+
+Para los **grados de libertad entre grupos**:
+
+\begin{equation}
+gl_{entre} = k - 1
+(\#eq:glentre)
+\end{equation}
+
+Para los **grados de libertad dentro de los grupos**:
+
+\begin{equation}
+gl_{dentro} = n - k
+(\#eq:gldentro)
+\end{equation}
+
+Para los **grados de libertad totales**:
+
+\begin{equation}
+gl_{total} = n - 1
+(\#eq:gltotal)
+\end{equation}
+
+Algo recomendado de hacer es construir una tabla con cada uno de los pasos a seguir con sus respectivas fórmulas. Los resultados que se presenta el ANOVA en R tiene un formato similar.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+anova.tabla <- data.frame(Fuentes = c("Entre grupos (Tratamientos)", "Dentro de grupos (Residuales)", "Total"))
+anova.tabla$gl <- c("$k - 1$", "$n - k$", "$n - 1$")
+anova.tabla$SC <- c("$\\sum_{i = 1}^{k}n_{i}(\\overline{x}_{i} - \\overline{x})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij} - \\overline{x}_{i})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij}-\\overline{x})^2$")
+anova.tabla$CM <- c("$\\frac{SC_{entre}}{gl_{entre}}$",
+                    "$\\frac{SC_{dentro}}{gl_{dentro}}$", NA)
+anova.tabla$F_ratio <- c("$\\frac{CM_{entre}}{CM_{dentro}}$", NA, NA)
+options(knitr.kable.NA = '')
+knitr::kable(anova.tabla, caption = "Tabla de ANOVA", escape = FALSE) %>% column_spec(1, bold = TRUE)
+```
+
