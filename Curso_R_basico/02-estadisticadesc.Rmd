@@ -273,14 +273,12 @@ Propiedades importantes de los **valores Z:**
 - Si un valor es menor que la media, su valor Z será negativo.
 
 #### Valores Z en R
-Para el calculo del valor Z de algún número simplemente le extraemos la media $\overline{x}$ y lo dividimos entre la desviación estándar $s$. Podemos agregar una sección que contenga el valor Z de cada uno de nuestros datos.
-```{r}
-PlantGrowth$Z <- (PlantGrowth$weight - mean(PlantGrowth$weight)) / sd(PlantGrowth$weight)
-```
+Para el calculo del valor Z de algún número simplemente le extraemos la media $\overline{x}$ y lo dividimos entre la desviación estándar $s$.
 
 Podemos utilizar la función de `mutate()` del paquete de `dplyr` para agregar una nueva sección a nuestra base de datos de PlantGrowth. Al utilizar la función `group_by()` antes de la función `mutate()` nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.
 ```{r}
 PlantGrowth <- PlantGrowth %>% group_by(group) %>% mutate(Z = (weight - mean(weight)/sd(weight)))
+PlantGrowth
 ```
 
 ### Frecuencia absoluta
