@@ -13,7 +13,7 @@ link-citations: yes
 description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
 ---
 
-```{r setup, include=TRUE}
+```{r setup, include=TRUE, cache = FALSE}
 library(knitr)
 library(bookdown)
 library(vegan)

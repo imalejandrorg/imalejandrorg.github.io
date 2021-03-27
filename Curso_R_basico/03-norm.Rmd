@@ -11,9 +11,7 @@ library(bookdown)
 library(vegan)
 library(tidyverse)
 library(kableExtra)
-library(knitr)
 ```
-
 Para realizar un **análisis de varianza** o **ANOVA** es necesario cumplir con ciertos supuestos. Estos supuestos son similares para otro tipo de pruebas y se encuentran descritas en la sigueinte lista:
 
 - Distribución normal de los datos.
@@ -61,7 +59,7 @@ ggplot(PlantGrowth) + geom_boxplot(aes(group, weight, fill = group)) +
 ```
 
 Computar la prueba de normalidad de Shapiro-Wilk sumamente sencillo y se hace con la función `shapiro_test()` de la librería `rstatix`. Para esto primero tenemos que agrupar nuestros datos por tratamientos con la función `group_by()` del paquete de `dplyr`. 
-```{r}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(rstatix)
 
@@ -79,7 +77,6 @@ Como podemos ver, el valor-*p* = 0.8915, lo que indica que nuestros datos se dis
 Algo importante a tener en consideración es que para muestras con $n > 50$ es recomendable utilizar otra prueba ya que la prueba de Shapiro-Wilk es sensible a pequeñas desviaciones de la normalidad para muestras grandes. Una alternativa es la utilización de **gráficos Q-Q** o **Q-Q plot**. Los gráficos Q-Q nos muestran la correlación que existe entre una muestra dada y la distribución normal. Utilizaremos la librería `ggpubr` y la función `ggqqplot()`.
 ```{r fig.align = "center", fig.cap = "Gráfico Q-Q que muestra la distribución normal de datos."}
 library(ggpubr)
-
 ggqqplot(PlantGrowth$weight) +
   xlab("Teórico") +
   ylab("Muestra")
@@ -228,3 +225,45 @@ options(knitr.kable.NA = '')
 knitr::kable(anova.tabla, caption = "Tabla de ANOVA", escape = FALSE) %>% column_spec(1, bold = TRUE)
 ```
 
+### ANOVA en R
+Una vez vistos los calculos necesarios para obtener el estadístico $F_{ratio}$ podemos hacer el ANOVA utilizando la función `aov()`. La función de ANOVA en R tiene una notación particular; primero escribimos la variable dependiente (en el caso de nuestros datos de `PlantGrowth`, el peso), posteriormente escribimos el símbolo `~` que significa *explicado por* seguido de nuestra variable independiente, en este caso, el tratamiento. Al final escribimos la base de datos de donde tomar estas variables.
+```{r}
+anova.plantas <- aov(weight ~ group, PlantGrowth)
+anova.plantas
+```
+
+Para observar el valor-*p* podemos utilizar la función `summary()` para obtener una tabla de ANOVA.
+```{r}
+summary(anova.plantas)
+```
+
+`Df` corresponde a los grados de libertad, `Sum Sq` corresponde a la suma de cuadrados, `Mean Sq` corresponde a los cuadrados medios y `F value` corresponde al valor F calculado. `Pr(>F)` corresponde al valor-*p*. En este caso nuestro valor-*p* $<$ 0.05 por lo que sabemos que hay diferencias entre grupos. Si quisieramos exportar esto a una tabla necesitamos utilizar la librería `broom`. 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(broom)
+
+tabla.aov.plantas <- tidy(anova.plantas)
+```
+
+```{r echo=FALSE}
+options(knitr.kable.NA = '')
+knitr::kable(tabla.aov.plantas, caption = "Resultados del ANOVA de tratamientos de plantas") %>% kable_styling(full_width = F)
+```
+
+Después de hacer el ANOVA podemos comprobar la distribución normal con los **residuales**. Para esto tenemos que crear una variable nueva. Esto lo podemos hacer también con la librería `broom` y la función `augment()`.
+```{r fig.align = "center", fig.cap = "Histograma de residuales del ANOVA mostrando distribución normal."}
+residuales <- anova.plantas$residuals
+hist(residuales, xlab = "Residuales", ylab = "Frecuencia", main = "Histograma de Residuales")
+```
+```{r fig.align = "center", fig.cap ="Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment().", message=FALSE, warning=FALSE}
+tabla.aov.plantas2 <- augment(anova.plantas)
+hist(tabla.aov.plantas2$.resid, xlab = "Residuales", ylab = "Frecuencia", main = "Histograma de Residuales")
+```
+
+Como podemos ver, los residuales tienen una distribución más o menos normal. Esto confirma lo que habíamos visto en las pruebas de normalidad y homocedasticidad. Podemos incluso mostrar la gráfica Q-Q de los residuales.
+```{r fig.align = "center", fig.cap = "Gráfico Q-Q de los residuales obtenidos por el ANOVA."}
+ggqqplot(tabla.aov.plantas2$.resid) +
+  xlab("Teórico") +
+  ylab("Residuales")
+```
+
+## Pruebas *post hoc*

@@ -10,312 +10,387 @@ library(bookdown)
 library(vegan)
 library(tidyverse)
 library(kableExtra)
-library(knitr)
 ```
 
-En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos medidas de tendencia central como la media, mediana y moda y medidas de dispersión como varianza, desviación estándar e intervalos de confianza.
+En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores Z.
 
 ## Medidas de tendencia central
-Los estadísticos descriptivos sirven para describir parte de la información de nuestros datos. Las tres medidas de tendencia central más utilizadas son:
+Sirven para describir los valores del centro o valores medios de algún conjunto de datos. Las tres medidas de tendencia central más utilizadas son: *media*, *mediana* y *moda*.
 
-* **Moda:** Es el valor que más se repite en un conjunto de datos. Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella.
-
-* **Media:** Mide el promedio del valor de nuestros datos. Se calcula como la suma de las observaciones dividida entre el número de observaciones. Para obtener la media utilizamos la ecuación \@ref(eq:mean).
+### Media
+Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones. Es representada como $\overline{x}$ (pronunciado $x$ barra) para datos muestrales y $\mu$ (pronunciado mu) para datos poblacionales. Para obtener la media muestral utilizamos la ecuación \@ref(eq:mean1) y para obtener la media poblacional se utiliza la ecuación \@ref(eq:mean2).
 
 \begin{equation}
-  \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
-  (\#eq:mean)
+\overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
+(\#eq:mean1)
 \end{equation}
-Donde $\sum_{i=1}^{n}{x_i}$ representa la sumatoria de los valores de todas nuestras observaciones y $n$ es el número de observaciones.
 
-* **Mediana:** Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos.
+\begin{equation}
+\mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
+(\#eq:mean2)
+\end{equation}
+
+Donde $\sum_{i=1}^{n}{x_i}$ y $\sum_{i=1}^{N}{x_i}$ representan la sumatoria de los valores de todas nuestras observaciones; $n$ y $N$ representan el número de valores de datos en una muestra y el número de valores totales en una población, respectivamente.
+
+Propiedades importantes de la **media:**
+
+* No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
+
+* Utiliza todos los datos disponibles.
+
+* Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
+
+#### Media en R
+El calculo de la media en R es algo sencillo. Para esto, utilizamos la función `mean()`.
+
+>**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).
+
+Se utilizará la base de datos `PlantGrowth` para este ejemplo.
+
+```{r}
+data("PlantGrowth")
+```
+Es importante que conozcamos los datos que incluye nuestra matriz. En este caso tenemos dos columnas, *weight* que hace referencia al peso seco y *group* que hace referencia al tratamiento. Para sacar la media global (independiente del tratamiento) simplemente escribimos la función `mean()` y hacemos referencia al peso con el símbolo `$`.
+```{r}
+mean(PlantGrowth$weight)
+```
+
+Lo que nos arroja una media  de 5.073. Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería `dplyr` que viene incluida en el paquete de `tidyverse`. Vamos a usar el **pipeline** `%>%` de `dplyr` para hacer varias operaciones en cadena: 1) Utilizamos la función `group_by(group)` para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función `summarise(Media = mean(weight), n = n())` para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.
+```{r}
+library(tidyverse)
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(Media = mean(weight), n = n())
+resumen
+```
+
+Al final obtenemos una matriz nueva con 3 columnas: tipo de tratamiento, media para cada tratamiento y número de observaciones para cada tipo de tratamiento.
+
+### Mediana
+Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se respresenta por el símbolo $\tilde{x}$ (pronunciado $x$ tilde).
 $$
 1, 2, 3, 4, 5
 $$
 
-En este caso, la mediana es igual al número **3** que se encuentra justo por la mitad de los datos. En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
+Para el conjunto de datos anteriores la mediana es igual al número **3** que se encuentra justo por la mitad de los datos. En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales. Por ejemplo.
 $$
 5, 6, 7, 8, 9, 10
 $$
 
-En este caso nuestros valores centrales son 7 y 8. Estos simplemente se promedian.
+Para este caso nuestros valores centrales son 7 y 8. Estos simplemente se promedian.
 $$
 \tilde{x} = \frac{7 + 8}{2} = 7.5
 $$
 
-### Media en R
-El cálculo de la media en R para un conjunto de datos es relativamente sencillo. Para ello implementamos la función `mean()`. Podemos ver un resumen de los primeros 10 datos con la función `head()`.
+Propiedades importantes de la **mediana:**
+
+- No cambia al añadir valores extremos por lo que se le considera un estadístico *robusto.*
+
+- No utiliza todo el conjunto de datos.
+
+#### Mediana en R
+Para el calculo de la mediana se utiliza la función `median()`. 
+
+>**Ejemplo:** Supongamos que con los datos del ejemplo anterior queremos ahora calcular la mediana global y la mediana para cada uno de nuestros tratamientos.
 
 ```{r}
-library(vegan)
-data("iris")
-head(iris)
-mean(iris$Sepal.Length)
+median(PlantGrowth$weight)
 ```
 
-Hemos calculado la media o el promedio para la longitud del sepalo del grupo de datos `iris` que viene incluida en el paquete `vegan`. Como en esta base de datos tenemos numerosas variables, nos referimos a una variable específica utilizando el símbolo $ seguido del nombre de la variable de interés.
-
-Si quisiéramos podemos almacenar el promedio de la longitud y el ancho de los sépalos en una variable nueva.
-
+El valor obtenido es de 5.155. De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando `dplyr`. 
 ```{r}
-Long.Prom <- mean(iris$Sepal.Length)
-Long.Prom
-
-Ancho.Prom <- mean(iris$Sepal.Width)
-Ancho.Prom
-
-Sepalos <- data.frame(Long.Prom, Ancho.Prom)
-Sepalos
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(Mediana = median(weight), n = n())
+resumen
 ```
 
-De esta manera obtenemos nuestra matriz con los promedios del largo y ancho de los sépalos. Si tuviéramos muestras de distintas poblaciones, podríamos generar una tabla con la media de cada población.
-
-Es importante que especifiquemos de qué variable queremos estimar el promedio con el símbolo `$`, de lo contrario podemos obtener errores.
-
-### Mediana en R
-La mediana sigue una lógica muy similar a la media. Simplemente utilizamos la función `median()` para obtener nuestro valor de interés.
-
+Si lo deséamos, podemos obtener la media y la mediana en una misma tabla.
 ```{r}
-median(iris$Sepal.Length)
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(Media = mean(weight), Mediana = median(weight), n = n())
+resumen
 ```
 
-De nuevo, podemos hacer una matriz de datos con las medianas de nuestras observaciones.
-```{r}
-Long.Median <- median(iris$Sepal.Length)
-Long.Median
 
-Ancho.Median <- median(iris$Sepal.Width)
-Ancho.Median
+### Moda
+Es el valor que más se repite en un conjunto de datos.
 
-Sepalos2 <- data.frame(Long.Median, Ancho.Median)
-Sepalos2
-```
+Propiedades importantes de la **moda:**
 
-Incluso podríamos combinar ambas matrices (promedio y mediana) en una sola.
+- Se puede aplicar a datos cualitativos.
 
-```{r}
-Sepalos.Resumen <- data.frame(Sepalos, Sepalos2)
-Sepalos.Resumen
-```
+- Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
 
-También podríamos optar por escribir directamente las nuevas variables de la mediana sobre la matriz de datos que ya habíamos generado para las medias.
-```{r}
-Sepalos$Long.Median <- median(iris$Sepal.Length)
-Sepalos$Ancho.Median <- median(iris$Sepal.Width)
-Sepalos
-```
-
-Como podemos ver, el resultado es el mismo. Al nosotros escribir Sépalos$Long.Median y asignarle una función, estamos generando una nueva variable en la matriz de datos preexistente aunque en dicha matriz no existía previamente la variable Long.Median. Ambas son técnicas distintas de llegar al mismo resultado y ambas son perfectamente válidas.
-
-```{r}
-Sepalos
-Sepalos.Resumen
-```
-
-Incluso podemos calcular la media y la mediana para los valores de los pétalos y resumir todo en una sola matriz.
-```{r}
-Pet.Long.Mean <- mean(iris$Petal.Length)
-Pet.Ancho.Mean <- mean(iris$Petal.Width)
-Pet.Long.Median <- median(iris$Petal.Length)
-Pet.Ancho.Median <- median(iris$Petal.Width)
-Resumen.iris <- data.frame(Sepalos, Pet.Long.Mean, Pet.Ancho.Mean, Pet.Long.Median, Pet.Ancho.Median)
-Resumen.iris
-```
-
-Lo ideal sería cambiar el nombre a las primeras 4 columnas para indicar que se trata de sépalos. También podemos hacer esto.
-```{r}
-colnames(Resumen.iris)[colnames(Resumen.iris) %in% c("Long.Prom", "Ancho.Prom", "Long.Median", "Ancho.Median")] <- c("Sep.Long.Prom", "Sep.Ancho.Prom", "Sep.Long.Median", "Sep.Ancho.Median")
-Resumen.iris
-```
-
-El operador %in% sirve para subsetear datos. En este caso, le indicamos que queremos que a las variables con nombre "Long.Prom", "Ancho.Prom", "Long.Median", "Ancho.Median" les asigne un nuevo nombre, indicado con <- y la función de concatenar `c`.
-
-### La función `summary`
-Como pudimos observar, hacer todos estos cálculos uno por uno harían que nuestro script sea demasiado largo. Debido a esto, podemos utilizar una función llamada `summary()` que nos da estos mismos estadísticos y otros adicionales que serán de mucha ayuda.
-
-```{r}
-summary(iris)
-```
-
-Esta función además de darnos la media y la mediana, nos da los valores mínimos y máximos, además del primer y tercer cuartil (utilizados para generar gráficos de boxplot) y nos dice cuántas observaciones tenemos de cada una de las especies.
-
-Podríamos guardar este resumen en una variable.
-```{r}
-summ.iris <- summary(iris)
-summ.iris
-```
-
-### Visualización básica de datos
-Podemos graficar, por ejemplo, la base de datos iris.
-
-```{r}
-plot(iris)
-```
-
-Como podemos ver, tenemos una gráfica compleja donde no se pueden apreciar del todo bien los datos. Para hacer una gráfica de, por ejemplo, la longitud de los sépalos de cada una de las especies, tenemos que agregar ciertos argumentos a la función `plot()`.
-```{r}
-plot(iris, x = iris$Species, y = iris$Sepal.Length)
-```
-
-También podemos graficar la relación entre dos variables para observar como estas van cambiando.
-```{r}
-plot(x = iris$Petal.Length, y = iris$Petal.Width)
-```
-
-Por ejemplo, graficamos la relación que existe entre la longitud del petal y su ancho. A primera vista parece existir una correlación positiva entre ambos.
-
-Podemos agregar más argumentos a nuestro gráfico para hacerlo más presentable.
-```{r}
-plot(x = iris$Petal.Length, y = iris$Petal.Width, main = "Gráfico de relación entre la longitud y el ancho del petalo",
-     sub = "Datos obtenidos de la base de datos iris", xlab = "Longitud del petalo", ylab = "Ancho del petalo")
-```
-
-Los argumentos `main` y `sub` sirven para darle un título y un subtítulo a nuestro gráfico, respectivamente. Los argumentos `xlab` y `ylab` sirven para nombrar los ejes x y y.
-
-
-Otros argumentos con los que podemos modificar la forma, color y contorno de los puntos son *pch*, *bg* y *col*, respectivamente. Con el argumento `cex` podemos modificar el tamaño de los puntos.
-```{r}
-plot(x = iris$Petal.Length, y = iris$Petal.Width, main = "Gráfico de relación entre la longitud y el ancho del petalo",
-     sub = "Datos obtenidos de la base de datos iris", xlab = "Longitud del petalo", ylab = "Ancho del petalo", cex = 0.8,
-     col = iris$Species, pch = 20)
-```
-
-Es necesario que para que el relleno (argumento `bg`) sea visible, se necesitan `pch = 21:25`, en este caso utilizamos `pch = 20`. Al no poner ningún valor para `col` el contorno de los puntos es negro.
-
-Las leyendas con los comandos R de base no son muy bonitas y son poco intuitivas. Para esto utilizaremos una librería más adelante llamada `ggplot2`.
-
-### Valores atípicos
-```{r echo=FALSE}
-plot(iris, x = iris$Species, y = iris$Sepal.Length)
-```
-
-Como podemos ver en el gráfico anterior, en el eje de las ordenadas tenemos a las tres especies: *Iris setosa, I. versicolor e I. virginica*. Esta es una gráfica llamada boxplot y se construye a partir de los datos que tenemos en nuestro resumen. La parte inferior de la caja corresponde al primer cuartil, la línea negra central corresponde a la mediana y la parte superior de la caja corresponde al tercer cuartil. Las líneas que salen de la caja corresponden a los valores máximos y mínimos que no son valores atípicos o *outliers*. Un valor atípico es aquel que se sale de la cerca superior e inferior, pero, ¿cómo se definen estos límites?
-
-Para el calculo de estas cercas se implementan las siguientes ecuaciones \@ref(eq:fence).
-
-\begin{equation}
-\begin{split}
-  Cerca_i = Q_1 - 1.5 * IQR \\
-  Cerca_s = Q_3 + 1.5 * IQR
-\end{split}
-(\#eq:fence)
-\end{equation}
-
-Donde $Cerca_i$ y $Cerca_s$ corresponden a la cerca inferior y superior, respectivamente, y el valor de $IQR$ corresponde al rango intercuartil (diferencia entre el primer y tercer cuartil $IQR = Q_3 - Q_1$). Por ejemplo, para la especies *I. virginica* el $IQR$ de la longitud del sepalo es el siguiente:
-$$
-IQR = 6.9 - 6.225 = 0.675
-$$
-
-Y las cercas correspondientes son:
-$$
-Cerca_i = 6.225 - 1.5*0.675 = 5.2125 \\
-Cerca_s = 6.9 + 1.5*0.675 = 7.9125
-$$
-
-Aunque no están incluidas en el boxplot, nuestras cercas inferior y superior son 5.2125 y 7.9125, respectivamente. Cualquier valor por encima o por debajo de este límite será considerado un valor atípico o *outlier*. Aunque las cercas no se incluyen en el boxplot, este sí gráfica los puntos cuando estos son considerados como valores atípicos, como en el caso del punto que podemos observar en *I. virginica*, que tiene un valor menor a 5.2125, específicamente, tiene un valor de 4.9. Incluso nosotros podríamos buscar este valor utilizando una serie de filtros.
-```{r}
-iris %>% dplyr::filter(Sepal.Length <= 5.2125)
-```
-
-Como podemos ver, la mayoría de las especies con valores inferiores a 5.2125 corresponden a otras especies, sin embargo, tenemos una única observación de la especies *I. virginica* con estas características. Los valores atípicos nos pueden indicar errores en la medición, en nuestra instrumentación, entre otras 
+Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella. Como tal no existe una función en R que calcule la moda pero en varias páginas y foros como *StackOverflow* se pueden encontrar scripts para su calculo.
 
 ## Medidas de dispersión
-A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Algunas medidas de dispersión son:
+A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Las medidas que veremos son: **rango** y **desviación estándar**.
 
-* **Rango:** La diferencia entre el valor máximo y el valor mínimo de un conjunto de datos. Para obtener el valor del rango utilizamos la ecuación \@ref(eq:range).
-
+### Rango
+Es la diferencia entre el valor máximo y mínimo de datos como se observa en la ecuación \@ref(eq:range)
 \begin{equation}
-  rango = x_{max} - x_{max}
+Rango = x_{max} - x_{max}
 (\#eq:range)
 \end{equation}
 
-* **Desviación estándar:** Indica qué tan dispersos están los datos respecto a la media. Es la medida de dispersión más usada. Para obtener la desviación estándar utilizamos la ecuación \@ref(eq:sd).
+Propiedades importante del **rango:**
+
+* Es muy sensible a valores extremos.
+* No toma en cuenta todos los valores, no refleja la variación de todos los datos.
+
+#### Rango en R
+Se utiliza la función `range()`. 
+
+>**Ejemplo:** Queremos calcular el rango de las observaciones de la base de datos de plantas que utilizamos en la sección de medidas de tendencia central.
+
+```{r}
+range(PlantGrowth$weight)
+```
+
+Esto nos da como resultado el valor máximo y el valor mínimo pero no nos dice cuál es el valor de nuestro rango. Podríamos hacer una operación simple para su calculo o utilizar las funciones `max()` y `min()`.
+```{r}
+max(PlantGrowth$weight) - min(PlantGrowth$weight)
+```
+
+Como podemos ver el rango es de 2.72 ya que la diferencia entre 6.31 y 3.59 corresponde a este vakir,
+
+Para sacar el valor máximo y mínimo de cada uno de los tratamientos podemos utilizar el paquete de `dplyr` y la función `group_by()`.
+```{r}
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(Rango = max(weight) - min(weight), n = n())
+resumen
+```
+
+Igualmente, podemos agregar las medidas de tendencia central.
+```{r}
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
+resumen
+```
+
+
+
+### Desviación estándar
+Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y se calcula con la ecuación \@ref(eq:sd1) y $\sigma$ para datos poblacionales y se calcula a partir de la ecuación \@ref(eq:sd2).
 
 \begin{equation}
-  s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
-(\#eq:sd)
+s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
+(\#eq:sd1)
 \end{equation}
 
-Donde $\sum_{i = 1}^{n}({x_i-\overline{x})^2}$ es igual al valor cada observación menos la media, elevado al cuadrado y el apartado ${n-1}$ corresponde a los grados de libertad que tenemos para el cálculo de la desviación estándar.
-
-Una medida derivad de la desviación estándar es la varianza. Se obtiene de forma sencilla como lo indica la ecuación \@ref(eq:var).
-
 \begin{equation}
-  Varianza = {s}^2
-  (\#eq:var)
+\sigma = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{N}}
+(\#eq:sd2)
 \end{equation}
 
-### Rango en R
-El rango es simplemente la diferencia entre el valor más grande y el más chico. Su calculo en R se puede hacer con la función `range()`.
+Donde $\sum_{i = 1}^{n}({x_i-\overline{x})^2}$ es igual al valor cada observación menos la media, elevado al cuadrado, ${n-1}$ corresponde a los grados de libertad que tenemos para el cálculo de la desviación estándar y $N$ es el número total de la población.
+
+Propiedades importantes de la **desviación estándar:**
+
+* Nunca tiene un valor negativo.
+* Mayor valor de $s$ indica mayor variación en los datos.
+* Puede aumentar considerablemente con valores atípicos, es decir, no es *robusta.*
+* Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
+
+#### Desviación estándar en R
+Se utiliza la función `sd()`.
+
+>**Ejemplo:** Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango.
 
 ```{r}
-range(iris$Petal.Length)
+sd(PlantGrowth$weight)
 ```
-A partir del output de está función podemos hacer el cálculo del rango.
-$$
-Rango = 6.9 - 1 = 5.9
-$$
 
-Otra forma de hacer el cálculo de manera directa es con las funciones `min()` y `max()`.
+Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos. En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de `dplyr` y `group_by()`.
 ```{r}
-Rango <- max(iris$Petal.Length) - min(iris$Petal.Length)
-Rango
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight))
+resumen
 ```
-### Desviación estándar en R
-Para obtener la desviación estándar en R lo único que necesitamos es utilizar la función `sd()`.
 
+Y de nueva cuenta, podemos agregar el resto de estadísticos descriptivos que hemos visto hasta ahora.
 ```{r}
-SD <- sd(iris$Petal.Length)
-SD
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
+resumen
 ```
 
-En caso de querer obtener la varianza, simplemente elevamos nuestro valor al cuadrado.
+En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora. Algo importante a tener en cuenta es que `sd()` calcula la desviación estandar muestral $s$, no la poblacional $\sigma$. Para calcular $\sigma$ necesitamos multiplicar el resultado obtenido por $\sqrt\frac{N-1}{N}$.
 ```{r}
-Var <- SD^2
-Var
+sd(PlantGrowth$weight)*(sqrt((length(PlantGrowth$weight)-1)/length(PlantGrowth$weight)))
 ```
 
-## Medidas de posición
-Podemos hacer también el calculo de medidas de posición como las siguientes:
+En caso de que se utilice frecuentemente la $\sigma$ se puede definir la función de la siguiente manera.
+```{r}
+sd.p = function(x){sd(x)*sqrt((length(x)-1)/length(x))}
+```
 
-* **Frecuencia absoluta:** Es el valor total de los datos que observamos.
-
-* **Frecuencia relativa:** Es el valor relativo de cada dato respecto del total como se observa en la ecuación \@ref(eq:frecr). Si se le multiplica por 100% se obtiene su valor en porcentaje.
+Para calcular la **varianza** $s^2$, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación \@ref(eq:var).
 
 \begin{equation}
-  f_i = \frac{n_i}{N}
+Varianza = {s}^2
+(\#eq:var)
+\end{equation}
+
+```{r}
+sd(PlantGrowth$weight)^2
+```
+
+Propiedades importantes de la **varianza:**
+
+- Las unidades están elevadas al cuadrado.
+- No es un estadístico *robusto.*
+- Nunca tiene valores negativos.
+
+Otro estadístico que nos puede interesare es el **coeficiente de variación** que se obtiene a partir de la ecuación \@ref(eq:cv).
+
+\begin{equation}
+CV = \frac{S}{\overline{x}}*100
+(\#eq:cv)
+\end{equation}
+
+Para su calculo simplemente utilizamos las funciones previamente aprendidas.
+```{r}
+sd(PlantGrowth$weight)/mean(PlantGrowth$weight)*100
+```
+
+Nusetro resultado es 13.82204%. Este es el coeficiente de variación para todos los datos. De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función `summarise()`del paquete `dplyr`. 
+```{r}
+resumen <- resumen <- PlantGrowth %>% group_by(group) %>% summarise(CV = sd(weight)/mean(weight)*100, Varianza = sd(weight)^2, SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
+resumen
+```
+## Medidas de posición relativa
+Indican la posición relativa de los datos con respecto de los demás datos. Algunas de las más usadas son: **valores Z**, **frecuencia absoluta**, **frecuencia relativa** y **cuartiles**.
+
+### Valores Z
+Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar a las que se encuentra un valor dado. Se puede calcular el valor z muestral y poblacional con las ecuaciones \@ref(eq:z1) y \@ref(eq:z2).
+
+\begin{equation}
+z = \frac{x - \overline{x}}{s}
+(\#eq:z1)
+\end{equation}
+
+\begin{equation}
+z = \frac{x - \mu}{\sigma}
+(\#eq:z2)
+\end{equation}
+
+Propiedades importantes de los **valores Z:**
+
+- No tienen unidades de medida.
+- Si un valor es menor que la media, su valor Z será negativo.
+
+#### Valores Z en R
+Para el calculo del valor Z de algún número simplemente le extraemos la media $\overline{x}$ y lo dividimos entre la desviación estándar $s$. Podemos agregar una sección que contenga el valor Z de cada uno de nuestros datos.
+```{r}
+PlantGrowth$Z <- (PlantGrowth$weight - mean(PlantGrowth$weight)) / sd(PlantGrowth$weight)
+```
+
+Podemos utilizar la función de `mutate()` del paquete de `dplyr` para agregar una nueva sección a nuestra base de datos de PlantGrowth. Al utilizar la función `group_by()` antes de la función `mutate()` nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.
+```{r}
+PlantGrowth <- PlantGrowth %>% group_by(group) %>% mutate(Z = (weight - mean(weight)/sd(weight)))
+```
+
+### Frecuencia absoluta
+Es el valor total de los datos observados. Por ejemplo, para los tratamientos de la base de datos de PlantGrowth, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. Otra situación es el número de veces que cada peso aparece. Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su frecuencia absoluta es de 2.
+
+
+#### Frecuencia absoluta en R
+Utilizamos la función `table()` para su calculo.
+```{r}
+table(PlantGrowth$group)
+```
+
+Aquí se puede ver que cada tratamiento se realizo con 10 plantas. Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de *weight*.
+```{r}
+table(PlantGrowth$weight)
+```
+
+Y como podemos confirmar, el valor 4.17 es el único que se repite 2 veces.
+Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se repiten. En este caso obtuvimos la frecuencia de cada uno de los tratamientos. Como podemos ver, $N = 30$ y cada tratamiento esta compuesto por 10 observaciones.
+
+Otra opción es el uso de la función `n()` junto con `group_by()`. De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.
+```{r}
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(CV = sd(weight)/mean(weight)*100, Varianza = sd(weight)^2, SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), Frec_Absoluta = n())
+resumen
+```
+
+
+### Frecuencia relativa
+Es el valor relativo de cada dato respecto del total como se observa en la ecuación \@ref(eq:frecr). Si se le multiplica por 100% se obtiene su valor en porcentaje.
+
+\begin{equation}
+f_i = \frac{n_i}{N}
 (\#eq:frecr)
 \end{equation}
 
-En este caso, utilizaremos la base de datos de aves que vimos en la lección anterior.
+Donde $f_i$ es la frecuencia de la i-ésima observación y $n_i$ es el número de observaciones en la i-ésima observación.
 
+#### Frecuencia relativa en R
+En este caso utilizamos la función `prop.table()`. 
 ```{r}
-Aves <- read.table("Aves.txt", header = TRUE)
+frec <- table(PlantGrowth$group)
+prop.table(frec)
 ```
 
-Para obtener la frecuencia absoluta utilizamos al función `table()` y el argumento `Aves$ambiente` para obtener la frecuencia de aves del bosque y aves de arbustales.
+En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos. Como cada una era 10 y $N = 30$ cada una tiene una frecuencia relativa de 0.3333 o 33.33%. Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.
 ```{r}
-table(Aves$ambiente)
+frec2 <- table(PlantGrowth$weight)
+prop.table(frec2)
 ```
 
-En caso de querer las frecuencias relativas, podemos usar la función `prop.table()` y el mismo argumento de `Aves$ambiente`. Para esto debemos tener las frecuencias absolutas guardadas en una variable.
+Y como podemos ver, la frecuencia del valor 4.17 es el doble que las del resto, lo que quiere decir que este valor se repite 2 veces.
+
+De nueva cuenta, otra opción es el uso de la función `mutate()` para agregar una sección de frecuencia relativa a nuestra tabla con los estadísticos descriptivos pasados.
 ```{r}
-Frecab <- table(Aves$ambiente)
-prop.table(Frecab)
+resumen <- resumen %>% mutate(Frec_Relativa = Frec_Absoluta / sum(Frec_Absoluta))
+resumen
 ```
 
-Para facilitar la lectura vamos a transformar las frecuencias relativas a porcentajes multiplicando por 100 y utilizando la función `round()` para redondear los valores a 2 dígitos.
+
+### Cuartiles
+Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil. $Q_2$ es equivalente a la mediana.
+
+Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ($RIQ$) como se indica en la siguiente fórmula.
+\begin{equation}
+RIQ = Q_3 - Q_1
+(\#eq:RIQ)
+\end{equation}
+
+#### Cuartiles en R
+Para el calculo de los cuartiles en R podemos utilizar la función `summary()` que viene en los paquetes básicos de R.
 ```{r}
-round((prop.table(Frecab) * 100), 2)
+summary(PlantGrowth)
 ```
-Podemos ver que el 55.56% de las aves son de hábitos arbustivos mientras que el 44.44% prefieren los bosques.
+
+Como podemos ver, esta función nos da los valores mínimos, máximos, el $Q_1$, $Q_3$, la mediana y la media. Los **cinco números** utilizados para generar **gráfica de caja** se encuentran en estos datos. Para sacar estos valores por cada uno de los datos podemos utilizar la función `filter()` del paquete `dplyr`. 
+```{r}
+ctrl <- PlantGrowth %>% dplyr::filter(group == "ctrl")
+trt1 <- PlantGrowth %>% dplyr::filter(group == "trt1")
+trt2 <- PlantGrowth %>% dplyr::filter(group == "trt2")
+summary(ctrl)
+summary(trt1)
+summary(trt2)
+```
+
+#### Valores atípicos
+Son aquellos valores que se encuentran por encima de $Q_3 + 1.5 * RIQ$ o debajo de $Q_1 - 1.5 * RIQ$. Con estos valores se pueden realizar **gráficas de cajas modificadas.** 
+
+Para realizar estas gráficas utilizaremos la paquetería `ggplot2` que está incluido en el paquete `tidyverse`.
+```{r}
+library(ggplot2)
+```
+
+Utilizamos la función `ggplot() + geom_boxplot`.
+```{r fig.align = 'center', fig.cap = "Gráfica de cajas modificada para la identificación de valores atípicos."}
+ggplot(PlantGrowth) + geom_boxplot(aes(group, weight, fill = group)) + 
+  xlab("Grupo") +
+  ylab("Peso") +
+  scale_fill_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) +
+  theme_classic()
+```
+
+Como podemos ver en la gráfica, el tratamiento 1 presenta dos valores atípicos que están por encima del valor $Q_3 + 1.5 * IQR$.
 
 ## El uso de la librería `dplyr`
-Para facilitar aún más las cosas podemos utilizar las herramientas de la librería `dplyr` que vienen incluidas en el paquete de `tidyverse`.
+A lo largo de todo esta lección hemos hecho uso de la librería `dplyr`. Este paquete está incluido dentro de la librería `tidyverse`.
 ```{r}
 library(tidyverse)
 ```
 
+La mayoría de estas funciones las hemos estado utilizando a lo largo de esta sección aunque puede que haya algunas que no hayamos aplicado.
 Las funciones más importantes de este paquete son:
 
 * `group_by:` agrupa datos.
@@ -332,97 +407,19 @@ Las funciones más importantes de este paquete son:
 
 * `arrange:` ordena.
 
-Con `dplyr` la extracción de la media y la mediana es a través de la función `summarise` y sería así:
-
-```{r}
-data("iris")
-resum.iris <- summarise(iris, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
-resum.iris
-```
-
-Pero supongamos que quiero extraer estos valores de cada una de las especies. Para esto utilizamos la función `group_by`:
-```{r}
-iris.especies <- group_by(iris, Species) #Aparentemente esta función no cambia la matriz de datos, sin embargo si hacemos un summarise estos se ordenarán por la forma en que los agrupamos.
-resum.iris.especies <- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
-resum.iris.especies
-```
-
-Con la función `mutate` nosotros podemos crear nuevas variables. Por ejemplo, la relación entre longitud del pétalo-ancho del pétalo.
-```{r}
-iris <- mutate(iris, Petal.Leng.Wid.Ratio = Petal.Length/Petal.Width)
-iris$Petal.Leng.Wid.Ratio
-```
-
-Para realizar operaciones de manera secuencial utilizamos el `pipeline %>%`. En lugar de escribir el siguiente código y asignar dos variables, podemos hacer todo de una.
-```{r}
-#iris.especies <- group_by(iris, Species)
-#resum.iris.especies <- summarise(iris.especies, Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length)) 
-
-resum.iris.especies2 <- iris %>%
-  group_by(Species) %>% 
-  summarise(Petal.Length.Mean = mean(Petal.Length), Petal.Length.Median = median(Petal.Length))
-resum.iris.especies2
-```
-
-Trabajar de esta forma es más cómodo y más claro.
-
-Para hacer filtros utilizamos la función `filter`. Sin embargo, como posiblemente hay otros paquetes que han nombrado una función igual, para evitar conflictos agregamos `dplyr::` antes de la función `filter` para especificar que queremos trabajar con el `filter` del paquete de `dplyr`. Hagamos un ejemplo de filtrado de la matriz de datos `iris` para obtener solamente las especies de *I. versicolor*.
-```{r}
-iris.versicolor <- iris %>% dplyr::filter(Species == "versicolor")
-iris.versicolor
-```
-
-Como podemos ver, hemos filtrado a todas las especies pertenecientes a *I. versicolor*. 
-
-```{r echo=FALSE}
-Símbolo <- c(">", "<", "==", ">=", "<=", "!=", "%in%", "is.na", "!is.na", "|, &")
-Significado <- c("Mayor que", "Menor que", "Igual a", "Mayor o igual a", "Menor o igual a", "Distinto a", "Dentro del grupo", "Es NA", "No es NA", "O, Y")
-Symbs <- data.frame(Símbolo, Significado)
-```
-
-
-```{r echo=FALSE}
-knitr::kable(Symbs, caption = "Símbolos utilizados con la función filter") %>% kable_styling(bootstrap_options = c("striped", "bordered", "hover"), full_width = TRUE)
-```
-
-Habíamos visto un individuo de la especie de *I. virginica* que tenía un valor en la longitud del sépalo menor a la cerca inferior de 5.2125 por lo que se le consideraba un valor atípico. Podemos encontrar este valor utilizando la función `dplyr::filter()`.
-```{r}
-outlier <- iris %>% dplyr::filter(Species == "virginica", Sepal.Length <= 5.2125)
-outlier
-```
-
-Así podemos corroborar las otras medidas que este valor presenta, para verificar que no sean atípica en sus correspondientes cuartiles.
-
-Podemos utilizar otra función llamada `n()` junto con `summarise()` para obtener las frecuencias absolutas de nuestros datos.
-```{r}
-Frecuencias <- iris %>%
-  group_by(Species) %>% 
-  summarise(Frecuencia_absoluta = n())
-Frecuencias
-```
-
-Para obtener la frecuencia relativa utilizamos la función `mutate` para agregar una nueva variable llamada `Frecuencia_relativa` junto con la función `sum` para obtener el número total de observaciones $N$ de la ecuación \@ref(eq:frecr) para nuestros datos.
-```{r}
-Frecuencias <- Frecuencias %>% mutate(Frecuencia_relativa = Frecuencia_absoluta / sum(Frecuencia_absoluta))
-Frecuencias
-```
-
-Y si quisiéramos obtener el porcentaje, de nuevo podemos utilizar la función `mutate` y multiplicando la variable `Frecuencia_relativa` por 100%.
-```{r}
-Frecuencias <- Frecuencias %>% mutate(Porcentaje = Frecuencia_relativa*100)
-Frecuencias
-```
-
 Con la función `select` podemos elegir unas cuantas variables para trabajar. Esto es útil para bases de datos con muchas variables como matrices de abundancias.
 
 ```{r}
-Petals <- iris %>% dplyr::select(Petal.Length, Petal.Width, Species)
-Petals
+resumen %>% dplyr::select(group, Media, SD)
 ```
 
-En este caso, eliminamos los datos de los sépalos y nos quedamos con los datos solamente de los pétalos. Otra forma de seleccionar las variables es con el argumento `starts_with()`, por ejemplo, para seleccionar solamente las variables que empiecen con la palabra "Petal".
+En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos. Otra forma de seleccionar las variables es con el argumento `starts_with()`, por ejemplo, para la selección de los datos del grupo control.
 
 ```{r}
-Petals2 <- iris %>% dplyr::select(starts_with("Petal"), Species)
-Petals2
+PlantGrowth %>% dplyr::select(starts_with("ctrl"), weight)
+```
+
+Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control. También podemos ordenar los datos utilizando la función `arrange()`. Es importante escribir el argumento `.by_group = TRUE` para que la función `arrange()` respete el agrupamiento que hicimos por tratamientos antes del pipeline %>%.
+```{r}
+PlantGrowth <- PlantGrowth %>% group_by(group) %>% arrange(desc(weight), .by_group = TRUE)
 ```
