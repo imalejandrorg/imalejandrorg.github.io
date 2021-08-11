@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 # Requisitos {-}
-Antes de comenzar con el curso es necesario que descarguemos ciertos programas entre ellos están incluidos R y RStudio.
+Antes de comenzar con el curso es necesario que descarguemos ciertos programas entre ellos están incluidos R y RStudio. Hola saludos a Camila.
 
 ## Descarga de R y RStudio
 Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programación y RStudio es el ambiente de trabajo donde utilizamos este lenguaje de programación.
