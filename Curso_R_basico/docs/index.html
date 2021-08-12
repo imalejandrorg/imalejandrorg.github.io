@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Curso de R básico</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Curso de R básico" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 
 <link rel="next" href="introducción-a-r.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,8 +50,8 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -204,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Curso de R básico</h1>
 <p class="author"><em>Alejandro Ruiz-García</em></p>
-<p class="date"><em>15/3/2021</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>15/3/2021</em></p>
 </div>
 <div id="requisitos" class="section level1 unnumbered">
 <h1>Requisitos</h1>
@@ -213,9 +214,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">0.1</span> Descarga de R y RStudio</h2>
 <p>Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programación y RStudio es el ambiente de trabajo donde utilizamos este lenguaje de programación.</p>
 <p>Para descargar R podemos acceder al link de <a href="https://cran.r-project.org/bin/windows/base/">esta página.</a></p>
-<p><img src="DescargaR.png" width="418" style="display: block; margin: auto;" /></p>
+<p><img src="DescargaR.png" style="display: block; margin: auto;" /></p>
 <p>Una vez descargado e instalado R, procedemos a descargar RStudio desde <a href="https://rstudio.com/products/rstudio/download/#download">esta página.</a></p>
-<p><img src="descargaRStudio.png" width="440" style="display: block; margin: auto;" /></p>
+<p><img src="descargaRStudio.png" style="display: block; margin: auto;" /></p>
 <p>Con estas herramientas podemos comenzar a trabajar en RStudio.</p>
 
 </div>
@@ -249,6 +250,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -276,20 +278,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

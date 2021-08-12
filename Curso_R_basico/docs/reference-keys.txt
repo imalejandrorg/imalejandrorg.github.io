@@ -82,3 +82,10 @@ análisis-de-varianza-anova-de-una-vía
 anova-en-r
 pruebas-post-hoc
 fig:unnamed-chunk-30
+r-markdown
+requisitos
+fig:unnamed-chunk-3
+tab:unnamed-chunk-14
+tab:unnamed-chunk-18
+fig:unnamed-chunk-19
+fig:unnamed-chunk-20
