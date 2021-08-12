@@ -52,6 +52,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -118,6 +120,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -179,7 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="probabilidad.html"><a href="probabilidad.html#curvas-de-densidad"><i class="fa fa-check"></i><b>4.3</b> Curvas de densidad</a></li>
 <li class="chapter" data-level="4.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>4.4</b> Distribución binomial</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.1</b> Distribución binomial en R</a></li>
+<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>4.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.2</b> Distribución binomial en R</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -262,14 +287,14 @@ data(&quot;PlantGrowth&quot;)</code></pre>
 <p>Es importante que conozcamos los datos que incluye nuestra matriz.
 En este caso tenemos dos columnas, <em>weight</em> que hace referencia al peso seco y <em>group</em> que hace referencia al tratamiento.
 Para sacar la media global (independiente del tratamiento) simplemente escribimos la función <code>mean()</code> y hacemos referencia al peso con el símbolo <code>$</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="estadística-descriptiva.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estadística-descriptiva.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 5.073</code></pre>
 <p>Lo que nos arroja una media de 5.073.
 Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería <code>dplyr</code> que viene incluida en el paquete de <code>tidyverse</code>.
 Vamos a usar el <strong>pipeline</strong> <code>%&gt;%</code> de <code>dplyr</code> para hacer varias operaciones en cadena: 1) Utilizamos la función <code>group_by(group)</code> para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función <code>summarise(Media = mean(weight), n = n())</code> para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="estadística-descriptiva.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-2"><a href="estadística-descriptiva.html#cb4-2" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb4-3"><a href="estadística-descriptiva.html#cb4-3" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="estadística-descriptiva.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb42-2"><a href="estadística-descriptiva.html#cb42-2" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb42-3"><a href="estadística-descriptiva.html#cb42-3" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   group Media     n
 ##   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt;
@@ -307,12 +332,12 @@ Estos simplemente se promedian.
 <blockquote>
 <p><strong>Ejemplo:</strong> Supongamos que con los datos del ejemplo anterior queremos ahora calcular la mediana global y la mediana para cada uno de nuestros tratamientos.</p>
 </blockquote>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="estadística-descriptiva.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estadística-descriptiva.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 5.155</code></pre>
 <p>El valor obtenido es de 5.155.
 De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="estadística-descriptiva.html#cb8-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb8-2"><a href="estadística-descriptiva.html#cb8-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estadística-descriptiva.html#cb46-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb46-2"><a href="estadística-descriptiva.html#cb46-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   group Mediana     n
 ##   &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -320,8 +345,8 @@ De manera similar podemos calcular la mediana para cada uno de nuestros datos ut
 ## 2 trt1     4.55    10
 ## 3 trt2     5.44    10</code></pre>
 <p>Si lo deséamos, podemos obtener la media y la mediana en una misma tabla.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="estadística-descriptiva.html#cb10-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb10-2"><a href="estadística-descriptiva.html#cb10-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="estadística-descriptiva.html#cb48-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb48-2"><a href="estadística-descriptiva.html#cb48-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   group Media Mediana     n
 ##   &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -352,15 +377,15 @@ Las medidas que veremos son: <strong>rango</strong> y <strong>desviación están
 <blockquote>
 <p><strong>Ejemplo:</strong> Queremos calcular el rango de las observaciones de la base de datos de plantas que utilizamos en la sección de medidas de tendencia central.</p>
 </blockquote>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="estadística-descriptiva.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="estadística-descriptiva.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 3.59 6.31</code></pre>
 <p>Esto nos da como resultado el valor máximo y el valor mínimo pero no nos dice cuál es el valor de nuestro rango. Podríamos hacer una operación simple para su calculo o utilizar las funciones <code>max()</code> y <code>min()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="estadística-descriptiva.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(PlantGrowth<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">min</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="estadística-descriptiva.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(PlantGrowth<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">min</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 2.72</code></pre>
 <p>Como podemos ver el rango es de 2.72 ya que la diferencia entre 6.31 y 3.59 corresponde a este vakir,</p>
 <p>Para sacar el valor máximo y mínimo de cada uno de los tratamientos podemos utilizar el paquete de <code>dplyr</code> y la función <code>group_by()</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="estadística-descriptiva.html#cb16-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb16-2"><a href="estadística-descriptiva.html#cb16-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="estadística-descriptiva.html#cb54-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb54-2"><a href="estadística-descriptiva.html#cb54-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   group Rango     n
 ##   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt;
@@ -368,8 +393,8 @@ Las medidas que veremos son: <strong>rango</strong> y <strong>desviación están
 ## 2 trt1   2.44    10
 ## 3 trt2   1.39    10</code></pre>
 <p>Igualmente, podemos agregar las medidas de tendencia central.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="estadística-descriptiva.html#cb18-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb18-2"><a href="estadística-descriptiva.html#cb18-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="estadística-descriptiva.html#cb56-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb56-2"><a href="estadística-descriptiva.html#cb56-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   group Rango Media Mediana     n
 ##   &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -402,12 +427,12 @@ s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 <blockquote>
 <p><strong>Ejemplo:</strong> Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango.</p>
 </blockquote>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="estadística-descriptiva.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="estadística-descriptiva.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 0.7011918</code></pre>
 <p>Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos.
 En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de <code>dplyr</code> y <code>group_by()</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="estadística-descriptiva.html#cb22-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">SD =</span> <span class="fu">sd</span>(weight))</span>
-<span id="cb22-2"><a href="estadística-descriptiva.html#cb22-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="estadística-descriptiva.html#cb60-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">SD =</span> <span class="fu">sd</span>(weight))</span>
+<span id="cb60-2"><a href="estadística-descriptiva.html#cb60-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   group    SD
 ##   &lt;fct&gt; &lt;dbl&gt;
@@ -415,8 +440,8 @@ En caso de querer calcular la desviación estándar de cada tratamiento utilizam
 ## 2 trt1  0.794
 ## 3 trt2  0.443</code></pre>
 <p>Y de nueva cuenta, podemos agregar el resto de estadísticos descriptivos que hemos visto hasta ahora.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="estadística-descriptiva.html#cb24-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb24-2"><a href="estadística-descriptiva.html#cb24-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="estadística-descriptiva.html#cb62-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb62-2"><a href="estadística-descriptiva.html#cb62-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 6
 ##   group    SD Rango Media Mediana     n
 ##   &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -426,16 +451,16 @@ En caso de querer calcular la desviación estándar de cada tratamiento utilizam
 <p>En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora.
 Algo importante a tener en cuenta es que <code>sd()</code> calcula la desviación estandar muestral <span class="math inline">\(s\)</span>, no la poblacional <span class="math inline">\(\sigma\)</span>.
 Para calcular <span class="math inline">\(\sigma\)</span> necesitamos multiplicar el resultado obtenido por <span class="math inline">\(\sqrt\frac{N-1}{N}\)</span>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="estadística-descriptiva.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span>(<span class="fu">sqrt</span>((<span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)))</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="estadística-descriptiva.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span>(<span class="fu">sqrt</span>((<span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)))</span></code></pre></div>
 <pre><code>## [1] 0.6894063</code></pre>
 <p>En caso de que se utilice frecuentemente la <span class="math inline">\(\sigma\)</span> se puede definir la función de la siguiente manera.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="estadística-descriptiva.html#cb28-1" aria-hidden="true" tabindex="-1"></a>sd.p <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">sd</span>(x)<span class="sc">*</span><span class="fu">sqrt</span>((<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(x))}</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="estadística-descriptiva.html#cb66-1" aria-hidden="true" tabindex="-1"></a>sd.p <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">sd</span>(x)<span class="sc">*</span><span class="fu">sqrt</span>((<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(x))}</span></code></pre></div>
 <p>Para calcular la <strong>varianza</strong> <span class="math inline">\(s^2\)</span>, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación <a href="estadística-descriptiva.html#eq:var">(3.4)</a>.</p>
 <span class="math display" id="eq:var">\[\begin{equation}
 Varianza = {s}^2
 \tag{3.4}
 \end{equation}\]</span>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="estadística-descriptiva.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="estadística-descriptiva.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.49167</code></pre>
 <p>Propiedades importantes de la <strong>varianza:</strong></p>
 <ul>
@@ -449,13 +474,13 @@ CV = \frac{S}{\overline{x}}*100
 \tag{3.5}
 \end{equation}\]</span>
 <p>Para su calculo simplemente utilizamos las funciones previamente aprendidas.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estadística-descriptiva.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">/</span><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="estadística-descriptiva.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">/</span><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 13.82204</code></pre>
 <p>Nusetro resultado es 13.82204%.
 Este es el coeficiente de variación para todos los datos.
 De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función <code>summarise()</code>del paquete <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estadística-descriptiva.html#cb33-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb33-2"><a href="estadística-descriptiva.html#cb33-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="estadística-descriptiva.html#cb71-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb71-2"><a href="estadística-descriptiva.html#cb71-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 8
 ##   group    CV Varianza    SD Rango Media Mediana     n
 ##   &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -492,8 +517,8 @@ z = \frac{x - \mu}{\sigma}
 <p>Para el calculo del valor Z de algún número simplemente le extraemos la media <span class="math inline">\(\overline{x}\)</span> y lo dividimos entre la desviación estándar <span class="math inline">\(s\)</span>.</p>
 <p>Podemos utilizar la función de <code>mutate()</code> del paquete de <code>dplyr</code> para agregar una nueva sección a nuestra base de datos de PlantGrowth.
 Al utilizar la función <code>group_by()</code> antes de la función <code>mutate()</code> nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estadística-descriptiva.html#cb35-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Z =</span> (weight <span class="sc">-</span> <span class="fu">mean</span>(weight)<span class="sc">/</span><span class="fu">sd</span>(weight)))</span>
-<span id="cb35-2"><a href="estadística-descriptiva.html#cb35-2" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="estadística-descriptiva.html#cb73-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Z =</span> (weight <span class="sc">-</span> <span class="fu">mean</span>(weight)<span class="sc">/</span><span class="fu">sd</span>(weight)))</span>
+<span id="cb73-2"><a href="estadística-descriptiva.html#cb73-2" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code></pre></div>
 <pre><code>## # A tibble: 30 x 3
 ## # Groups:   group [3]
 ##    weight group     Z
@@ -521,13 +546,13 @@ Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su fr
 <div id="frecuencia-absoluta-en-r" class="section level4" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Frecuencia absoluta en R</h4>
 <p>Utilizamos la función <code>table()</code> para su calculo.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estadística-descriptiva.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="estadística-descriptiva.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span></code></pre></div>
 <pre><code>## 
 ## ctrl trt1 trt2 
 ##   10   10   10</code></pre>
 <p>Aquí se puede ver que cada tratamiento se realizo con 10 plantas.
 Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de <em>weight</em>.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estadística-descriptiva.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="estadística-descriptiva.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## 
 ## 3.59 3.83 4.17 4.32 4.41  4.5 4.53 4.61 4.69 4.81 4.89 4.92 5.12 5.14 5.17 5.18 
 ##    1    1    2    1    1    1    1    1    1    1    1    1    1    1    1    1 
@@ -539,8 +564,8 @@ En este caso obtuvimos la frecuencia de cada uno de los tratamientos.
 Como podemos ver, <span class="math inline">\(N = 30\)</span> y cada tratamiento esta compuesto por 10 observaciones.</p>
 <p>Otra opción es el uso de la función <code>n()</code> junto con <code>group_by()</code>.
 De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estadística-descriptiva.html#cb41-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">Frec_Absoluta =</span> <span class="fu">n</span>())</span>
-<span id="cb41-2"><a href="estadística-descriptiva.html#cb41-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="estadística-descriptiva.html#cb79-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">Frec_Absoluta =</span> <span class="fu">n</span>())</span>
+<span id="cb79-2"><a href="estadística-descriptiva.html#cb79-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 8
 ##   group    CV Varianza    SD Rango Media Mediana Frec_Absoluta
 ##   &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;         &lt;int&gt;
@@ -561,16 +586,16 @@ f_i = \frac{n_i}{N}
 <div id="frecuencia-relativa-en-r" class="section level4" number="3.3.3.1">
 <h4><span class="header-section-number">3.3.3.1</span> Frecuencia relativa en R</h4>
 <p>En este caso utilizamos la función <code>prop.table()</code>.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estadística-descriptiva.html#cb43-1" aria-hidden="true" tabindex="-1"></a>frec <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span>
-<span id="cb43-2"><a href="estadística-descriptiva.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="estadística-descriptiva.html#cb81-1" aria-hidden="true" tabindex="-1"></a>frec <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span>
+<span id="cb81-2"><a href="estadística-descriptiva.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec)</span></code></pre></div>
 <pre><code>## 
 ##      ctrl      trt1      trt2 
 ## 0.3333333 0.3333333 0.3333333</code></pre>
 <p>En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos.
 Como cada una era 10 y <span class="math inline">\(N = 30\)</span> cada una tiene una frecuencia relativa de 0.3333 o 33.33%.
 Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estadística-descriptiva.html#cb45-1" aria-hidden="true" tabindex="-1"></a>frec2 <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span>
-<span id="cb45-2"><a href="estadística-descriptiva.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec2)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="estadística-descriptiva.html#cb83-1" aria-hidden="true" tabindex="-1"></a>frec2 <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span>
+<span id="cb83-2"><a href="estadística-descriptiva.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec2)</span></code></pre></div>
 <pre><code>## 
 ##       3.59       3.83       4.17       4.32       4.41        4.5       4.53 
 ## 0.03333333 0.03333333 0.06666667 0.03333333 0.03333333 0.03333333 0.03333333 
@@ -584,8 +609,8 @@ Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la sig
 ## 0.03333333</code></pre>
 <p>Y como podemos ver, la frecuencia del valor 4.17 es el doble que las del resto, lo que quiere decir que este valor se repite 2 veces.</p>
 <p>De nueva cuenta, otra opción es el uso de la función <code>mutate()</code> para agregar una sección de frecuencia relativa a nuestra tabla con los estadísticos descriptivos pasados.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="estadística-descriptiva.html#cb47-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> resumen <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Frec_Relativa =</span> Frec_Absoluta <span class="sc">/</span> <span class="fu">sum</span>(Frec_Absoluta))</span>
-<span id="cb47-2"><a href="estadística-descriptiva.html#cb47-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="estadística-descriptiva.html#cb85-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> resumen <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Frec_Relativa =</span> Frec_Absoluta <span class="sc">/</span> <span class="fu">sum</span>(Frec_Absoluta))</span>
+<span id="cb85-2"><a href="estadística-descriptiva.html#cb85-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 9
 ##   group    CV Varianza    SD Rango Media Mediana Frec_Absoluta Frec_Relativa
 ##   &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;         &lt;int&gt;         &lt;dbl&gt;
@@ -604,7 +629,7 @@ Se representan por los símbolos <span class="math inline">\(Q_1\)</span>, <span
 <div id="cuartiles-en-r" class="section level4" number="3.3.4.1">
 <h4><span class="header-section-number">3.3.4.1</span> Cuartiles en R</h4>
 <p>Para el calculo de los cuartiles en R podemos utilizar la función <code>summary()</code> que viene en los paquetes básicos de R.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="estadística-descriptiva.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PlantGrowth)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="estadística-descriptiva.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PlantGrowth)</span></code></pre></div>
 <pre><code>##      weight       group          Z          
 ##  Min.   :3.590   ctrl:10   Min.   :-7.5661  
 ##  1st Qu.:4.550   trt1:10   1st Qu.:-6.5986  
@@ -615,10 +640,10 @@ Se representan por los símbolos <span class="math inline">\(Q_1\)</span>, <span
 <p>Como podemos ver, esta función nos da los valores mínimos, máximos, el <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_3\)</span>, la mediana y la media.
 Los <strong>cinco números</strong> utilizados para generar <strong>gráfica de caja</strong> se encuentran en estos datos.
 Para sacar estos valores por cada uno de los datos podemos utilizar la función <code>filter()</code> del paquete <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="estadística-descriptiva.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;ctrl&quot;</span>)</span>
-<span id="cb51-2"><a href="estadística-descriptiva.html#cb51-2" aria-hidden="true" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt1&quot;</span>)</span>
-<span id="cb51-3"><a href="estadística-descriptiva.html#cb51-3" aria-hidden="true" tabindex="-1"></a>trt2 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt2&quot;</span>)</span>
-<span id="cb51-4"><a href="estadística-descriptiva.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ctrl)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="estadística-descriptiva.html#cb89-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;ctrl&quot;</span>)</span>
+<span id="cb89-2"><a href="estadística-descriptiva.html#cb89-2" aria-hidden="true" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt1&quot;</span>)</span>
+<span id="cb89-3"><a href="estadística-descriptiva.html#cb89-3" aria-hidden="true" tabindex="-1"></a>trt2 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt2&quot;</span>)</span>
+<span id="cb89-4"><a href="estadística-descriptiva.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ctrl)</span></code></pre></div>
 <pre><code>##      weight       group          Z         
 ##  Min.   :4.170   ctrl:10   Min.   :-4.460  
 ##  1st Qu.:4.550   trt1: 0   1st Qu.:-4.080  
@@ -626,7 +651,7 @@ Para sacar estos valores por cada uno de los datos podemos utilizar la función 
 ##  Mean   :5.032             Mean   :-3.598  
 ##  3rd Qu.:5.293             3rd Qu.:-3.337  
 ##  Max.   :6.110             Max.   :-2.520</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="estadística-descriptiva.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trt1)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="estadística-descriptiva.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trt1)</span></code></pre></div>
 <pre><code>##      weight       group          Z          
 ##  Min.   :3.590   ctrl: 0   Min.   :-2.2827  
 ##  1st Qu.:4.207   trt1:10   1st Qu.:-1.6652  
@@ -634,7 +659,7 @@ Para sacar estos valores por cada uno de los datos podemos utilizar la función 
 ##  Mean   :4.661             Mean   :-1.2117  
 ##  3rd Qu.:4.870             3rd Qu.:-1.0027  
 ##  Max.   :6.030             Max.   : 0.1573</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="estadística-descriptiva.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trt2)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="estadística-descriptiva.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trt2)</span></code></pre></div>
 <pre><code>##      weight       group          Z         
 ##  Min.   :4.920   ctrl: 0   Min.   :-7.566  
 ##  1st Qu.:5.268   trt1: 0   1st Qu.:-7.219  
@@ -648,15 +673,15 @@ Para sacar estos valores por cada uno de los datos podemos utilizar la función 
 <p>Son aquellos valores que se encuentran por encima de <span class="math inline">\(Q_3 + 1.5 * RIQ\)</span> o debajo de <span class="math inline">\(Q_1 - 1.5 * RIQ\)</span>.
 Con estos valores se pueden realizar <strong>gráficas de cajas modificadas.</strong></p>
 <p>Para realizar estas gráficas utilizaremos la paquetería <code>ggplot2</code> que está incluido en el paquete <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="estadística-descriptiva.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="estadística-descriptiva.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>Utilizamos la función <code>ggplot() + geom_boxplot</code>.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="estadística-descriptiva.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(group, weight, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
-<span id="cb58-2"><a href="estadística-descriptiva.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-3"><a href="estadística-descriptiva.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-4"><a href="estadística-descriptiva.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb58-5"><a href="estadística-descriptiva.html#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-30-1.png" alt="Gráfica de cajas modificada para la identificación de valores atípicos." width="672" />
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="estadística-descriptiva.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(group, weight, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb96-2"><a href="estadística-descriptiva.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb96-3"><a href="estadística-descriptiva.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb96-4"><a href="estadística-descriptiva.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb96-5"><a href="estadística-descriptiva.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-66"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-66-1.png" alt="Gráfica de cajas modificada para la identificación de valores atípicos." width="672" />
 <p class="caption">
 Figura 3.1: Gráfica de cajas modificada para la identificación de valores atípicos.
 </p>
@@ -669,7 +694,7 @@ Figura 3.1: Gráfica de cajas modificada para la identificación de valores atí
 <h2><span class="header-section-number">3.4</span> El uso de la librería <code>dplyr</code></h2>
 <p>A lo largo de todo esta lección hemos hecho uso de la librería <code>dplyr</code>.
 Este paquete está incluido dentro de la librería <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="estadística-descriptiva.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="estadística-descriptiva.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>La mayoría de estas funciones las hemos estado utilizando a lo largo de esta sección aunque puede que haya algunas que no hayamos aplicado.
 Las funciones más importantes de este paquete son:</p>
 <ul>
@@ -683,7 +708,7 @@ Las funciones más importantes de este paquete son:</p>
 </ul>
 <p>Con la función <code>select</code> podemos elegir unas cuantas variables para trabajar.
 Esto es útil para bases de datos con muchas variables como matrices de abundancias.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="estadística-descriptiva.html#cb60-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(group, Media, SD)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="estadística-descriptiva.html#cb98-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(group, Media, SD)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   group Media    SD
 ##   &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -692,7 +717,7 @@ Esto es útil para bases de datos con muchas variables como matrices de abundanc
 ## 3 trt2   5.53 0.443</code></pre>
 <p>En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos.
 Otra forma de seleccionar las variables es con el argumento <code>starts_with()</code>, por ejemplo, para la selección de los datos del grupo control.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="estadística-descriptiva.html#cb62-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;ctrl&quot;</span>), weight)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="estadística-descriptiva.html#cb100-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;ctrl&quot;</span>), weight)</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `group`</code></pre>
 <pre><code>## # A tibble: 30 x 2
 ## # Groups:   group [3]
@@ -712,7 +737,7 @@ Otra forma de seleccionar las variables es con el argumento <code>starts_with()<
 <p>Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control.
 También podemos ordenar los datos utilizando la función <code>arrange()</code>.
 Es importante escribir el argumento <code>.by_group = TRUE</code> para que la función <code>arrange()</code> respete el agrupamiento que hicimos por tratamientos antes del pipeline %&gt;%.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="estadística-descriptiva.html#cb65-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight), <span class="at">.by_group =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="estadística-descriptiva.html#cb103-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight), <span class="at">.by_group =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 
 </div>
 </div>
