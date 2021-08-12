@@ -91,5 +91,3 @@ prueba-de-homocedasticidad
 análisis-de-varianza-anova-de-una-vía
 anova-en-r
 pruebas-post-hoc
-fig:unnamed-chunk-2
-media-en-r

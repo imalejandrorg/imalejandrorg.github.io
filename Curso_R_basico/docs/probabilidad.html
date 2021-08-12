@@ -52,6 +52,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -118,6 +120,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -302,8 +326,8 @@ En este caso, <span class="math inline">\(\tt P(CR \cap OA) = P(CR) * P(OA | CR)
 <div id="curvas-de-densidad" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Curvas de densidad</h2>
 <p>Se utilizan para variables continuas. Los <strong>histogramas de frecuencias relativas</strong> representan las proporciones de las observaciones en cada categoría, en lugar del total de observaciones. Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una <strong>curva de densidad.</strong> La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva. El área total bajo la curva debe ser igual a 1.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-2-1.png" alt="Curva de densidad" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-72-1.png" alt="Curva de densidad" width="672" />
 <p class="caption">
 Figura 4.1: Curva de densidad
 </p>
@@ -371,19 +395,19 @@ _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
 <p>-<code>qbinom()</code> toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad.</p>
 <p>-<code>rbinom()</code> genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.</p>
 <p>En este caso, queremos conocer la probabilidad exacta de que 2 personas sean mutantes. Para esto necesitamos la función <code>dbinom(x, size, prob)</code>, donde el argumento <code>x</code> equivale al número de éxitos, <code>size</code> al número de ensayos y <code>prob</code> a la probabilidad de éxito.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="probabilidad.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.37</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="probabilidad.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.37</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3423143</code></pre>
 <blockquote>
 <p><strong>Ejemplo</strong>: En Estados Unidos, 85% de la población tiene sangre Rh positivo. Supongamos que tomamos 6 personas y contamos cuántos tiene Rh positivo. En este caso <span class="math inline">\(Y\)</span> representará cuántas personas tienen Rh positivo dentro del grupo de 6. ¿Cuál es la probabilidad de <span class="math inline">\(Y\)</span> = 4? ¿Y la probabilidad de que <em>al menos</em> 4 personas sean Rh positivo? ¿Y la probabilidad de que haya <em>al menos</em> 1 persona con Rh negativo?</p>
 </blockquote>
 <p>En este caso debemos utilizar dos comandos, <code>dbinom()</code> y <code>pbinom()</code>, con uno calcularemos <span class="math inline">\(\tt Y = 4\)</span> y con el otro <span class="math inline">\(\tt Y \ge 4\)</span> (4 o más). Como queremos obtener <span class="math inline">\(\tt P(Y \ge 4)\)</span>, entonces <span class="math inline">\(\tt P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)\)</span>, utilizamos el argumento <code>lower.tail</code> y lo ponemos en <code>FALSE</code> para indicar que vamos a trabajar con un valor mínimo de 4, para arriba. Para el caso de <em>al menos</em> una persona con Rh negativo <span class="math inline">\(\tt P(Y &lt; 6)\)</span>, tenemos dos opciones. Usar <code>dbinom()</code> cinco veces para calcular el valor individual de <span class="math inline">\(\tt P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)\)</span>, o calcular <span class="math inline">\(\tt P(Y = 6)\)</span> y restarle a 1 este valor. Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la segunda.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="probabilidad.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="probabilidad.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1761771</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="probabilidad.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="probabilidad.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9526614</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="probabilidad.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="probabilidad.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6228505</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="probabilidad.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="probabilidad.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6228505</code></pre>
 
 </div>
