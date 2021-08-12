@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 2 Estadística descriptiva | Curso de R básico</title>
+  <title>Lección 3 Estadística descriptiva | Curso de R básico</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 2 Estadística descriptiva | Curso de R básico" />
+  <meta property="og:title" content="Lección 3 Estadística descriptiva | Curso de R básico" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 2 Estadística descriptiva | Curso de R básico" />
+  <meta name="twitter:title" content="Lección 3 Estadística descriptiva | Curso de R básico" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -31,8 +31,8 @@
   
   
 <link rel="prev" href="introducción-a-r.html"/>
-<link rel="next" href="análisis-de-varianza-anova.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<link rel="next" href="probabilidad.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -116,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -132,54 +135,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Curso de R básico</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Requisitos</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Requisitos</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>0.1</b> Descarga de R y RStudio</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Descarga de R y RStudio</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<li class="chapter" data-level="2" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>2</b> Introducción a R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
-<li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
-<li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
-<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
-<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
-<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
-<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
-<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
+<li class="chapter" data-level="2.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>2.1</b> Interfaz</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>2.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>2.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>2.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>2.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>2.6</b> Comentarios</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>2.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>2.8</b> Pedir ayuda</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
+<li class="chapter" data-level="3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>3</b> Estadística descriptiva</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.1</b> Medidas de tendencia central</a>
+<li class="chapter" data-level="3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>3.1</b> Medidas de tendencia central</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>2.1.1</b> Media</a></li>
-<li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>2.1.2</b> Mediana</a></li>
-<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>2.1.3</b> Moda</a></li>
+<li class="chapter" data-level="3.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>3.1.1</b> Media</a></li>
+<li class="chapter" data-level="3.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>3.1.2</b> Mediana</a></li>
+<li class="chapter" data-level="3.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>3.1.3</b> Moda</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
+<li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>2.2.1</b> Rango</a></li>
-<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar</a></li>
+<li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición relativa</a>
+<li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>2.3.1</b> Valores Z</a></li>
-<li class="chapter" data-level="2.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>2.3.2</b> Frecuencia absoluta</a></li>
-<li class="chapter" data-level="2.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>2.3.3</b> Frecuencia relativa</a></li>
-<li class="chapter" data-level="2.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>2.3.4</b> Cuartiles</a></li>
+<li class="chapter" data-level="3.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>3.3.1</b> Valores Z</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>3.3.2</b> Frecuencia absoluta</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>3.3.3</b> Frecuencia relativa</a></li>
+<li class="chapter" data-level="3.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>3.3.4</b> Cuartiles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
+<li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>3</b> Análisis de Varianza (ANOVA)</a>
+<li class="chapter" data-level="4" data-path="probabilidad.html"><a href="probabilidad.html"><i class="fa fa-check"></i><b>4</b> Probabilidad</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>3.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>3.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<li class="chapter" data-level="4.1" data-path="probabilidad.html"><a href="probabilidad.html#probabilidad-frecuentista"><i class="fa fa-check"></i><b>4.1</b> Probabilidad frecuentista</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad.html"><a href="probabilidad.html#reglas-de-probabilidad"><i class="fa fa-check"></i><b>4.2</b> Reglas de probabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="probabilidad.html"><a href="probabilidad.html#curvas-de-densidad"><i class="fa fa-check"></i><b>4.3</b> Curvas de densidad</a></li>
+<li class="chapter" data-level="4.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>4.4</b> Distribución binomial</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>3.3.1</b> ANOVA en R</a></li>
+<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.1</b> Distribución binomial en R</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>3.4</b> Pruebas <em>post hoc</em></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>5.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>5.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>5.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>5.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>5.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -199,42 +212,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="estadística-descriptiva" class="section level1" number="2">
-<h1><span class="header-section-number">Lección 2</span> Estadística descriptiva</h1>
-<p>En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos <strong>medidas de tendencia central</strong> como la media, mediana y moda, <strong>medidas de dispersión</strong> como el rango o la desviación estándar y <strong>medidas de posición relativa</strong> como los valores Z.</p>
-<div id="medidas-de-tendencia-central" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Medidas de tendencia central</h2>
-<p>Sirven para describir los valores del centro o valores medios de algún conjunto de datos. Las tres medidas de tendencia central más utilizadas son: <em>media</em>, <em>mediana</em> y <em>moda</em>.</p>
-<div id="media" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Media</h3>
-<p>Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones. Es representada como <span class="math inline">\(\overline{x}\)</span> (pronunciado <span class="math inline">\(x\)</span> barra) para datos muestrales y <span class="math inline">\(\mu\)</span> (pronunciado mu) para datos poblacionales. Para obtener la media muestral utilizamos la ecuación <a href="estadística-descriptiva.html#eq:mean1">(2.1)</a> y para obtener la media poblacional se utiliza la ecuación <a href="estadística-descriptiva.html#eq:mean2">(2.2)</a>.</p>
+<div id="estadística-descriptiva" class="section level1" number="3">
+<h1><span class="header-section-number">Lección 3</span> Estadística descriptiva</h1>
+<p>En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio.
+Veremos <strong>medidas de tendencia central</strong> como la media, mediana y moda, <strong>medidas de dispersión</strong> como el rango o la desviación estándar y <strong>medidas de posición relativa</strong> como los valores Z.</p>
+<div id="medidas-de-tendencia-central" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Medidas de tendencia central</h2>
+<p>Sirven para describir los valores del centro o valores medios de algún conjunto de datos.
+Las tres medidas de tendencia central más utilizadas son: <em>media</em>, <em>mediana</em> y <em>moda</em>.</p>
+<div id="media" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Media</h3>
+<p>Mide el promedio del valor de nuestros datos.
+Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
+Es representada como <span class="math inline">\(\overline{x}\)</span> (pronunciado <span class="math inline">\(x\)</span> barra) para datos muestrales y <span class="math inline">\(\mu\)</span> (pronunciado mu) para datos poblacionales.
+Para obtener la media muestral utilizamos la ecuación <a href="estadística-descriptiva.html#eq:mean1">(3.1)</a> y para obtener la media poblacional se utiliza la ecuación <a href="#eq:mean2">(<strong>??</strong>)</a>.</p>
 <p><span class="math display" id="eq:mean1">\[\begin{equation}
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
-\tag{2.1}
+\tag{3.1}
 \end{equation}\]</span></p>
-<p><span class="math display" id="eq:mean2">\[\begin{equation}
+<pre><code>```{=tex}
+\begin{equation}
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
-\tag{2.2}
-\end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> y <span class="math inline">\(\sum_{i=1}^{N}{x_i}\)</span> representan la sumatoria de los valores de todas nuestras observaciones; <span class="math inline">\(n\)</span> y <span class="math inline">\(N\)</span> representan el número de valores de datos en una muestra y el número de valores totales en una población, respectivamente.</p>
-<p>Propiedades importantes de la <strong>media:</strong></p>
-<ul>
-<li><p>No es un estadístico <em>robusto</em>, ya que es sensible a valores extremadamente grandes o pequeños.</p></li>
-<li><p>Utiliza todos los datos disponibles.</p></li>
-<li><p>Las medias muestrales (<span class="math inline">\(\overline{x}\)</span>) de una población tienden a variar menos que otras medidas.</p></li>
-</ul>
-<div id="media-en-r" class="section level4" number="2.1.1.1">
-<h4><span class="header-section-number">2.1.1.1</span> Media en R</h4>
-<p>El calculo de la media en R es algo sencillo. Para esto, utilizamos la función <code>mean()</code>.</p>
-<blockquote>
-<p><strong>Ejemplo:</strong> En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).</p>
-</blockquote>
-<p>Se utilizará la base de datos <code>PlantGrowth</code> para este ejemplo.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="estadística-descriptiva.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span></code></pre></div>
-<p>Es importante que conozcamos los datos que incluye nuestra matriz. En este caso tenemos dos columnas, <em>weight</em> que hace referencia al peso seco y <em>group</em> que hace referencia al tratamiento. Para sacar la media global (independiente del tratamiento) simplemente escribimos la función <code>mean()</code> y hacemos referencia al peso con el símbolo <code>$</code>.</p>
+(\#eq:mean2)
+\end{equation}
+
+Donde $\sum_{i=1}^{n}{x_i}$ y $\sum_{i=1}^{N}{x_i}$ representan la sumatoria de los valores de todas nuestras observaciones; $n$ y $N$ representan el número de valores de datos en una muestra y el número de valores totales en una población, respectivamente.
+
+Propiedades importantes de la **media:**
+
+-   No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
+
+-   Utiliza todos los datos disponibles.
+
+-   Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
+
+#### Media en R
+
+El calculo de la media en R es algo sencillo.
+Para esto, utilizamos la función `mean()`.
+
+&gt; **Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas.
+&gt; Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).
+
+Se utilizará la base de datos `PlantGrowth` para este ejemplo.
+
+
+```r
+data(&quot;PlantGrowth&quot;)</code></pre>
+<p>Es importante que conozcamos los datos que incluye nuestra matriz.
+En este caso tenemos dos columnas, <em>weight</em> que hace referencia al peso seco y <em>group</em> que hace referencia al tratamiento.
+Para sacar la media global (independiente del tratamiento) simplemente escribimos la función <code>mean()</code> y hacemos referencia al peso con el símbolo <code>$</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="estadística-descriptiva.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 5.073</code></pre>
-<p>Lo que nos arroja una media de 5.073. Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería <code>dplyr</code> que viene incluida en el paquete de <code>tidyverse</code>. Vamos a usar el <strong>pipeline</strong> <code>%&gt;%</code> de <code>dplyr</code> para hacer varias operaciones en cadena: 1) Utilizamos la función <code>group_by(group)</code> para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función <code>summarise(Media = mean(weight), n = n())</code> para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.</p>
+<p>Lo que nos arroja una media de 5.073.
+Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería <code>dplyr</code> que viene incluida en el paquete de <code>tidyverse</code>.
+Vamos a usar el <strong>pipeline</strong> <code>%&gt;%</code> de <code>dplyr</code> para hacer varias operaciones en cadena: 1) Utilizamos la función <code>group_by(group)</code> para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función <code>summarise(Media = mean(weight), n = n())</code> para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="estadística-descriptiva.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb4-2"><a href="estadística-descriptiva.html#cb4-2" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
 <span id="cb4-3"><a href="estadística-descriptiva.html#cb4-3" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
@@ -246,18 +278,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 trt2   5.53    10</code></pre>
 <p>Al final obtenemos una matriz nueva con 3 columnas: tipo de tratamiento, media para cada tratamiento y número de observaciones para cada tipo de tratamiento.</p>
 </div>
-</div>
-<div id="mediana" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Mediana</h3>
-<p>Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se respresenta por el símbolo <span class="math inline">\(\tilde{x}\)</span> (pronunciado <span class="math inline">\(x\)</span> tilde).
+<div id="mediana" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Mediana</h3>
+<p>Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos.
+Se respresenta por el símbolo <span class="math inline">\(\tilde{x}\)</span> (pronunciado <span class="math inline">\(x\)</span> tilde).
 <span class="math display">\[
 1, 2, 3, 4, 5
 \]</span></p>
-<p>Para el conjunto de datos anteriores la mediana es igual al número <strong>3</strong> que se encuentra justo por la mitad de los datos. En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales. Por ejemplo.
+<p>Para el conjunto de datos anteriores la mediana es igual al número <strong>3</strong> que se encuentra justo por la mitad de los datos.
+En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
+Por ejemplo.
 <span class="math display">\[
 5, 6, 7, 8, 9, 10
 \]</span></p>
-<p>Para este caso nuestros valores centrales son 7 y 8. Estos simplemente se promedian.
+<p>Para este caso nuestros valores centrales son 7 y 8.
+Estos simplemente se promedian.
 <span class="math display">\[
 \tilde{x} = \frac{7 + 8}{2} = 7.5
 \]</span></p>
@@ -266,15 +301,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>No cambia al añadir valores extremos por lo que se le considera un estadístico <em>robusto.</em></p></li>
 <li><p>No utiliza todo el conjunto de datos.</p></li>
 </ul>
-<div id="mediana-en-r" class="section level4" number="2.1.2.1">
-<h4><span class="header-section-number">2.1.2.1</span> Mediana en R</h4>
+<div id="mediana-en-r" class="section level4" number="3.1.2.1">
+<h4><span class="header-section-number">3.1.2.1</span> Mediana en R</h4>
 <p>Para el calculo de la mediana se utiliza la función <code>median()</code>.</p>
 <blockquote>
 <p><strong>Ejemplo:</strong> Supongamos que con los datos del ejemplo anterior queremos ahora calcular la mediana global y la mediana para cada uno de nuestros tratamientos.</p>
 </blockquote>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="estadística-descriptiva.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 5.155</code></pre>
-<p>El valor obtenido es de 5.155. De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando <code>dplyr</code>.</p>
+<p>El valor obtenido es de 5.155.
+De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando <code>dplyr</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="estadística-descriptiva.html#cb8-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
 <span id="cb8-2"><a href="estadística-descriptiva.html#cb8-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
@@ -294,34 +330,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 trt2   5.53    5.44    10</code></pre>
 </div>
 </div>
-<div id="moda" class="section level3" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Moda</h3>
+<div id="moda" class="section level3" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Moda</h3>
 <p>Es el valor que más se repite en un conjunto de datos.</p>
 <p>Propiedades importantes de la <strong>moda:</strong></p>
 <ul>
 <li><p>Se puede aplicar a datos cualitativos.</p></li>
 <li><p>Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.</p></li>
 </ul>
-<p>Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella. Como tal no existe una función en R que calcule la moda pero en varias páginas y foros como <em>StackOverflow</em> se pueden encontrar scripts para su calculo.</p>
+<p>Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella.
+Como tal no existe una función en R que calcule la moda pero en varias páginas y foros como <em>StackOverflow</em> se pueden encontrar scripts para su calculo.</p>
 </div>
 </div>
-<div id="medidas-de-dispersión" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Medidas de dispersión</h2>
-<p>A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Las medidas que veremos son: <strong>rango</strong> y <strong>desviación estándar</strong>.</p>
-<div id="rango" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Rango</h3>
-<p>Es la diferencia entre el valor máximo y mínimo de datos como se observa en la ecuación <a href="estadística-descriptiva.html#eq:range">(2.3)</a>
-<span class="math display" id="eq:range">\[\begin{equation}
-Rango = x_{max} - x_{max}
-\tag{2.3}
-\end{equation}\]</span></p>
-<p>Propiedades importante del <strong>rango:</strong></p>
-<ul>
-<li>Es muy sensible a valores extremos.</li>
-<li>No toma en cuenta todos los valores, no refleja la variación de todos los datos.</li>
-</ul>
-<div id="rango-en-r" class="section level4" number="2.2.1.1">
-<h4><span class="header-section-number">2.2.1.1</span> Rango en R</h4>
+<div id="medidas-de-dispersión" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Medidas de dispersión</h2>
+<p>A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están.
+Las medidas que veremos son: <strong>rango</strong> y <strong>desviación estándar</strong>.</p>
+<div id="rango" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Rango</h3>
 <p>Se utiliza la función <code>range()</code>.</p>
 <blockquote>
 <p><strong>Ejemplo:</strong> Queremos calcular el rango de las observaciones de la base de datos de plantas que utilizamos en la sección de medidas de tendencia central.</p>
@@ -351,17 +377,16 @@ Rango = x_{max} - x_{max}
 ## 2 trt1   2.44  4.66    4.55    10
 ## 3 trt2   1.39  5.53    5.44    10</code></pre>
 </div>
-</div>
-<div id="desviación-estándar" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Desviación estándar</h3>
-<p>Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo <span class="math inline">\(s\)</span> para datos muestrales y se calcula con la ecuación <a href="estadística-descriptiva.html#eq:sd1">(2.4)</a> y <span class="math inline">\(\sigma\)</span> para datos poblacionales y se calcula a partir de la ecuación <a href="estadística-descriptiva.html#eq:sd2">(2.5)</a>.</p>
+<div id="desviación-estándar" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Desviación estándar</h3>
+<p>Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo <span class="math inline">\(s\)</span> para datos muestrales y se calcula con la ecuación <a href="estadística-descriptiva.html#eq:sd1">(3.2)</a> y <span class="math inline">\(\sigma\)</span> para datos poblacionales y se calcula a partir de la ecuación <a href="estadística-descriptiva.html#eq:sd2">(3.3)</a>.</p>
 <p><span class="math display" id="eq:sd1">\[\begin{equation}
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
-\tag{2.4}
+\tag{3.2}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:sd2">\[\begin{equation}
 \sigma = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{N}}
-\tag{2.5}
+\tag{3.3}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\sum_{i = 1}^{n}({x_i-\overline{x})^2}\)</span> es igual al valor cada observación menos la media, elevado al cuadrado, <span class="math inline">\({n-1}\)</span> corresponde a los grados de libertad que tenemos para el cálculo de la desviación estándar y <span class="math inline">\(N\)</span> es el número total de la población.</p>
 <p>Propiedades importantes de la <strong>desviación estándar:</strong></p>
@@ -371,15 +396,16 @@ s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 <li>Puede aumentar considerablemente con valores atípicos, es decir, no es <em>robusta.</em></li>
 <li>Las unidades de la desviación estándar son iguales a las unidades de los datos originales.</li>
 </ul>
-<div id="desviación-estándar-en-r" class="section level4" number="2.2.2.1">
-<h4><span class="header-section-number">2.2.2.1</span> Desviación estándar en R</h4>
+<div id="desviación-estándar-en-r" class="section level4" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> Desviación estándar en R</h4>
 <p>Se utiliza la función <code>sd()</code>.</p>
 <blockquote>
 <p><strong>Ejemplo:</strong> Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango.</p>
 </blockquote>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="estadística-descriptiva.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 0.7011918</code></pre>
-<p>Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos. En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de <code>dplyr</code> y <code>group_by()</code>.</p>
+<p>Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos.
+En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de <code>dplyr</code> y <code>group_by()</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="estadística-descriptiva.html#cb22-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">SD =</span> <span class="fu">sd</span>(weight))</span>
 <span id="cb22-2"><a href="estadística-descriptiva.html#cb22-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
@@ -397,16 +423,18 @@ s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 ## 1 ctrl  0.583  1.94  5.03    5.15    10
 ## 2 trt1  0.794  2.44  4.66    4.55    10
 ## 3 trt2  0.443  1.39  5.53    5.44    10</code></pre>
-<p>En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora. Algo importante a tener en cuenta es que <code>sd()</code> calcula la desviación estandar muestral <span class="math inline">\(s\)</span>, no la poblacional <span class="math inline">\(\sigma\)</span>. Para calcular <span class="math inline">\(\sigma\)</span> necesitamos multiplicar el resultado obtenido por <span class="math inline">\(\sqrt\frac{N-1}{N}\)</span>.</p>
+<p>En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora.
+Algo importante a tener en cuenta es que <code>sd()</code> calcula la desviación estandar muestral <span class="math inline">\(s\)</span>, no la poblacional <span class="math inline">\(\sigma\)</span>.
+Para calcular <span class="math inline">\(\sigma\)</span> necesitamos multiplicar el resultado obtenido por <span class="math inline">\(\sqrt\frac{N-1}{N}\)</span>.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="estadística-descriptiva.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span>(<span class="fu">sqrt</span>((<span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)))</span></code></pre></div>
 <pre><code>## [1] 0.6894063</code></pre>
 <p>En caso de que se utilice frecuentemente la <span class="math inline">\(\sigma\)</span> se puede definir la función de la siguiente manera.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="estadística-descriptiva.html#cb28-1" aria-hidden="true" tabindex="-1"></a>sd.p <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">sd</span>(x)<span class="sc">*</span><span class="fu">sqrt</span>((<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(x))}</span></code></pre></div>
-<p>Para calcular la <strong>varianza</strong> <span class="math inline">\(s^2\)</span>, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación <a href="estadística-descriptiva.html#eq:var">(2.6)</a>.</p>
-<p><span class="math display" id="eq:var">\[\begin{equation}
+<p>Para calcular la <strong>varianza</strong> <span class="math inline">\(s^2\)</span>, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación <a href="estadística-descriptiva.html#eq:var">(3.4)</a>.</p>
+<span class="math display" id="eq:var">\[\begin{equation}
 Varianza = {s}^2
-\tag{2.6}
-\end{equation}\]</span></p>
+\tag{3.4}
+\end{equation}\]</span>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="estadística-descriptiva.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.49167</code></pre>
 <p>Propiedades importantes de la <strong>varianza:</strong></p>
@@ -415,15 +443,17 @@ Varianza = {s}^2
 <li>No es un estadístico <em>robusto.</em></li>
 <li>Nunca tiene valores negativos.</li>
 </ul>
-<p>Otro estadístico que nos puede interesare es el <strong>coeficiente de variación</strong> que se obtiene a partir de la ecuación <a href="estadística-descriptiva.html#eq:cv">(2.7)</a>.</p>
-<p><span class="math display" id="eq:cv">\[\begin{equation}
+<p>Otro estadístico que nos puede interesare es el <strong>coeficiente de variación</strong> que se obtiene a partir de la ecuación <a href="estadística-descriptiva.html#eq:cv">(3.5)</a>.</p>
+<span class="math display" id="eq:cv">\[\begin{equation}
 CV = \frac{S}{\overline{x}}*100
-\tag{2.7}
-\end{equation}\]</span></p>
+\tag{3.5}
+\end{equation}\]</span>
 <p>Para su calculo simplemente utilizamos las funciones previamente aprendidas.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estadística-descriptiva.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">/</span><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 13.82204</code></pre>
-<p>Nusetro resultado es 13.82204%. Este es el coeficiente de variación para todos los datos. De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función <code>summarise()</code>del paquete <code>dplyr</code>.</p>
+<p>Nusetro resultado es 13.82204%.
+Este es el coeficiente de variación para todos los datos.
+De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función <code>summarise()</code>del paquete <code>dplyr</code>.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estadística-descriptiva.html#cb33-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span>
 <span id="cb33-2"><a href="estadística-descriptiva.html#cb33-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 8
@@ -435,29 +465,33 @@ CV = \frac{S}{\overline{x}}*100
 </div>
 </div>
 </div>
-<div id="medidas-de-posición-relativa" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Medidas de posición relativa</h2>
-<p>Indican la posición relativa de los datos con respecto de los demás datos. Algunas de las más usadas son: <strong>valores Z</strong>, <strong>frecuencia absoluta</strong>, <strong>frecuencia relativa</strong> y <strong>cuartiles</strong>.</p>
-<div id="valores-z" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Valores Z</h3>
-<p>Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar a las que se encuentra un valor dado. Se puede calcular el valor z muestral y poblacional con las ecuaciones <a href="estadística-descriptiva.html#eq:z1">(2.8)</a> y <a href="estadística-descriptiva.html#eq:z2">(2.9)</a>.</p>
-<p><span class="math display" id="eq:z1">\[\begin{equation}
+<div id="medidas-de-posición-relativa" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Medidas de posición relativa</h2>
+<p>Indican la posición relativa de los datos con respecto de los demás datos.
+Algunas de las más usadas son: <strong>valores Z</strong>, <strong>frecuencia absoluta</strong>, <strong>frecuencia relativa</strong> y <strong>cuartiles</strong>.</p>
+<div id="valores-z" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Valores Z</h3>
+<p>Se obtienen al estandarizar los valores de nuestros datos.
+Es el número de desviaciones estándar a las que se encuentra un valor dado.
+Se puede calcular el valor z muestral y poblacional con las ecuaciones <a href="estadística-descriptiva.html#eq:z1">(3.6)</a> y <a href="estadística-descriptiva.html#eq:z2">(3.7)</a>.</p>
+<span class="math display" id="eq:z1">\[\begin{equation}
 z = \frac{x - \overline{x}}{s}
-\tag{2.8}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:z2">\[\begin{equation}
+\tag{3.6}
+\end{equation}\]</span>
+<span class="math display" id="eq:z2">\[\begin{equation}
 z = \frac{x - \mu}{\sigma}
-\tag{2.9}
-\end{equation}\]</span></p>
+\tag{3.7}
+\end{equation}\]</span>
 <p>Propiedades importantes de los <strong>valores Z:</strong></p>
 <ul>
 <li>No tienen unidades de medida.</li>
 <li>Si un valor es menor que la media, su valor Z será negativo.</li>
 </ul>
-<div id="valores-z-en-r" class="section level4" number="2.3.1.1">
-<h4><span class="header-section-number">2.3.1.1</span> Valores Z en R</h4>
+<div id="valores-z-en-r" class="section level4" number="3.3.1.1">
+<h4><span class="header-section-number">3.3.1.1</span> Valores Z en R</h4>
 <p>Para el calculo del valor Z de algún número simplemente le extraemos la media <span class="math inline">\(\overline{x}\)</span> y lo dividimos entre la desviación estándar <span class="math inline">\(s\)</span>.</p>
-<p>Podemos utilizar la función de <code>mutate()</code> del paquete de <code>dplyr</code> para agregar una nueva sección a nuestra base de datos de PlantGrowth. Al utilizar la función <code>group_by()</code> antes de la función <code>mutate()</code> nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.</p>
+<p>Podemos utilizar la función de <code>mutate()</code> del paquete de <code>dplyr</code> para agregar una nueva sección a nuestra base de datos de PlantGrowth.
+Al utilizar la función <code>group_by()</code> antes de la función <code>mutate()</code> nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estadística-descriptiva.html#cb35-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Z =</span> (weight <span class="sc">-</span> <span class="fu">mean</span>(weight)<span class="sc">/</span><span class="fu">sd</span>(weight)))</span>
 <span id="cb35-2"><a href="estadística-descriptiva.html#cb35-2" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code></pre></div>
 <pre><code>## # A tibble: 30 x 3
@@ -477,17 +511,22 @@ z = \frac{x - \mu}{\sigma}
 ## # ... with 20 more rows</code></pre>
 </div>
 </div>
-<div id="frecuencia-absoluta" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Frecuencia absoluta</h3>
-<p>Es el valor total de los datos observados. Por ejemplo, para los tratamientos de la base de datos de PlantGrowth, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. Otra situación es el número de veces que cada peso aparece. Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su frecuencia absoluta es de 2.</p>
-<div id="frecuencia-absoluta-en-r" class="section level4" number="2.3.2.1">
-<h4><span class="header-section-number">2.3.2.1</span> Frecuencia absoluta en R</h4>
+<div id="frecuencia-absoluta" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Frecuencia absoluta</h3>
+<p>Es el valor total de los datos observados.
+Por ejemplo, para los tratamientos de la base de datos de PlantGrowth, podemos ver que cada tratamiento tuvo 10 plantas en observación.
+La frecuencia de cada tratamiento es por ende de 10.
+Otra situación es el número de veces que cada peso aparece.
+Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su frecuencia absoluta es de 2.</p>
+<div id="frecuencia-absoluta-en-r" class="section level4" number="3.3.2.1">
+<h4><span class="header-section-number">3.3.2.1</span> Frecuencia absoluta en R</h4>
 <p>Utilizamos la función <code>table()</code> para su calculo.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estadística-descriptiva.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span></code></pre></div>
 <pre><code>## 
 ## ctrl trt1 trt2 
 ##   10   10   10</code></pre>
-<p>Aquí se puede ver que cada tratamiento se realizo con 10 plantas. Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de <em>weight</em>.</p>
+<p>Aquí se puede ver que cada tratamiento se realizo con 10 plantas.
+Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de <em>weight</em>.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estadística-descriptiva.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## 
 ## 3.59 3.83 4.17 4.32 4.41  4.5 4.53 4.61 4.69 4.81 4.89 4.92 5.12 5.14 5.17 5.18 
@@ -495,8 +534,11 @@ z = \frac{x - \mu}{\sigma}
 ## 5.26 5.29 5.33 5.37  5.5 5.54 5.58  5.8 5.87 6.03 6.11 6.15 6.31 
 ##    1    1    1    1    1    1    1    1    1    1    1    1    1</code></pre>
 <p>Y como podemos confirmar, el valor 4.17 es el único que se repite 2 veces.
-Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se repiten. En este caso obtuvimos la frecuencia de cada uno de los tratamientos. Como podemos ver, <span class="math inline">\(N = 30\)</span> y cada tratamiento esta compuesto por 10 observaciones.</p>
-<p>Otra opción es el uso de la función <code>n()</code> junto con <code>group_by()</code>. De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.</p>
+Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se repiten.
+En este caso obtuvimos la frecuencia de cada uno de los tratamientos.
+Como podemos ver, <span class="math inline">\(N = 30\)</span> y cada tratamiento esta compuesto por 10 observaciones.</p>
+<p>Otra opción es el uso de la función <code>n()</code> junto con <code>group_by()</code>.
+De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estadística-descriptiva.html#cb41-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">CV =</span> <span class="fu">sd</span>(weight)<span class="sc">/</span><span class="fu">mean</span>(weight)<span class="sc">*</span><span class="dv">100</span>, <span class="at">Varianza =</span> <span class="fu">sd</span>(weight)<span class="sc">^</span><span class="dv">2</span>, <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">Rango =</span> <span class="fu">max</span>(weight) <span class="sc">-</span> <span class="fu">min</span>(weight), <span class="at">Media =</span> <span class="fu">mean</span>(weight), <span class="at">Mediana =</span> <span class="fu">median</span>(weight), <span class="at">Frec_Absoluta =</span> <span class="fu">n</span>())</span>
 <span id="cb41-2"><a href="estadística-descriptiva.html#cb41-2" aria-hidden="true" tabindex="-1"></a>resumen</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 8
@@ -507,23 +549,26 @@ Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se
 ## 3 trt2   8.01    0.196 0.443  1.39  5.53    5.44            10</code></pre>
 </div>
 </div>
-<div id="frecuencia-relativa" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Frecuencia relativa</h3>
-<p>Es el valor relativo de cada dato respecto del total como se observa en la ecuación <a href="estadística-descriptiva.html#eq:frecr">(2.10)</a>. Si se le multiplica por 100% se obtiene su valor en porcentaje.</p>
-<p><span class="math display" id="eq:frecr">\[\begin{equation}
+<div id="frecuencia-relativa" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Frecuencia relativa</h3>
+<p>Es el valor relativo de cada dato respecto del total como se observa en la ecuación <a href="estadística-descriptiva.html#eq:frecr">(3.8)</a>.
+Si se le multiplica por 100% se obtiene su valor en porcentaje.</p>
+<span class="math display" id="eq:frecr">\[\begin{equation}
 f_i = \frac{n_i}{N}
-\tag{2.10}
-\end{equation}\]</span></p>
+\tag{3.8}
+\end{equation}\]</span>
 <p>Donde <span class="math inline">\(f_i\)</span> es la frecuencia de la i-ésima observación y <span class="math inline">\(n_i\)</span> es el número de observaciones en la i-ésima observación.</p>
-<div id="frecuencia-relativa-en-r" class="section level4" number="2.3.3.1">
-<h4><span class="header-section-number">2.3.3.1</span> Frecuencia relativa en R</h4>
+<div id="frecuencia-relativa-en-r" class="section level4" number="3.3.3.1">
+<h4><span class="header-section-number">3.3.3.1</span> Frecuencia relativa en R</h4>
 <p>En este caso utilizamos la función <code>prop.table()</code>.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estadística-descriptiva.html#cb43-1" aria-hidden="true" tabindex="-1"></a>frec <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span>
 <span id="cb43-2"><a href="estadística-descriptiva.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec)</span></code></pre></div>
 <pre><code>## 
 ##      ctrl      trt1      trt2 
 ## 0.3333333 0.3333333 0.3333333</code></pre>
-<p>En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos. Como cada una era 10 y <span class="math inline">\(N = 30\)</span> cada una tiene una frecuencia relativa de 0.3333 o 33.33%. Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.</p>
+<p>En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos.
+Como cada una era 10 y <span class="math inline">\(N = 30\)</span> cada una tiene una frecuencia relativa de 0.3333 o 33.33%.
+Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estadística-descriptiva.html#cb45-1" aria-hidden="true" tabindex="-1"></a>frec2 <span class="ot">&lt;-</span> <span class="fu">table</span>(PlantGrowth<span class="sc">$</span>weight)</span>
 <span id="cb45-2"><a href="estadística-descriptiva.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frec2)</span></code></pre></div>
 <pre><code>## 
@@ -549,16 +594,15 @@ f_i = \frac{n_i}{N}
 ## 3 trt2   8.01    0.196 0.443  1.39  5.53    5.44            10         0.333</code></pre>
 </div>
 </div>
-<div id="cuartiles" class="section level3" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> Cuartiles</h3>
-<p>Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span> y <span class="math inline">\(Q_3\)</span>, para el primer, segundo y tercer cuartil. <span class="math inline">\(Q_2\)</span> es equivalente a la mediana.</p>
+<div id="cuartiles" class="section level3" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Cuartiles</h3>
+<p>Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos.
+Se representan por los símbolos <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span> y <span class="math inline">\(Q_3\)</span>, para el primer, segundo y tercer cuartil.
+<span class="math inline">\(Q_2\)</span> es equivalente a la mediana.</p>
 <p>Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil (<span class="math inline">\(RIQ\)</span>) como se indica en la siguiente fórmula.
-<span class="math display" id="eq:RIQ">\[\begin{equation}
-RIQ = Q_3 - Q_1
-\tag{2.11}
-\end{equation}\]</span></p>
-<div id="cuartiles-en-r" class="section level4" number="2.3.4.1">
-<h4><span class="header-section-number">2.3.4.1</span> Cuartiles en R</h4>
+\begin{equation} RIQ = Q_3 - Q_1 (\#eq:RIQ) \end{equation}</p>
+<div id="cuartiles-en-r" class="section level4" number="3.3.4.1">
+<h4><span class="header-section-number">3.3.4.1</span> Cuartiles en R</h4>
 <p>Para el calculo de los cuartiles en R podemos utilizar la función <code>summary()</code> que viene en los paquetes básicos de R.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="estadística-descriptiva.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PlantGrowth)</span></code></pre></div>
 <pre><code>##      weight       group          Z          
@@ -568,7 +612,9 @@ RIQ = Q_3 - Q_1
 ##  Mean   :5.073             Mean   :-3.9232  
 ##  3rd Qu.:5.530             3rd Qu.:-1.7877  
 ##  Max.   :6.310             Max.   : 0.1573</code></pre>
-<p>Como podemos ver, esta función nos da los valores mínimos, máximos, el <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_3\)</span>, la mediana y la media. Los <strong>cinco números</strong> utilizados para generar <strong>gráfica de caja</strong> se encuentran en estos datos. Para sacar estos valores por cada uno de los datos podemos utilizar la función <code>filter()</code> del paquete <code>dplyr</code>.</p>
+<p>Como podemos ver, esta función nos da los valores mínimos, máximos, el <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_3\)</span>, la mediana y la media.
+Los <strong>cinco números</strong> utilizados para generar <strong>gráfica de caja</strong> se encuentran en estos datos.
+Para sacar estos valores por cada uno de los datos podemos utilizar la función <code>filter()</code> del paquete <code>dplyr</code>.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="estadística-descriptiva.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;ctrl&quot;</span>)</span>
 <span id="cb51-2"><a href="estadística-descriptiva.html#cb51-2" aria-hidden="true" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt1&quot;</span>)</span>
 <span id="cb51-3"><a href="estadística-descriptiva.html#cb51-3" aria-hidden="true" tabindex="-1"></a>trt2 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;trt2&quot;</span>)</span>
@@ -597,9 +643,10 @@ RIQ = Q_3 - Q_1
 ##  3rd Qu.:5.735             3rd Qu.:-6.751  
 ##  Max.   :6.310             Max.   :-6.176</code></pre>
 </div>
-<div id="valores-atípicos" class="section level4" number="2.3.4.2">
-<h4><span class="header-section-number">2.3.4.2</span> Valores atípicos</h4>
-<p>Son aquellos valores que se encuentran por encima de <span class="math inline">\(Q_3 + 1.5 * RIQ\)</span> o debajo de <span class="math inline">\(Q_1 - 1.5 * RIQ\)</span>. Con estos valores se pueden realizar <strong>gráficas de cajas modificadas.</strong></p>
+<div id="valores-atípicos" class="section level4" number="3.3.4.2">
+<h4><span class="header-section-number">3.3.4.2</span> Valores atípicos</h4>
+<p>Son aquellos valores que se encuentran por encima de <span class="math inline">\(Q_3 + 1.5 * RIQ\)</span> o debajo de <span class="math inline">\(Q_1 - 1.5 * RIQ\)</span>.
+Con estos valores se pueden realizar <strong>gráficas de cajas modificadas.</strong></p>
 <p>Para realizar estas gráficas utilizaremos la paquetería <code>ggplot2</code> que está incluido en el paquete <code>tidyverse</code>.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="estadística-descriptiva.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>Utilizamos la función <code>ggplot() + geom_boxplot</code>.</p>
@@ -611,16 +658,17 @@ RIQ = Q_3 - Q_1
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-30-1.png" alt="Gráfica de cajas modificada para la identificación de valores atípicos." width="672" />
 <p class="caption">
-Figura 2.1: Gráfica de cajas modificada para la identificación de valores atípicos.
+Figura 3.1: Gráfica de cajas modificada para la identificación de valores atípicos.
 </p>
 </div>
 <p>Como podemos ver en la gráfica, el tratamiento 1 presenta dos valores atípicos que están por encima del valor <span class="math inline">\(Q_3 + 1.5 * IQR\)</span>.</p>
 </div>
 </div>
 </div>
-<div id="el-uso-de-la-librería-dplyr" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> El uso de la librería <code>dplyr</code></h2>
-<p>A lo largo de todo esta lección hemos hecho uso de la librería <code>dplyr</code>. Este paquete está incluido dentro de la librería <code>tidyverse</code>.</p>
+<div id="el-uso-de-la-librería-dplyr" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> El uso de la librería <code>dplyr</code></h2>
+<p>A lo largo de todo esta lección hemos hecho uso de la librería <code>dplyr</code>.
+Este paquete está incluido dentro de la librería <code>tidyverse</code>.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="estadística-descriptiva.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>La mayoría de estas funciones las hemos estado utilizando a lo largo de esta sección aunque puede que haya algunas que no hayamos aplicado.
 Las funciones más importantes de este paquete son:</p>
@@ -633,7 +681,8 @@ Las funciones más importantes de este paquete son:</p>
 <li><p><code>%&gt;%:</code> pipeline.</p></li>
 <li><p><code>arrange:</code> ordena.</p></li>
 </ul>
-<p>Con la función <code>select</code> podemos elegir unas cuantas variables para trabajar. Esto es útil para bases de datos con muchas variables como matrices de abundancias.</p>
+<p>Con la función <code>select</code> podemos elegir unas cuantas variables para trabajar.
+Esto es útil para bases de datos con muchas variables como matrices de abundancias.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="estadística-descriptiva.html#cb60-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(group, Media, SD)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   group Media    SD
@@ -641,7 +690,8 @@ Las funciones más importantes de este paquete son:</p>
 ## 1 ctrl   5.03 0.583
 ## 2 trt1   4.66 0.794
 ## 3 trt2   5.53 0.443</code></pre>
-<p>En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos. Otra forma de seleccionar las variables es con el argumento <code>starts_with()</code>, por ejemplo, para la selección de los datos del grupo control.</p>
+<p>En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos.
+Otra forma de seleccionar las variables es con el argumento <code>starts_with()</code>, por ejemplo, para la selección de los datos del grupo control.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="estadística-descriptiva.html#cb62-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;ctrl&quot;</span>), weight)</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `group`</code></pre>
 <pre><code>## # A tibble: 30 x 2
@@ -659,7 +709,9 @@ Las funciones más importantes de este paquete son:</p>
 ##  9 ctrl    5.33
 ## 10 ctrl    5.14
 ## # ... with 20 more rows</code></pre>
-<p>Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control. También podemos ordenar los datos utilizando la función <code>arrange()</code>. Es importante escribir el argumento <code>.by_group = TRUE</code> para que la función <code>arrange()</code> respete el agrupamiento que hicimos por tratamientos antes del pipeline %&gt;%.</p>
+<p>Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control.
+También podemos ordenar los datos utilizando la función <code>arrange()</code>.
+Es importante escribir el argumento <code>.by_group = TRUE</code> para que la función <code>arrange()</code> respete el agrupamiento que hicimos por tratamientos antes del pipeline %&gt;%.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="estadística-descriptiva.html#cb65-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight), <span class="at">.by_group =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 
 </div>
@@ -670,7 +722,7 @@ Las funciones más importantes de este paquete son:</p>
         </div>
       </div>
 <a href="introducción-a-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análisis-de-varianza-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="probabilidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -693,6 +745,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

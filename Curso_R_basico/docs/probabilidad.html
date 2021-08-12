@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lección 4 Probabilidad | Curso de R básico</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lección 4 Probabilidad | Curso de R básico" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lección 4 Probabilidad | Curso de R básico" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estadística-descriptiva.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Requisitos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>2</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>2.1</b> Interfaz</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>2.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>2.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>2.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>2.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>2.6</b> Comentarios</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>2.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>2.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>3</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>3.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>3.1.1</b> Media</a></li>
+<li class="chapter" data-level="3.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>3.1.2</b> Mediana</a></li>
+<li class="chapter" data-level="3.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>3.1.3</b> Moda</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>3.3.1</b> Valores Z</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>3.3.2</b> Frecuencia absoluta</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>3.3.3</b> Frecuencia relativa</a></li>
+<li class="chapter" data-level="3.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>3.3.4</b> Cuartiles</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probabilidad.html"><a href="probabilidad.html"><i class="fa fa-check"></i><b>4</b> Probabilidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probabilidad.html"><a href="probabilidad.html#probabilidad-frecuentista"><i class="fa fa-check"></i><b>4.1</b> Probabilidad frecuentista</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad.html"><a href="probabilidad.html#reglas-de-probabilidad"><i class="fa fa-check"></i><b>4.2</b> Reglas de probabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="probabilidad.html"><a href="probabilidad.html#curvas-de-densidad"><i class="fa fa-check"></i><b>4.3</b> Curvas de densidad</a></li>
+<li class="chapter" data-level="4.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>4.4</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>4.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.2</b> Distribución binomial en R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>5.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>5.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>5.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>5.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>5.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probabilidad" class="section level1" number="4">
+<h1><span class="header-section-number">Lección 4</span> Probabilidad</h1>
+<p>La <strong>probabilidad</strong> es una cantidad numérica que expresa qué tan factible es que ocurra un evento.
+Normalmente es expresada como P(A), donde A expresa un evento aleatorio.
+Siempre se encuentra entre un rango de 0 y 1, o expresado en porcentaje, entre 0% y 100%.
+Existen distintas interpretaciones de la probabilidad como la <strong>frecuentista</strong> o la <strong>bayesiana.</strong> En este caso, aprenderemos el enfoque frecuentista como una forma de asignar una probabilidad mensurable a un evento, es decir, la ocurrencia de el evento a la larga.</p>
+<div id="probabilidad-frecuentista" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Probabilidad frecuentista</h2>
+<p>En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento A ocurre en una serie de repeticiones indefinidamente largas.</p>
+<p><span class="math display" id="eq:prob">\[\begin{equation}
+P(A) = \frac{num_{A}}{num_{T}}
+\tag{4.1}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\tt num_{A}\)</span> es el número de veces que se repite el evento A y <span class="math inline">\(\tt num_{T}\)</span> es el número total de repeticiones.</p>
+</div>
+<div id="reglas-de-probabilidad" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Reglas de probabilidad</h2>
+<p>Estas son algunas reglas que nos pueden servir para determinar la probabilidad de algunos eventos.</p>
+<ol style="list-style-type: decimal">
+<li><p>La probabilidad de un evento A siempre se encuentra entre 0 y 1.</p></li>
+<li><p>La suma de probabilidades de los eventos tiene que ser igual a 1.</p></li>
+<li><p>La probabilidad de que el evento A no ocurra es <span class="math inline">\(\tt 1 - P(A)\)</span> y se denota con el símbolo <span class="math inline">\(\tt A_1^C\)</span>, indicando que es el complemento de <span class="math inline">\(\tt A_1\)</span>.</p></li>
+<li><p>Si dos eventos <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span> son eventos que no ocurren en conjunto, entonces <span class="math inline">\(\tt P(A_1 \cup A_2) = P(A_1) + P(A_2)\)</span>.</p></li>
+<li><p>Para dos eventos que ocurren en conjunto, <span class="math inline">\(\tt P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)\)</span>.</p></li>
+</ol>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="18%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Cabello Café</th>
+<th>Cabello Negro</th>
+<th>Cabello Rojo</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ojos Cafés</strong></td>
+<td>400</td>
+<td>300</td>
+<td>20</td>
+<td>720</td>
+</tr>
+<tr class="even">
+<td><strong>Ojos Azules</strong></td>
+<td>800</td>
+<td>200</td>
+<td>50</td>
+<td>1050</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>1200</td>
+<td>500</td>
+<td>70</td>
+<td>1770</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR), <span class="math inline">\(\tt P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770\)</span>.</p>
+<p>La probabilidad de que alguien tenga el cabello café <span class="math inline">\(\tt P(CC) = 1200/1770\)</span>.</p>
+<p>La probabilidad de tener ojos azules <span class="math inline">\(\tt P(OA) = 1050/1770\)</span>.</p>
+<p>La probabilidad de tener cabello negro y ojos azules <span class="math inline">\(\tt P(CN \cap OA)\)</span> pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
+Entonces <span class="math inline">\(\tt P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770\)</span>.</p>
+<p>La fórmula de <strong>probabilidad condicional</strong> es la siguiente:</p>
+<p><span class="math display" id="eq:prob">\[\begin{equation}
+P(A_1 | A_2) = \frac{P(A_1 \cap A_2)}{P(A_2)}
+\tag{4.1}
+\end{equation}\]</span></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Si dos eventos, <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span> son <strong>independientes,</strong> entonces <span class="math inline">\(\tt P(A_1 \cap A_2) = P(A_1)*P(A_2)\)</span>.</p></li>
+<li><p>Para cualquier evento <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span>, <span class="math inline">\(\tt P(A_1 \cap A_2) = P(A_1) * P(A_2 | A_1)\)</span>.</p></li>
+</ol>
+<p>Por ejemplo, de la tabla anterior, ¿Cuál es la probabilidad de que una persona tenga cabello rojo y ojos cafés?
+En este caso, <span class="math inline">\(\tt P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770\)</span>.</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Para dos eventos cualesquiera, <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span>, <span class="math inline">\(\tt P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )\)</span> donde <span class="math inline">\(\tt A_2^C\)</span> es el complemento de <span class="math inline">\(\tt A_2\)</span>, es decir <span class="math inline">\(\tt 1 - A_2\)</span>.</li>
+</ol>
+</div>
+<div id="curvas-de-densidad" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Curvas de densidad</h2>
+<p>Se utilizan para variables continuas. Los <strong>histogramas de frecuencias relativas</strong> representan las proporciones de las observaciones en cada categoría, en lugar del total de observaciones. Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una <strong>curva de densidad.</strong> La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva. El área total bajo la curva debe ser igual a 1.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-2-1.png" alt="Curva de densidad" width="672" />
+<p class="caption">
+Figura 4.1: Curva de densidad
+</p>
+</div>
+<p>Una probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos.</p>
+</div>
+<div id="distribución-binomial" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Distribución binomial</h2>
+<p>La <strong>distribución binomial</strong> de una variable aleatoria es una distribución de probabilidad discreta, que cuenta el número de éxitos tras realizar <span class="math inline">\(\tt n\)</span> veces un experimento, cada <em>intento</em> debe ser independiente entre sí. La probabilidad de éxito es fija entre cada intento y se denota con la letra <span class="math inline">\(\tt p\)</span>. Lo primero que se nos viene a la mente con este tipo de distribuciones son <em>lanzamientos de moneda</em>, sin embargo, el comportamiento de muchos genes también sigue una distribución binomial.</p>
+<p>Normalmente, para que una variable aleatoria sea una <strong>variable aleatoria binomial</strong> se requieren los siguientes requisitos:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Resultados binarios:</strong> Solamente existen dos posibilidades para cada intento (éxito o fracaso, cara o cruz, dominante o recesivo, muerto o vivo, niño o niña, etc.).</p></li>
+<li><p><strong>Intentos independientes:</strong> Cada prueba o intento deben ser independientes del anterior.</p></li>
+<li><p><strong>El valor de <span class="math inline">\(\tt n\)</span> es fijo:</strong> Se sabe con antelación el número de pruebas <span class="math inline">\(\tt n\)</span>.</p></li>
+<li><p><strong>Mismo valor <span class="math inline">\(\tt p\)</span>:</strong> En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir <span class="math inline">\(\tt p\)</span> debe permanecer constante.</p></li>
+<li><p><strong>Resultados mutuamente excluyentes:</strong> Es decir, no se puede tener éxito y fracaso al mismo tiempo.</p></li>
+<li><p><strong>Resultados colectivamente exhaustivos:</strong> Al menos uno de los dos resultados debe de ocurrir.</p></li>
+</ol>
+<p>Ahora bien, la fórmula de la distribución binomial se indica en la ecuación <a href="probabilidad.html#eq:binom">(4.2)</a>.</p>
+<p><span class="math display" id="eq:binom">\[\begin{equation}
+P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
+\tag{4.2}
+\end{equation}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\tt P(X = k)\)</span> = probabilidad de obtener <span class="math inline">\(\tt k\)</span> éxitos.</p></li>
+<li><p><span class="math inline">\(\tt \binom{n}{k}\)</span> = coeficiente binomial, que se calcula con la fórmula <a href="probabilidad.html#eq:binc">(4.3)</a>.</p></li>
+<li><p><span class="math inline">\(\tt k\)</span> = número de éxitos.</p></li>
+<li><p><span class="math inline">\(\tt p\)</span> = probabilidad de éxito.</p></li>
+<li><p><span class="math inline">\(\tt q\)</span> = probabilidad de fracaso.</p></li>
+<li><p><span class="math inline">\(\tt n\)</span> = número de pruebas.</p></li>
+</ul>
+<p><span class="math display" id="eq:binc">\[\begin{equation}
+_{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\tag{4.3}
+\end{equation}\]</span></p>
+<div id="media-y-desviación-estándar-de-la-distribución-binomial" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Media y desviación estándar de la distribución binomial</h3>
+<p>Se pueden calcular tanto la <strong>media</strong> como la <strong>desviación estándar</strong> de una distribución binomial. La media es el número promedio de éxitos, y la desviación estándar es qué tanto se desvían de la media los valores.</p>
+<p>La media de una distribución binomial se calcula con la ecuación <a href="probabilidad.html#eq:meanbinom">(4.4)</a>.</p>
+<p><span class="math display" id="eq:meanbinom">\[\begin{equation}
+\mu = {n}{p}
+\tag{4.4}
+\end{equation}\]</span></p>
+<p>En cuanto a la desviación estándar se calcula con la siguiente ecuación <a href="probabilidad.html#eq:sdbinom">(4.5)</a>.</p>
+<p><span class="math display" id="eq:sdbinom">\[\begin{equation}
+\sigma = \sqrt{{n}{p}{(1-p)}} = \sqrt{{n}{p}{q}}
+\tag{4.5}
+\end{equation}\]</span></p>
+<p>En caso de querer obtener la <strong>varianza</strong>, simplemente tomamos la ecuación <a href="probabilidad.html#eq:sdbinom">(4.5)</a> sin aplicar la raíz cuadrada.
+<span class="math display" id="eq:varbinom">\[\begin{equation}
+\sigma^2 = {n}{p}{(1-p)} = {n}{p}{q}
+\tag{4.6}
+\end{equation}\]</span></p>
+</div>
+<div id="distribución-binomial-en-r" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Distribución binomial en R</h3>
+<p>Para utilizar la distribución binomial en R es bastante sencillo. Veamos el siguiente ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Supongamos que analizamos a 5 individuos de una población en la que el 37% de las personas presentan un alelo mutante. Las probabilidades de las distintas configuraciones están dadas por la distribución binomial, en donde <span class="math inline">\(n\)</span> = 5 y <span class="math inline">\(p\)</span> = 0.37. ¿Cuál es la probabilidad de que exactamente 2 personas sean mutantes?</p>
+</blockquote>
+<p>Antes de continuar, hay que saber que existen 4 distintos comandos de la función binomial:</p>
+<p>-<code>dbinom()</code> nos da un valor exacto de la distribución binomial en el punto indicado.</p>
+<p>-<code>pbinom()</code> nos da la probabilidad acumulada de un evento.</p>
+<p>-<code>qbinom()</code> toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad.</p>
+<p>-<code>rbinom()</code> genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.</p>
+<p>En este caso, queremos conocer la probabilidad exacta de que 2 personas sean mutantes. Para esto necesitamos la función <code>dbinom(x, size, prob)</code>, donde el argumento <code>x</code> equivale al número de éxitos, <code>size</code> al número de ensayos y <code>prob</code> a la probabilidad de éxito.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="probabilidad.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.37</span>)</span></code></pre></div>
+<pre><code>## [1] 0.3423143</code></pre>
+<blockquote>
+<p><strong>Ejemplo</strong>: En Estados Unidos, 85% de la población tiene sangre Rh positivo. Supongamos que tomamos 6 personas y contamos cuántos tiene Rh positivo. En este caso <span class="math inline">\(Y\)</span> representará cuántas personas tienen Rh positivo dentro del grupo de 6. ¿Cuál es la probabilidad de <span class="math inline">\(Y\)</span> = 4? ¿Y la probabilidad de que <em>al menos</em> 4 personas sean Rh positivo? ¿Y la probabilidad de que haya <em>al menos</em> 1 persona con Rh negativo?</p>
+</blockquote>
+<p>En este caso debemos utilizar dos comandos, <code>dbinom()</code> y <code>pbinom()</code>, con uno calcularemos <span class="math inline">\(\tt Y = 4\)</span> y con el otro <span class="math inline">\(\tt Y \ge 4\)</span> (4 o más). Como queremos obtener <span class="math inline">\(\tt P(Y \ge 4)\)</span>, entonces <span class="math inline">\(\tt P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)\)</span>, utilizamos el argumento <code>lower.tail</code> y lo ponemos en <code>FALSE</code> para indicar que vamos a trabajar con un valor mínimo de 4, para arriba. Para el caso de <em>al menos</em> una persona con Rh negativo <span class="math inline">\(\tt P(Y &lt; 6)\)</span>, tenemos dos opciones. Usar <code>dbinom()</code> cinco veces para calcular el valor individual de <span class="math inline">\(\tt P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)\)</span>, o calcular <span class="math inline">\(\tt P(Y = 6)\)</span> y restarle a 1 este valor. Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la segunda.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="probabilidad.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1761771</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="probabilidad.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9526614</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="probabilidad.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6228505</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="probabilidad.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6228505</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estadística-descriptiva.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

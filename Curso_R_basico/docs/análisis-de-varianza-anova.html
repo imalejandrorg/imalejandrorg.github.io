@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 4 Análisis de Varianza (ANOVA) | Curso de R básico</title>
+  <title>Lección 5 Análisis de Varianza (ANOVA) | Curso de R básico</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 4 Análisis de Varianza (ANOVA) | Curso de R básico" />
+  <meta property="og:title" content="Lección 5 Análisis de Varianza (ANOVA) | Curso de R básico" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 4 Análisis de Varianza (ANOVA) | Curso de R básico" />
+  <meta name="twitter:title" content="Lección 5 Análisis de Varianza (ANOVA) | Curso de R básico" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estadística-descriptiva.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="references.html"/>
+
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,7 +163,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
-<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
 <ul>
@@ -174,17 +173,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>4</b> Análisis de Varianza (ANOVA)</a>
+<li class="chapter" data-level="4" data-path="probabilidad.html"><a href="probabilidad.html"><i class="fa fa-check"></i><b>4</b> Probabilidad</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>4.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>4.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="4.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>4.3</b> Análisis de varianza (ANOVA de una vía)</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>4.3.1</b> ANOVA en R</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>4.4</b> Pruebas <em>post hoc</em></a></li>
+<li class="chapter" data-level="4.1" data-path="probabilidad.html"><a href="probabilidad.html#probabilidad-frecuentista"><i class="fa fa-check"></i><b>4.1</b> Probabilidad frecuentista</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad.html"><a href="probabilidad.html#reglas-de-probabilidad"><i class="fa fa-check"></i><b>4.2</b> Reglas de probabilidad</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>5.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>5.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>5.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>5.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>5.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -204,18 +208,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análisis-de-varianza-anova" class="section level1" number="4">
-<h1><span class="header-section-number">Lección 4</span> Análisis de Varianza (ANOVA)</h1>
+<div id="análisis-de-varianza-anova" class="section level1" number="5">
+<h1><span class="header-section-number">Lección 5</span> Análisis de Varianza (ANOVA)</h1>
 <p>Para realizar un <strong>análisis de varianza</strong> o <strong>ANOVA</strong> es necesario cumplir con ciertos supuestos. Estos supuestos son similares para otro tipo de pruebas y se encuentran descritas en la sigueinte lista:</p>
 <ul>
 <li>Distribución normal de los datos.</li>
 <li>Homocedasticidad (varianzas iguales).</li>
 <li>Datos independientes.</li>
 </ul>
-<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias (<span class="math inline">\(\mu\)</span>)</strong> de las muestras.</p>
+<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias (</strong><span class="math inline">\(\mu\)</span>) de las muestras.</p>
 <p>Antes de hacer el ANOVa debemos buscar una manera de comprobar la distribución normal y la homocedasticidad de los datos. Esto es relativamente sencillo de hacer.</p>
-<div id="prueba-de-normalidad" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Prueba de normalidad</h2>
+<div id="prueba-de-normalidad" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Prueba de normalidad</h2>
 <p>Una de las pruebas de normalidad más utilizadas es la prueba de Shapiro-Wilk. El resultado de la prueba de Shapiro-Wilk es un valor-<em>p</em> que se puede interpretar de la siguiente manera:</p>
 <ul>
 <li>Valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.01: No normalidad.</li>
@@ -236,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-3-1.png" alt="Gráfica con los distintos tratamientos." width="672" />
 <p class="caption">
-Figura 4.1: Gráfica con los distintos tratamientos.
+Figura 5.1: Gráfica con los distintos tratamientos.
 </p>
 </div>
 <p>Otra forma de visualizar los datos es con un boxplot que puede ir dándonos idea más o menos de cómo se distribuyen nuestros datos.</p>
@@ -250,7 +254,7 @@ Figura 4.1: Gráfica con los distintos tratamientos.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-4-1.png" alt="Graficos de boxplot para visualización de las distribuciones de los datos." width="672" />
 <p class="caption">
-Figura 4.2: Graficos de boxplot para visualización de las distribuciones de los datos.
+Figura 5.2: Graficos de boxplot para visualización de las distribuciones de los datos.
 </p>
 </div>
 <p>Computar la prueba de normalidad de Shapiro-Wilk sumamente sencillo y se hace con la función <code>shapiro_test()</code> de la librería <code>rstatix</code>. Para esto primero tenemos que agrupar nuestros datos por tratamientos con la función <code>group_by()</code> del paquete de <code>dplyr</code>.</p>
@@ -281,7 +285,7 @@ Figura 4.2: Graficos de boxplot para visualización de las distribuciones de los
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-7-1.png" alt="Gráfico Q-Q que muestra la distribución normal de datos." width="672" />
 <p class="caption">
-Figura 4.3: Gráfico Q-Q que muestra la distribución normal de datos.
+Figura 5.3: Gráfico Q-Q que muestra la distribución normal de datos.
 </p>
 </div>
 <p>Este gráfico nos muestra una distribución normal teórica vs. la de nuestros datos. Como podemos ver, todos los puntos caen dentro del intervalo de confianza al 95% de la recta, lo que quiere decir que nuestros datos se distribuyen de manera normal. Esto confirma los resultados obtenidos con la prueba de Shapiro-Wilk. Otra opción sería ver la <strong>gráfica de densidad</strong> para identificar la forma de la distribución.</p>
@@ -291,12 +295,12 @@ Figura 4.3: Gráfico Q-Q que muestra la distribución normal de datos.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-8-1.png" alt="Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos." width="672" />
 <p class="caption">
-Figura 4.4: Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos.
+Figura 5.4: Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos.
 </p>
 </div>
 </div>
-<div id="prueba-de-homocedasticidad" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Prueba de homocedasticidad</h2>
+<div id="prueba-de-homocedasticidad" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Prueba de homocedasticidad</h2>
 <p>Para la prueba de homocedasticidad existen varias aproximaciones. En este caso veremos pruebas estadísticas, ya que existen pruebas que se pueden realizar una vez realizamos el ANOVA.</p>
 <p>La prueba a utilizar es la prueba de Bartlett, que en R se escribe <code>bartlett.test()</code>. Es una prueba relativamente sencilla de realizar.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="análisis-de-varianza-anova.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
@@ -322,8 +326,8 @@ Figura 4.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 ##       27</code></pre>
 <p>Podemos ver que medida de tendencia central utilizó en la consola, después del título de la prueba. Una vez que hemos corroborado que nuestros datos presentan <strong>homocedasticidad</strong>, <strong>distribución normal</strong> y sabemos que son <strong>independientes</strong>, podemos proceder a hacer el ANOVA.</p>
 </div>
-<div id="análisis-de-varianza-anova-de-una-vía" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Análisis de varianza (ANOVA de una vía)</h2>
+<div id="análisis-de-varianza-anova-de-una-vía" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Análisis de varianza (ANOVA de una vía)</h2>
 <p>Algo importante es que R requiere que las variables predictoras sean clasificadas como grupos de factores. Si corroboramos en nuestros datos de <code>PlantGrowth</code> veremos que efectivamente la variable predictora (el tratamiento) se encuentra como factor.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="análisis-de-varianza-anova.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PlantGrowth)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    30 obs. of  2 variables:
@@ -346,57 +350,57 @@ Figura 4.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 <li><span class="math inline">\(\overline{x}\)</span> = la media global de todos los grupos/poblaciones/tratamientos independientemente del grupo.</li>
 </ul>
 <p>El estadístico que calcula el ANOVA se conoce como <span class="math inline">\(F_{ratio}\)</span>, ya que es una relación entre dos valores: los <strong>cuadrados medios entre grupos</strong> (<span class="math inline">\(CM_{entre}\)</span>) y los <strong>cuadrados medios dentro de los grupos</strong> (<span class="math inline">\(MS_{dentro}\)</span>). Para calcular el <span class="math inline">\(F_{ratio}\)</span> utilizamos la ecuación (eq:Fratio).</p>
-<p><span class="math display" id="eq:Fratio">\[\begin{equation}
+<span class="math display" id="eq:Fratio">\[\begin{equation}
 F_{ratio} = \frac{CM_{entre}}{CM_{dentro}}
-\tag{4.1}
-\end{equation}\]</span></p>
+\tag{5.1}
+\end{equation}\]</span>
 <p>Cada uno de estos términos tiene su propia fórmula.</p>
-<p><span class="math display" id="eq:CMentre">\[\begin{equation}
+<span class="math display" id="eq:CMentre">\[\begin{equation}
 CM_{entre} = \frac{SC_{entre}}{gl_{entre}}
-\tag{4.2}
-\end{equation}\]</span></p>
+\tag{5.2}
+\end{equation}\]</span>
 <p>Dónde <span class="math inline">\(gl_{entre}\)</span> hace referencia a los grados de libertad entre grupos y <span class="math inline">\(SC_{entre}\)</span> hace referencia a la suma de cuadrados entre grupos.</p>
-<p><span class="math display" id="eq:CMdentro">\[\begin{equation}
+<span class="math display" id="eq:CMdentro">\[\begin{equation}
 CM_{dentro} = \frac{SC_{dentro}}{gl_{dentro}}
-\tag{4.3}
-\end{equation}\]</span></p>
+\tag{5.3}
+\end{equation}\]</span>
 <p>Dónde <span class="math inline">\(gl_{dentro}\)</span> hace referencia a los grados de libertad dentro de los grupos** y <span class="math inline">\(SC_{dentro}\)</span> hace referencia a la suma de cuadrados dentro de los grupos.</p>
 <p>Para calcular la <strong>suma de cuadrados total</strong> usamos la siguiente ecuación. La suma de cuadrados total hace referencia a la variación de todos los datos respecto de la media global (<span class="math inline">\(\overline{x}\)</span>).</p>
-<p><span class="math display" id="eq:SCtotal">\[\begin{equation}
+<span class="math display" id="eq:SCtotal">\[\begin{equation}
 SC_{total} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij}-\overline{x})^2 = SC_{entre} + SC_{dentro}
-\tag{4.4}
-\end{equation}\]</span></p>
+\tag{5.4}
+\end{equation}\]</span>
 <p>Pues esta suma de cuadrados total está compuesta de dos valores: la suma de cuadrados entre grupos (<span class="math inline">\(SC_{entre}\)</span>) y la suma de cuadrados dentro de los grupos (<span class="math inline">\(SC_{dentro}\)</span>) aunque también se le conoce como el error o los residuales.</p>
 <p>Para calcular la <strong>suma de cuadrados entre grupos</strong> usamos la siguiente ecuación. Este valor hace referencia a la variación de las medias de cada grupo (<span class="math inline">\(\overline{x}_i\)</span>) cada grupo respecto de la media global (<span class="math inline">\(\overline{x}\)</span>).</p>
-<p><span class="math display" id="eq:SCentre">\[\begin{equation}
+<span class="math display" id="eq:SCentre">\[\begin{equation}
 SC_{entre} = \sum_{i = 1}^{k}n_{i}(\overline{x}_{i} - \overline{x})^2
-\tag{4.5}
-\end{equation}\]</span></p>
+\tag{5.5}
+\end{equation}\]</span>
 <p>Para calcular la <strong>suma de cuadrados dentro de los grupos</strong> usamos la siguiente ecuación. Este valor hace referencia a la variación de cada muestra u observación dentro de un grupo respecto de la media de ese grupo (<span class="math inline">\(\overline{x}_i\)</span>).</p>
-<p><span class="math display" id="eq:SCdentro">\[\begin{equation}
+<span class="math display" id="eq:SCdentro">\[\begin{equation}
 SC_{dentro} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij} - \overline{x}_{i})^2 =  \sum_{i = 1}^{k}(n_i - 1)s_i^2 = SC_{total} - SC_{entre}
-\tag{4.6}
-\end{equation}\]</span></p>
+\tag{5.6}
+\end{equation}\]</span>
 <p>El calculo de los <strong>grados de libertad</strong> es algo relativamente sencillo y se puede hacer de la siguiente manera.</p>
 <p>Para los <strong>grados de libertad entre grupos</strong>:</p>
-<p><span class="math display" id="eq:glentre">\[\begin{equation}
+<span class="math display" id="eq:glentre">\[\begin{equation}
 gl_{entre} = k - 1
-\tag{4.7}
-\end{equation}\]</span></p>
+\tag{5.7}
+\end{equation}\]</span>
 <p>Para los <strong>grados de libertad dentro de los grupos</strong>:</p>
-<p><span class="math display" id="eq:gldentro">\[\begin{equation}
+<span class="math display" id="eq:gldentro">\[\begin{equation}
 gl_{dentro} = n - k
-\tag{4.8}
-\end{equation}\]</span></p>
+\tag{5.8}
+\end{equation}\]</span>
 <p>Para los <strong>grados de libertad totales</strong>:</p>
-<p><span class="math display" id="eq:gltotal">\[\begin{equation}
+<span class="math display" id="eq:gltotal">\[\begin{equation}
 gl_{total} = n - 1
-\tag{4.9}
-\end{equation}\]</span></p>
+\tag{5.9}
+\end{equation}\]</span>
 <p>Algo recomendado de hacer es construir una tabla con cada uno de los pasos a seguir con sus respectivas fórmulas. Los resultados que se presenta el ANOVA en R tiene un formato similar.</p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-14">Tabla 4.1: </span>Tabla de ANOVA
+<span id="tab:unnamed-chunk-14">Tabla 5.1: </span>Tabla de ANOVA
 </caption>
 <thead>
 <tr>
@@ -468,8 +472,8 @@ Total
 </tr>
 </tbody>
 </table>
-<div id="anova-en-r" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> ANOVA en R</h3>
+<div id="anova-en-r" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> ANOVA en R</h3>
 <p>Una vez vistos los calculos necesarios para obtener el estadístico <span class="math inline">\(F_{ratio}\)</span> podemos hacer el ANOVA utilizando la función <code>aov()</code>. La función de ANOVA en R tiene una notación particular; primero escribimos la variable dependiente (en el caso de nuestros datos de <code>PlantGrowth</code>, el peso), posteriormente escribimos el símbolo <code>~</code> que significa <em>explicado por</em> seguido de nuestra variable independiente, en este caso, el tratamiento. Al final escribimos la base de datos de donde tomar estas variables.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="análisis-de-varianza-anova.html#cb20-1" aria-hidden="true" tabindex="-1"></a>anova.plantas <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, PlantGrowth)</span>
 <span id="cb20-2"><a href="análisis-de-varianza-anova.html#cb20-2" aria-hidden="true" tabindex="-1"></a>anova.plantas</span></code></pre></div>
@@ -496,7 +500,7 @@ Total
 <span id="cb24-3"><a href="análisis-de-varianza-anova.html#cb24-3" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(anova.plantas)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-18">Tabla 4.2: </span>Resultados del ANOVA de tratamientos de plantas
+<span id="tab:unnamed-chunk-18">Tabla 5.2: </span>Resultados del ANOVA de tratamientos de plantas
 </caption>
 <thead>
 <tr>
@@ -567,7 +571,7 @@ Residuals
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-19-1.png" alt="Histograma de residuales del ANOVA mostrando distribución normal." width="672" />
 <p class="caption">
-Figura 4.5: Histograma de residuales del ANOVA mostrando distribución normal.
+Figura 5.5: Histograma de residuales del ANOVA mostrando distribución normal.
 </p>
 </div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="análisis-de-varianza-anova.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(anova.plantas)</span>
@@ -575,7 +579,7 @@ Figura 4.5: Histograma de residuales del ANOVA mostrando distribución normal.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-20-1.png" alt="Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment()." width="672" />
 <p class="caption">
-Figura 4.6: Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment().
+Figura 5.6: Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment().
 </p>
 </div>
 <p>Como podemos ver, los residuales tienen una distribución más o menos normal. Esto confirma lo que habíamos visto en las pruebas de normalidad y homocedasticidad. Podemos incluso mostrar la gráfica Q-Q de los residuales.</p>
@@ -585,17 +589,13 @@ Figura 4.6: Histograma de residuales del ANOVA a partir de los residuales obteni
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-21-1.png" alt="Gráfico Q-Q de los residuales obtenidos por el ANOVA." width="672" />
 <p class="caption">
-Figura 4.7: Gráfico Q-Q de los residuales obtenidos por el ANOVA.
+Figura 5.7: Gráfico Q-Q de los residuales obtenidos por el ANOVA.
 </p>
 </div>
 </div>
 </div>
-<div id="pruebas-post-hoc" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Pruebas <em>post hoc</em></h2>
-
-<p>#Probabilidad</p>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<div id="pruebas-post-hoc" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Pruebas <em>post hoc</em></h2>
 
 </div>
 </div>
@@ -604,8 +604,8 @@ Figura 4.7: Gráfico Q-Q de los residuales obtenidos por el ANOVA.
           </div>
         </div>
       </div>
-<a href="estadística-descriptiva.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

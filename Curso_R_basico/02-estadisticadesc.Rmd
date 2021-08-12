@@ -2,8 +2,13 @@
 output:
   bookdown::html_document2:
     fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
+
 # Estadística descriptiva
+
 ```{r include=FALSE}
 library(knitr)
 library(bookdown)
@@ -12,19 +17,28 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio. Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores Z.
+En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de R y RStudio.
+Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores Z.
 
 ## Medidas de tendencia central
-Sirven para describir los valores del centro o valores medios de algún conjunto de datos. Las tres medidas de tendencia central más utilizadas son: *media*, *mediana* y *moda*.
+
+Sirven para describir los valores del centro o valores medios de algún conjunto de datos.
+Las tres medidas de tendencia central más utilizadas son: *media*, *mediana* y *moda*.
 
 ### Media
-Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones. Es representada como $\overline{x}$ (pronunciado $x$ barra) para datos muestrales y $\mu$ (pronunciado mu) para datos poblacionales. Para obtener la media muestral utilizamos la ecuación \@ref(eq:mean1) y para obtener la media poblacional se utiliza la ecuación \@ref(eq:mean2).
+
+Mide el promedio del valor de nuestros datos.
+Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
+Es representada como $\overline{x}$ (pronunciado $x$ barra) para datos muestrales y $\mu$ (pronunciado mu) para datos poblacionales.
+Para obtener la media muestral utilizamos la ecuación \@ref(eq:mean1) y para obtener la media poblacional se utiliza la ecuación \@ref(eq:mean2).
+
 
 \begin{equation}
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 (\#eq:mean1)
 \end{equation}
-
+```
+```{=tex}
 \begin{equation}
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
 (\#eq:mean2)
@@ -34,28 +48,38 @@ Donde $\sum_{i=1}^{n}{x_i}$ y $\sum_{i=1}^{N}{x_i}$ representan la sumatoria de 
 
 Propiedades importantes de la **media:**
 
-* No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
+-   No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
 
-* Utiliza todos los datos disponibles.
+-   Utiliza todos los datos disponibles.
 
-* Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
+-   Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
 
 #### Media en R
-El calculo de la media en R es algo sencillo. Para esto, utilizamos la función `mean()`.
 
->**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).
+El calculo de la media en R es algo sencillo.
+Para esto, utilizamos la función `mean()`.
+
+> **Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas.
+> Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).
 
 Se utilizará la base de datos `PlantGrowth` para este ejemplo.
 
 ```{r}
 data("PlantGrowth")
 ```
-Es importante que conozcamos los datos que incluye nuestra matriz. En este caso tenemos dos columnas, *weight* que hace referencia al peso seco y *group* que hace referencia al tratamiento. Para sacar la media global (independiente del tratamiento) simplemente escribimos la función `mean()` y hacemos referencia al peso con el símbolo `$`.
+
+Es importante que conozcamos los datos que incluye nuestra matriz.
+En este caso tenemos dos columnas, *weight* que hace referencia al peso seco y *group* que hace referencia al tratamiento.
+Para sacar la media global (independiente del tratamiento) simplemente escribimos la función `mean()` y hacemos referencia al peso con el símbolo `$`.
+
 ```{r}
 mean(PlantGrowth$weight)
 ```
 
-Lo que nos arroja una media  de 5.073. Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería `dplyr` que viene incluida en el paquete de `tidyverse`. Vamos a usar el **pipeline** `%>%` de `dplyr` para hacer varias operaciones en cadena: 1) Utilizamos la función `group_by(group)` para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función `summarise(Media = mean(weight), n = n())` para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.
+Lo que nos arroja una media de 5.073.
+Ahora en caso de que quisiéramos sacar la media de por cada uno de los tratamientos tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería `dplyr` que viene incluida en el paquete de `tidyverse`.
+Vamos a usar el **pipeline** `%>%` de `dplyr` para hacer varias operaciones en cadena: 1) Utilizamos la función `group_by(group)` para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función `summarise(Media = mean(weight), n = n())` para indicar que saque la media de nuestro datos YA agrupados y el número de observaciones de cada grupo.
+
 ```{r}
 library(tidyverse)
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(Media = mean(weight), n = n())
@@ -65,80 +89,80 @@ resumen
 Al final obtenemos una matriz nueva con 3 columnas: tipo de tratamiento, media para cada tratamiento y número de observaciones para cada tipo de tratamiento.
 
 ### Mediana
-Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se respresenta por el símbolo $\tilde{x}$ (pronunciado $x$ tilde).
+
+Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos.
+Se respresenta por el símbolo $\tilde{x}$ (pronunciado $x$ tilde).
 $$
 1, 2, 3, 4, 5
 $$
 
-Para el conjunto de datos anteriores la mediana es igual al número **3** que se encuentra justo por la mitad de los datos. En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales. Por ejemplo.
+Para el conjunto de datos anteriores la mediana es igual al número **3** que se encuentra justo por la mitad de los datos.
+En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
+Por ejemplo.
 $$
 5, 6, 7, 8, 9, 10
 $$
 
-Para este caso nuestros valores centrales son 7 y 8. Estos simplemente se promedian.
+Para este caso nuestros valores centrales son 7 y 8.
+Estos simplemente se promedian.
 $$
 \tilde{x} = \frac{7 + 8}{2} = 7.5
 $$
 
 Propiedades importantes de la **mediana:**
 
-- No cambia al añadir valores extremos por lo que se le considera un estadístico *robusto.*
+-   No cambia al añadir valores extremos por lo que se le considera un estadístico *robusto.*
 
-- No utiliza todo el conjunto de datos.
+-   No utiliza todo el conjunto de datos.
 
 #### Mediana en R
-Para el calculo de la mediana se utiliza la función `median()`. 
 
->**Ejemplo:** Supongamos que con los datos del ejemplo anterior queremos ahora calcular la mediana global y la mediana para cada uno de nuestros tratamientos.
+Para el calculo de la mediana se utiliza la función `median()`.
+
+> **Ejemplo:** Supongamos que con los datos del ejemplo anterior queremos ahora calcular la mediana global y la mediana para cada uno de nuestros tratamientos.
 
 ```{r}
 median(PlantGrowth$weight)
 ```
 
-El valor obtenido es de 5.155. De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando `dplyr`. 
+El valor obtenido es de 5.155.
+De manera similar podemos calcular la mediana para cada uno de nuestros datos utilizando `dplyr`.
+
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(Mediana = median(weight), n = n())
 resumen
 ```
 
 Si lo deséamos, podemos obtener la media y la mediana en una misma tabla.
+
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(Media = mean(weight), Mediana = median(weight), n = n())
 resumen
 ```
 
-
 ### Moda
+
 Es el valor que más se repite en un conjunto de datos.
 
 Propiedades importantes de la **moda:**
 
-- Se puede aplicar a datos cualitativos.
+-   Se puede aplicar a datos cualitativos.
 
-- Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
+-   Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
 
-Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella. Como tal no existe una función en R que calcule la moda pero en varias páginas y foros como *StackOverflow* se pueden encontrar scripts para su calculo.
+Sin embargo, casi no se utiliza en estadística y por lo mismo no hablaremos más de ella.
+Como tal no existe una función en R que calcule la moda pero en varias páginas y foros como *StackOverflow* se pueden encontrar scripts para su calculo.
 
 ## Medidas de dispersión
-A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están. Las medidas que veremos son: **rango** y **desviación estándar**.
+
+A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están.
+Las medidas que veremos son: **rango** y **desviación estándar**.
 
 ### Rango
-Es la diferencia entre el valor máximo y mínimo de datos como se observa en la ecuación \@ref(eq:range)
-\begin{equation}
-Rango = x_{max} - x_{max}
-(\#eq:range)
-\end{equation}
 
-Propiedades importante del **rango:**
-
-* Es muy sensible a valores extremos.
-* No toma en cuenta todos los valores, no refleja la variación de todos los datos.
-
-#### Rango en R
 Se utiliza la función `range()`. 
 
 >**Ejemplo:** Queremos calcular el rango de las observaciones de la base de datos de plantas que utilizamos en la sección de medidas de tendencia central.
-
 ```{r}
 range(PlantGrowth$weight)
 ```
@@ -187,143 +211,187 @@ Propiedades importantes de la **desviación estándar:**
 * Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
 
 #### Desviación estándar en R
+
 Se utiliza la función `sd()`.
 
->**Ejemplo:** Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango.
+> **Ejemplo:** Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango.
 
 ```{r}
 sd(PlantGrowth$weight)
 ```
 
-Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos. En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de `dplyr` y `group_by()`.
+Obtenemos una desviación estándar de 0.7011918 para todo el conjunto de datos.
+En caso de querer calcular la desviación estándar de cada tratamiento utilizamos el paquete de `dplyr` y `group_by()`.
+
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight))
 resumen
 ```
 
 Y de nueva cuenta, podemos agregar el resto de estadísticos descriptivos que hemos visto hasta ahora.
+
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
 resumen
 ```
 
-En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora. Algo importante a tener en cuenta es que `sd()` calcula la desviación estandar muestral $s$, no la poblacional $\sigma$. Para calcular $\sigma$ necesitamos multiplicar el resultado obtenido por $\sqrt\frac{N-1}{N}$.
+En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora.
+Algo importante a tener en cuenta es que `sd()` calcula la desviación estandar muestral $s$, no la poblacional $\sigma$.
+Para calcular $\sigma$ necesitamos multiplicar el resultado obtenido por $\sqrt\frac{N-1}{N}$.
+
 ```{r}
 sd(PlantGrowth$weight)*(sqrt((length(PlantGrowth$weight)-1)/length(PlantGrowth$weight)))
 ```
 
 En caso de que se utilice frecuentemente la $\sigma$ se puede definir la función de la siguiente manera.
+
 ```{r}
 sd.p = function(x){sd(x)*sqrt((length(x)-1)/length(x))}
 ```
 
 Para calcular la **varianza** $s^2$, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación \@ref(eq:var).
 
+```{=tex}
 \begin{equation}
 Varianza = {s}^2
 (\#eq:var)
 \end{equation}
-
+```
 ```{r}
 sd(PlantGrowth$weight)^2
 ```
 
 Propiedades importantes de la **varianza:**
 
-- Las unidades están elevadas al cuadrado.
-- No es un estadístico *robusto.*
-- Nunca tiene valores negativos.
+-   Las unidades están elevadas al cuadrado.
+-   No es un estadístico *robusto.*
+-   Nunca tiene valores negativos.
 
 Otro estadístico que nos puede interesare es el **coeficiente de variación** que se obtiene a partir de la ecuación \@ref(eq:cv).
 
+```{=tex}
 \begin{equation}
 CV = \frac{S}{\overline{x}}*100
 (\#eq:cv)
 \end{equation}
-
+```
 Para su calculo simplemente utilizamos las funciones previamente aprendidas.
+
 ```{r}
 sd(PlantGrowth$weight)/mean(PlantGrowth$weight)*100
 ```
 
-Nusetro resultado es 13.82204%. Este es el coeficiente de variación para todos los datos. De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función `summarise()`del paquete `dplyr`. 
+Nusetro resultado es 13.82204%.
+Este es el coeficiente de variación para todos los datos.
+De nueva cuenta, todo esto puede ser integrado en una sola tabla con la función `summarise()`del paquete `dplyr`.
+
 ```{r}
 resumen <- resumen <- PlantGrowth %>% group_by(group) %>% summarise(CV = sd(weight)/mean(weight)*100, Varianza = sd(weight)^2, SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
 resumen
 ```
+
 ## Medidas de posición relativa
-Indican la posición relativa de los datos con respecto de los demás datos. Algunas de las más usadas son: **valores Z**, **frecuencia absoluta**, **frecuencia relativa** y **cuartiles**.
+
+Indican la posición relativa de los datos con respecto de los demás datos.
+Algunas de las más usadas son: **valores Z**, **frecuencia absoluta**, **frecuencia relativa** y **cuartiles**.
 
 ### Valores Z
-Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar a las que se encuentra un valor dado. Se puede calcular el valor z muestral y poblacional con las ecuaciones \@ref(eq:z1) y \@ref(eq:z2).
 
+Se obtienen al estandarizar los valores de nuestros datos.
+Es el número de desviaciones estándar a las que se encuentra un valor dado.
+Se puede calcular el valor z muestral y poblacional con las ecuaciones \@ref(eq:z1) y \@ref(eq:z2).
+
+```{=tex}
 \begin{equation}
 z = \frac{x - \overline{x}}{s}
 (\#eq:z1)
 \end{equation}
-
+```
+```{=tex}
 \begin{equation}
 z = \frac{x - \mu}{\sigma}
 (\#eq:z2)
 \end{equation}
-
+```
 Propiedades importantes de los **valores Z:**
 
-- No tienen unidades de medida.
-- Si un valor es menor que la media, su valor Z será negativo.
+-   No tienen unidades de medida.
+-   Si un valor es menor que la media, su valor Z será negativo.
 
 #### Valores Z en R
+
 Para el calculo del valor Z de algún número simplemente le extraemos la media $\overline{x}$ y lo dividimos entre la desviación estándar $s$.
 
-Podemos utilizar la función de `mutate()` del paquete de `dplyr` para agregar una nueva sección a nuestra base de datos de PlantGrowth. Al utilizar la función `group_by()` antes de la función `mutate()` nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.
+Podemos utilizar la función de `mutate()` del paquete de `dplyr` para agregar una nueva sección a nuestra base de datos de PlantGrowth.
+Al utilizar la función `group_by()` antes de la función `mutate()` nos aseguramos de que los valores Z se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.
+
 ```{r}
 PlantGrowth <- PlantGrowth %>% group_by(group) %>% mutate(Z = (weight - mean(weight)/sd(weight)))
 PlantGrowth
 ```
 
 ### Frecuencia absoluta
-Es el valor total de los datos observados. Por ejemplo, para los tratamientos de la base de datos de PlantGrowth, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. Otra situación es el número de veces que cada peso aparece. Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su frecuencia absoluta es de 2.
 
+Es el valor total de los datos observados.
+Por ejemplo, para los tratamientos de la base de datos de PlantGrowth, podemos ver que cada tratamiento tuvo 10 plantas en observación.
+La frecuencia de cada tratamiento es por ende de 10.
+Otra situación es el número de veces que cada peso aparece.
+Por ejemplo, el valor de 4.17 aparece dos veces en los datos, por lo tanto su frecuencia absoluta es de 2.
 
 #### Frecuencia absoluta en R
+
 Utilizamos la función `table()` para su calculo.
+
 ```{r}
 table(PlantGrowth$group)
 ```
 
-Aquí se puede ver que cada tratamiento se realizo con 10 plantas. Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de *weight*.
+Aquí se puede ver que cada tratamiento se realizo con 10 plantas.
+Ahora si quisieramos ver en los pesos cuántas veces se repite cada valor, lo haríamos por la variable de *weight*.
+
 ```{r}
 table(PlantGrowth$weight)
 ```
 
 Y como podemos confirmar, el valor 4.17 es el único que se repite 2 veces.
-Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se repiten. En este caso obtuvimos la frecuencia de cada uno de los tratamientos. Como podemos ver, $N = 30$ y cada tratamiento esta compuesto por 10 observaciones.
+Aparecen los valores de cada uno de nuestros datos y la frecuencia con la que se repiten.
+En este caso obtuvimos la frecuencia de cada uno de los tratamientos.
+Como podemos ver, $N = 30$ y cada tratamiento esta compuesto por 10 observaciones.
 
-Otra opción es el uso de la función `n()` junto con `group_by()`. De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.
+Otra opción es el uso de la función `n()` junto con `group_by()`.
+De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.
+
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(CV = sd(weight)/mean(weight)*100, Varianza = sd(weight)^2, SD = sd(weight), Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), Frec_Absoluta = n())
 resumen
 ```
 
-
 ### Frecuencia relativa
-Es el valor relativo de cada dato respecto del total como se observa en la ecuación \@ref(eq:frecr). Si se le multiplica por 100% se obtiene su valor en porcentaje.
 
+Es el valor relativo de cada dato respecto del total como se observa en la ecuación \@ref(eq:frecr).
+Si se le multiplica por 100% se obtiene su valor en porcentaje.
+
+```{=tex}
 \begin{equation}
 f_i = \frac{n_i}{N}
 (\#eq:frecr)
 \end{equation}
-
+```
 Donde $f_i$ es la frecuencia de la i-ésima observación y $n_i$ es el número de observaciones en la i-ésima observación.
 
 #### Frecuencia relativa en R
-En este caso utilizamos la función `prop.table()`. 
+
+En este caso utilizamos la función `prop.table()`.
+
 ```{r}
 frec <- table(PlantGrowth$group)
 prop.table(frec)
 ```
 
-En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos. Como cada una era 10 y $N = 30$ cada una tiene una frecuencia relativa de 0.3333 o 33.33%. Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.
+En este caso obtenemos la frecuencia relativa de cada una de las observaciones de los tratamientos.
+Como cada una era 10 y $N = 30$ cada una tiene una frecuencia relativa de 0.3333 o 33.33%.
+Ahora las frecuencias relativas para cada uno de nuestros pesos sería de la siguiente manera.
+
 ```{r}
 frec2 <- table(PlantGrowth$weight)
 prop.table(frec2)
@@ -332,28 +400,33 @@ prop.table(frec2)
 Y como podemos ver, la frecuencia del valor 4.17 es el doble que las del resto, lo que quiere decir que este valor se repite 2 veces.
 
 De nueva cuenta, otra opción es el uso de la función `mutate()` para agregar una sección de frecuencia relativa a nuestra tabla con los estadísticos descriptivos pasados.
+
 ```{r}
 resumen <- resumen %>% mutate(Frec_Relativa = Frec_Absoluta / sum(Frec_Absoluta))
 resumen
 ```
 
-
 ### Cuartiles
-Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil. $Q_2$ es equivalente a la mediana.
+
+Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos.
+Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil.
+$Q_2$ es equivalente a la mediana.
 
 Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ($RIQ$) como se indica en la siguiente fórmula.
-\begin{equation}
-RIQ = Q_3 - Q_1
-(\#eq:RIQ)
-\end{equation}
+\\begin{equation} RIQ = Q_3 - Q_1 (\\\#eq:RIQ) \\end{equation}
 
 #### Cuartiles en R
+
 Para el calculo de los cuartiles en R podemos utilizar la función `summary()` que viene en los paquetes básicos de R.
+
 ```{r}
 summary(PlantGrowth)
 ```
 
-Como podemos ver, esta función nos da los valores mínimos, máximos, el $Q_1$, $Q_3$, la mediana y la media. Los **cinco números** utilizados para generar **gráfica de caja** se encuentran en estos datos. Para sacar estos valores por cada uno de los datos podemos utilizar la función `filter()` del paquete `dplyr`. 
+Como podemos ver, esta función nos da los valores mínimos, máximos, el $Q_1$, $Q_3$, la mediana y la media.
+Los **cinco números** utilizados para generar **gráfica de caja** se encuentran en estos datos.
+Para sacar estos valores por cada uno de los datos podemos utilizar la función `filter()` del paquete `dplyr`.
+
 ```{r}
 ctrl <- PlantGrowth %>% dplyr::filter(group == "ctrl")
 trt1 <- PlantGrowth %>% dplyr::filter(group == "trt1")
@@ -364,14 +437,18 @@ summary(trt2)
 ```
 
 #### Valores atípicos
-Son aquellos valores que se encuentran por encima de $Q_3 + 1.5 * RIQ$ o debajo de $Q_1 - 1.5 * RIQ$. Con estos valores se pueden realizar **gráficas de cajas modificadas.** 
+
+Son aquellos valores que se encuentran por encima de $Q_3 + 1.5 * RIQ$ o debajo de $Q_1 - 1.5 * RIQ$.
+Con estos valores se pueden realizar **gráficas de cajas modificadas.**
 
 Para realizar estas gráficas utilizaremos la paquetería `ggplot2` que está incluido en el paquete `tidyverse`.
+
 ```{r}
 library(ggplot2)
 ```
 
 Utilizamos la función `ggplot() + geom_boxplot`.
+
 ```{r fig.align = 'center', fig.cap = "Gráfica de cajas modificada para la identificación de valores atípicos."}
 ggplot(PlantGrowth) + geom_boxplot(aes(group, weight, fill = group)) + 
   xlab("Grupo") +
@@ -383,7 +460,10 @@ ggplot(PlantGrowth) + geom_boxplot(aes(group, weight, fill = group)) +
 Como podemos ver en la gráfica, el tratamiento 1 presenta dos valores atípicos que están por encima del valor $Q_3 + 1.5 * IQR$.
 
 ## El uso de la librería `dplyr`
-A lo largo de todo esta lección hemos hecho uso de la librería `dplyr`. Este paquete está incluido dentro de la librería `tidyverse`.
+
+A lo largo de todo esta lección hemos hecho uso de la librería `dplyr`.
+Este paquete está incluido dentro de la librería `tidyverse`.
+
 ```{r}
 library(tidyverse)
 ```
@@ -391,33 +471,38 @@ library(tidyverse)
 La mayoría de estas funciones las hemos estado utilizando a lo largo de esta sección aunque puede que haya algunas que no hayamos aplicado.
 Las funciones más importantes de este paquete son:
 
-* `group_by:` agrupa datos.
+-   `group_by:` agrupa datos.
 
-* `summarize` o `summarise:` resumen de datos agrupados.
+-   `summarize` o `summarise:` resumen de datos agrupados.
 
-* `filter:` encuentra filas con ciertas condiciones.
+-   `filter:` encuentra filas con ciertas condiciones.
 
-* `select:` junto a 'starts_with', 'ends_with' o 'contains'
+-   `select:` junto a 'starts_with', 'ends_with' o 'contains'
 
-* `mutate:` genera nuevas variables.
+-   `mutate:` genera nuevas variables.
 
-* `%>%:` pipeline.
+-   `%>%:` pipeline.
 
-* `arrange:` ordena.
+-   `arrange:` ordena.
 
-Con la función `select` podemos elegir unas cuantas variables para trabajar. Esto es útil para bases de datos con muchas variables como matrices de abundancias.
+Con la función `select` podemos elegir unas cuantas variables para trabajar.
+Esto es útil para bases de datos con muchas variables como matrices de abundancias.
 
 ```{r}
 resumen %>% dplyr::select(group, Media, SD)
 ```
 
-En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos. Otra forma de seleccionar las variables es con el argumento `starts_with()`, por ejemplo, para la selección de los datos del grupo control.
+En este caso, solamente nos interesa trabajar con la media y la desviación estándar de nuestros tratamientos.
+Otra forma de seleccionar las variables es con el argumento `starts_with()`, por ejemplo, para la selección de los datos del grupo control.
 
 ```{r}
 PlantGrowth %>% dplyr::select(starts_with("ctrl"), weight)
 ```
 
-Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control. También podemos ordenar los datos utilizando la función `arrange()`. Es importante escribir el argumento `.by_group = TRUE` para que la función `arrange()` respete el agrupamiento que hicimos por tratamientos antes del pipeline %>%.
+Como podemos ver, esto despliega los datos de peso seco solamente del grupo de control.
+También podemos ordenar los datos utilizando la función `arrange()`.
+Es importante escribir el argumento `.by_group = TRUE` para que la función `arrange()` respete el agrupamiento que hicimos por tratamientos antes del pipeline %\>%.
+
 ```{r}
 PlantGrowth <- PlantGrowth %>% group_by(group) %>% arrange(desc(weight), .by_group = TRUE)
 ```

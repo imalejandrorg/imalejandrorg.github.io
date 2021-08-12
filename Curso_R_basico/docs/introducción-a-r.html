@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lección 1 Introducción a R | Curso de R básico</title>
+  <title>Lección 2 Introducción a R | Curso de R básico</title>
   <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lección 1 Introducción a R | Curso de R básico" />
+  <meta property="og:title" content="Lección 2 Introducción a R | Curso de R básico" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lección 1 Introducción a R | Curso de R básico" />
+  <meta name="twitter:title" content="Lección 2 Introducción a R | Curso de R básico" />
   
   <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
   
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="estadística-descriptiva.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -134,54 +159,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Curso de R básico</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Requisitos</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Requisitos</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>0.1</b> Descarga de R y RStudio</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Descarga de R y RStudio</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<li class="chapter" data-level="2" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>2</b> Introducción a R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
-<li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
-<li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
-<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
-<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
-<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
-<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
-<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
+<li class="chapter" data-level="2.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>2.1</b> Interfaz</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>2.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>2.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>2.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>2.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>2.6</b> Comentarios</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>2.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>2.8</b> Pedir ayuda</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
+<li class="chapter" data-level="3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>3</b> Estadística descriptiva</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.1</b> Medidas de tendencia central</a>
+<li class="chapter" data-level="3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>3.1</b> Medidas de tendencia central</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>2.1.1</b> Media</a></li>
-<li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>2.1.2</b> Mediana</a></li>
-<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>2.1.3</b> Moda</a></li>
+<li class="chapter" data-level="3.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>3.1.1</b> Media</a></li>
+<li class="chapter" data-level="3.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>3.1.2</b> Mediana</a></li>
+<li class="chapter" data-level="3.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>3.1.3</b> Moda</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
+<li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>2.2.1</b> Rango</a></li>
-<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar</a></li>
+<li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición relativa</a>
+<li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>2.3.1</b> Valores Z</a></li>
-<li class="chapter" data-level="2.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>2.3.2</b> Frecuencia absoluta</a></li>
-<li class="chapter" data-level="2.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>2.3.3</b> Frecuencia relativa</a></li>
-<li class="chapter" data-level="2.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>2.3.4</b> Cuartiles</a></li>
+<li class="chapter" data-level="3.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>3.3.1</b> Valores Z</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>3.3.2</b> Frecuencia absoluta</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>3.3.3</b> Frecuencia relativa</a></li>
+<li class="chapter" data-level="3.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>3.3.4</b> Cuartiles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>3</b> Análisis de Varianza (ANOVA)</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>3.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>3.3</b> Análisis de varianza (ANOVA de una vía)</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>3.3.1</b> ANOVA en R</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>3.4</b> Pruebas <em>post hoc</em></a></li>
+<li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>4</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>4.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>4.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>4.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>4.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>4.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -201,11 +226,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introducción-a-r" class="section level1" number="1">
-<h1><span class="header-section-number">Lección 1</span> Introducción a R</h1>
-<p>En esta lección veremos las nociones más básicas de <code>R</code> y <code>RStudio</code>, cómo escribir tablas, cómo importar datos, entre otras cosas.</p>
-<div id="interfaz" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Interfaz</h2>
+<div id="introducción-a-r" class="section level1" number="2">
+<h1><span class="header-section-number">Lección 2</span> Introducción a R</h1>
+<p>En esta lección veremos las nociones más básicas de <code>R</code> y <code>RStudio</code>, cómo escribir tablas, cómo importar datos, entre otras cosas. Hola saludos a la Kmi.</p>
+<div id="interfaz" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Interfaz</h2>
 <p>R Studio cuenta con 4 ventanas esenciales:</p>
 <ol style="list-style-type: decimal">
 <li><p>La <em>consola</em>, que es donde se ejecutan los comandos y se visualizan los outputs de nuestros análisis.</p></li>
@@ -213,88 +238,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>El <em>Envirnoment</em> y el <em>History</em> que corresponden a la ventana superior derecha, aunque también cuenta con otras herramientas útiles como <em>Build</em> y <em>Git</em> que se utilizan en cuestiones más avanzadas.</p></li>
 <li><p>Los <em>Files</em>, <em>Packages</em> y <em>Plots</em> así como la ventana de <em>Help</em> que corresponden a la esquina inferior derecha. Básicamente estas son las 4 pestañas de esta ventana que estaremos utilizando.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="RStudio.png" alt="Interfaz de RStudio" width="960" />
+<img src="RStudio.png" alt="Interfaz de RStudio"  />
 <p class="caption">
-Figura 1.1: Interfaz de RStudio
+Figura 2.1: Interfaz de RStudio
 </p>
 </div></li>
 </ol>
 Adicionalmente, en la ventana de <strong><em>Tools -&gt; Global Options -&gt; Appearance</em></strong> podemos configurar los colores de nuestra interfaz, el tamaño de la fuente, el zoom, el tema del editor y la tipografía.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="GlobalOptions.png" alt="Para abrir las opciones globales nos vamos a ***Tools -&gt; Global Options***." width="392" />
+<img src="GlobalOptions.png" alt="Para abrir las opciones globales nos vamos a ***Tools -&gt; Global Options***."  />
 <p class="caption">
-Figura 1.2: Para abrir las opciones globales nos vamos a <strong><em>Tools -&gt; Global Options</em></strong>.
+Figura 2.2: Para abrir las opciones globales nos vamos a <strong><em>Tools -&gt; Global Options</em></strong>.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="Apariencia.png" alt="Ventana de *Appearance* dentro de las Opciones Globales de RStudio" width="475" />
+<img src="Apariencia.png" alt="Ventana de *Appearance* dentro de las Opciones Globales de RStudio"  />
 <p class="caption">
-Figura 1.3: Ventana de <em>Appearance</em> dentro de las Opciones Globales de RStudio
+Figura 2.3: Ventana de <em>Appearance</em> dentro de las Opciones Globales de RStudio
 </p>
 </div>
 <p>Personalmente encuentro los colores oscuros más cómodos para trabajar, por eso elegí el tema <code>Material</code>.</p>
 </div>
-<div id="creando-nuestro-primer-proyecto" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Creando nuestro primer proyecto</h2>
+<div id="creando-nuestro-primer-proyecto" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Creando nuestro primer proyecto</h2>
 Una vez que nos familiarizamos con la interfaz, es momento de crear nuestro primer proyecto. Para esto, debemos dar clic en <strong><em>File -&gt; New Project</em></strong> para que nos aparezca una ventana como la siguiente.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="NProj.png" alt="Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control." width="431" />
+<img src="NProj.png" alt="Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control."  />
 <p class="caption">
-Figura 1.4: Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control.
+Figura 2.4: Ventana para crear un nuevo proyecto a partir de distintas opciones: Nuevo directorio, directorio existente y versión de control.
 </p>
 </div>
 <p>Creamos un nuevo directorio que se guarda por defecto en la carpeta de <em>Documentos</em> de nuestro ordenador.</p>
 <p>SE RECOMIENDA NO DEJAR ESPACIOS EN EL NOMBRE. En su lugar, podemos utilizar guión bajo (_), el símbolo de menos (-) o un punto (.).
 Una vez creado nuestro proyecto, vamos a crear un nuevo archivo script tecleando Ctrl + Shift + N. Deberíamos tener un ambiente de trabajo más o menos así.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="Proj1.png" alt="Ventana con el ambiente de trabajo básico en RStudio." width="1536" />
+<img src="Proj1.png" alt="Ventana con el ambiente de trabajo básico en RStudio."  />
 <p class="caption">
-Figura 1.5: Ventana con el ambiente de trabajo básico en RStudio.
+Figura 2.5: Ventana con el ambiente de trabajo básico en RStudio.
 </p>
 </div>
 <p>Otra recomendación es guardar nuestro script en la misma carpeta del proyecto, así como las bases de datos y demás archivos que vayamos a utilizar.</p>
 <p>Para saber cuál es la carpeta de nuestro proyecto, podemos teclear el siguiente comando en la consola.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="introducción-a-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introducción-a-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico&quot;</code></pre>
 <p>Para cambiar el directorio de trabajo, simplemente tecleamos en la consola la siguiente función.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="introducción-a-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;O:/Documentos/R_Basico&quot;</span>)</span>
-<span id="cb22-2"><a href="introducción-a-r.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-a-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;O:/Documentos/R_Basico&quot;</span>)</span>
+<span id="cb15-2"><a href="introducción-a-r.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;O:/Documentos/R_Basico&quot;</code></pre>
 <p>De esta manera cambiamos el directorio de nuestro proyecto actual y sabemos en qué carpeta ingresar nuestros archivos. Para guardar nuestro script simplemente hacemos clic en icono del disquete o con las teclas <code>Ctrl</code> + <code>S</code>. Recuerda que es recomendable guardar el script en la misma carpeta que nuestro proyecto.</p>
 </div>
-<div id="objetos-y-variables" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Objetos y variables</h2>
+<div id="objetos-y-variables" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Objetos y variables</h2>
 <p>Para que un comando que queramos ejecutar permanezca almacenado, debemos asignar un nombre al resultado. La manera en la que R hace esto es a través de los símbolos <code>&lt;-</code> o <code>=</code> (cuyo atajo de escritura es <code>Alt</code> + <code>-</code>). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="introducción-a-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introducción-a-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>Sin embargo, si queremos almacenar este resultado necesitamos nombrar a una variable con este resultado. Por ejemplo, una variable llamada “suma.”</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introducción-a-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a>suma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb26-2"><a href="introducción-a-r.html#cb26-2" aria-hidden="true" tabindex="-1"></a>suma</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a>suma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb19-2"><a href="introducción-a-r.html#cb19-2" aria-hidden="true" tabindex="-1"></a>suma</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 Como podemos ver en ambos casos obtenemos los mismos resultados. Sin embargo, en el segundo caso encontraremos una variable llamada “suma” en nuestro <em>Environment</em> en el panel superior derecho.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="Variable.png" alt="Panel *Environment* en el cual podremos encontrar las variables que vayamos generando." width="542" />
+<img src="Variable.png" alt="Panel *Environment* en el cual podremos encontrar las variables que vayamos generando."  />
 <p class="caption">
-Figura 1.6: Panel <em>Environment</em> en el cual podremos encontrar las variables que vayamos generando.
+Figura 2.6: Panel <em>Environment</em> en el cual podremos encontrar las variables que vayamos generando.
 </p>
 </div>
 <p>En caso de que estemos interesados en asignar valores categóricos, estos deben estar encomillados.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introducción-a-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a>letraA <span class="ot">&lt;-</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a>letraA <span class="ot">&lt;-</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
 De nuevo se agregará esta variable a nuestro <em>Environment</em>.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
-<img src="Variable2.png" alt="Tras definir la variable *A* esta se suma a la ventana de *Environment*." width="542" />
+<img src="Variable2.png" alt="Tras definir la variable *A* esta se suma a la ventana de *Environment*."  />
 <p class="caption">
-Figura 1.7: Tras definir la variable <em>A</em> esta se suma a la ventana de <em>Environment</em>.
+Figura 2.7: Tras definir la variable <em>A</em> esta se suma a la ventana de <em>Environment</em>.
 </p>
 </div>
 <p>Para corroborar el tipo de dato que tenemos podemos utilizar la función <code>class(x)</code> donde x es el nombre de nuestra variable.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introducción-a-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letraA)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="introducción-a-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letraA)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introducción-a-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(suma)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="introducción-a-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(suma)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Para los análisis de datos de naturaleza biológica normalmente se trabaja con matrices de datos con múltiples caracteres tanto categóricos como cuantitativos, que en R corresponde a un data frame. Por ejemplo, los datos de una matriz llamada <code>dune</code> del paquete <code>vegan</code> corresponde a una matriz de datos.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;dune&quot;</span>)</span>
-<span id="cb33-2"><a href="introducción-a-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dune)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introducción-a-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;dune&quot;</span>)</span>
+<span id="cb26-2"><a href="introducción-a-r.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dune)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:910px; ">
 <table class="table table-striped table-bordered table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
@@ -2237,42 +2262,42 @@ Callcusp
 </table>
 </div>
 </div>
-<div id="instalar-paquetes" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Instalar paquetes</h2>
+<div id="instalar-paquetes" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Instalar paquetes</h2>
 <p>Una de las herramientas más útiles de <code>R</code> es la instalación de paquetes. No tenemos la necesidad de escribir nuestras propias funciones cada que queramos realizar un análisis. En su lugar, bajamos e instalamos paquetes que nos sirven para ciertas funciones.</p>
 <p>Por ejemplo, uno de los paquetes más utilizados es el de <code>vegan</code>, útil para realizar análisis ecológicos. Para instalar los paquetes escribimos la siguiente función en la consola.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vegan&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introducción-a-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vegan&quot;</span>)</span></code></pre></div>
 <p>Tenemos que conocer el nombre exacto del paquete, en este caso, vegan está escrito con una v minúscula. Tenemos que entender que instalar un paquete no es lo mismo que <em>llamarlo</em>. Para esto último utilizamos la siguiente función.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introducción-a-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
 Vemos que en esta ocasión llamamos al paquete sin necesidad de poner el entrecomillado. En ocasiones la función <code>install.package()</code> puede arrojarnos error. Una alternativa es utilizar la ventana de <em>Packages</em> del panel inferior derecho.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
-<img src="Package1.png" alt="Ventana de *Packages* donde podremos encontrar los paquetes instalados." width="543" />
+<img src="Package1.png" alt="Ventana de *Packages* donde podremos encontrar los paquetes instalados."  />
 <p class="caption">
-Figura 1.8: Ventana de <em>Packages</em> donde podremos encontrar los paquetes instalados.
+Figura 2.8: Ventana de <em>Packages</em> donde podremos encontrar los paquetes instalados.
 </p>
 </div>
 Damos clic en Install y escribimos el nombre del paquete.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
-<img src="Package2.png" alt="Al hacer clic sobre el botón `Install` en la ventana de *Packages* aparece esta pequeña ventana donde podremos buscar la librería deseada." width="307" />
+<img src="Package2.png" alt="Al hacer clic sobre el botón `Install` en la ventana de *Packages* aparece esta pequeña ventana donde podremos buscar la librería deseada."  />
 <p class="caption">
-Figura 1.9: Al hacer clic sobre el botón <code>Install</code> en la ventana de <em>Packages</em> aparece esta pequeña ventana donde podremos buscar la librería deseada.
+Figura 2.9: Al hacer clic sobre el botón <code>Install</code> en la ventana de <em>Packages</em> aparece esta pequeña ventana donde podremos buscar la librería deseada.
 </p>
 </div>
 Nos irán apareciendo opciones con el nombre del paquete de interés. Lo seleccionamos y damos clic en Install.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
-<img src="Package3.png" alt="En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares." width="307" />
+<img src="Package3.png" alt="En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares."  />
 <p class="caption">
-Figura 1.10: En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares.
+Figura 2.10: En este caso, solo con escribir las primeras letras del paquete deseado se despliega una lista de librerías con nombres similares.
 </p>
 </div>
 </div>
-<div id="importar-datos-a-r" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Importar datos a R</h2>
-<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="references.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="references.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
+<div id="importar-datos-a-r" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Importar datos a R</h2>
+<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
 <p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <code>read.table()</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-2"><a href="introducción-a-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(Aves)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introducción-a-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a href="introducción-a-r.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(Aves)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:910px; ">
 <table class="table table-striped table-bordered table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -6241,70 +6266,76 @@ arbustal
 </table>
 </div>
 <p>También podemos importar archivos .csv utilizando la función <code>read.csv()</code>.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introducción-a-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a>Aves_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Aves.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Así obtendríamos la misma tabla anterior.</p>
 <p>En caso de que queramos leer archivos excel, podemos hacerlo utilizando la librería <code>readxl</code>. En caso de ya tener instalado el paquete no es necesario que pongan la función <code>install.packages("readxl")</code>, al ya tenerlo instalado yo omití esta parte poniéndole el símbolo de gato #.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;readxl&quot;)</span></span>
-<span id="cb39-2"><a href="introducción-a-r.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb39-3"><a href="introducción-a-r.html#cb39-3" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Aves.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introducción-a-r.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;readxl&quot;)</span></span>
+<span id="cb32-2"><a href="introducción-a-r.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb32-3"><a href="introducción-a-r.html#cb32-3" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Aves.xlsx&quot;</span>)</span></code></pre></div>
 <p>Estas tres formas de importar los datos nos producen la misma matriz. Sin embargo podemos ver que la clase del archivo importado desde excel pertenece a una subclase de los archivos de tipo data frame llamada <code>tibble</code>. Sin embargo, se recomienda que se cambie el tipo de archivo a solamente data.frame.</p>
 <p>Para hacer esto podemos escribir el siguiente código</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introducción-a-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aves_xlsx)</span>
-<span id="cb40-2"><a href="introducción-a-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a>Aves_xlsx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aves_xlsx)</span>
+<span id="cb33-2"><a href="introducción-a-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Aves_xlsx)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <p>Básicamente le estamos diciendo a R que escriba un data frame con el mismo nombre que el data frame de subtipo tibble. De esta manera sobrescribimos el primer archivo y mantenemos limpio nuestro espacio de trabajo.</p>
 También se puede importar desde el botón <em>Import Dataset</em> que aparece en la ventana de nuestro Environment.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
-<img src="Import.png" alt="En el panel *Environment* podemos hacer clic sobre la ventana`Import Dataset` para importar archivos de distintos formatos." width="542" />
+<img src="Import.png" alt="En el panel *Environment* podemos hacer clic sobre la ventana`Import Dataset` para importar archivos de distintos formatos."  />
 <p class="caption">
-Figura 1.11: En el panel <em>Environment</em> podemos hacer clic sobre la ventana<code>Import Dataset</code> para importar archivos de distintos formatos.
+Figura 2.11: En el panel <em>Environment</em> podemos hacer clic sobre la ventana<code>Import Dataset</code> para importar archivos de distintos formatos.
 </p>
 </div>
 <p>De igual manera se recomienda copiar el código al script para saber exactamente qué hacemos.</p>
 </div>
-<div id="comentarios" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Comentarios</h2>
+<div id="comentarios" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Comentarios</h2>
 <p>Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introducción-a-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esta función sirve para importar archivos.</span></span>
-<span id="cb42-2"><a href="introducción-a-r.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esta función sirve para importar archivos.</span></span>
+<span id="cb35-2"><a href="introducción-a-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Podemos ver como al poner un # antes de una línea de código esta cambia a color gris. Lo que sea que realice esta línea no será leída.</p>
 </div>
-<div id="exportar-datos" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Exportar datos</h2>
+<div id="exportar-datos" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Exportar datos</h2>
 <p>En algunas ocasiones queremos trabajar con otro software o queremos exportar nuestra tabla modificada a Excel. Para hacer esto, utilizamos la función <code>write.table()</code>, por ejemplo.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtramos nuestro archivo para tener solo las abundancias.</span></span>
-<span id="cb43-2"><a href="introducción-a-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a>Abun <span class="ot">&lt;-</span> Aves[,<span class="dv">4</span><span class="sc">:</span><span class="dv">35</span>]</span>
-<span id="cb43-3"><a href="introducción-a-r.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="introducción-a-r.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportamos nuestro archivo en formato .csv</span></span>
-<span id="cb43-5"><a href="introducción-a-r.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introducción-a-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtramos nuestro archivo para tener solo las abundancias.</span></span>
+<span id="cb36-2"><a href="introducción-a-r.html#cb36-2" aria-hidden="true" tabindex="-1"></a>Abun <span class="ot">&lt;-</span> Aves[,<span class="dv">4</span><span class="sc">:</span><span class="dv">35</span>]</span>
+<span id="cb36-3"><a href="introducción-a-r.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="introducción-a-r.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportamos nuestro archivo en formato .csv</span></span>
+<span id="cb36-5"><a href="introducción-a-r.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>De esta manera omitimos los nombres de la columnas y de las filas, además especificamos que queremos un documento en formato .csv, y que la separación sea por comas. Si no especificamos la ruta, guardaremos nuestro archivo en nuestro directorio de trabajo, si queremos guardar el archivo en un directorio específico, tendremos que dar la ruta antes de poner el nombre.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introducción-a-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(Abun, <span class="at">file =</span> <span class="st">&quot;O:/Documentos/R_Basico/Lección_1/Abundancias.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 Como podemos ver, el archivo fue escrito en la dirección indicada.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
-<img src="SaveTable.png" alt="Dirección a en la cual hemos decidido guardar el archivo *Abundancias.csv*." width="537" />
+<img src="SaveTable.png" alt="Dirección a en la cual hemos decidido guardar el archivo *Abundancias.csv*."  />
 <p class="caption">
-Figura 1.12: Dirección a en la cual hemos decidido guardar el archivo <em>Abundancias.csv</em>.
+Figura 2.12: Dirección a en la cual hemos decidido guardar el archivo <em>Abundancias.csv</em>.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
-<img src="SaveTable2.png" alt="Archivo *Abundancias.csv* visto en Excel." width="1843" />
+<img src="SaveTable2.png" alt="Archivo *Abundancias.csv* visto en Excel."  />
 <p class="caption">
-Figura 1.13: Archivo <em>Abundancias.csv</em> visto en Excel.
+Figura 2.13: Archivo <em>Abundancias.csv</em> visto en Excel.
 </p>
 </div>
 </div>
-<div id="pedir-ayuda" class="section level2" number="1.8">
-<h2><span class="header-section-number">1.8</span> Pedir ayuda</h2>
+<div id="pedir-ayuda" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Pedir ayuda</h2>
 <p>En caso de que no sepamos que argumentos van en alguna función, podemos pedir ayuda en la consola utilizando el símbolo de interrogación <code>?</code> seguido de la función sobre la cuál tengamos una duda.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-r.html#cb45-1" aria-hidden="true" tabindex="-1"></a>?specaccum</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introducción-a-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>?specaccum</span></code></pre></div>
 <p>Cuando nosotros escribimos esto, se abrirá la ventana de <em>Help</em> en el panel inferior derecho y nos mostrará una pequeña descripción de la función, así como sus usos y qué argumentos utilizar. En ocasiones incluso podemos encontrar ejemplos.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
-<img src="help.png" alt="Ventana de ayuda en la pestaña *Help* para la función que en este caso fue `?specaccum`." width="542" />
+<img src="help.png" alt="Ventana de ayuda en la pestaña *Help* para la función que en este caso fue `?specaccum`."  />
 <p class="caption">
-Figura 1.14: Ventana de ayuda en la pestaña <em>Help</em> para la función que en este caso fue <code>?specaccum</code>.
+Figura 2.14: Ventana de ayuda en la pestaña <em>Help</em> para la función que en este caso fue <code>?specaccum</code>.
 </p>
 </div>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-Palacio2020" class="csl-entry">
+Palacio, F. X., Apodaca, M. J., &amp; Crisci, J. V. (2020). <em>Análisis multivariado para datos biológicos. Teoría y su aplicación utilizando el lenguaje r</em>. Fundación Azara.
 </div>
 </div>
             </section>
@@ -6336,6 +6367,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
