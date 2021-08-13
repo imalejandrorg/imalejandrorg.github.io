@@ -206,6 +206,12 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>4.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
 <li class="chapter" data-level="4.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.2</b> Distribución binomial en R</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal"><i class="fa fa-check"></i><b>4.5</b> Distribución normal</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>4.5.1</b> Distribución normal en R</a></li>
+<li class="chapter" data-level="4.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>4.5.2</b> Pruebas de normalidad en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>4.6</b> Distribución muestral</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
@@ -250,40 +256,32 @@ Las tres medidas de tendencia central más utilizadas son: <em>media</em>, <em>m
 <p>Mide el promedio del valor de nuestros datos.
 Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
 Es representada como <span class="math inline">\(\overline{x}\)</span> (pronunciado <span class="math inline">\(x\)</span> barra) para datos muestrales y <span class="math inline">\(\mu\)</span> (pronunciado mu) para datos poblacionales.
-Para obtener la media muestral utilizamos la ecuación <a href="estadística-descriptiva.html#eq:mean1">(3.1)</a> y para obtener la media poblacional se utiliza la ecuación <a href="#eq:mean2">(<strong>??</strong>)</a>.</p>
+Para obtener la media muestral utilizamos la ecuación <a href="estadística-descriptiva.html#eq:mean1">(3.1)</a> y para obtener la media poblacional se utiliza la ecuación <a href="estadística-descriptiva.html#eq:mean2">(3.2)</a>.</p>
 <p><span class="math display" id="eq:mean1">\[\begin{equation}
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 \tag{3.1}
 \end{equation}\]</span></p>
-<pre><code>```{=tex}
-\begin{equation}
+<p><span class="math display" id="eq:mean2">\[\begin{equation}
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
-(\#eq:mean2)
-\end{equation}
-
-Donde $\sum_{i=1}^{n}{x_i}$ y $\sum_{i=1}^{N}{x_i}$ representan la sumatoria de los valores de todas nuestras observaciones; $n$ y $N$ representan el número de valores de datos en una muestra y el número de valores totales en una población, respectivamente.
-
-Propiedades importantes de la **media:**
-
--   No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
-
--   Utiliza todos los datos disponibles.
-
--   Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
-
-#### Media en R
-
-El calculo de la media en R es algo sencillo.
-Para esto, utilizamos la función `mean()`.
-
-&gt; **Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas.
-&gt; Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).
-
-Se utilizará la base de datos `PlantGrowth` para este ejemplo.
-
-
-```r
-data(&quot;PlantGrowth&quot;)</code></pre>
+\tag{3.2}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\sum_{i=1}^{n}{x_i}\)</span> y <span class="math inline">\(\sum_{i=1}^{N}{x_i}\)</span> representan la sumatoria de los valores de todas nuestras observaciones; <span class="math inline">\(n\)</span> y <span class="math inline">\(N\)</span> representan el número de valores de datos en una muestra y el número de valores totales en una población, respectivamente.</p>
+<p>Propiedades importantes de la <strong>media:</strong></p>
+<ul>
+<li><p>No es un estadístico <em>robusto</em>, ya que es sensible a valores extremadamente grandes o pequeños.</p></li>
+<li><p>Utiliza todos los datos disponibles.</p></li>
+<li><p>Las medias muestrales (<span class="math inline">\(\overline{x}\)</span>) de una población tienden a variar menos que otras medidas.</p></li>
+</ul>
+<div id="media-en-r" class="section level4" number="3.1.1.1">
+<h4><span class="header-section-number">3.1.1.1</span> Media en R</h4>
+<p>El calculo de la media en R es algo sencillo.
+Para esto, utilizamos la función <code>mean()</code>.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas.
+Supongamos que queremos saber cuál fue la media global para todos los pesos (independientemente del tratamiento).</p>
+</blockquote>
+<p>Se utilizará la base de datos <code>PlantGrowth</code> para este ejemplo.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estadística-descriptiva.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span></code></pre></div>
 <p>Es importante que conozcamos los datos que incluye nuestra matriz.
 En este caso tenemos dos columnas, <em>weight</em> que hace referencia al peso seco y <em>group</em> que hace referencia al tratamiento.
 Para sacar la media global (independiente del tratamiento) simplemente escribimos la función <code>mean()</code> y hacemos referencia al peso con el símbolo <code>$</code>.</p>
@@ -302,6 +300,7 @@ Vamos a usar el <strong>pipeline</strong> <code>%&gt;%</code> de <code>dplyr</co
 ## 2 trt1   4.66    10
 ## 3 trt2   5.53    10</code></pre>
 <p>Al final obtenemos una matriz nueva con 3 columnas: tipo de tratamiento, media para cada tratamiento y número de observaciones para cada tipo de tratamiento.</p>
+</div>
 </div>
 <div id="mediana" class="section level3" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Mediana</h3>
@@ -404,14 +403,14 @@ Las medidas que veremos son: <strong>rango</strong> y <strong>desviación están
 </div>
 <div id="desviación-estándar" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Desviación estándar</h3>
-<p>Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo <span class="math inline">\(s\)</span> para datos muestrales y se calcula con la ecuación <a href="estadística-descriptiva.html#eq:sd1">(3.2)</a> y <span class="math inline">\(\sigma\)</span> para datos poblacionales y se calcula a partir de la ecuación <a href="estadística-descriptiva.html#eq:sd2">(3.3)</a>.</p>
+<p>Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo <span class="math inline">\(s\)</span> para datos muestrales y se calcula con la ecuación <a href="estadística-descriptiva.html#eq:sd1">(3.3)</a> y <span class="math inline">\(\sigma\)</span> para datos poblacionales y se calcula a partir de la ecuación <a href="estadística-descriptiva.html#eq:sd2">(3.4)</a>.</p>
 <p><span class="math display" id="eq:sd1">\[\begin{equation}
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
-\tag{3.2}
+\tag{3.3}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:sd2">\[\begin{equation}
 \sigma = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{N}}
-\tag{3.3}
+\tag{3.4}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\sum_{i = 1}^{n}({x_i-\overline{x})^2}\)</span> es igual al valor cada observación menos la media, elevado al cuadrado, <span class="math inline">\({n-1}\)</span> corresponde a los grados de libertad que tenemos para el cálculo de la desviación estándar y <span class="math inline">\(N\)</span> es el número total de la población.</p>
 <p>Propiedades importantes de la <strong>desviación estándar:</strong></p>
@@ -455,10 +454,10 @@ Para calcular <span class="math inline">\(\sigma\)</span> necesitamos multiplica
 <pre><code>## [1] 0.6894063</code></pre>
 <p>En caso de que se utilice frecuentemente la <span class="math inline">\(\sigma\)</span> se puede definir la función de la siguiente manera.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="estadística-descriptiva.html#cb66-1" aria-hidden="true" tabindex="-1"></a>sd.p <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">sd</span>(x)<span class="sc">*</span><span class="fu">sqrt</span>((<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(x))}</span></code></pre></div>
-<p>Para calcular la <strong>varianza</strong> <span class="math inline">\(s^2\)</span>, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación <a href="estadística-descriptiva.html#eq:var">(3.4)</a>.</p>
+<p>Para calcular la <strong>varianza</strong> <span class="math inline">\(s^2\)</span>, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación <a href="estadística-descriptiva.html#eq:var">(3.5)</a>.</p>
 <span class="math display" id="eq:var">\[\begin{equation}
 Varianza = {s}^2
-\tag{3.4}
+\tag{3.5}
 \end{equation}\]</span>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="estadística-descriptiva.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.49167</code></pre>
@@ -468,10 +467,10 @@ Varianza = {s}^2
 <li>No es un estadístico <em>robusto.</em></li>
 <li>Nunca tiene valores negativos.</li>
 </ul>
-<p>Otro estadístico que nos puede interesare es el <strong>coeficiente de variación</strong> que se obtiene a partir de la ecuación <a href="estadística-descriptiva.html#eq:cv">(3.5)</a>.</p>
+<p>Otro estadístico que nos puede interesare es el <strong>coeficiente de variación</strong> que se obtiene a partir de la ecuación <a href="estadística-descriptiva.html#eq:cv">(3.6)</a>.</p>
 <span class="math display" id="eq:cv">\[\begin{equation}
 CV = \frac{S}{\overline{x}}*100
-\tag{3.5}
+\tag{3.6}
 \end{equation}\]</span>
 <p>Para su calculo simplemente utilizamos las funciones previamente aprendidas.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="estadística-descriptiva.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">/</span><span class="fu">mean</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
@@ -498,15 +497,15 @@ Algunas de las más usadas son: <strong>valores Z</strong>, <strong>frecuencia a
 <h3><span class="header-section-number">3.3.1</span> Valores Z</h3>
 <p>Se obtienen al estandarizar los valores de nuestros datos.
 Es el número de desviaciones estándar a las que se encuentra un valor dado.
-Se puede calcular el valor z muestral y poblacional con las ecuaciones <a href="estadística-descriptiva.html#eq:z1">(3.6)</a> y <a href="estadística-descriptiva.html#eq:z2">(3.7)</a>.</p>
-<span class="math display" id="eq:z1">\[\begin{equation}
-z = \frac{x - \overline{x}}{s}
-\tag{3.6}
-\end{equation}\]</span>
-<span class="math display" id="eq:z2">\[\begin{equation}
-z = \frac{x - \mu}{\sigma}
+Se puede calcular el valor z muestral y poblacional con las ecuaciones <a href="estadística-descriptiva.html#eq:z1">(3.7)</a> y <a href="estadística-descriptiva.html#eq:z2">(3.8)</a>.</p>
+<p><span class="math display" id="eq:z1">\[\begin{equation}
+Z = \frac{X - \overline{x}}{s}
 \tag{3.7}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:z2">\[\begin{equation}
+Z = \frac{X - \mu}{\sigma}
+\tag{3.8}
+\end{equation}\]</span></p>
 <p>Propiedades importantes de los <strong>valores Z:</strong></p>
 <ul>
 <li>No tienen unidades de medida.</li>
@@ -576,11 +575,11 @@ De hecho, hemos incluido este valor en nuestra tabla de resumen desde un inicio.
 </div>
 <div id="frecuencia-relativa" class="section level3" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Frecuencia relativa</h3>
-<p>Es el valor relativo de cada dato respecto del total como se observa en la ecuación <a href="estadística-descriptiva.html#eq:frecr">(3.8)</a>.
+<p>Es el valor relativo de cada dato respecto del total como se observa en la ecuación <a href="estadística-descriptiva.html#eq:frecr">(3.9)</a>.
 Si se le multiplica por 100% se obtiene su valor en porcentaje.</p>
 <span class="math display" id="eq:frecr">\[\begin{equation}
 f_i = \frac{n_i}{N}
-\tag{3.8}
+\tag{3.9}
 \end{equation}\]</span>
 <p>Donde <span class="math inline">\(f_i\)</span> es la frecuencia de la i-ésima observación y <span class="math inline">\(n_i\)</span> es el número de observaciones en la i-ésima observación.</p>
 <div id="frecuencia-relativa-en-r" class="section level4" number="3.3.3.1">

@@ -37,8 +37,8 @@ Para obtener la media muestral utilizamos la ecuación \@ref(eq:mean1) y para ob
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 (\#eq:mean1)
 \end{equation}
-```
-```{=tex}
+
+
 \begin{equation}
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
 (\#eq:mean2)
@@ -301,18 +301,18 @@ Se obtienen al estandarizar los valores de nuestros datos.
 Es el número de desviaciones estándar a las que se encuentra un valor dado.
 Se puede calcular el valor z muestral y poblacional con las ecuaciones \@ref(eq:z1) y \@ref(eq:z2).
 
-```{=tex}
+
 \begin{equation}
-z = \frac{x - \overline{x}}{s}
+Z = \frac{X - \overline{x}}{s}
 (\#eq:z1)
 \end{equation}
-```
-```{=tex}
+
+
 \begin{equation}
-z = \frac{x - \mu}{\sigma}
+Z = \frac{X - \mu}{\sigma}
 (\#eq:z2)
 \end{equation}
-```
+
 Propiedades importantes de los **valores Z:**
 
 -   No tienen unidades de medida.

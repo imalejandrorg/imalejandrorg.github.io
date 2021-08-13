@@ -15,6 +15,7 @@ library(bookdown)
 library(tidyverse)
 library(kableExtra)
 library(ggthemes)
+library(cowplot)
 ```
 
 La **probabilidad** es una cantidad numérica que expresa qué tan factible es que ocurra un evento.
@@ -32,7 +33,7 @@ P(A) = \frac{num_{A}}{num_{T}}
 (\#eq:prob)
 \end{equation}
 
-Donde $\tt num_{A}$ es el número de veces que se repite el evento A y $\tt  num_{T}$ es el número total de repeticiones.
+Donde $\tt num_{A}$ es el número de veces que se repite el evento A y $\tt num_{T}$ es el número total de repeticiones.
 
 ## Reglas de probabilidad
 
@@ -42,11 +43,11 @@ Estas son algunas reglas que nos pueden servir para determinar la probabilidad d
 
 2.  La suma de probabilidades de los eventos tiene que ser igual a 1.
 
-3.  La probabilidad de que el evento A no ocurra es $\tt  1 - P(A)$ y se denota con el símbolo $\tt  A_1^C$, indicando que es el complemento de $\tt  A_1$.
+3.  La probabilidad de que el evento A no ocurra es $\tt 1 - P(A)$ y se denota con el símbolo $\tt A_1^C$, indicando que es el complemento de $\tt A_1$.
 
-4.  Si dos eventos $\tt  A_1$ y $\tt  A_2$ son eventos que no ocurren en conjunto, entonces $\tt  P(A_1 \cup A_2) = P(A_1) + P(A_2)$.
+4.  Si dos eventos $\tt A_1$ y $\tt A_2$ son eventos que no ocurren en conjunto, entonces $\tt P(A_1 \cup A_2) = P(A_1) + P(A_2)$.
 
-5.  Para dos eventos que ocurren en conjunto, $\tt  P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)$.
+5.  Para dos eventos que ocurren en conjunto, $\tt P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)$.
 
 +-----------------+--------------+---------------+--------------+------------+
 |                 | Cabello Café | Cabello Negro | Cabello Rojo | Total      |
@@ -58,64 +59,73 @@ Estas son algunas reglas que nos pueden servir para determinar la probabilidad d
 | **Total**       | 1200         | 500           | 70           | 1770       |
 +-----------------+--------------+---------------+--------------+------------+
 
-En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR), $\tt  P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770$.
+En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR), $\tt P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770$.
 
-La probabilidad de que alguien tenga el cabello café $\tt  P(CC) = 1200/1770$.
+La probabilidad de que alguien tenga el cabello café $\tt P(CC) = 1200/1770$.
 
-La probabilidad de tener ojos azules $\tt  P(OA) = 1050/1770$.
+La probabilidad de tener ojos azules $\tt P(OA) = 1050/1770$.
 
-La probabilidad de tener cabello negro y ojos azules $\tt  P(CN \cap OA)$ pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
-Entonces $\tt  P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770$.
+La probabilidad de tener cabello negro y ojos azules $\tt P(CN \cap OA)$ pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
+Entonces $\tt P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770$.
 
 La fórmula de **probabilidad condicional** es la siguiente:
+
 
 \begin{equation}
 P(A_1 | A_2) = \frac{P(A_1 \cap A_2)}{P(A_2)}
 (\#eq:prob)
 \end{equation}
 
-6.  Si dos eventos, $\tt  A_1$ y $\tt  A_2$ son **independientes,** entonces $\tt  P(A_1 \cap A_2) = P(A_1)*P(A_2)$.
+6.  Si dos eventos, $\tt A_1$ y $\tt A_2$ son **independientes,** entonces $\tt P(A_1 \cap A_2) = P(A_1)*P(A_2)$.
 
-7.  Para cualquier evento $\tt  A_1$ y $\tt  A_2$, $\tt  P(A_1 \cap A_2) = P(A_1) * P(A_2 | A_1)$.
+7.  Para cualquier evento $\tt A_1$ y $\tt A_2$, $\tt P(A_1 \cap A_2) = P(A_1) * P(A_2 | A_1)$.
 
 Por ejemplo, de la tabla anterior, ¿Cuál es la probabilidad de que una persona tenga cabello rojo y ojos cafés?
-En este caso, $\tt  P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770$.
+En este caso, $\tt P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770$.
 
-8.  Para dos eventos cualesquiera, $\tt  A_1$ y $\tt  A_2$, $\tt  P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )$ donde $\tt  A_2^C$ es el complemento de $\tt  A_2$, es decir $\tt  1 - A_2$.
+8.  Para dos eventos cualesquiera, $\tt A_1$ y $\tt A_2$, $\tt P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )$ donde $\tt A_2^C$ es el complemento de $\tt A_2$, es decir $\tt 1 - A_2$.
 
 ## Curvas de densidad
 
-Se utilizan para variables continuas. Los **histogramas de frecuencias relativas** representan las proporciones de las observaciones en cada categoría, en lugar del total de observaciones. Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una **curva de densidad.** La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva. El área total bajo la curva debe ser igual a 1.
+Se utilizan para variables continuas.
+Los **histogramas de frecuencias relativas** representan las proporciones de las observaciones en cada categoría, en lugar del total de observaciones.
+Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una **curva de densidad.** La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva.
+El área total bajo la curva debe ser igual a 1.
 
 ```{r echo=FALSE, message=TRUE, warning=TRUE, paged.print=FALSE, fig.cap = "Curva de densidad", fig.align = "center"}
 data <- data.frame("x" = rnorm(100000, mean = 0, sd = 1))
 ggplot(data, aes(x = x)) +
-  geom_density(fill = "lightblue", alpha = 0.4) +
-  labs(x = "", y = "Densidad") +
-  theme_classic()
+  geom_density(size = 0.6) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  theme_minimal_hgrid()
 ```
 
 Una probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos.
 
 ## Distribución binomial
 
-La **distribución binomial** de una variable aleatoria es una distribución de probabilidad discreta, que cuenta el número de éxitos tras realizar $\tt  n$ veces un experimento, cada *intento* debe ser independiente entre sí. La probabilidad de éxito es fija entre cada intento y se denota con la letra $\tt  p$. Lo primero que se nos viene a la mente con este tipo de distribuciones son *lanzamientos de moneda*, sin embargo, el comportamiento de muchos genes también sigue una distribución binomial.
+La **distribución binomial** de una variable aleatoria es una distribución de probabilidad discreta, que cuenta el número de éxitos tras realizar $\tt n$ veces un experimento, cada *intento* debe ser independiente entre sí.
+La probabilidad de éxito es fija entre cada intento y se denota con la letra $\tt p$.
+Lo primero que se nos viene a la mente con este tipo de distribuciones son *lanzamientos de moneda*, sin embargo, el comportamiento de muchos genes también sigue una distribución binomial.
 
 Normalmente, para que una variable aleatoria sea una **variable aleatoria binomial** se requieren los siguientes requisitos:
 
-1. **Resultados binarios:** Solamente existen dos posibilidades para cada intento (éxito o fracaso, cara o cruz, dominante o recesivo, muerto o vivo, niño o niña, etc.). 
+1.  **Resultados binarios:** Solamente existen dos posibilidades para cada intento (éxito o fracaso, cara o cruz, dominante o recesivo, muerto o vivo, niño o niña, etc.).
 
-2. **Intentos independientes:** Cada prueba o intento deben ser independientes del anterior.
+2.  **Intentos independientes:** Cada prueba o intento deben ser independientes del anterior.
 
-3. **El valor de $\tt  n$ es fijo:** Se sabe con antelación el número de pruebas $\tt  n$. 
+3.  **El valor de** $\tt n$ es fijo: Se sabe con antelación el número de pruebas $\tt n$.
 
-4. **Mismo valor $\tt  p$:** En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir $\tt  p$ debe permanecer constante.
+4.  **Mismo valor** $\tt p$: En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir $\tt p$ debe permanecer constante.
 
-5. **Resultados mutuamente excluyentes:** Es decir, no se puede tener éxito y fracaso al mismo tiempo.
+5.  **Resultados mutuamente excluyentes:** Es decir, no se puede tener éxito y fracaso al mismo tiempo.
 
-6. **Resultados colectivamente exhaustivos:** Al menos uno de los dos resultados debe de ocurrir.
+6.  **Resultados colectivamente exhaustivos:** Al menos uno de los dos resultados debe de ocurrir.
 
 Ahora bien, la fórmula de la distribución binomial se indica en la ecuación \@ref(eq:binom).
+
 
 \begin{equation}
 P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
@@ -124,17 +134,18 @@ P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
 
 Donde:
 
-- $\tt  P(X = k)$ = probabilidad de obtener $\tt  k$ éxitos.
+-   $\tt P(X = k)$ = probabilidad de obtener $\tt k$ éxitos.
 
-- $\tt  \binom{n}{k}$ = coeficiente binomial, que se calcula con la fórmula \@ref(eq:binc).
+-   $\tt \binom{n}{k}$ = coeficiente binomial, que se calcula con la fórmula \@ref(eq:binc).
 
-- $\tt  k$ = número de éxitos.
+-   $\tt k$ = número de éxitos.
 
-- $\tt  p$ = probabilidad de éxito.
+-   $\tt p$ = probabilidad de éxito.
 
-- $\tt  q$ = probabilidad de fracaso.
+-   $\tt q$ = probabilidad de fracaso.
 
-- $\tt  n$ = número de pruebas.
+-   $\tt n$ = número de pruebas.
+
 
 \begin{equation}
 _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
@@ -143,16 +154,19 @@ _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
 
 ### Media y desviación estándar de la distribución binomial
 
-Se pueden calcular tanto la **media** como la **desviación estándar** de una distribución binomial. La media es el número promedio de éxitos, y la desviación estándar es qué tanto se desvían de la media los valores.
+Se pueden calcular tanto la **media** como la **desviación estándar** de una distribución binomial.
+La media es el número promedio de éxitos, y la desviación estándar es qué tanto se desvían de la media los valores.
 
 La media de una distribución binomial se calcula con la ecuación \@ref(eq:meanbinom).
+
 
 \begin{equation}
 \mu = {n}{p}
 (\#eq:meanbinom)
 \end{equation}
- 
+
 En cuanto a la desviación estándar se calcula con la siguiente ecuación \@ref(eq:sdbinom).
+
 
 \begin{equation}
 \sigma = \sqrt{{n}{p}{(1-p)}} = \sqrt{{n}{p}{q}}
@@ -160,37 +174,50 @@ En cuanto a la desviación estándar se calcula con la siguiente ecuación \@ref
 \end{equation}
 
 En caso de querer obtener la **varianza**, simplemente tomamos la ecuación \@ref(eq:sdbinom) sin aplicar la raíz cuadrada.
+
 \begin{equation}
-\sigma^2 = {n}{p}{(1-p)} = {n}{p}{q}
+\sigma\^2 = {n}{p}{(1-p)} = {n}{p}{q}
 (\#eq:varbinom)
 \end{equation}
 
-
 ### Distribución binomial en R
 
-Para utilizar la distribución binomial en R es bastante sencillo. Veamos el siguiente ejemplo.
+Para utilizar la distribución binomial en R es bastante sencillo.
+Veamos el siguiente ejemplo.
 
-> **Ejemplo:** Supongamos que analizamos a 5 individuos de una población en la que el 37% de las personas presentan un alelo mutante. Las probabilidades de las distintas configuraciones están dadas por la distribución binomial, en donde $n$ = 5 y $p$ = 0.37. ¿Cuál es la probabilidad de que exactamente 2 personas sean mutantes?
+> **Ejemplo:** Supongamos que analizamos a 5 individuos de una población en la que el 37% de las personas presentan un alelo mutante.
+> Las probabilidades de las distintas configuraciones están dadas por la distribución binomial, en donde $n$ = 5 y $p$ = 0.37.
+> ¿Cuál es la probabilidad de que exactamente 2 personas sean mutantes?
 
 Antes de continuar, hay que saber que existen 4 distintos comandos de la función binomial:
 
--`dbinom()` nos da un valor exacto de la distribución binomial en el punto indicado.
+\-`dbinom()` nos da un valor exacto de la distribución binomial en el punto indicado.
 
--`pbinom()` nos da la probabilidad acumulada de un evento. 
+\-`pbinom()` nos da la probabilidad acumulada de un evento.
 
--`qbinom()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad.
+\-`qbinom()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad.
 
--`rbinom()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
+\-`rbinom()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
 
-En este caso, queremos conocer la probabilidad exacta de que 2 personas sean mutantes. Para esto necesitamos la función `dbinom(x, size, prob)`, donde el argumento `x` equivale al número de éxitos, `size` al número de ensayos y `prob` a la probabilidad de éxito.
+En este caso, queremos conocer la probabilidad exacta de que 2 personas sean mutantes.
+Para esto necesitamos la función `dbinom(x, size, prob)`, donde el argumento `x` equivale al número de éxitos, `size` al número de ensayos y `prob` a la probabilidad de éxito.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 dbinom(2, 5, 0.37)
 ```
 
-> **Ejemplo**: En Estados Unidos, 85% de la población tiene sangre Rh positivo. Supongamos que tomamos 6 personas y contamos cuántos tiene Rh positivo. En este caso $Y$ representará cuántas personas tienen Rh positivo dentro del grupo de 6. ¿Cuál es la probabilidad de $Y$ = 4? ¿Y la probabilidad de que *al menos* 4 personas sean Rh positivo? ¿Y la probabilidad de que haya *al menos* 1 persona con Rh negativo?
+> **Ejemplo**: En Estados Unidos, 85% de la población tiene sangre Rh positivo.
+> Supongamos que tomamos 6 personas y contamos cuántos tiene Rh positivo.
+> En este caso $Y$ representará cuántas personas tienen Rh positivo dentro del grupo de 6.
+> ¿Cuál es la probabilidad de $Y$ = 4?
+> ¿Y la probabilidad de que *al menos* 4 personas sean Rh positivo?
+> ¿Y la probabilidad de que haya *al menos* 1 persona con Rh negativo?
 
-En este caso debemos utilizar dos comandos, `dbinom()` y `pbinom()`, con uno calcularemos $\tt  Y = 4$ y con el otro $\tt  Y \ge 4$  (4 o más). Como queremos obtener $\tt  P(Y \ge 4)$, entonces $\tt  P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)$, utilizamos el argumento `lower.tail` y lo ponemos en `FALSE` para indicar que vamos a trabajar con un valor mínimo de 4, para arriba. Para el caso de *al menos* una persona con Rh negativo $\tt  P(Y < 6)$, tenemos dos opciones. Usar `dbinom()` cinco veces para calcular el valor individual de $\tt  P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots  + P(Y = 5)$, o calcular  $\tt  P(Y = 6)$ y restarle a 1 este valor. Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la segunda.
+En este caso debemos utilizar dos comandos, `dbinom()` y `pbinom()`, con uno calcularemos $\tt Y = 4$ y con el otro $\tt Y \ge 4$ (4 o más).
+Como queremos obtener $\tt P(Y \ge 4)$, entonces $\tt P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)$, utilizamos el argumento `lower.tail` y lo ponemos en `FALSE` para indicar que vamos a trabajar con un valor mínimo de 4, para arriba.
+Para el caso de *al menos* una persona con Rh negativo $\tt P(Y < 6)$, tenemos dos opciones.
+Usar `dbinom()` cinco veces para calcular el valor individual de $\tt P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)$, o calcular $\tt P(Y = 6)$ y restarle a 1 este valor.
+Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la segunda.
 
 ```{r}
 dbinom(4, 6, 0.85)
@@ -199,3 +226,219 @@ dbinom(0, 6, 0.85) + dbinom(1, 6, 0.85) + dbinom(2, 6, 0.85) + dbinom(3, 6, 0.85
 1 - dbinom(6, 6, 0.85)
 ```
 
+## Distribución normal
+
+Una **distribución normal** corresponde a una curva *en forma de campana*, con ciertas características específicas.
+Se utiliza para representar la distribución de los valores de una variable $\tt X$, de dos maneras distintas: (1) como una aproximación a un histograma basado en los valores muestreados de la variable $\tt X$ o; (2) como una representación idealizada de la distribución poblacional de $\tt X$.
+
+Las curvas con distribución normal toman su forma por dos elementos muy importantes: la **media** $\mu$ y su **desviación estándar** $\sigma$.
+Cuando se tiene una curva con distribución normal, se expresa de la siguiente manera $\tt X \sim N(\mu, \sigma)$.
+La fórmula de la distribución normal se encuentra en la ecuación \@ref(eq:norm).
+No se trata de cualquier curva simétrica, si no de una curva simétrica *específica*.
+
+
+\begin{equation}
+f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+(\#eq:norm)
+\end{equation}
+
+La función $\tt f(x)$ se conoce como **función de densidad** y expresa la altura de la curva como una función de la posición en el eje horizontal.
+El centro de una curva normal es $\tt x = \mu$, los puntos de inflexión están en $\tt x = \mu + \sigma$ y $\tt x = \mu - \sigma$.
+En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultados valores demasiado pequeños.
+El ancho y alto de una curva normal está determinado por la desviación estándar $\sigma$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Forma de la distribución normal."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, size = 0.6) +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid()
+```
+
+Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva**.
+Para esto utilizamos la **escala estandarizada**, en el cual el valor del eje horizontal se denomina **valor Z**.
+La escala de Z mide las desviaciones estándar a partir de la media, por ejemplo, $z = 1$ corresponde a una desviación estándar de la media.
+Para transformar nuestros datos a la escala Z simplemente aplicamos la ecuación \@ref(eq:Z) y a la variable Z se le conoce como una variable de **distribución normal estándar**, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable Z es *adimensional*.
+
+
+\begin{equation}
+Z = \frac{X - \mu}{\sigma}
+(\#eq:Z)
+\end{equation}
+
+Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar **tablas de Z** para realizar el cálculo debajo del área que corresponde al valor Z obtenido, aunque claro, también podemos hacer estos cálculos en `R`.
+Hay que tener en cuenta que para una curva de distribución normal estándar:
+
+-   68% del área se encuentra entre $\tt \pm$ 1 distribución estándar.
+
+-   95% del área se encuentra entre $\tt \pm$ 2 distribuciones estándar.
+
+-   99.7% del área se encuentra entre $\tt \pm$ 3 distribuciones estándar.
+
+### Distribución normal en R
+
+De manera similar a la distribución binomial, en `R` encontramos comandos similares para la distribución normal, donde tenemos:
+
+\-`dnorm()` nos da un valor de densidad normal en determinado punto (valor puntual de la función de densidad).
+
+\-`pnorm()` nos da un valor de densidad normal acumulado hasta cierto punto (área debajo de la curva).
+
+\-`qnorm()` toma el valor de densidad normal que le ponemos como primer argumento y nos da como regreso un número cuya densidad normal acumulada empate con el valor de densidad normal ingresado.
+
+\-`rnorm()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad normal.
+
+Intentemos resolver algunos ejercicios.
+
+> **Ejemplo:** En una población de peces de la especie *Pomolobus aestivalis*, la longitud de los individuos sigue una distribución normal. La media de la longitud es de 54.0 mm, y la desviación estándar es de 4.5 mm^2^. ¿Qué porcentaje de los peces mide menos de 60 mm? ¿Qué porcentaje de los peces mide más de 51 mm? ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?
+
+Para responder la primer pregunta, debemos transformar nuestros datos a valores Z, ya que se encuentran en mm. Para esto aplicamos la ecuación \@ref(eq:Z). En `R` es una operación relativamente sencilla de hacer.
+
+```{r}
+(60 - 54)/(4.5)
+```
+
+Como podemos ver, el valor Z de 60 mm es igual a 1.33. Lo siguiente sería encontrar *el área bajo la curva* que corresponda a este valor Z. Para esto utilizamos la función `pnorm()`.
+
+```{r}
+pnorm(1.33, 0, 1, lower.tail = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = 1.33"}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-3, 1.33)) +
+  stat_function(fun = dnorm, size = 0.6) +
+  geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.5) +
+  geom_text(aes(x = 2.2, label = "Área = 0.9082", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
+  geom_text(aes(x = 2.25, label = "Z = 1.33", y = 0.26), color = "black", vjust = -3, size = 4.5) +
+  xlim(-4, 4) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid()
+```
+
+
+De nuevo, el argumento `lower.tail = TRUE` significa que encontrará la probabilidad acumulada de valores Z menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.
+
+Para la segunda pregunta, primero debemos encontrar el valor de Z correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`. 
+
+```{r}
+(51 - 54)/(4.5)
+
+pnorm(-0.67, 0, 1, lower.tail = FALSE)
+```
+
+Como podemos ver el resultado indica que 75.86% de los peces miden más de 51 mm. Bastante sencillo, ¿no?
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-0.67, 3)) +
+  stat_function(fun = dnorm, size = 0.6) +
+  geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.5) +
+  geom_text(aes(x = -1.8, label = "Área = 0.7486", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
+  geom_text(aes(x = -1.7, label = "Z = -0.67", y = 0.26), color = "black", vjust = -3, size = 4.5) +
+  xlim(-4, 4) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+    scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid()
+```
+
+Ahora para la última pregunta, simplemente calculamos la probabilidad acumulada hasta nuestro valor Z más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor Z más pequeño, que corresponde -0.67.
+
+```{r}
+pnorm(1.33, 0, 1) - pnorm(-0.67, 0, 1)
+```
+
+Como resultado obtenemos que el 65.68% de los peces se encuentran en longitudes de entre 51 mm y 60 mm. Si nos damos cuenta, la distribución normal puede, de cierta manera, interpretarse como una distribución de probabilidad continua.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un intervalo entre Z = -0.67 y Z = 1.33."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-0.67, 1.33)) +
+  stat_function(fun = dnorm, size = 0.6) +
+  geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.5) +
+  geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.5) +
+  geom_text(aes(x = -1.8, label = "Área = 0.6568", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
+  geom_text(aes(x = -1.7, label = "Z = -0.67", y = 0.26), color = "black", vjust = -3, size = 4.5) +
+  geom_text(aes(x = 1.9, label = "Z = 1.33", y = 0.26), color = "black", vjust = -3, size = 4.5) +
+  xlim(-4, 4) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+    scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid()
+```
+
+
+En algunas ocasiones, queremos encontrar el valor Z correspondiente a un área bajo la curva determinada, para este tipo de ocasiones, utilizamos la función `qnorm()`.
+
+Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable $\tt y$. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que $y$ y el 30% son mayores.
+
+```{r}
+qnorm(0.7, 0, 1)
+```
+
+Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(0.5244, 3)) +
+  stat_function(fun = dnorm, size = 0.6) +
+  geom_vline(aes(xintercept = 0.5244), linetype = "dashed", size = 0.5) +
+  geom_text(aes(x = 1.8, label = "Área = 0.7", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
+  geom_text(aes(x = 2.18, label = "Z = 0.5244", y = 0.26), color = "black", vjust = -3, size = 4.5) +
+  xlim(-4, 4) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+    scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid()
+```
+
+### Pruebas de normalidad en R
+
+Ya que muchos procedimientos estadísticos se basan en datos provenientes de una población con distribución normal, es importante saber si nuestros datos siguen está distribución.
+
+Uno de los métodos más utilizados son los **gráficos cuantil-cuantil**, **gráficos Q-Q** o **Q-Q plot**. Veamos un ejemplo con datos de plantas que vienen incluidas en `ggplot2`. 
+
+```{r}
+data("PlantGrowth")
+PlantGrowth
+```
+
+Como podemos ver, tenemos tres grupos, el control, tratamiento 1 y tratamiento 2. Vamos a enfocarnos solamente en los datos del grupo del tratamiento 1.
+
+```{r}
+Datos <- PlantGrowth %>% dplyr::select(starts_with("trt1"), weight)
+Datos
+```
+
+Recordemos que podemos utilizar la librería `dplyr` para extraer ciertos datos de nuestras matrices de datos. Lo que haremos ahora es utilizar el gráfico Q-Q para comprar los datos de nuestra muestra con  unos datos teóricos que siguen una distribución normal. En caso de que nuestros datos se comporten de manera normal, deberíamos de tener casi una línea recta. Para esto necesitaremos la librería `ggpubr`.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico Q-Q comparando una muestra de datos contra una muestra teórica con distribución normal."}
+library(ggpubr)
+
+ggqqplot(Datos$weight) +
+  xlab("Teórico") +
+  ylab("Muestra")
+```
+
+Otra opción sería realizar el gráfico de densidad, pero muchas veces es difícil identificar la forma de campana en cierto conjunto de datos, así que los gráficos Q-Q son de gran ayuda.
+
+Otra opción para realizar una prueba de normalidad conocida como **prueba de Shapiro-Wilks** (aunque no se recomienda que para $n > 50$), pero es muy sensible a ligeras desviaciones de la normalidad, sobre todo con un tamaño de muestra grande. Es muy sencillo de realizar en `R`, simplemente utilizamos el comando `shapiro_test()` del paquete `rstatix`. En este caso, vamos a analizar si nuestros dos tratamientos y el control siguen una distribución normal. Para esto, vamos a hacer uso de la librería `dplyr`.
+
+```{r}
+library(rstatix)
+
+PlantGrowth %>% group_by(group) %>% shapiro_test(weight) #Agrupamos los datos por tipo de tratamiento y hacemos la prueba a la variable "weight".
+```
+
+¿Cómo interpretamos los resultados y qué significa el valor-*p*? Bueno, ya que el control y los dos tratamientos tienen un valor-*p* > 0.05 decimos que se distribuyen de manera normal. Valores-*p* menores a 0.05 son indicativos fuertes de no-normalidad. Después de obtener un valor menor a 0.05, podríamos corroborar esto con un gráfico Q-Q o con un histograma para ver la forma de la distribución de nuestros datos.
+
+
+## Distribución muestral
