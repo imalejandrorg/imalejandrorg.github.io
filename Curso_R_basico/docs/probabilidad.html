@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="estadística-descriptiva.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="intervalos-de-confianza.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,8 +52,6 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -120,28 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -216,16 +192,17 @@ div.csl-indent {
 <li class="chapter" data-level="4.6.1" data-path="probabilidad.html"><a href="probabilidad.html#poblaciones-muestras-y-distribuciones-muestrales"><i class="fa fa-check"></i><b>4.6.1</b> Poblaciones, muestras y distribuciones muestrales</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html"><i class="fa fa-check"></i><b>5</b> Intervalos de confianza</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
+<li class="chapter" data-level="6" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>6</b> Análisis de Varianza (ANOVA)</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>5.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>5.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="5.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>5.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<li class="chapter" data-level="6.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>6.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="6.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>6.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="6.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>6.3</b> Análisis de varianza (ANOVA de una vía)</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>5.3.1</b> ANOVA en R</a></li>
+<li class="chapter" data-level="6.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>6.3.1</b> ANOVA en R</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>5.4</b> Pruebas <em>post hoc</em></a></li>
+<li class="chapter" data-level="6.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>6.4</b> Pruebas <em>post hoc</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -259,7 +236,7 @@ Existen distintas interpretaciones de la probabilidad como la <strong>frecuentis
 P(A) = \frac{num_{A}}{num_{T}}
 \tag{4.1}
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\tt num_{A}\)</span> es el número de veces que se repite el evento A y <span class="math inline">\(\tt num_{T}\)</span> es el número total de repeticiones.</p>
+<p>Donde <span class="math inline">\(num_{A}\)</span> es el número de veces que se repite el evento A y <span class="math inline">\(num_{T}\)</span> es el número total de repeticiones.</p>
 </div>
 <div id="reglas-de-probabilidad" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Reglas de probabilidad</h2>
@@ -267,9 +244,9 @@ P(A) = \frac{num_{A}}{num_{T}}
 <ol style="list-style-type: decimal">
 <li><p>La probabilidad de un evento A siempre se encuentra entre 0 y 1.</p></li>
 <li><p>La suma de probabilidades de los eventos tiene que ser igual a 1.</p></li>
-<li><p>La probabilidad de que el evento A no ocurra es <span class="math inline">\(\tt 1 - P(A)\)</span> y se denota con el símbolo <span class="math inline">\(\tt A_1^C\)</span>, indicando que es el complemento de <span class="math inline">\(\tt A_1\)</span>.</p></li>
-<li><p>Si dos eventos <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span> son eventos que no ocurren en conjunto, entonces <span class="math inline">\(\tt P(A_1 \cup A_2) = P(A_1) + P(A_2)\)</span>.</p></li>
-<li><p>Para dos eventos que ocurren en conjunto, <span class="math inline">\(\tt P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)\)</span>.</p></li>
+<li><p>La probabilidad de que el evento A no ocurra es <span class="math inline">\(1 - P(A)\)</span> y se denota con el símbolo <span class="math inline">\(A_1^C\)</span>, indicando que es el complemento de <span class="math inline">\(A_1\)</span>.</p></li>
+<li><p>Si dos eventos <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span> son eventos que no ocurren en conjunto, entonces <span class="math inline">\(P(A_1 \cup A_2) = P(A_1) + P(A_2)\)</span>.</p></li>
+<li><p>Para dos eventos que ocurren en conjunto, <span class="math inline">\(P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)\)</span>.</p></li>
 </ol>
 <table>
 <colgroup>
@@ -312,24 +289,24 @@ P(A) = \frac{num_{A}}{num_{T}}
 </tr>
 </tbody>
 </table>
-<p>En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR), <span class="math inline">\(\tt P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770\)</span>.</p>
-<p>La probabilidad de que alguien tenga el cabello café <span class="math inline">\(\tt P(CC) = 1200/1770\)</span>.</p>
-<p>La probabilidad de tener ojos azules <span class="math inline">\(\tt P(OA) = 1050/1770\)</span>.</p>
-<p>La probabilidad de tener cabello negro y ojos azules <span class="math inline">\(\tt P(CN \cap OA)\)</span> pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
-Entonces <span class="math inline">\(\tt P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770\)</span>.</p>
+<p>En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR), <span class="math inline">\(P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770\)</span>.</p>
+<p>La probabilidad de que alguien tenga el cabello café <span class="math inline">\(P(CC) = 1200/1770\)</span>.</p>
+<p>La probabilidad de tener ojos azules <span class="math inline">\(P(OA) = 1050/1770\)</span>.</p>
+<p>La probabilidad de tener cabello negro y ojos azules <span class="math inline">\(P(CN \cap OA)\)</span> pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
+Entonces <span class="math inline">\(P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770\)</span>.</p>
 <p>La fórmula de <strong>probabilidad condicional</strong> es la siguiente:</p>
 <p><span class="math display" id="eq:prob">\[\begin{equation}
 P(A_1 | A_2) = \frac{P(A_1 \cap A_2)}{P(A_2)}
 \tag{4.1}
 \end{equation}\]</span></p>
 <ol start="6" style="list-style-type: decimal">
-<li><p>Si dos eventos, <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span> son <strong>independientes,</strong> entonces <span class="math inline">\(\tt P(A_1 \cap A_2) = P(A_1)*P(A_2)\)</span>.</p></li>
-<li><p>Para cualquier evento <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span>, <span class="math inline">\(\tt P(A_1 \cap A_2) = P(A_1) * P(A_2 | A_1)\)</span>.</p></li>
+<li><p>Si dos eventos, <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span> son <strong>independientes,</strong> entonces <span class="math inline">\(P(A_1 \cap A_2) = P(A_1)*P(A_2)\)</span>.</p></li>
+<li><p>Para cualquier evento <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>, <span class="math inline">\(P(A_1 \cap A_2) = P(A_1) * P(A_2 | A_1)\)</span>.</p></li>
 </ol>
 <p>Por ejemplo, de la tabla anterior, ¿Cuál es la probabilidad de que una persona tenga cabello rojo y ojos cafés?
-En este caso, <span class="math inline">\(\tt P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770\)</span>.</p>
+En este caso, <span class="math inline">\(P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770\)</span>.</p>
 <ol start="8" style="list-style-type: decimal">
-<li>Para dos eventos cualesquiera, <span class="math inline">\(\tt A_1\)</span> y <span class="math inline">\(\tt A_2\)</span>, <span class="math inline">\(\tt P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )\)</span> donde <span class="math inline">\(\tt A_2^C\)</span> es el complemento de <span class="math inline">\(\tt A_2\)</span>, es decir <span class="math inline">\(\tt 1 - A_2\)</span>.</li>
+<li>Para dos eventos cualesquiera, <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>, <span class="math inline">\(P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )\)</span> donde <span class="math inline">\(A_2^C\)</span> es el complemento de <span class="math inline">\(A_2\)</span>, es decir <span class="math inline">\(1 - A_2\)</span>.</li>
 </ol>
 </div>
 <div id="curvas-de-densidad" class="section level2" number="4.3">
@@ -338,8 +315,8 @@ En este caso, <span class="math inline">\(\tt P(CR \cap OA) = P(CR) * P(OA | CR)
 Los <strong>histogramas de frecuencias relativas</strong> representan las proporciones de las observaciones en cada categoría, en lugar del total de observaciones.
 Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una <strong>curva de densidad.</strong> La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva.
 El área total bajo la curva debe ser igual a 1.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-72-1.png" alt="Curva de densidad." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-2-1.png" alt="Curva de densidad." width="672" />
 <p class="caption">
 Figura 4.1: Curva de densidad.
 </p>
@@ -348,31 +325,31 @@ Figura 4.1: Curva de densidad.
 </div>
 <div id="distribución-binomial" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Distribución binomial</h2>
-<p>La <strong>distribución binomial</strong> de una variable aleatoria es una distribución de probabilidad discreta, que cuenta el número de éxitos tras realizar <span class="math inline">\(\tt n\)</span> veces un experimento, cada <em>intento</em> debe ser independiente entre sí.
-La probabilidad de éxito es fija entre cada intento y se denota con la letra <span class="math inline">\(\tt p\)</span>.
+<p>La <strong>distribución binomial</strong> de una variable aleatoria es una distribución de probabilidad discreta, que cuenta el número de éxitos tras realizar <span class="math inline">\(n\)</span> veces un experimento, cada <em>intento</em> debe ser independiente entre sí.
+La probabilidad de éxito es fija entre cada intento y se denota con la letra <span class="math inline">\(p\)</span>.
 Lo primero que se nos viene a la mente con este tipo de distribuciones son <em>lanzamientos de moneda</em>, sin embargo, el comportamiento de muchos genes también sigue una distribución binomial.</p>
 <p>Normalmente, para que una variable aleatoria sea una <strong>variable aleatoria binomial</strong> se requieren los siguientes requisitos:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Resultados binarios:</strong> Solamente existen dos posibilidades para cada intento (éxito o fracaso, cara o cruz, dominante o recesivo, muerto o vivo, niño o niña, etc.).</p></li>
 <li><p><strong>Intentos independientes:</strong> Cada prueba o intento deben ser independientes del anterior.</p></li>
-<li><p><strong>El valor de</strong> <span class="math inline">\(\tt n\)</span> es fijo: Se sabe con antelación el número de pruebas <span class="math inline">\(\tt n\)</span>.</p></li>
-<li><p><strong>Mismo valor</strong> <span class="math inline">\(\tt p\)</span>: En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir <span class="math inline">\(\tt p\)</span> debe permanecer constante.</p></li>
+<li><p><strong>El valor de</strong> <span class="math inline">\(n\)</span> es fijo: Se sabe con antelación el número de pruebas <span class="math inline">\(n\)</span>.</p></li>
+<li><p><strong>Mismo valor</strong> <span class="math inline">\(p\)</span>: En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir <span class="math inline">\(p\)</span> debe permanecer constante.</p></li>
 <li><p><strong>Resultados mutuamente excluyentes:</strong> Es decir, no se puede tener éxito y fracaso al mismo tiempo.</p></li>
 <li><p><strong>Resultados colectivamente exhaustivos:</strong> Al menos uno de los dos resultados debe de ocurrir.</p></li>
 </ol>
-<p>Ahora bien, la fórmula de la distribución binomial se indica en la ecuación <a href="probabilidad.html#eq:binom">(4.2)</a>.</p>
+<p>Ahora bien, la <strong>función de masa de probabilidad (PMF)</strong> o fórmula de la distribución binomial se indica en la ecuación <a href="probabilidad.html#eq:binom">(4.2)</a>.</p>
 <p><span class="math display" id="eq:binom">\[\begin{equation}
 P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
 \tag{4.2}
 \end{equation}\]</span></p>
 <p>Donde:</p>
 <ul>
-<li><p><span class="math inline">\(\tt P(X = k)\)</span> = probabilidad de obtener <span class="math inline">\(\tt k\)</span> éxitos.</p></li>
-<li><p><span class="math inline">\(\tt \binom{n}{k}\)</span> = coeficiente binomial, que se calcula con la fórmula <a href="probabilidad.html#eq:binc">(4.3)</a>.</p></li>
-<li><p><span class="math inline">\(\tt k\)</span> = número de éxitos.</p></li>
-<li><p><span class="math inline">\(\tt p\)</span> = probabilidad de éxito.</p></li>
-<li><p><span class="math inline">\(\tt q\)</span> = probabilidad de fracaso.</p></li>
-<li><p><span class="math inline">\(\tt n\)</span> = número de pruebas.</p></li>
+<li><p><span class="math inline">\(P(X = k)\)</span> = probabilidad de obtener <span class="math inline">\(k\)</span> éxitos.</p></li>
+<li><p><span class="math inline">\(\binom{n}{k}\)</span> = coeficiente binomial, que se calcula con la fórmula <a href="probabilidad.html#eq:binc">(4.3)</a>.</p></li>
+<li><p><span class="math inline">\(k\)</span> = número de éxitos.</p></li>
+<li><p><span class="math inline">\(p\)</span> = probabilidad de éxito.</p></li>
+<li><p><span class="math inline">\(q\)</span> = probabilidad de fracaso.</p></li>
+<li><p><span class="math inline">\(n\)</span> = número de pruebas.</p></li>
 </ul>
 <p><span class="math display" id="eq:binc">\[\begin{equation}
 _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
@@ -414,7 +391,7 @@ Las probabilidades de las distintas configuraciones están dadas por la distribu
 <p>-<code>rbinom()</code> genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.</p>
 <p>En este caso, queremos conocer la probabilidad exacta de que 2 personas sean mutantes.
 Para esto necesitamos la función <code>dbinom(x, size, prob)</code>, donde el argumento <code>x</code> equivale al número de éxitos, <code>size</code> al número de ensayos y <code>prob</code> a la probabilidad de éxito.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="probabilidad.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.37</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="probabilidad.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.37</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3423143</code></pre>
 <blockquote>
 <p><strong>Ejemplo</strong>: En Estados Unidos, 85% de la población tiene sangre Rh positivo.
@@ -424,39 +401,42 @@ En este caso <span class="math inline">\(Y\)</span> representará cuántas perso
 ¿Y la probabilidad de que <em>al menos</em> 4 personas sean Rh positivo?
 ¿Y la probabilidad de que haya <em>al menos</em> 1 persona con Rh negativo?</p>
 </blockquote>
-<p>En este caso debemos utilizar dos comandos, <code>dbinom()</code> y <code>pbinom()</code>, con uno calcularemos <span class="math inline">\(\tt Y = 4\)</span> y con el otro <span class="math inline">\(\tt Y \ge 4\)</span> (4 o más).
-Como queremos obtener <span class="math inline">\(\tt P(Y \ge 4)\)</span>, entonces <span class="math inline">\(\tt P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)\)</span>, utilizamos el argumento <code>lower.tail</code> y lo ponemos en <code>FALSE</code> para indicar que vamos a trabajar con un valor mínimo de 4, para arriba.
-Para el caso de <em>al menos</em> una persona con Rh negativo <span class="math inline">\(\tt P(Y &lt; 6)\)</span>, tenemos dos opciones.
-Usar <code>dbinom()</code> cinco veces para calcular el valor individual de <span class="math inline">\(\tt P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)\)</span>, o calcular <span class="math inline">\(\tt P(Y = 6)\)</span> y restarle a 1 este valor.
+<p>En este caso debemos utilizar dos comandos, <code>dbinom()</code> y <code>pbinom()</code>, con uno calcularemos <span class="math inline">\(Y = 4\)</span> y con el otro <span class="math inline">\(Y \ge 4\)</span> (4 o más).
+Como queremos obtener <span class="math inline">\(P(Y \ge 4)\)</span>, entonces <span class="math inline">\(P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)\)</span>, utilizamos el argumento <code>lower.tail</code> y lo ponemos en <code>FALSE</code> para indicar que vamos a trabajar con un valor mínimo de 4, para arriba.
+Para el caso de <em>al menos</em> una persona con Rh negativo <span class="math inline">\(P(Y &lt; 6)\)</span>, tenemos dos opciones.
+Usar <code>dbinom()</code> cinco veces para calcular el valor individual de <span class="math inline">\(P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)\)</span>, o calcular <span class="math inline">\(P(Y = 6)\)</span> y restarle a 1 este valor.
 Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la segunda.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="probabilidad.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="probabilidad.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Probabilidad de que 4 personas tengan Rh positivo.</span></span>
+<span id="cb3-2"><a href="probabilidad.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1761771</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="probabilidad.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="probabilidad.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Probabilidad de que al menos 4 personas (pueden ser 4, 5 o 6) tengan Rh positivo.</span></span>
+<span id="cb5-2"><a href="probabilidad.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9526614</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="probabilidad.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="probabilidad.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Probabilidad de que al menos 1 persona tenga Rh positivo.</span></span>
+<span id="cb7-2"><a href="probabilidad.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="fl">0.85</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6228505</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="probabilidad.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="probabilidad.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.85</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6228505</code></pre>
 </div>
 </div>
 <div id="distribución-normal" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Distribución normal</h2>
 <p>Una <strong>distribución normal</strong> corresponde a una curva <em>en forma de campana</em>, con ciertas características específicas.
-Se utiliza para representar la distribución de los valores de una variable <span class="math inline">\(\tt X\)</span>, de dos maneras distintas: (1) como una aproximación a un histograma basado en los valores muestreados de la variable <span class="math inline">\(\tt X\)</span> o; (2) como una representación idealizada de la distribución poblacional de <span class="math inline">\(\tt X\)</span>.</p>
+Se utiliza para representar la distribución de los valores de una variable <span class="math inline">\(X\)</span>, de dos maneras distintas: (1) como una aproximación a un histograma basado en los valores muestreados de la variable <span class="math inline">\(X\)</span> o; (2) como una representación idealizada de la distribución poblacional de <span class="math inline">\(X\)</span>.</p>
 <p>Las curvas con distribución normal toman su forma por dos elementos muy importantes: la <strong>media</strong> <span class="math inline">\(\mu\)</span> y su <strong>desviación estándar</strong> <span class="math inline">\(\sigma\)</span>.
-Cuando se tiene una curva con distribución normal, se expresa de la siguiente manera <span class="math inline">\(\tt X \sim N(\mu, \sigma)\)</span>.
+Cuando se tiene una curva con distribución normal, se expresa de la siguiente manera <span class="math inline">\(X \sim N(\mu, \sigma)\)</span>.
 La fórmula de la distribución normal se encuentra en la ecuación <a href="probabilidad.html#eq:norm">(4.7)</a>.
 No se trata de cualquier curva simétrica, si no de una curva simétrica <em>específica</em>.</p>
 <p><span class="math display" id="eq:norm">\[\begin{equation}
 f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 \tag{4.7}
 \end{equation}\]</span></p>
-<p>La función <span class="math inline">\(\tt f(x)\)</span> se conoce como <strong>función de densidad</strong> y expresa la altura de la curva como una función de la posición en el eje horizontal.
-El centro de una curva normal es <span class="math inline">\(\tt x = \mu\)</span>, los puntos de inflexión están en <span class="math inline">\(\tt x = \mu + \sigma\)</span> y <span class="math inline">\(\tt x = \mu - \sigma\)</span>.
-En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultados valores demasiado pequeños.
-El ancho y alto de una curva normal está determinado por la desviación estándar <span class="math inline">\(\sigma\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-75"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-75-1.png" alt="Forma de la distribución normal." width="672" />
+<p>La función <span class="math inline">\(f(x)\)</span> se conoce como <strong>función de densidad de probabilidad (PDF)</strong> y expresa la altura de la curva como una función de la posición en el eje horizontal.
+El centro de una curva normal es <span class="math inline">\(x = \mu\)</span>, los puntos de inflexión están en <span class="math inline">\(x = \mu + \sigma\)</span> y <span class="math inline">\(x = \mu - \sigma\)</span>.
+En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños.
+El ancho y alto de una curva normal están determinados por la desviación estándar <span class="math inline">\(\sigma\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-5-1.png" alt="Forma de la distribución normal." width="672" />
 <p class="caption">
 Figura 4.2: Forma de la distribución normal.
 </p>
@@ -472,9 +452,9 @@ Z = \frac{X - \mu}{\sigma}
 <p>Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar <strong>tablas de Z</strong> para realizar el cálculo debajo del área que corresponde al valor Z obtenido, aunque claro, también podemos hacer estos cálculos en <code>R</code>.
 Hay que tener en cuenta que para una curva de distribución normal estándar:</p>
 <ul>
-<li><p>68% del área se encuentra entre <span class="math inline">\(\tt \pm\)</span> 1 distribución estándar.</p></li>
-<li><p>95% del área se encuentra entre <span class="math inline">\(\tt \pm\)</span> 2 distribuciones estándar.</p></li>
-<li><p>99.7% del área se encuentra entre <span class="math inline">\(\tt \pm\)</span> 3 distribuciones estándar.</p></li>
+<li><p>68% del área se encuentra entre <span class="math inline">\(\pm\)</span> 1 distribución estándar.</p></li>
+<li><p>95% del área se encuentra entre <span class="math inline">\(\pm\)</span> 2 distribuciones estándar.</p></li>
+<li><p>99.7% del área se encuentra entre <span class="math inline">\(\pm\)</span> 3 distribuciones estándar.</p></li>
 </ul>
 <div id="distribución-normal-en-r" class="section level3" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Distribución normal en R</h3>
@@ -488,47 +468,47 @@ Hay que tener en cuenta que para una curva de distribución normal estándar:</p
 <p><strong>Ejemplo:</strong> En una población de peces de la especie <em>Pomolobus aestivalis</em>, la longitud de los individuos sigue una distribución normal. La media de la longitud es de 54.0 mm, y la desviación estándar es de 4.5 mm<sup>2</sup>. ¿Qué porcentaje de los peces mide menos de 60 mm? ¿Qué porcentaje de los peces mide más de 51 mm? ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?</p>
 </blockquote>
 <p>Para responder la primer pregunta, debemos transformar nuestros datos a valores Z, ya que se encuentran en mm. Para esto aplicamos la ecuación <a href="probabilidad.html#eq:Z">(4.8)</a>. En <code>R</code> es una operación relativamente sencilla de hacer.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="probabilidad.html#cb114-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">60</span> <span class="sc">-</span> <span class="dv">54</span>)<span class="sc">/</span>(<span class="fl">4.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="probabilidad.html#cb11-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">60</span> <span class="sc">-</span> <span class="dv">54</span>)<span class="sc">/</span>(<span class="fl">4.5</span>)</span></code></pre></div>
 <pre><code>## [1] 1.333333</code></pre>
 <p>Como podemos ver, el valor Z de 60 mm es igual a 1.33. Lo siguiente sería encontrar <em>el área bajo la curva</em> que corresponda a este valor Z. Para esto utilizamos la función <code>pnorm()</code>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="probabilidad.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.33</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.33</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9082409</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-78"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-78-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = 1.33" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-8-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = 1.33" width="672" />
 <p class="caption">
 Figura 4.3: Curva de distribución normal con el área sombreada correspondiente a un valor Z = 1.33
 </p>
 </div>
 <p>De nuevo, el argumento <code>lower.tail = TRUE</code> significa que encontrará la probabilidad acumulada de valores Z menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.</p>
 <p>Para la segunda pregunta, primero debemos encontrar el valor de Z correspondiente a 51 mm y después basta con cambiar el argumento <code>lower.tail</code> a <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="probabilidad.html#cb118-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">51</span> <span class="sc">-</span> <span class="dv">54</span>)<span class="sc">/</span>(<span class="fl">4.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="probabilidad.html#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">51</span> <span class="sc">-</span> <span class="dv">54</span>)<span class="sc">/</span>(<span class="fl">4.5</span>)</span></code></pre></div>
 <pre><code>## [1] -0.6666667</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="probabilidad.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.67</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.67</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7485711</code></pre>
 <p>Como podemos ver el resultado indica que 75.86% de los peces miden más de 51 mm. Bastante sencillo, ¿no?</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-80"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-80-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-10-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva." width="672" />
 <p class="caption">
 Figura 4.4: Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva.
 </p>
 </div>
 <p>Ahora para la última pregunta, simplemente calculamos la probabilidad acumulada hasta nuestro valor Z más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor Z más pequeño, que corresponde -0.67.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="probabilidad.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.33</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.67</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="probabilidad.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.33</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.67</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.656812</code></pre>
 <p>Como resultado obtenemos que el 65.68% de los peces se encuentran en longitudes de entre 51 mm y 60 mm. Si nos damos cuenta, la distribución normal puede, de cierta manera, interpretarse como una distribución de probabilidad continua.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-82-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un intervalo entre Z = -0.67 y Z = 1.33." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-12-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un intervalo entre Z = -0.67 y Z = 1.33." width="672" />
 <p class="caption">
 Figura 4.5: Curva de distribución normal con el área sombreada correspondiente a un intervalo entre Z = -0.67 y Z = 1.33.
 </p>
 </div>
 <p>En algunas ocasiones, queremos encontrar el valor Z correspondiente a un área bajo la curva determinada, para este tipo de ocasiones, utilizamos la función <code>qnorm()</code>.</p>
-<p>Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable <span class="math inline">\(\tt y\)</span>. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que <span class="math inline">\(y\)</span> y el 30% son mayores.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="probabilidad.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.7</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable <span class="math inline">\(y\)</span>. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que <span class="math inline">\(y\)</span> y el 30% son mayores.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="probabilidad.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.7</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5244005</code></pre>
-<p>Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación <a href="probabilidad.html#eq:Z">(4.8)</a> podemos realizar un despeje muy sencillo y obtener la fórmula <span class="math inline">\(\tt y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3\)</span>. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-84"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-84-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva." width="672" />
+<p>Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación <a href="probabilidad.html#eq:Z">(4.8)</a> podemos realizar un despeje muy sencillo y obtener la fórmula <span class="math inline">\(y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3\)</span>. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-14-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva." width="672" />
 <p class="caption">
 Figura 4.6: Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva.
 </p>
@@ -538,8 +518,8 @@ Figura 4.6: Curva de distribución normal con el área sombreada correspondiente
 <h3><span class="header-section-number">4.5.2</span> Pruebas de normalidad en R</h3>
 <p>Ya que muchos procedimientos estadísticos se basan en datos provenientes de una población con distribución normal, es importante saber si nuestros datos siguen está distribución.</p>
 <p>Uno de los métodos más utilizados son los <strong>gráficos cuantil-cuantil</strong>, <strong>gráficos Q-Q</strong> o <strong>Q-Q plot</strong>. Veamos un ejemplo con datos de plantas que vienen incluidas en <code>ggplot2</code>.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="probabilidad.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span>
-<span id="cb126-2"><a href="probabilidad.html#cb126-2" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="probabilidad.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span>
+<span id="cb23-2"><a href="probabilidad.html#cb23-2" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code></pre></div>
 <pre><code>##    weight group
 ## 1    4.17  ctrl
 ## 2    5.58  ctrl
@@ -572,8 +552,8 @@ Figura 4.6: Curva de distribución normal con el área sombreada correspondiente
 ## 29   5.80  trt2
 ## 30   5.26  trt2</code></pre>
 <p>Como podemos ver, tenemos tres grupos, el control, tratamiento 1 y tratamiento 2. Vamos a enfocarnos solamente en los datos del grupo del tratamiento 1.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="probabilidad.html#cb128-1" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;trt1&quot;</span>), weight)</span>
-<span id="cb128-2"><a href="probabilidad.html#cb128-2" aria-hidden="true" tabindex="-1"></a>Datos</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="probabilidad.html#cb25-1" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;trt1&quot;</span>), weight)</span>
+<span id="cb25-2"><a href="probabilidad.html#cb25-2" aria-hidden="true" tabindex="-1"></a>Datos</span></code></pre></div>
 <pre><code>##    weight
 ## 1    4.17
 ## 2    5.58
@@ -606,26 +586,26 @@ Figura 4.6: Curva de distribución normal con el área sombreada correspondiente
 ## 29   5.80
 ## 30   5.26</code></pre>
 <p>Recordemos que podemos utilizar la librería <code>dplyr</code> para extraer ciertos datos de nuestras matrices de datos. Lo que haremos ahora es utilizar el gráfico Q-Q para comprar los datos de nuestra muestra con unos datos teóricos que siguen una distribución normal. En caso de que nuestros datos se comporten de manera normal, deberíamos de tener casi una línea recta. Para esto necesitaremos la librería <code>ggpubr</code>.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="probabilidad.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb130-2"><a href="probabilidad.html#cb130-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="probabilidad.html#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(Datos<span class="sc">$</span>weight) <span class="sc">+</span></span>
-<span id="cb130-4"><a href="probabilidad.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
-<span id="cb130-5"><a href="probabilidad.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Muestra&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-87"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-87-1.png" alt="Gráfico Q-Q comparando una muestra de datos contra una muestra teórica con distribución normal." width="672" />
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="probabilidad.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb27-2"><a href="probabilidad.html#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="probabilidad.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(Datos<span class="sc">$</span>weight) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="probabilidad.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="probabilidad.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Muestra&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-17-1.png" alt="Gráfico Q-Q comparando una muestra de datos contra una muestra teórica con distribución normal." width="672" />
 <p class="caption">
 Figura 4.7: Gráfico Q-Q comparando una muestra de datos contra una muestra teórica con distribución normal.
 </p>
 </div>
 <p>Otra opción sería realizar el gráfico de densidad, pero muchas veces es difícil identificar la forma de campana en cierto conjunto de datos, así que los gráficos Q-Q son de gran ayuda.</p>
 <p>Otra opción para realizar una prueba de normalidad conocida como <strong>prueba de Shapiro-Wilks</strong> (aunque no se recomienda que para <span class="math inline">\(n &gt; 50\)</span>), pero es muy sensible a ligeras desviaciones de la normalidad, sobre todo con un tamaño de muestra grande. Es muy sencillo de realizar en <code>R</code>, simplemente utilizamos el comando <code>shapiro_test()</code> del paquete <code>rstatix</code>. En este caso, vamos a analizar si nuestros dos tratamientos y el control siguen una distribución normal. Para esto, vamos a hacer uso de la librería <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="probabilidad.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="probabilidad.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;rstatix&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:stats&#39;:
 ## 
 ##     filter</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="probabilidad.html#cb134-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(weight) <span class="co">#Agrupamos los datos por tipo de tratamiento y hacemos la prueba a la variable &quot;weight&quot;.</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="probabilidad.html#cb31-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(weight) <span class="co">#Agrupamos los datos por tipo de tratamiento y hacemos la prueba a la variable &quot;weight&quot;.</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   group variable statistic     p
 ##   &lt;fct&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
@@ -638,9 +618,9 @@ Figura 4.7: Gráfico Q-Q comparando una muestra de datos contra una muestra teó
 <div id="distribución-muestral" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Distribución muestral</h2>
 <p>La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como <strong>variabilidad de muestreo</strong>. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como <strong>distribución muestral</strong>. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre entre la muestra y la población es probable que sea.</p>
-<p>Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un <strong>meta-estudio</strong>, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño <span class="math inline">\(\tt n\)</span> de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño <span class="math inline">\(\tt n\)</span> de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.</p>
-<p>Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra <span class="math inline">\(\tt \overline{x}\)</span> de la media de la población <span class="math inline">\(\tt \mu\)</span>? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable <span class="math inline">\(\tt \overline{X}\)</span>, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de <span class="math inline">\(\tt \mu\)</span> es probable que este <span class="math inline">\(\tt \overline{X}\)</span>? Nuestra respuesta la encontramos en la <strong>distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span></strong>.</p>
-<p>Tenemos que tener en cuenta que, en promedio, la <strong>media de la distribución muestral</strong> <span class="math inline">\(\tt \overline{X}\)</span> equivale a la media de la población <span class="math inline">\(\tt \mu\)</span>. Esto se ve mejor en la fórmula <a href="probabilidad.html#eq:samplemean">(4.9)</a>.</p>
+<p>Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un <strong>meta-estudio</strong>, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño <span class="math inline">\(n\)</span> de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.</p>
+<p>Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra <span class="math inline">\(\overline{x}\)</span> de la media de la población <span class="math inline">\(\mu\)</span>? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable <span class="math inline">\(\overline{X}\)</span>, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de <span class="math inline">\(\mu\)</span> es probable que este <span class="math inline">\(\overline{X}\)</span>? Nuestra respuesta la encontramos en la <strong>distribución muestral de <span class="math inline">\(\overline{X}\)</span></strong>.</p>
+<p>Tenemos que tener en cuenta que, en promedio, la <strong>media de la distribución muestral</strong> <span class="math inline">\(\overline{X}\)</span> equivale a la media de la población <span class="math inline">\(\mu\)</span>. Esto se ve mejor en la fórmula <a href="probabilidad.html#eq:samplemean">(4.9)</a>.</p>
 <p><span class="math display" id="eq:samplemean">\[\begin{equation}
 \mu_{\overline{X}} = \mu
 \tag{4.9}
@@ -650,77 +630,76 @@ Figura 4.7: Gráfico Q-Q comparando una muestra de datos contra una muestra teó
 \sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
 \tag{4.10}
 \end{equation}\]</span></p>
-<p>Mientras el tamaño de muestra incrementa, la desviación estándar de <span class="math inline">\(\tt \overline{X}\)</span> disminuye. Es decir para muestras más grandes existe menos variación.</p>
-<p>La <strong>forma</strong> está determinada por el tamaño de muestra y la naturaleza de la población. Si la población <span class="math inline">\(\tt X\)</span> se distribuye de manera normal, entonces la distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span> será también normal, sin importar el tamaño de nuestra <span class="math inline">\(\tt n\)</span>. Además el <strong>teorema del límite central</strong> indica que si obtenemos una <span class="math inline">\(\tt n\)</span> suficientemente grande, la distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span> será aproximadamente normal incluso para muestras cuya población <span class="math inline">\(\tt X\)</span> no se distribuye de manera normal.</p>
+<p>Mientras el tamaño de muestra incrementa, la desviación estándar de <span class="math inline">\(\overline{X}\)</span> disminuye. Es decir para muestras más grandes existe menos variación.</p>
+<p>La <strong>forma</strong> está determinada por el tamaño de muestra y la naturaleza de la población. Si la población <span class="math inline">\(X\)</span> se distribuye de manera normal, entonces la distribución muestral de <span class="math inline">\(\overline{X}\)</span> será también normal, sin importar el tamaño de nuestra <span class="math inline">\(n\)</span>. Además el <strong>teorema del límite central</strong> indica que si obtenemos una <span class="math inline">\(n\)</span> suficientemente grande, la distribución muestral de <span class="math inline">\(\overline{X}\)</span> será aproximadamente normal incluso para muestras cuya población <span class="math inline">\(X\)</span> no se distribuye de manera normal.</p>
 <blockquote>
-<p><strong>Ejemplo:</strong> Supongamos que tenemos una población del Carbonerito Mexicano (<em>Poecile sclateri</em>) en la cuál el peso medio es de <span class="math inline">\(\tt \mu = 11 g\)</span> y la desviación estándar <span class="math inline">\(\tt \sigma = 1.2 g\)</span>. Supongamos que tomamos una muestra aleatoria de seis aves. Dejemos que <span class="math inline">\(\tt \overline{x}\)</span> represente la media del peso de las seis aves. Ya que sabemos que el peso de esta ave sigue una distribución normal en la población, también nuestras muestras seguirán una distribución normal.</p>
+<p><strong>Ejemplo:</strong> Supongamos que tenemos una población del Carbonerito Mexicano (<em>Poecile sclateri</em>) en la cuál el peso medio es de <span class="math inline">\(\mu = 11 g\)</span> y la desviación estándar <span class="math inline">\(\sigma = 1.2 g\)</span>. Supongamos que tomamos una muestra aleatoria de seis aves. Dejemos que <span class="math inline">\(\overline{x}\)</span> represente la media del peso de las seis aves. Ya que sabemos que el peso de esta ave sigue una distribución normal en la población, también nuestras muestras seguirán una distribución normal.</p>
 </blockquote>
 <p>Para este caso, la media y la desviación estándar de nuestra muestra serán las siguientes:</p>
 <p><span class="math display">\[\begin{equation}
 \mu_{\overline{X}} = \mu = 11 g\\
 \sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}} = \frac{1.2}{\sqrt{6}} = 0.49 g
 \end{equation}\]</span></p>
-<p>En este caso <span class="math inline">\(\tt \mu_{\overline{X}} = 11 g\)</span> y <span class="math inline">\(\tt \sigma_{\overline{X}} = 0.49 g\)</span>. De tal manera que, en promedio la media de la muestra será 11 g, sin embargo, el 68% de las veces <span class="math inline">\(\tt \overline{X}\)</span> se encontrará entre <span class="math inline">\(\tt 11g \pm 0.49g\)</span> y el 95% de las veces se encontrará entre <span class="math inline">\(\tt 11g \pm 0.98g\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-89"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-89-1.png" alt="Distribución muestral proveniente de una población de *Sclateri poecile*." width="672" />
+<p>En este caso <span class="math inline">\(\mu_{\overline{X}} = 11 g\)</span> y <span class="math inline">\(\sigma_{\overline{X}} = 0.49 g\)</span>. De tal manera que, en promedio la media de la muestra será 11 g, sin embargo, el 68% de las veces <span class="math inline">\(\overline{X}\)</span> se encontrará entre <span class="math inline">\(11g \pm 0.49g\)</span> y el 95% de las veces se encontrará entre <span class="math inline">\(11g \pm 0.98g\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-19-1.png" alt="Distribución muestral proveniente de una población de *Sclateri poecile*." width="672" />
 <p class="caption">
 Figura 4.8: Distribución muestral proveniente de una población de <em>Sclateri poecile</em>.
 </p>
 </div>
-<p>Esta distribución muestral expresa distintas posibilidades para los valores de <span class="math inline">\(\tt \overline{X}\)</span>. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.</p>
+<p>Esta distribución muestral expresa distintas posibilidades para los valores de <span class="math inline">\(\overline{X}\)</span>. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.</p>
 <p><span class="math display">\[\begin{equation}
 Z = \frac{\overline{x}-\mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 - 11}{0.49} = 1.0204
 \end{equation}\]</span></p>
 <p>Ya que nuestro valor Z = 1.0204, usamos la función <code>pnorm()</code> para encontrar nuestra área bajo la curva.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="probabilidad.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.0204</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="probabilidad.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.0204</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1537694</code></pre>
 <p>De hecho, ni siquiera es necesario realizar la transformación a valores Z en <code>R</code> ya que podemos modificar los parámetros de la función <code>pnorm()</code>.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="probabilidad.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">11.5</span>, <span class="at">mean =</span> <span class="dv">11</span>, <span class="at">sd =</span> <span class="fl">0.49</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="probabilidad.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">11.5</span>, <span class="at">mean =</span> <span class="dv">11</span>, <span class="at">sd =</span> <span class="fl">0.49</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1537675</code></pre>
 <p>Debido a que hemos redondeado la desviación estándar el valor es ligeramente distinto, pero en esencia el resultado es el mismo. Entonces podemos concluir que</p>
 <p><span class="math display">\[\begin{equation}
 P(\overline{X} &gt; 11.5) = P(Z &gt; 1.0204) = 0.1538 \approx 0.15
 \end{equation}\]</span></p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-92-1.png" alt="Probabilidad de que la media de una muestra de seis aves de la especie *Poecile sclateri* sea mayor a 11.5." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-22-1.png" alt="Probabilidad de que la media de una muestra de seis aves de la especie *Poecile sclateri* sea mayor a 11.5." width="672" />
 <p class="caption">
 Figura 4.9: Probabilidad de que la media de una muestra de seis aves de la especie <em>Poecile sclateri</em> sea mayor a 11.5.
 </p>
 </div>
 <p>Si eligiéramos muchas muestras aleatorias provenientes de esta población cerca del 15% de las muestras tendrían una media mayor a 11.5 g.</p>
-<p>El <strong>tamaño de la muestra</strong> tiene un efecto directo sobre la forma de nuestra curva. Básicamente, muestras más grandes dan un <span class="math inline">\(\tt \sigma_\overline{X}\)</span> menor, y por ende dan un menor error de muestreo. En seguida se muestran distintas gráficas con distintas <span class="math inline">\(\tt \mu_\overline{X}\)</span>. Para este caso hipotético, <span class="math inline">\(\tt \mu = 100, \sigma = 40\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93-1"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-93-1.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
+<p>El <strong>tamaño de la muestra</strong> tiene un efecto directo sobre la forma de nuestra curva. Básicamente, muestras más grandes dan un <span class="math inline">\(\sigma_\overline{X}\)</span> menor, y por ende dan un menor error de muestreo. En seguida se muestran distintas gráficas con distintas <span class="math inline">\(\mu_\overline{X}\)</span>. Para este caso hipotético, <span class="math inline">\(\mu = 100, \sigma = 40\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23-1"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-23-1.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
 <p class="caption">
 Figura 4.10: Cambios en la forma de la curva dependientes de la desviación estándar muestral.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93-2"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-93-2.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23-2"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-23-2.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
 <p class="caption">
 Figura 4.11: Cambios en la forma de la curva dependientes de la desviación estándar muestral.
 </p>
 </div>
-<p>Qué tan cerca esta <span class="math inline">\(\tt \overline{X}\)</span> de <span class="math inline">\(\tt \mu\)</span> depende del tamaño de la muestra <span class="math inline">\(\tt n\)</span>. La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.</p>
+<p>Qué tan cerca esta <span class="math inline">\(\overline{X}\)</span> de <span class="math inline">\(\mu\)</span> depende del tamaño de la muestra <span class="math inline">\(n\)</span>. La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.</p>
 <div id="poblaciones-muestras-y-distribuciones-muestrales" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Poblaciones, muestras y distribuciones muestrales</h3>
-<p>Una vez llegado a este punto puede que exista confusión entre los valores de una población, de una muestra y de una distribución muestral. Para esto aclaremos los siguientes puntos, en torno a una variable <span class="math inline">\(\tt X\)</span>.</p>
+<p>Una vez llegado a este punto puede que exista confusión entre los valores de una población, de una muestra y de una distribución muestral. Para esto aclaremos los siguientes puntos, en torno a una variable <span class="math inline">\(X\)</span>.</p>
 <p>En una <strong>población</strong>, los estadísticos descriptivos como la media y la desviación estándar se representan por los siguientes símbolos:</p>
 <ul>
-<li><p><span class="math inline">\(\tt \mu\)</span>: media poblacional.</p></li>
-<li><p><span class="math inline">\(\tt \sigma\)</span>: desviación estándar poblacional.</p></li>
+<li><p><span class="math inline">\(\mu\)</span>: media poblacional.</p></li>
+<li><p><span class="math inline">\(\sigma\)</span>: desviación estándar poblacional.</p></li>
 </ul>
 <p>En una <strong>muestra</strong>, los mismos estadísticos se representan por los siguientes símbolos:</p>
 <ul>
-<li><p><span class="math inline">\(\tt \overline{x}\)</span>: media muestral.</p></li>
-<li><p><span class="math inline">\(\tt s\)</span>: desviación estándar poblacional.</p></li>
+<li><p><span class="math inline">\(\overline{x}\)</span>: media muestral.</p></li>
+<li><p><span class="math inline">\(s\)</span>: desviación estándar poblacional.</p></li>
 </ul>
-<p>En una <strong>distribución muestral</strong> lo que nosotros hacemos es repetir un muestreo indefinidas veces (meta-estudio) y de cada muestreo extraer la media muestral <span class="math inline">\(\tt \overline{x}\)</span>. Lo que representa la distribución muestral es una distribución de medias, en lugar de observaciones individuales.</p>
+<p>En una <strong>distribución muestral</strong> lo que nosotros hacemos es repetir un muestreo indefinidas veces (meta-estudio) y de cada muestreo extraer la media muestral <span class="math inline">\(\overline{x}\)</span>. Lo que representa la distribución muestral es una distribución de medias, en lugar de observaciones individuales.</p>
 <ul>
-<li><p><span class="math inline">\(\tt \mu_\overline{X}\)</span>: media de una distribución muestral.</p></li>
-<li><p><span class="math inline">\(\tt \sigma_\overline{X}\)</span>: desviación estándar de una distribución muestral.</p></li>
+<li><p><span class="math inline">\(\mu_\overline{X}\)</span>: media de una distribución muestral.</p></li>
+<li><p><span class="math inline">\(\sigma_\overline{X}\)</span>: desviación estándar de una distribución muestral.</p></li>
 </ul>
-
 </div>
 </div>
 </div>
@@ -730,7 +709,7 @@ Figura 4.11: Cambios en la forma de la curva dependientes de la desviación est�
         </div>
       </div>
 <a href="estadística-descriptiva.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intervalos-de-confianza.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

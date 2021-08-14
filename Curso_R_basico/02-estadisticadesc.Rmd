@@ -251,12 +251,12 @@ sd.p = function(x){sd(x)*sqrt((length(x)-1)/length(x))}
 
 Para calcular la **varianza** $s^2$, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente ecuación \@ref(eq:var).
 
-```{=tex}
+
 \begin{equation}
 Varianza = {s}^2
 (\#eq:var)
 \end{equation}
-```
+
 ```{r}
 sd(PlantGrowth$weight)^2
 ```
@@ -269,12 +269,12 @@ Propiedades importantes de la **varianza:**
 
 Otro estadístico que nos puede interesare es el **coeficiente de variación** que se obtiene a partir de la ecuación \@ref(eq:cv).
 
-```{=tex}
+
 \begin{equation}
 CV = \frac{S}{\overline{x}}*100
 (\#eq:cv)
 \end{equation}
-```
+
 Para su calculo simplemente utilizamos las funciones previamente aprendidas.
 
 ```{r}
@@ -371,12 +371,12 @@ resumen
 Es el valor relativo de cada dato respecto del total como se observa en la ecuación \@ref(eq:frecr).
 Si se le multiplica por 100% se obtiene su valor en porcentaje.
 
-```{=tex}
+
 \begin{equation}
 f_i = \frac{n_i}{N}
 (\#eq:frecr)
 \end{equation}
-```
+
 Donde $f_i$ es la frecuencia de la i-ésima observación y $n_i$ es el número de observaciones en la i-ésima observación.
 
 #### Frecuencia relativa en R

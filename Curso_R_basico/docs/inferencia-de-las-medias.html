@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lección 5 Inferencia de las medias | Curso de R básico</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lección 5 Inferencia de las medias | Curso de R básico" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lección 5 Inferencia de las medias | Curso de R básico" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probabilidad.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Requisitos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>2</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>2.1</b> Interfaz</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>2.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>2.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>2.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>2.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>2.6</b> Comentarios</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>2.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>2.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>3</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>3.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>3.1.1</b> Media</a></li>
+<li class="chapter" data-level="3.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>3.1.2</b> Mediana</a></li>
+<li class="chapter" data-level="3.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>3.1.3</b> Moda</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>3.3.1</b> Valores Z</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>3.3.2</b> Frecuencia absoluta</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>3.3.3</b> Frecuencia relativa</a></li>
+<li class="chapter" data-level="3.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>3.3.4</b> Cuartiles</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probabilidad.html"><a href="probabilidad.html"><i class="fa fa-check"></i><b>4</b> Probabilidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probabilidad.html"><a href="probabilidad.html#probabilidad-frecuentista"><i class="fa fa-check"></i><b>4.1</b> Probabilidad frecuentista</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad.html"><a href="probabilidad.html#reglas-de-probabilidad"><i class="fa fa-check"></i><b>4.2</b> Reglas de probabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="probabilidad.html"><a href="probabilidad.html#curvas-de-densidad"><i class="fa fa-check"></i><b>4.3</b> Curvas de densidad</a></li>
+<li class="chapter" data-level="4.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>4.4</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>4.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.2</b> Distribución binomial en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal"><i class="fa fa-check"></i><b>4.5</b> Distribución normal</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>4.5.1</b> Distribución normal en R</a></li>
+<li class="chapter" data-level="4.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>4.5.2</b> Pruebas de normalidad en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>4.6</b> Distribución muestral</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="probabilidad.html"><a href="probabilidad.html#poblaciones-muestras-y-distribuciones-muestrales"><i class="fa fa-check"></i><b>4.6.1</b> Poblaciones, muestras y distribuciones muestrales</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html"><i class="fa fa-check"></i><b>5</b> Inferencia de las medias</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#error-estándar-de-la-media"><i class="fa fa-check"></i><b>5.1</b> Error estándar de la media</a></li>
+<li class="chapter" data-level="5.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#intervalo-de-confianza-para-mu"><i class="fa fa-check"></i><b>5.2</b> Intervalo de confianza para <span class="math inline">\(\mu\)</span></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#distribución-t-de-student"><i class="fa fa-check"></i><b>5.2.1</b> Distribución <span class="math inline">\(t\)</span> de Student</a></li>
+<li class="chapter" data-level="5.2.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#construcción-de-un-intervalo-de-confianza-para-mu"><i class="fa fa-check"></i><b>5.2.2</b> Construcción de un intervalo de confianza para <span class="math inline">\(\mu\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="6" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>6</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>6.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="6.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>6.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="6.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>6.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>6.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>6.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inferencia-de-las-medias" class="section level1" number="5">
+<h1><span class="header-section-number">Lección 5</span> Inferencia de las medias</h1>
+<p>En esta lección aprenderemos a hacer <strong>inferencias</strong>, basadas en un modelo de muestreo aleatorio. Usaremos información proveniente de nuestras muestras aleatorias para <em>inferir</em> hechos acerca de la población de la que fueron tomadas. Utilizamos datos para determinar alguna característica de la población original o para medir la precisión de nuestras estimaciones.</p>
+<p>Sabemos que al tomar muestras de una población, nuestros datos son susceptibles a un error de muestreo. Cabe aclarar que este error no solamente tiene que ver con la precisión de medición, si no que este error surge por el hecho de que no estamos tomando en cuenta los datos de toda la población.</p>
+<div id="error-estándar-de-la-media" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Error estándar de la media</h2>
+<p>El <strong>error estándar</strong> mide la magnitud del error de muestreo, es decir, la discrepancia entre <span class="math inline">\(\overline{x}\)</span> y <span class="math inline">\(\mu\)</span> utilizando la distribución muestral de <span class="math inline">\(\overline{X}\)</span>. La fórmula del error estándar es la siguiente:</p>
+<p><span class="math display" id="eq:stderror">\[\begin{equation}
+SE_\overline{X} = \frac{s}{\sqrt{n}}
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>Como podemos ver, esta fórmula es bastante similar a la fórmula de la desviación estándar de la muestra <span class="math inline">\(\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}\)</span>.</p>
+<p>Normalmente, la diferencia entre <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\overline{x}\)</span> es unos cuantos errores estándar. De hecho, encontramos a <span class="math inline">\(\overline{x}\)</span> a un error estándar de <span class="math inline">\(\mu\)</span> bastante seguido. Hay que destacar que el error estándar dependen de la desviación estándar muestral <span class="math inline">\(s\)</span> y del tamaño de muestra <span class="math inline">\(n\)</span>.</p>
+<p>Es importante destacar la diferencia entre el error estándar y la desviación estándar. La desviación estándar describe la <strong>dispersión</strong> de los datos de una muestra, mientras que el error estándar describe la <strong>falta de fidelidad</strong> en la media de una muestra como estimación de la media poblacional, debido al error de muestreo. Una forma de disminuir el error estándar es incrementando el tamaño de muestra <span class="math inline">\(n\)</span>.</p>
+<p>En las gráficas podemos ver el error estándar o la desviación estándar representadas como intervalos en nuestros puntos. Por ejemplo, las siguientes gráficas representan la desviación estándar en la figura <a href="inferencia-de-las-medias.html#fig:sd-bar">5.1</a> y el error estándar en la figura <a href="inferencia-de-las-medias.html#fig:se-bar">5.2</a>. Como podemos ver, la dispersión de los datos es mayor al error estándar.</p>
+<div class="figure" style="text-align: center"><span id="fig:sd-bar"></span>
+<img src="Curso_R_basico_files/figure-html/sd-bar-1.png" alt="Gráfico con la desviación estándar representada en forma de intervalo." width="672" />
+<p class="caption">
+Figura 5.1: Gráfico con la desviación estándar representada en forma de intervalo.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:se-bar"></span>
+<img src="Curso_R_basico_files/figure-html/se-bar-1.png" alt="Gráfico con el error estándar representado en forma de intervalo." width="672" />
+<p class="caption">
+Figura 5.2: Gráfico con el error estándar representado en forma de intervalo.
+</p>
+</div>
+</div>
+<div id="intervalo-de-confianza-para-mu" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Intervalo de confianza para <span class="math inline">\(\mu\)</span></h2>
+<p>Un <strong>intervalo de confianza</strong> nos sirve para determinar qué tan cerca está de <span class="math inline">\(\mu\)</span> nuestra media muestral <span class="math inline">\(\overline{x}\)</span>. Ya que no podemos medir de manera directa <span class="math inline">\(\mu\)</span>, utilizamos <span class="math inline">\(\overline{x}\)</span> adicional al error estándar <span class="math inline">\(SE_\overline{X}\)</span> como se indica en la fórmula <a href="inferencia-de-las-medias.html#eq:IC">(5.2)</a>.</p>
+<p><span class="math display" id="eq:IC">\[\begin{equation}
+\overline{x} \pm {2}*{SE_\overline{X}}
+\tag{5.2}
+\end{equation}\]</span></p>
+<p>¿Por qué utilizar dos veces <span class="math inline">\(SE_\overline{X}\)</span>? Porque al utilizarlo sabemos que el 95% de las veces <span class="math inline">\(\mu\)</span> se encontrará en este intervalo. Si utilizáramos solamente un <span class="math inline">\(SE_\overline{X}\)</span> solamente estaríamos seguros de que <span class="math inline">\(\mu\)</span> se encuentra en este intervalo el 68% de las veces. Esta idea está basada en la distribución muestral de <span class="math inline">\(X\)</span> que vimos en la lección anterior. Al estandarizar nuestra variable <span class="math inline">\(X\)</span> y transformarla en valores <span class="math inline">\(Z\)</span>, lo que buscamos es un área de 0.95. Estos valores Z corresponden a -1.96 como límite inferior y 1.96 como limite superior.</p>
+<p><span class="math display">\[\begin{equation}
+P({-1.96}&lt;{Z}&lt;1.96) = 0.95 \\
+
+P({-1.96}&lt;{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}&lt;1.96) = 0.95 \\
+
+P({-1.96\times{\sigma/\sqrt{n}}}&lt;{{\overline{X}-\mu}}&lt;1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+P({-\overline{X}-1.96\times{\sigma/\sqrt{n}}}&lt;{-\mu}&lt;-\overline{X}1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+P({\overline{X}-1.96\times{\sigma/\sqrt{n}}}&lt;{\mu}&lt;\overline{X}1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+\end{equation}\]</span></p>
+<p>A partir de este despeje obtenemos la fórmula para un intervalo de confianza que contendrá a <span class="math inline">\(\mu\)</span> el 95% de las veces.</p>
+<p><span class="math display" id="eq:IC2">\[\begin{equation}
+\overline{X} \pm 1.96\frac{\sigma}{\sqrt{n}}
+\tag{5.3}
+\end{equation}\]</span></p>
+<p>Si en este caso, cambiamos <span class="math inline">\(\sigma\)</span> por <span class="math inline">\(s\)</span>, podemos calcular el intervalo de confianza para nuestra muestra. William Sealy Gosset, quién publicó sus hallazgos bajo el seudónimo de <em>Student</em>, descubrió un método para preservar la interpretación del 95% y desde entonces este método lleva su seudónimo. Básicamente, si la muestra proviene de una población normal, y si remplazamos <span class="math inline">\(\sigma\)</span> del intervalo por <span class="math inline">\(s\)</span>, la interpretación del 95% se puede preservar utilizando la nueva cantidad denotada como <span class="math inline">\(t_{0.025}\)</span> y que está relacionada con una distribución conocida como <strong>distribución <span class="math inline">\(t\)</span> de Student</strong>.</p>
+<div id="distribución-t-de-student" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Distribución <span class="math inline">\(t\)</span> de Student</h3>
+<p>La distribución <span class="math inline">\(t\)</span> de Student es una distribución teórica continua, usada para distintos própositos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como <strong>grados de libertad</strong> o <strong>df</strong>. La forma de una distribución <span class="math inline">\(t\)</span> de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución <span class="math inline">\(t\)</span> de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(df = \infty\)</span>). En la figura <a href="inferencia-de-las-medias.html#fig:df-graph">5.3</a> podemos ver como la forma de una distribución <span class="math inline">\(t\)</span> de Student cambia conforme los <span class="math inline">\(df\)</span> aumentan. La línea punteada es una curva con distribución normal.</p>
+<div class="figure" style="text-align: center"><span id="fig:df-graph"></span>
+<img src="Curso_R_basico_files/figure-html/df-graph-1.png" alt="Curvas con distribución *t* de Student y cómo cambian dependiendo de los *df*." width="672" />
+<p class="caption">
+Figura 5.3: Curvas con distribución <em>t</em> de Student y cómo cambian dependiendo de los <em>df</em>.
+</p>
+</div>
+<p>La cantidad <span class="math inline">\(t_{0.025}\)</span> se conoce como <strong>valor crítico al 5% de dos colas</strong> de una distribución <span class="math inline">\(t\)</span> de Student. El área entre <span class="math inline">\(-t_{0.025}\)</span> y <span class="math inline">\(t_{0.025}\)</span> contiene el 95% del área de la curva. Es decir el área debajo de <span class="math inline">\(-t_{0.025}\)</span> y encima de <span class="math inline">\(t_{0.025}\)</span> suman en total 5% como se ve en la figura <a href="inferencia-de-las-medias.html#fig:t-crit">5.4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:t-crit"></span>
+<img src="Curso_R_basico_files/figure-html/t-crit-1.png" alt="Valores críticos de una distribución *t* de Student" width="672" />
+<p class="caption">
+Figura 5.4: Valores críticos de una distribución <em>t</em> de Student
+</p>
+</div>
+<p>Existen <strong>tablas de distribución <span class="math inline">\(t\)</span> de Student</strong> que se utilizan para encontrar los valores críticos acorde con nuestros grados de libertad. Al igual que la distribución binomial y normal, <code>R</code> viene con funciones para la distribución <span class="math inline">\(t\)</span> de Student.</p>
+<p>Estos son los siguientes:</p>
+<p>-<code>dt()</code> nos da un valor de densidad en determinado punto de la distribución de <span class="math inline">\(t\)</span> (valor puntual de la función de densidad).</p>
+<p>-<code>pt()</code> nos da un valor de densidad acumulado hasta cierto punto en la distribución de <span class="math inline">\(t\)</span> (área debajo de la curva).</p>
+<p>-<code>qt()</code> toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.</p>
+<p>-<code>rt()</code> genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.</p>
+<p>Sin embargo en este caso, en lugar de contar con el argumento <code>n</code> para el tamaño de muestra, contamos con otro argumento <code>df</code> para los grados de libertad.</p>
+</div>
+<div id="construcción-de-un-intervalo-de-confianza-para-mu" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Construcción de un intervalo de confianza para <span class="math inline">\(\mu\)</span></h3>
+<p>El primer paso para construir nuestro intervalo de confianza es elegir nuestro nivel de confianza (generalmente es 95% pero esto no quiere decir que siempre tenga que ser así). Si quisiéramos un nivel de confianza de 90% utilizamos un valor crítico de <span class="math inline">\(t_{0.05}\)</span>.</p>
+<p>Después tenemos que establecer los límites de nuestro intervalo utilizando la siguiente fórmula (para intervalos con 95% de confianza):</p>
+<p><span class="math display" id="eq:IC3">\[\begin{equation}
+\overline{x} \pm t_{0.025}\frac{s}{\sqrt{n}}
+\tag{5.4}
+\end{equation}\]</span></p>
+<p>Como vimos, el valor crítico de <span class="math inline">\(t\)</span> es determinado por los grados de libertad. Estos se calculan utilizando las siguiente fórmula:</p>
+<p><span class="math display" id="eq:df">\[\begin{equation}
+df = n - 1
+\tag{5.5}
+\end{equation}\]</span></p>
+<p>¿Por qué se calculan así los grados de libertad? Bueno, las desviaciones (<span class="math inline">\(x_i - \overline{x}\)</span>) deben de sumar 0 en total, por lo que solamente una (<span class="math inline">\(n - 1\)</span>) de estas desviaciones puede variar <em>libremente</em>.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Una muestra del área de las alas obtenida de una población de la Mariposa Monarca (<em>Danaus plexippus</em>) de 14 ejemplares tiene una media <span class="math inline">\(\overline{x} = 32.8143cm^2\)</span> y una desviación estándar <span class="math inline">\(s = 2.4757 cm^2\)</span>. Sabemos que los datos provienen de una población con distribución normal. ¿Cuál sería el intervalo de confianza al 95% para esta muestra?</p>
+</blockquote>
+<p>El primer paso es calcular los grados de libertad.</p>
+<p><span class="math display">\[\begin{equation}
+df = n - 1 = 14 - 1 = 13
+\end{equation}\]</span></p>
+<p>Como queremos un intervalo de confianza al 95%, utilizamos el valor crítico de <span class="math inline">\(t_{0.025}\)</span>. Para encontrar este valor podemos buscarlo en una tabla de <span class="math inline">\(t\)</span> o utilizar las funciones de <code>R</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="inferencia-de-las-medias.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="dv">13</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 2.160369</code></pre>
+<p>Por lo tanto el intervalo de confianza al 95% para nuestra muestra es</p>
+<p><span class="math display">\[\begin{equation}
+32.8143 \pm {2.16}{\frac{2.4757}{\sqrt{14}}} \\
+32.8143 \pm {2.16}{0.6617} \\
+32.8143 \pm 1.4293
+\end{equation}\]</span></p>
+<p>De nuevo, esto se puede calcular en <code>R</code> de manera sencilla.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="inferencia-de-las-medias.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">+</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
+<pre><code>## [1] 34.24348</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="inferencia-de-las-medias.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">-</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
+<pre><code>## [1] 31.38512</code></pre>
+<p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis (<span class="math inline">\(31.4, 34.2\)</span>). Con esta información sabemos entonces que <span class="math inline">\(31.4cm^2 &gt; \mu &gt; 34.2cm^2\)</span>, nuestra media poblacional <span class="math inline">\(\mu\)</span> se encuentra, el 95% de las veces, en este intervalo.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probabilidad.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

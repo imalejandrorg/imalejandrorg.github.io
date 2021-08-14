@@ -1,0 +1,205 @@
+---
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Inferencia de las medias
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+library(cowplot)
+library(ggpubr)
+library(latex2exp)
+```
+
+En esta lección aprenderemos a hacer **inferencias**, basadas en un modelo de muestreo aleatorio. Usaremos información proveniente de nuestras muestras aleatorias para *inferir* hechos acerca de la población de la que fueron tomadas. Utilizamos datos para determinar alguna característica de la población original o para medir la precisión de nuestras estimaciones.
+
+Sabemos que al tomar muestras de una población, nuestros datos son susceptibles a un error de muestreo. Cabe aclarar que este error no solamente tiene que ver con la precisión de medición, si no que este error surge por el hecho de que no estamos tomando en cuenta los datos de toda la población.
+
+## Error estándar de la media
+
+El **error estándar** mide la magnitud del error de muestreo, es decir, la discrepancia entre $\overline{x}$ y $\mu$ utilizando la distribución muestral de $\overline{X}$. La fórmula del error estándar es la siguiente:
+
+\begin{equation}
+SE_\overline{X} = \frac{s}{\sqrt{n}}
+(\#eq:stderror)
+\end{equation}
+
+Como podemos ver, esta fórmula es bastante similar a la fórmula de la desviación estándar de la muestra $\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}$.
+
+Normalmente, la diferencia entre $\mu$ y $\overline{x}$ es unos cuantos errores estándar. De hecho, encontramos a $\overline{x}$ a un error estándar de $\mu$ bastante seguido. Hay que destacar que el error estándar dependen de la desviación estándar muestral $s$ y del tamaño de muestra $n$.
+
+Es importante destacar la diferencia entre el error estándar y la desviación estándar. La desviación estándar describe la **dispersión** de los datos de una muestra, mientras que el error estándar describe la **falta de fidelidad** en la media de una muestra como estimación de la media poblacional, debido al error de muestreo. Una forma de disminuir el error estándar es incrementando el tamaño de muestra $n$.
+
+En las gráficas podemos ver el error estándar o la desviación estándar representadas como intervalos en nuestros puntos. Por ejemplo, las siguientes gráficas representan la desviación estándar en la figura \@ref(fig:sd-bar) y el error estándar en la figura \@ref(fig:se-bar). Como podemos ver, la dispersión de los datos es mayor al error estándar.
+
+```{r sd-bar, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico con la desviación estándar representada en forma de intervalo."}
+data("PlantGrowth")
+resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight), Media = mean(weight), Frec_Absoluta = n(), se = sd(weight)/sqrt(n()))
+
+ggplot(resumen, aes(x = group, y = Media)) +
+  geom_errorbar(aes(ymin = Media - SD, ymax = Media + SD), width = 0.1) +
+  geom_dotplot(aes(fill = group), binaxis = "y", stackdir = "center", binwidth = 0.2) +
+  xlab("Tratamientos") +
+  ylab("Peso") +
+  ylim(0, 10) +
+  scale_fill_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) +
+  theme_classic()
+```
+
+```{r se-bar, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico con el error estándar representado en forma de intervalo."}
+ggplot(resumen, aes(x = group, y = Media)) +
+  geom_errorbar(aes(ymin = Media - se, ymax = Media + se), width = 0.1) +
+  geom_dotplot(aes(fill = group), binaxis = "y", stackdir = "center", binwidth = 0.2) +
+  xlab("Tratamientos") +
+  ylab("Peso") +
+  ylim(0, 10)+
+  scale_fill_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) +
+  theme_classic()
+```
+
+## Intervalo de confianza para $\mu$
+
+Un **intervalo de confianza** nos sirve para determinar qué tan cerca está de $\mu$ nuestra media muestral $\overline{x}$. Ya que no podemos medir de manera directa $\mu$, utilizamos $\overline{x}$ adicional al error estándar $SE_\overline{X}$ como se indica en la fórmula \@ref(eq:IC).
+
+\begin{equation}
+\overline{x} \pm {2}*{SE_\overline{X}}
+(\#eq:IC)
+\end{equation}
+
+¿Por qué utilizar dos veces $SE_\overline{X}$? Porque al utilizarlo sabemos que el 95% de las veces $\mu$ se encontrará en este intervalo. Si utilizáramos solamente un $SE_\overline{X}$ solamente estaríamos seguros de que $\mu$ se encuentra en este intervalo el 68% de las veces. Esta idea está basada en la distribución muestral de $X$ que vimos en la lección anterior. Al estandarizar nuestra variable $X$ y transformarla en valores $Z$, lo que buscamos es un área de 0.95. Estos valores Z corresponden a -1.96 como límite inferior y 1.96 como limite superior.
+
+\begin{equation}
+P({-1.96}<{Z}<1.96) = 0.95 \\
+
+P({-1.96}<{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}<1.96) = 0.95 \\
+
+P({-1.96\times{\sigma/\sqrt{n}}}<{{\overline{X}-\mu}}<1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+P({-\overline{X}-1.96\times{\sigma/\sqrt{n}}}<{-\mu}<-\overline{X}1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+P({\overline{X}-1.96\times{\sigma/\sqrt{n}}}<{\mu}<\overline{X}1.96\times{\sigma/\sqrt{n}}) = 0.95 \\
+
+\end{equation}
+
+A partir de este despeje obtenemos la fórmula para un intervalo de confianza que contendrá a $\mu$ el 95% de las veces.
+
+\begin{equation}
+\overline{X} \pm 1.96\frac{\sigma}{\sqrt{n}}
+(\#eq:IC2)
+\end{equation}
+
+Si en este caso, cambiamos $\sigma$ por $s$, podemos calcular el intervalo de confianza para nuestra muestra. William Sealy Gosset, quién publicó sus hallazgos bajo el seudónimo de *Student*, descubrió un método para preservar la interpretación del 95% y desde entonces este método lleva su seudónimo. Básicamente, si la muestra proviene de una población normal, y si remplazamos $\sigma$ del intervalo por $s$, la interpretación del 95% se puede preservar utilizando la nueva cantidad denotada como $t_{0.025}$ y que está relacionada con una distribución conocida como **distribución $t$ de Student**.
+
+### Distribución $t$ de Student
+
+La distribución $t$ de Student es una distribución teórica continua, usada para distintos própositos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como **grados de libertad** o **df**. La forma de una distribución $t$ de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución $t$ de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva $t$ de Student con $df = \infty$). En la figura \@ref(fig:df-graph) podemos ver como la forma de una distribución $t$ de Student cambia conforme los $df$ aumentan. La línea punteada es una curva con distribución normal.
+
+```{r df-graph, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curvas con distribución *t* de Student y cómo cambian dependiendo de los *df*."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dt, args = list(df = 3), size = 0.6, color = "blue") +
+  stat_function(fun = dt, args = list(df = 5), size = 0.6, color = "red") +
+  stat_function(fun = dt, args = list(df = 10), size = 0.6, color = "darkgreen") +
+  geom_text(aes(x = 2, label = "df = 3", y = 0.3), color = "blue") +
+  geom_text(aes(x = 2, label = "df = 5", y = 0.28), color = "red") +
+  geom_text(aes(x = 2, label = "df = 10", y = 0.26), color = "darkgreen") +
+  stat_function(fun =dnorm, size = 0.6, linetype = "dashed") +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  theme_minimal_hgrid()
+```
+
+La cantidad $t_{0.025}$ se conoce como **valor crítico al 5% de dos colas** de una distribución $t$ de Student. El área entre $-t_{0.025}$ y $t_{0.025}$ contiene el 95% del área de la curva. Es decir el área debajo de $-t_{0.025}$ y encima de $t_{0.025}$ suman en total 5% como se ve en la figura \@ref(fig:t-crit). 
+
+```{r t-crit, echo=FALSE, fig.align='center', fig.cap="Valores críticos de una distribución *t* de Student", message=FALSE, warning=FALSE, paged.print=FALSE}
+
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-4, -1.96)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(1.96, 4)) +
+  geom_vline(aes(xintercept = -1.96), linetype = "dashed", size = 0.35) +
+  geom_vline(aes(xintercept = 1.96), linetype = "dashed", size = 0.35) +
+  geom_text(aes(x = 0, y = 0.1, label = "0.95")) +
+  geom_text(aes(x = -2.5, y = 0.1, label = "0.025")) +
+  geom_text(aes(x = 2.5, y = 0.1, label = "0.025")) +
+  stat_function(fun = dnorm, size = 0.6) +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_discrete(limit = c(-1.96, 1.96), labels = c("-1.96" = parse(text = TeX("$-\\t_{0.025}$")), "1.96" = parse(text = TeX("$\\t_{0.025}$")))) +
+  theme_minimal_hgrid()
+```
+
+Existen **tablas de distribución $t$ de Student** que se utilizan para encontrar los valores críticos acorde con nuestros grados de libertad. Al igual que la distribución binomial y normal, `R` viene con funciones para la distribución $t$ de Student.
+
+Estos son los siguientes:
+
+-`dt()` nos da un valor de densidad en determinado punto de la distribución de $t$ (valor puntual de la función de densidad).
+
+-`pt()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $t$ (área debajo de la curva).
+
+-`qt()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
+
+-`rt()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
+
+Sin embargo en este caso, en lugar de contar con el argumento `n` para el tamaño de muestra, contamos con otro argumento `df` para los grados de libertad.
+
+### Construcción de un intervalo de confianza para $\mu$
+
+El primer paso para construir nuestro intervalo de confianza es elegir nuestro nivel de confianza (generalmente es 95% pero esto no quiere decir que siempre tenga que ser así). Si quisiéramos un nivel de confianza de 90% utilizamos un valor crítico de $t_{0.05}$. 
+
+Después tenemos que establecer los límites de nuestro intervalo utilizando la siguiente fórmula (para intervalos con 95% de confianza):
+
+\begin{equation}
+\overline{x} \pm t_{0.025}\frac{s}{\sqrt{n}}
+(\#eq:IC3)
+\end{equation}
+
+Como vimos, el valor crítico de $t$ es determinado por los grados de libertad. Estos se calculan utilizando las siguiente fórmula:
+
+\begin{equation}
+df = n - 1
+(\#eq:df)
+\end{equation}
+
+¿Por qué se calculan así los grados de libertad? Bueno, las desviaciones ($x_i - \overline{x}$) deben de sumar 0 en total, por lo que solamente una ($n - 1$) de estas desviaciones puede variar *libremente*.
+
+>**Ejemplo:** Una muestra del área de las alas obtenida de una población de la Mariposa Monarca (*Danaus plexippus*) de 14 ejemplares tiene una media $\overline{x} = 32.8143cm^2$ y una desviación estándar $s = 2.4757 cm^2$. Sabemos que los datos provienen de una población con distribución normal. ¿Cuál sería el intervalo de confianza al 95% para esta muestra?
+
+El primer paso es calcular los grados de libertad.
+
+\begin{equation}
+df = n - 1 = 14 - 1 = 13
+\end{equation}
+
+Como queremos un intervalo de confianza al 95%, utilizamos el valor crítico de $t_{0.025}$. Para encontrar este valor podemos buscarlo en una tabla de $t$ o utilizar las funciones de `R`.
+
+```{r}
+qt(0.025, 13, lower.tail = FALSE)
+```
+
+Por lo tanto el intervalo de confianza al 95% para nuestra muestra es
+
+\begin{equation}
+32.8143 \pm {2.16}{\frac{2.4757}{\sqrt{14}}} \\
+32.8143 \pm {2.16}{0.6617} \\
+32.8143 \pm 1.4293
+\end{equation}
+
+De nuevo, esto se puede calcular en `R` de manera sencilla.
+```{r}
+32.8143 + 2.160*(2.4757/sqrt(14))
+32.8143 - 2.160*(2.4757/sqrt(14))
+```
+
+Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$, nuestra media poblacional $\mu$ se encuentra, el 95% de las veces, en este intervalo.
