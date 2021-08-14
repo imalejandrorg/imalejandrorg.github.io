@@ -211,7 +211,10 @@ div.csl-indent {
 <li class="chapter" data-level="4.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>4.5.1</b> Distribución normal en R</a></li>
 <li class="chapter" data-level="4.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>4.5.2</b> Pruebas de normalidad en R</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>4.6</b> Distribución muestral</a></li>
+<li class="chapter" data-level="4.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>4.6</b> Distribución muestral</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="probabilidad.html"><a href="probabilidad.html#poblaciones-muestras-y-distribuciones-muestrales"><i class="fa fa-check"></i><b>4.6.1</b> Poblaciones, muestras y distribuciones muestrales</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="5" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>5</b> Análisis de Varianza (ANOVA)</a>
@@ -336,9 +339,9 @@ Los <strong>histogramas de frecuencias relativas</strong> representan las propor
 Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una <strong>curva de densidad.</strong> La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva.
 El área total bajo la curva debe ser igual a 1.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-72-1.png" alt="Curva de densidad" width="672" />
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-72-1.png" alt="Curva de densidad." width="672" />
 <p class="caption">
-Figura 4.1: Curva de densidad
+Figura 4.1: Curva de densidad.
 </p>
 </div>
 <p>Una probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos.</p>
@@ -391,7 +394,7 @@ La media es el número promedio de éxitos, y la desviación estándar es qué t
 \end{equation}\]</span></p>
 <p>En caso de querer obtener la <strong>varianza</strong>, simplemente tomamos la ecuación <a href="probabilidad.html#eq:sdbinom">(4.5)</a> sin aplicar la raíz cuadrada.</p>
 <p><span class="math display" id="eq:varbinom">\[\begin{equation}
-\sigma\^2 = {n}{p}{(1-p)} = {n}{p}{q}
+\sigma^2 = {n}{p}{(1-p)} = {n}{p}{q}
 \tag{4.6}
 \end{equation}\]</span></p>
 </div>
@@ -523,7 +526,7 @@ Figura 4.5: Curva de distribución normal con el área sombreada correspondiente
 <p>Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable <span class="math inline">\(\tt y\)</span>. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que <span class="math inline">\(y\)</span> y el 30% son mayores.</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="probabilidad.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.7</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5244005</code></pre>
-<p>Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación <a href="probabilidad.html#eq:Z">(4.8)</a> podemos realizar un despeje muy sencillo y obtener la fórmula <span class="math inline">\(y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3\)</span>. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.</p>
+<p>Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación <a href="probabilidad.html#eq:Z">(4.8)</a> podemos realizar un despeje muy sencillo y obtener la fórmula <span class="math inline">\(\tt y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3\)</span>. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-84"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-84-1.png" alt="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva." width="672" />
 <p class="caption">
@@ -634,7 +637,91 @@ Figura 4.7: Gráfico Q-Q comparando una muestra de datos contra una muestra teó
 </div>
 <div id="distribución-muestral" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Distribución muestral</h2>
+<p>La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como <strong>variabilidad de muestreo</strong>. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como <strong>distribución muestral</strong>. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre entre la muestra y la población es probable que sea.</p>
+<p>Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un <strong>meta-estudio</strong>, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño <span class="math inline">\(\tt n\)</span> de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño <span class="math inline">\(\tt n\)</span> de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.</p>
+<p>Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra <span class="math inline">\(\tt \overline{x}\)</span> de la media de la población <span class="math inline">\(\tt \mu\)</span>? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable <span class="math inline">\(\tt \overline{X}\)</span>, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de <span class="math inline">\(\tt \mu\)</span> es probable que este <span class="math inline">\(\tt \overline{X}\)</span>? Nuestra respuesta la encontramos en la <strong>distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span></strong>.</p>
+<p>Tenemos que tener en cuenta que, en promedio, la <strong>media de la distribución muestral</strong> <span class="math inline">\(\tt \overline{X}\)</span> equivale a la media de la población <span class="math inline">\(\tt \mu\)</span>. Esto se ve mejor en la fórmula <a href="probabilidad.html#eq:samplemean">(4.9)</a>.</p>
+<p><span class="math display" id="eq:samplemean">\[\begin{equation}
+\mu_{\overline{X}} = \mu
+\tag{4.9}
+\end{equation}\]</span></p>
+<p>La fórmula de la <strong>desviación estándar de la muestra</strong> es un poco menos intuitiva, aunque si se analiza de manera detallada tiene sentido.</p>
+<p><span class="math display" id="eq:samplesd">\[\begin{equation}
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+\tag{4.10}
+\end{equation}\]</span></p>
+<p>Mientras el tamaño de muestra incrementa, la desviación estándar de <span class="math inline">\(\tt \overline{X}\)</span> disminuye. Es decir para muestras más grandes existe menos variación.</p>
+<p>La <strong>forma</strong> está determinada por el tamaño de muestra y la naturaleza de la población. Si la población <span class="math inline">\(\tt X\)</span> se distribuye de manera normal, entonces la distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span> será también normal, sin importar el tamaño de nuestra <span class="math inline">\(\tt n\)</span>. Además el <strong>teorema del límite central</strong> indica que si obtenemos una <span class="math inline">\(\tt n\)</span> suficientemente grande, la distribución muestral de <span class="math inline">\(\tt \overline{X}\)</span> será aproximadamente normal incluso para muestras cuya población <span class="math inline">\(\tt X\)</span> no se distribuye de manera normal.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Supongamos que tenemos una población del Carbonerito Mexicano (<em>Poecile sclateri</em>) en la cuál el peso medio es de <span class="math inline">\(\tt \mu = 11 g\)</span> y la desviación estándar <span class="math inline">\(\tt \sigma = 1.2 g\)</span>. Supongamos que tomamos una muestra aleatoria de seis aves. Dejemos que <span class="math inline">\(\tt \overline{x}\)</span> represente la media del peso de las seis aves. Ya que sabemos que el peso de esta ave sigue una distribución normal en la población, también nuestras muestras seguirán una distribución normal.</p>
+</blockquote>
+<p>Para este caso, la media y la desviación estándar de nuestra muestra serán las siguientes:</p>
+<p><span class="math display">\[\begin{equation}
+\mu_{\overline{X}} = \mu = 11 g\\
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}} = \frac{1.2}{\sqrt{6}} = 0.49 g
+\end{equation}\]</span></p>
+<p>En este caso <span class="math inline">\(\tt \mu_{\overline{X}} = 11 g\)</span> y <span class="math inline">\(\tt \sigma_{\overline{X}} = 0.49 g\)</span>. De tal manera que, en promedio la media de la muestra será 11 g, sin embargo, el 68% de las veces <span class="math inline">\(\tt \overline{X}\)</span> se encontrará entre <span class="math inline">\(\tt 11g \pm 0.49g\)</span> y el 95% de las veces se encontrará entre <span class="math inline">\(\tt 11g \pm 0.98g\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-89"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-89-1.png" alt="Distribución muestral proveniente de una población de *Sclateri poecile*." width="672" />
+<p class="caption">
+Figura 4.8: Distribución muestral proveniente de una población de <em>Sclateri poecile</em>.
+</p>
+</div>
+<p>Esta distribución muestral expresa distintas posibilidades para los valores de <span class="math inline">\(\tt \overline{X}\)</span>. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.</p>
+<p><span class="math display">\[\begin{equation}
+Z = \frac{\overline{x}-\mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 - 11}{0.49} = 1.0204
+\end{equation}\]</span></p>
+<p>Ya que nuestro valor Z = 1.0204, usamos la función <code>pnorm()</code> para encontrar nuestra área bajo la curva.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="probabilidad.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.0204</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1537694</code></pre>
+<p>De hecho, ni siquiera es necesario realizar la transformación a valores Z en <code>R</code> ya que podemos modificar los parámetros de la función <code>pnorm()</code>.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="probabilidad.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">11.5</span>, <span class="at">mean =</span> <span class="dv">11</span>, <span class="at">sd =</span> <span class="fl">0.49</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1537675</code></pre>
+<p>Debido a que hemos redondeado la desviación estándar el valor es ligeramente distinto, pero en esencia el resultado es el mismo. Entonces podemos concluir que</p>
+<p><span class="math display">\[\begin{equation}
+P(\overline{X} &gt; 11.5) = P(Z &gt; 1.0204) = 0.1538 \approx 0.15
+\end{equation}\]</span></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-92-1.png" alt="Probabilidad de que la media de una muestra de seis aves de la especie *Poecile sclateri* sea mayor a 11.5." width="672" />
+<p class="caption">
+Figura 4.9: Probabilidad de que la media de una muestra de seis aves de la especie <em>Poecile sclateri</em> sea mayor a 11.5.
+</p>
+</div>
+<p>Si eligiéramos muchas muestras aleatorias provenientes de esta población cerca del 15% de las muestras tendrían una media mayor a 11.5 g.</p>
+<p>El <strong>tamaño de la muestra</strong> tiene un efecto directo sobre la forma de nuestra curva. Básicamente, muestras más grandes dan un <span class="math inline">\(\tt \sigma_\overline{X}\)</span> menor, y por ende dan un menor error de muestreo. En seguida se muestran distintas gráficas con distintas <span class="math inline">\(\tt \mu_\overline{X}\)</span>. Para este caso hipotético, <span class="math inline">\(\tt \mu = 100, \sigma = 40\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93-1"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-93-1.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
+<p class="caption">
+Figura 4.10: Cambios en la forma de la curva dependientes de la desviación estándar muestral.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93-2"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-93-2.png" alt="Cambios en la forma de la curva dependientes de la desviación estándar muestral." width="672" />
+<p class="caption">
+Figura 4.11: Cambios en la forma de la curva dependientes de la desviación estándar muestral.
+</p>
+</div>
+<p>Qué tan cerca esta <span class="math inline">\(\tt \overline{X}\)</span> de <span class="math inline">\(\tt \mu\)</span> depende del tamaño de la muestra <span class="math inline">\(\tt n\)</span>. La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.</p>
+<div id="poblaciones-muestras-y-distribuciones-muestrales" class="section level3" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Poblaciones, muestras y distribuciones muestrales</h3>
+<p>Una vez llegado a este punto puede que exista confusión entre los valores de una población, de una muestra y de una distribución muestral. Para esto aclaremos los siguientes puntos, en torno a una variable <span class="math inline">\(\tt X\)</span>.</p>
+<p>En una <strong>población</strong>, los estadísticos descriptivos como la media y la desviación estándar se representan por los siguientes símbolos:</p>
+<ul>
+<li><p><span class="math inline">\(\tt \mu\)</span>: media poblacional.</p></li>
+<li><p><span class="math inline">\(\tt \sigma\)</span>: desviación estándar poblacional.</p></li>
+</ul>
+<p>En una <strong>muestra</strong>, los mismos estadísticos se representan por los siguientes símbolos:</p>
+<ul>
+<li><p><span class="math inline">\(\tt \overline{x}\)</span>: media muestral.</p></li>
+<li><p><span class="math inline">\(\tt s\)</span>: desviación estándar poblacional.</p></li>
+</ul>
+<p>En una <strong>distribución muestral</strong> lo que nosotros hacemos es repetir un muestreo indefinidas veces (meta-estudio) y de cada muestreo extraer la media muestral <span class="math inline">\(\tt \overline{x}\)</span>. Lo que representa la distribución muestral es una distribución de medias, en lugar de observaciones individuales.</p>
+<ul>
+<li><p><span class="math inline">\(\tt \mu_\overline{X}\)</span>: media de una distribución muestral.</p></li>
+<li><p><span class="math inline">\(\tt \sigma_\overline{X}\)</span>: desviación estándar de una distribución muestral.</p></li>
+</ul>
 
+</div>
 </div>
 </div>
             </section>

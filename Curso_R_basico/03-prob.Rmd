@@ -16,6 +16,8 @@ library(tidyverse)
 library(kableExtra)
 library(ggthemes)
 library(cowplot)
+library(ggpubr)
+library(latex2exp)
 ```
 
 La **probabilidad** es una cantidad numérica que expresa qué tan factible es que ocurra un evento.
@@ -92,7 +94,7 @@ Los **histogramas de frecuencias relativas** representan las proporciones de las
 Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una **curva de densidad.** La coordenada y de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva.
 El área total bajo la curva debe ser igual a 1.
 
-```{r echo=FALSE, message=TRUE, warning=TRUE, paged.print=FALSE, fig.cap = "Curva de densidad", fig.align = "center"}
+```{r echo=FALSE, message=TRUE, warning=TRUE, paged.print=FALSE, fig.cap = "Curva de densidad.", fig.align = "center"}
 data <- data.frame("x" = rnorm(100000, mean = 0, sd = 1))
 ggplot(data, aes(x = x)) +
   geom_density(size = 0.6) +
@@ -176,7 +178,7 @@ En cuanto a la desviación estándar se calcula con la siguiente ecuación \@ref
 En caso de querer obtener la **varianza**, simplemente tomamos la ecuación \@ref(eq:sdbinom) sin aplicar la raíz cuadrada.
 
 \begin{equation}
-\sigma\^2 = {n}{p}{(1-p)} = {n}{p}{q}
+\sigma^2 = {n}{p}{(1-p)} = {n}{p}{q}
 (\#eq:varbinom)
 \end{equation}
 
@@ -383,7 +385,7 @@ Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la di
 qnorm(0.7, 0, 1)
 ```
 
-Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
+Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la ecuación \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $\tt y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -442,3 +444,140 @@ PlantGrowth %>% group_by(group) %>% shapiro_test(weight) #Agrupamos los datos po
 
 
 ## Distribución muestral
+
+La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como **variabilidad de muestreo**. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como **distribución muestral**. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre entre la muestra y la población es probable que sea.
+
+Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un **meta-estudio**, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño $\tt n$ de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño $\tt n$ de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.
+
+Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra $\tt \overline{x}$ de la media de la población $\tt \mu$? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable $\tt \overline{X}$, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de $\tt \mu$ es probable que este $\tt \overline{X}$? Nuestra respuesta la encontramos en la **distribución muestral de $\tt \overline{X}$**.
+
+Tenemos que tener en cuenta que, en promedio, la **media de la distribución muestral** $\tt \overline{X}$ equivale a la media de la población $\tt \mu$. Esto se ve mejor en la fórmula \@ref(eq:samplemean).
+
+\begin{equation}
+\mu_{\overline{X}} = \mu
+(\#eq:samplemean)
+\end{equation}
+
+La fórmula de la **desviación estándar de la muestra** es un poco menos intuitiva, aunque si se analiza de manera detallada tiene sentido.
+
+\begin{equation}
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+(\#eq:samplesd)
+\end{equation}
+
+Mientras el tamaño de muestra incrementa, la desviación estándar de $\tt \overline{X}$ disminuye. Es decir para muestras más grandes existe menos variación.
+
+La **forma** está determinada por el tamaño de muestra y la naturaleza de la población. Si la población $\tt X$ se distribuye de manera normal, entonces la distribución muestral de $\tt \overline{X}$ será también normal, sin importar el tamaño de nuestra $\tt n$. Además el **teorema del límite central** indica que si obtenemos una $\tt n$ suficientemente grande, la distribución muestral de $\tt \overline{X}$ será aproximadamente normal incluso para muestras cuya población $\tt X$ no se distribuye de manera normal.
+
+>**Ejemplo:** Supongamos que tenemos una población del Carbonerito Mexicano (*Poecile sclateri*) en la cuál el peso medio es de $\tt \mu = 11 g$ y la desviación estándar $\tt \sigma = 1.2 g$. Supongamos que tomamos una muestra aleatoria de seis aves. Dejemos que $\tt \overline{x}$ represente la media del peso de las seis aves. Ya que sabemos que el peso de esta ave sigue una distribución normal en la población, también nuestras muestras seguirán una distribución normal.
+
+Para este caso, la media y la desviación estándar de nuestra muestra serán las siguientes:
+
+\begin{equation}
+\mu_{\overline{X}} = \mu = 11 g\\
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}} = \frac{1.2}{\sqrt{6}} = 0.49 g
+\end{equation}
+
+En este caso $\tt \mu_{\overline{X}} = 11 g$ y $\tt \sigma_{\overline{X}} = 0.49 g$. De tal manera que, en promedio la media de la muestra será 11 g, sin embargo, el 68% de las veces $\tt \overline{X}$ se encontrará entre $\tt 11g \pm 0.49g$ y el 95% de las veces se encontrará entre $\tt 11g \pm 0.98g$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución muestral proveniente de una población de *Sclateri poecile*."}
+ggplot(data.frame(x = c(9.53, 12.47)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 11, sd = 0.49), size = 0.6) +
+  xlim(9, 13) +
+  ylab("") +
+  xlab("Media de la muestra (g)") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_discrete(limit = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
+  theme_minimal_hgrid()
+```
+
+Esta distribución muestral expresa distintas posibilidades para los valores de $\tt \overline{X}$. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.
+
+\begin{equation}
+Z = \frac{\overline{x}-\mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 - 11}{0.49} = 1.0204
+\end{equation}
+
+Ya que nuestro valor Z = 1.0204, usamos la función `pnorm()` para encontrar nuestra área bajo la curva.
+
+```{r}
+pnorm(1.0204, mean = 0, sd = 1, lower.tail = FALSE)
+```
+
+De hecho, ni siquiera es necesario realizar la transformación a valores Z en `R` ya que podemos modificar los parámetros de la función `pnorm()`.
+
+```{r}
+pnorm(11.5, mean = 11, sd = 0.49, lower.tail = FALSE)
+```
+
+Debido a que hemos redondeado la desviación estándar el valor es ligeramente distinto, pero en esencia el resultado es el mismo. Entonces podemos concluir que
+
+\begin{equation}
+P(\overline{X} > 11.5) = P(Z > 1.0204) = 0.1538 \approx 0.15
+\end{equation}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Probabilidad de que la media de una muestra de seis aves de la especie *Poecile sclateri* sea mayor a 11.5."}
+
+ggplot(data.frame(x = c(9.53, 12.47)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 11, sd = 0.49), geom = "area", fill = "lightblue", xlim = c(11.5,12.47)) +
+  stat_function(fun = dnorm, args = list(mean = 11, sd = 0.49), size = 0.6) +
+  geom_vline(aes(xintercept = 11.5), linetype = "dashed", size = 0.35) +
+  geom_text(aes(x = 12, label = "Área = 0.1538", y = 0.4), color = "red", vjust = -0.8, size = 4.5) +
+  geom_text(aes(x = 12.08, label = "Z = 1.0204", y = 0.4), color = "black", vjust = -2.6, size = 4.5) +
+  xlim(9, 13) +
+  ylab("") +
+  xlab("Media de la muestra (g)") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_discrete(limit = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
+  theme_minimal_hgrid()
+```
+
+Si eligiéramos muchas muestras aleatorias provenientes de esta población cerca del 15% de las muestras tendrían una media mayor a 11.5 g. 
+
+El **tamaño de la muestra** tiene un efecto directo sobre la forma de nuestra curva. Básicamente, muestras más grandes dan un $\tt \sigma_\overline{X}$ menor, y por ende dan un menor error de muestreo. En seguida se muestran distintas gráficas con distintas $\tt \mu_\overline{X}$. Para este caso hipotético, $\tt \mu = 100, \sigma = 40$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Cambios en la forma de la curva dependientes de la desviación estándar muestral."}
+
+ggplot(data.frame(x = c(40, 160)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 20), size = 0.6) +
+  geom_text(aes(x = 150, y = 0.015, label = "n == 4"), parse = TRUE) +
+  geom_text(aes(x = 150, y = 0.0135, label = "sigma[bar(X)] == 20"), parse = TRUE) +
+  xlim(40, 160) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  theme_minimal_hgrid()
+
+ggplot(data.frame(x = c(40, 160)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 10), size = 0.6) +
+  geom_text(aes(x = 130, y = 0.015, label = "n == 16"), parse = TRUE) +
+  geom_text(aes(x = 130, y = 0.012, label = "sigma[bar(X)] == 10"), parse = TRUE) +
+  xlim(40, 160) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  theme_minimal_hgrid()
+```
+
+Qué tan cerca esta $\tt \overline{X}$ de $\tt \mu$ depende del tamaño de la muestra $\tt n$. La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.
+
+### Poblaciones, muestras y distribuciones muestrales
+
+Una vez llegado a este punto puede que exista confusión entre los valores de una población, de una muestra y de una distribución muestral. Para esto aclaremos los siguientes puntos, en torno a una variable $\tt X$.
+
+En una **población**, los estadísticos descriptivos como la media y la desviación estándar se representan por los siguientes símbolos:
+
+- $\tt \mu$: media poblacional.   
+
+- $\tt \sigma$: desviación estándar poblacional.
+
+En una **muestra**, los mismos estadísticos se representan por los siguientes símbolos:
+
+- $\tt \overline{x}$: media muestral.
+
+- $\tt s$: desviación estándar poblacional.
+
+En una **distribución muestral** lo que nosotros hacemos es repetir un muestreo indefinidas veces (meta-estudio) y de cada muestreo extraer la media muestral $\tt \overline{x}$. Lo que representa la distribución muestral es una distribución de medias, en lugar de observaciones individuales.
+
+- $\tt \mu_\overline{X}$: media de una distribución muestral.
+
+- $\tt \sigma_\overline{X}$: desviación estándar de una distribución muestral.
