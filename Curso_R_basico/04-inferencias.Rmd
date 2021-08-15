@@ -202,4 +202,4 @@ De nuevo, esto se puede calcular en `R` de manera sencilla.
 32.8143 - 2.160*(2.4757/sqrt(14))
 ```
 
-Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$, nuestra media poblacional $\mu$ se encuentra, el 95% de las veces, en este intervalo.
+Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$, nuestra media poblacional $\mu$ se encuentra, el 95% de las veces, en este intervalo.|
