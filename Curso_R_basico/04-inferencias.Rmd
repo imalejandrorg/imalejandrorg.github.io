@@ -246,7 +246,7 @@ Para comprar la media de dos muestras, es natural considerar la diferencia entre
 
 Esta cantidad es un estimado de la diferencia entre las poblaciones ($\mu_1 - \mu_2$). Para caracterizar el error de muestreo de esta estimación, debemos conocer el error estándar entre la diferencia de ($\overline{X}_1 - \overline{X}_2$).
 
-La fórmula para el **error estándar de ($\overline{X}_1 - \overline{X}_2$) es la siguiente:
+La fórmula para el **error estándar** de ($\overline{X}_1 - \overline{X}_2$) es la siguiente:
 
 \begin{equation}
 SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
@@ -342,7 +342,7 @@ H_A: \mu_1 \neq \mu_2
 (\#eq:HA)
 \end{equation}
 
-La antitesis de esta hipótesis se conoce como **hipótesis nula** y se abrevia como $H_0$. 
+La antítesis de esta hipótesis se conoce como **hipótesis nula** y se abrevia como $H_0$. 
 
 \begin{equation}
 H_0: \mu_1 = \mu_2
@@ -365,11 +365,147 @@ La $H_A$ dice que la diferencia entre las medias no es igual a 0.
 H_0: \mu_1 \neq \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 \neq 0
 \end{equation}
 
-La **prueba de $t$** es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necestiamos computar el **estadístico de $t$**.
+La **prueba de $t$** es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necesitamos computar el **estadístico de $t$**.
 
 \begin{equation}
 t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
 (\#eq:tstat)
 \end{equation}
 
-Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la $H_0$ fuese verdad $(\overline{x}_1 - \overline{x}_2) - 0$, expresada en relación con el error estándar de la diferencia $SE_{(\overline{X}_1 - \overline{X}_2)}$ (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias).
+Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la $H_0$ fuese verdad $(\overline{x}_1 - \overline{x}_2) - 0$, expresada en relación con el error estándar de la diferencia $SE_{(\overline{X}_1 - \overline{X}_2)}$ (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias). Veamos un ejemplo.
+
+>**Ejemplo:** Investigadores están interesados en los efectos que produce el tolueno. Para esto, midieron las concentraciones de varios químicos en el cerebro de ratas que habían sido expuestas a tolueno y ratas que no habían sido expuestas (control). En la siguiente tabla se muestran las concentraciones de norepinefrina (NE) de la región de la médula del cerebro. La $H_0$ de los investigadores es que el tolueno no tiene efecto en la concentración de NE en la médula de las ratas. Por ende, la $H_A$ es que el tolueno tiene un efecto en la médlua de las ratas.
+
+```{r}
+set.seed(123)
+Tolueno <- round(rnorm(10, 540.8, 66.1), 1)
+Control <- round(rnorm(10, 444.2, 69.6), 1)
+ex1 <- data.frame(Control, Tolueno)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+set.seed(123)
+ex1 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Concentración de NE en cerebro de ratas (ng/gm)") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1, width_min = "3cm")
+```
+
+```{r ex2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+ex2 <- gather(ex1, Grupo, Conc)
+
+ggplot(ex2, aes(x = Grupo, y = Conc, fill = Grupo)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 6) +
+  ylab("Concentración de NE (ng/mg)") +
+  xlab("Tratamiento") +
+  theme_classic()
+```
+
+En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de `dplyr`.
+
+```{r}
+ex3 <- ex2 %>% group_by(Grupo) %>% summarise(n = n(), Media = mean(Conc), SD = sd(Conc), SE = SD/sqrt(n))
+ex3
+```
+
+Listo, tenemos nuestra media $\overline{x}$, desviación estándar $s$ y error estándar $SE$ para el grupo control y el grupo tratado con tolueno. Ahora procedemos a aplicar la fórmula para encontrar nuestro estadístico $t$. Primero debemos calcular el error estándar de ($\overline{X}_1 - \overline{X}_2$).
+
+\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{63.04^2}{10} + \frac{72.26^2}{10}} 
+\end{equation}
+
+Posteriormente aplicaríamos la fórmula para encontrar el estadístico $t$.
+
+\begin{equation}
+t_s = \frac{(545.74 - 458.72) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
+\end{equation}
+
+Sin embargo, gracias a la función `t.test` no es necesario que apliquemos esta fórmula paso a paso. Por ejemplo, si queremos obtener el estadístico $t$ simplemente escribimos lo siguiente.
+
+```{r}
+t.test(Conc ~ Grupo, ex2)$statistic
+```
+
+Si agregamos `$statistic` al final de nuestra función obtenemos el estadístico de $t$ que en este caso es 2.87. Pero, ¿cómo sabemos que tenemos suficiente evidencia para aceptar o rechazar la $H_A$? Bueno, si la $H_0$ es verdadera, la distribución muestral de $t_s$ se aproximará a una distribución $t$ de Student con los grados de libertad dados por la fórmula \@ref(eq:df2).
+
+La esencia de de la prueba de $t$ es ver en qué parte de la distribución $t$ de Student cae el estadístico $t_s$. Si cae cercano al centro, entonces la evidencia de los datos es compatible con la $H_0$. Sin embargo, si $t_s$ cae en alguna de las colas, entonces, la evidencia de los datos es compatible con la $H_A$ y una observación como la obtenida no puede explicarse meramente por azar.
+
+Para juzgar si nuestro valor $t_s$ cae en la cola de la distribución $t$ de Student, usamos un valor conocido como **valor-p**. El valor-*p*  puede definirse como el área bajo la curva de una distribución $t$ de Student en cualquiera de las colas que se encuentra más allá de $-t_s$ o $t_s$ como se muestra en la figura \@ref(fig:pvalue).
+
+```{r pvalue, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Valor-*p* para un valor de $t_s$."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-4, -1.96)) +
+  stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(1.96, 4)) +
+  geom_vline(aes(xintercept = -1.96), linetype = "dashed", size = 0.35) +
+  geom_vline(aes(xintercept = 1.96), linetype = "dashed", size = 0.35) +
+  stat_function(fun = dnorm, size = 0.6) +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(limit = c(-4, 4), breaks = c(-1.96, 0, 1.96), labels = c("-1.96" = parse(text = TeX("$-\\t_{s}$")), "0" = "0", "1.96" = parse(text = TeX("$\\t_{s}$")))) +
+  theme_minimal_hgrid(color = "black")
+```
+
+Otra forma de definir el valor-*p* es como la probabilidad de obtener un valor tan extremo como el observado si la $H_0$ fuera verdadera. Para calcular el valor-*p* necesitamos encontrar el área bajo la distribución $t$ de Student que se encuentre más allá de $\pm SE_{\overline{X}_1 - \overline{X}_2}$. Afortunadamente, la función `t.test()` también nos da el valor-*p*. Podemos corroborar esto a mano.
+
+```{r}
+t.test(Conc ~ Grupo, ex2)$parameter
+```
+Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces simplemente en la distribución $t$ de Student buscamos el área correspondiente para un valor $t_s = -2.87$ con $df = 17.67$.
+
+```{r}
+pt(2.87, 17.67, lower.tail = F)
+pt(-2.87, 17.67, lower.tail = T)
+```
+Como en este caso se trata de un valor-*p* de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro $valor-p = 0.0103$. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de $t$ en R. Simplemente escribimos `$p.value` al final de nuestro comando y este nos debería dar nuestro valor-*p*.
+
+```{r}
+t.test(Conc ~ Grupo, ex2)$p.value
+```
+
+Como podemos ver el valor es aproximadamente igual (puede diferir debido a los decimales). Un valor-*p* cercano a 1 indica que el valor $t_s$ se encuentra cercano al centro de la distribución $t$, que resultaría en una falta de evidencia para la $H_A$. Un valor-*p* cercano a 0 indica que el valor $t_s$ se encuentra en una de las colas de la distribución $t$, lo que daría evidencia para la $H_A$. 
+
+¿Cómo decidimos qué valores-*p* muestran evidencia para la $H_A$? Para esto necesitamos elegir un **nivel de significancia** o $\alpha$. Este valor lo elige, generalmente, quién realiza la decisión acerca del estudio. Valores $\alpha$ comunes son $\alpha = 0.1, \space 0.05, \space 0.01$. Si nuestro valor-*p* es menor o igual a nuestro alfa ($valor-p \leq \alpha$) nuestros datos muestran evidencia de una diferencia **estadísticamente significativa** a favor de $H_A$. Decimos que la $H_0$ se rechaza. Si por el contrario el valor-*p* es mayor que nuestro alfa ($valor-p \geq \alpha$), decimos que hay insuficiente evidencia para decir que $H_A$ es verdad, por lo tanto no se rechaza la $H_0$.
+
+¿Cómo podemos ver toda está información? Bueno, si no agregamos ningún valor al final de nuestro comando `t.test()`, obtenemos toda la información condensada.
+
+```{r}
+t.test(Conc ~ Grupo, ex2)
+```
+
+¿Dónde ponemos o indicamos el $\alpha$? La función `t.test()` no especifica un nivel de significancia y lo deja a manos de quién está realizando el experimento para decidir qué $\alpha$ utilizar.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico con el valor-*p* (área sombreada) correspondiente a los datos del ejercicio anterior."}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dt, args = list(df = 17.675), geom = "area", fill = "lightblue", xlim = c(-4, -2.8696)) +
+  stat_function(fun = dt, args = list(df = 17.675), geom = "area", fill = "lightblue", xlim = c(4, 2.8696)) +
+  stat_function(fun = dt, args = list(df = 17.675), size = 0.6, color = "black") +
+  geom_vline(aes(xintercept = -2.8696), linetype = "dashed", size = 0.35) +
+  geom_vline(aes(xintercept = 2.8696), linetype = "dashed", size = 0.35) +
+  geom_text(aes(x = 0, y = 0.1, label = "99.98967")) +
+  geom_text(aes(x = -3.5, y = 0.1, label = "0.005165")) +
+  geom_text(aes(x = 3.5, y = 0.1, label = "0.005165")) +
+  geom_text(aes(x = 1.6, y = 0.35, label = "Valor-p = 0.01033")) +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  scale_x_continuous(limit = c(-4, 4), breaks = c(-2.8696, 0, 2.8696), labels = c("-1.96" = parse(text = TeX("$-\\t_{s}$")), "0" = "0", "1.96" = parse(text = TeX("$\\t_{s}$")))) +
+  theme_minimal_hgrid(color = "black")
+```
+
+Algo importante a tener en consideración es que, incluso cuando nuestro valor-*p* no muestra diferencias significativas no quiere decir esto que la $H_A$ no sea verdadera. Esto nos lleva a los tipos de errores que podemos cometer cuando hacemos pruebas de hipótesis.
+
+- **Tipo de error I:** Cuando decimos que los datos proveen evidencia significativa a favor de la $H_A$, cuando en realidad $H_0$ es verdad. Este tipo de error se contrarresta cuando elegimos nuestro $\alpha$.
+
+- **Tipo de error II:** cuando la $H_A$ es verdadera, pero no obtenemos suficiente información que demuestre esto. Las muestras con tamaños de muestra pequeños son particularmente vulnerables a este tipo de error. La probabilidad de cometer este tipo de error se conoce como $\beta$.
+
+La posibilidad de no cometer un error tipo II cuando la $H_A$ es verdadera se conoce como **poder**.
+
+\begin{equation}
+Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) \space si \space H_{A} \space es \space verdad
+(\#eq:power)
+\end{equation}
+
+## Asociación y causa
+

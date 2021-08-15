@@ -235,6 +235,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#t-test"><i class="fa fa-check"></i><b>5.4.2</b> <span class="math inline">\(t\)</span>-test</a></li>
 <li class="chapter" data-level="5.4.3" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#el-estadístico-de-t"><i class="fa fa-check"></i><b>5.4.3</b> El estadístico de <span class="math inline">\(t\)</span></a></li>
 </ul></li>
+<li class="chapter" data-level="5.5" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#asociación-y-causa"><i class="fa fa-check"></i><b>5.5</b> Asociación y causa</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="6" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>6</b> Análisis de Varianza (ANOVA)</a>
@@ -411,7 +412,7 @@ P(La\space siguiente\space muestra\space nos\space dará\space un\space interval
 \overline{X}_1 - \overline{X}_2
 \end{equation}\]</span></p>
 <p>Esta cantidad es un estimado de la diferencia entre las poblaciones (<span class="math inline">\(\mu_1 - \mu_2\)</span>). Para caracterizar el error de muestreo de esta estimación, debemos conocer el error estándar entre la diferencia de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>).</p>
-<p>La fórmula para el **error estándar de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>) es la siguiente:</p>
+<p>La fórmula para el <strong>error estándar</strong> de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>) es la siguiente:</p>
 <p><span class="math display" id="eq:stderror2">\[\begin{equation}
 SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 \tag{5.6}
@@ -570,7 +571,7 @@ Figura 5.5: Peso del torax de Mariposas Monarca macho y hembra (mg)
 H_A: \mu_1 \neq \mu_2
 \tag{5.10}
 \end{equation}\]</span></p>
-<p>La antitesis de esta hipótesis se conoce como <strong>hipótesis nula</strong> y se abrevia como <span class="math inline">\(H_0\)</span>.</p>
+<p>La antítesis de esta hipótesis se conoce como <strong>hipótesis nula</strong> y se abrevia como <span class="math inline">\(H_0\)</span>.</p>
 <p><span class="math display" id="eq:H0">\[\begin{equation}
 H_0: \mu_1 = \mu_2
 \tag{5.11}
@@ -587,14 +588,195 @@ H_0: \mu_1 = \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 = 0
 <p><span class="math display">\[\begin{equation}
 H_0: \mu_1 \neq \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 \neq 0
 \end{equation}\]</span></p>
-<p>La <strong>prueba de <span class="math inline">\(t\)</span></strong> es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necestiamos computar el <strong>estadístico de <span class="math inline">\(t\)</span></strong>.</p>
+<p>La <strong>prueba de <span class="math inline">\(t\)</span></strong> es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necesitamos computar el <strong>estadístico de <span class="math inline">\(t\)</span></strong>.</p>
 <p><span class="math display" id="eq:tstat">\[\begin{equation}
 t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
 \tag{5.12}
 \end{equation}\]</span></p>
-<p>Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la <span class="math inline">\(H_0\)</span> fuese verdad <span class="math inline">\((\overline{x}_1 - \overline{x}_2) - 0\)</span>, expresada en relación con el error estándar de la diferencia <span class="math inline">\(SE_{(\overline{X}_1 - \overline{X}_2)}\)</span> (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias).</p>
-
+<p>Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la <span class="math inline">\(H_0\)</span> fuese verdad <span class="math inline">\((\overline{x}_1 - \overline{x}_2) - 0\)</span>, expresada en relación con el error estándar de la diferencia <span class="math inline">\(SE_{(\overline{X}_1 - \overline{X}_2)}\)</span> (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias). Veamos un ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Investigadores están interesados en los efectos que produce el tolueno. Para esto, midieron las concentraciones de varios químicos en el cerebro de ratas que habían sido expuestas a tolueno y ratas que no habían sido expuestas (control). En la siguiente tabla se muestran las concentraciones de norepinefrina (NE) de la región de la médula del cerebro. La <span class="math inline">\(H_0\)</span> de los investigadores es que el tolueno no tiene efecto en la concentración de NE en la médula de las ratas. Por ende, la <span class="math inline">\(H_A\)</span> es que el tolueno tiene un efecto en la médlua de las ratas.</p>
+</blockquote>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="inferencia-de-las-medias.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb152-2"><a href="inferencia-de-las-medias.html#cb152-2" aria-hidden="true" tabindex="-1"></a>Tolueno <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">540.8</span>, <span class="fl">66.1</span>), <span class="dv">1</span>)</span>
+<span id="cb152-3"><a href="inferencia-de-las-medias.html#cb152-3" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">444.2</span>, <span class="fl">69.6</span>), <span class="dv">1</span>)</span>
+<span id="cb152-4"><a href="inferencia-de-las-medias.html#cb152-4" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Tolueno)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-101">Tabla 5.2: </span>Concentración de NE en cerebro de ratas (ng/gm)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Control
+</th>
+<th style="text-align:center;">
+Tolueno
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+529.4
+</td>
+<td style="text-align:center;">
+503.8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+469.2
+</td>
+<td style="text-align:center;">
+525.6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+472.1
+</td>
+<td style="text-align:center;">
+643.8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+451.9
+</td>
+<td style="text-align:center;">
+545.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+405.5
+</td>
+<td style="text-align:center;">
+549.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+568.6
+</td>
+<td style="text-align:center;">
+654.2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+478.9
+</td>
+<td style="text-align:center;">
+571.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+307.3
+</td>
+<td style="text-align:center;">
+457.2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+493.0
+</td>
+<td style="text-align:center;">
+495.4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+411.3
+</td>
+<td style="text-align:center;">
+511.3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Curso_R_basico_files/figure-html/ex2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="inferencia-de-las-medias.html#cb153-1" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> ex2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Conc), <span class="at">SD =</span> <span class="fu">sd</span>(Conc), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb153-2"><a href="inferencia-de-las-medias.html#cb153-2" aria-hidden="true" tabindex="-1"></a>ex3</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##   Grupo       n Media    SD    SE
+##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Control    10  459.  72.3  22.9
+## 2 Tolueno    10  546.  63.0  19.9</code></pre>
+<p>Listo, tenemos nuestra media <span class="math inline">\(\overline{x}\)</span>, desviación estándar <span class="math inline">\(s\)</span> y error estándar <span class="math inline">\(SE\)</span> para el grupo control y el grupo tratado con tolueno. Ahora procedemos a aplicar la fórmula para encontrar nuestro estadístico <span class="math inline">\(t\)</span>. Primero debemos calcular el error estándar de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>).</p>
+<p><span class="math display">\[\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{63.04^2}{10} + \frac{72.26^2}{10}} 
+\end{equation}\]</span></p>
+<p>Posteriormente aplicaríamos la fórmula para encontrar el estadístico <span class="math inline">\(t\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+t_s = \frac{(545.74 - 458.72) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
+\end{equation}\]</span></p>
+<p>Sin embargo, gracias a la función <code>t.test</code> no es necesario que apliquemos esta fórmula paso a paso. Por ejemplo, si queremos obtener el estadístico <span class="math inline">\(t\)</span> simplemente escribimos lo siguiente.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="inferencia-de-las-medias.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>statistic</span></code></pre></div>
+<pre><code>##         t 
+## -2.869561</code></pre>
+<p>Si agregamos <code>$statistic</code> al final de nuestra función obtenemos el estadístico de <span class="math inline">\(t\)</span> que en este caso es 2.87. Pero, ¿cómo sabemos que tenemos suficiente evidencia para aceptar o rechazar la <span class="math inline">\(H_A\)</span>? Bueno, si la <span class="math inline">\(H_0\)</span> es verdadera, la distribución muestral de <span class="math inline">\(t_s\)</span> se aproximará a una distribución <span class="math inline">\(t\)</span> de Student con los grados de libertad dados por la fórmula <a href="inferencia-de-las-medias.html#eq:df2">(5.9)</a>.</p>
+<p>La esencia de de la prueba de <span class="math inline">\(t\)</span> es ver en qué parte de la distribución <span class="math inline">\(t\)</span> de Student cae el estadístico <span class="math inline">\(t_s\)</span>. Si cae cercano al centro, entonces la evidencia de los datos es compatible con la <span class="math inline">\(H_0\)</span>. Sin embargo, si <span class="math inline">\(t_s\)</span> cae en alguna de las colas, entonces, la evidencia de los datos es compatible con la <span class="math inline">\(H_A\)</span> y una observación como la obtenida no puede explicarse meramente por azar.</p>
+<p>Para juzgar si nuestro valor <span class="math inline">\(t_s\)</span> cae en la cola de la distribución <span class="math inline">\(t\)</span> de Student, usamos un valor conocido como <strong>valor-p</strong>. El valor-<em>p</em> puede definirse como el área bajo la curva de una distribución <span class="math inline">\(t\)</span> de Student en cualquiera de las colas que se encuentra más allá de <span class="math inline">\(-t_s\)</span> o <span class="math inline">\(t_s\)</span> como se muestra en la figura <a href="inferencia-de-las-medias.html#fig:pvalue">5.6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pvalue"></span>
+<img src="Curso_R_basico_files/figure-html/pvalue-1.png" alt="Valor-*p* para un valor de $t_s$." width="672" />
+<p class="caption">
+Figura 5.6: Valor-<em>p</em> para un valor de <span class="math inline">\(t_s\)</span>.
+</p>
 </div>
+<p>Otra forma de definir el valor-<em>p</em> es como la probabilidad de obtener un valor tan extremo como el observado si la <span class="math inline">\(H_0\)</span> fuera verdadera. Para calcular el valor-<em>p</em> necesitamos encontrar el área bajo la distribución <span class="math inline">\(t\)</span> de Student que se encuentre más allá de <span class="math inline">\(\pm SE_{\overline{X}_1 - \overline{X}_2}\)</span>. Afortunadamente, la función <code>t.test()</code> también nos da el valor-<em>p</em>. Podemos corroborar esto a mano.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="inferencia-de-las-medias.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>parameter</span></code></pre></div>
+<pre><code>##      df 
+## 17.6748</code></pre>
+<p>Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces simplemente en la distribución <span class="math inline">\(t\)</span> de Student buscamos el área correspondiente para un valor <span class="math inline">\(t_s = -2.87\)</span> con <span class="math inline">\(df = 17.67\)</span>.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="inferencia-de-las-medias.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.005160011</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="inferencia-de-las-medias.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> T)</span></code></pre></div>
+<pre><code>## [1] 0.005160011</code></pre>
+<p>Como en este caso se trata de un valor-<em>p</em> de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro <span class="math inline">\(valor-p = 0.0103\)</span>. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de <span class="math inline">\(t\)</span> en R. Simplemente escribimos <code>$p.value</code> al final de nuestro comando y este nos debería dar nuestro valor-<em>p</em>.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="inferencia-de-las-medias.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>p.value</span></code></pre></div>
+<pre><code>## [1] 0.0103277</code></pre>
+<p>Como podemos ver el valor es aproximadamente igual (puede diferir debido a los decimales). Un valor-<em>p</em> cercano a 1 indica que el valor <span class="math inline">\(t_s\)</span> se encuentra cercano al centro de la distribución <span class="math inline">\(t\)</span>, que resultaría en una falta de evidencia para la <span class="math inline">\(H_A\)</span>. Un valor-<em>p</em> cercano a 0 indica que el valor <span class="math inline">\(t_s\)</span> se encuentra en una de las colas de la distribución <span class="math inline">\(t\)</span>, lo que daría evidencia para la <span class="math inline">\(H_A\)</span>.</p>
+<p>¿Cómo decidimos qué valores-<em>p</em> muestran evidencia para la <span class="math inline">\(H_A\)</span>? Para esto necesitamos elegir un <strong>nivel de significancia</strong> o <span class="math inline">\(\alpha\)</span>. Este valor lo elige, generalmente, quién realiza la decisión acerca del estudio. Valores <span class="math inline">\(\alpha\)</span> comunes son <span class="math inline">\(\alpha = 0.1, \space 0.05, \space 0.01\)</span>. Si nuestro valor-<em>p</em> es menor o igual a nuestro alfa (<span class="math inline">\(valor-p \leq \alpha\)</span>) nuestros datos muestran evidencia de una diferencia <strong>estadísticamente significativa</strong> a favor de <span class="math inline">\(H_A\)</span>. Decimos que la <span class="math inline">\(H_0\)</span> se rechaza. Si por el contrario el valor-<em>p</em> es mayor que nuestro alfa (<span class="math inline">\(valor-p \geq \alpha\)</span>), decimos que hay insuficiente evidencia para decir que <span class="math inline">\(H_A\)</span> es verdad, por lo tanto no se rechaza la <span class="math inline">\(H_0\)</span>.</p>
+<p>¿Cómo podemos ver toda está información? Bueno, si no agregamos ningún valor al final de nuestro comando <code>t.test()</code>, obtenemos toda la información condensada.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="inferencia-de-las-medias.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Conc by Grupo
+## t = -2.8696, df = 17.675, p-value = 0.01033
+## alternative hypothesis: true difference in means between group Control and group Tolueno is not equal to 0
+## 95 percent confidence interval:
+##  -150.81499  -23.22501
+## sample estimates:
+## mean in group Control mean in group Tolueno 
+##                458.72                545.74</code></pre>
+<p>¿Dónde ponemos o indicamos el <span class="math inline">\(\alpha\)</span>? La función <code>t.test()</code> no especifica un nivel de significancia y lo deja a manos de quién está realizando el experimento para decidir qué <span class="math inline">\(\alpha\)</span> utilizar.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-108"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-108-1.png" alt="Gráfico con el valor-*p* (área sombreada) correspondiente a los datos del ejercicio anterior." width="672" />
+<p class="caption">
+Figura 5.7: Gráfico con el valor-<em>p</em> (área sombreada) correspondiente a los datos del ejercicio anterior.
+</p>
+</div>
+<p>Algo importante a tener en consideración es que, incluso cuando nuestro valor-<em>p</em> no muestra diferencias significativas no quiere decir esto que la <span class="math inline">\(H_A\)</span> no sea verdadera. Esto nos lleva a los tipos de errores que podemos cometer cuando hacemos pruebas de hipótesis.</p>
+<ul>
+<li><p><strong>Tipo de error I:</strong> Cuando decimos que los datos proveen evidencia significativa a favor de la <span class="math inline">\(H_A\)</span>, cuando en realidad <span class="math inline">\(H_0\)</span> es verdad. Este tipo de error se contrarresta cuando elegimos nuestro <span class="math inline">\(\alpha\)</span>.</p></li>
+<li><p><strong>Tipo de error II:</strong> cuando la <span class="math inline">\(H_A\)</span> es verdadera, pero no obtenemos suficiente información que demuestre esto. Las muestras con tamaños de muestra pequeños son particularmente vulnerables a este tipo de error. La probabilidad de cometer este tipo de error se conoce como <span class="math inline">\(\beta\)</span>.</p></li>
+</ul>
+<p>La posibilidad de no cometer un error tipo II cuando la <span class="math inline">\(H_A\)</span> es verdadera se conoce como <strong>poder</strong>.</p>
+<p><span class="math display" id="eq:power">\[\begin{equation}
+Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) \space si \space H_{A} \space es \space verdad
+\tag{5.13}
+\end{equation}\]</span></p>
+</div>
+</div>
+<div id="asociación-y-causa" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Asociación y causa</h2>
+
 </div>
 </div>
             </section>
