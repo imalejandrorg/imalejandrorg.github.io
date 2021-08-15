@@ -101,7 +101,7 @@ ggplot(data, aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 Una probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos.
@@ -262,7 +262,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
   scale_x_discrete(limit = c(-3:3)) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva**.
@@ -326,7 +326,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
   scale_x_discrete(limit = c(-3:3)) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 
@@ -353,8 +353,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-    scale_x_discrete(limit = c(-3:3)) +
-  theme_minimal_hgrid()
+  scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid(color = "black")
 ```
 
 Ahora para la última pregunta, simplemente calculamos la probabilidad acumulada hasta nuestro valor Z más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor Z más pequeño, que corresponde -0.67.
@@ -378,8 +378,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-    scale_x_discrete(limit = c(-3:3)) +
-  theme_minimal_hgrid()
+  scale_x_discrete(limit = c(-3:3)) +
+  theme_minimal_hgrid(color = "black")
 ```
 
 
@@ -405,7 +405,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
   scale_x_discrete(limit = c(-3:3)) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 ### Pruebas de normalidad en R
@@ -493,8 +493,8 @@ ggplot(data.frame(x = c(9.53, 12.47)), aes(x = x)) +
   ylab("") +
   xlab("Media de la muestra (g)") +
   scale_y_continuous(breaks = NULL) +
-  scale_x_discrete(limit = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
-  theme_minimal_hgrid()
+  scale_x_continuous(breaks = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
+  theme_minimal_hgrid(color = "black")
 ```
 
 Esta distribución muestral expresa distintas posibilidades para los valores de $\overline{X}$. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.
@@ -533,8 +533,8 @@ ggplot(data.frame(x = c(9.53, 12.47)), aes(x = x)) +
   ylab("") +
   xlab("Media de la muestra (g)") +
   scale_y_continuous(breaks = NULL) +
-  scale_x_discrete(limit = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
-  theme_minimal_hgrid()
+  scale_x_continuous(breaks = c(9.53, 10.02, 10.51, 11, 11.49, 11.98, 12.47)) +
+  theme_minimal_hgrid(color = "black")
 ```
 
 Si eligiéramos muchas muestras aleatorias provenientes de esta población cerca del 15% de las muestras tendrían una media mayor a 11.5 g. 
@@ -551,7 +551,7 @@ ggplot(data.frame(x = c(40, 160)), aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 
 ggplot(data.frame(x = c(40, 160)), aes(x = x)) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 10), size = 0.6) +
@@ -561,7 +561,7 @@ ggplot(data.frame(x = c(40, 160)), aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 Qué tan cerca esta $\overline{X}$ de $\mu$ depende del tamaño de la muestra $n$. La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.

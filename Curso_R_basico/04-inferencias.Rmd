@@ -18,6 +18,8 @@ library(ggthemes)
 library(cowplot)
 library(ggpubr)
 library(latex2exp)
+library(kableExtra)
+library(broom)
 ```
 
 En esta lección aprenderemos a hacer **inferencias**, basadas en un modelo de muestreo aleatorio. Usaremos información proveniente de nuestras muestras aleatorias para *inferir* hechos acerca de la población de la que fueron tomadas. Utilizamos datos para determinar alguna característica de la población original o para medir la precisión de nuestras estimaciones.
@@ -101,7 +103,7 @@ Si en este caso, cambiamos $\sigma$ por $s$, podemos calcular el intervalo de co
 
 ### Distribución $t$ de Student
 
-La distribución $t$ de Student es una distribución teórica continua, usada para distintos própositos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como **grados de libertad** o **df**. La forma de una distribución $t$ de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución $t$ de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva $t$ de Student con $df = \infty$). En la figura \@ref(fig:df-graph) podemos ver como la forma de una distribución $t$ de Student cambia conforme los $df$ aumentan. La línea punteada es una curva con distribución normal.
+La distribución $t$ de Student es una distribución teórica continua, usada para distintos propósitos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como **grados de libertad** o **df**. La forma de una distribución $t$ de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución $t$ de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva $t$ de Student con $df = \infty$). En la figura \@ref(fig:df-graph) podemos ver como la forma de una distribución $t$ de Student cambia conforme los $df$ aumentan. La línea punteada es una curva con distribución normal.
 
 ```{r df-graph, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curvas con distribución *t* de Student y cómo cambian dependiendo de los *df*."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -115,8 +117,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   scale_y_continuous(breaks = NULL) +
   ylab("") +
   xlab("") +
-  scale_y_continuous(breaks = NULL) +
-  theme_minimal_hgrid()
+  theme_minimal_hgrid(color = "black")
 ```
 
 La cantidad $t_{0.025}$ se conoce como **valor crítico al 5% de dos colas** de una distribución $t$ de Student. El área entre $-t_{0.025}$ y $t_{0.025}$ contiene el 95% del área de la curva. Es decir el área debajo de $-t_{0.025}$ y encima de $t_{0.025}$ suman en total 5% como se ve en la figura \@ref(fig:t-crit). 
@@ -136,8 +137,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   ylab("") +
   xlab("") +
   scale_y_continuous(breaks = NULL) +
-  scale_x_discrete(limit = c(-1.96, 1.96), labels = c("-1.96" = parse(text = TeX("$-\\t_{0.025}$")), "1.96" = parse(text = TeX("$\\t_{0.025}$")))) +
-  theme_minimal_hgrid()
+  scale_x_continuous(limit = c(-4, 4), breaks = c(-1.96, 1.96), labels = c("-1.96" = parse(text = TeX("$-\\t_{0.025}$")),  "1.96" = parse(text = TeX("$\\t_{0.025}$")))) +
+  theme_minimal_hgrid(color = "black")
 ```
 
 Existen **tablas de distribución $t$ de Student** que se utilizan para encontrar los valores críticos acorde con nuestros grados de libertad. Al igual que la distribución binomial y normal, `R` viene con funciones para la distribución $t$ de Student.
@@ -153,6 +154,16 @@ Estos son los siguientes:
 -`rt()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
 
 Sin embargo en este caso, en lugar de contar con el argumento `n` para el tamaño de muestra, contamos con otro argumento `df` para los grados de libertad.
+
+Para poder utilizar el método $t$ de Student, se necesitan cumplir ciertas condiciones:
+
+- Las muestras deben de ser **aleatorias**.
+
+- Las observaciones de la muestra deben ser independientes unas de otras.
+
+- Si $n$ es pequeña, la distribución de la población debe ser aproximadamente normal.
+
+- Si $n$ es grande, la distribución de la población no necesita ser normal.
 
 ### Construcción de un intervalo de confianza para $\mu$
 
@@ -202,4 +213,163 @@ De nuevo, esto se puede calcular en `R` de manera sencilla.
 32.8143 - 2.160*(2.4757/sqrt(14))
 ```
 
-Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$, nuestra media poblacional $\mu$ se encuentra, el 95% de las veces, en este intervalo.|
+Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$.
+
+Una cosa importante a destacar es que es el propio intervalo de confianza el que es **aleatorio**. Si consideramos intervalos de confianza al 95%, entonces:
+
+\begin{equation}
+P(La\space siguiente\space muestra\space nos\space dará\space un\space intervalo\space de\space confianza\space que\space contenga\space a\space \mu) = 0.95
+\end{equation}
+
+Véanoslo de la siguiente manera. Si hiciéramos un meta-estudio y construyéramos un intervalo de confianza a 95% para cada una de las muestras, entonces el 95% de los intervalos de confianza contendrán a $\mu$. El nivel de confianza (90%, 95%, 99%) es una propiedad del método más que de un intervalo particular.
+
+### Intervalos de confianza unilateral
+
+Este tipo de intervalos de confianza se obtienen cuando solamente nos interesa el límite inferior o superior. Supongamos que queremos construir un intervalo de confianza con un límite inferior al 95%. Mientras que un intervalo de confianza bilateral está basado en usar el valor $\pm t_0.025$, un intervalo de confianza al 95% de un solo lado (en este caso inferior) solamente se preocupa por el área bajo la curva del lado correspondiente. Ya que $P(-t_{0.05} > t > \infty) = 0.95$, para un intervalo de confianza unilateral al 95% utilizamos un valor de $-t_{0.05}$ y establecemos el límite con la siguientes operaciones:
+
+\begin{equation}
+\overline{x} - t_{0.05}{SE_{\overline{X}}} \\
+\overline{x} + t_{0.05}{SE_{\overline{X}}}
+\end{equation}
+
+Estas serían las operaciones a realizar para un intervalo de confianza con límite inferior y superior, respectivamente.
+
+## Comparación de dos medias
+
+Cuando queremos comparar dos muestras que provienen de supuestamente poblaciones distintas, podemos realizar las comparaciones utilizando (1) las medias de las muestras; (2) sus desviaciones estándar o; (3) la forma de su distribución.
+
+Para comprar la media de dos muestras, es natural considerar la diferencia entre ellas.
+
+\begin{equation}
+\overline{X}_1 - \overline{X}_2
+\end{equation}
+
+Esta cantidad es un estimado de la diferencia entre las poblaciones ($\mu_1 - \mu_2$). Para caracterizar el error de muestreo de esta estimación, debemos conocer el error estándar entre la diferencia de ($\overline{X}_1 - \overline{X}_2$).
+
+La fórmula para el **error estándar de ($\overline{X}_1 - \overline{X}_2$) es la siguiente:
+
+\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
+(\#eq:stderror2)
+\end{equation}
+
+Otra forma de representar la fórmula es de la siguiente manera
+
+\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{SE^2_1 + SE^2_2}
+(\#eq:stderror3)
+\end{equation}
+
+En donde $SE_1 = SE_{\overline{X}_1} = \frac{s_1}{\sqrt{n_1}}$ y $SE_2 = SE_{\overline{X}_2} = \frac{s_2}{\sqrt{n_2}}$.
+
+### Intervalo de confianza para $\mu_1 - \mu_2$
+
+Podemos comprar las medias de dos muestras construyendo un intervalo de confianza para la diferencia de las medias. La fórmula para un intervalo de confianza de la diferencia de las medias es bastante similar a la usada para construir uno para una muestra.
+
+\begin{equation}
+(\overline{X}_1 - \overline{X}_2) \pm t_{0.025} SE_{(\overline{X}_1 - \overline{X}_2)}
+(\#eq:IC4)
+\end{equation}
+
+El valor crítico de $t_{0.025}$ es determinado a partir de la distribución $t$ de Student utilizando los grados de libertad que en este caso se calculan de la siguiente manera:
+
+\begin{equation}
+df = \frac{(SE^2_1 + SE^2_2)^2}{SE^4_1/(n_1 - 1) + SE^4_2/(n_2 -1)}
+(\#eq:df2)
+\end{equation}
+
+Otros métodos se basan en obtener los grados de libertad utilizando el número más pequeño entre ($n_1 - 1$) y ($n_2 - 1$) o $n_1 + n_2 - 2$.
+
+>**Ejemplo:** Varios biólogos creen que el tórax de las mariposas monarca macho es mayor que el de las hembras. Una muestra de 7 machos y 8 hembras dan los resultados de la tabla \@ref(tab:ej1) y la figura \@ref(fig:a).
+
+```{r ej1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Machos <- c(67, 73, 85, 84, 78, 63, 80, NA)
+Hembras <- c(73, 54, 61, 63, 66, 57, 75, 58)
+Sample1 <- data.frame(Machos, Hembras)
+
+options(knitr.kable.NA = "")
+Sample1 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Peso del torax (mg)") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1, width_min = "3cm")
+
+Sample2 <- gather(Sample1, Grupo, Peso) %>% na.omit
+```
+En la siguiente figura se puede observar la distribución de los datos para los machos y las hembras. A simple vista parece ser que el tórax de los machos pesa ligeramente más que el de las hebras. 
+
+Ahora tendremos que calcular ciertos valores para estos datos, como las medias y desviaciones estándar de cada grupo. Recuerden que para esto podemos usar la librería `dplyr`. Anteriormente creé una variable llamada `Sample2` que contiene los datos que vamos a necesitar.
+
+```{r}
+Sample2
+```
+
+En este caso yo he redondeado los valores a solamente 1 dígito. Ahora para obtener el intervalo de confianza no hace falta que hagamos todas las fórmulas para obtener los grados de libertad, el error estándar, etc. Basta con usar la función `t.test()` para obtener nuestro intervalo de confianza.
+
+```{r}
+t.test(Peso ~ Grupo,Sample2)$conf.int
+```
+
+Como podemos ver nuestro intervalo se encuentra entre ($3.3, 21.4$) para un nivel de significancia del 95%. ¿Cómo se interpreta esto? Bueno, de la siguiente manera: de acuerdo a nuestro intervalo de confianza, podemos estar 95% seguros de que la media poblacional del tórax de los machos de Mariposa Monarca ($\mu_1$) es más grande que la de las hembras ($\mu_2$) por una cantidad tan pequeña como 3.3 mg o tan grande como 21.4 mg.
+
+Si quisiéramos ajustar el nivel de confianza de nuestro intervalo, también podemos hacerlo.
+```{r}
+t.test(Peso ~ Grupo,Sample2, conf.level = 0.9)$conf.int
+```
+
+Un intervalo de confianza al 90% se encuentra entre ($5.0, 19.7$).
+
+```{r a, echo=FALSE, fig.align='center', fig.cap="Peso del torax de Mariposas Monarca macho y hembra (mg)", message=FALSE, warning=FALSE, paged.print=FALSE}
+
+ggplot(Sample2, aes(x = Grupo, y = Peso)) +
+  geom_dotplot(aes(fill = Grupo), binaxis = "y", stackdir = "center", binwidth = 0.6) +
+  xlab("Sexo") +
+  ylab("Peso del torax (mg)") +
+  theme_classic()
+```
+
+## Pruebas de hipótesis
+
+¿Qué tan diferentes tienen que ser dos muestras para concluir que las poblaciones de las que vienen son distintas? Una aproximación que podemos hacer es comparar las medias de las dos muestras y ver qué tanto difieren comparándolo con la diferencia que esperaríamos si fuese azar.
+
+### Análisis permutacional
+
+### $t$-test
+
+La idea general es formular una hipótesis para ver si $\mu_1$ y $\mu_2$ difieren, y ver la información que tenemos de nuestras muestras para ver si se apoya esta hipótesis. La hipótesis de que $\mu_1$ y $\mu_2$ no son iguales es, de manera general, nuestra **hipótesis alternativa** y se abrevia como $H_A$. 
+
+\begin{equation}
+H_A: \mu_1 \neq \mu_2
+(\#eq:HA)
+\end{equation}
+
+La antitesis de esta hipótesis se conoce como **hipótesis nula** y se abrevia como $H_0$. 
+
+\begin{equation}
+H_0: \mu_1 = \mu_2
+(\#eq:H0)
+\end{equation}
+
+Una **estadístico de prueba de hipótesis** o **estadístico de prueba** nos ayuda a corroborar la fuerza de la evidencia presentada en los datos en favor de la $H_A$. 
+
+### El estadístico de $t$
+
+Ya que la $H_0$ dice que las medias de las poblaciones son iguales, esperaríamos que esa diferencia fuese 0.
+
+\begin{equation}
+H_0: \mu_1 = \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 = 0
+\end{equation}
+
+La $H_A$ dice que la diferencia entre las medias no es igual a 0.
+
+\begin{equation}
+H_0: \mu_1 \neq \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 \neq 0
+\end{equation}
+
+La **prueba de $t$** es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necestiamos computar el **estadístico de $t$**.
+
+\begin{equation}
+t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
+(\#eq:tstat)
+\end{equation}
+
+Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la $H_0$ fuese verdad $(\overline{x}_1 - \overline{x}_2) - 0$, expresada en relación con el error estándar de la diferencia $SE_{(\overline{X}_1 - \overline{X}_2)}$ (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias).

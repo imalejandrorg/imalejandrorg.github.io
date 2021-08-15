@@ -223,6 +223,17 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#distribución-t-de-student"><i class="fa fa-check"></i><b>5.2.1</b> Distribución <span class="math inline">\(t\)</span> de Student</a></li>
 <li class="chapter" data-level="5.2.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#construcción-de-un-intervalo-de-confianza-para-mu"><i class="fa fa-check"></i><b>5.2.2</b> Construcción de un intervalo de confianza para <span class="math inline">\(\mu\)</span></a></li>
+<li class="chapter" data-level="5.2.3" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#intervalos-de-confianza-unilateral"><i class="fa fa-check"></i><b>5.2.3</b> Intervalos de confianza unilateral</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#comparación-de-dos-medias"><i class="fa fa-check"></i><b>5.3</b> Comparación de dos medias</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#intervalo-de-confianza-para-mu_1---mu_2"><i class="fa fa-check"></i><b>5.3.1</b> Intervalo de confianza para <span class="math inline">\(\mu_1 - \mu_2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>5.4</b> Pruebas de hipótesis</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#análisis-permutacional"><i class="fa fa-check"></i><b>5.4.1</b> Análisis permutacional</a></li>
+<li class="chapter" data-level="5.4.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#t-test"><i class="fa fa-check"></i><b>5.4.2</b> <span class="math inline">\(t\)</span>-test</a></li>
+<li class="chapter" data-level="5.4.3" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#el-estadístico-de-t"><i class="fa fa-check"></i><b>5.4.3</b> El estadístico de <span class="math inline">\(t\)</span></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -311,7 +322,7 @@ P({\overline{X}-1.96\times{\sigma/\sqrt{n}}}&lt;{\mu}&lt;\overline{X}1.96\times{
 <p>Si en este caso, cambiamos <span class="math inline">\(\sigma\)</span> por <span class="math inline">\(s\)</span>, podemos calcular el intervalo de confianza para nuestra muestra. William Sealy Gosset, quién publicó sus hallazgos bajo el seudónimo de <em>Student</em>, descubrió un método para preservar la interpretación del 95% y desde entonces este método lleva su seudónimo. Básicamente, si la muestra proviene de una población normal, y si remplazamos <span class="math inline">\(\sigma\)</span> del intervalo por <span class="math inline">\(s\)</span>, la interpretación del 95% se puede preservar utilizando la nueva cantidad denotada como <span class="math inline">\(t_{0.025}\)</span> y que está relacionada con una distribución conocida como <strong>distribución <span class="math inline">\(t\)</span> de Student</strong>.</p>
 <div id="distribución-t-de-student" class="section level3" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Distribución <span class="math inline">\(t\)</span> de Student</h3>
-<p>La distribución <span class="math inline">\(t\)</span> de Student es una distribución teórica continua, usada para distintos própositos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como <strong>grados de libertad</strong> o <strong>df</strong>. La forma de una distribución <span class="math inline">\(t\)</span> de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución <span class="math inline">\(t\)</span> de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(df = \infty\)</span>). En la figura <a href="inferencia-de-las-medias.html#fig:df-graph">5.3</a> podemos ver como la forma de una distribución <span class="math inline">\(t\)</span> de Student cambia conforme los <span class="math inline">\(df\)</span> aumentan. La línea punteada es una curva con distribución normal.</p>
+<p>La distribución <span class="math inline">\(t\)</span> de Student es una distribución teórica continua, usada para distintos propósitos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como <strong>grados de libertad</strong> o <strong>df</strong>. La forma de una distribución <span class="math inline">\(t\)</span> de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución <span class="math inline">\(t\)</span> de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(df = \infty\)</span>). En la figura <a href="inferencia-de-las-medias.html#fig:df-graph">5.3</a> podemos ver como la forma de una distribución <span class="math inline">\(t\)</span> de Student cambia conforme los <span class="math inline">\(df\)</span> aumentan. La línea punteada es una curva con distribución normal.</p>
 <div class="figure" style="text-align: center"><span id="fig:df-graph"></span>
 <img src="Curso_R_basico_files/figure-html/df-graph-1.png" alt="Curvas con distribución *t* de Student y cómo cambian dependiendo de los *df*." width="672" />
 <p class="caption">
@@ -332,6 +343,13 @@ Figura 5.4: Valores críticos de una distribución <em>t</em> de Student
 <p>-<code>qt()</code> toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.</p>
 <p>-<code>rt()</code> genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.</p>
 <p>Sin embargo en este caso, en lugar de contar con el argumento <code>n</code> para el tamaño de muestra, contamos con otro argumento <code>df</code> para los grados de libertad.</p>
+<p>Para poder utilizar el método <span class="math inline">\(t\)</span> de Student, se necesitan cumplir ciertas condiciones:</p>
+<ul>
+<li><p>Las muestras deben de ser <strong>aleatorias</strong>.</p></li>
+<li><p>Las observaciones de la muestra deben ser independientes unas de otras.</p></li>
+<li><p>Si <span class="math inline">\(n\)</span> es pequeña, la distribución de la población debe ser aproximadamente normal.</p></li>
+<li><p>Si <span class="math inline">\(n\)</span> es grande, la distribución de la población no necesita ser normal.</p></li>
+</ul>
 </div>
 <div id="construcción-de-un-intervalo-de-confianza-para-mu" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Construcción de un intervalo de confianza para <span class="math inline">\(\mu\)</span></h3>
@@ -368,7 +386,213 @@ df = n - 1 = 14 - 1 = 13
 <pre><code>## [1] 34.24348</code></pre>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="inferencia-de-las-medias.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">-</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 31.38512</code></pre>
-<p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre parentésis (<span class="math inline">\(31.4, 34.2\)</span>). Con esta información sabemos entonces que <span class="math inline">\(31.4cm^2 &gt; \mu &gt; 34.2cm^2\)</span>, nuestra media poblacional <span class="math inline">\(\mu\)</span> se encuentra, el 95% de las veces, en este intervalo.|</p>
+<p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis (<span class="math inline">\(31.4, 34.2\)</span>). Con esta información sabemos entonces que <span class="math inline">\(31.4cm^2 &gt; \mu &gt; 34.2cm^2\)</span>.</p>
+<p>Una cosa importante a destacar es que es el propio intervalo de confianza el que es <strong>aleatorio</strong>. Si consideramos intervalos de confianza al 95%, entonces:</p>
+<p><span class="math display">\[\begin{equation}
+P(La\space siguiente\space muestra\space nos\space dará\space un\space intervalo\space de\space confianza\space que\space contenga\space a\space \mu) = 0.95
+\end{equation}\]</span></p>
+<p>Véanoslo de la siguiente manera. Si hiciéramos un meta-estudio y construyéramos un intervalo de confianza a 95% para cada una de las muestras, entonces el 95% de los intervalos de confianza contendrán a <span class="math inline">\(\mu\)</span>. El nivel de confianza (90%, 95%, 99%) es una propiedad del método más que de un intervalo particular.</p>
+</div>
+<div id="intervalos-de-confianza-unilateral" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Intervalos de confianza unilateral</h3>
+<p>Este tipo de intervalos de confianza se obtienen cuando solamente nos interesa el límite inferior o superior. Supongamos que queremos construir un intervalo de confianza con un límite inferior al 95%. Mientras que un intervalo de confianza bilateral está basado en usar el valor <span class="math inline">\(\pm t_0.025\)</span>, un intervalo de confianza al 95% de un solo lado (en este caso inferior) solamente se preocupa por el área bajo la curva del lado correspondiente. Ya que <span class="math inline">\(P(-t_{0.05} &gt; t &gt; \infty) = 0.95\)</span>, para un intervalo de confianza unilateral al 95% utilizamos un valor de <span class="math inline">\(-t_{0.05}\)</span> y establecemos el límite con la siguientes operaciones:</p>
+<p><span class="math display">\[\begin{equation}
+\overline{x} - t_{0.05}{SE_{\overline{X}}} \\
+\overline{x} + t_{0.05}{SE_{\overline{X}}}
+\end{equation}\]</span></p>
+<p>Estas serían las operaciones a realizar para un intervalo de confianza con límite inferior y superior, respectivamente.</p>
+</div>
+</div>
+<div id="comparación-de-dos-medias" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Comparación de dos medias</h2>
+<p>Cuando queremos comparar dos muestras que provienen de supuestamente poblaciones distintas, podemos realizar las comparaciones utilizando (1) las medias de las muestras; (2) sus desviaciones estándar o; (3) la forma de su distribución.</p>
+<p>Para comprar la media de dos muestras, es natural considerar la diferencia entre ellas.</p>
+<p><span class="math display">\[\begin{equation}
+\overline{X}_1 - \overline{X}_2
+\end{equation}\]</span></p>
+<p>Esta cantidad es un estimado de la diferencia entre las poblaciones (<span class="math inline">\(\mu_1 - \mu_2\)</span>). Para caracterizar el error de muestreo de esta estimación, debemos conocer el error estándar entre la diferencia de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>).</p>
+<p>La fórmula para el **error estándar de (<span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>) es la siguiente:</p>
+<p><span class="math display" id="eq:stderror2">\[\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
+\tag{5.6}
+\end{equation}\]</span></p>
+<p>Otra forma de representar la fórmula es de la siguiente manera</p>
+<p><span class="math display" id="eq:stderror3">\[\begin{equation}
+SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{SE^2_1 + SE^2_2}
+\tag{5.7}
+\end{equation}\]</span></p>
+<p>En donde <span class="math inline">\(SE_1 = SE_{\overline{X}_1} = \frac{s_1}{\sqrt{n_1}}\)</span> y <span class="math inline">\(SE_2 = SE_{\overline{X}_2} = \frac{s_2}{\sqrt{n_2}}\)</span>.</p>
+<div id="intervalo-de-confianza-para-mu_1---mu_2" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Intervalo de confianza para <span class="math inline">\(\mu_1 - \mu_2\)</span></h3>
+<p>Podemos comprar las medias de dos muestras construyendo un intervalo de confianza para la diferencia de las medias. La fórmula para un intervalo de confianza de la diferencia de las medias es bastante similar a la usada para construir uno para una muestra.</p>
+<p><span class="math display" id="eq:IC4">\[\begin{equation}
+(\overline{X}_1 - \overline{X}_2) \pm t_{0.025} SE_{(\overline{X}_1 - \overline{X}_2)}
+\tag{5.8}
+\end{equation}\]</span></p>
+<p>El valor crítico de <span class="math inline">\(t_{0.025}\)</span> es determinado a partir de la distribución <span class="math inline">\(t\)</span> de Student utilizando los grados de libertad que en este caso se calculan de la siguiente manera:</p>
+<p><span class="math display" id="eq:df2">\[\begin{equation}
+df = \frac{(SE^2_1 + SE^2_2)^2}{SE^4_1/(n_1 - 1) + SE^4_2/(n_2 -1)}
+\tag{5.9}
+\end{equation}\]</span></p>
+<p>Otros métodos se basan en obtener los grados de libertad utilizando el número más pequeño entre (<span class="math inline">\(n_1 - 1\)</span>) y (<span class="math inline">\(n_2 - 1\)</span>) o <span class="math inline">\(n_1 + n_2 - 2\)</span>.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Varios biólogos creen que el tórax de las mariposas monarca macho es mayor que el de las hembras. Una muestra de 7 machos y 8 hembras dan los resultados de la tabla <a href="inferencia-de-las-medias.html#tab:ej1">5.1</a> y la figura <a href="inferencia-de-las-medias.html#fig:a">5.5</a>.</p>
+</blockquote>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ej1">Tabla 5.1: </span>Peso del torax (mg)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Machos
+</th>
+<th style="text-align:center;">
+Hembras
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+67
+</td>
+<td style="text-align:center;">
+73
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+73
+</td>
+<td style="text-align:center;">
+54
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+85
+</td>
+<td style="text-align:center;">
+61
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+84
+</td>
+<td style="text-align:center;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+78
+</td>
+<td style="text-align:center;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+63
+</td>
+<td style="text-align:center;">
+57
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+80
+</td>
+<td style="text-align:center;">
+75
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+</td>
+<td style="text-align:center;">
+58
+</td>
+</tr>
+</tbody>
+</table>
+<p>En la siguiente figura se puede observar la distribución de los datos para los machos y las hembras. A simple vista parece ser que el tórax de los machos pesa ligeramente más que el de las hebras.</p>
+<p>Ahora tendremos que calcular ciertos valores para estos datos, como las medias y desviaciones estándar de cada grupo. Recuerden que para esto podemos usar la librería <code>dplyr</code>. Anteriormente creé una variable llamada <code>Sample2</code> que contiene los datos que vamos a necesitar.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="inferencia-de-las-medias.html#cb146-1" aria-hidden="true" tabindex="-1"></a>Sample2</span></code></pre></div>
+<pre><code>##      Grupo Peso
+## 1   Machos   67
+## 2   Machos   73
+## 3   Machos   85
+## 4   Machos   84
+## 5   Machos   78
+## 6   Machos   63
+## 7   Machos   80
+## 9  Hembras   73
+## 10 Hembras   54
+## 11 Hembras   61
+## 12 Hembras   63
+## 13 Hembras   66
+## 14 Hembras   57
+## 15 Hembras   75
+## 16 Hembras   58</code></pre>
+<p>En este caso yo he redondeado los valores a solamente 1 dígito. Ahora para obtener el intervalo de confianza no hace falta que hagamos todas las fórmulas para obtener los grados de libertad, el error estándar, etc. Basta con usar la función <code>t.test()</code> para obtener nuestro intervalo de confianza.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="inferencia-de-las-medias.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2)<span class="sc">$</span>conf.int</span></code></pre></div>
+<pre><code>## [1] -21.353087  -3.325484
+## attr(,&quot;conf.level&quot;)
+## [1] 0.95</code></pre>
+<p>Como podemos ver nuestro intervalo se encuentra entre (<span class="math inline">\(3.3, 21.4\)</span>) para un nivel de significancia del 95%. ¿Cómo se interpreta esto? Bueno, de la siguiente manera: de acuerdo a nuestro intervalo de confianza, podemos estar 95% seguros de que la media poblacional del tórax de los machos de Mariposa Monarca (<span class="math inline">\(\mu_1\)</span>) es más grande que la de las hembras (<span class="math inline">\(\mu_2\)</span>) por una cantidad tan pequeña como 3.3 mg o tan grande como 21.4 mg.</p>
+<p>Si quisiéramos ajustar el nivel de confianza de nuestro intervalo, también podemos hacerlo.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="inferencia-de-las-medias.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2, <span class="at">conf.level =</span> <span class="fl">0.9</span>)<span class="sc">$</span>conf.int</span></code></pre></div>
+<pre><code>## [1] -19.716479  -4.962093
+## attr(,&quot;conf.level&quot;)
+## [1] 0.9</code></pre>
+<p>Un intervalo de confianza al 90% se encuentra entre (<span class="math inline">\(5.0, 19.7\)</span>).</p>
+<div class="figure" style="text-align: center"><span id="fig:a"></span>
+<img src="Curso_R_basico_files/figure-html/a-1.png" alt="Peso del torax de Mariposas Monarca macho y hembra (mg)" width="672" />
+<p class="caption">
+Figura 5.5: Peso del torax de Mariposas Monarca macho y hembra (mg)
+</p>
+</div>
+</div>
+</div>
+<div id="pruebas-de-hipótesis" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Pruebas de hipótesis</h2>
+<p>¿Qué tan diferentes tienen que ser dos muestras para concluir que las poblaciones de las que vienen son distintas? Una aproximación que podemos hacer es comparar las medias de las dos muestras y ver qué tanto difieren comparándolo con la diferencia que esperaríamos si fuese azar.</p>
+<div id="análisis-permutacional" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Análisis permutacional</h3>
+</div>
+<div id="t-test" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> <span class="math inline">\(t\)</span>-test</h3>
+<p>La idea general es formular una hipótesis para ver si <span class="math inline">\(\mu_1\)</span> y <span class="math inline">\(\mu_2\)</span> difieren, y ver la información que tenemos de nuestras muestras para ver si se apoya esta hipótesis. La hipótesis de que <span class="math inline">\(\mu_1\)</span> y <span class="math inline">\(\mu_2\)</span> no son iguales es, de manera general, nuestra <strong>hipótesis alternativa</strong> y se abrevia como <span class="math inline">\(H_A\)</span>.</p>
+<p><span class="math display" id="eq:HA">\[\begin{equation}
+H_A: \mu_1 \neq \mu_2
+\tag{5.10}
+\end{equation}\]</span></p>
+<p>La antitesis de esta hipótesis se conoce como <strong>hipótesis nula</strong> y se abrevia como <span class="math inline">\(H_0\)</span>.</p>
+<p><span class="math display" id="eq:H0">\[\begin{equation}
+H_0: \mu_1 = \mu_2
+\tag{5.11}
+\end{equation}\]</span></p>
+<p>Una <strong>estadístico de prueba de hipótesis</strong> o <strong>estadístico de prueba</strong> nos ayuda a corroborar la fuerza de la evidencia presentada en los datos en favor de la <span class="math inline">\(H_A\)</span>.</p>
+</div>
+<div id="el-estadístico-de-t" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> El estadístico de <span class="math inline">\(t\)</span></h3>
+<p>Ya que la <span class="math inline">\(H_0\)</span> dice que las medias de las poblaciones son iguales, esperaríamos que esa diferencia fuese 0.</p>
+<p><span class="math display">\[\begin{equation}
+H_0: \mu_1 = \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 = 0
+\end{equation}\]</span></p>
+<p>La <span class="math inline">\(H_A\)</span> dice que la diferencia entre las medias no es igual a 0.</p>
+<p><span class="math display">\[\begin{equation}
+H_0: \mu_1 \neq \mu_2 \longleftrightarrow H_0: \mu_1 - \mu_2 \neq 0
+\end{equation}\]</span></p>
+<p>La <strong>prueba de <span class="math inline">\(t\)</span></strong> es un método que nos ayuda a elegir entre ambas hipótesis. Para hacer un análisis como este, primero necestiamos computar el <strong>estadístico de <span class="math inline">\(t\)</span></strong>.</p>
+<p><span class="math display" id="eq:tstat">\[\begin{equation}
+t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
+\tag{5.12}
+\end{equation}\]</span></p>
+<p>Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la <span class="math inline">\(H_0\)</span> fuese verdad <span class="math inline">\((\overline{x}_1 - \overline{x}_2) - 0\)</span>, expresada en relación con el error estándar de la diferencia <span class="math inline">\(SE_{(\overline{X}_1 - \overline{X}_2)}\)</span> (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias).</p>
 
 </div>
 </div>
