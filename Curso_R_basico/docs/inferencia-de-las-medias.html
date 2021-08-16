@@ -235,7 +235,14 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.2" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#t-test"><i class="fa fa-check"></i><b>5.4.2</b> <span class="math inline">\(t\)</span>-test</a></li>
 <li class="chapter" data-level="5.4.3" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#el-estadístico-de-t"><i class="fa fa-check"></i><b>5.4.3</b> El estadístico de <span class="math inline">\(t\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#asociación-y-causa"><i class="fa fa-check"></i><b>5.5</b> Asociación y causa</a></li>
+<li class="chapter" data-level="5.5" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#t-test-de-una-cola"><i class="fa fa-check"></i><b>5.5</b> <span class="math inline">\(t\)</span> test de una cola</a></li>
+<li class="chapter" data-level="5.6" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#tamaño-de-efecto"><i class="fa fa-check"></i><b>5.6</b> Tamaño de efecto</a></li>
+<li class="chapter" data-level="5.7" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#la-prueba-de-wilcoxon-mann-whitney"><i class="fa fa-check"></i><b>5.7</b> La prueba de Wilcoxon-Mann-Whitney</a></li>
+<li class="chapter" data-level="5.8" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#comparación-de-muestras-pareadas"><i class="fa fa-check"></i><b>5.8</b> Comparación de muestras pareadas</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#prueba-de-t-pareada"><i class="fa fa-check"></i><b>5.8.1</b> Prueba de <span class="math inline">\(t\)</span> pareada</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="inferencia-de-las-medias.html"><a href="inferencia-de-las-medias.html#sign-test"><i class="fa fa-check"></i><b>5.9</b> Sign test</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="6" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>6</b> Análisis de Varianza (ANOVA)</a>
@@ -774,8 +781,364 @@ Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) 
 \end{equation}\]</span></p>
 </div>
 </div>
-<div id="asociación-y-causa" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Asociación y causa</h2>
+<div id="t-test-de-una-cola" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> <span class="math inline">\(t\)</span> test de una cola</h2>
+<p>En caso de que tengamos una <strong>hipótesis direccional</strong> en la que nos interese solamente una de las dos colas de la distribución de <span class="math inline">\(t\)</span>, realizamos un <span class="math inline">\(t\)</span> test de una cola.</p>
+<p>Las <span class="math inline">\(H_A\)</span> podrían ser <span class="math inline">\(H_{A}: \mu_1 &gt; \mu_2\)</span> o <span class="math inline">\(H_{A}: \mu_1 &lt; \mu_2\)</span>. Para este tipo de pruebas lo primero es checar la direccionalidad: ¿Nos interesa la parte inferior o superior de la distribución de <span class="math inline">\(t\)</span>? Después de eso, ver hacia que lado se desvían los datos. Si nuestros datos se desvían en dirección de la <span class="math inline">\(H_A\)</span> entonces podemos seguir con el procedimiento.</p>
+<p>En este caso, el valor-<em>p</em> de una prueba de <span class="math inline">\(t\)</span> de una cola será el área que se encuentre más allá de <span class="math inline">\(t_s\)</span>.</p>
+<p>Para hacer una prueba de una cola en R simplemente necesitamos cambiar un argumento en <code>t.test(alternative = "greater")</code> o <code>t.test(alternative = "less")</code>.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="inferencia-de-las-medias.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Conc by Grupo
+## t = -2.8696, df = 17.675, p-value = 0.005164
+## alternative hypothesis: true difference in means between group Control and group Tolueno is less than 0
+## 95 percent confidence interval:
+##       -Inf -34.38172
+## sample estimates:
+## mean in group Control mean in group Tolueno 
+##                458.72                545.74</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="inferencia-de-las-medias.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Conc by Grupo
+## t = -2.8696, df = 17.675, p-value = 0.9948
+## alternative hypothesis: true difference in means between group Control and group Tolueno is greater than 0
+## 95 percent confidence interval:
+##  -139.6583       Inf
+## sample estimates:
+## mean in group Control mean in group Tolueno 
+##                458.72                545.74</code></pre>
+<p>Ahora bien, algo importante a recalcar es que existan <strong>diferencia significativas</strong> no quiere decir que el efecto sea realmente <strong>importante</strong>. Una prueba de hipótesis solamente responde a la pregunta <em>¿Hay suficiente diferencia entre ambas muestras como para inferir que vinieron de dos poblaciones distintas?</em> sin embargo no nos dice qué tan grande o importante es la diferencia.</p>
+</div>
+<div id="tamaño-de-efecto" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> Tamaño de efecto</h2>
+<p>Para medir la importancia de una diferencia uno debe de considerar la magnitud de la diferencia. El <strong>tamaño de efecto</strong> de un estudio es la diferencia entre <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\mu_{2}\)</span>, en relación con la desviación estándar de una de las poblaciones.</p>
+<p><span class="math display" id="eq:es">\[\begin{equation}
+Tamaño \space de \space efecto = \frac{|{\overline{x}_1-\overline{x}_2}|}{\sigma}
+\tag{5.14}
+\end{equation}\]</span></p>
+<p>Los resultados están dados en desviaciones estándar y el valor se conoce como <strong>d de Cohen</strong>. Para calcular la d de Cohen en <code>R</code> necesitamos un paquete estadístico llamado <code>effsize</code> y la función <code>cohen.d()</code>.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="inferencia-de-las-medias.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb171-2"><a href="inferencia-de-las-medias.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cohen.d</span>(Conc <span class="sc">~</span> Grupo, <span class="at">data =</span> ex2, <span class="at">pooled_sd =</span> F)</span></code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: -1.283307 (large)
+## 95 percent confidence interval:
+##      lower      upper 
+## -2.3150540 -0.2515596</code></pre>
+<p>La ventaja de esta función es que nos dice si nuestro tamaño de efecto es grande o pequeño.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-111-1.png" alt="Diferencias entre las medias de ambas muestras utilizadas en el ejercicio anterior." width="672" />
+<p class="caption">
+Figura 5.8: Diferencias entre las medias de ambas muestras utilizadas en el ejercicio anterior.
+</p>
+</div>
+</div>
+<div id="la-prueba-de-wilcoxon-mann-whitney" class="section level2" number="5.7">
+<h2><span class="header-section-number">5.7</span> La prueba de Wilcoxon-Mann-Whitney</h2>
+<p>También es utilizada para comprar dos muestras. A diferencia de la prueba de <span class="math inline">\(t\)</span>, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas <strong>no paramétricas</strong>.</p>
+<p>En el caso de esta prueba, una <span class="math inline">\(H_0\)</span> generalmente empleada es que las distribuciones de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> son iguales, y la <span class="math inline">\(H_A\)</span> es que la distribución de <span class="math inline">\(X_1\)</span> es distinta a la distribución de la población <span class="math inline">\(X_2\)</span>.</p>
+<p>Esta prueba es recomendable aplicarla cuando tenemos datos que no se pueden transformar a una distribución normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se denota como <span class="math inline">\(U_s\)</span> y mide el grado de separación entra ambas muestras.</p>
+<p>Lo primero es acomodar los datos en orden, de menor a mayor para ambas muestras. Posteriormente determinamos <span class="math inline">\(K_1\)</span> y <span class="math inline">\(K_2\)</span>. Para <span class="math inline">\(K_1\)</span>, contamos el número de observaciones en la muestra 2 que son más pequeñas que la muestra 1. Si hay observaciones que sean iguales para ambas muestras, se cuenta como 1/2 punto. Luego contamos para <span class="math inline">\(K_2\)</span> el número de observaciones en la muestra 1 que son menores que la muestra 2 y de igual forma, 1/2 si hay alguna observación con valor igual. Para corroborar si nuestras cuentas son correctas la suma de <span class="math inline">\(K_1\)</span> y <span class="math inline">\(K_2\)</span> debe ser igual al producto de <span class="math inline">\(n_1 * n_2\)</span>. En este caso el estadístico <span class="math inline">\(U_s\)</span> va a ser el más grande de los dos <span class="math inline">\(K_1\)</span> o <span class="math inline">\(K_2\)</span>. Para encontrar el valor-<em>p</em> se utilizan tablas de U. Aunque en <code>R</code> es más sencillo, utilizando la función <code>wilcox.text()</code>.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="inferencia-de-las-medias.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Conc <span class="sc">~</span> Grupo, <span class="at">data =</span> ex2)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  Conc by Grupo
+## W = 16, p-value = 0.008931
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>El valor <span class="math inline">\(W\)</span> es equivalente al estadístico <span class="math inline">\(U_s\)</span>.</p>
+</div>
+<div id="comparación-de-muestras-pareadas" class="section level2" number="5.8">
+<h2><span class="header-section-number">5.8</span> Comparación de muestras pareadas</h2>
+<p>En esta ocasión vamos a considerar dos muestras que no son independientes entre sí, si no que se encuentran <strong>pareadas</strong>. En un diseño pareado, las observaciones de (<span class="math inline">\(X_1, X_2\)</span>) ocurren en pares. Esto quiere decir que las observaciones tienen más en común entre sí que con otros pares.</p>
+<div id="prueba-de-t-pareada" class="section level3" number="5.8.1">
+<h3><span class="header-section-number">5.8.1</span> Prueba de <span class="math inline">\(t\)</span> pareada</h3>
+<p>Cuando tenemos datos pareados, cambiamos un poco el enfoque. En lugar de considerar a <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> por separado, consideramos su diferencia <span class="math inline">\(D\)</span>.</p>
+<p><span class="math display" id="eq:diff">\[\begin{equation}
+D = X_1 - X_2
+\tag{5.15}
+\end{equation}\]</span></p>
+<p>Cuando tenemos datos pareados, son las diferencias en sí lo que queremos registrar. La media de <span class="math inline">\(D\)</span> es <span class="math inline">\(\overline{D}\)</span> y de igual manera se obtiene como una diferencia entre las medias de ambas muestras.</p>
+<p><span class="math display" id="eq:diffmean">\[\begin{equation}
+\overline{D} = \overline{X}_1 - \overline{X}_2
+\tag{5.16}
+\end{equation}\]</span></p>
+<p>Lo mismo con la diferencia entre las medias de la población.</p>
+<p><span class="math display" id="eq:diffmeanpop">\[\begin{equation}
+\overline{D_\mu} = \mu_1 - \mu_2
+\tag{5.17}
+\end{equation}\]</span></p>
+<p>Debido a esto podemos decir que la media de la diferencia es igual a la diferencia de las medias. Debido a esto podemos concentrarnos exclusivamente en <span class="math inline">\(D\)</span>. Ya que <span class="math inline">\(\overline{D}\)</span> es la media de una sola muestra, para obtener el error estándar simplemente aplicamos la fórmula <a href="inferencia-de-las-medias.html#eq:stderror">(5.1)</a>.</p>
+<p><span class="math display" id="eq:stderrord">\[\begin{equation}
+SE_\overline{D} = \frac{s_D}{\sqrt{n_D}}
+\tag{5.18}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(s_{D}\)</span> y <span class="math inline">\(n_D\)</span> son la desviación estándar y el tamaño de muestra de <span class="math inline">\(D\)</span>, respectivamente.</p>
+<p>Veamos esto con un ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> El adenosin monofosfato cíclico (cAMP) es una sustancia que regula la respuesta celular a las hormonas. En un estudio de maduración de ovarios en la rana <em>Xenopus laevis</em>, los oocitos de cada una de las 4 hembras fueron divdidos en dos grupos: un grupo fue expuesto a progesterona y el otro no. Después de 2 minutos, cada grupo fue analizado para encontrar el contenido de cAMP. Los datos se muestran en la siguiente tabla <a href="inferencia-de-las-medias.html#tab:camp">5.3</a>.</p>
+</blockquote>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="inferencia-de-las-medias.html#cb175-1" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.01</span>, <span class="fl">2.28</span>, <span class="fl">1.51</span>, <span class="fl">2.12</span>)</span>
+<span id="cb175-2"><a href="inferencia-de-las-medias.html#cb175-2" aria-hidden="true" tabindex="-1"></a>Progesterona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.23</span>, <span class="fl">1.21</span>, <span class="fl">1.40</span>, <span class="fl">1.38</span>)</span>
+<span id="cb175-3"><a href="inferencia-de-las-medias.html#cb175-3" aria-hidden="true" tabindex="-1"></a>Datos1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Progesterona)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:camp">Tabla 5.3: </span>Concentración de cAMP (pmol/oocito)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Control
+</th>
+<th style="text-align:center;">
+Progesterona
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+6.01
+</td>
+<td style="text-align:center;">
+5.23
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+2.28
+</td>
+<td style="text-align:center;">
+1.21
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+1.51
+</td>
+<td style="text-align:center;">
+1.40
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+2.12
+</td>
+<td style="text-align:center;">
+1.38
+</td>
+</tr>
+</tbody>
+</table>
+<p>Ahora que tenemos nuestros datos, lo primero es encontrar las diferencias, <span class="math inline">\(d\)</span> entre los datos. Esto lo hacemos muy sencillo agregando una nueva columna <code>$d</code> a nuestra tabla.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="inferencia-de-las-medias.html#cb176-1" aria-hidden="true" tabindex="-1"></a>Datos1<span class="sc">$</span>d <span class="ot">&lt;-</span> Control <span class="sc">-</span> Progesterona <span class="co">#Encontramos d sacando la diferencia entre nuestros datos.</span></span></code></pre></div>
+<p>Bien, ahora para poder encontrar la media y la desviación estándar de nuestras muestras de la diferencia <span class="math inline">\(d\)</span> necesitamos transformar la tabla en un formato que nos permita hacer estos análisis. Afortunadamente la función <code>gather()</code> nos ayuda con eso, que es parte del paquete <code>tidyr</code>.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="inferencia-de-las-medias.html#cb177-1" aria-hidden="true" tabindex="-1"></a>Datos2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos1, Grupo, Concentracion)</span></code></pre></div>
+<p>La función <code>gather()</code> nos ayuda a reorganizar los datos para tenerlos de manera en que podamos trabajar con ellos. Ahora con la propia librería de <code>dplyr</code> deberíamos poder encontrar la media, tanto para los tratamientos como para <span class="math inline">\(d\)</span>.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="inferencia-de-las-medias.html#cb178-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span> </span>
+<span id="cb178-2"><a href="inferencia-de-las-medias.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> </span>
+<span id="cb178-3"><a href="inferencia-de-las-medias.html#cb178-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="inferencia-de-las-medias.html#cb179-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="sc">%&gt;%</span> </span>
+<span id="cb179-2"><a href="inferencia-de-las-medias.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="st">&quot;html&quot;</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Estadísticos descriptivos de cAMP&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb179-3"><a href="inferencia-de-las-medias.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">lightable_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-4"><a href="inferencia-de-las-medias.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">width_min =</span> <span class="st">&quot;3cm&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-117">Tabla 5.4: </span>Estadísticos descriptivos de cAMP
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Grupo
+</th>
+<th style="text-align:center;">
+n
+</th>
+<th style="text-align:center;">
+Media
+</th>
+<th style="text-align:center;">
+SD
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+Control
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2.980
+</td>
+<td style="text-align:center;">
+2.047
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+d
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+0.675
+</td>
+<td style="text-align:center;">
+0.404
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+Progesterona
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2.305
+</td>
+<td style="text-align:center;">
+1.952
+</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso tenemos ya la media de la diferencia <span class="math inline">\(\overline{d}\)</span> y la desviación estándar de la diferencia <span class="math inline">\(s_D\)</span> así como el tamaño de muestra de la diferencia, en este caso <span class="math inline">\(n_D\)</span>. Nos quedaría calcular el error estándar de la diferencia <span class="math inline">\(SE_{\overline{D}}\)</span>, que en este caso sería.</p>
+<p><span class="math display">\[\begin{equation}
+SE_\overline{D} = \frac{0.404}{\sqrt{4}} = 0.202
+\end{equation}\]</span></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="inferencia-de-las-medias.html#cb180-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span></span>
+<span id="cb180-2"><a href="inferencia-de-las-medias.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span></span>
+<span id="cb180-3"><a href="inferencia-de-las-medias.html#cb180-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-119">Tabla 5.5: </span>Estadísticos descriptivos incluyendo el error estándar
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Grupo
+</th>
+<th style="text-align:center;">
+n
+</th>
+<th style="text-align:center;">
+Media
+</th>
+<th style="text-align:center;">
+SD
+</th>
+<th style="text-align:center;">
+SE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+Control
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2.980
+</td>
+<td style="text-align:center;">
+2.047
+</td>
+<td style="text-align:center;">
+1.0235
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+d
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+0.675
+</td>
+<td style="text-align:center;">
+0.404
+</td>
+<td style="text-align:center;">
+0.2020
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+Progesterona
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2.305
+</td>
+<td style="text-align:center;">
+1.952
+</td>
+<td style="text-align:center;">
+0.9760
+</td>
+</tr>
+</tbody>
+</table>
+<p>A partir de aquí podemos construir un intervalo de confianza para <span class="math inline">\(D\)</span>. La forma de hacerlo es igual a la que vimos anteriormente.</p>
+<p><span class="math display" id="eq:ICpair">\[\begin{equation}
+\overline{d} \pm t_{n_{D}-1, 0.025}SE_\overline{D}
+\tag{5.19}
+\end{equation}\]</span></p>
+<p>En donde <span class="math inline">\(t_{n_{D}-1, 0.025}\)</span> es una constante determinada a partir de la distribución <span class="math inline">\(t\)</span> de Student, utilizando como grados de libertad la fórmula <span class="math inline">\(df = n_D - 1\)</span>. Intervalos de confianza con otros coeficientes se construyen de la misma manera.</p>
+<p>Construir el intervalo de confianza correspondiente es relativamente sencillo. Vamos a utilizar la función <code>t.test()</code> pero con el argumento <code>paired = TRUE</code>.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="inferencia-de-las-medias.html#cb181-1" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(Control, Progesterona)</span>
+<span id="cb181-2"><a href="inferencia-de-las-medias.html#cb181-2" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos4, Grupo, Concentracion)</span>
+<span id="cb181-3"><a href="inferencia-de-las-medias.html#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-4"><a href="inferencia-de-las-medias.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Concentracion <span class="sc">~</span> Grupo, Datos4, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  Concentracion by Grupo
+## t = 3.3387, df = 3, p-value = 0.04443
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.0315868 1.3184132
+## sample estimates:
+## mean of the differences 
+##                   0.675</code></pre>
+<p>De hecho, de esta manera obtenemos el intervalo de confianza, el valor crítico de <span class="math inline">\(t\)</span>, los grados de libertad, el valor-<em>p</em>, la media de las diferencias <span class="math inline">\(\overline{D}\)</span>. Hay que tener en cuenta que en este caso nuestra hipótesis nula <span class="math inline">\(H_0\)</span> tiene una connotación distinta. En este caso:</p>
+<p><span class="math display">\[\begin{equation}
+H_0 : \mu_{d} = 0 \\
+H_A : \mu_{d} \neq 0
+\end{equation}\]</span></p>
+<p>Para nuestro ejemplo, nuestras hipótesis pueden ser las siguientes:</p>
+<ul>
+<li><p><strong><span class="math inline">\(H_0\)</span>:</strong> La media de la concentración de cAMP de los oocitos es la misma tanto con exposición o sin exposición a progesterona.</p></li>
+<li><p><strong><span class="math inline">\(H_A\)</span>:</strong> La media de la concentración de cAMP de los oocitos es distinta tras exponerse a progesterona a los que no fueron expuestos.</p></li>
+</ul>
+<p>En este caso nuestro <span class="math inline">\(valor-p &lt; 0.05\)</span> por lo tanto tenemos sufciente evidencia para rechazar la <span class="math inline">\(H_0\)</span>.</p>
+<p>Si quisieramos hacer el cálculo de manera manual, encontrar el valor crítico <span class="math inline">\(t_s\)</span> se realiza con la siguiente fórmula:</p>
+<p><span class="math display" id="eq:tpair">\[\begin{equation}
+t_s = \frac{\overline{d}-0}{SE_\overline{D}}
+\tag{5.20}
+\end{equation}\]</span></p>
+</div>
+</div>
+<div id="sign-test" class="section level2" number="5.9">
+<h2><span class="header-section-number">5.9</span> Sign test</h2>
+<p>El <strong>sign test</strong> es un método no paramétrico para comprarar dos muestras pareadas.</p>
 
 </div>
 </div>

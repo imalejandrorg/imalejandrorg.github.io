@@ -507,5 +507,209 @@ Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) 
 (\#eq:power)
 \end{equation}
 
-## Asociación y causa
+## $t$ test de una cola
 
+En caso de que tengamos una **hipótesis direccional** en la que nos interese solamente una de las dos colas de la distribución de $t$, realizamos un $t$ test de una cola.
+
+Las $H_A$ podrían ser $H_{A}: \mu_1 > \mu_2$ o $H_{A}: \mu_1 < \mu_2$. Para este tipo de pruebas lo primero es checar la direccionalidad: ¿Nos interesa la parte inferior o superior de la distribución de $t$? Después de eso, ver hacia que lado se desvían los datos. Si nuestros datos se desvían en dirección de la $H_A$ entonces podemos seguir con el procedimiento.
+
+En este caso, el valor-*p* de una prueba de $t$ de una cola será el área que se encuentre más allá de $t_s$. 
+
+Para hacer una prueba de una cola en R simplemente necesitamos cambiar un argumento en `t.test(alternative = "greater")` o `t.test(alternative = "less")`. 
+
+```{r}
+t.test(Conc ~ Grupo, ex2, alternative = "less")
+t.test(Conc ~ Grupo, ex2, alternative = "greater")
+```
+
+Ahora bien, algo importante a recalcar es que existan **diferencia significativas** no quiere decir que el efecto sea realmente **importante**. Una prueba de hipótesis solamente responde a la pregunta *¿Hay suficiente diferencia entre ambas muestras como para inferir que vinieron de dos poblaciones distintas?* sin embargo no nos dice qué tan grande o importante es la diferencia.
+
+## Tamaño de efecto
+
+Para medir la importancia de una diferencia uno debe de considerar la magnitud de la diferencia. El **tamaño de efecto** de un estudio es la diferencia entre $\mu_{1}$ y $\mu_{2}$, en relación con la desviación estándar de una de las poblaciones. 
+
+\begin{equation}
+Tamaño \space de \space efecto = \frac{|{\overline{x}_1-\overline{x}_2}|}{\sigma}
+(\#eq:es)
+\end{equation}
+
+Los resultados están dados en desviaciones estándar y el valor se conoce como **d de Cohen**. Para calcular la d de Cohen en `R` necesitamos un paquete estadístico llamado `effsize` y la función `cohen.d()`.
+
+```{r}
+library(effsize)
+cohen.d(Conc ~ Grupo, data = ex2, pooled_sd = F)
+```
+
+La ventaja de esta función es que nos dice si nuestro tamaño de efecto es grande o pequeño.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Diferencias entre las medias de ambas muestras utilizadas en el ejercicio anterior."}
+ggplot(data.frame(x = c(-5, 4)), aes(x = x)) +
+  stat_function(fun = dnorm, args= list(mean = 0, sd = 1), size = 0.6, color = "blue") +
+  stat_function(fun = dnorm, args= list(mean = -1.28, sd = 1), size = 0.6, color = "red") +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  theme_minimal_hgrid(color = "black")
+```
+
+
+## La prueba de Wilcoxon-Mann-Whitney
+
+También es utilizada para comprar dos muestras. A diferencia de la prueba de $t$, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas **no paramétricas**.
+
+En el caso de esta prueba, una $H_0$ generalmente empleada es que las distribuciones de $X_1$ y $X_2$ son iguales, y la $H_A$ es que la distribución de $X_1$ es distinta a la distribución de la población $X_2$.
+
+Esta prueba es recomendable aplicarla cuando tenemos datos que no se pueden transformar a una distribución normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se denota como $U_s$ y mide el grado de separación entra ambas muestras.
+
+Lo primero es acomodar los datos en orden, de menor a mayor para ambas muestras. Posteriormente determinamos $K_1$ y $K_2$. Para $K_1$, contamos el número de observaciones en la muestra 2 que son más pequeñas que la muestra 1. Si hay observaciones que sean iguales para ambas muestras, se cuenta como 1/2 punto. Luego contamos para $K_2$ el número de observaciones en la muestra 1 que son menores que la muestra 2 y de igual forma, 1/2 si hay alguna observación con valor igual. Para corroborar si nuestras cuentas son correctas la suma de $K_1$ y $K_2$ debe ser igual al producto de $n_1 * n_2$. En este caso el estadístico $U_s$ va a ser el más grande de los dos $K_1$ o $K_2$. Para encontrar el valor-*p* se utilizan tablas de U. Aunque en `R` es más sencillo, utilizando la función `wilcox.text()`. 
+
+```{r}
+wilcox.test(Conc ~ Grupo, data = ex2)
+```
+
+El valor $W$ es equivalente al estadístico $U_s$. 
+
+## Comparación de muestras pareadas
+
+En esta ocasión vamos a considerar dos muestras que no son independientes entre sí, si no que se encuentran **pareadas**. En un diseño pareado, las observaciones de ($X_1, X_2$) ocurren en pares. Esto quiere decir que las observaciones tienen más en común entre sí que con otros pares.
+
+### Prueba de $t$ pareada
+
+Cuando tenemos datos pareados, cambiamos un poco el enfoque. En lugar de considerar a $X_1$ y $X_2$ por separado, consideramos su diferencia $D$.
+
+\begin{equation}
+D = X_1 - X_2
+(\#eq:diff)
+\end{equation}
+
+Cuando tenemos datos pareados, son las diferencias en sí lo que queremos registrar. La media de $D$ es $\overline{D}$ y de igual manera se obtiene como una diferencia entre las medias de ambas muestras.
+
+\begin{equation}
+\overline{D} = \overline{X}_1 - \overline{X}_2
+(\#eq:diffmean)
+\end{equation}
+
+Lo mismo con la diferencia entre las medias  de la población.
+
+\begin{equation}
+\overline{D_\mu} = \mu_1 - \mu_2
+(\#eq:diffmeanpop)
+\end{equation}
+
+Debido a esto podemos decir que la media de la diferencia es igual a la diferencia de las medias. Debido a esto podemos concentrarnos exclusivamente en $D$. Ya que $\overline{D}$ es la media de una sola muestra, para obtener el error estándar simplemente aplicamos la fórmula \@ref(eq:stderror).
+
+\begin{equation}
+SE_\overline{D} = \frac{s_D}{\sqrt{n_D}}
+(\#eq:stderrord)
+\end{equation}
+
+Donde $s_{D}$ y $n_D$ son la desviación estándar y el tamaño de muestra de $D$, respectivamente.
+
+Veamos esto con un ejemplo.
+
+>**Ejemplo:** El adenosin monofosfato cíclico (cAMP) es una sustancia  que regula la respuesta celular a las hormonas. En un estudio de maduración de ovarios en la rana *Xenopus laevis*, los oocitos de cada una de las 4 hembras fueron divdidos en dos grupos: un grupo fue expuesto a progesterona y el otro no. Después de 2 minutos, cada grupo fue analizado para encontrar el contenido de cAMP. Los datos se muestran en la siguiente tabla \@ref(tab:camp).
+
+```{r}
+Control <- c(6.01, 2.28, 1.51, 2.12)
+Progesterona <- c(5.23, 1.21, 1.40, 1.38)
+Datos1 <- data.frame(Control, Progesterona)
+```
+
+
+```{r camp, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos1 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Concentración de cAMP (pmol/oocito)") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1, width_min = "3cm")
+```
+
+Ahora que tenemos nuestros datos, lo primero es encontrar las diferencias, $d$ entre los datos. Esto lo hacemos muy sencillo agregando una nueva columna `$d` a nuestra tabla.
+  
+```{r}
+Datos1$d <- Control - Progesterona #Encontramos d sacando la diferencia entre nuestros datos.
+```
+  
+Bien, ahora para poder encontrar la media y la desviación estándar de nuestras muestras de la diferencia $d$ necesitamos transformar la tabla en un formato que nos permita hacer estos análisis. Afortunadamente la función `gather()` nos ayuda con eso, que es parte del paquete `tidyr`.
+
+```{r}
+Datos2 <- gather(Datos1, Grupo, Concentracion)
+```
+
+La función `gather()` nos ayuda a reorganizar los datos para tenerlos de manera en que podamos trabajar con ellos. Ahora con la propia librería de `dplyr` deberíamos poder encontrar la media, tanto para los tratamientos como para $d$. 
+
+```{r}
+Datos3 <- Datos2 %>% 
+  group_by(Grupo) %>% 
+  summarise(n = n(), Media = mean(Concentracion), SD = round(sd(Concentracion), 3))
+```
+
+```{r}
+Datos3 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Estadísticos descriptivos de cAMP") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1, width_min = "3cm")
+```
+
+En este caso tenemos ya la media de la diferencia $\overline{d}$ y la desviación estándar de la diferencia $s_D$ así como el tamaño de muestra de la diferencia, en este caso $n_D$. Nos quedaría calcular el error estándar de la diferencia $SE_{\overline{D}}$, que en este caso sería.
+
+\begin{equation}
+SE_\overline{D} = \frac{0.404}{\sqrt{4}} = 0.202
+\end{equation}
+
+```{r}
+Datos3 <- Datos2 %>%
+  group_by(Grupo) %>%
+  summarise(n = n(), Media = mean(Concentracion), SD = round(sd(Concentracion), 3), SE = SD/sqrt(n))
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos3 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Estadísticos descriptivos incluyendo el error estándar") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1, width_min = "3cm")
+```
+
+A partir de aquí podemos construir un intervalo de confianza para $D$. La forma de hacerlo es igual a la que vimos anteriormente.
+
+\begin{equation}
+\overline{d} \pm t_{n_{D}-1, 0.025}SE_\overline{D}
+(\#eq:ICpair)
+\end{equation}
+
+En donde $t_{n_{D}-1, 0.025}$ es una constante determinada a partir de la distribución $t$ de Student, utilizando como grados de libertad la fórmula $df = n_D - 1$. Intervalos de confianza con otros coeficientes se construyen de la misma manera.
+
+Construir el intervalo de confianza correspondiente es relativamente sencillo. Vamos a utilizar la función `t.test()` pero con el argumento `paired = TRUE`.
+
+```{r}
+Datos4 <-  data.frame(Control, Progesterona)
+Datos4 <- gather(Datos4, Grupo, Concentracion)
+
+t.test(Concentracion ~ Grupo, Datos4, paired = TRUE)
+```
+
+De hecho, de esta manera obtenemos el intervalo de confianza, el valor crítico de $t$, los grados de libertad, el valor-*p*, la media de las diferencias $\overline{D}$. Hay que tener en cuenta que en este caso nuestra hipótesis nula $H_0$ tiene una connotación distinta. En este caso:
+
+\begin{equation}
+H_0 : \mu_{d} = 0 \\
+H_A : \mu_{d} \neq 0
+\end{equation}
+
+Para nuestro ejemplo, nuestras hipótesis pueden ser las siguientes:
+
+- **$H_0$:** La media de la concentración de cAMP de los oocitos es la misma tanto con exposición o sin exposición a progesterona.
+
+- **$H_A$:** La media de la concentración de cAMP de los oocitos es distinta tras exponerse a progesterona a los que no fueron expuestos.
+
+En este caso nuestro $valor-p < 0.05$ por lo tanto tenemos sufciente evidencia para rechazar la $H_0$. 
+
+Si quisieramos hacer el cálculo de manera manual, encontrar el valor crítico $t_s$ se realiza con la siguiente fórmula:
+
+
+\begin{equation}
+t_s = \frac{\overline{d}-0}{SE_\overline{D}}
+(\#eq:tpair)
+\end{equation}
+
+## Sign test
+
+El **sign test** es un método no paramétrico para comprarar dos muestras pareadas.
