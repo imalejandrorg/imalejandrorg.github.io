@@ -11,6 +11,10 @@ library(bookdown)
 library(vegan)
 library(tidyverse)
 library(kableExtra)
+library(ggthemes)
+library(cowplot)
+library(ggpubr)
+library(latex2exp)
 ```
 
 En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas. Hola saludos a la Kmi.

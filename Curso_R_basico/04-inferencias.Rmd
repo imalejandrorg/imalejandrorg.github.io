@@ -7,7 +7,7 @@ editor_options:
     wrap: sentence
 ---
 
-# Inferencia de las medias
+# Estadística inferencial
 
 ```{r include=FALSE}
 library(knitr)
@@ -203,7 +203,7 @@ Por lo tanto el intervalo de confianza al 95% para nuestra muestra es
 
 \begin{equation}
 32.8143 \pm {2.16}{\frac{2.4757}{\sqrt{14}}} \\
-32.8143 \pm {2.16}{0.6617} \\
+32.8143 \pm {2.16}*{0.6617} \\
 32.8143 \pm 1.4293
 \end{equation}
 
@@ -223,7 +223,7 @@ P(La\space siguiente\space muestra\space nos\space dará\space un\space interval
 
 Véanoslo de la siguiente manera. Si hiciéramos un meta-estudio y construyéramos un intervalo de confianza a 95% para cada una de las muestras, entonces el 95% de los intervalos de confianza contendrán a $\mu$. El nivel de confianza (90%, 95%, 99%) es una propiedad del método más que de un intervalo particular.
 
-### Intervalos de confianza unilateral
+### Intervalos de confianza unilaterales
 
 Este tipo de intervalos de confianza se obtienen cuando solamente nos interesa el límite inferior o superior. Supongamos que queremos construir un intervalo de confianza con un límite inferior al 95%. Mientras que un intervalo de confianza bilateral está basado en usar el valor $\pm t_0.025$, un intervalo de confianza al 95% de un solo lado (en este caso inferior) solamente se preocupa por el área bajo la curva del lado correspondiente. Ya que $P(-t_{0.05} > t > \infty) = 0.95$, para un intervalo de confianza unilateral al 95% utilizamos un valor de $-t_{0.05}$ y establecemos el límite con la siguientes operaciones:
 
@@ -291,7 +291,7 @@ options(knitr.kable.NA = "")
 Sample1 %>% 
   knitr::kable("html", align = c("c", "c"), caption = "Peso del torax (mg)") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
-  column_spec(1, width_min = "3cm")
+  column_spec(1:2, width_min = "3cm")
 
 Sample2 <- gather(Sample1, Grupo, Peso) %>% na.omit
 ```
@@ -331,8 +331,6 @@ ggplot(Sample2, aes(x = Grupo, y = Peso)) +
 
 ¿Qué tan diferentes tienen que ser dos muestras para concluir que las poblaciones de las que vienen son distintas? Una aproximación que podemos hacer es comparar las medias de las dos muestras y ver qué tanto difieren comparándolo con la diferencia que esperaríamos si fuese azar.
 
-### Análisis permutacional
-
 ### $t$-test
 
 La idea general es formular una hipótesis para ver si $\mu_1$ y $\mu_2$ difieren, y ver la información que tenemos de nuestras muestras para ver si se apoya esta hipótesis. La hipótesis de que $\mu_1$ y $\mu_2$ no son iguales es, de manera general, nuestra **hipótesis alternativa** y se abrevia como $H_A$. 
@@ -350,8 +348,6 @@ H_0: \mu_1 = \mu_2
 \end{equation}
 
 Una **estadístico de prueba de hipótesis** o **estadístico de prueba** nos ayuda a corroborar la fuerza de la evidencia presentada en los datos en favor de la $H_A$. 
-
-### El estadístico de $t$
 
 Ya que la $H_0$ dice que las medias de las poblaciones son iguales, esperaríamos que esa diferencia fuese 0.
 
@@ -388,7 +384,7 @@ set.seed(123)
 ex1 %>% 
   knitr::kable("html", align = c("c", "c"), caption = "Concentración de NE en cerebro de ratas (ng/gm)") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
-  column_spec(1, width_min = "3cm")
+  column_spec(1:2, width_min = "3cm")
 ```
 
 ```{r ex2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -404,6 +400,7 @@ ggplot(ex2, aes(x = Grupo, y = Conc, fill = Grupo)) +
 En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de `dplyr`.
 
 ```{r}
+ex2 <- gather(ex1, Grupo, Conc)
 ex3 <- ex2 %>% group_by(Grupo) %>% summarise(n = n(), Media = mean(Conc), SD = sd(Conc), SE = SD/sqrt(n))
 ex3
 ```
@@ -420,7 +417,7 @@ Posteriormente aplicaríamos la fórmula para encontrar el estadístico $t$.
 t_s = \frac{(545.74 - 458.72) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
 \end{equation}
 
-Sin embargo, gracias a la función `t.test` no es necesario que apliquemos esta fórmula paso a paso. Por ejemplo, si queremos obtener el estadístico $t$ simplemente escribimos lo siguiente.
+Sin embargo, gracias a la función `t.test` no es necesario que hagamos este procedimiento paso a paso. Por ejemplo, si queremos obtener el estadístico $t$ simplemente escribimos lo siguiente.
 
 ```{r}
 t.test(Conc ~ Grupo, ex2)$statistic
@@ -458,7 +455,7 @@ Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces
 pt(2.87, 17.67, lower.tail = F)
 pt(-2.87, 17.67, lower.tail = T)
 ```
-Como en este caso se trata de un valor-*p* de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro $valor-p = 0.0103$. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de $t$ en R. Simplemente escribimos `$p.value` al final de nuestro comando y este nos debería dar nuestro valor-*p*.
+Como en este caso se trata de un valor-*p* de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro $valor-p = 0.0103$. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de $t$ en `R`. Simplemente escribimos `$p.value` al final de nuestro comando y este nos debería dar nuestro valor-*p*.
 
 ```{r}
 t.test(Conc ~ Grupo, ex2)$p.value
@@ -477,6 +474,7 @@ t.test(Conc ~ Grupo, ex2)
 ¿Dónde ponemos o indicamos el $\alpha$? La función `t.test()` no especifica un nivel de significancia y lo deja a manos de quién está realizando el experimento para decidir qué $\alpha$ utilizar.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico con el valor-*p* (área sombreada) correspondiente a los datos del ejercicio anterior."}
+
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dt, args = list(df = 17.675), geom = "area", fill = "lightblue", xlim = c(-4, -2.8696)) +
   stat_function(fun = dt, args = list(df = 17.675), geom = "area", fill = "lightblue", xlim = c(4, 2.8696)) +
@@ -507,7 +505,7 @@ Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) 
 (\#eq:power)
 \end{equation}
 
-## $t$ test de una cola
+### $t$ test de una cola
 
 En caso de que tengamos una **hipótesis direccional** en la que nos interese solamente una de las dos colas de la distribución de $t$, realizamos un $t$ test de una cola.
 
@@ -524,7 +522,7 @@ t.test(Conc ~ Grupo, ex2, alternative = "greater")
 
 Ahora bien, algo importante a recalcar es que existan **diferencia significativas** no quiere decir que el efecto sea realmente **importante**. Una prueba de hipótesis solamente responde a la pregunta *¿Hay suficiente diferencia entre ambas muestras como para inferir que vinieron de dos poblaciones distintas?* sin embargo no nos dice qué tan grande o importante es la diferencia.
 
-## Tamaño de efecto
+### Tamaño de efecto
 
 Para medir la importancia de una diferencia uno debe de considerar la magnitud de la diferencia. El **tamaño de efecto** de un estudio es la diferencia entre $\mu_{1}$ y $\mu_{2}$, en relación con la desviación estándar de una de las poblaciones. 
 
@@ -543,9 +541,9 @@ cohen.d(Conc ~ Grupo, data = ex2, pooled_sd = F)
 La ventaja de esta función es que nos dice si nuestro tamaño de efecto es grande o pequeño.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Diferencias entre las medias de ambas muestras utilizadas en el ejercicio anterior."}
-ggplot(data.frame(x = c(-5, 4)), aes(x = x)) +
-  stat_function(fun = dnorm, args= list(mean = 0, sd = 1), size = 0.6, color = "blue") +
-  stat_function(fun = dnorm, args= list(mean = -1.28, sd = 1), size = 0.6, color = "red") +
+ggplot(data.frame(x = c(0, 1000)), aes(x = x)) +
+  stat_function(fun = dnorm, args= list(mean = 459, sd = 72.3), size = 0.6, color = "blue") +
+  stat_function(fun = dnorm, args= list(mean = 546, sd = 63), size = 0.6, color = "red") +
   scale_y_continuous(breaks = NULL) +
   ylab("") +
   xlab("") +
@@ -553,7 +551,7 @@ ggplot(data.frame(x = c(-5, 4)), aes(x = x)) +
 ```
 
 
-## La prueba de Wilcoxon-Mann-Whitney
+### Prueba de Wilcoxon-Mann-Whitney
 
 También es utilizada para comprar dos muestras. A diferencia de la prueba de $t$, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas **no paramétricas**.
 
@@ -561,13 +559,44 @@ En el caso de esta prueba, una $H_0$ generalmente empleada es que las distribuci
 
 Esta prueba es recomendable aplicarla cuando tenemos datos que no se pueden transformar a una distribución normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se denota como $U_s$ y mide el grado de separación entra ambas muestras.
 
-Lo primero es acomodar los datos en orden, de menor a mayor para ambas muestras. Posteriormente determinamos $K_1$ y $K_2$. Para $K_1$, contamos el número de observaciones en la muestra 2 que son más pequeñas que la muestra 1. Si hay observaciones que sean iguales para ambas muestras, se cuenta como 1/2 punto. Luego contamos para $K_2$ el número de observaciones en la muestra 1 que son menores que la muestra 2 y de igual forma, 1/2 si hay alguna observación con valor igual. Para corroborar si nuestras cuentas son correctas la suma de $K_1$ y $K_2$ debe ser igual al producto de $n_1 * n_2$. En este caso el estadístico $U_s$ va a ser el más grande de los dos $K_1$ o $K_2$. Para encontrar el valor-*p* se utilizan tablas de U. Aunque en `R` es más sencillo, utilizando la función `wilcox.text()`. 
+1. Lo primero es acomodar los datos en orden, de menor a mayor para ambas muestras. 
+
+2. Posteriormente determinamos $K_1$ y $K_2$. Para $K_1$, contamos el número de observaciones en la muestra 2 que son más pequeñas que la muestra 1. Si hay observaciones que sean iguales para ambas muestras, se cuenta como 1/2 punto. Luego contamos para $K_2$ el número de observaciones en la muestra 1 que son menores que la muestra 2 y de igual forma, 1/2 si hay alguna observación con valor igual.
+
+3. Para corroborar si nuestros cálculos son correctos la suma de $K_1$ y $K_2$ debe ser igual al producto de $n_1 * n_2$. 
+
+4. El estadístico $U_s$ va a ser el más grande de los dos $K_1$ o $K_2$. 
+
+5. Para encontrar el valor-*p* se utilizan tablas de U. Aunque en `R` es más sencillo, utilizando la función `wilcox.text()`.
+
+>**Ejemplo:** En un estudio farmacéutico, investigadores midieron la concentración de dopamina en el cerebro de seis ratas expuestas a tolueno y seis ratas que funcionaron como control. Las concentraciones se muestran en la tabla \@ref(tab:uex). 
 
 ```{r}
-wilcox.test(Conc ~ Grupo, data = ex2)
+Tolueno1 <- c(3420, 2314, 1911, 2464, 2781, 2803)
+Control1 <- c(1820, 1843, 1397, 1803, 2539, 1990)
+
+Dopamina <- data.frame(Tolueno1, Control1)
 ```
 
-El valor $W$ es equivalente al estadístico $U_s$. 
+```{r uex, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Dopamina2 <- gather(Dopamina, Grupo, Concentracion)
+Dopamina2 <- Dopamina2 %>% group_by(Grupo) %>% summarise(n = n(), Media = mean(Concentracion), SD = round(sd(Concentracion), 3), SE = round(SD/sqrt(n), 3))
+
+  knitr::kables(list(
+  knitr::kable(Dopamina, col.names = c("Tolueno", "Control"), align = c("c", "c"), valign = "t") %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:2, width_min = "1.5cm"),
+  knitr::kable(Dopamina2, align = c("c", "c"), valign = "t") %>% kableExtra::kable_classic(lightable_options = "striped", full_width = T) %>% 
+  column_spec(1:5, width_min = "3cm")
+  ), caption = "Concentración de dopamina (ng/mg) y sus estadísticos descriptivos.")
+```
+
+```{r}
+Dopamina <- gather(Dopamina, Tratamiento, Concentracion) #Organizamos los datos de manera que se puedan trabajar.
+
+wilcox.test(Concentracion ~ Tratamiento, data = Dopamina)
+```
+
+El valor $W$ es equivalente al estadístico $U_s$. En este caso vemos que en nuestro ejemplo tenemos diferencias significativas entre ambos tratamientos ya que el $valor-p < 0.05$. Eso claro, siempre que elijamos un $\alpha = 0.05$. 
 
 ## Comparación de muestras pareadas
 
@@ -620,7 +649,7 @@ Datos1 <- data.frame(Control, Progesterona)
 Datos1 %>% 
   knitr::kable("html", align = c("c", "c"), caption = "Concentración de cAMP (pmol/oocito)") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
-  column_spec(1, width_min = "3cm")
+  column_spec(1:2, width_min = "3cm")
 ```
 
 Ahora que tenemos nuestros datos, lo primero es encontrar las diferencias, $d$ entre los datos. Esto lo hacemos muy sencillo agregando una nueva columna `$d` a nuestra tabla.
@@ -643,11 +672,11 @@ Datos3 <- Datos2 %>%
   summarise(n = n(), Media = mean(Concentracion), SD = round(sd(Concentracion), 3))
 ```
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 Datos3 %>% 
   knitr::kable("html", align = c("c", "c"), caption = "Estadísticos descriptivos de cAMP") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
-  column_spec(1, width_min = "3cm")
+  column_spec(1:4, width_min = "3cm")
 ```
 
 En este caso tenemos ya la media de la diferencia $\overline{d}$ y la desviación estándar de la diferencia $s_D$ así como el tamaño de muestra de la diferencia, en este caso $n_D$. Nos quedaría calcular el error estándar de la diferencia $SE_{\overline{D}}$, que en este caso sería.
@@ -666,7 +695,7 @@ Datos3 <- Datos2 %>%
 Datos3 %>% 
   knitr::kable("html", align = c("c", "c"), caption = "Estadísticos descriptivos incluyendo el error estándar") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
-  column_spec(1, width_min = "3cm")
+  column_spec(1:4, width_min = "3cm")
 ```
 
 A partir de aquí podemos construir un intervalo de confianza para $D$. La forma de hacerlo es igual a la que vimos anteriormente.
@@ -700,9 +729,9 @@ Para nuestro ejemplo, nuestras hipótesis pueden ser las siguientes:
 
 - **$H_A$:** La media de la concentración de cAMP de los oocitos es distinta tras exponerse a progesterona a los que no fueron expuestos.
 
-En este caso nuestro $valor-p < 0.05$ por lo tanto tenemos sufciente evidencia para rechazar la $H_0$. 
+En este caso nuestro $valor-p < 0.05$ por lo tanto tenemos suficiente evidencia para rechazar la $H_0$. 
 
-Si quisieramos hacer el cálculo de manera manual, encontrar el valor crítico $t_s$ se realiza con la siguiente fórmula:
+Si quisiéramos hacer el cálculo de manera manual, encontrar el valor crítico $t_s$ se realiza con la siguiente fórmula:
 
 
 \begin{equation}
@@ -710,6 +739,98 @@ t_s = \frac{\overline{d}-0}{SE_\overline{D}}
 (\#eq:tpair)
 \end{equation}
 
-## Sign test
+### Prueba de signos
 
-El **sign test** es un método no paramétrico para comprarar dos muestras pareadas.
+El **sign test** o **prueba de signos** es un método no paramétrico para comparar dos muestras pareadas. También se basa en las diferencias $D = X_1 - X_2$. La única información que se utiliza en esta prueba es el **signo** (positivo o negativo) de cada diferencia. 
+
+1. El primer paso es contar el número de signos positivos $N_+$ y negativos $N_-$. El estadístico de la prueba de signos se conoce como $B_s$ y dependiendo de nuestra hipótesis, $B_s = N_+$ o $B_s = N_-$.
+
+2. Posteriormente calculamos el valor-*p*. Como el estadístico $B_s$ sigue una distribución binomial, podemos decir que $p$ representa la probabilidad de que la diferencia sea positiva o negativa. La distribución nula de $B_s$ es una distribución binomial con $n$ = número de muestras y $p = 0.5$.
+
+3. Entonces el valor-*p* para la prueba consiste en la probabilidad de obtener $B_s$ o más diferencias, positivas o negativas.
+
+Esta prueba es aplicable en situaciones en las que la $H_0 : P(D \space es \space positiva) = 0.5$ en los que se puede aplicar una distribución binomial. En esta prueba la forma de la distribución no es un factor importante. Para hacer una prueba de signos en `R` simplemente utilizamos la distribución binomial que vimos anteriormente.
+
+>**Ejemplo:** Un investigador estudia la interacción entre dos subespecies de aves, el Junco de Carolina y el Junco Norteño. Puso a ambos en un aviario y observó el comportamiento durante 45 minutos. Este proceso fue repetido en varios días con distintos pares de individuos. Los resultados se muestran en la tabla \@ref(tab:signex).
+
+```{r}
+Norteno <- c(0, 0, 0, 2, 0, 2, 1, 0)
+Carolina <- c(9, 6, 22, 16, 17, 33, 24, 40)
+
+Aves <- data.frame(Norteno, Carolina)
+```
+
+```{r signex, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Signo <- c("-", "-", "-", "-", "-", "-", "-", "-")
+Aves2 <- data.frame(Norteno, Carolina, Signo)
+
+Aves2 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Número de veces que fue dominante un ave") %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "3cm")
+```
+Para este ejemplo, $N_+ = 0$ y $N_- = 8$, por lo tanto $B_s = 8$. Nuestro valor-*p* es la probabilidad de obtener 8 valores con signo -, en un experimento binomial con $n = 8$. Para encontrar el valor-*p* podemos usar alguna tabla o la función `dbinom()`.
+
+```{r}
+2*dbinom(8, 8, 0.5) #Multiplicamos por dos, ya que hacemos una prueba de signos de dos colas.
+```
+
+Como podemos ver, el $valor-p = 0.008$, por lo tanto el $valor-p < 0.05$ y aceptamos la $H_A$ y vemos que hay diferencias significativas entre las dos subespecies en cuanto a la dominancia. También podemos hacer uso del paquete `BSDA`, ``DescTools` o `signmedia.test` con sus funciones correspondientes, como veremos en todos los casos obtenemos un resultado similar.
+
+```{r}
+Diferencia <- Norteno - Carolina #Obtenemos la diferencia de nuestros datos
+Diferencia
+
+library(BSDA)
+SIGN.test(Diferencia, md = 8)
+
+library(DescTools)
+SignTest(Diferencia, mu = 8)
+
+library(signmedian.test)
+signmedian.test(Diferencia, mu = 8)
+```
+Como podemos ver obtenemos el mismo valor que en nuestro código con la distribución binomial.
+
+### Prueba de rangos con signos de Wilcoxon
+
+Esta es una prueba para datos pareados que no siguen una distribución normal. También esta basado en las diferencias de $D = X_1 - X_2$ y combina las ideas de "mirar a los signos de las diferencias" con "mirar las magnitudes de las diferencias".
+
+1. El primer paso para una prueba de rangos con signos de Wilcoxon es calcular las diferencia $d$ entre los datos pareados. Después de esto, buscamos el valor absoluto de las diferencias $|d|$. 
+
+2. Después de organizan estas diferencias de las menores a las mayores. 
+
+3. Después de esto regresamos los signos que tenían previamente a los valores absolutos y sumamos los valores con símbolos positivos para formar $W_+$ y los valores absolutos de los valores con símbolos negativos para formar $W_-$. El estadístico $W_s$ es el valor que sea más grande entre $W_+$ y $W_-$.
+
+4. Para encontrar el valor-*p* se pueden utilizar tablas. En este caso, basta con cambiar un argumento al comando `wilcox.test(paired = TRUE)`.
+
+Esta prueba se puede llevar a cabo incluso cuando hay información incompleta. La hipótesis es similar al test del Wilcoxon para datos no pareados, $H_0 : \mu_{D} = 0$.
+
+>**Ejemplo:** En una investigación acerca de posible daño cerebral debido al alcoholísmo, un procedimo de rayos-X conocido como tomografía computarizada (TC) fue utilizado para medir la densidad del cerebro en 11 bebedores de alcohol crónicos. Para cada alcohólico, se selecciono una persona no alcohólica para empatar en edad, sexo, educación, etc.
+
+```{r}
+Alcoholico <- c(40.1, 38.5, 36.9, 41.4, 40.6, 42.3, 37.2, 38.6, 38.5, 38.4, 38.1)
+NoAlcoholico <- c(41.3, 40.2, 37.4, 46.1, 43.9, 41.9, 39.9, 40.4, 38.6, 38.1, 39.5)
+
+Densidad <- data.frame(Alcoholico, NoAlcoholico)
+Densidad2 <- gather(Densidad, Grupo, Densidad)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+DiferenciaDensidad <- Alcoholico - NoAlcoholico
+Densidad3 <- data.frame(Alcoholico, NoAlcoholico, DiferenciaDensidad)
+Densidad3 %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Diferencia de densidad entre personas alcohólicas y no alcohólicas", col.names = c("Alcohólico", "No Alcohólico", "Diferencia")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "4cm")
+```
+
+```{r}
+wilcox.test(Densidad ~ Grupo, Densidad2, paired = TRUE)
+```
+
+Como podemos ver, nuestro valor-*p* quiere decir que hay diferencias significativas ya que $valor-p < 0.05$. Si quisiéramos usar una hipótesis unidireccional, podríamos escribir como argumento `alternative = "less"` para ver si el alcoholismo reduce la densidad del cerebro.
+
+```{r}
+wilcox.test(Densidad ~ Grupo, Densidad2, paired = TRUE, alternative = "less")
+```
