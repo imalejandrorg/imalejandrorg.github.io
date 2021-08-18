@@ -257,6 +257,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-exacta-de-fisher"><i class="fa fa-check"></i><b>6.5</b> Prueba exacta de Fisher</a></li>
 <li class="chapter" data-level="6.6" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#tablas-de-contingencia-r-times-k"><i class="fa fa-check"></i><b>6.6</b> Tablas de contingencia <span class="math inline">\(r \times k\)</span></a></li>
+<li class="chapter" data-level="6.7" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#intervalos-de-confianza-para-la-diferencia-entre-probabilidades"><i class="fa fa-check"></i><b>6.7</b> Intervalos de confianza para la diferencia entre probabilidades</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="7" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>7</b> Análisis de Varianza (ANOVA)</a>
@@ -895,8 +896,9 @@ P(A|B)
 </tbody>
 </table>
 <p>Ya que estos calculos se realizan exclusivamente con los valores marginales, los valores esperados <span class="math inline">\(e\)</span> se pueden obtener de la siguiente manera.</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:e">\[\begin{align}
 e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
+\tag{6.9}
 \end{align}\]</span></p>
 <p>Los grados de libertad para nuestra tabla de contingencia de 2x2 es de 1. ¿Por qué? Bueno, porque de las 4 celdas disponibles, solamente una de ellas es libre de variar. Ya que, por ejemplo, al determinar el valor esperado de la celda superior izquierda (36.59), el valor de la celda superior derecha tiene que ser 19.41, ya que la suma de ambas debe de ser 56. Lo mismo para la celda inferior izquierda (12.41) que al sumarse a la celda superior izquierda dan como resultado 49. Y la misma lógica aplica a la celda inferior derecha. Ya que la celda superior derecha es 19.41, la celda inferior tiene que ser 6.59 para sumar 26 en total. En este sentido, <strong>solo una celda es libre de variar</strong> y por ende <span class="math inline">\(df = 1\)</span> para una tabla de contingencia de 2x2.</p>
 <p>Para este tipo de tablas, la hipótesis puede ser direccional o no direccional. En el caso de nuestro ejemplo, nos interesa saber si el efecto de la cirugía reduce el dolor de migraña (hipótesis direccional), así que al calcular el valor-<em>p</em> simplemente hay que dividirlo entre 2 y obtendremos el valor direccional.</p>
@@ -1124,12 +1126,12 @@ H_0: P(C|G_1) = P(C|G_2)
 <p>Con esta prueba se encuentra la probabilidad de que la tabla de contingencia que tengamos, haya surgido por mero azar, dado que las probabilidades marginales de la tabla son fijas. Se utiliza especialmente con muestras pequeñas. La fórmula para calcular nuestro valor es la siguiente:</p>
 <p><span class="math display" id="eq:fisher">\[\begin{align}
 p = \frac{\binom{a+b}{a}\binom{c+d}{c}}{\binom{n}{a+c}} = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a! \space b! \space c! \space d!  \space n!}
-\tag{6.9}
+\tag{6.10}
 \end{align}\]</span></p>
 <p>Donde <span class="math inline">\(\binom{n}{k}\)</span> es el coeficiente binomial (<span class="math inline">\(_{n}C_{k}\)</span>). Para recordar este coeficiente aquí tenemos la fórmula.</p>
 <p><span class="math display" id="eq:binc2">\[\begin{equation}
 _{n}C_{k} = \frac{n!}{k!(n-k)!}
-\tag{6.10}
+\tag{6.11}
 \end{equation}\]</span></p>
 <p>Por ejemplo, para el primer y segundo coeficiente binomial obtendríamos lo siguiente:</p>
 <p><span class="math display">\[\begin{align}
@@ -1218,6 +1220,201 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 </div>
 <div id="tablas-de-contingencia-r-times-k" class="section level2" number="6.6">
 <h2><span class="header-section-number">6.6</span> Tablas de contingencia <span class="math inline">\(r \times k\)</span></h2>
+<p>En esta sección consideraremos tablas de contingencia más grandes, con <span class="math inline">\(r\)</span> filas y <span class="math inline">\(k\)</span> columnas. Veamos el siguiente ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Ecólogos que estudiaron los hábitats reproductivos del Chorlo Llanero (<em>Charadrius montanus</em>) durante 3 años y anotaron en dónde es que anidan. Encontraron 66 nidos en zonas agricolas (ZA), 67 en pastizales con perritos de las praderas (PP) y otros 20 en praderas (P). La siguiente tabla muestra las elecciones a través de los años.</p>
+</blockquote>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="inferencia-de-datos-categóricos.html#cb233-1" aria-hidden="true" tabindex="-1"></a>chorlos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">26</span>, <span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb233-2"><a href="inferencia-de-datos-categóricos.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(chorlos) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Zona Agricola (ZA)&quot;</span>, <span class="st">&quot;Pastizal con Perritos (PP)&quot;</span>, <span class="st">&quot;Praderas (P)&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;2004&quot;</span>, <span class="st">&quot;2005&quot;</span>, <span class="st">&quot;2006&quot;</span>))</span>
+<span id="cb233-3"><a href="inferencia-de-datos-categóricos.html#cb233-3" aria-hidden="true" tabindex="-1"></a>chorlos</span></code></pre></div>
+<pre><code>##                            2004 2005 2006
+## Zona Agricola (ZA)           21   19   26
+## Pastizal con Perritos (PP)   17   38   12
+## Praderas (P)                  5    6    9</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="42%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="15%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>2004</strong></td>
+<td><strong>2005</strong></td>
+<td><strong>2006</strong></td>
+<td><strong>Total</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Zona Agricola (ZA)</strong></td>
+<td>21</td>
+<td>19</td>
+<td>26</td>
+<td>66</td>
+</tr>
+<tr class="odd">
+<td><strong>Pastizal con Perritos (PP)</strong></td>
+<td>17</td>
+<td>38</td>
+<td>12</td>
+<td>67</td>
+</tr>
+<tr class="even">
+<td><strong>Praderas (P)</strong></td>
+<td>5</td>
+<td>6</td>
+<td>9</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>43</td>
+<td>63</td>
+<td>47</td>
+<td>153</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso, podemos transformar los valores absolutos en relativos haciendo uso del total que se encuentra en las columnas. Por ejemplo, en el caso de <em>2004</em> y la <em>ZA</em> tendríamos algo como <span class="math inline">\(\frac{21}{43} = 0.488\)</span> y así sucesivamente.</p>
+<table style="width:92%;">
+<colgroup>
+<col width="45%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>2004</strong></td>
+<td><strong>2005</strong></td>
+<td><strong>2006</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Zona Agricola (ZA)</strong></td>
+<td>48.8</td>
+<td>30.2</td>
+<td>55.3</td>
+</tr>
+<tr class="odd">
+<td><strong>Pastizal con Perritos (PP)</strong></td>
+<td>39.5</td>
+<td>60.3</td>
+<td>25.5</td>
+</tr>
+<tr class="even">
+<td><strong>Praderas (P)</strong></td>
+<td>11.6</td>
+<td>9.5</td>
+<td>19.1</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>99.9</td>
+<td>100</td>
+<td>99.9</td>
+</tr>
+</tbody>
+</table>
+<p>Algunos totales no dan el 100 debido al redondeo. Podemos ver en la figura <a href="inferencia-de-datos-categóricos.html#fig:Ej2a">6.4</a> las proporciones de cada una de las áreas de anidamiento correspondientes con cada año. Estos porcentajes que tenemos en la tabla son nuestras probabilidades condicionales, es decir <span class="math inline">\(P(ZA|2004) = 0.488\)</span>, <span class="math inline">\(P(PP|2004) = 0.395\)</span>, <span class="math inline">\(P(P|2004) = 0.116\)</span> y así sucesivamente…</p>
+<div class="figure" style="text-align: center"><span id="fig:Ej2a"></span>
+<img src="Curso_R_basico_files/figure-html/Ej2a-1.png" alt="Gráfica con las proporciones de las zonas de anidamiento del Chorlo Llanero." width="672" />
+<p class="caption">
+Figura 6.4: Gráfica con las proporciones de las zonas de anidamiento del Chorlo Llanero.
+</p>
+</div>
+<p>Para esto simplemente aplicamos la fórmula de Chi-cuadrada.</p>
+<p><span class="math display" id="eq:chirk">\[\begin{align}
+\sum_{r \times k} = \frac{(o_i - e_i)^2}{e_i}
+\tag{6.12}
+\end{align}\]</span></p>
+<p>Donde <span class="math inline">\(r \times k\)</span> son todas las céludas de nuestra tabla de contingencia. Los valores <span class="math inline">\(e\)</span> se calculan con la fórmula vista anteriormente <a href="inferencia-de-datos-categóricos.html#eq:e">(6.9)</a>. Para los grados de libertad <span class="math inline">\(df\)</span> utilizaríamos la siguiente fórmula:</p>
+<p><span class="math display" id="eq:dfrk">\[\begin{align}
+df = (r-1)(k-1)
+\tag{6.13}
+\end{align}\]</span></p>
+<p>Nuestra <span class="math inline">\(H_0\)</span> para los Chorlos sería que la preferencia de anidamiento es igual en todos los años y la <span class="math inline">\(H_A\)</span> sería que son distintas.</p>
+<p><span class="math display">\[\begin{equation*}
+H_0:
+\begin{Bmatrix}
+P(ZA|2004) = P(ZA|2005) = P(ZA|2006) \\
+P(PP|2004) = P(PP|2005) = P(PP|2006) \\
+P(P|2004) = P(P|2005) = P(P|2006)
+\end{Bmatrix}
+\end{equation*}\]</span></p>
+<p>Igual que con la tabla de contingencia de 2x2, multiplicamos la probabilidad marignal por el total para obtener el valor esperado. Es decir, del total chorlos en la Zona Agricola (ZA) <span class="math inline">\(\frac{66}{153} \times 43 = 18.55\)</span> y así sucesivamente.</p>
+<table>
+<colgroup>
+<col width="38%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>2004</strong></td>
+<td><strong>2005</strong></td>
+<td><strong>2006</strong></td>
+<td><strong>Total</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Zona Agricola (ZA)</strong></td>
+<td>21 (18.55)</td>
+<td>19 (21.18)</td>
+<td>26 (20.27)</td>
+<td>66</td>
+</tr>
+<tr class="odd">
+<td><strong>Pastizal con Perritos (PP)</strong></td>
+<td>17 (18.83)</td>
+<td>38 (27.59)</td>
+<td>12 (20.58)</td>
+<td>67</td>
+</tr>
+<tr class="even">
+<td><strong>Praderas (P)</strong></td>
+<td>5 (5.62)</td>
+<td>6 (8.24)</td>
+<td>9 (6.14)</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>43</td>
+<td>63</td>
+<td>47</td>
+<td>153</td>
+</tr>
+</tbody>
+</table>
+<p>Ahora simplemente aplicamos la fórmula de Chi-cuadrada para obtener nuestro estadístico <span class="math inline">\(\chi_s^2\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+\chi_s^2 = \frac{(21-18.55)^2}{18.55} + \frac{(19-21.18)^2}{21.18} + \cdots + \frac{(9-6.14)^2}{6.14} = 14.09
+\end{equation}\]</span></p>
+<p>Nuestros <span class="math inline">\(df\)</span> son los siguientes, dado que <span class="math inline">\(r = 3\)</span> y <span class="math inline">\(k = 3\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+df = (3-1)(3-1) = 4
+\end{equation}\]</span></p>
+<p>Si buscamos el valor de tablas, vemos que el valor-<em>p</em> se encuentra entre 0.01 y 0.001. Pero para facilitarnos la vida, simplemente ingresamos nuestra variable <code>chorlos</code> que creamos previamente a la función <code>chisq.test()</code> y obtenemos nuestro resultado. Podemos corroborar que el valor de <span class="math inline">\(\chi^2\)</span> calculado coincide al igual que los <span class="math inline">\(df\)</span>. Nuestro <span class="math inline">\(valor-p = 0.007\)</span> por lo tanto, <span class="math inline">\(valor-p &lt; 0.01\)</span>, tenemos evidencias significativas con un <span class="math inline">\(\alpha = 0.01\)</span> de de que los Chorlos Llaneros cambiaron de sitio de anidación. Para estos casos, nuestra <span class="math inline">\(H_A\)</span> siempre será no direccional.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="inferencia-de-datos-categóricos.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(chorlos)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  chorlos
+## X-squared = 14.089, df = 4, p-value = 0.007015</code></pre>
+<p>Al igual que con las tablas de contingencia 2x2, las tabla <span class="math inline">\(r \times k\)</span> pueden ser vistas bajo dos contextos.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(k\)</span> muestras independientes; una variable categórica observada con <span class="math inline">\(r\)</span> categorías</p></li>
+<li><p>Una muestra; dos variables categóricas observadas — una con <span class="math inline">\(k\)</span> categorías y otra con <span class="math inline">\(r\)</span> categorías.</p></li>
+</ol>
+<p>Y al igual que las tablas 2x2, el cálculo del valor <span class="math inline">\(\chi^2\)</span> es el mismo para ambos contexto pero la interpretación de las hipótesis cambia.</p>
+</div>
+<div id="intervalos-de-confianza-para-la-diferencia-entre-probabilidades" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Intervalos de confianza para la diferencia entre probabilidades</h2>
 
 </div>
 </div>

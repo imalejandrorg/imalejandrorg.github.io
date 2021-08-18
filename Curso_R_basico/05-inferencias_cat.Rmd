@@ -440,6 +440,7 @@ Ya que estos calculos se realizan exclusivamente con los valores marginales, los
 
 \begin{align}
 e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
+(\#eq:e)
 \end{align}
 
 Los grados de libertad para nuestra tabla de contingencia de 2x2 es de 1. ¿Por qué? Bueno, porque de las 4 celdas disponibles, solamente una de ellas es libre de variar. Ya que, por ejemplo, al determinar el valor esperado de la celda superior izquierda (36.59), el valor de la celda superior derecha tiene que ser 19.41, ya que la suma de ambas debe de ser 56. Lo mismo para la celda inferior izquierda (12.41) que al sumarse a la celda superior izquierda dan como resultado 49. Y la misma lógica aplica a la celda inferior derecha. Ya que la celda superior derecha es 19.41, la celda inferior tiene que ser 6.59 para sumar 26 en total. En este sentido, **solo una celda es libre de variar** y por ende $df = 1$ para una tabla de contingencia de 2x2.
@@ -689,3 +690,120 @@ fisher.test(Tratamientos)
 Para cambiar la direccionalidad de nuestra hipótesis basta con que agreguemos el argumento `alternative = "two.sided"` para una $H_A$ no direccional y `alternative = "less"` o `alternative = "greater"` para una $H_A$ direccional.
 
 ## Tablas de contingencia $r \times k$
+
+En esta sección consideraremos tablas de contingencia más grandes, con $r$ filas y $k$ columnas. Veamos el siguiente ejemplo.
+
+>**Ejemplo:** Ecólogos que estudiaron los hábitats reproductivos del Chorlo Llanero (*Charadrius montanus*) durante 3 años y anotaron en dónde es que anidan. Encontraron 66 nidos en zonas agricolas (ZA), 67 en pastizales con perritos de las praderas (PP) y otros 20 en praderas (P). La siguiente tabla muestra las elecciones a través de los años.
+
+```{r}
+chorlos <- matrix(c(21, 19, 26, 17, 38, 12, 5, 6, 9), nrow = 3, ncol = 3, byrow = T)
+dimnames(chorlos) <- list(c("Zona Agricola (ZA)", "Pastizal con Perritos (PP)", "Praderas (P)"), c("2004", "2005", "2006"))
+chorlos
+```
+
++--------------------------------+----------+----------+----------+-----------+
+|                                | **2004** | **2005** | **2006** | **Total** |
++--------------------------------+----------+----------+----------+-----------+
+| **Zona Agricola (ZA)**         | 21       | 19       | 26       | 66        |
++--------------------------------+----------+----------+----------+-----------+
+| **Pastizal con Perritos (PP)** | 17       | 38       | 12       | 67        |
++--------------------------------+----------+----------+----------+-----------+
+| **Praderas (P)**               | 5        | 6        | 9        | 20        |
++--------------------------------+----------+----------+----------+-----------+
+| **Total**                      | 43       | 63       | 47       | 153       |
++--------------------------------+----------+----------+----------+-----------+
+
+En este caso, podemos transformar los valores absolutos en relativos haciendo uso del total que se encuentra en las columnas. Por ejemplo, en el caso de *2004* y la *ZA* tendríamos algo como $\frac{21}{43} = 0.488$ y así sucesivamente.
+
++--------------------------------+----------+----------+----------+
+|                                | **2004** | **2005** | **2006** |
++--------------------------------+----------+----------+----------+
+| **Zona Agricola (ZA)**         | 48.8     | 30.2     | 55.3     |
++--------------------------------+----------+----------+----------+
+| **Pastizal con Perritos (PP)** | 39.5     | 60.3     | 25.5     |
++--------------------------------+----------+----------+----------+
+| **Praderas (P)**               | 11.6     | 9.5      | 19.1     |
++--------------------------------+----------+----------+----------+
+| **Total**                      | 99.9     | 100      | 99.9     |
++--------------------------------+----------+----------+----------+
+
+Algunos totales no dan el 100 debido al redondeo. Podemos ver en la figura \@ref(fig:Ej2a) las proporciones de cada una de las áreas de anidamiento correspondientes con cada año. Estos porcentajes que tenemos en la tabla son nuestras probabilidades condicionales, es decir $P(ZA|2004) = 0.488$, $P(PP|2004) = 0.395$, $P(P|2004) = 0.116$ y así sucesivamente...
+
+```{r Ej2a, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.align="center", fig.cap="Gráfica con las proporciones de las zonas de anidamiento del Chorlo Llanero."}
+graph <- data.frame(Año = c(rep("2004", 3), rep("2005", 3), rep("2006", 3)), Zona = rep(c("Zona Agricola (ZA)", "Pastizal con Perritos (PP)", "Praderas (P)"), 3), Nidos = c(48.8, 39.5, 11.6, 30.2, 60.3, 9.5, 55.3, 25.5, 19.1))
+
+ggplot(graph, aes(fill = reorder(Zona, Nidos), y = Nidos, x = Año)) + 
+  geom_bar(position = position_fill(reverse = F), stack = "dodge", stat = "identity",  color = "Grey5", width = 0.6) +
+  scale_fill_grey(start = 0.8, end = 0.4) +
+  xlab("") +
+  ylab("Proporción") +
+  labs(fill = "Lugar de anidamiento") +
+  theme_classic()
+```
+
+Para esto simplemente aplicamos la fórmula de Chi-cuadrada.
+
+\begin{align}
+\sum_{r \times k} = \frac{(o_i - e_i)^2}{e_i}
+(\#eq:chirk)
+\end{align}
+
+Donde $r \times k$ son todas las céludas de nuestra tabla de contingencia. Los valores $e$ se calculan con la fórmula vista anteriormente \@ref(eq:e). Para los grados de libertad $df$ utilizaríamos la siguiente fórmula:
+
+\begin{align}
+df = (r-1)(k-1)
+(\#eq:dfrk)
+\end{align}
+
+Nuestra $H_0$ para los Chorlos sería que la preferencia de anidamiento es igual en todos los años y la $H_A$ sería que son distintas.
+
+\begin{equation*}
+H_0:
+\begin{Bmatrix}
+P(ZA|2004) = P(ZA|2005) = P(ZA|2006) \\
+P(PP|2004) = P(PP|2005) = P(PP|2006) \\
+P(P|2004) = P(P|2005) = P(P|2006)
+\end{Bmatrix}
+\end{equation*}
+
+Igual que con la tabla de contingencia de 2x2, multiplicamos la probabilidad marignal por el total para obtener el valor esperado. Es decir, del total chorlos en la Zona Agricola (ZA) $\frac{66}{153} \times 43 = 18.55$ y así sucesivamente.
+
++--------------------------------+------------+------------+------------+-----------+
+|                                | **2004**   | **2005**   | **2006**   | **Total** |
++--------------------------------+------------+------------+------------+-----------+
+| **Zona Agricola (ZA)**         | 21 (18.55) | 19 (21.18) | 26 (20.27) | 66        |
++--------------------------------+------------+------------+------------+-----------+
+| **Pastizal con Perritos (PP)** | 17 (18.83) | 38 (27.59) | 12 (20.58) | 67        |
++--------------------------------+------------+------------+------------+-----------+
+| **Praderas (P)**               | 5 (5.62)   | 6 (8.24)   | 9 (6.14)   | 20        |
++--------------------------------+------------+------------+------------+-----------+
+| **Total**                      | 43         | 63         | 47         | 153       |
++--------------------------------+------------+------------+------------+-----------+
+
+Ahora simplemente aplicamos la fórmula de Chi-cuadrada para obtener nuestro estadístico $\chi_s^2$. 
+
+\begin{equation}
+\chi_s^2 = \frac{(21-18.55)^2}{18.55} + \frac{(19-21.18)^2}{21.18} + \cdots + \frac{(9-6.14)^2}{6.14} = 14.09
+\end{equation}
+
+Nuestros $df$ son los siguientes, dado que $r = 3$ y $k = 3$:
+
+\begin{equation}
+df = (3-1)(3-1) = 4
+\end{equation}
+
+Si buscamos el valor de tablas, vemos que el valor-*p* se encuentra entre 0.01 y 0.001. Pero para facilitarnos la vida, simplemente ingresamos nuestra variable `chorlos` que creamos previamente a la función `chisq.test()` y obtenemos nuestro resultado. Podemos corroborar que el valor de $\chi^2$ calculado coincide al igual que los $df$. Nuestro $valor-p = 0.007$ por lo tanto, $valor-p < 0.01$, tenemos evidencias significativas con un $\alpha = 0.01$ de de que los Chorlos Llaneros cambiaron de sitio de anidación. Para estos casos, nuestra $H_A$ siempre será no direccional.
+
+```{r}
+chisq.test(chorlos)
+```
+
+Al igual que con las tablas de contingencia 2x2, las tabla $r \times k$ pueden ser vistas bajo dos contextos.
+
+1. $k$ muestras independientes; una variable categórica observada con $r$ categorías
+
+2. Una muestra; dos variables categóricas observadas --- una con $k$ categorías y otra con $r$ categorías.
+
+Y al igual que las tablas 2x2, el cálculo del valor $\chi^2$ es el mismo para ambos contexto pero la interpretación de las hipótesis cambia.
+
+## Intervalos de confianza para la diferencia entre probabilidades
