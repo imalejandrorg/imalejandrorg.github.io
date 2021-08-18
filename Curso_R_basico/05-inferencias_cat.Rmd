@@ -24,28 +24,36 @@ library(broom)
 
 ## Distribuciones de una muestra
 
-En esta sección consideraremos **variables categóricas**, es decir, variables que solamente tienen dos posibles valores, y su distribución muestral de la proporción de la muestra. Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, $p$, es la muestra de la proporción $\hat{p} = \frac{x}{n}$, donde $x$ es el número de observaciones en la muestra que cumplen con el atributo de interés, y $n$ es el tamaño de muestra.
+En esta sección consideraremos **variables categóricas**, es decir, variables que solamente tienen dos posibles valores, y su distribución muestral de la proporción de la muestra.
+Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, $p$, es la muestra de la proporción $\hat{p} = \frac{x}{n}$, donde $x$ es el número de observaciones en la muestra que cumplen con el atributo de interés, y $n$ es el tamaño de muestra.
 
-La proporción de Wilson ajustada a la muestra, $\tilde{p}$, es otro estimado que utiliza la fórmula \@ref(eq:wilson). Esto equivale a sesgar la estimación hacia el valor 1/2. 
+La proporción de Wilson ajustada a la muestra, $\tilde{p}$, es otro estimado que utiliza la fórmula \@ref(eq:wilson).
+Esto equivale a sesgar la estimación hacia el valor 1/2.
 
 \begin{equation}
 \tilde{p} = \frac{x + 2}{n + 4}
 (\#eq:wilson)
 \end{equation}
 
-La distribución binomial determina la distribución muestral de $\tilde{P}$. Veamos cómo funciona esto con un ejemplo.
+La distribución binomial determina la distribución muestral de $\tilde{P}$.
+Veamos cómo funciona esto con un ejemplo.
 
->**Ejemplo:** En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria *Chryseobacterium meningosepticum*. Imaginemos que examinamos una muestra de dos máquinas dispensadoras. La probabilidad de tener dos máquinas contaminadas es $0.17 * 0.17 = 0.0289$, la probabilidad de que ninguna este contaminada es de $1-0.17 * 1-0.17$ y la probabilidad de que una este contaminada y la otra no es $0.17 * (1-0.17) + 0.17 * (1-0.17)$.
+> **Ejemplo:** En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria *Chryseobacterium meningosepticum*.
+> Imaginemos que examinamos una muestra de dos máquinas dispensadoras.
+> La probabilidad de tener dos máquinas contaminadas es $0.17 * 0.17 = 0.0289$, la probabilidad de que ninguna este contaminada es de $1-0.17 * 1-0.17$ y la probabilidad de que una este contaminada y la otra no es $0.17 * (1-0.17) + 0.17 * (1-0.17)$.
 
-Una muestra que contenga cero máquinas contaminadas, $\tilde{p} = \frac{0+2}{2+4} = 0.33$ ocurre con una probabilidad de 0.6889, una muestra con una máquina contaminada, $\tilde{p} = \frac{1+2}{2+4} = 0.5$ ocurre con una probabilidad de 0.2822 y una muestra con dos máquinas contaminadas, $\tilde{p} = \frac{2+2}{2+4} = 0.67$ ocurre con una probabilidad de 0.0289. Por ende, hay un 68.89% de probabilidad de que $\tilde{P}$ sea igual a 0.33, un 28% de que $\tilde{P}$ sea igual a 0.5 y 3% de que $\tilde{P}$ sea igual a 0.67.
+Una muestra que contenga cero máquinas contaminadas, $\tilde{p} = \frac{0+2}{2+4} = 0.33$ ocurre con una probabilidad de 0.6889, una muestra con una máquina contaminada, $\tilde{p} = \frac{1+2}{2+4} = 0.5$ ocurre con una probabilidad de 0.2822 y una muestra con dos máquinas contaminadas, $\tilde{p} = \frac{2+2}{2+4} = 0.67$ ocurre con una probabilidad de 0.0289.
+Por ende, hay un 68.89% de probabilidad de que $\tilde{P}$ sea igual a 0.33, un 28% de que $\tilde{P}$ sea igual a 0.5 y 3% de que $\tilde{P}$ sea igual a 0.67.
 
-Imaginemos ahora que nuestra muestra pasa de $n = 2$ a $n = 20$, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial. Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos $p = 0.17$ y $n = 20$.
+Imaginemos ahora que nuestra muestra pasa de $n = 2$ a $n = 20$, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial.
+Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos $p = 0.17$ y $n = 20$.
 
 ```{r}
 dbinom(5, 20, 0.17)
 ```
 
-Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando $\tilde{P}$, una muestra con 5 máquinas contaminadas sería $\tilde{p} = \frac{5+2}{20+4} = 0.2917$, por lo que $P(\tilde{P} = 0.2917) = 0.1345$. Con la distribución binomial, podemos determinar toda la distribución muestral de $\tilde{P}$. 
+Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando $\tilde{P}$, una muestra con 5 máquinas contaminadas sería $\tilde{p} = \frac{5+2}{20+4} = 0.2917$, por lo que $P(\tilde{P} = 0.2917) = 0.1345$.
+Con la distribución binomial, podemos determinar toda la distribución muestral de $\tilde{P}$.
 
 Por ejemplo, podemos preguntar *¿Cuál es la probabilidad de que no más de 5 máquinas estén contaminadas?*
 
@@ -53,9 +61,14 @@ Por ejemplo, podemos preguntar *¿Cuál es la probabilidad de que no más de 5 m
 pbinom(5, 20, 0.17)
 ```
 
-Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245. Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$. La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado. De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$. 
+Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245.
+Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$.
+La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado.
+De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$.
 
-Para la construcción de **intervalos de confianza** de la proporción de una población, necesitamos encontrar el error estándar de $\tilde{P}$. Para eso utilizamos la siguiente fórmula (para intervalos al 95%).
+Para la construcción de **intervalos de confianza** de la proporción de una población, necesitamos encontrar el error estándar de $\tilde{P}$.
+Para eso utilizamos la siguiente fórmula (para intervalos al 95%).
+
 
 \begin{equation}
 SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
@@ -64,12 +77,14 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 
 Posteriormente, realizamos el intervalo de confianza correspondiente con la siguiente fórmula (esto para un intervalo de confianza al 95%).
 
+
 \begin{equation}
 \tilde{p} \pm 1.96 \times SE_{\tilde{p}}
 (\#eq:pic)
 \end{equation}
 
-Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos. Para eso podemos utilizar la función `qnorm()` en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.
+Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos.
+Para eso podemos utilizar la función `qnorm()` en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.
 
 ```{r}
 qnorm(0.95, 0, 1)
@@ -77,12 +92,14 @@ qnorm(0.95, 0, 1)
 
 Como podemos ver, para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.
 
+
 \begin{equation}
 \tilde{p} \pm 1.645 \times SE_{\tilde{p}}
 (\#eq:pic2)
 \end{equation}
 
 Las fórmulas para intervalos de confianza generales son las siguientes:
+
 
 \begin{equation}
 \tilde{p} \pm z_{\alpha/2} \times SE_{\tilde{p}}
@@ -99,11 +116,15 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + z^2_{\alpha/2}}}
 (\#eq:pse2)
 \end{equation}
 
-
 ## Prueba de Chi-cuadrada
 
-Una **prueba de bondad de ajuste** se utiliza para ver la compatibilidad de los datos con una distribución o $H_0$ específica. Una de las más utilizadas es la **prueba de $\chi^2$** (léase chi-cuadrada). Para esto se utilizan frecuencias absolutas de nuestros datos. Para cada nivel de categoría, $i$, dejamos que $o_i$ represente la frecuencia observada y $e_i$ la frecuencia esperada, es decir, la frecuencia que esperaríamos obtener bajo la $H_0$. Las frecuencias esperadas $e_i$ se obtienen multiplicando las probabilidades dadas por la $H_0$ por $n$. 
+Una **prueba de bondad de ajuste** se utiliza para ver la compatibilidad de los datos con una distribución o $H_0$ específica.
+Una de las más utilizadas es la **prueba de** $\chi^2$ (léase chi-cuadrada).
+Para esto se utilizan frecuencias absolutas de nuestros datos.
+Para cada nivel de categoría, $i$, dejamos que $o_i$ represente la frecuencia observada y $e_i$ la frecuencia esperada, es decir, la frecuencia que esperaríamos obtener bajo la $H_0$.
+Las frecuencias esperadas $e_i$ se obtienen multiplicando las probabilidades dadas por la $H_0$ por $n$.
 Posteriormente utilizamos la fórmula \@ref(eq:chi) para calcular nuestro estadístico de prueba.
+
 
 \begin{equation}
 \chi^2 = \sum_{i = 1}^{k}\frac{(o_i - e_i)^2}{e_i}
@@ -112,7 +133,10 @@ Posteriormente utilizamos la fórmula \@ref(eq:chi) para calcular nuestro estad�
 
 Donde $k$ es el número total de categorías e $i$ es la *i*-ésima observación.
 
->**Ejemplo:** Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada. La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada. La $H_0$ es que los venados no muestran preferencia por alguna de las áreas. La $H_A$ es que muestran cierta preferencia por alguna de las áreas.
+> **Ejemplo:** Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada.
+> La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada.
+> La $H_0$ es que los venados no muestran preferencia por alguna de las áreas.
+> La $H_A$ es que muestran cierta preferencia por alguna de las áreas.
 
 ```{r}
 Area <- c(520, 210, 240, 2030)
@@ -131,6 +155,7 @@ Datos %>%
 
 Si la $H_0$ es verdadera, entonces
 
+
 \begin{aligned}
 H_0: P(Área \space interior) = \frac{520}{3000} = 0.173 \\
 P(Área \space exterior) = \frac{210}{3000} = 0.070 \\
@@ -139,6 +164,7 @@ P(No \space quemado) = \frac{2030}{3000} = 0.677
 \end{aligned}
 
 Entonces la $H_A$ sería
+
 
 \begin{aligned}
 H_A: P(Área \space interior) \ne 0.173 \\
@@ -168,8 +194,8 @@ Datos %>%
   column_spec(1:3, width_min = "4cm")
 ```
 
-
 Para este caso, las probabilidades estimadas (denotadas como $\hat{p}$) son
+
 
 \begin{align}
 \hat{P}(Área \space interior) = \frac{2}{75} = 0.027 \\
@@ -218,13 +244,17 @@ Venados_esperados <- Proporcion * sum(Datos$Venados)
 Venados_esperados
 ```
 
-Como podemos ver, los valores son aproximadamente 13, 5.25, 6 y 50.78. Ahora simplemente aplicamos la fórmula para nuestros datos.
+Como podemos ver, los valores son aproximadamente 13, 5.25, 6 y 50.78.
+Ahora simplemente aplicamos la fórmula para nuestros datos.
+
 
 \begin{align}
 \chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
 \end{align}
 
-Ahora tenemos que considerar la distribución nula de $\chi_s^2$, que es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera. Esta distribución muestral sigue la distribución de chi-cuadrada $\chi^2$ cuando el tamaño de muestra es suficientemente grande. La forma de la distribución de $\chi^2$ depende de los grados de libertad.
+Ahora tenemos que considerar la distribución nula de $\chi_s^2$, que es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
+Esta distribución muestral sigue la distribución de chi-cuadrada $\chi^2$ cuando el tamaño de muestra es suficientemente grande.
+La forma de la distribución de $\chi^2$ depende de los grados de libertad.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución de $\\chi^2$ con $df = 5$ en azul, $df = 8$ en rojo y $df = 10$ en verde."}
 
@@ -244,13 +274,13 @@ ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
 
 Al igual que las demás distribuciones de probabilidad en `R`, tenemos una serie de comandos para encontrar los valores de una distribución de chi-cuadrada fácilmente.
 
--`dchisq()` nos da un valor de densidad en determinado punto de la distribución de $\chi^2$.
+\-`dchisq()` nos da un valor de densidad en determinado punto de la distribución de $\chi^2$.
 
--`pchisq()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $\chi^2$ (área debajo de la curva).
+\-`pchisq()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $\chi^2$ (área debajo de la curva).
 
--`qchisq()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
+\-`qchisq()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
 
--`rchisq()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
+\-`rchisq()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
 
 Sin embargo en este caso, en lugar de contar con el argumento `n` para el tamaño de muestra, contamos con otro argumento `df` para los grados de libertad.
 
@@ -260,7 +290,8 @@ Por ejemplo, supongamos que quisiéramos encontrar el valor crítico $\chi_{5,0.
 qchisq(0.95, 5)
 ```
 
-Como podemos ver, el valor crítico es 11.07. Esto corresponde a un área de 0.05 por encima de la cola de la distribución de $\chi^2$.
+Como podemos ver, el valor crítico es 11.07.
+Esto corresponde a un área de 0.05 por encima de la cola de la distribución de $\chi^2$.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 
@@ -280,28 +311,31 @@ ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
 
 El cálculo de los grados de libertad $df$ para una distribución de $\chi^2$ depende del número de categorías, $k$.
 
+
 \begin{align}
 df = k - 1
 (\#eq:chidf)
 \end{align}
 
-Siguiendo el ejemplo de los venados, en este caso tenemos $k = 4$ por lo que $df = 4 - 1 = 3$. Ya que el valor que habíamos obtenido de nuestra fórmula de $\chi_s^2 = 43.2$, buscaremos el área debajo de la curva correspondiente a este valor.
+Siguiendo el ejemplo de los venados, en este caso tenemos $k = 4$ por lo que $df = 4 - 1 = 3$.
+Ya que el valor que habíamos obtenido de nuestra fórmula de $\chi_s^2 = 43.2$, buscaremos el área debajo de la curva correspondiente a este valor.
 
 ```{r}
 pchisq(43.2, 3, lower.tail = F)
 ```
 
-Como podemos ver el resultado es extremadamente pequeño y nuestro $valor-p < 0.0001$ por lo que tenemos evidencia para rechazar la $H_0$ y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras. La prueba de $\chi^2$ se puede utilizar para cualquier número de categorías $k$.
+Como podemos ver el resultado es extremadamente pequeño y nuestro $valor-p < 0.0001$ por lo que tenemos evidencia para rechazar la $H_0$ y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras.
+La prueba de $\chi^2$ se puede utilizar para cualquier número de categorías $k$.
 
 Ahora todo esto se facilita gracias a la función `chisq.test()` que viene incluida en `R`.
 
-Para realizar la prueba de Chi-cuadrada con esta función, lo único que necesitamos es una variable con el valor absoluto de nuestras observaciones y otra con los valores  relativos esperados como los de la tabla \@ref(tab:Ejemplo1d). 
+Para realizar la prueba de Chi-cuadrada con esta función, lo único que necesitamos es una variable con el valor absoluto de nuestras observaciones y otra con los valores relativos esperados como los de la tabla \@ref(tab:Ejemplo1d).
 
 ```{r}
 chisq.test(Datos$Venados, Datos$Propocion)
 ```
 
-Estos valores los podemos obtener de la matriz de datos que habíamos creado previamente, simplemente los seleccionamos con  el símbolo `$` seguido del nombre de la variable (`$Venados` y `$Proporcion`, en mí caso).
+Estos valores los podemos obtener de la matriz de datos que habíamos creado previamente, simplemente los seleccionamos con el símbolo `$` seguido del nombre de la variable (`$Venados` y `$Proporcion`, en mí caso).
 
 ```{r Ejemplo1d, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 Datos %>% 
@@ -313,10 +347,178 @@ Datos %>%
 
 ### Hipótesis compuestas y direccionales
 
-Hay que darnos cuenta que en el ejemplo de los venados, nuestras hipótesis son **hipótesis compuestas**, es decir, hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de $t$ ($H_0: \mu_1 = \mu_2$). Las primeras tres afiramciones de nuestra hipótesis nula $H_0$ son independientes ($P(Área \space interior) = 0.173$, $P(Área \space exterior) = 0.070$, $P(Borde \space  exterior) = 0.080$) pero nuestra última afirmación ($P(No \space quemado) = 0.677$) es **dependiente** de las demás afirmaciones realizadas. Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional. Otra cosa interesante es que cuando se rechaza la $H_0$, la prueba no nos dice la dirección de la conclusión.
+Hay que darnos cuenta que en el ejemplo de los venados, nuestras hipótesis son **hipótesis compuestas**, es decir, hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de $t$ ($H_0: \mu_1 = \mu_2$).
+Las primeras tres afiramciones de nuestra hipótesis nula $H_0$ son independientes, $P(Área \space interior) = 0.173$, $P(Área \space exterior) = 0.070$, $P(Borde \space exterior) = 0.080$ pero nuestra última afirmación, $P(No \space quemado) = 0.677$, es **dependiente** de las demás afirmaciones realizadas.
+Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional.
+Otra cosa interesante es que cuando se rechaza la $H_0$, la prueba no nos dice la dirección de la conclusión.
 
-En cambio, cuando una variable es dicotómica, la $H_0$ no es compuesta y por lo tanto, alternativas direccionales o conclusiones direccionales no suponen un problema. Para una variable dicotómica, una prueba de hipótesis direccional de Chi-cuadrada se realizaría de la misma manera que en pruebas pasadas. 
+En cambio, cuando una variable es dicotómica, la $H_0$ no es compuesta y por lo tanto, alternativas direccionales o conclusiones direccionales no suponen un problema.
+Para una variable dicotómica, una prueba de hipótesis direccional de Chi-cuadrada se realizaría de la misma manera que en pruebas pasadas.
 
-1. Primero elegimos la direccionalidad y corroboramos que los datos se desvían de la $H_0$ en la dirección especificada por la $H_A$. Si es así realizamos el siguiente paso.
+1.  Primero elegimos la direccionalidad y corroboramos que los datos se desvían de la $H_0$ en la dirección especificada por la $H_A$.
+    Si es así realizamos el siguiente paso.
 
-2. Encontramos el valor-*p*, el cuál será la mitad de lo que sería si nuestra $H_A$ fuese no direccional.
+2.  Encontramos el valor-*p*, el cuál será la mitad de lo que sería si nuestra $H_A$ fuese no direccional.
+
+## Prueba de Chi-cuadrada para tablas de contingencia
+
+Una **tabla de contingencia** muestra los datos de tal manera que existe una asociación entre las variables de las filas y columnas.
+
+> **Ejemplo:** Un grupo de 75 pacientes fueron asignados de manera aleatoria para recibir una cirugía para tratar dolores de migraña.
+> La cirugía podía ser real ($n = 49$) o no ($n = 26$).
+> Los cirujanos esperan una reducción en los dolores de migraña (éxito).
+> En la tabla \@ref(tab:Ejercicio2a) se pueden observar los datos.
+
+```{r}
+#Creamos nuestra matriz de datos.
+cirugia <- matrix(c(41, 15, 8, 11), nrow = 2, ncol = 2, byrow = T)
+dimnames(cirugia) <- list(c("Éxito", "Fracaso"), c("Real", "Falsa"))
+```
+
+Como podemos ver, tenemos nuestra tabla de contingencia lista.
+
+|             |          |           |
+|-------------|----------|-----------|
+|             | **Real** | **Falsa** |
+| **Éxito**   | 41       | 15        |
+| **Fracaso** | 8        | 11        |
+
+Posteriormente podríamos agregar los casos totales para cada lado de nuestra tabla de contingencia.
+
++----------------+----------------+-----------------+----------------+
+|                | **Real**       | **Falsa**       | **Total**      |
++----------------+----------------+-----------------+----------------+
+| **Éxito**      | 41             | 15              | 56             |
++----------------+----------------+-----------------+----------------+
+| **Fracaso**    | 8              | 11              | 19             |
++----------------+----------------+-----------------+----------------+
+| **Total**      | 49             | 26              | 75             |
++----------------+----------------+-----------------+----------------+
+
+Cuando hacemos una prueba de Chi-cuadrado para este tipo de tablas, nusetra hipótesis nula es que la probabilidad de éxito dado que la cirugía fue real es la misma que la probabilidad de éxito dado que la cirugía fue falsa, $H_0: P(Éxito|Real) = P(Éxito|Falsa)$. Como vimos en la lección de probabilidad, este tipo de probabilidad se conoce como **condicional** y predice qué tan seguido un evento ocurre bajo condiciones específicas.
+
+\begin{equation}
+P(A|B)
+\end{equation}
+
+Esta fórmula nos dice cuál es la probabilidad de que A ocurra, dado que B ha ocurrido. Cuando una probabilidad condicional se estima de los datos, normalmente se denota con el símbolo ^. 
+
+\begin{equation}
+\hat{P}(A|B)
+\end{equation}
+
+Por ejemplo, para nuestros datos:
+
+\begin{align}
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Éxito|Falsa) = \frac{15}{26} = 0.577
+\end{align}
+
+Como podemos ver, estas probabilidades las obtenemos utilizando las columnas **Real** y **Falsa** de nuestra tabla de contingencia y sus respectivos totales. Pero, ¿es esta diferencia significativa? Para esto realizaremos la prueba de Chi-cuadrada.
+
+**IMPORTANTE:** No es lo mismo $P(Éxito|Real)$ que $P(Real|Éxito)$. Puedes comprobarlo tú mismo.
+
+\begin{align}
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Real|Éxito) = \frac{41}{56} = 0.7321 \\
+\hat{P}(Éxito|Real) \ne \hat{P}(Real|Éxito)
+\end{align}
+
+Ahora, el primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de contingencia es calcular las **frecuencias marginales**, es decir, las frecuencias de los totales de nuestra tabla de contingencia. Si nuestra $H_0$ es verdadera, entonces las columnas **Real** y **Falsa** son equivalentes, así que podemos agruparlas ($41 + 15$) y dividirlas sobre el total de observaciones ($\frac{56}{75} = 0.747$). Bien, ahora aplicamos esta probabilidad a nuestros valores observados para el grupo Real y Falso ($\frac{56}{75} \times 49 = 36.59$ éxitos esperados y $\frac{56}{75} \times 26 = 36.59$ éxitos esperados). De igual manera, aplicamos lo mismo para los fracasos esperados ($\frac{19}{75} = 0.253$). Para obtener nuestros fracasos esperados obtenemos, multiplicamos este valor por los de los grupos Real y Falso ($\frac{19}{75} \times 49$ fracasos esperados y $\frac{19}{75} \times 26$ fracasos esperados).
+
++----------------+----------------+-----------------+-----------------+
+|                | **Real**       | **Falsa**       | **Total**       |
++----------------+----------------+-----------------+-----------------+
+| **Éxito**      | 41 (36.59)     | 15 (19.41)      | 56              |
++----------------+----------------+-----------------+-----------------+
+| **Fracaso**    | 8 (12.41)      | 11 (6.59)       | 19              |
++----------------+----------------+-----------------+-----------------+
+| **Total**      | 49             | 26              | 75              |
++----------------+----------------+-----------------+-----------------+
+
+Ya que estos calculos se realizan exclusivamente con los valores marginales, los valores esperados $e$ se pueden obtener de la siguiente manera.
+
+\begin{align}
+e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
+\end{align}
+
+Los grados de libertad para nuestra tabla de contingencia de 2x2 es de 1. ¿Por qué? Bueno, porque de las 4 celdas disponibles, solamente una de ellas es libre de variar. Ya que, por ejemplo, al determinar el valor esperado de la celda superior izquierda (36.59), el valor de la celda superior derecha tiene que ser 19.41, ya que la suma de ambas debe de ser 56. Lo mismo para la celda inferior izquierda (12.41) que al sumarse a la celda superior izquierda dan como resultado 49. Y la misma lógica aplica a la celda inferior derecha. Ya que la celda superior derecha es 19.41, la celda inferior tiene que ser 6.59 para sumar 26 en total. En este sentido, **solo una celda es libre de variar** y por ende $df = 1$ para una tabla de contingencia de 2x2.
+
+Para este tipo de tablas, la hipótesis puede ser direccional o no direccional. En el caso de nuestro ejemplo, nos interesa saber si el efecto de la cirugía reduce el dolor de migraña (hipótesis direccional), así que al calcular el valor-*p* simplemente hay que dividirlo entre 2 y obtendremos el valor direccional.
+
+Ahora sí, podemos aplicar la fórmula de $\chi^2$.
+
+\begin{align}
+\chi_s^2 = \frac{(41-36.59)^2}{36.59} + \frac{(15-19.41)^2}{19.41} + \frac{(8-12.41)^2}{12.41} + \frac{(11-6.59)^2}{6.59} = 6.06
+\end{align}
+
+Todo este proceso se puede hacer de manera rapidísima con la función `chisq.test()`. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento `correct = F` para evitar aplicar correcciones.
+
+```{r}
+chisq.test(cirugia, correct = F)
+```
+
+Como vemos el valor-*p* es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.
+
+```{r}
+chisq.test(cirugia, correct = F)$p.value / 2
+```
+
+Por lo que obtenemos un $valor-p = 0.0069$. En este caso, si nuestro $\alpha = 0.01$ rechazaríamos la $H_0$ y diríamos que hay evidencias suficientes que apoyan que la cirugía real es mejor que la falsa para reducir los dolores de migraña.
+
+
+## Interpretación de las tablas de contingencia
+
+Una tabla de contingencia 2x2 se puede intepretar de dos maneras:
+
+1. Dos muestras independientes con una variable dicotómica.
+
+2. Una muestra con dos variable dicotómicas.
+
+Afortunadamente, la aritmética de la prueba de Chi-cuadrada es la misma para ambos contextos, pero la intepretación de la hipótesis y las conclusiones son distintas.
+
+En algunas tablas de contingencia las filas y columnas juegan un papel muy distinto. Por ejemplo, puede que las columnas sean un tratamiento y las filas una respuesta. En otros casos, las columnas y las filas pueden jugar papeles intercambiables.
+
+Cuando un conjunto de datos es visto como una sola muestra con dos variable dicotómicas, la relación expresada por $H_0$ se conoce como **dependencia estadística** de las variables de columna y fila. Variables que no son independientes son llamadas **dependientes** o **asociadas**. Por eso a veces la prueba de Chi-cuadrada puede ser conocida como prueba de asociación o prueba de independencia.
+
+>**Ejemplo:** Un antropólogo alemán que estidaba la relación entre el color de ojos y cabello observó una muestra de $n = 6800$ hombres con los resultados siguientes.
+
++---------------------+-------------------------+------------------------+-----------------+
+|                     | **Cabello oscuro (CO)** | **Cabello claro (CC)** | **Total**       |
++=====================+=========================+========================+=================+
+| **Ojo oscuro (OO)** | 726                     | 131                    | 857             |
++---------------------+-------------------------+------------------------+-----------------+
+| **Ojo claro (OC)**  | 3129                    | 2814                   | 5943            |
++---------------------+-------------------------+------------------------+-----------------+
+| **Total**           | 3855                    | 2945                   | 6800            |
++---------------------+-------------------------+------------------------+-----------------+
+
+En este caso, podemos calcular las probabilidades condicional de la siguiente manera:
+
+\begin{align}
+\hat{P} = (OO|CO) = \frac{726}{3855} = 0.19 \\
+\hat{P} = (OO|CC) = \frac{131}{2945} = 0.04
+\end{align}
+
+Pero la siguiente manera también es valida:
+
+\begin{align}
+\hat{P} = (CO|OO) = \frac{726}{857} = 0.85 \\
+\hat{P} = (CO|OC) = \frac{3129}{5943} = 0.53
+\end{align}
+
+Por lo tanto nuestra hipótesis nula se vería de las siguientes dos maneras, ambas válidas:
+
+\begin{align}
+H_0: P(OO|CO) = P(OO|CC) \\
+H_0: P(CO|OO) = P(CO|OC)
+\end{align}
+
+Esto es lo mismo que decir que $H_0: El \space color \space de \space ojos \space es \space independiente \space del \space color \space de \space cabello$ o  $H_0: El \space color \space del \space cabello \space es \space independiente \space del \space color \space de \space ojos$. Que es lo mismo que decir $H_0: El \space color \space de \space ojos \space y \space el \space color \space del \space cabello \space son \space independientes$.
+
+La hipótesis nula de independencia puede decirse de la siguiente manera. Dos grupos, $G_1$ y $G_2$ son comparados con respecto de la probabilidad de la característica $C$. La hipótesis nula es entonces:
+
+\begin{align}
+H_0: P(C|G_1) = P(C|G_2)
+\end{align}
+

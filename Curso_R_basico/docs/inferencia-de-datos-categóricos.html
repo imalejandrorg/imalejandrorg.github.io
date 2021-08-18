@@ -250,6 +250,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#hipótesis-compuestas-y-direccionales"><i class="fa fa-check"></i><b>6.2.1</b> Hipótesis compuestas y direccionales</a></li>
 </ul></li>
+<li class="chapter" data-level="6.3" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-de-chi-cuadrada-para-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.3</b> Prueba de Chi-cuadrada para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.4" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#interpretación-de-las-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.4</b> Interpretación de las tablas de contingencia</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="7" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>7</b> Análisis de Varianza (ANOVA)</a>
@@ -285,26 +287,38 @@ div.csl-indent {
 <h1><span class="header-section-number">Lección 6</span> Inferencia de datos categóricos</h1>
 <div id="distribuciones-de-una-muestra" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Distribuciones de una muestra</h2>
-<p>En esta sección consideraremos <strong>variables categóricas</strong>, es decir, variables que solamente tienen dos posibles valores, y su distribución muestral de la proporción de la muestra. Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, <span class="math inline">\(p\)</span>, es la muestra de la proporción <span class="math inline">\(\hat{p} = \frac{x}{n}\)</span>, donde <span class="math inline">\(x\)</span> es el número de observaciones en la muestra que cumplen con el atributo de interés, y <span class="math inline">\(n\)</span> es el tamaño de muestra.</p>
-<p>La proporción de Wilson ajustada a la muestra, <span class="math inline">\(\tilde{p}\)</span>, es otro estimado que utiliza la fórmula <a href="inferencia-de-datos-categóricos.html#eq:wilson">(6.1)</a>. Esto equivale a sesgar la estimación hacia el valor 1/2.</p>
+<p>En esta sección consideraremos <strong>variables categóricas</strong>, es decir, variables que solamente tienen dos posibles valores, y su distribución muestral de la proporción de la muestra.
+Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, <span class="math inline">\(p\)</span>, es la muestra de la proporción <span class="math inline">\(\hat{p} = \frac{x}{n}\)</span>, donde <span class="math inline">\(x\)</span> es el número de observaciones en la muestra que cumplen con el atributo de interés, y <span class="math inline">\(n\)</span> es el tamaño de muestra.</p>
+<p>La proporción de Wilson ajustada a la muestra, <span class="math inline">\(\tilde{p}\)</span>, es otro estimado que utiliza la fórmula <a href="inferencia-de-datos-categóricos.html#eq:wilson">(6.1)</a>.
+Esto equivale a sesgar la estimación hacia el valor 1/2.</p>
 <p><span class="math display" id="eq:wilson">\[\begin{equation}
 \tilde{p} = \frac{x + 2}{n + 4}
 \tag{6.1}
 \end{equation}\]</span></p>
-<p>La distribución binomial determina la distribución muestral de <span class="math inline">\(\tilde{P}\)</span>. Veamos cómo funciona esto con un ejemplo.</p>
+<p>La distribución binomial determina la distribución muestral de <span class="math inline">\(\tilde{P}\)</span>.
+Veamos cómo funciona esto con un ejemplo.</p>
 <blockquote>
-<p><strong>Ejemplo:</strong> En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria <em>Chryseobacterium meningosepticum</em>. Imaginemos que examinamos una muestra de dos máquinas dispensadoras. La probabilidad de tener dos máquinas contaminadas es <span class="math inline">\(0.17 * 0.17 = 0.0289\)</span>, la probabilidad de que ninguna este contaminada es de <span class="math inline">\(1-0.17 * 1-0.17\)</span> y la probabilidad de que una este contaminada y la otra no es <span class="math inline">\(0.17 * (1-0.17) + 0.17 * (1-0.17)\)</span>.</p>
+<p><strong>Ejemplo:</strong> En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria <em>Chryseobacterium meningosepticum</em>.
+Imaginemos que examinamos una muestra de dos máquinas dispensadoras.
+La probabilidad de tener dos máquinas contaminadas es <span class="math inline">\(0.17 * 0.17 = 0.0289\)</span>, la probabilidad de que ninguna este contaminada es de <span class="math inline">\(1-0.17 * 1-0.17\)</span> y la probabilidad de que una este contaminada y la otra no es <span class="math inline">\(0.17 * (1-0.17) + 0.17 * (1-0.17)\)</span>.</p>
 </blockquote>
-<p>Una muestra que contenga cero máquinas contaminadas, <span class="math inline">\(\tilde{p} = \frac{0+2}{2+4} = 0.33\)</span> ocurre con una probabilidad de 0.6889, una muestra con una máquina contaminada, <span class="math inline">\(\tilde{p} = \frac{1+2}{2+4} = 0.5\)</span> ocurre con una probabilidad de 0.2822 y una muestra con dos máquinas contaminadas, <span class="math inline">\(\tilde{p} = \frac{2+2}{2+4} = 0.67\)</span> ocurre con una probabilidad de 0.0289. Por ende, hay un 68.89% de probabilidad de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.33, un 28% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.5 y 3% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.67.</p>
-<p>Imaginemos ahora que nuestra muestra pasa de <span class="math inline">\(n = 2\)</span> a <span class="math inline">\(n = 20\)</span>, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial. Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos <span class="math inline">\(p = 0.17\)</span> y <span class="math inline">\(n = 20\)</span>.</p>
+<p>Una muestra que contenga cero máquinas contaminadas, <span class="math inline">\(\tilde{p} = \frac{0+2}{2+4} = 0.33\)</span> ocurre con una probabilidad de 0.6889, una muestra con una máquina contaminada, <span class="math inline">\(\tilde{p} = \frac{1+2}{2+4} = 0.5\)</span> ocurre con una probabilidad de 0.2822 y una muestra con dos máquinas contaminadas, <span class="math inline">\(\tilde{p} = \frac{2+2}{2+4} = 0.67\)</span> ocurre con una probabilidad de 0.0289.
+Por ende, hay un 68.89% de probabilidad de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.33, un 28% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.5 y 3% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.67.</p>
+<p>Imaginemos ahora que nuestra muestra pasa de <span class="math inline">\(n = 2\)</span> a <span class="math inline">\(n = 20\)</span>, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial.
+Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos <span class="math inline">\(p = 0.17\)</span> y <span class="math inline">\(n = 20\)</span>.</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="inferencia-de-datos-categóricos.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1345426</code></pre>
-<p>Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando <span class="math inline">\(\tilde{P}\)</span>, una muestra con 5 máquinas contaminadas sería <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span>, por lo que <span class="math inline">\(P(\tilde{P} = 0.2917) = 0.1345\)</span>. Con la distribución binomial, podemos determinar toda la distribución muestral de <span class="math inline">\(\tilde{P}\)</span>.</p>
+<p>Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando <span class="math inline">\(\tilde{P}\)</span>, una muestra con 5 máquinas contaminadas sería <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span>, por lo que <span class="math inline">\(P(\tilde{P} = 0.2917) = 0.1345\)</span>.
+Con la distribución binomial, podemos determinar toda la distribución muestral de <span class="math inline">\(\tilde{P}\)</span>.</p>
 <p>Por ejemplo, podemos preguntar <em>¿Cuál es la probabilidad de que no más de 5 máquinas estén contaminadas?</em></p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="inferencia-de-datos-categóricos.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
 <pre><code>## [1] 0.8902245</code></pre>
-<p>Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245. Y como <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span> entonces <span class="math inline">\(P(\tilde{P} \leq 0.2917) = 0.8902\)</span>. La distribución muestral de <span class="math inline">\(\tilde{P}\)</span> se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado. De igual manera, entre mayor sea nuestro <span class="math inline">\(n\)</span> mayor posibilidades hay de que <span class="math inline">\(\tilde{P}\)</span> se encuentre cercano a <span class="math inline">\(p\)</span>.</p>
-<p>Para la construcción de <strong>intervalos de confianza</strong> de la proporción de una población, necesitamos encontrar el error estándar de <span class="math inline">\(\tilde{P}\)</span>. Para eso utilizamos la siguiente fórmula (para intervalos al 95%).</p>
+<p>Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245.
+Y como <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span> entonces <span class="math inline">\(P(\tilde{P} \leq 0.2917) = 0.8902\)</span>.
+La distribución muestral de <span class="math inline">\(\tilde{P}\)</span> se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado.
+De igual manera, entre mayor sea nuestro <span class="math inline">\(n\)</span> mayor posibilidades hay de que <span class="math inline">\(\tilde{P}\)</span> se encuentre cercano a <span class="math inline">\(p\)</span>.</p>
+<p>Para la construcción de <strong>intervalos de confianza</strong> de la proporción de una población, necesitamos encontrar el error estándar de <span class="math inline">\(\tilde{P}\)</span>.
+Para eso utilizamos la siguiente fórmula (para intervalos al 95%).</p>
 <p><span class="math display" id="eq:pse">\[\begin{equation}
 SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 \tag{6.2}
@@ -314,7 +328,8 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 \tilde{p} \pm 1.96 \times SE_{\tilde{p}}
 \tag{6.3}
 \end{equation}\]</span></p>
-<p>Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos. Para eso podemos utilizar la función <code>qnorm()</code> en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.</p>
+<p>Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos.
+Para eso podemos utilizar la función <code>qnorm()</code> en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="inferencia-de-datos-categóricos.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1.644854</code></pre>
 <p>Como podemos ver, para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.</p>
@@ -338,7 +353,11 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + z^2_{\alpha/2}}}
 </div>
 <div id="prueba-de-chi-cuadrada" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Prueba de Chi-cuadrada</h2>
-<p>Una <strong>prueba de bondad de ajuste</strong> se utiliza para ver la compatibilidad de los datos con una distribución o <span class="math inline">\(H_0\)</span> específica. Una de las más utilizadas es la <strong>prueba de <span class="math inline">\(\chi^2\)</span></strong> (léase chi-cuadrada). Para esto se utilizan frecuencias absolutas de nuestros datos. Para cada nivel de categoría, <span class="math inline">\(i\)</span>, dejamos que <span class="math inline">\(o_i\)</span> represente la frecuencia observada y <span class="math inline">\(e_i\)</span> la frecuencia esperada, es decir, la frecuencia que esperaríamos obtener bajo la <span class="math inline">\(H_0\)</span>. Las frecuencias esperadas <span class="math inline">\(e_i\)</span> se obtienen multiplicando las probabilidades dadas por la <span class="math inline">\(H_0\)</span> por <span class="math inline">\(n\)</span>.
+<p>Una <strong>prueba de bondad de ajuste</strong> se utiliza para ver la compatibilidad de los datos con una distribución o <span class="math inline">\(H_0\)</span> específica.
+Una de las más utilizadas es la <strong>prueba de</strong> <span class="math inline">\(\chi^2\)</span> (léase chi-cuadrada).
+Para esto se utilizan frecuencias absolutas de nuestros datos.
+Para cada nivel de categoría, <span class="math inline">\(i\)</span>, dejamos que <span class="math inline">\(o_i\)</span> represente la frecuencia observada y <span class="math inline">\(e_i\)</span> la frecuencia esperada, es decir, la frecuencia que esperaríamos obtener bajo la <span class="math inline">\(H_0\)</span>.
+Las frecuencias esperadas <span class="math inline">\(e_i\)</span> se obtienen multiplicando las probabilidades dadas por la <span class="math inline">\(H_0\)</span> por <span class="math inline">\(n\)</span>.
 Posteriormente utilizamos la fórmula <a href="inferencia-de-datos-categóricos.html#eq:chi">(6.7)</a> para calcular nuestro estadístico de prueba.</p>
 <p><span class="math display" id="eq:chi">\[\begin{equation}
 \chi^2 = \sum_{i = 1}^{k}\frac{(o_i - e_i)^2}{e_i}
@@ -346,7 +365,10 @@ Posteriormente utilizamos la fórmula <a href="inferencia-de-datos-categóricos.
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(k\)</span> es el número total de categorías e <span class="math inline">\(i\)</span> es la <em>i</em>-ésima observación.</p>
 <blockquote>
-<p><strong>Ejemplo:</strong> Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada. La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada. La <span class="math inline">\(H_0\)</span> es que los venados no muestran preferencia por alguna de las áreas. La <span class="math inline">\(H_A\)</span> es que muestran cierta preferencia por alguna de las áreas.</p>
+<p><strong>Ejemplo:</strong> Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada.
+La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada.
+La <span class="math inline">\(H_0\)</span> es que los venados no muestran preferencia por alguna de las áreas.
+La <span class="math inline">\(H_A\)</span> es que muestran cierta preferencia por alguna de las áreas.</p>
 </blockquote>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="inferencia-de-datos-categóricos.html#cb209-1" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">520</span>, <span class="dv">210</span>, <span class="dv">240</span>, <span class="dv">2030</span>)</span>
 <span id="cb209-2"><a href="inferencia-de-datos-categóricos.html#cb209-2" aria-hidden="true" tabindex="-1"></a>Zona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Área interior&quot;</span>, <span class="st">&quot;Área exterior&quot;</span>, <span class="st">&quot;Borde exterior&quot;</span>, <span class="st">&quot;No quemado&quot;</span>)</span>
@@ -635,11 +657,14 @@ Figura 6.2: Valores observados contra esperados en las proporciones de venados e
 <span id="cb212-2"><a href="inferencia-de-datos-categóricos.html#cb212-2" aria-hidden="true" tabindex="-1"></a>Venados_esperados <span class="ot">&lt;-</span> Proporcion <span class="sc">*</span> <span class="fu">sum</span>(Datos<span class="sc">$</span>Venados) </span>
 <span id="cb212-3"><a href="inferencia-de-datos-categóricos.html#cb212-3" aria-hidden="true" tabindex="-1"></a>Venados_esperados</span></code></pre></div>
 <pre><code>## [1] 12.975  5.250  6.000 50.775</code></pre>
-<p>Como podemos ver, los valores son aproximadamente 13, 5.25, 6 y 50.78. Ahora simplemente aplicamos la fórmula para nuestros datos.</p>
+<p>Como podemos ver, los valores son aproximadamente 13, 5.25, 6 y 50.78.
+Ahora simplemente aplicamos la fórmula para nuestros datos.</p>
 <p><span class="math display">\[\begin{align}
 \chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
 \end{align}\]</span></p>
-<p>Ahora tenemos que considerar la distribución nula de <span class="math inline">\(\chi_s^2\)</span>, que es la distribución muestral que se sigue en caso de que nuestra <span class="math inline">\(H_0\)</span> sea verdadera. Esta distribución muestral sigue la distribución de chi-cuadrada <span class="math inline">\(\chi^2\)</span> cuando el tamaño de muestra es suficientemente grande. La forma de la distribución de <span class="math inline">\(\chi^2\)</span> depende de los grados de libertad.</p>
+<p>Ahora tenemos que considerar la distribución nula de <span class="math inline">\(\chi_s^2\)</span>, que es la distribución muestral que se sigue en caso de que nuestra <span class="math inline">\(H_0\)</span> sea verdadera.
+Esta distribución muestral sigue la distribución de chi-cuadrada <span class="math inline">\(\chi^2\)</span> cuando el tamaño de muestra es suficientemente grande.
+La forma de la distribución de <span class="math inline">\(\chi^2\)</span> depende de los grados de libertad.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-138"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-138-1.png" alt="Distribución de $\chi^2$ con $df = 5$ en azul, $df = 8$ en rojo y $df = 10$ en verde." width="672" />
 <p class="caption">
@@ -655,17 +680,20 @@ Figura 6.3: Distribución de <span class="math inline">\(\chi^2\)</span> con <sp
 <p>Por ejemplo, supongamos que quisiéramos encontrar el valor crítico <span class="math inline">\(\chi_{5,0.05}^2\)</span> cuando <span class="math inline">\(df = 5\)</span>, para esto utilizamos la función <code>qchisq()</code>.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="inferencia-de-datos-categóricos.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 11.0705</code></pre>
-<p>Como podemos ver, el valor crítico es 11.07. Esto corresponde a un área de 0.05 por encima de la cola de la distribución de <span class="math inline">\(\chi^2\)</span>.</p>
+<p>Como podemos ver, el valor crítico es 11.07.
+Esto corresponde a un área de 0.05 por encima de la cola de la distribución de <span class="math inline">\(\chi^2\)</span>.</p>
 <p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-140-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>El cálculo de los grados de libertad <span class="math inline">\(df\)</span> para una distribución de <span class="math inline">\(\chi^2\)</span> depende del número de categorías, <span class="math inline">\(k\)</span>.</p>
 <p><span class="math display" id="eq:chidf">\[\begin{align}
 df = k - 1
 \tag{6.8}
 \end{align}\]</span></p>
-<p>Siguiendo el ejemplo de los venados, en este caso tenemos <span class="math inline">\(k = 4\)</span> por lo que <span class="math inline">\(df = 4 - 1 = 3\)</span>. Ya que el valor que habíamos obtenido de nuestra fórmula de <span class="math inline">\(\chi_s^2 = 43.2\)</span>, buscaremos el área debajo de la curva correspondiente a este valor.</p>
+<p>Siguiendo el ejemplo de los venados, en este caso tenemos <span class="math inline">\(k = 4\)</span> por lo que <span class="math inline">\(df = 4 - 1 = 3\)</span>.
+Ya que el valor que habíamos obtenido de nuestra fórmula de <span class="math inline">\(\chi_s^2 = 43.2\)</span>, buscaremos el área debajo de la curva correspondiente a este valor.</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="inferencia-de-datos-categóricos.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">43.2</span>, <span class="dv">3</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
 <pre><code>## [1] 2.231754e-09</code></pre>
-<p>Como podemos ver el resultado es extremadamente pequeño y nuestro <span class="math inline">\(valor-p &lt; 0.0001\)</span> por lo que tenemos evidencia para rechazar la <span class="math inline">\(H_0\)</span> y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras. La prueba de <span class="math inline">\(\chi^2\)</span> se puede utilizar para cualquier número de categorías <span class="math inline">\(k\)</span>.</p>
+<p>Como podemos ver el resultado es extremadamente pequeño y nuestro <span class="math inline">\(valor-p &lt; 0.0001\)</span> por lo que tenemos evidencia para rechazar la <span class="math inline">\(H_0\)</span> y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras.
+La prueba de <span class="math inline">\(\chi^2\)</span> se puede utilizar para cualquier número de categorías <span class="math inline">\(k\)</span>.</p>
 <p>Ahora todo esto se facilita gracias a la función <code>chisq.test()</code> que viene incluida en <code>R</code>.</p>
 <p>Para realizar la prueba de Chi-cuadrada con esta función, lo único que necesitamos es una variable con el valor absoluto de nuestras observaciones y otra con los valores relativos esperados como los de la tabla <a href="inferencia-de-datos-categóricos.html#tab:Ejemplo1d">6.4</a>.</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="inferencia-de-datos-categóricos.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(Datos<span class="sc">$</span>Venados, Datos<span class="sc">$</span>Propocion)</span></code></pre></div>
@@ -726,14 +754,233 @@ No. de venados
 </table>
 <div id="hipótesis-compuestas-y-direccionales" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Hipótesis compuestas y direccionales</h3>
-<p>Hay que darnos cuenta que en el ejemplo de los venados, nuestras hipótesis son <strong>hipótesis compuestas</strong>, es decir, hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de <span class="math inline">\(t\)</span> (<span class="math inline">\(H_0: \mu_1 = \mu_2\)</span>). Las primeras tres afiramciones de nuestra hipótesis nula <span class="math inline">\(H_0\)</span> son independientes (<span class="math inline">\(P(Área \space interior) = 0.173\)</span>, <span class="math inline">\(P(Área \space exterior) = 0.070\)</span>, <span class="math inline">\(P(Borde \space exterior) = 0.080\)</span>) pero nuestra última afirmación (<span class="math inline">\(P(No \space quemado) = 0.677\)</span>) es <strong>dependiente</strong> de las demás afirmaciones realizadas. Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional. Otra cosa interesante es que cuando se rechaza la <span class="math inline">\(H_0\)</span>, la prueba no nos dice la dirección de la conclusión.</p>
-<p>En cambio, cuando una variable es dicotómica, la <span class="math inline">\(H_0\)</span> no es compuesta y por lo tanto, alternativas direccionales o conclusiones direccionales no suponen un problema. Para una variable dicotómica, una prueba de hipótesis direccional de Chi-cuadrada se realizaría de la misma manera que en pruebas pasadas.</p>
+<p>Hay que darnos cuenta que en el ejemplo de los venados, nuestras hipótesis son <strong>hipótesis compuestas</strong>, es decir, hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de <span class="math inline">\(t\)</span> (<span class="math inline">\(H_0: \mu_1 = \mu_2\)</span>).
+Las primeras tres afiramciones de nuestra hipótesis nula <span class="math inline">\(H_0\)</span> son independientes, <span class="math inline">\(P(Área \space interior) = 0.173\)</span>, <span class="math inline">\(P(Área \space exterior) = 0.070\)</span>, <span class="math inline">\(P(Borde \space exterior) = 0.080\)</span> pero nuestra última afirmación, <span class="math inline">\(P(No \space quemado) = 0.677\)</span>, es <strong>dependiente</strong> de las demás afirmaciones realizadas.
+Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional.
+Otra cosa interesante es que cuando se rechaza la <span class="math inline">\(H_0\)</span>, la prueba no nos dice la dirección de la conclusión.</p>
+<p>En cambio, cuando una variable es dicotómica, la <span class="math inline">\(H_0\)</span> no es compuesta y por lo tanto, alternativas direccionales o conclusiones direccionales no suponen un problema.
+Para una variable dicotómica, una prueba de hipótesis direccional de Chi-cuadrada se realizaría de la misma manera que en pruebas pasadas.</p>
 <ol style="list-style-type: decimal">
-<li><p>Primero elegimos la direccionalidad y corroboramos que los datos se desvían de la <span class="math inline">\(H_0\)</span> en la dirección especificada por la <span class="math inline">\(H_A\)</span>. Si es así realizamos el siguiente paso.</p></li>
+<li><p>Primero elegimos la direccionalidad y corroboramos que los datos se desvían de la <span class="math inline">\(H_0\)</span> en la dirección especificada por la <span class="math inline">\(H_A\)</span>.
+Si es así realizamos el siguiente paso.</p></li>
 <li><p>Encontramos el valor-<em>p</em>, el cuál será la mitad de lo que sería si nuestra <span class="math inline">\(H_A\)</span> fuese no direccional.</p></li>
 </ol>
-
 </div>
+</div>
+<div id="prueba-de-chi-cuadrada-para-tablas-de-contingencia" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Prueba de Chi-cuadrada para tablas de contingencia</h2>
+<p>Una <strong>tabla de contingencia</strong> muestra los datos de tal manera que existe una asociación entre las variables de las filas y columnas.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Un grupo de 75 pacientes fueron asignados de manera aleatoria para recibir una cirugía para tratar dolores de migraña.
+La cirugía podía ser real (<span class="math inline">\(n = 49\)</span>) o no (<span class="math inline">\(n = 26\)</span>).
+Los cirujanos esperan una reducción en los dolores de migraña (éxito).
+En la tabla <a href="#tab:Ejercicio2a"><strong>??</strong></a> se pueden observar los datos.</p>
+</blockquote>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="inferencia-de-datos-categóricos.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos nuestra matriz de datos.</span></span>
+<span id="cb220-2"><a href="inferencia-de-datos-categóricos.html#cb220-2" aria-hidden="true" tabindex="-1"></a>cirugia <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">11</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb220-3"><a href="inferencia-de-datos-categóricos.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(cirugia) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Éxito&quot;</span>, <span class="st">&quot;Fracaso&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Falsa&quot;</span>))</span></code></pre></div>
+<p>Como podemos ver, tenemos nuestra tabla de contingencia lista.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Real</strong></td>
+<td><strong>Falsa</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Éxito</strong></td>
+<td>41</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td><strong>Fracaso</strong></td>
+<td>8</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p>Posteriormente podríamos agregar los casos totales para cada lado de nuestra tabla de contingencia.</p>
+<table style="width:97%;">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Real</strong></td>
+<td><strong>Falsa</strong></td>
+<td><strong>Total</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Éxito</strong></td>
+<td>41</td>
+<td>15</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<td><strong>Fracaso</strong></td>
+<td>8</td>
+<td>11</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>49</td>
+<td>26</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando hacemos una prueba de Chi-cuadrado para este tipo de tablas, nusetra hipótesis nula es que la probabilidad de éxito dado que la cirugía fue real es la misma que la probabilidad de éxito dado que la cirugía fue falsa, <span class="math inline">\(H_0: P(Éxito|Real) = P(Éxito|Falsa)\)</span>. Como vimos en la lección de probabilidad, este tipo de probabilidad se conoce como <strong>condicional</strong> y predice qué tan seguido un evento ocurre bajo condiciones específicas.</p>
+<p><span class="math display">\[\begin{equation}
+P(A|B)
+\end{equation}\]</span></p>
+<p>Esta fórmula nos dice cuál es la probabilidad de que A ocurra, dado que B ha ocurrido. Cuando una probabilidad condicional se estima de los datos, normalmente se denota con el símbolo ^.</p>
+<p><span class="math display">\[\begin{equation}
+\hat{P}(A|B)
+\end{equation}\]</span></p>
+<p>Por ejemplo, para nuestros datos:</p>
+<p><span class="math display">\[\begin{align}
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Éxito|Falsa) = \frac{15}{26} = 0.577
+\end{align}\]</span></p>
+<p>Como podemos ver, estas probabilidades las obtenemos utilizando las columnas <strong>Real</strong> y <strong>Falsa</strong> de nuestra tabla de contingencia y sus respectivos totales. Pero, ¿es esta diferencia significativa? Para esto realizaremos la prueba de Chi-cuadrada.</p>
+<p><strong>IMPORTANTE:</strong> No es lo mismo <span class="math inline">\(P(Éxito|Real)\)</span> que <span class="math inline">\(P(Real|Éxito)\)</span>. Puedes comprobarlo tú mismo.</p>
+<p><span class="math display">\[\begin{align}
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Real|Éxito) = \frac{41}{56} = 0.7321 \\
+\hat{P}(Éxito|Real) \ne \hat{P}(Real|Éxito)
+\end{align}\]</span></p>
+<p>Ahora, el primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de contingencia es calcular las <strong>frecuencias marginales</strong>, es decir, las frecuencias de los totales de nuestra tabla de contingencia. Si nuestra <span class="math inline">\(H_0\)</span> es verdadera, entonces las columnas <strong>Real</strong> y <strong>Falsa</strong> son equivalentes, así que podemos agruparlas (<span class="math inline">\(41 + 15\)</span>) y dividirlas sobre el total de observaciones (<span class="math inline">\(\frac{56}{75} = 0.747\)</span>). Bien, ahora aplicamos esta probabilidad a nuestros valores observados para el grupo Real y Falso (<span class="math inline">\(\frac{56}{75} \times 49 = 36.59\)</span> éxitos esperados y <span class="math inline">\(\frac{56}{75} \times 26 = 36.59\)</span> éxitos esperados). De igual manera, aplicamos lo mismo para los fracasos esperados (<span class="math inline">\(\frac{19}{75} = 0.253\)</span>). Para obtener nuestros fracasos esperados obtenemos, multiplicamos este valor por los de los grupos Real y Falso (<span class="math inline">\(\frac{19}{75} \times 49\)</span> fracasos esperados y <span class="math inline">\(\frac{19}{75} \times 26\)</span> fracasos esperados).</p>
+<table style="width:97%;">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Real</strong></td>
+<td><strong>Falsa</strong></td>
+<td><strong>Total</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Éxito</strong></td>
+<td>41 (36.59)</td>
+<td>15 (19.41)</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<td><strong>Fracaso</strong></td>
+<td>8 (12.41)</td>
+<td>11 (6.59)</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>49</td>
+<td>26</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+<p>Ya que estos calculos se realizan exclusivamente con los valores marginales, los valores esperados <span class="math inline">\(e\)</span> se pueden obtener de la siguiente manera.</p>
+<p><span class="math display">\[\begin{align}
+e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
+\end{align}\]</span></p>
+<p>Los grados de libertad para nuestra tabla de contingencia de 2x2 es de 1. ¿Por qué? Bueno, porque de las 4 celdas disponibles, solamente una de ellas es libre de variar. Ya que, por ejemplo, al determinar el valor esperado de la celda superior izquierda (36.59), el valor de la celda superior derecha tiene que ser 19.41, ya que la suma de ambas debe de ser 56. Lo mismo para la celda inferior izquierda (12.41) que al sumarse a la celda superior izquierda dan como resultado 49. Y la misma lógica aplica a la celda inferior derecha. Ya que la celda superior derecha es 19.41, la celda inferior tiene que ser 6.59 para sumar 26 en total. En este sentido, <strong>solo una celda es libre de variar</strong> y por ende <span class="math inline">\(df = 1\)</span> para una tabla de contingencia de 2x2.</p>
+<p>Para este tipo de tablas, la hipótesis puede ser direccional o no direccional. En el caso de nuestro ejemplo, nos interesa saber si el efecto de la cirugía reduce el dolor de migraña (hipótesis direccional), así que al calcular el valor-<em>p</em> simplemente hay que dividirlo entre 2 y obtendremos el valor direccional.</p>
+<p>Ahora sí, podemos aplicar la fórmula de <span class="math inline">\(\chi^2\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+\chi_s^2 = \frac{(41-36.59)^2}{36.59} + \frac{(15-19.41)^2}{19.41} + \frac{(8-12.41)^2}{12.41} + \frac{(11-6.59)^2}{6.59} = 6.06
+\end{align}\]</span></p>
+<p>Todo este proceso se puede hacer de manera rapidísima con la función <code>chisq.test()</code>. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento <code>correct = F</code> para evitar aplicar correcciones.</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="inferencia-de-datos-categóricos.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  cirugia
+## X-squared = 6.0619, df = 1, p-value = 0.01381</code></pre>
+<p>Como vemos el valor-<em>p</em> es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="inferencia-de-datos-categóricos.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)<span class="sc">$</span>p.value <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 0.00690659</code></pre>
+<p>Por lo que obtenemos un <span class="math inline">\(valor-p = 0.0069\)</span>. En este caso, si nuestro <span class="math inline">\(\alpha = 0.01\)</span> rechazaríamos la <span class="math inline">\(H_0\)</span> y diríamos que hay evidencias suficientes que apoyan que la cirugía real es mejor que la falsa para reducir los dolores de migraña.</p>
+</div>
+<div id="interpretación-de-las-tablas-de-contingencia" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Interpretación de las tablas de contingencia</h2>
+<p>Una tabla de contingencia 2x2 se puede intepretar de dos maneras:</p>
+<ol style="list-style-type: decimal">
+<li><p>Dos muestras independientes con una variable dicotómica.</p></li>
+<li><p>Una muestra con dos variable dicotómicas.</p></li>
+</ol>
+<p>Afortunadamente, la aritmética de la prueba de Chi-cuadrada es la misma para ambos contextos, pero la intepretación de la hipótesis y las conclusiones son distintas.</p>
+<p>En algunas tablas de contingencia las filas y columnas juegan un papel muy distinto. Por ejemplo, puede que las columnas sean un tratamiento y las filas una respuesta. En otros casos, las columnas y las filas pueden jugar papeles intercambiables.</p>
+<p>Cuando un conjunto de datos es visto como una sola muestra con dos variable dicotómicas, la relación expresada por <span class="math inline">\(H_0\)</span> se conoce como <strong>dependencia estadística</strong> de las variables de columna y fila. Variables que no son independientes son llamadas <strong>dependientes</strong> o <strong>asociadas</strong>. Por eso a veces la prueba de Chi-cuadrada puede ser conocida como prueba de asociación o prueba de independencia.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Un antropólogo alemán que estidaba la relación entre el color de ojos y cabello observó una muestra de <span class="math inline">\(n = 6800\)</span> hombres con los resultados siguientes.</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="28%" />
+<col width="27%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Cabello oscuro (CO)</strong></th>
+<th><strong>Cabello claro (CC)</strong></th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ojo oscuro (OO)</strong></td>
+<td>726</td>
+<td>131</td>
+<td>857</td>
+</tr>
+<tr class="even">
+<td><strong>Ojo claro (OC)</strong></td>
+<td>3129</td>
+<td>2814</td>
+<td>5943</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>3855</td>
+<td>2945</td>
+<td>6800</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso, podemos calcular las probabilidades condicional de la siguiente manera:</p>
+<p><span class="math display">\[\begin{align}
+\hat{P} = (OO|CO) = \frac{726}{3855} = 0.19 \\
+\hat{P} = (OO|CC) = \frac{131}{2945} = 0.04
+\end{align}\]</span></p>
+<p>Pero la siguiente manera también es valida:</p>
+<p><span class="math display">\[\begin{align}
+\hat{P} = (CO|OO) = \frac{726}{857} = 0.85 \\
+\hat{P} = (CO|OC) = \frac{3129}{5943} = 0.53
+\end{align}\]</span></p>
+<p>Por lo tanto nuestra hipótesis nula se vería de las siguientes dos maneras, ambas válidas:</p>
+<p><span class="math display">\[\begin{align}
+H_0: P(OO|CO) = P(OO|CC) \\
+H_0: P(CO|OO) = P(CO|OC)
+\end{align}\]</span></p>
+<p>Esto es lo mismo que decir que <span class="math inline">\(H_0: El \space color \space de \space ojos \space es \space independiente \space del \space color \space de \space cabello\)</span> o <span class="math inline">\(H_0: El \space color \space del \space cabello \space es \space independiente \space del \space color \space de \space ojos\)</span>. Que es lo mismo que decir <span class="math inline">\(H_0: El \space color \space de \space ojos \space y \space el \space color \space del \space cabello \space son \space independientes\)</span>.</p>
+<p>La hipótesis nula de independencia puede decirse de la siguiente manera. Dos grupos, <span class="math inline">\(G_1\)</span> y <span class="math inline">\(G_2\)</span> son comparados con respecto de la probabilidad de la característica <span class="math inline">\(C\)</span>. La hipótesis nula es entonces:</p>
+<p><span class="math display">\[\begin{align}
+H_0: P(C|G_1) = P(C|G_2)
+\end{align}\]</span></p>
+
 </div>
 </div>
             </section>
