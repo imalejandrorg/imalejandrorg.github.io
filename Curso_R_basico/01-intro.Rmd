@@ -2,6 +2,9 @@
 output:
   bookdown::html_document2:
     fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 # Introducción a R
