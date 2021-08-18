@@ -522,3 +522,170 @@ La hipótesis nula de independencia puede decirse de la siguiente manera. Dos gr
 H_0: P(C|G_1) = P(C|G_2)
 \end{align}
 
+>**Ejemplo:** Considere una especie ficticia de plantas, que se puede categorizar en pequeñas (S), y altas (T), así como resistentes (R) y no resistentes (NR) a una enfermedad.
+
+Consideremos las siguientes $H_0$:
+
+1. $H_0: P(R|S) = P(R|T)$
+
+2. $H_0: P(NR|S) = P(NR|T)$
+
+3. $H_0: P(S|R) = P(S|NR)$
+
+4. $H_0: P(T|R) = P(T|NR)$
+
+Todas ellas son igual de válidas. Sin embargo la siguiente hipótesis no es valida.
+
+5. $H_0: P(R|S) = P(NR|S)$
+
+La primer hipótesis compara dos grupos (plantas pequeñas con altas) respecto a la resistencia a la enfermedad. mientras que la hipótesis 5 es una afirmación acerca de la distribución de la resistencia a la enfermedad en solo un grupo (plantas bajas). 
+
+Supongamos ahora que hacemos un muestreo aleatorio de 100 plantas de esta población.
+
+```{r}
+plantas <- matrix(c(12, 18, 28, 42), nrow = 2, ncol = 2, byrow = T)
+dimnames(plantas) <- list(c("R", "NR"), c("S", "T"))
+plantas
+```
+
++----------------+-------------------+------------------+-------------+
+|                | S                 | T                | **Total**   |
++================+===================+==================+=============+
+| **R**          | 12                | 18               | 30          |
++----------------+-------------------+------------------+-------------+
+| **NR**         | 28                | 42               | 70          |
++----------------+-------------------+------------------+-------------+
+| **Total**      | 40                | 60               | 100         |
++----------------+-------------------+------------------+-------------+
+
+Vamos a corroborar las hipótesis antes generadas:
+
+1. $H_0: P(R|S) = P(R|T) = \frac{12}{40} = \frac{18}{60} = 0.30$
+
+2. $H_0: P(NR|S) = P(NR|T) = \frac{28}{40} = \frac{42}{60} = 0.70$
+
+3. $H_0: P(S|R) = P(S|NR) = \frac{12}{30} = \frac{28}{70} = 0.40$
+
+4. $H_0: P(T|R) = P(T|NR) = \frac{18}{30} = \frac{42}{70} = 0.30$
+
+Sin embargo, con la hipótesis 5.
+
+5. $H_0: P(R|S) = \frac{12}{40} = 0.40$ y $H_0: P(NR|S) = \frac{28}{40} = 0.70$.
+
+### Cuestiones acerca de las columnas y filas
+
+El hecho de que la tabla anterior muestre la independencia vista tanto por medio de las filas o columnas no es casualidad, como se demuestra en la siguiente tabla.
+
++----------------+-------------------+------------------+-------------+
+|                |                   |                  | **Total**   |
++================+===================+==================+=============+
+|                | a                 | b                | a + b       |
++----------------+-------------------+------------------+-------------+
+|                | c                 | d                | c + d       |
++----------------+-------------------+------------------+-------------+
+| **Total**      | a + c             | b + d            |             |
++----------------+-------------------+------------------+-------------+
+
+Entonces,
+
+\begin{align}
+\frac{a}{c} = \frac{b}{d}
+\end{align}
+
+si y solo si
+
+\begin{align}
+\frac{a}{b} = \frac{c}{d}
+\end{align}
+
+Otra forma en la que esto se puede expresar es
+
+\begin{align}
+\frac{a}{a+c} = \frac{b}{b+d}
+\end{align}
+
+si y solo si
+
+\begin{align}
+\frac{a}{a+b} = \frac{c}{c+d}
+\end{align}
+
+Otra cuestion es que si $a$, $b$, $c$ y $d$ son números positivos, entonces
+
+\begin{align}
+\frac{a}{a+c} > \frac{b}{b+d}
+\end{align}
+
+si y solo si
+
+\begin{align}
+\frac{a}{a+b} > \frac{c}{c+d}
+\end{align}
+
+## Prueba exacta de Fisher
+
+Con esta prueba se encuentra la probabilidad de que la tabla de contingencia que tengamos, haya surgido por mero azar, dado que las probabilidades marginales de la tabla son fijas. Se utiliza especialmente con muestras pequeñas. La fórmula para calcular nuestro valor es la siguiente:
+
+\begin{align}
+p = \frac{\binom{a+b}{a}\binom{c+d}{c}}{\binom{n}{a+c}} = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a! \space b! \space c! \space d!  \space n!}
+(\#eq:fisher)
+\end{align}
+
+Donde $\binom{n}{k}$ es el coeficiente binomial ($_{n}C_{k}$). Para recordar este coeficiente aquí tenemos la fórmula.
+
+\begin{equation}
+_{n}C_{k} = \frac{n!}{k!(n-k)!}
+(\#eq:binc2)
+\end{equation}
+
+Por ejemplo, para el primer y segundo coeficiente binomial obtendríamos lo siguiente:
+
+\begin{align}
+_{a+b}C_{a} = \frac{a+b!}{a!(a+b-a)!} \\
+_{a+b}C_{a} = \frac{c+d!}{c!(c+d-c)!} 
+\end{align}
+
+Y para el último coeficiente, sería algo así:
+
+\begin{align}
+_{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!} 
+\end{align}
+
+Cuando hacemos una prueba exacta de Fisher para prubar una hipótesis nula contra una hipótesis alternativa direccional, necesitamos encontrar la probabilidad de todas las tablas de datos (teniendo los mismos margenes que la tabla observada) que provean evidencia al menos tan fuerte en contra de $H_0$, en la dirección predicha por la $H_A$, como la tabla observada.
+
+Posteriormente calculamos el valor-*p* como la suma de las probabilidades de obtener tablas tan extremas como las obtenidas, si la $H_0$ es verdad. 
+
+Afortundamente no tenemos que buscar los valores de todas las tablas posibles una por una y en su lugar podemos utilizar el comando `fisher.test()` que viene incluido en `R`.
+
+>**Ejemplo:** La oxigenación extracorpórea por membrana (ECMO) es un procedimiento con el potencial de salvar vidas de bebés recién nacidos que sufren de una falla respiratoria severa. En un experimento se trataron a 29 bebés recién nacidos con ECMO y a 10 bebés recién nacidos con terapia médica convencional (CMT).
+
+```{r}
+#Creamos nuestra matriz de datos.
+Tratamientos <- matrix(c(4, 1, 6, 28), nrow = 2, ncol = 2, byrow = T)
+dimnames(Tratamientos) <- list(c("Muerto", "Vivo"), c("CMT", "ECMO"))
+Tratamientos
+```
+
++----------------+-------------------+------------------+--------------+
+|                | CMT               | ECMO             | **Total**    |
++================+===================+==================+==============+
+| **Muerto**     | 4                 | 1                | 5            |
++----------------+-------------------+------------------+--------------+
+| **Vivo**       | 6                 | 28               | 34           |
++----------------+-------------------+------------------+--------------+
+| **Total**      | 10                | 29               | 39           |
++----------------+-------------------+------------------+--------------+
+
+```{r}
+fisher.test(Tratamientos)
+```
+
+Como podemos ver, el $valor-p = 0.01102$ lo que quiere decir que rechazamos la $H_0$ y aceptamos la $H_A: P(Muerto|ECMO) < P(Muerto|CMT)$.
+
+```{r}
+fisher.test(Tratamientos)
+```
+
+Para cambiar la direccionalidad de nuestra hipótesis basta con que agreguemos el argumento `alternative = "two.sided"` para una $H_A$ no direccional y `alternative = "less"` o `alternative = "greater"` para una $H_A$ direccional.
+
+## Tablas de contingencia $r \times k$

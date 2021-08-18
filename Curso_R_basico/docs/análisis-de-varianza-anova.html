@@ -251,7 +251,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#hipótesis-compuestas-y-direccionales"><i class="fa fa-check"></i><b>6.2.1</b> Hipótesis compuestas y direccionales</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-de-chi-cuadrada-para-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.3</b> Prueba de Chi-cuadrada para tablas de contingencia</a></li>
-<li class="chapter" data-level="6.4" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#interpretación-de-las-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.4</b> Interpretación de las tablas de contingencia</a></li>
+<li class="chapter" data-level="6.4" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#interpretación-de-las-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.4</b> Interpretación de las tablas de contingencia</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#cuestiones-acerca-de-las-columnas-y-filas"><i class="fa fa-check"></i><b>6.4.1</b> Cuestiones acerca de las columnas y filas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-exacta-de-fisher"><i class="fa fa-check"></i><b>6.5</b> Prueba exacta de Fisher</a></li>
+<li class="chapter" data-level="6.6" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#tablas-de-contingencia-r-times-k"><i class="fa fa-check"></i><b>6.6</b> Tablas de contingencia <span class="math inline">\(r \times k\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="7" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>7</b> Análisis de Varianza (ANOVA)</a>
@@ -303,40 +308,40 @@ div.csl-indent {
 </ul>
 <p>Usualmente un valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05 es suficiente para indicar que nuestros datos no se distribuyen de manera normal. Esta base de datos incluye 2 variables, los valores del peso y el tratamiento que recibieron las plantas.</p>
 <p>Para esta ocasión vamos a trabajar con la base de datos <code>PlantGrowth</code> que viene incluida en R.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="análisis-de-varianza-anova.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="análisis-de-varianza-anova.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</span></code></pre></div>
 <p>Vamos a realizar una gráfica de nuestros datos para darnos una idea de su comportamiento.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="análisis-de-varianza-anova.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb226-2"><a href="análisis-de-varianza-anova.html#cb226-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-3"><a href="análisis-de-varianza-anova.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(group, weight, <span class="at">color =</span> group)) <span class="sc">+</span> </span>
-<span id="cb226-4"><a href="análisis-de-varianza-anova.html#cb226-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
-<span id="cb226-5"><a href="análisis-de-varianza-anova.html#cb226-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb226-6"><a href="análisis-de-varianza-anova.html#cb226-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb226-7"><a href="análisis-de-varianza-anova.html#cb226-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-148"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-148-1.png" alt="Gráfica con los distintos tratamientos." width="672" />
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="análisis-de-varianza-anova.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb234-2"><a href="análisis-de-varianza-anova.html#cb234-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-3"><a href="análisis-de-varianza-anova.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(group, weight, <span class="at">color =</span> group)) <span class="sc">+</span> </span>
+<span id="cb234-4"><a href="análisis-de-varianza-anova.html#cb234-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb234-5"><a href="análisis-de-varianza-anova.html#cb234-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb234-6"><a href="análisis-de-varianza-anova.html#cb234-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb234-7"><a href="análisis-de-varianza-anova.html#cb234-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-152-1.png" alt="Gráfica con los distintos tratamientos." width="672" />
 <p class="caption">
 Figura 7.1: Gráfica con los distintos tratamientos.
 </p>
 </div>
 <p>Otra forma de visualizar los datos es con un boxplot que puede ir dándonos idea más o menos de cómo se distribuyen nuestros datos.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="análisis-de-varianza-anova.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb227-2"><a href="análisis-de-varianza-anova.html#cb227-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb227-3"><a href="análisis-de-varianza-anova.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(group, weight, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
-<span id="cb227-4"><a href="análisis-de-varianza-anova.html#cb227-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
-<span id="cb227-5"><a href="análisis-de-varianza-anova.html#cb227-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb227-6"><a href="análisis-de-varianza-anova.html#cb227-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb227-7"><a href="análisis-de-varianza-anova.html#cb227-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-149"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-149-1.png" alt="Graficos de boxplot para visualización de las distribuciones de los datos." width="672" />
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="análisis-de-varianza-anova.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb235-2"><a href="análisis-de-varianza-anova.html#cb235-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb235-3"><a href="análisis-de-varianza-anova.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PlantGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(group, weight, <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb235-4"><a href="análisis-de-varianza-anova.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb235-5"><a href="análisis-de-varianza-anova.html#cb235-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb235-6"><a href="análisis-de-varianza-anova.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Tratamientos&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Tratamiento 1&quot;</span>, <span class="st">&quot;Tratamiento 2&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb235-7"><a href="análisis-de-varianza-anova.html#cb235-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-153"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-153-1.png" alt="Graficos de boxplot para visualización de las distribuciones de los datos." width="672" />
 <p class="caption">
 Figura 7.2: Graficos de boxplot para visualización de las distribuciones de los datos.
 </p>
 </div>
 <p>Computar la prueba de normalidad de Shapiro-Wilk sumamente sencillo y se hace con la función <code>shapiro_test()</code> de la librería <code>rstatix</code>. Para esto primero tenemos que agrupar nuestros datos por tratamientos con la función <code>group_by()</code> del paquete de <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="análisis-de-varianza-anova.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb228-2"><a href="análisis-de-varianza-anova.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb228-3"><a href="análisis-de-varianza-anova.html#cb228-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-4"><a href="análisis-de-varianza-anova.html#cb228-4" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(weight) <span class="co">#Agrupamos los datos por tratamiento.</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="análisis-de-varianza-anova.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb236-2"><a href="análisis-de-varianza-anova.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb236-3"><a href="análisis-de-varianza-anova.html#cb236-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb236-4"><a href="análisis-de-varianza-anova.html#cb236-4" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(weight) <span class="co">#Agrupamos los datos por tratamiento.</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   group variable statistic     p
 ##   &lt;fct&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
@@ -345,7 +350,7 @@ Figura 7.2: Graficos de boxplot para visualización de las distribuciones de los
 ## 3 trt2  weight       0.941 0.564</code></pre>
 <p>Tanto el control como los dos tratamientos tienen un valor-<em>p</em> <span class="math inline">\(&gt;\)</span> 0.05, lo que indica que se distribuyen de manera normal. El estadístico que obtenemos se conoce como <span class="math inline">\(W\)</span> y entre más cercano sea su valor a 1 más evidencia existe de que se trata de datos que se distribuyen de manera normal.</p>
 <p>Otra opción es realizar la prueba de Shapiro-Wilk con la función integrada en R, de nombre bastante similar, llamada <code>shapiro.test()</code>. Para esta prueba no es necesario agrupar los datos por tratamiento.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="análisis-de-varianza-anova.html#cb230-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth<span class="sc">$</span>weight <span class="sc">%&gt;%</span> shapiro.test</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="análisis-de-varianza-anova.html#cb238-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth<span class="sc">$</span>weight <span class="sc">%&gt;%</span> shapiro.test</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -353,22 +358,22 @@ Figura 7.2: Graficos de boxplot para visualización de las distribuciones de los
 ## W = 0.98268, p-value = 0.8915</code></pre>
 <p>Como podemos ver, el valor-<em>p</em> = 0.8915, lo que indica que nuestros datos se distribuyen de manera normal.</p>
 <p>Algo importante a tener en consideración es que para muestras con <span class="math inline">\(n &gt; 50\)</span> es recomendable utilizar otra prueba ya que la prueba de Shapiro-Wilk es sensible a pequeñas desviaciones de la normalidad para muestras grandes. Una alternativa es la utilización de <strong>gráficos Q-Q</strong> o <strong>Q-Q plot</strong>. Los gráficos Q-Q nos muestran la correlación que existe entre una muestra dada y la distribución normal. Utilizaremos la librería <code>ggpubr</code> y la función <code>ggqqplot()</code>.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="análisis-de-varianza-anova.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb232-2"><a href="análisis-de-varianza-anova.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(PlantGrowth<span class="sc">$</span>weight) <span class="sc">+</span></span>
-<span id="cb232-3"><a href="análisis-de-varianza-anova.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
-<span id="cb232-4"><a href="análisis-de-varianza-anova.html#cb232-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Muestra&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-152-1.png" alt="Gráfico Q-Q que muestra la distribución normal de datos." width="672" />
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="análisis-de-varianza-anova.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb240-2"><a href="análisis-de-varianza-anova.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(PlantGrowth<span class="sc">$</span>weight) <span class="sc">+</span></span>
+<span id="cb240-3"><a href="análisis-de-varianza-anova.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
+<span id="cb240-4"><a href="análisis-de-varianza-anova.html#cb240-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Muestra&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-156"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-156-1.png" alt="Gráfico Q-Q que muestra la distribución normal de datos." width="672" />
 <p class="caption">
 Figura 7.3: Gráfico Q-Q que muestra la distribución normal de datos.
 </p>
 </div>
 <p>Este gráfico nos muestra una distribución normal teórica vs. la de nuestros datos. Como podemos ver, todos los puntos caen dentro del intervalo de confianza al 95% de la recta, lo que quiere decir que nuestros datos se distribuyen de manera normal. Esto confirma los resultados obtenidos con la prueba de Shapiro-Wilk. Otra opción sería ver la <strong>gráfica de densidad</strong> para identificar la forma de la distribución.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="análisis-de-varianza-anova.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(PlantGrowth<span class="sc">$</span>weight, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb233-2"><a href="análisis-de-varianza-anova.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb233-3"><a href="análisis-de-varianza-anova.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-153"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-153-1.png" alt="Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos." width="672" />
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="análisis-de-varianza-anova.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(PlantGrowth<span class="sc">$</span>weight, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb241-2"><a href="análisis-de-varianza-anova.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb241-3"><a href="análisis-de-varianza-anova.html#cb241-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-157"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-157-1.png" alt="Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos." width="672" />
 <p class="caption">
 Figura 7.4: Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos.
 </p>
@@ -378,7 +383,7 @@ Figura 7.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 <h2><span class="header-section-number">7.2</span> Prueba de homocedasticidad</h2>
 <p>Para la prueba de homocedasticidad existen varias aproximaciones. En este caso veremos pruebas estadísticas, ya que existen pruebas que se pueden realizar una vez realizamos el ANOVA.</p>
 <p>La prueba a utilizar es la prueba de Bartlett, que en R se escribe <code>bartlett.test()</code>. Es una prueba relativamente sencilla de realizar.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="análisis-de-varianza-anova.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="análisis-de-varianza-anova.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
 ## 
@@ -386,15 +391,15 @@ Figura 7.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 ## Bartlett&#39;s K-squared = 2.8786, df = 2, p-value = 0.2371</code></pre>
 <p>Indicamos que la variable <code>weight</code> va a ser evaluada bajo la variable <code>group</code>. Como resultados tenemos el estadístico Bartlett, los grados de libertad y el valor-<em>p</em>, que en este caso resulto ser valor-<em>p</em> <span class="math inline">\(&gt;\)</span> 0.05 lo que significa que aceptamos la hipótesis de que nuestros datos tienen varianzas iguales. Un valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05 indicaría que nuestros datos NO tienen varianzas iguales.</p>
 <p>Otra prueba que podemos utilizar que viene en la librería <code>car</code> es la prueba de Levene. Utilizamos la función <code>leveneTest()</code>.</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="análisis-de-varianza-anova.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb236-2"><a href="análisis-de-varianza-anova.html#cb236-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-3"><a href="análisis-de-varianza-anova.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> group, PlantGrowth, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="análisis-de-varianza-anova.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb244-2"><a href="análisis-de-varianza-anova.html#cb244-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb244-3"><a href="análisis-de-varianza-anova.html#cb244-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> group, PlantGrowth, mean)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
 ##       Df F value Pr(&gt;F)
 ## group  2   1.237 0.3062
 ##       27</code></pre>
 <p>En este caso nuestro valor-<em>p</em> es mayor a 0.05 (indicado en el outpot como <code>Pr(&gt;F)</code>) lo que indica que no hay diferencias en las varianzas de nuestras muestras. Es importante que en nuestro último argumento (<code>center</code>) escribamos que queremos que los calculos se realicen con la media (<code>center = mean</code>). Si utilizamos la mediana, haremos una prueba modificada de Levene conocida como prueba de Brown-Forsythe, que es la prueba que realiza por defecto si no escribimos <code>mean</code>.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="análisis-de-varianza-anova.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="análisis-de-varianza-anova.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight <span class="sc">~</span> group, PlantGrowth)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
 ## group  2  1.1192 0.3412
@@ -404,13 +409,13 @@ Figura 7.4: Gráfico de densidad que muestra una ligera forma de campana, lo que
 <div id="análisis-de-varianza-anova-de-una-vía" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Análisis de varianza (ANOVA de una vía)</h2>
 <p>Algo importante es que R requiere que las variables predictoras sean clasificadas como grupos de factores. Si corroboramos en nuestros datos de <code>PlantGrowth</code> veremos que efectivamente la variable predictora (el tratamiento) se encuentra como factor.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="análisis-de-varianza-anova.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PlantGrowth)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="análisis-de-varianza-anova.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PlantGrowth)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    30 obs. of  2 variables:
 ##  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
 ##  $ group : Factor w/ 3 levels &quot;ctrl&quot;,&quot;trt1&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <p>En caso de que nuestros datos no se encuentren como factores podemos transformarlos con la función <code>as.factor()</code> o <code>as_factor()</code>.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="análisis-de-varianza-anova.html#cb242-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">&quot;Tratamiento1&quot;</span>, <span class="st">&quot;Tratamiento2&quot;</span>, <span class="st">&quot;Control&quot;</span>))</span>
-<span id="cb242-2"><a href="análisis-de-varianza-anova.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="análisis-de-varianza-anova.html#cb250-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">&quot;Tratamiento1&quot;</span>, <span class="st">&quot;Tratamiento2&quot;</span>, <span class="st">&quot;Control&quot;</span>))</span>
+<span id="cb250-2"><a href="análisis-de-varianza-anova.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos)</span></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;Control&quot;,&quot;Tratamiento1&quot;,..: 2 3 1</code></pre>
 <p>Cuando nos referimos a un <em>ANOVA de una vía</em> decimos que solamente consideramos una variable predictora o independiente. También se le conoce como <em>ANOVA de un factor</em>. En este caso, para la base de datos de <code>PlantGrowth</code> solo estamos considerando el tratamiento, por lo tanto lo lógico es hacer un ANOVA de una vía. Sin emabrgo, si además del tratamiento tuvieramos otra variable como la cantidad de luz, podríamos considerar hacer un <em>ANOVA de dos vías</em>.</p>
 <p>El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir <span class="math inline">\(H_0\)</span>: Las medias de todas las muestras son iguales: <span class="math inline">\(\mu_1 = \mu_2 = \mu_3 = ... = \mu_n\)</span>. <span class="math inline">\(H_A\)</span>: Al menos una de las medias de las muestras es distinta: <span class="math inline">\(\mu_1 \neq \mu_n\)</span>.</p>
@@ -475,7 +480,7 @@ gl_{total} = n - 1
 <p>Algo recomendado de hacer es construir una tabla con cada uno de los pasos a seguir con sus respectivas fórmulas. Los resultados que se presenta el ANOVA en R tiene un formato similar.</p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-159">Tabla 7.1: </span>Tabla de ANOVA
+<span id="tab:unnamed-chunk-163">Tabla 7.1: </span>Tabla de ANOVA
 </caption>
 <thead>
 <tr>
@@ -550,8 +555,8 @@ Total
 <div id="anova-en-r" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> ANOVA en R</h3>
 <p>Una vez vistos los calculos necesarios para obtener el estadístico <span class="math inline">\(F_{ratio}\)</span> podemos hacer el ANOVA utilizando la función <code>aov()</code>. La función de ANOVA en R tiene una notación particular; primero escribimos la variable dependiente (en el caso de nuestros datos de <code>PlantGrowth</code>, el peso), posteriormente escribimos el símbolo <code>~</code> que significa <em>explicado por</em> seguido de nuestra variable independiente, en este caso, el tratamiento. Al final escribimos la base de datos de donde tomar estas variables.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="análisis-de-varianza-anova.html#cb244-1" aria-hidden="true" tabindex="-1"></a>anova.plantas <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, PlantGrowth)</span>
-<span id="cb244-2"><a href="análisis-de-varianza-anova.html#cb244-2" aria-hidden="true" tabindex="-1"></a>anova.plantas</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="análisis-de-varianza-anova.html#cb252-1" aria-hidden="true" tabindex="-1"></a>anova.plantas <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, PlantGrowth)</span>
+<span id="cb252-2"><a href="análisis-de-varianza-anova.html#cb252-2" aria-hidden="true" tabindex="-1"></a>anova.plantas</span></code></pre></div>
 <pre><code>## Call:
 ##    aov(formula = weight ~ group, data = PlantGrowth)
 ## 
@@ -563,19 +568,19 @@ Total
 ## Residual standard error: 0.6233746
 ## Estimated effects may be unbalanced</code></pre>
 <p>Para observar el valor-<em>p</em> podemos utilizar la función <code>summary()</code> para obtener una tabla de ANOVA.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="análisis-de-varianza-anova.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova.plantas)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="análisis-de-varianza-anova.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova.plantas)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## group        2  3.766  1.8832   4.846 0.0159 *
 ## Residuals   27 10.492  0.3886                 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p><code>Df</code> corresponde a los grados de libertad, <code>Sum Sq</code> corresponde a la suma de cuadrados, <code>Mean Sq</code> corresponde a los cuadrados medios y <code>F value</code> corresponde al valor F calculado. <code>Pr(&gt;F)</code> corresponde al valor-<em>p</em>. En este caso nuestro valor-<em>p</em> <span class="math inline">\(&lt;\)</span> 0.05 por lo que sabemos que hay diferencias entre grupos. Si quisieramos exportar esto a una tabla necesitamos utilizar la librería <code>broom</code>.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="análisis-de-varianza-anova.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb248-2"><a href="análisis-de-varianza-anova.html#cb248-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-3"><a href="análisis-de-varianza-anova.html#cb248-3" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(anova.plantas)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="análisis-de-varianza-anova.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb256-2"><a href="análisis-de-varianza-anova.html#cb256-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-3"><a href="análisis-de-varianza-anova.html#cb256-3" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(anova.plantas)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-163">Tabla 7.2: </span>Resultados del ANOVA de tratamientos de plantas
+<span id="tab:unnamed-chunk-167">Tabla 7.2: </span>Resultados del ANOVA de tratamientos de plantas
 </caption>
 <thead>
 <tr>
@@ -641,28 +646,28 @@ Residuals
 </tbody>
 </table>
 <p>Después de hacer el ANOVA podemos comprobar la distribución normal con los <strong>residuales</strong>. Para esto tenemos que crear una variable nueva. Esto lo podemos hacer también con la librería <code>broom</code> y la función <code>augment()</code>.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="análisis-de-varianza-anova.html#cb249-1" aria-hidden="true" tabindex="-1"></a>residuales <span class="ot">&lt;-</span> anova.plantas<span class="sc">$</span>residuals</span>
-<span id="cb249-2"><a href="análisis-de-varianza-anova.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(residuales, <span class="at">xlab =</span> <span class="st">&quot;Residuales&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histograma de Residuales&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-164"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-164-1.png" alt="Histograma de residuales del ANOVA mostrando distribución normal." width="672" />
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="análisis-de-varianza-anova.html#cb257-1" aria-hidden="true" tabindex="-1"></a>residuales <span class="ot">&lt;-</span> anova.plantas<span class="sc">$</span>residuals</span>
+<span id="cb257-2"><a href="análisis-de-varianza-anova.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(residuales, <span class="at">xlab =</span> <span class="st">&quot;Residuales&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histograma de Residuales&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-168"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-168-1.png" alt="Histograma de residuales del ANOVA mostrando distribución normal." width="672" />
 <p class="caption">
 Figura 7.5: Histograma de residuales del ANOVA mostrando distribución normal.
 </p>
 </div>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="análisis-de-varianza-anova.html#cb250-1" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(anova.plantas)</span>
-<span id="cb250-2"><a href="análisis-de-varianza-anova.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(tabla.aov.plantas2<span class="sc">$</span>.resid, <span class="at">xlab =</span> <span class="st">&quot;Residuales&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histograma de Residuales&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-165"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-165-1.png" alt="Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment()." width="672" />
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="análisis-de-varianza-anova.html#cb258-1" aria-hidden="true" tabindex="-1"></a>tabla.aov.plantas2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(anova.plantas)</span>
+<span id="cb258-2"><a href="análisis-de-varianza-anova.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(tabla.aov.plantas2<span class="sc">$</span>.resid, <span class="at">xlab =</span> <span class="st">&quot;Residuales&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Frecuencia&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histograma de Residuales&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-169"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-169-1.png" alt="Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment()." width="672" />
 <p class="caption">
 Figura 7.6: Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment().
 </p>
 </div>
 <p>Como podemos ver, los residuales tienen una distribución más o menos normal. Esto confirma lo que habíamos visto en las pruebas de normalidad y homocedasticidad. Podemos incluso mostrar la gráfica Q-Q de los residuales.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="análisis-de-varianza-anova.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(tabla.aov.plantas2<span class="sc">$</span>.resid) <span class="sc">+</span></span>
-<span id="cb251-2"><a href="análisis-de-varianza-anova.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
-<span id="cb251-3"><a href="análisis-de-varianza-anova.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residuales&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-166"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-166-1.png" alt="Gráfico Q-Q de los residuales obtenidos por el ANOVA." width="672" />
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="análisis-de-varianza-anova.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(tabla.aov.plantas2<span class="sc">$</span>.resid) <span class="sc">+</span></span>
+<span id="cb259-2"><a href="análisis-de-varianza-anova.html#cb259-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Teórico&quot;</span>) <span class="sc">+</span></span>
+<span id="cb259-3"><a href="análisis-de-varianza-anova.html#cb259-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residuales&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-170"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-170-1.png" alt="Gráfico Q-Q de los residuales obtenidos por el ANOVA." width="672" />
 <p class="caption">
 Figura 7.7: Gráfico Q-Q de los residuales obtenidos por el ANOVA.
 </p>
