@@ -1,7 +1,7 @@
 ---
 output:
-  bookdown::html_document2:
-    fig.caption: yes
+  bookdown:
+    html_document2:
 editor_options: 
   markdown: 
     wrap: sentence
@@ -348,7 +348,7 @@ Datos %>%
 ### Hipótesis compuestas y direccionales
 
 Hay que darnos cuenta que en el ejemplo de los venados, nuestras hipótesis son **hipótesis compuestas**, es decir, hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de $t$ ($H_0: \mu_1 = \mu_2$).
-Las primeras tres afiramciones de nuestra hipótesis nula $H_0$ son independientes, $P(Área \space interior) = 0.173$, $P(Área \space exterior) = 0.070$, $P(Borde \space exterior) = 0.080$ pero nuestra última afirmación, $P(No \space quemado) = 0.677$, es **dependiente** de las demás afirmaciones realizadas.
+Las primeras tres afirmaciones de nuestra hipótesis nula $H_0$ son independientes, $P(Área \space interior) = 0.173$, $P(Área \space exterior) = 0.070$, $P(Borde \space exterior) = 0.080$ pero nuestra última afirmación, $P(No \space quemado) = 0.677$, es **dependiente** de las demás afirmaciones realizadas.
 Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional.
 Otra cosa interesante es que cuando se rechaza la $H_0$, la prueba no nos dice la dirección de la conclusión.
 
@@ -395,7 +395,7 @@ Posteriormente podríamos agregar los casos totales para cada lado de nuestra ta
 | **Total**      | 49             | 26              | 75             |
 +----------------+----------------+-----------------+----------------+
 
-Cuando hacemos una prueba de Chi-cuadrado para este tipo de tablas, nusetra hipótesis nula es que la probabilidad de éxito dado que la cirugía fue real es la misma que la probabilidad de éxito dado que la cirugía fue falsa, $H_0: P(Éxito|Real) = P(Éxito|Falsa)$. Como vimos en la lección de probabilidad, este tipo de probabilidad se conoce como **condicional** y predice qué tan seguido un evento ocurre bajo condiciones específicas.
+Cuando hacemos una prueba de Chi-cuadrado para este tipo de tablas, nuestra hipótesis nula es que la probabilidad de éxito dado que la cirugía fue real es la misma que la probabilidad de éxito dado que la cirugía fue falsa, $H_0: P(Éxito|Real) = P(Éxito|Falsa)$. Como vimos en la lección de probabilidad, este tipo de probabilidad se conoce como **condicional** y predice qué tan seguido un evento ocurre bajo condiciones específicas.
 
 \begin{equation}
 P(A|B)
@@ -436,7 +436,7 @@ Ahora, el primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de 
 | **Total**      | 49             | 26              | 75              |
 +----------------+----------------+-----------------+-----------------+
 
-Ya que estos calculos se realizan exclusivamente con los valores marginales, los valores esperados $e$ se pueden obtener de la siguiente manera.
+Ya que estos cálculos se realizan exclusivamente con los valores marginales, los valores esperados $e$ se pueden obtener de la siguiente manera.
 
 \begin{align}
 e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
@@ -470,13 +470,13 @@ Por lo que obtenemos un $valor-p = 0.0069$. En este caso, si nuestro $\alpha = 0
 
 ## Interpretación de las tablas de contingencia
 
-Una tabla de contingencia 2x2 se puede intepretar de dos maneras:
+Una tabla de contingencia 2x2 se puede interpretar de dos maneras:
 
 1. Dos muestras independientes con una variable dicotómica.
 
 2. Una muestra con dos variable dicotómicas.
 
-Afortunadamente, la aritmética de la prueba de Chi-cuadrada es la misma para ambos contextos, pero la intepretación de la hipótesis y las conclusiones son distintas.
+Afortunadamente, la aritmética de la prueba de Chi-cuadrada es la misma para ambos contextos, pero la interpretación de la hipótesis y las conclusiones son distintas.
 
 En algunas tablas de contingencia las filas y columnas juegan un papel muy distinto. Por ejemplo, puede que las columnas sean un tratamiento y las filas una respuesta. En otros casos, las columnas y las filas pueden jugar papeles intercambiables.
 
@@ -611,7 +611,7 @@ si y solo si
 \frac{a}{a+b} = \frac{c}{c+d}
 \end{align}
 
-Otra cuestion es que si $a$, $b$, $c$ y $d$ son números positivos, entonces
+Otra cuestión es que si $a$, $b$, $c$ y $d$ son números positivos, entonces
 
 \begin{align}
 \frac{a}{a+c} > \frac{b}{b+d}
@@ -652,11 +652,11 @@ Y para el último coeficiente, sería algo así:
 _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!} 
 \end{align}
 
-Cuando hacemos una prueba exacta de Fisher para prubar una hipótesis nula contra una hipótesis alternativa direccional, necesitamos encontrar la probabilidad de todas las tablas de datos (teniendo los mismos margenes que la tabla observada) que provean evidencia al menos tan fuerte en contra de $H_0$, en la dirección predicha por la $H_A$, como la tabla observada.
+Cuando hacemos una prueba exacta de Fisher para probar una hipótesis nula contra una hipótesis alternativa direccional, necesitamos encontrar la probabilidad de todas las tablas de datos (teniendo los mismos margenes que la tabla observada) que provean evidencia al menos tan fuerte en contra de $H_0$, en la dirección predicha por la $H_A$, como la tabla observada.
 
 Posteriormente calculamos el valor-*p* como la suma de las probabilidades de obtener tablas tan extremas como las obtenidas, si la $H_0$ es verdad. 
 
-Afortundamente no tenemos que buscar los valores de todas las tablas posibles una por una y en su lugar podemos utilizar el comando `fisher.test()` que viene incluido en `R`.
+Afortunadamente no tenemos que buscar los valores de todas las tablas posibles una por una y en su lugar podemos utilizar el comando `fisher.test()` que viene incluido en `R`.
 
 >**Ejemplo:** La oxigenación extracorpórea por membrana (ECMO) es un procedimiento con el potencial de salvar vidas de bebés recién nacidos que sufren de una falla respiratoria severa. En un experimento se trataron a 29 bebés recién nacidos con ECMO y a 10 bebés recién nacidos con terapia médica convencional (CMT).
 
@@ -704,7 +704,7 @@ chorlos
 +--------------------------------+----------+----------+----------+-----------+
 |                                | **2004** | **2005** | **2006** | **Total** |
 +--------------------------------+----------+----------+----------+-----------+
-| **Zona Agricola (ZA)**         | 21       | 19       | 26       | 66        |
+| **Zona Agrícola (ZA)**         | 21       | 19       | 26       | 66        |
 +--------------------------------+----------+----------+----------+-----------+
 | **Pastizal con Perritos (PP)** | 17       | 38       | 12       | 67        |
 +--------------------------------+----------+----------+----------+-----------+
@@ -718,7 +718,7 @@ En este caso, podemos transformar los valores absolutos en relativos haciendo us
 +--------------------------------+----------+----------+----------+
 |                                | **2004** | **2005** | **2006** |
 +--------------------------------+----------+----------+----------+
-| **Zona Agricola (ZA)**         | 48.8     | 30.2     | 55.3     |
+| **Zona Agrícola (ZA)**         | 48.8     | 30.2     | 55.3     |
 +--------------------------------+----------+----------+----------+
 | **Pastizal con Perritos (PP)** | 39.5     | 60.3     | 25.5     |
 +--------------------------------+----------+----------+----------+
@@ -748,7 +748,7 @@ Para esto simplemente aplicamos la fórmula de Chi-cuadrada.
 (\#eq:chirk)
 \end{align}
 
-Donde $r \times k$ son todas las céludas de nuestra tabla de contingencia. Los valores $e$ se calculan con la fórmula vista anteriormente \@ref(eq:e). Para los grados de libertad $df$ utilizaríamos la siguiente fórmula:
+Donde $r \times k$ son todas las celdas de nuestra tabla de contingencia. Los valores $e$ se calculan con la fórmula vista anteriormente \@ref(eq:e). Para los grados de libertad $df$ utilizaríamos la siguiente fórmula:
 
 \begin{align}
 df = (r-1)(k-1)
@@ -766,12 +766,12 @@ P(P|2004) = P(P|2005) = P(P|2006)
 \end{Bmatrix}
 \end{equation*}
 
-Igual que con la tabla de contingencia de 2x2, multiplicamos la probabilidad marignal por el total para obtener el valor esperado. Es decir, del total chorlos en la Zona Agricola (ZA) $\frac{66}{153} \times 43 = 18.55$ y así sucesivamente.
+Igual que con la tabla de contingencia de 2x2, multiplicamos la probabilidad marginal por el total para obtener el valor esperado. Es decir, del total chorlos en la Zona Agrícola (ZA) $\frac{66}{153} \times 43 = 18.55$ y así sucesivamente.
 
 +--------------------------------+------------+------------+------------+-----------+
 |                                | **2004**   | **2005**   | **2006**   | **Total** |
 +--------------------------------+------------+------------+------------+-----------+
-| **Zona Agricola (ZA)**         | 21 (18.55) | 19 (21.18) | 26 (20.27) | 66        |
+| **Zona Agrícola (ZA)**         | 21 (18.55) | 19 (21.18) | 26 (20.27) | 66        |
 +--------------------------------+------------+------------+------------+-----------+
 | **Pastizal con Perritos (PP)** | 17 (18.83) | 38 (27.59) | 12 (20.58) | 67        |
 +--------------------------------+------------+------------+------------+-----------+
@@ -879,7 +879,7 @@ Como se puede ver, estos datos claramente están pareados ya que tanto los hijos
 | **Total**                | 114                      | 114                      |
 +--------------------------+--------------------------+--------------------------+
 
-Como podemos ver, hay dos casos que corresponden a una respuesta *sí/sí* y 77 casos que corresponden a una respuesta *no/no.* Estos no nos ayudan a determinar si el VIH ocurre con mayor frecuencia en hijos menores que en mayores, y se les conoce como **pares concordantes.** Tenemos a su vez 17 casos *sí/no* y 18 *no/sí.* Estos se conocen como **pares discordantes** y nos ayudana  determinar si la infección por VIH ocurre con mayor frecuencia en uno de los dos casos (hijos mayores vs menores).
+Como podemos ver, hay dos casos que corresponden a una respuesta *sí/sí* y 77 casos que corresponden a una respuesta *no/no.* Estos no nos ayudan a determinar si el VIH ocurre con mayor frecuencia en hijos menores que en mayores, y se les conoce como **pares concordantes.** Tenemos a su vez 17 casos *sí/no* y 18 *no/sí.* Estos se conocen como **pares discordantes** y nos ayudan a  determinar si la infección por VIH ocurre con mayor frecuencia en uno de los dos casos (hijos mayores vs menores).
 
 Por lo tanto, nuestra *$H_0:$ la probabilidad de infección por VIH es la misma para hijos mayores y menores.*
 

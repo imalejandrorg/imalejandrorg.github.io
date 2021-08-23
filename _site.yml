@@ -8,6 +8,10 @@ navbar:
       menu:
       - text: "Curso de R básico"
         href: Curso_R_basico/docs/index.html
+    - text: "Proyectos"
+      menu:
+      - text: "Tesis de Licenciatura"
+        href: 
 output_dir: "."
 output:
   html_document:

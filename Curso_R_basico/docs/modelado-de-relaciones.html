@@ -120,28 +120,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -262,19 +240,18 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html"><i class="fa fa-check"></i><b>7</b> Modelado de relaciones</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#comparando-la-media-de-diversas-muestras"><i class="fa fa-check"></i><b>7.1</b> Comparando la media de diversas muestras</a></li>
+<li class="chapter" data-level="7.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#análisis-de-varianza-anova"><i class="fa fa-check"></i><b>7.1</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#variación-dentro-de-los-grupos"><i class="fa fa-check"></i><b>7.1.1</b> Variación dentro de los grupos</a></li>
+<li class="chapter" data-level="7.1.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#variación-entre-los-grupos"><i class="fa fa-check"></i><b>7.1.2</b> Variación entre los grupos</a></li>
+<li class="chapter" data-level="7.1.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#una-relación-importante-en-el-anova"><i class="fa fa-check"></i><b>7.1.3</b> Una relación importante en el ANOVA</a></li>
+<li class="chapter" data-level="7.1.4" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#tabla-de-anova"><i class="fa fa-check"></i><b>7.1.4</b> Tabla de ANOVA</a></li>
+<li class="chapter" data-level="7.1.5" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#modelo-del-anova"><i class="fa fa-check"></i><b>7.1.5</b> Modelo del ANOVA</a></li>
+<li class="chapter" data-level="7.1.6" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#distribución-de-f"><i class="fa fa-check"></i><b>7.1.6</b> Distribución de <span class="math inline">\(F\)</span></a></li>
+<li class="chapter" data-level="7.1.7" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#prueba-de-f"><i class="fa fa-check"></i><b>7.1.7</b> Prueba de <span class="math inline">\(F\)</span></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="8" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>8</b> Análisis de Varianza (ANOVA)</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>8.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="8.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>8.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="8.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>8.3</b> Análisis de varianza (ANOVA de una vía)</a>
-<ul>
-<li class="chapter" data-level="8.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>8.3.1</b> ANOVA en R</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>8.4</b> Pruebas <em>post hoc</em></a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -297,9 +274,454 @@ div.csl-indent {
 <div id="modelado-de-relaciones" class="section level1" number="7">
 <h1><span class="header-section-number">Lección 7</span> Modelado de relaciones</h1>
 <p>En esta lección vamos a considerar la comparación de más de dos muestras y los diversos métodos que podemos emplear para esto.</p>
-<div id="comparando-la-media-de-diversas-muestras" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Comparando la media de diversas muestras</h2>
+<div id="análisis-de-varianza-anova" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Análisis de Varianza (ANOVA)</h2>
+<p>El análisis clásico para realizar observaciones de múltiples muestras es el <strong>análisis de varianza</strong> o <strong>ANOVA.</strong> Para llevar a cabo este análisis existen ciertos supuestos que nuestros datos deben de cumplir.</p>
+<ul>
+<li>Distribución normal de los datos.</li>
+<li>Homocedasticidad (varianzas iguales).</li>
+<li>Datos independientes.</li>
+</ul>
+<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias</strong> (<span class="math inline">\(\mu\)</span>) de las muestras.</p>
+<p>Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de <span class="math inline">\(I\)</span> muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos <em>entre</em> los grupos y <em>dentro</em> de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.</p>
+<ul>
+<li><p><span class="math inline">\(x_{ij}\)</span>: observación <span class="math inline">\(j\)</span> en el <span class="math inline">\(i\)</span>-ésimo grupo. Por ejemplo la primer observación del primer grupo o muestra sería <span class="math inline">\(x_{11}\)</span>, la segunda <span class="math inline">\(x_{12}\)</span> y así sucesivamente.</p></li>
+<li><p><span class="math inline">\(k\)</span>: Número total de grupos, muestras o tratamientos.</p></li>
+<li><p><span class="math inline">\(n_i\)</span>: número de observaciones en el <span class="math inline">\(i\)</span>-ésimo grupo.</p></li>
+<li><p><span class="math inline">\(\overline{x}_i\)</span>: la media del <span class="math inline">\(i\)</span>-ésimo grupo.</p></li>
+<li><p><span class="math inline">\(s_i\)</span>: la desviación estándar del <span class="math inline">\(i\)</span>-ésimo grupo.</p></li>
+<li><p><span class="math inline">\(n\)</span>: el número total de observaciones, dado por la fórmula:</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+n = \sum_{i = 1}^k n_i
+\end{equation}\]</span></p>
+<ul>
+<li><span class="math inline">\(\overline{x}\)</span>: la gran media o promedio de todas las observaciones, dado por la fórmula:</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\overline{x} = \frac{\sum_{i = 1}^k \sum_{j = 1}^{n_i}n_{ij}}{n} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{\sum_{i}^k n_i} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{n}
+\end{equation}\]</span></p>
+<div id="variación-dentro-de-los-grupos" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Variación dentro de los grupos</h3>
+<p>Una medida de variación dentro de los grupos es la <strong>varianza agrupada,</strong> denotada como <span class="math inline">\(s_{p}^2\)</span>. Su cálculo se obtiene de la siguiente manera:</p>
+<p><span class="math display" id="eq:varpooled">\[\begin{equation}
+s_{p}^2 = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)} = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k}
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>Mientras que para obtener la desviación estándar agrupadas simplemente obtenemos la raíz cuadrada.</p>
+<p><span class="math display" id="eq:sdpooled">\[\begin{equation}
+s_{p} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)}} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k}}
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>El valor de la desviación estándar agrupada solamente depende de la variabilidad dentro de los datos y no de sus medias. Por ahora, vamos a asignar términos correspondientes al ANOVA a nuestra fórmula.</p>
+<p>El númerador de la varianza agrupada se conoce como <strong>suma de cuadrados dentro de los grupos,</strong> <span class="math inline">\(SS(dentro)\)</span> mientras que el denominador son los <strong>grados de libertad dentro de los grupos,</strong> <span class="math inline">\(df(dentro)\)</span>.</p>
+<p>Así, entoces:</p>
+<p><span class="math display" id="eq:sswithin">\[\begin{equation}
+SS(dentro) = \sum_{i = 1}^k (n_i - 1)^2
+\tag{7.3}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:dfwithin">\[\begin{equation}
+df(dentro) = n - k
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>La razón entre estos dos valores se conoce como <strong>cuadrados medios dentro de los grupos,</strong> <span class="math inline">\(MS(dentro)\)</span>.</p>
+<p><span class="math display" id="eq:mswithin">\[\begin{equation}
+MS(dentro) = \frac{SS(dentro)}{df(dentro)}
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>Por lo tanto <span class="math inline">\(MS(dentro)\)</span> mide la variabilidad dentro de los grupos.</p>
+</div>
+<div id="variación-entre-los-grupos" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Variación entre los grupos</h3>
+<p>En los casos en los que solamente tenemos dos grupos, la diferencia es simplemente <span class="math inline">\((\overline{x}_1 - \overline{x}_2)\)</span>. Sin embargo, en este caso tenemos más dos grupos que queremos comparar. Para este caso utilizamos los <strong>cuadrados medios entre los grupos,</strong> <span class="math inline">\(MS(entre)\)</span>. Su cálculo se obtiene de la siguiente manera:</p>
+<p><span class="math display" id="eq:msbetween">\[\begin{equation}
+MS(entre) = \frac{\sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2}{k - 1}
+\tag{7.6}
+\end{equation}\]</span></p>
+<p>De igual manera, el numerador y denominador tienen sus nombres respectivos. Al numerador se le conoce coo <strong>suma de cuadrados entre los grupos,</strong> <span class="math inline">\(SS(entre)\)</span> y al denominador como <strong>grados de libertad entre los grupos,</strong> <span class="math inline">\(df(entre)\)</span>.</p>
+<p><span class="math display" id="eq:ssbetween">\[\begin{equation}
+SS(entre) = \sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2
+\tag{7.7}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:dfbetween">\[\begin{equation}
+df(dentro) = k - 1
+\tag{7.8}
+\end{equation}\]</span></p>
+</div>
+<div id="una-relación-importante-en-el-anova" class="section level3" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Una relación importante en el ANOVA</h3>
+<p>El nombre <em>análisis de varianza</em> viene de la comparación entre <span class="math inline">\(SS(entre)\)</span> y <span class="math inline">\(SS(dentro)\)</span>. Consideremos un valor, <span class="math inline">\(x_{ij}\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+x_{ij} - \overline{x} = (x_{ij} - \overline{x}_i) + (x_{ij} - \overline{x})
+\end{equation}\]</span></p>
+<p>Esta ecuación expresa la desviación que hay en una observación <span class="math inline">\((x_{ij})\)</span> de la gran media <span class="math inline">\((\overline{x})\)</span> como la suma de dos partes: una desviación dentro del grupo <span class="math inline">\((x_{ij} - \overline{x}_i)\)</span> y una desviación entre grupos <span class="math inline">\((\overline{x}_i - \overline{x})\)</span>.</p>
+<p>Esta relación se mantiene para la suma de cuadrados correspondiente:</p>
+<p><span class="math display" id="eq:sstotal1">\[\begin{equation}
+\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k \sum_{j=1}^{n_i}(x_{ij} - \overline{x}_i)^2 + \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2
+\tag{7.9}
+\end{equation}\]</span></p>
+<p>Que, al reescribirse se puede expresar como:</p>
+<p><span class="math display" id="eq:sstotal2">\[\begin{equation}
+\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k (n_i - 1)s_{i}^2 + \sum_{i=1}^k n_i (\overline{x}_i - \overline{x})^2
+\tag{7.10}
+\end{equation}\]</span></p>
+<p>Esta cantidad se conoce como <strong>suma de cuadrados totales,</strong> <span class="math inline">\(SS(total)\)</span>.</p>
+<p><span class="math display" id="eq:sstotal3">\[\begin{equation}
+SS(total) = \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2
+\tag{7.11}
+\end{equation}\]</span></p>
+<p>Este valor mide la cantidad de variabilidad entre todas las <span class="math inline">\(n\)</span> observaciones en los grupos <span class="math inline">\(k\)</span>.</p>
+<p><span class="math display" id="eq:sstotal4">\[\begin{equation}
+SS(total) = SS(entre) + SS(dentro)
+\tag{7.12}
+\end{equation}\]</span></p>
+<p>Esta relación anterior muestra cómo la variación total de nuestros datos puede dividirse o partirse en dos componentes: la variación entre grupos y la variación dentro de los grupos (de ahí el nombre, <strong>análisis de varianza</strong>).</p>
+<p>Para los grados de libertad totales <span class="math inline">\(df(total)\)</span> se utiliza la siguiente fórmula:</p>
+<p><span class="math display" id="eq:dftotal1">\[\begin{equation}
+df(total) = n - 1
+\tag{7.13}
+\end{equation}\]</span></p>
+<p>Y al igual que la suma de cuadrados, se pueden calcular sumando los grados de libertad entre y dentro de los grupos:</p>
+<p><span class="math display" id="eq:dftotal2">\[\begin{equation}
+df(total) = df(dentro) + df(entre) \\
+df(total) = (n - k) + (k - 1)
+\tag{7.14}
+\end{equation}\]</span></p>
+</div>
+<div id="tabla-de-anova" class="section level3" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Tabla de ANOVA</h3>
+<p>Cuando se realzia un ANOVA, es una práctica muy común realizar una <strong>tabla de ANOVA</strong>. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.</p>
+<table>
+<caption>
+<span id="tab:anovatab">Tabla 7.1: </span>Tabla de ANOVA
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Valores
+</th>
+<th style="text-align:left;">
+df
+</th>
+<th style="text-align:left;">
+SS
+</th>
+<th style="text-align:left;">
+MS
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Entre los grupos (Tratamientos)
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(k - 1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\sum_{i = 1}^{k}n_{i}(\overline{x}_{i} - \overline{x})^2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{SS(entre)}{df(entre)}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Dentro de los grupos (Residuales)
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(n - k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij} - \overline{x}_{i})^2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{SS(dentro)}{df(dentro)}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Total
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(n - 1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij}-\overline{x})^2\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>Una tabla de ANOVA nos ayuda a organizar los datos y los valores de nuestro conjunto de datos. En la tabla <a href="modelado-de-relaciones.html#tab:anovatab">7.1</a> podemos ver las fórmulas que necesitamos utilizar para obtener los valores correspondientes. Por ejemplo, para obtener los grados de libertad entre tratamientos,<span class="math inline">\(df(entre)\)</span>, utilizaría la fórmula <span class="math inline">\(k - 1\)</span> y así sucesivamente. La suma de cuadrados y los cuadrados medios entre grupos son los que corresponden a los tratamientos y los que se dan dentro de los grupos son típicamente conocidos como <strong>residuales.</strong></p>
+</div>
+<div id="modelo-del-anova" class="section level3" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> Modelo del ANOVA</h3>
+<p>Pensamos acerca de <span class="math inline">\(x_{ij}\)</span> como una observación aleatoria del grupo <span class="math inline">\(i\)</span>, donde la media poblacional del grupo <span class="math inline">\(i\)</span> es <span class="math inline">\(\mu_i\)</span>. Utilizamos el ANOVA para investigar la hipótesis nula, <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_i\)</span>. El siguiente modelo describe al ANOVA:</p>
+<p><span class="math display" id="eq:anovamodel">\[\begin{equation}
+x_{ij} = \mu + \tau_i + \epsilon_{ij}
+\tag{7.15}
+\end{equation}\]</span></p>
+<p>En este modelo, <span class="math inline">\(\mu\)</span> representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la <span class="math inline">\(H_0\)</span> entonces <span class="math inline">\(\mu\)</span> es la media en común para todos los grupos. Si es falsa, entonces al menos una de las <span class="math inline">\(\mu_i\)</span> difiere de la gran media pbolacional <span class="math inline">\(\mu\)</span>. El término <span class="math inline">\(\tau_i\)</span> (tau) representa el efecto que tiene el grupo <span class="math inline">\(i\)</span>, es decir, la diferencia entre la media poblacional para el grupo <span class="math inline">\(i\)</span>, <span class="math inline">\(\mu_i\)</span> y la gran media poblacional, <span class="math inline">\(\mu\)</span>. Por ende:</p>
+<p><span class="math display" id="eq:anovatau">\[\begin{equation}
+\tau_i = \mu_i - \mu
+\tag{7.16}
+\end{equation}\]</span></p>
+<p>Esto es equivalente a decir que <span class="math inline">\(H_0: \tau_1 = \tau_2 = \cdots = \tau_n = 0\)</span>. Si la <span class="math inline">\(H_0\)</span> es falsa, entonces al menos alguno de los grupos o tratamientos difiere de los demás. Si <span class="math inline">\(\tau_i\)</span> es positivo, entonces, las observaciones del grupo <span class="math inline">\(i\)</span> tienden a ser mayores que el promedio, en cambio, si es negativo, las observaciones tienden a ser menores que el promedio.</p>
+<p>El término <span class="math inline">\(\epsilon_{ij}\)</span> (epsilon) representa el error aleatorio asociado con la observación <span class="math inline">\(j\)</span> en el grupo <span class="math inline">\(i\)</span>. Por lo que nuestro modelo puede ser intepretado como:</p>
+<p><span class="math display" id="eq:anovamodel2">\[\begin{equation}
+observación = gran \space media + effecto \space de \space grupo + error \space aleatorio
+\tag{7.17}
+\end{equation}\]</span></p>
+<p>Estimamos la media general, <span class="math inline">\(\mu\)</span>, con la gran media de los datos <span class="math inline">\(\overline{x}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{\mu} = \overline{x}
+\end{equation}\]</span></p>
+<p>De igual manera, estimamos la media poblacional del grupo <span class="math inline">\(i\)</span> con la media muestral del grupo <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{\mu}_i = \overline{x}_i
+\end{equation}\]</span></p>
+<p>Entonces, efecto de grupo es:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{\tau}_i = \overline{x}_i - \overline{x}
+\end{equation}\]</span></p>
+<p>Finalmente, para el error aleatorio de la observación <span class="math inline">\(j\)</span> en el grupo <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{\epsilon}_{ij} = x_{ij} - \overline{x}_i
+\end{equation}\]</span></p>
+<p>Poniendo todos estos valores juntos obtenemos:</p>
+<p><span class="math display">\[\begin{equation}
+x_{ij} = \overline{x} + (\overline{x}_i - \overline{x}) + (x_{ij} + \overline{x}_i) = \hat{\mu} + \hat{\tau_i} + \hat{\epsilon}_{ij}
+\end{equation}\]</span></p>
+<p>En algunos libros e incluso algunos software, se utiliza la terminología <span class="math inline">\(SS(error)\)</span> en lugar de <span class="math inline">\(SS(dentro)\)</span> ya que este componente, <span class="math inline">\(x_{ij} - \overline{x}_i\)</span>, es la parte del error aleatorio en el modelo del ANOVA. También se le conoce como residuales y de está manera la encontramos en <code>R</code>.</p>
+<p>Cuando hacemos un análisis de varianza, ANOVA, comparamos el tamaño del efecto de grupo de la muestra, <span class="math inline">\(\hat{\tau}_i\)</span>, al tamaño del error aleatorio de los datos, <span class="math inline">\(\hat{\epsilon}_{ij}\)</span>.</p>
+<p>Esto se puede observar en las fórmulas para <span class="math inline">\(SS(entre)\)</span> y <span class="math inline">\(SS(dentro)\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+SS(entre) = \sum_{i=1}^k n_i \hat{\tau}_i^2
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+SS(dentro) = \sum_{i=1}^k \sum_{j=1}^{n_i} \hat{\epsilon}_{ij}^2
+\end{equation}\]</span></p>
+</div>
+<div id="distribución-de-f" class="section level3" number="7.1.6">
+<h3><span class="header-section-number">7.1.6</span> Distribución de <span class="math inline">\(F\)</span></h3>
+<p>Consideremos la hipótesis nula <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_i\)</span> y una hipótesis alternativa no direccional, <span class="math inline">\(H_A: Al \space menos \space una \space \mu_i \space no \space es \space igual\)</span>. El rechazo de la <span class="math inline">\(H_0\)</span> no nos dice cuál grupo es el que es diferente.</p>
+<p>La <strong>distribución de <span class="math inline">\(F\)</span></strong> fue nombrada así en honor del estadista y genetista R.A. Fisher y es utilizada en muchísimos análisis estadísticos. Su forma depende de dos parámetros: el <strong>numerador de los grados de libertad</strong> (<span class="math inline">\(df(entre)\)</span>) y el <strong>denominador de los grados de libertad</strong> (<span class="math inline">\(df(dentro)\)</span>). La siguiente figura muestra una distribución de <span class="math inline">\(F\)</span> con <span class="math inline">\(df(entre) = 4\)</span> y <span class="math inline">\(df(dentro) = 20\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-2-1.png" alt="Distribución de $F$ con $df(entre) = 4$ y $df(dentro) = 20$." width="672" />
+<p class="caption">
+Figura 7.1: Distribución de <span class="math inline">\(F\)</span> con <span class="math inline">\(df(entre) = 4\)</span> y <span class="math inline">\(df(dentro) = 20\)</span>.
+</p>
+</div>
+<p>Como con el resto de distribuciones, tenemos una serie de comandos en <code>R</code> para trabajar con la distribución de <span class="math inline">\(F\)</span>.</p>
+<p>-<code>df()</code> nos da un valor de densidad en determinado punto de la distribución de <span class="math inline">\(F\)</span>.</p>
+<p>-<code>pf()</code> nos da un valor de densidad acumulado hasta cierto punto en la distribución de <span class="math inline">\(F\)</span> (área debajo de la curva).</p>
+<p>-<code>qf()</code> toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.</p>
+<p>-<code>rf()</code> genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.</p>
+<p>Para encontrar los valores críticos de nuestra distribución de <span class="math inline">\(F\)</span> simplemente utilizamos la función <code>qf()</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelado-de-relaciones.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 2.866081</code></pre>
+<p>Y listo, nuestro valor crítico de <span class="math inline">\(F\)</span> para un <span class="math inline">\(F(4, 20)_{0.05}\)</span> es 2.87. Estos comandos se utilizan como el resto que hemos visto con las demás distribuciones.</p>
+</div>
+<div id="prueba-de-f" class="section level3" number="7.1.7">
+<h3><span class="header-section-number">7.1.7</span> Prueba de <span class="math inline">\(F\)</span></h3>
+<p>Para obtener nuestro <strong>estadístico de <span class="math inline">\(F\)</span></strong> utilizamos la siguiente fómrula:</p>
+<p><span class="math display" id="eq:fratio">\[\begin{equation}
+F_s = \frac{MS(entre)}{MS(dentro)}
+\tag{7.18}
+\end{equation}\]</span></p>
+<p>Esta claro que el valor de nuestra <span class="math inline">\(F_s\)</span> será mayor si las discrepancias entre las medias de los grupos (<span class="math inline">\(\overline{X}_i\)</span>) son grandes en relación a variabiliadad dentro de los grupos. Valores grandes de <span class="math inline">\(F_s\)</span> tienden a proveer evidencia en contra de la <span class="math inline">\(H_0\)</span>.</p>
+<p>Veamos todo lo que hemos visto con un ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla @tab:ex1.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelado-de-relaciones.html#cb3-1" aria-hidden="true" tabindex="-1"></a>Dieta1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">9</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb3-2"><a href="modelado-de-relaciones.html#cb3-2" aria-hidden="true" tabindex="-1"></a>Dieta2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">21</span>, <span class="dv">11</span>, <span class="dv">18</span>)</span>
+<span id="cb3-3"><a href="modelado-de-relaciones.html#cb3-3" aria-hidden="true" tabindex="-1"></a>Dieta3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">17</span>, <span class="dv">6</span>, <span class="cn">NA</span>)</span>
+<span id="cb3-4"><a href="modelado-de-relaciones.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="modelado-de-relaciones.html#cb3-5" aria-hidden="true" tabindex="-1"></a>Corderos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Dieta1, Dieta2, Dieta3)</span>
+<span id="cb3-6"><a href="modelado-de-relaciones.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb3-7"><a href="modelado-de-relaciones.html#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="modelado-de-relaciones.html#cb3-8" aria-hidden="true" tabindex="-1"></a>Corderos <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="modelado-de-relaciones.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="st">&quot;html&quot;</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Ganancia de peso (lb) de los corderos&quot;</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Dieta 1&quot;</span>, <span class="st">&quot;Dieta 2&quot;</span>, <span class="st">&quot;Dieta 3&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="modelado-de-relaciones.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">lightable_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="modelado-de-relaciones.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">width_min =</span> <span class="st">&quot;4cm&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-4">Tabla 7.2: </span>Ganancia de peso (lb) de los corderos
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Dieta 1
+</th>
+<th style="text-align:center;">
+Dieta 2
+</th>
+<th style="text-align:center;">
+Dieta 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+8
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+9
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+16
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+16
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+9
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+21
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+11
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+18
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="modelado-de-relaciones.html#cb4-1" aria-hidden="true" tabindex="-1"></a>Corderos <span class="ot">&lt;-</span> <span class="fu">gather</span>(Corderos, Dieta1, Dieta2, Dieta3) <span class="sc">%&gt;%</span> na.omit</span></code></pre></div>
+<p>En lugar de realizar todo el proceso manual (el cuál puede tomar cierto tiempo) vamos a utilizar la función <code>aov()</code> para analizar estos datos y ver si realmente existe alguna diferencia entre los datos. Para esto necesitamos generar nuestra variable con nuestros datos.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="modelado-de-relaciones.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Tratamiento <span class="ot">&lt;-</span> <span class="fu">c</span>((<span class="fu">rep</span>(<span class="st">&quot;Dieta 1&quot;</span>, <span class="dv">3</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 2&quot;</span>, <span class="dv">5</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 3&quot;</span>, <span class="dv">4</span>)))</span>
+<span id="cb5-2"><a href="modelado-de-relaciones.html#cb5-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">21</span>, <span class="dv">11</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">17</span>, <span class="dv">6</span>)</span>
+<span id="cb5-3"><a href="modelado-de-relaciones.html#cb5-3" aria-hidden="true" tabindex="-1"></a>Corderos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Tratamiento, Peso)</span>
+<span id="cb5-4"><a href="modelado-de-relaciones.html#cb5-4" aria-hidden="true" tabindex="-1"></a>Corderos</span></code></pre></div>
+<pre><code>##    Tratamiento Peso
+## 1      Dieta 1    8
+## 2      Dieta 1   16
+## 3      Dieta 1    9
+## 4      Dieta 2    9
+## 5      Dieta 2   16
+## 6      Dieta 2   21
+## 7      Dieta 2   11
+## 8      Dieta 2   18
+## 9      Dieta 3   15
+## 10     Dieta 3   10
+## 11     Dieta 3   17
+## 12     Dieta 3    6</code></pre>
+<p>Ahora que tenemos nuestra variable simplente ingresamos el siguiente comando.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="modelado-de-relaciones.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Tratamiento, Corderos)</span></code></pre></div>
+<p>Si queremos observar nuestros valores-<em>p</em> calculados, y ver si existen diferencias significativas, tenemos que guardar el análisis en una variable, en este caso yo la nombre <em>ANOVA</em>. Posteriormente utilizamos la función <code>summary()</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="modelado-de-relaciones.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Tratamiento  2     36   18.00   0.771  0.491
+## Residuals    9    210   23.33</code></pre>
+<p>Donde obtenemos una tabla de ANOVA con nuestros valores F esperados y F estimados. El apartado Pr(&gt;F) es nuestro valor-<em>p</em>. Si quisiéramos guardar nuestra tabla de ANOVA para algún reporte, podemos hacerlo a través de la librería <code>broom</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelado-de-relaciones.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb10-2"><a href="modelado-de-relaciones.html#cb10-2" aria-hidden="true" tabindex="-1"></a>ANOVA.tabla <span class="ot">&lt;-</span> <span class="fu">tidy</span>(ANOVA)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="modelado-de-relaciones.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb11-2"><a href="modelado-de-relaciones.html#cb11-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ANOVA.tabla, <span class="st">&quot;html&quot;</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Ganancia de peso (lb) de los corderos&quot;</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Término&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;SS&quot;</span>, <span class="st">&quot;MS&quot;</span>, <span class="st">&quot;Estadístico de F&quot;</span>, <span class="st">&quot;Valor p&quot;</span>)) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">lightable_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="modelado-de-relaciones.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">width_min =</span> <span class="st">&quot;2cm&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-9">Tabla 7.3: </span>Ganancia de peso (lb) de los corderos
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Término
+</th>
+<th style="text-align:center;">
+df
+</th>
+<th style="text-align:center;">
+SS
+</th>
+<th style="text-align:center;">
+MS
+</th>
+<th style="text-align:center;">
+Estadístico de F
+</th>
+<th style="text-align:center;">
+Valor p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+Tratamiento
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+2
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+36
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+18.00000
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+0.7714286
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+0.490658
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+Residuals
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+9
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+210
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+23.33333
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+</td>
+</tr>
+</tbody>
+</table>
+<p>Por lo tanto nuestro estadístico <span class="math inline">\(F\)</span> calculado nos da un valor de 0.77, el área correspondiente a esta densidad valor <span class="math inline">\(F\)</span> es 0.4907, por lo que nuestro valor-<em>p</em> &gt; 0.05 y aceptamos la <span class="math inline">\(H_0\)</span>.</p>
 
+</div>
 </div>
 </div>
             </section>

@@ -1,6 +1,7 @@
 ---
 output:
-  bookdown::html_document2:
+  bookdown:
+    html_document2:
     fig.caption: yes
 editor_options: 
   markdown: 
@@ -24,4 +25,344 @@ library(kableExtra)
 library(broom)
 ```
 
-## Comparando la media de diversas muestras
+## Análisis de Varianza (ANOVA)
+
+El análisis clásico para realizar observaciones de múltiples muestras es el **análisis de varianza** o **ANOVA.** Para llevar a cabo este análisis existen ciertos supuestos que nuestros datos deben de cumplir.
+
+-   Distribución normal de los datos.
+-   Homocedasticidad (varianzas iguales).
+-   Datos independientes.
+
+La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias** ($\mu$) de las muestras.
+
+Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de $I$ muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos *entre* los grupos y *dentro* de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.
+
+- $x_{ij}$: observación $j$ en el $i$-ésimo grupo. Por ejemplo la primer observación del primer grupo o muestra sería $x_{11}$, la segunda $x_{12}$ y así sucesivamente. 
+
+- $k$: Número total de grupos, muestras o tratamientos.
+
+- $n_i$: número de observaciones en el $i$-ésimo grupo.
+
+- $\overline{x}_i$: la media del $i$-ésimo grupo.
+
+- $s_i$: la desviación estándar del $i$-ésimo grupo.
+
+- $n$: el número total de observaciones, dado por la fórmula:
+
+\begin{equation}
+n = \sum_{i = 1}^k n_i
+\end{equation}
+
+- $\overline{x}$: la gran media o promedio de todas las observaciones, dado por la fórmula:
+
+\begin{equation}
+\overline{x} = \frac{\sum_{i = 1}^k \sum_{j = 1}^{n_i}n_{ij}}{n} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{\sum_{i}^k n_i} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{n}
+\end{equation}
+
+### Variación dentro de los grupos
+
+Una medida de variación dentro de los grupos es la **varianza agrupada,** denotada como $s_{p}^2$. Su cálculo se obtiene de la siguiente manera:
+
+\begin{equation}
+s_{p}^2 = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)} = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k}
+(\#eq:varpooled)
+\end{equation}
+
+Mientras que para obtener la desviación estándar agrupadas simplemente obtenemos la raíz cuadrada.
+
+\begin{equation}
+s_{p} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)}} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k}}
+(\#eq:sdpooled)
+\end{equation}
+
+El valor de la desviación estándar agrupada solamente depende de la variabilidad dentro de los datos y no de sus medias. Por ahora, vamos a asignar términos correspondientes al ANOVA a nuestra fórmula.
+
+El númerador de la varianza agrupada se conoce como **suma de cuadrados dentro de los grupos,** $SS(dentro)$ mientras que el denominador son los **grados de libertad dentro de los grupos,** $df(dentro)$.
+
+Así, entoces:
+
+\begin{equation}
+SS(dentro) = \sum_{i = 1}^k (n_i - 1)^2
+(\#eq:sswithin)
+\end{equation}
+
+\begin{equation}
+df(dentro) = n - k
+(\#eq:dfwithin)
+\end{equation}
+
+La razón entre estos dos valores se conoce como **cuadrados medios dentro de los grupos,** $MS(dentro)$.
+
+\begin{equation}
+MS(dentro) = \frac{SS(dentro)}{df(dentro)}
+(\#eq:mswithin)
+\end{equation}
+
+Por lo tanto $MS(dentro)$ mide la variabilidad dentro de los grupos. 
+
+### Variación entre los grupos
+
+En los casos en los que solamente tenemos dos grupos, la diferencia es simplemente $(\overline{x}_1 - \overline{x}_2)$. Sin embargo, en este caso tenemos más dos grupos que queremos comparar. Para este caso utilizamos los **cuadrados medios entre los grupos,** $MS(entre)$. Su cálculo se obtiene de la siguiente manera:
+
+\begin{equation}
+MS(entre) = \frac{\sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2}{k - 1}
+(\#eq:msbetween)
+\end{equation}
+
+De igual manera, el numerador y denominador tienen sus nombres respectivos. Al numerador se le conoce coo **suma de cuadrados entre los grupos,** $SS(entre)$ y al denominador como **grados de libertad entre los grupos,** $df(entre)$.
+
+\begin{equation}
+SS(entre) = \sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2
+(\#eq:ssbetween)
+\end{equation}
+
+\begin{equation}
+df(dentro) = k - 1
+(\#eq:dfbetween)
+\end{equation}
+
+### Una relación importante en el ANOVA
+
+El nombre *análisis de varianza* viene de la comparación entre $SS(entre)$ y $SS(dentro)$. Consideremos un valor, $x_{ij}$.
+
+\begin{equation}
+x_{ij} - \overline{x} = (x_{ij} - \overline{x}_i) + (x_{ij} - \overline{x})
+\end{equation}
+
+Esta ecuación expresa la desviación que hay en una observación $(x_{ij})$ de la gran media $(\overline{x})$ como la suma de dos partes: una desviación dentro del grupo $(x_{ij} - \overline{x}_i)$ y una desviación entre grupos $(\overline{x}_i - \overline{x})$.
+
+Esta relación se mantiene para la suma de cuadrados correspondiente:
+
+\begin{equation}
+\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k \sum_{j=1}^{n_i}(x_{ij} - \overline{x}_i)^2 + \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2
+(\#eq:sstotal1)
+\end{equation}
+
+Que, al reescribirse se puede expresar como:
+
+\begin{equation}
+\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k (n_i - 1)s_{i}^2 + \sum_{i=1}^k n_i (\overline{x}_i - \overline{x})^2
+(\#eq:sstotal2)
+\end{equation}
+
+Esta cantidad se conoce como **suma de cuadrados totales,** $SS(total)$. 
+
+\begin{equation}
+SS(total) = \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2
+(\#eq:sstotal3)
+\end{equation}
+
+Este valor mide la cantidad de variabilidad entre todas las $n$ observaciones en los grupos $k$.
+
+\begin{equation}
+SS(total) = SS(entre) + SS(dentro)
+(\#eq:sstotal4)
+\end{equation}
+
+Esta relación anterior muestra cómo la variación total de nuestros datos puede dividirse o partirse en dos componentes: la variación entre grupos y la variación dentro de los grupos (de ahí el nombre, **análisis de varianza**).
+
+Para los grados de libertad totales $df(total)$ se utiliza la siguiente fórmula:
+
+\begin{equation}
+df(total) = n - 1
+(\#eq:dftotal1)
+\end{equation}
+
+Y al igual que la suma de cuadrados, se pueden calcular sumando los grados de libertad entre y dentro de los grupos:
+
+\begin{equation}
+df(total) = df(dentro) + df(entre) \\
+df(total) = (n - k) + (k - 1)
+(\#eq:dftotal2)
+\end{equation}
+
+### Tabla de ANOVA
+
+Cuando se realzia un ANOVA, es una práctica muy común realizar una **tabla de ANOVA**. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.
+
+```{r anovatab, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+anova.tabla <- data.frame(Valores = c("Entre los grupos (Tratamientos)", "Dentro de los grupos (Residuales)", "Total"))
+
+anova.tabla$df <- c("$k - 1$", "$n - k$", "$n - 1$")
+
+anova.tabla$SS <- c("$\\sum_{i = 1}^{k}n_{i}(\\overline{x}_{i} - \\overline{x})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij} - \\overline{x}_{i})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij}-\\overline{x})^2$")
+anova.tabla$MS <- c("$\\frac{SS(entre)}{df(entre)}$",
+                    "$\\frac{SS(dentro)}{df(dentro)}$", NA)
+
+options(knitr.kable.NA = '')
+knitr::kable(anova.tabla, caption = "Tabla de ANOVA", escape = FALSE) %>% column_spec(1, bold = TRUE)
+```
+
+Una tabla de ANOVA nos ayuda a organizar los datos y los valores de nuestro conjunto de datos. En la tabla \@ref(tab:anovatab) podemos ver las fórmulas que necesitamos utilizar para obtener los valores correspondientes. Por ejemplo, para obtener los grados de libertad entre tratamientos,$df(entre)$, utilizaría la fórmula $k - 1$ y así sucesivamente. La suma de cuadrados y los cuadrados medios entre grupos son los que corresponden a los tratamientos y los que se dan dentro de los grupos son típicamente conocidos como **residuales.**
+
+### Modelo del ANOVA
+
+Pensamos acerca de $x_{ij}$ como una observación aleatoria del grupo $i$, donde la media poblacional del grupo $i$ es $\mu_i$. Utilizamos el ANOVA para investigar la hipótesis nula, $H_0: \mu_1 = \mu_2  = \cdots = \mu_i$. El siguiente modelo describe al ANOVA:
+
+\begin{equation}
+x_{ij} = \mu + \tau_i + \epsilon_{ij}
+(\#eq:anovamodel)
+\end{equation}
+
+En este modelo, $\mu$ representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la $H_0$ entonces $\mu$ es la media en común para todos los grupos. Si es falsa, entonces al menos una de las $\mu_i$ difiere de la gran media pbolacional $\mu$. El término $\tau_i$ (tau) representa el efecto que tiene el grupo $i$, es decir, la diferencia entre la media poblacional para el grupo $i$, $\mu_i$ y la gran media poblacional, $\mu$. Por ende:
+
+
+\begin{equation}
+\tau_i = \mu_i - \mu
+(\#eq:anovatau)
+\end{equation}
+
+Esto es equivalente a decir que $H_0: \tau_1 = \tau_2 = \cdots = \tau_n = 0$. Si la $H_0$ es falsa, entonces al menos alguno de los grupos o tratamientos difiere de los demás. Si $\tau_i$ es positivo, entonces, las observaciones del grupo $i$ tienden a ser mayores que el promedio, en cambio, si es negativo, las observaciones tienden a ser menores que el promedio.
+
+El término $\epsilon_{ij}$ (epsilon) representa el error aleatorio asociado con la observación $j$ en el grupo $i$. Por lo que nuestro modelo puede ser intepretado como:
+
+\begin{equation}
+observación = gran \space media + effecto \space de \space grupo + error \space aleatorio
+(\#eq:anovamodel2)
+\end{equation}
+
+Estimamos la media general, $\mu$, con la gran media de los datos $\overline{x}$:
+
+\begin{equation}
+\hat{\mu} = \overline{x}
+\end{equation}
+
+De igual manera, estimamos la media poblacional del grupo $i$ con la media muestral del grupo $i$:
+
+\begin{equation}
+\hat{\mu}_i = \overline{x}_i
+\end{equation}
+
+Entonces, efecto de grupo es:
+
+\begin{equation}
+\hat{\tau}_i = \overline{x}_i - \overline{x}
+\end{equation}
+
+Finalmente, para el error aleatorio de la observación $j$ en el grupo $i$:
+
+\begin{equation}
+\hat{\epsilon}_{ij} = x_{ij} - \overline{x}_i
+\end{equation}
+
+Poniendo todos estos valores juntos obtenemos:
+
+\begin{equation}
+x_{ij} = \overline{x} + (\overline{x}_i - \overline{x}) + (x_{ij} + \overline{x}_i) = \hat{\mu} + \hat{\tau_i} + \hat{\epsilon}_{ij}
+\end{equation}
+
+En algunos libros e incluso algunos software, se utiliza la terminología $SS(error)$ en lugar de $SS(dentro)$ ya que este componente, $x_{ij} - \overline{x}_i$, es la parte del error aleatorio en el modelo del ANOVA. También se le conoce como residuales y de está manera la encontramos en `R`. 
+
+Cuando hacemos un análisis de varianza, ANOVA, comparamos el tamaño del efecto de grupo de la muestra, $\hat{\tau}_i$, al tamaño del error aleatorio de los datos, $\hat{\epsilon}_{ij}$.
+
+Esto se puede observar en las fórmulas para $SS(entre)$ y $SS(dentro)$. 
+
+\begin{equation}
+SS(entre) = \sum_{i=1}^k n_i \hat{\tau}_i^2
+\end{equation}
+
+\begin{equation}
+SS(dentro) = \sum_{i=1}^k \sum_{j=1}^{n_i} \hat{\epsilon}_{ij}^2
+\end{equation}
+
+### Distribución de $F$
+
+Consideremos la hipótesis nula $H_0: \mu_1 = \mu_2 = \cdots = \mu_i$ y una hipótesis alternativa no direccional, $H_A: Al \space menos \space una \space \mu_i \space no \space es \space igual$. El rechazo de la $H_0$ no nos dice cuál grupo es el que es diferente.
+
+La **distribución de $F$** fue nombrada así en honor del estadista y genetista R.A. Fisher y es utilizada en muchísimos análisis estadísticos. Su forma depende de dos parámetros: el **numerador de los grados de libertad** ($df(entre)$) y el **denominador de los grados de libertad** ($df(dentro)$). La siguiente figura muestra una distribución de $F$ con $df(entre) = 4$ y $df(dentro) = 20$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución de $F$ con $df(entre) = 4$ y $df(dentro) = 20$."}
+ggplot(data.frame(x = c(0, 8)), aes(x = x)) +
+  stat_function(fun = df, args = list(df1 = 4, df2 = 20), size = 0.6) +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  ylab("") +
+  xlab("") +
+  theme_minimal_hgrid(color = "black")
+```
+
+Como con el resto de distribuciones, tenemos una serie de comandos en `R` para trabajar con la distribución de $F$.
+
+\-`df()` nos da un valor de densidad en determinado punto de la distribución de $F$.
+
+\-`pf()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $F$ (área debajo de la curva).
+
+\-`qf()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
+
+\-`rf()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
+
+Para encontrar los valores críticos de nuestra distribución de $F$ simplemente utilizamos la función `qf()`. 
+
+```{r}
+qf(0.05, df1 = 4, df = 20, lower.tail = F)
+```
+
+Y listo, nuestro valor crítico de $F$ para un $F(4, 20)_{0.05}$ es 2.87. Estos comandos se utilizan como el resto que hemos visto con las demás distribuciones.
+
+### Prueba de $F$
+
+Para obtener nuestro **estadístico de $F$** utilizamos la siguiente fómrula:
+
+\begin{equation}
+F_s = \frac{MS(entre)}{MS(dentro)}
+(\#eq:fratio)
+\end{equation}
+
+Esta claro que el valor de nuestra $F_s$ será mayor si las discrepancias entre las medias de los grupos ($\overline{X}_i$) son grandes en relación a variabiliadad dentro de los grupos. Valores grandes de $F_s$ tienden a proveer evidencia en contra de la $H_0$.
+
+Veamos todo lo que hemos visto con un ejemplo.
+
+>**Ejemplo:** Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla \@tab:ex1. 
+
+```{r}
+Dieta1 <- c(8, 16, 9, NA, NA)
+Dieta2 <- c(9, 16, 21, 11, 18)
+Dieta3 <- c(15, 10, 17, 6, NA)
+
+Corderos <- data.frame(Dieta1, Dieta2, Dieta3)
+options(knitr.kable.NA = "")
+
+Corderos %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Ganancia de peso (lb) de los corderos", col.names = c("Dieta 1", "Dieta 2", "Dieta 3")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "4cm")
+
+Corderos <- gather(Corderos, Dieta1, Dieta2, Dieta3) %>% na.omit
+```
+
+En lugar de realizar todo el proceso manual (el cuál puede tomar cierto tiempo) vamos a utilizar la función `aov()` para analizar estos datos y ver si realmente existe alguna diferencia entre los datos. Para esto necesitamos generar nuestra variable con nuestros datos.
+
+```{r}
+Tratamiento <- c((rep("Dieta 1", 3)), c(rep("Dieta 2", 5)), c(rep("Dieta 3", 4)))
+Peso <- c(8, 16, 9, 9, 16, 21, 11, 18, 15, 10, 17, 6)
+Corderos <- data.frame(Tratamiento, Peso)
+Corderos
+```
+
+Ahora que tenemos nuestra variable simplente ingresamos el siguiente comando.
+
+```{r}
+ANOVA <- aov(Peso ~ Tratamiento, Corderos)
+```
+
+Si queremos observar nuestros valores-*p* calculados, y ver si existen diferencias significativas, tenemos que guardar el análisis en una variable, en este caso yo la nombre *ANOVA*. Posteriormente utilizamos la función `summary()`.
+
+```{r}
+summary(ANOVA)
+```
+
+Donde obtenemos una tabla de ANOVA con nuestros valores F esperados y F estimados. El apartado Pr(>F) es nuestro valor-*p*. Si quisiéramos guardar nuestra tabla de ANOVA para algún reporte, podemos hacerlo a través de la librería `broom`. 
+
+```{r}
+library(broom)
+ANOVA.tabla <- tidy(ANOVA)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+options(knitr.kable.NA = '')
+knitr::kable(ANOVA.tabla, "html", align = c("c", "c"), caption = "Ganancia de peso (lb) de los corderos", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:6, width_min = "2cm")
+```
+
+Por lo tanto nuestro estadístico $F$ calculado nos da un valor de 0.77, el área correspondiente a esta densidad valor $F$ es 0.4907, por lo que nuestro valor-*p* > 0.05 y aceptamos la $H_0$.
