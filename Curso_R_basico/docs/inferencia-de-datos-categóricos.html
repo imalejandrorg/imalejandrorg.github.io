@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="estadística-inferencial.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="modelado-de-relaciones.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,17 +258,22 @@ div.csl-indent {
 <li class="chapter" data-level="6.5" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-exacta-de-fisher"><i class="fa fa-check"></i><b>6.5</b> Prueba exacta de Fisher</a></li>
 <li class="chapter" data-level="6.6" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#tablas-de-contingencia-r-times-k"><i class="fa fa-check"></i><b>6.6</b> Tablas de contingencia <span class="math inline">\(r \times k\)</span></a></li>
 <li class="chapter" data-level="6.7" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#intervalos-de-confianza-para-la-diferencia-entre-probabilidades"><i class="fa fa-check"></i><b>6.7</b> Intervalos de confianza para la diferencia entre probabilidades</a></li>
+<li class="chapter" data-level="6.8" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#datos-pareados-en-tablas-2x2"><i class="fa fa-check"></i><b>6.8</b> Datos pareados en tablas 2x2</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html"><i class="fa fa-check"></i><b>7</b> Modelado de relaciones</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#comparando-la-media-de-diversas-muestras"><i class="fa fa-check"></i><b>7.1</b> Comparando la media de diversas muestras</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="7" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>7</b> Análisis de Varianza (ANOVA)</a>
+<li class="chapter" data-level="8" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>8</b> Análisis de Varianza (ANOVA)</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>7.1</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="7.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>7.2</b> Prueba de homocedasticidad</a></li>
-<li class="chapter" data-level="7.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>7.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<li class="chapter" data-level="8.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>8.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="8.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>8.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="8.3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>8.3</b> Análisis de varianza (ANOVA de una vía)</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>7.3.1</b> ANOVA en R</a></li>
+<li class="chapter" data-level="8.3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#anova-en-r"><i class="fa fa-check"></i><b>8.3.1</b> ANOVA en R</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>7.4</b> Pruebas <em>post hoc</em></a></li>
+<li class="chapter" data-level="8.4" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>8.4</b> Pruebas <em>post hoc</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -1491,6 +1496,126 @@ SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2
 ## sample estimates:
 ##    prop 1    prop 2 
 ## 0.4390244 0.2727273</code></pre>
+</div>
+<div id="datos-pareados-en-tablas-2x2" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Datos pareados en tablas 2x2</h2>
+<p>Para datos pareados en tablas de 2x2 necesitamos reconstruir nuestra tabla de cierta manera. Veamos esto con un ejemplo.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Se conduce un estudio para determinar el riesgo de que una mujer transmita el VIH a sus hijos no nacidos. De una muestra de 114 mujeres infectadas con VIH que dieron a luz a dos hijos, se encontró que la infección por VIH ocurrió en 19 de los 114 hijos mayores y en 20 de los 114 hijos menores.</p>
+</blockquote>
+<table style="width:64%;">
+<colgroup>
+<col width="16%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Hijo mayor</strong></td>
+<td><strong>Hijo menor</strong></td>
+</tr>
+<tr class="even">
+<td><strong>VIH +</strong></td>
+<td>19</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td><strong>VIH -</strong></td>
+<td>95</td>
+<td>94</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>114</td>
+<td>114</td>
+</tr>
+</tbody>
+</table>
+<p>Como se puede ver, estos datos claramente están pareados ya que tanto los hijos menores como mayores provienen de la misma madre. Una forma de representar esta tabla es de la siguiente manera.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Hijo menor con VIH +</strong></td>
+<td><strong>Hijo menor con VIH -</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Hijo mayor con VIH +</strong></td>
+<td>2</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td><strong>Hijo mayor con VIH -</strong></td>
+<td>18</td>
+<td>77</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>114</td>
+<td>114</td>
+</tr>
+</tbody>
+</table>
+<p>Como podemos ver, hay dos casos que corresponden a una respuesta <em>sí/sí</em> y 77 casos que corresponden a una respuesta <em>no/no.</em> Estos no nos ayudan a determinar si el VIH ocurre con mayor frecuencia en hijos menores que en mayores, y se les conoce como <strong>pares concordantes.</strong> Tenemos a su vez 17 casos <em>sí/no</em> y 18 <em>no/sí.</em> Estos se conocen como <strong>pares discordantes</strong> y nos ayudana determinar si la infección por VIH ocurre con mayor frecuencia en uno de los dos casos (hijos mayores vs menores).</p>
+<p>Por lo tanto, nuestra <em><span class="math inline">\(H_0:\)</span> la probabilidad de infección por VIH es la misma para hijos mayores y menores.</em></p>
+<p><span class="math display">\[\begin{equation}
+H_0: entre \space pares \space discordantes, \space P(sí/no) = P(no/sí) = \frac{1}{2}
+\end{equation}\]</span></p>
+<p>Para este tipo de pruebas se utiliza la <strong>prueba de Chi-cuadrada de McNemar.</strong> Tiene una forma sumamente sencilla de aplicarse. Imaginemos que <span class="math inline">\(n_{11}\)</span> corresponde al número de pares <em>sí/sí</em>, <span class="math inline">\(n_{12}\)</span> corresponde al número de pares <em>sí/no</em>, <span class="math inline">\(n_{21}\)</span> al número de pares <em>no/sí</em> y <span class="math inline">\(n_{22}\)</span> al número de pares <em>no/no.</em></p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>+</strong></td>
+<td><strong>-</strong></td>
+</tr>
+<tr class="even">
+<td><strong>+</strong></td>
+<td><em>n<sub>11</sub></em></td>
+<td><em>n<sub>12</sub></em></td>
+</tr>
+<tr class="odd">
+<td><strong>-</strong></td>
+<td><em>n<sub>21</sub></em></td>
+<td><em>n<sub>22</sub></em></td>
+</tr>
+</tbody>
+</table>
+<p>La fórmula para encontrar nuestro estadístico <span class="math inline">\(X_{s}^2\)</span> sería:</p>
+<p><span class="math display" id="eq:mcnemar">\[\begin{equation}
+X_{s}^2 = \frac{(n_{12} - \frac{(n_{12} + n_{21})}{2})^2}{\frac{(n_{12} - n_{21})}{2}} + \frac{(n_{21} - \frac{(n_{12} + n_{21})^2}{2})^2}{\frac{(n_{12} - n_{21})^2}{2}} \\
+\tag{6.15}
+\end{equation}\]</span></p>
+<p>Esto se simplifica de la siguiente manera:</p>
+<p><span class="math display" id="eq:mcnemar2">\[\begin{equation}
+X_{s}^2 = \frac{(n_{12} - n_{21})^2}{n_{12} + n_{21}}
+\tag{6.16}
+\end{equation}\]</span></p>
+<p>Para realizar esta prueba en <code>R</code>, simplemente utilizamos el comando <code>mcnemar.test()</code> con el argumento con nuestra matriz de datos y el argumento <code>correct = F</code>, para evitar que<code>R</code> realice correcciones.</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="inferencia-de-datos-categóricos.html#cb241-1" aria-hidden="true" tabindex="-1"></a>VIH <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">77</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb241-2"><a href="inferencia-de-datos-categóricos.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(VIH) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Hijo mayor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>), <span class="st">&quot;Hijo menor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>))</span>
+<span id="cb241-3"><a href="inferencia-de-datos-categóricos.html#cb241-3" aria-hidden="true" tabindex="-1"></a>VIH</span></code></pre></div>
+<pre><code>##           Hijo menor
+## Hijo mayor VIH + VIH -
+##      VIH +     2    17
+##      VIH -    18    77</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="inferencia-de-datos-categóricos.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(VIH, <span class="at">correct =</span> F)</span></code></pre></div>
+<pre><code>## 
+##  McNemar&#39;s Chi-squared test
+## 
+## data:  VIH
+## McNemar&#39;s chi-squared = 0.028571, df = 1, p-value = 0.8658</code></pre>
 
 </div>
 </div>
@@ -1500,7 +1625,7 @@ SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2
         </div>
       </div>
 <a href="estadística-inferencial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelado-de-relaciones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

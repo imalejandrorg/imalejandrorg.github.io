@@ -16,14 +16,14 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::include_graphics("profile.png", dpi = 20)
 ```
 
-Mi nombre es **Alejandro Ruiz,** biólogo por parte de la Universidad de Guadalajara, en Jalisco, México. He tomado algunos cursos y guías de R para el análisis de datos biológicos y a partir de ahí comencé a interesarme muchísimo y comencé a estudiar más por mi cuenta. Actualmente me encuentro realizando mi tesis de licenciatura, trabajando con aves en el Nevado de Colima, Jalisco, México.
+Mi nombre es **Alejandro Ruiz,** biólogo por parte de la Universidad de Guadalajara, en Jalisco, México. He tomado algunos cursos y guías de R para el análisis de datos biológicos y a partir de ahí comencé a interesarme muchísimo y comencé a estudiar más por mi cuenta. Actualmente me encuentro realizando mi tesis de licenciatura, trabajando con aves en el Nevado de Colima, Jalisco, México y debido a ello he tenido que aprender a usar R.
 
-He participado como voluntario en distintos laboratorios que van desde temas de neurociencias, donde incluso asistí al congreso *Neuroscience 2018*, para presentar un póster sobre una técnica que desarrollamos para detectar un neurotransmisor.
+He participado como voluntario en distintos laboratorios uno de ellos de neurociencias, donde asistí al congreso *Neuroscience 2018*, para presentar un póster sobre una técnica que desarrollamos para detectar un neurotransmisor.
 
 A finales de 2018 transicioné a la ecología y la conservación biológica, trabajando principalmente en el Complejo Volcánico de Colima (CVC) que incluye al Nevado de Colima y Volcán de Colima así como su zona de influencia.
 
 Como dije en un principio, no soy experto y seguro hay formas muchísimo más sencillas de obtener los resultados que yo obtengo, sin embargo, el lenguaje de programación, como su nombre indica, es un lenguaje y podemos expresar lo mismo de muchísimas maneras. Esta es la mía.
 
-Actualmente me encuentro desarrollando un curso de R para mis colegas de la universidad. Espero y tú que estás viendo esto también te sirva un poco.
+Actualmente me encuentro desarrollando un curso de R para mis colegas de la universidad. Espero que a ti que estás viendo esto también te sirva un poco.
 
 ¡Saludos!

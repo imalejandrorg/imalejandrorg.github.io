@@ -1,0 +1,27 @@
+---
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Modelado de relaciones
+
+En esta lección vamos a considerar la comparación de más de dos muestras y los diversos métodos que podemos emplear para esto.
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+library(cowplot)
+library(ggpubr)
+library(latex2exp)
+library(kableExtra)
+library(broom)
+```
+
+## Comparando la media de diversas muestras
