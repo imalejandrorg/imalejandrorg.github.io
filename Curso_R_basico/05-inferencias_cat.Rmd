@@ -367,7 +367,7 @@ Una **tabla de contingencia** muestra los datos de tal manera que existe una aso
 > **Ejemplo:** Un grupo de 75 pacientes fueron asignados de manera aleatoria para recibir una cirugía para tratar dolores de migraña.
 > La cirugía podía ser real ($n = 49$) o no ($n = 26$).
 > Los cirujanos esperan una reducción en los dolores de migraña (éxito).
-> En la tabla \@ref(tab:Ejercicio2a) se pueden observar los datos.
+> En la tabla \@ref(tab:Ej2a) se pueden observar los datos.
 
 ```{r}
 #Creamos nuestra matriz de datos.
@@ -807,3 +807,47 @@ Al igual que con las tablas de contingencia 2x2, las tabla $r \times k$ pueden s
 Y al igual que las tablas 2x2, el cálculo del valor $\chi^2$ es el mismo para ambos contexto pero la interpretación de las hipótesis cambia.
 
 ## Intervalos de confianza para la diferencia entre probabilidades
+
+Un modo de análisis complementario para la prueba de Chi-cuadrada es la construcción de intervalos de confianza para la magnitud de diferencia ($p_1 - p_2$). Para esto vamos a definir nuevas estimaciones que están basadas en la idea de añadir 1 observación a cada celda de nuestra tabla. 
+
+Consideremos una tabla de contingencia 2x2.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Muestra1 <- c("$x_1$", "$n_1 - x_1$", "$n_1$")
+Muestra2 <- c("$x_2$", "$n_2 - x_2$", "$n_2$")
+Table <- data.frame(Muestra1, Muestra2)
+
+Table %>% 
+  knitr::kable("html", align = c("c", "c"), caption = "Dos muestra hipotéticas", col.names = c("Muestra 1", "Muestra 2")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:2, width_min = "4cm")
+```
+
+Definimos entonces
+
+\begin{equation}
+\tilde{p_1} = \frac{x_1 + 1}{n_1 + 2} \\
+\tilde{p_2} = \frac{x_2 + 1}{n_2 + 2}
+\end{equation}
+
+Y usaremos la diferencia entre $\tilde{p_1} - \tilde{p_2}$ para construir el intervalo de confianza para ($p_1 - p_2$). De igual manera, $\tilde{P_1} - \tilde{P_2}$ esta sujeta a error de muestreo. Para calcular este error usamos la fórmula de error estándar para $\tilde{P_1} - \tilde{P_2}$. 
+
+\begin{equation}
+SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2} + \frac{\tilde{p_2}(1-\tilde{p_2})}{n_2 + 2}}
+(\#eq:stderrorp)
+\end{equation}
+
+Un intervalo de confianza al 95% sería de la siguiente manera.
+
+\begin{equation}
+(\tilde{p_1} - \tilde{p_2}) \pm (1.96)SE_{\tilde{P_1} - \tilde{P_2}}
+\end{equation}
+
+Para calcular un intervalo de confianza de las proporciones o probabilidades en `R` utilizamos la función `prop.test()`. Para este comando es necesario que la matriz de datos sea 2x2. Por ejemplo.
+
+```{r}
+prop.datos <- matrix(c(18, 23, 6, 16), nrow = 2, ncol = 2, byrow = T)
+prop.datos
+prop.test(prop.datos, correct = F)
+```
+
