@@ -577,7 +577,7 @@ library(broom)
 ANOVA.tabla.bloque <- tidy(anova.bloque)
 ```
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 options(knitr.kable.NA = '')
 knitr::kable(ANOVA.tabla.bloque, "html", align = c("c", "c"), caption = "Tabla de ANOVA por bloques para el rendimiento de cebada", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
   column_spec(1:6, width_min = "2cm")
