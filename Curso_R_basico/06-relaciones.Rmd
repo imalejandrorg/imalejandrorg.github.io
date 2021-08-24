@@ -35,7 +35,7 @@ El análisis clásico para realizar observaciones de múltiples muestras es el *
 
 La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias** ($\mu$) de las muestras.
 
-Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de $I$ muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos *entre* los grupos y *dentro* de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.
+Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de $k$ muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos *entre* los grupos y *dentro* de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.
 
 - $x_{ij}$: observación $j$ en el $i$-ésimo grupo. Por ejemplo la primer observación del primer grupo o muestra sería $x_{11}$, la segunda $x_{12}$ y así sucesivamente. 
 
@@ -315,7 +315,7 @@ Veamos todo lo que hemos visto con un ejemplo.
 
 >**Ejemplo:** Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla \@tab:ex1. 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 Dieta1 <- c(8, 16, 9, NA, NA)
 Dieta2 <- c(9, 16, 21, 11, 18)
 Dieta3 <- c(15, 10, 17, 6, NA)
@@ -359,10 +359,231 @@ library(broom)
 ANOVA.tabla <- tidy(ANOVA)
 ```
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 options(knitr.kable.NA = '')
 knitr::kable(ANOVA.tabla, "html", align = c("c", "c"), caption = "Ganancia de peso (lb) de los corderos", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
   column_spec(1:6, width_min = "2cm")
 ```
 
 Por lo tanto nuestro estadístico $F$ calculado nos da un valor de 0.77, el área correspondiente a esta densidad valor $F$ es 0.4907, por lo que nuestro valor-*p* > 0.05 y aceptamos la $H_0$.
+
+## Diseño por bloques aleatorizados
+
+En un **diseño por bloques aleatorizados,** primero agrupamos las unidades experimentales en bloques de unidades relativamente similares y después alocamos tratamientos de manera aleatoria dentro de cada bloque. Para llevar a cabo este tipo de diseños, el investigador debe de crear o identificar bloques adecuados de unidades experimentales y posteriormente asignar tratamientos de manera aleatoria dentro de cada bloque de tal manera que cada tratamiento aparece en el bloque (al menos para un diseño de bloques completo).
+
+*¿Por qué crear bloques?* Bueno este procedimiento ayuda a reducir o eliminar variabilidad causada por variables extrañas, por lo tanto, aumenta la precisión de los experimentos. Podemos observar el diseño experimental de manera tabular, de la siguiente manera.
+
++---------------+-------------------+-------------------+-------------------+
+|               | T~1~              | T~2~              | T~3~              |
++:=============:+:=================:+:=================:+:=================:+
+| **Bloque 1**  | X~1,1~            | X~1,2~            | X~1,3~            |
++---------------+-------------------+-------------------+-------------------+
+| **Bloque 2**  | X~2,1~            | X~2,2~            | X~2,3~            |
++---------------+-------------------+-------------------+-------------------+
+| **Bloque 3**  | X~3,1~            | X~3,2~            | X~3,3~            |
++---------------+-------------------+-------------------+-------------------+
+| .             | .                 | .                 | .                 |
++---------------+-------------------+-------------------+-------------------+
+| .             | .                 | .                 | .                 |
++---------------+-------------------+-------------------+-------------------+
+| .             | .                 | .                 | .                 |
++---------------+-------------------+-------------------+-------------------+
+| **Bloque 10** | X~10,1~           | X~10,2~           | X~10,3~           |
++---------------+-------------------+-------------------+-------------------+
+
+Donde $X_{i,j}$ representa la observación $i$ que recibió el tratamiento $j$.
+
+### Creando los bloques
+
+La creación de los bloques es una forma de organizar la variación inherente que existe entre las unidades experimentales. De manera ideal, los bloques incrementan la información disponible del experimento. Para esto se deben crear bloques lo más homogéneos posibles entre sí para que la variación inherente entre las unidades experimentales sea, dentro de lo posible, variación entre bloques más que dentro de los bloques.
+
+Una vez que los bloques se han generado, lo que ocurre dentro de cada bloque es como un "mini-experimento". La aleatorización se hace para cada bloque de manera separada. Para el análisis de los bloques utilizamos un **ANOVA por bloques aleatorizados.** Consideremos el siguiente ejemplo:
+
+>**Ejemplo:** Un agrónomo se encuentra comparando variedades de cebada, por lo que genera distintas parcelas de cada variedad para así medir su eficiencia. Sin embargo, el arreglo espacial de las parcelas es muy importante, ya que pueden surgir diferencias por el tipo de suelo, pH, etc., por lo que el área de cultivo fue dividida en varias regiones (los bloques) y después, cada bloque fue subdividido en distintas parcelas. Dentro de cada bloque las variades de granos son sembradas de manera aleatoria, con una aleatorización echa para cada bloque. Se obtienen los siguientes resultados.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Bloque1 <- c(93.5, 102.9, 67.0, 86.3, 87.4)
+Bloque2 <- c(66.6, 53.2, 54.7, 61.3, 59.0)
+Bloque3 <- c(50.5, 47.4, 50, 50.7, 49.7)
+Bloque4 <- c(42.4, 43.8, 40.1, 46.4, 43.2)
+Media <- c(63.3, 61.8, 53.0, 61.2, NA)
+Variedad <- c("Variedad 1", "Variedad 2", "Variedad 3", "Variedad 4", "Media del bloque")
+
+Cebada <- data.frame(Variedad, Bloque1, Bloque2, Bloque3, Bloque4, Media)
+
+options(knitr.kable.NA = "")
+knitr::kable(Cebada, "html", align = c("c", "c"), caption = "Rendimiento (lb) de las variedades de cebada", col.names = c("", "Bloque 1", "Bloque 2", "Bloque 3", "Bloque 4", "Media de la variedad")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:6, width_min = "2cm")
+```
+Como podemos ver en los datos, existe claramente un gradiente de mayor fertilidad, partiendo del bloque 1 al bloque 4. Gracias al diseño por bloques aún podemos realizar la comparación entre las variedades.
+
+La hipótesis nula de nuestro ANOVA es que las medias de nuestras poblaciones son iguales, $H_0: \mu_1 = \mu_2 = \cdots = \mu_k$. Por lo que nuestra hipótesis nula sería que todas las variedades son iguales.
+
+El modelo de ANOVA por bloques aleatorizados sufre ciertas alteraciones al modelo de una vía.
+
+\begin{equation}
+x_{ijk} = \mu + \tau_i + \beta_{j} + \epsilon_{ijk}
+(\#eq:anovablock)
+\end{equation}
+
+Donde $x_{ijk}$ representa la $k$-ésima observación, cuando el tratamiento $i$ es aplicado al bloque $j$. $\mu$ representa la gran media poblacional, y $\tau_i$ el efecto del grupo $i$. El nuevo término, $\beta_{j}$ representa el efecto de $j$-ésimo bloque. Podemos repensar este modelo de la siguiente manera:
+
+\begin{equation}
+(x_{ijk} - \tau_i) = \mu + \beta_{j} + \epsilon_{ijk}
+\end{equation}
+
+Bueno, ahora la parte izquierda de esta ecuación toma describe los datos una vez que los efectos del tratamiento, $\tau_i$ son removidos, ¿cómo estimamos este lado izquierdo con nuestros datos? Bastante sencillo.
+
+\begin{equation}
+x_{ijk} - \hat{\tau_i} = x_{ijk} - (\overline{x}_i - \overline{x})
+\end{equation}
+
+Dentro de cada tratamiento, la media del tratamiento es extraída de cada valor. Si viésemos las desviaciones de la media de los tratamientos de nuestros datos, veríamos que existe todavía bastante variabilidad atribuible a los bloques.
+
+Para este caso, escribiremos la $SS(entre)$ como $SS(tratmientos)$ para distinguir nuestra suma de cuadrados de los tratamientos de la de los bloques. Para este caso vamos a partir nuestra $SS(dentro)$ en dos partes: $SS(bloques)$, que mide la variabilidad entre la media de los bloques y $SS(dentro)$, que mide el resto de variabilidad no explicada de los datos.
+
+Así, tenemos la siguiente fórmula:
+
+\begin{equation}
+SS(total) = SS(tratamientos) + SS(bloques) + SS(dentro)
+\end{equation}
+
+¿Cómo calculamos $SS(bloques)$? Con la siguiente fórmula:
+
+\begin{equation}
+SS(bloques) = {\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}
+(\#eq:ssblock)
+\end{equation}
+
+Donde $\overline{x}_{bloque}$ es la media de las observaciones del bloque $j$, $J$ es el número total de bloques y $m_j$ es el número de observaciones en el bloque $j$. Los grados de libertad serían:
+
+\begin{equation}
+df(bloques) = J - 1
+(\#eq:dfblock)
+\end{equation}
+
+Y de manera análoga al ANOVA de una vía, $SS(bloques)$ es el numerador y $df(bloques)$ es el denominador para el calculo de los cuadrados medios de los bloques, $MS(bloques)$. 
+
+\begin{equation}
+MS(bloques) = \frac{\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}{J - 1}
+(\#eq:msblock)
+\end{equation}
+
+Para el calculo de $SS(dentro)$ realizamos la siguiente operación, ya que el calculo de $SS(bloques)$ reduce la variabilidad no expliacada, $SS(dentro)$. 
+
+\begin{equation}
+SS(dentro) = SS(total) - SS(tratamientos) - SS(bloques)
+(\#eq:ssdentrob)
+\end{equation}
+
+De igual manera, para calcular los grados de libertad utilizamos:
+
+\begin{equation}
+df(dentro) = df(total) - df(tratamiento) - df(bloques)
+(\#eq:dfdentrob)
+\end{equation}
+
+Para el caso de nuestros datos, el valor de nuestra gran media poblacional, $\overline{x}$ es:
+
+\begin{equation}
+\overline{x} = \frac {93.5 + 102.9 + 67.0 + 86.3 + \cdots + 40.1 + 46.4}{16} = \frac{956.8}{16} = 59.8
+\end{equation}
+
+Ahora calculamos la suma de cuadrados de los tratamientos $SS(tratamientos)$ como en el ANOVA de una sola vía.
+
+\begin{equation}
+SS(tratamientos) = 4(63.3 - 59.8)^2 + 4(61.8 - 59.8)^2 + 4(53.0 - 59.8)^2 + 4(61.2 - 59.8)^2 = 259
+\end{equation}
+
+Ya que el número de tratamientos es 4, $df(tratamientos)$:
+
+\begin{equation}
+df(tratamientos) = 4-1 = 3
+\end{equation}
+
+Entonces:
+
+\begin{equation}
+Ms(tratamientos) = \frac{259}{3} = 86.333
+\end{equation}
+
+Ahora calculamos $SS(bloques)$:
+
+\begin{equation}
+SS(bloques) = 4(87.4 - 59.8)^2 + 4(59.0 - 59.8)^2 + 4(49.7 - 59.8)^2 + 4(43.2-59.8)^2 = 4573
+\end{equation}
+
+Ya que tenemos cuatro bloques, $J = 4$ y los $df(bloques)$ son:
+
+\begin{equation}
+df(bloques) = 4-1 = 3
+\end{equation}
+
+Ahora calculamos $MS(bloques)$:
+
+\begin{equation}
+MS(bloques) = \frac{4573}{3} = 1524.333
+\end{equation}
+
+Para el calculo de la $SS(total)$ realizamos la extración de la gran media poblacional a cada valor:
+
+\begin{equation}
+SS(total) = (93.5-59.8)^2 + (102.9-59.8)^2 + (67.0-59.8)^2 + \cdots + (46.4-59.8)^2 = 5411
+\end{equation}
+
+Por lo tanto, $SS(dentro)$ se obtiene restando las demás $SS$ a $SS(total)$.
+
+\begin{equation}
+SS(dentro) = 5411 - 259 - 4573 = 579
+\end{equation}
+
+Y nuestros $df(dentro)$ se calculan restando el resto de $df$.
+
+\begin{equation}
+df(dentro) = 15 - 3 - 3 = 9
+\end{equation}
+
+Por lo tanto, $MS(dentro)$  se obtiene así:
+
+\begin{equation}
+MS(dentro) = \frac{579}{9} = 64.333
+\end{equation}
+
+Ahora sí, podemos calcular nuestro estadístico de $F$ con la fórmula \@ref(eq:fratio).
+
+\begin{equation}
+F_s = \frac{86.333}{64.333} = 1.342
+\end{equation}
+
+Vamos a ver qué resultado obtenemos con `R`, para realizar un ANOVA por bloques simplemente añadimos `+ Bloque` después del tratamiento en el argumento de la función `aov()`. ¡Recuerden guardar el ANOVA en una variable!
+
+```{r}
+Bloque <- factor(rep(1:4, each = 4))
+Variedad <- factor(rep(c("Variedad 1", "Variedad 2", "Variedad 3", "Variedad 4"), 4))
+Peso <- c(93.5, 102.9, 67.0, 86.3,
+       66.6, 53.2, 54.7, 61.3,
+       50.5, 47.4, 50, 50.7,
+       42.4, 43.8, 40.1, 46.4)
+Cebada <- data.frame(Peso, Bloque, Variedad)
+
+anova.bloque <- aov(Peso ~ Variedad + Bloque, Cebada)
+summary(anova.bloque)
+```
+
+Como podemos ver, el valor-*p* obtenido es de 0.320294, por lo que aceptamos la $H_0$ y decimos que las cuatro variedades tienen el mismo rendimiento. ¡Observemos la cantidad de variabilidad explicada por $SS(bloques)$!
+
+```{r}
+library(broom)
+ANOVA.tabla.bloque <- tidy(anova.bloque)
+```
+
+```{r}
+options(knitr.kable.NA = '')
+knitr::kable(ANOVA.tabla.bloque, "html", align = c("c", "c"), caption = "Tabla de ANOVA por bloques para el rendimiento de cebada", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:6, width_min = "2cm")
+```
+
+
+## ANOVA de dos vías
+
+Algunos análisis de varianza requieren más de un factor o variable.
