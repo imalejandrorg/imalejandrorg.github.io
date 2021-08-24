@@ -33,7 +33,7 @@ El análisis clásico para realizar observaciones de múltiples muestras es el *
 -   Homocedasticidad (varianzas iguales).
 -   Datos independientes.
 
-La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias** ($\mu$) de las muestras.
+La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sensitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias** ($\mu$) de las muestras.
 
 Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de $k$ muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos *entre* los grupos y *dentro* de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.
 
@@ -77,9 +77,9 @@ s_{p} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)}} = \sqrt
 
 El valor de la desviación estándar agrupada solamente depende de la variabilidad dentro de los datos y no de sus medias. Por ahora, vamos a asignar términos correspondientes al ANOVA a nuestra fórmula.
 
-El númerador de la varianza agrupada se conoce como **suma de cuadrados dentro de los grupos,** $SS(dentro)$ mientras que el denominador son los **grados de libertad dentro de los grupos,** $df(dentro)$.
+El numerador de la varianza agrupada se conoce como **suma de cuadrados dentro de los grupos,** $SS(dentro)$ mientras que el denominador son los **grados de libertad dentro de los grupos,** $df(dentro)$.
 
-Así, entoces:
+Así, entonces:
 
 \begin{equation}
 SS(dentro) = \sum_{i = 1}^k (n_i - 1)^2
@@ -178,7 +178,7 @@ df(total) = (n - k) + (k - 1)
 
 ### Tabla de ANOVA
 
-Cuando se realzia un ANOVA, es una práctica muy común realizar una **tabla de ANOVA**. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.
+Cuando se realiza un ANOVA, es una práctica muy común realizar una **tabla de ANOVA**. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.
 
 ```{r anovatab, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 anova.tabla <- data.frame(Valores = c("Entre los grupos (Tratamientos)", "Dentro de los grupos (Residuales)", "Total"))
@@ -206,7 +206,7 @@ x_{ij} = \mu + \tau_i + \epsilon_{ij}
 (\#eq:anovamodel)
 \end{equation}
 
-En este modelo, $\mu$ representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la $H_0$ entonces $\mu$ es la media en común para todos los grupos. Si es falsa, entonces al menos una de las $\mu_i$ difiere de la gran media pbolacional $\mu$. El término $\tau_i$ (tau) representa el efecto que tiene el grupo $i$, es decir, la diferencia entre la media poblacional para el grupo $i$, $\mu_i$ y la gran media poblacional, $\mu$. Por ende:
+En este modelo, $\mu$ representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la $H_0$ entonces $\mu$ es la media en común para todos los grupos. Si es falsa, entonces al menos una de las $\mu_i$ difiere de la gran media poblacional $\mu$. El término $\tau_i$ (tau) representa el efecto que tiene el grupo $i$, es decir, la diferencia entre la media poblacional para el grupo $i$, $\mu_i$ y la gran media poblacional, $\mu$. Por ende:
 
 
 \begin{equation}
@@ -216,10 +216,10 @@ En este modelo, $\mu$ representa la gran media poblacional, es decir la media de
 
 Esto es equivalente a decir que $H_0: \tau_1 = \tau_2 = \cdots = \tau_n = 0$. Si la $H_0$ es falsa, entonces al menos alguno de los grupos o tratamientos difiere de los demás. Si $\tau_i$ es positivo, entonces, las observaciones del grupo $i$ tienden a ser mayores que el promedio, en cambio, si es negativo, las observaciones tienden a ser menores que el promedio.
 
-El término $\epsilon_{ij}$ (epsilon) representa el error aleatorio asociado con la observación $j$ en el grupo $i$. Por lo que nuestro modelo puede ser intepretado como:
+El término $\epsilon_{ij}$ (epsilon) representa el error aleatorio asociado con la observación $j$ en el grupo $i$. Por lo que nuestro modelo puede ser interpretado como:
 
 \begin{equation}
-observación = gran \space media + effecto \space de \space grupo + error \space aleatorio
+observación = gran \space media + efecto \space de \space grupo + error \space aleatorio
 (\#eq:anovamodel2)
 \end{equation}
 
@@ -302,14 +302,14 @@ Y listo, nuestro valor crítico de $F$ para un $F(4, 20)_{0.05}$ es 2.87. Estos 
 
 ### Prueba de $F$
 
-Para obtener nuestro **estadístico de $F$** utilizamos la siguiente fómrula:
+Para obtener nuestro **estadístico de $F$** utilizamos la siguiente fórmula:
 
 \begin{equation}
 F_s = \frac{MS(entre)}{MS(dentro)}
 (\#eq:fratio)
 \end{equation}
 
-Esta claro que el valor de nuestra $F_s$ será mayor si las discrepancias entre las medias de los grupos ($\overline{X}_i$) son grandes en relación a variabiliadad dentro de los grupos. Valores grandes de $F_s$ tienden a proveer evidencia en contra de la $H_0$.
+Esta claro que el valor de nuestra $F_s$ será mayor si las discrepancias entre las medias de los grupos ($\overline{X}_i$) son grandes en relación a variabilidad dentro de los grupos. Valores grandes de $F_s$ tienden a proveer evidencia en contra de la $H_0$.
 
 Veamos todo lo que hemos visto con un ejemplo.
 
@@ -340,7 +340,7 @@ Corderos <- data.frame(Tratamiento, Peso)
 Corderos
 ```
 
-Ahora que tenemos nuestra variable simplente ingresamos el siguiente comando.
+Ahora que tenemos nuestra variable simplemente ingresamos el siguiente comando.
 
 ```{r}
 ANOVA <- aov(Peso ~ Tratamiento, Corderos)
@@ -469,7 +469,7 @@ MS(bloques) = \frac{\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}{J
 (\#eq:msblock)
 \end{equation}
 
-Para el calculo de $SS(dentro)$ realizamos la siguiente operación, ya que el calculo de $SS(bloques)$ reduce la variabilidad no expliacada, $SS(dentro)$. 
+Para el calculo de $SS(dentro)$ realizamos la siguiente operación, ya que el calculo de $SS(bloques)$ reduce la variabilidad no explicada, $SS(dentro)$. 
 
 \begin{equation}
 SS(dentro) = SS(total) - SS(tratamientos) - SS(bloques)
@@ -525,7 +525,7 @@ Ahora calculamos $MS(bloques)$:
 MS(bloques) = \frac{4573}{3} = 1524.333
 \end{equation}
 
-Para el calculo de la $SS(total)$ realizamos la extración de la gran media poblacional a cada valor:
+Para el calculo de la $SS(total)$ realizamos la extracción de la gran media poblacional a cada valor:
 
 \begin{equation}
 SS(total) = (93.5-59.8)^2 + (102.9-59.8)^2 + (67.0-59.8)^2 + \cdots + (46.4-59.8)^2 = 5411
@@ -579,11 +579,160 @@ ANOVA.tabla.bloque <- tidy(anova.bloque)
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 options(knitr.kable.NA = '')
-knitr::kable(ANOVA.tabla.bloque, "html", align = c("c", "c"), caption = "Tabla de ANOVA por bloques para el rendimiento de cebada", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+knitr::kable(ANOVA.tabla.bloque, "html", align = c("c", "c"), caption = "Tabla de ANOVA por bloques para el rendimiento de cebada", col.names = c("Término", "df", "SS", "MS", "Estadístico de F", "Valor p")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>%
   column_spec(1:6, width_min = "2cm")
 ```
 
 
 ## ANOVA de dos vías
 
-Algunos análisis de varianza requieren más de un factor o variable.
+Algunos análisis de varianza requieren más de un factor o variable. En el ejemplo anterior, nuestro **factor** era el tipo de variedad de cebada y los **niveles** eran 4: variedad 1, 2, 3 y 4.
+
+>**Ejemplo:** Un fisiologo vegetal investiga al efecto del estrés mecánico en el crecimiento de plantas de soya. Las plantas fueron asignadas a uno de los cuatro tratamientos, con 13 plantulas por tratamiento. Las plantas de dos de los tratamientos fueron estresadas al agitarlas durante 20 minutos, dos veces al día, mientras que el grupo control no fue estresado. Aquí tenemos nuestro primer **factor,** con dos niveles: agitamiento y control. Además, las plantas crecieron en dos condiciones de luz: baja y moderada. Así que en este caso, nuestro segundo factor es la cantidad de luz, con dos niveles: baja y moderada. Nuestros tratamientos quedan de la siguiente manera:
+
+- Tratamiento 1: Control, luz baja
+
+- Tratamiento 2: Estrés, luz baja
+
+- Tratamiento 3: Control, luz moderada
+
+- Tratamiento 4: Estrés, luz moderada
+
+>Después de 16 días las plantas fueron colectadas y se midió el área total de la hoja (cm^2^) de cada planta. Los resultados fueron los siguientes:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+T1 <- c(264, 200, 225, 268, 215, 241, 232, 256, 229, 288, 253, 288, 230)
+T2 <- c(235, 188, 195, 205, 212, 214, 182, 215, 272, 163, 230, 255, 202)
+T3 <- c(314, 320, 310, 340, 299, 268, 345, 271, 285, 309, 337, 282, 273)
+T4 <- c(283, 312, 291, 259, 216, 201, 267, 326, 241, 291, 269, 282, 257)
+plantas <- data.frame(T1, T2, T3, T4)
+
+options(knitr.kable.NA = '')
+knitr::kable(plantas, "html", align = c("c", "c"), caption = "Área total de la hoja (cm^2^)", col.names = c("Control, luz baja", "Estrés, luz baja", "Control, luz moderada", "Estrés, luz moderada")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>%
+  column_spec(1:4, width_min = "2cm")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfica de puntos de los datos de crecimiento de plantas, la barra horizontal indica la media del tratamiento."}
+plantas.graph <- gather(plantas, Tratamiento, Area)
+
+ggplot(plantas.graph, aes(x = Tratamiento, y = Area, fill = Tratamiento)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 3, show.legend = F) +
+  stat_summary(fun = mean, geom = "crossbar", size = 0.15, width =0.35, show.legend = F) +
+  labs(x = "", y = bquote("Área"~(cm^2))) +
+  scale_x_discrete(labels = c("Tratamiento 1", "Tratamiento 2", "Tratamiento 3", "Tratamiento 4")) +
+  theme_classic()
+```
+
+El modelo del ANOVA para este caso sería:
+
+\begin{equation}
+x_{ijk} = \mu + \tau_i + \beta_j + \epsilon_{ijk}
+(\#eq:anovatwoway)
+\end{equation}
+
+Donde $x_{ijk}$ es la $k$-ésima observación en el nivel $i$ del primer factor y el nivel $j$ del segundo factor. El término $\tau_i$ representa el efecto del nivel $i$ del primer factor (en este caso, la condición de estrés), y el término $\beta_j$ representa el efecto del nivel $j$ del segundo factor (condición de luz).
+
+Si la influencia conjunta de dos factores es igual a la suma de sus influencias separadas, se dice que los dos factores son **aditivos** en cuanto a sus efectos. Visualizar esto es más sencillo con una tabla que incluya las medias de cada tratamiento.
+
+|                |              |                  |                |
+|----------------|--------------|------------------|----------------|
+|                | **Luz baja** | **Luz moderada** | **Diferencia** |
+| **Control**    | 245.3        | 304.1            | 58.8           |
+| **Estrés**     | 212.9        | 268.8            | 55.9           |
+| **Diferencia** | -32.4        | -35.3            |                |
+
+Por ejemplo, el efecto del estrés reduce el área de la hoja por casi la misma cantidad, por lo que podríamos decir que el estrés tiene un efecto aditivo negativo sobre el área. Véamos esto en una gráfica. 
+
+```{r eff, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Efecto del estrés sobre la media del área de las hojas."}
+plantas.graph2 <- plantas.graph[1:26, ]
+plantas.graph3 <- plantas.graph[27:52, ]
+
+ggplot(plantas.graph, aes(x = Tratamiento, y = Area, fill = Tratamiento)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 3, show.legend = F) +
+  stat_summary(fun = mean, geom = "crossbar", size = 0.15, width =0.35, show.legend = F) +
+  stat_summary(data = plantas.graph2, fun = mean, geom = "line", aes(group = 1), show.legend = F) +
+  stat_summary(data = plantas.graph3, fun = mean, geom = "line", aes(group = 1), show.legend = F) +
+  labs(x = "", y = bquote("Área"~(cm^2))) +
+  scale_x_discrete(labels = c("Tratamiento 1", "Tratamiento 2", "Tratamiento 3", "Tratamiento 4")) +
+  theme_classic()
+```
+
+Como podemos ver en la figura \@ref(fig:eff), el efecto de los tratamientos 2 y 4 (que corresponden a ambos tratamientos con estrés) parece reducir de manera casi idéntica el área de las hojas de nuesetras plantas. Cuando los efectos de los factores son aditivos, decimos que no hay **interacción** entre los factores. Algunas veces, el efecto que un factor tiene sobre una variable depende del nivel del segundo factor. Cuando esto ocurre, decimos que los dos factores interactúan para generar el efecto de la variable de respuesta.
+
+>**Ejemplo:** Investigadores condujeron un estudio sobre el enriquecimiento de bebidas frutales a base de leche con cantidades bajas y altas de hierro (Fe) y zinc (Zn). Las bebidas fueron digeridas en un tracto gastrointestintal simulado y la retención celular de hierro fue medida ($\mu$g Fe/mg de proteína celular). La figura \@ref(fig:znfe) muestra la interacción del promedio obtenido de los cuatro tratamientos. Cuando el nivel de Zn fue bajo, el efecto en la retención de Fe es mucho menor a cuando el nivel de Zn fue alto.
+
+|                |             |             |                |
+|----------------|-------------|-------------|----------------|
+|                | **Zn bajo** | **Zn alto** | **Diferencia** |
+| **Fe bajo**    | 0.707       | 0.215       | -0.492         |
+| **Fe alto**    | 0.994       | 1.412       | 0.418          |
+| **Diferencia** | 0.287       | 1.197       |                |
+
+En este ejemplo, las líneas de interacción **no son paralelas,** lo que quiere decir que existe una interacción entre el factor 1 (nivel de Fe) y el factor 2 (nivel de Zn). Quiere decir que el nivel de retención de Fe depende de la cantidad de Zn utilizada.
+
+```{r znfe, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Interacción entre el nivel de suplemento de Zn y Fe."}
+Fe <- c("Fe bajo", "Fe alto", "Fe bajo", "Fe alto")
+Zn <- c("Zn bajo", "Zn bajo", "Zn alto", "Zn alto")
+Value <- c(0.707, 0.994, 0.215, 1.412)
+Fe.uptake <- data.frame(Fe, Zn, Value)
+
+Fe.uptake$Fe <- factor(Fe.uptake$Fe, levels = c("Fe bajo", "Fe alto"))
+
+ggplot(Fe.uptake, aes(x = Fe, y = Value, fill = Zn)) +
+  geom_line(aes(group = Zn)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 0.03) +
+  labs(x = "", y = expression(atop("Retención de Fe", paste("("*mu*"g Fe/mg de proteína celular)")))) +
+  scale_y_continuous(limits = c(0, 1.6), breaks = seq(0, 1.6, by = 0.2)) + 
+  scale_fill_discrete(name = "Nivel de Zn") +
+  theme_classic()
+```
+
+Para estos casos podemos ajustar nuestro modelo del ANOVA para tomar en cuenta la interacción entre estos dos factores.
+
+\begin{equation}
+x_{ijk} = \mu + \tau_i + \beta_j + \gamma_{ij} + \epsilon_{ijk}
+(\#eq:anovatwoway2)
+\end{equation}
+
+Donde el nuevo término $\gamma_{ij}$ es el efecto de la interacción entre el nivel $i$ del primer factor y el nivel $j$ del segundo factor. De igual manera, si hay $n$ observaciones, entonces $df(total) = n - 1$. Si hay $I$ niveles para el primer factor, entonces $I - 1$ nos da los grados de libertad y si hay $J$ niveles para el segundo factor, de nuevo, $J - 1$ nos da sus grados de libertad. Existen entonces $(I - 1) \times (J-1)$ grados de libertad para la interacción. Con $I$ niveles en el primer factor y $J$ niveles en el segundo, hay $IJ$ combinaciones para los tratamientos, por lo tanto $df(dentro) = n - IJ$.
+
+Una hipótesis nula de interés podría ser que las interacciones suman 0:
+
+\begin{equation}
+H_0: \gamma_{11} = \gamma_{12} = \cdots = \gamma_{IJ} = 0
+\end{equation}
+
+Para probar esta hipótesis calculamos el estadístico $F_s$:
+
+\begin{equation}
+F_s = \frac{MS(interacción)}{MS(dentro)}
+\end{equation}
+
+Y rechazamos la $H_0$ si nuestro valor-*p* es pequeño. Por ejemplo, para los datos de nuestras plantas, vamos a crear una matriz con los datos y realizar el ANOVA de dos vías.
+
+```{r}
+Luz <- factor(c(rep("Luz baja", 26), rep("Luz alta", 26)))
+Condicion <- factor(c(rep("Control", 13), rep("Estrés", 13), rep("Control", 13), rep("Estrés", 13)))
+Area <- c(264, 200, 225, 268, 215, 241, 232, 256, 229, 288, 253, 288, 230,
+       235, 188, 195, 205, 212, 214, 182, 215, 272, 163, 230, 255, 202, 
+       314, 320, 310, 340, 299, 268, 345, 271, 285, 309, 337, 282, 273,
+       283, 312, 291, 259, 216, 201, 267, 326, 241, 291, 269, 282, 257)
+
+Soya <- data.frame(Luz, Condicion, Area)
+
+plantas.anova <- aov(Area ~ Condicion + Luz, Soya)
+summary(plantas.anova)
+```
+
+Este ANOVA que acabamos de realizar no toma en cuenta el efecto de la interacción, ¿cómo podemos incluirlo? Bueno para esto tenemos que agregar un argumento especial en nuestro anova, que sería `Condicion:Luz`, le cual toma en cuenta la interacción entre la condición de estrés y la cantidad de luz.
+
+```{r}
+plantas.anova.int <- aov(Area ~ Condicion + Luz + Condicion:Luz, Soya)
+summary(plantas.anova.int)
+```
+
+Como podemos ver (y como ya sabíamos por la gráfica que realizamos), parece ser que la interacción entre el estrés y la condición de luz no es significativa, ya que obtenemos un valor-*p* muchísimo mayor a 0.05 (0.8646). Al parecer encontramos también diferencias significativas en nuestros dos factores (condición de estrés y cantidad de luz), de nuevo, algo que también ya habíamos observado en la figura \@ref(fig:eff). 
+
+Algo importante a considerar es que cuando existen interacciones entre los factores, como en la figura \@ref(fig:znfe), la interpretación de los efectos de los factores no es la misma. Es difícil determinar el efecto independiente de un factor, por ejemplo, el efecto del Fe, ya que la naturaleza y la magntiud del efecto depende de un nivel particular de Zn. Debido a esto, primero buscamos la presencia de una interacción (a través de una gráfica o un ANOVA). Si encontramos una interacción entre los factores, usualmente detenemos el análisis en este punto. Si no hay una interacción (como en el caso de las plantas), procedemos a evaluar los efectos de los factores individuales.
+
+Ya que en el caso de las plantas era muy evidente que no existe una interacción entre ambos factores (corroborado por el estadístico $F$ para la interacción y la gráfica), pudimos concluir el ANOVA de dos vías y analizar el efecto de cada uno de los factores en donde, corroboramos que ambos parecen afectar el crecimiento de las plantas.

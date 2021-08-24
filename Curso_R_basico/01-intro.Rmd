@@ -20,7 +20,7 @@ library(ggpubr)
 library(latex2exp)
 ```
 
-En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas. Hola saludos a la Kmi.
+En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas.
 
 ## Interfaz
 R Studio cuenta con 4 ventanas esenciales: 

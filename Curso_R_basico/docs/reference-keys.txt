@@ -134,6 +134,12 @@ eq:msblock
 eq:ssdentrob
 eq:dfdentrob
 tab:unnamed-chunk-167
+tab:unnamed-chunk-168
+fig:unnamed-chunk-169
+eq:anovatwoway
+fig:eff
+fig:znfe
+eq:anovatwoway2
 requisitos
 descarga-de-r-y-rstudio
 introducción-a-r

@@ -309,7 +309,7 @@ div.csl-indent {
 <li>Homocedasticidad (varianzas iguales).</li>
 <li>Datos independientes.</li>
 </ul>
-<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias</strong> (<span class="math inline">\(\mu\)</span>) de las muestras.</p>
+<p>La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sensitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca <strong>diferencias en las medias</strong> (<span class="math inline">\(\mu\)</span>) de las muestras.</p>
 <p>Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos. El ANOVA de <span class="math inline">\(k\)</span> muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos <em>entre</em> los grupos y <em>dentro</em> de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.</p>
 <ul>
 <li><p><span class="math inline">\(x_{ij}\)</span>: observación <span class="math inline">\(j\)</span> en el <span class="math inline">\(i\)</span>-ésimo grupo. Por ejemplo la primer observación del primer grupo o muestra sería <span class="math inline">\(x_{11}\)</span>, la segunda <span class="math inline">\(x_{12}\)</span> y así sucesivamente.</p></li>
@@ -341,8 +341,8 @@ s_{p} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)}} = \sqrt
 \tag{7.2}
 \end{equation}\]</span></p>
 <p>El valor de la desviación estándar agrupada solamente depende de la variabilidad dentro de los datos y no de sus medias. Por ahora, vamos a asignar términos correspondientes al ANOVA a nuestra fórmula.</p>
-<p>El númerador de la varianza agrupada se conoce como <strong>suma de cuadrados dentro de los grupos,</strong> <span class="math inline">\(SS(dentro)\)</span> mientras que el denominador son los <strong>grados de libertad dentro de los grupos,</strong> <span class="math inline">\(df(dentro)\)</span>.</p>
-<p>Así, entoces:</p>
+<p>El numerador de la varianza agrupada se conoce como <strong>suma de cuadrados dentro de los grupos,</strong> <span class="math inline">\(SS(dentro)\)</span> mientras que el denominador son los <strong>grados de libertad dentro de los grupos,</strong> <span class="math inline">\(df(dentro)\)</span>.</p>
+<p>Así, entonces:</p>
 <p><span class="math display" id="eq:sswithin">\[\begin{equation}
 SS(dentro) = \sum_{i = 1}^k (n_i - 1)^2
 \tag{7.3}
@@ -417,7 +417,7 @@ df(total) = (n - k) + (k - 1)
 </div>
 <div id="tabla-de-anova" class="section level3" number="7.1.4">
 <h3><span class="header-section-number">7.1.4</span> Tabla de ANOVA</h3>
-<p>Cuando se realzia un ANOVA, es una práctica muy común realizar una <strong>tabla de ANOVA</strong>. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.</p>
+<p>Cuando se realiza un ANOVA, es una práctica muy común realizar una <strong>tabla de ANOVA</strong>. En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.</p>
 <table>
 <caption>
 <span id="tab:anovatab">Tabla 7.1: </span>Tabla de ANOVA
@@ -491,15 +491,15 @@ Total
 x_{ij} = \mu + \tau_i + \epsilon_{ij}
 \tag{7.15}
 \end{equation}\]</span></p>
-<p>En este modelo, <span class="math inline">\(\mu\)</span> representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la <span class="math inline">\(H_0\)</span> entonces <span class="math inline">\(\mu\)</span> es la media en común para todos los grupos. Si es falsa, entonces al menos una de las <span class="math inline">\(\mu_i\)</span> difiere de la gran media pbolacional <span class="math inline">\(\mu\)</span>. El término <span class="math inline">\(\tau_i\)</span> (tau) representa el efecto que tiene el grupo <span class="math inline">\(i\)</span>, es decir, la diferencia entre la media poblacional para el grupo <span class="math inline">\(i\)</span>, <span class="math inline">\(\mu_i\)</span> y la gran media poblacional, <span class="math inline">\(\mu\)</span>. Por ende:</p>
+<p>En este modelo, <span class="math inline">\(\mu\)</span> representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la <span class="math inline">\(H_0\)</span> entonces <span class="math inline">\(\mu\)</span> es la media en común para todos los grupos. Si es falsa, entonces al menos una de las <span class="math inline">\(\mu_i\)</span> difiere de la gran media poblacional <span class="math inline">\(\mu\)</span>. El término <span class="math inline">\(\tau_i\)</span> (tau) representa el efecto que tiene el grupo <span class="math inline">\(i\)</span>, es decir, la diferencia entre la media poblacional para el grupo <span class="math inline">\(i\)</span>, <span class="math inline">\(\mu_i\)</span> y la gran media poblacional, <span class="math inline">\(\mu\)</span>. Por ende:</p>
 <p><span class="math display" id="eq:anovatau">\[\begin{equation}
 \tau_i = \mu_i - \mu
 \tag{7.16}
 \end{equation}\]</span></p>
 <p>Esto es equivalente a decir que <span class="math inline">\(H_0: \tau_1 = \tau_2 = \cdots = \tau_n = 0\)</span>. Si la <span class="math inline">\(H_0\)</span> es falsa, entonces al menos alguno de los grupos o tratamientos difiere de los demás. Si <span class="math inline">\(\tau_i\)</span> es positivo, entonces, las observaciones del grupo <span class="math inline">\(i\)</span> tienden a ser mayores que el promedio, en cambio, si es negativo, las observaciones tienden a ser menores que el promedio.</p>
-<p>El término <span class="math inline">\(\epsilon_{ij}\)</span> (epsilon) representa el error aleatorio asociado con la observación <span class="math inline">\(j\)</span> en el grupo <span class="math inline">\(i\)</span>. Por lo que nuestro modelo puede ser intepretado como:</p>
+<p>El término <span class="math inline">\(\epsilon_{ij}\)</span> (epsilon) representa el error aleatorio asociado con la observación <span class="math inline">\(j\)</span> en el grupo <span class="math inline">\(i\)</span>. Por lo que nuestro modelo puede ser interpretado como:</p>
 <p><span class="math display" id="eq:anovamodel2">\[\begin{equation}
-observación = gran \space media + effecto \space de \space grupo + error \space aleatorio
+observación = gran \space media + efecto \space de \space grupo + error \space aleatorio
 \tag{7.17}
 \end{equation}\]</span></p>
 <p>Estimamos la media general, <span class="math inline">\(\mu\)</span>, con la gran media de los datos <span class="math inline">\(\overline{x}\)</span>:</p>
@@ -554,12 +554,12 @@ Figura 7.1: Distribución de <span class="math inline">\(F\)</span> con <span cl
 </div>
 <div id="prueba-de-f" class="section level3" number="7.1.7">
 <h3><span class="header-section-number">7.1.7</span> Prueba de <span class="math inline">\(F\)</span></h3>
-<p>Para obtener nuestro <strong>estadístico de <span class="math inline">\(F\)</span></strong> utilizamos la siguiente fómrula:</p>
+<p>Para obtener nuestro <strong>estadístico de <span class="math inline">\(F\)</span></strong> utilizamos la siguiente fórmula:</p>
 <p><span class="math display" id="eq:fratio">\[\begin{equation}
 F_s = \frac{MS(entre)}{MS(dentro)}
 \tag{7.18}
 \end{equation}\]</span></p>
-<p>Esta claro que el valor de nuestra <span class="math inline">\(F_s\)</span> será mayor si las discrepancias entre las medias de los grupos (<span class="math inline">\(\overline{X}_i\)</span>) son grandes en relación a variabiliadad dentro de los grupos. Valores grandes de <span class="math inline">\(F_s\)</span> tienden a proveer evidencia en contra de la <span class="math inline">\(H_0\)</span>.</p>
+<p>Esta claro que el valor de nuestra <span class="math inline">\(F_s\)</span> será mayor si las discrepancias entre las medias de los grupos (<span class="math inline">\(\overline{X}_i\)</span>) son grandes en relación a variabilidad dentro de los grupos. Valores grandes de <span class="math inline">\(F_s\)</span> tienden a proveer evidencia en contra de la <span class="math inline">\(H_0\)</span>.</p>
 <p>Veamos todo lo que hemos visto con un ejemplo.</p>
 <blockquote>
 <p><strong>Ejemplo:</strong> Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla @tab:ex1.</p>
@@ -654,7 +654,7 @@ Dieta 3
 ## 10     Dieta 3   10
 ## 11     Dieta 3   17
 ## 12     Dieta 3    6</code></pre>
-<p>Ahora que tenemos nuestra variable simplente ingresamos el siguiente comando.</p>
+<p>Ahora que tenemos nuestra variable simplemente ingresamos el siguiente comando.</p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="modelado-de-relaciones.html#cb249-1" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Tratamiento, Corderos)</span></code></pre></div>
 <p>Si queremos observar nuestros valores-<em>p</em> calculados, y ver si existen diferencias significativas, tenemos que guardar el análisis en una variable, en este caso yo la nombre <em>ANOVA</em>. Posteriormente utilizamos la función <code>summary()</code>.</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="modelado-de-relaciones.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA)</span></code></pre></div>
@@ -969,7 +969,7 @@ df(bloques) = J - 1
 MS(bloques) = \frac{\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}{J - 1}
 \tag{7.22}
 \end{equation}\]</span></p>
-<p>Para el calculo de <span class="math inline">\(SS(dentro)\)</span> realizamos la siguiente operación, ya que el calculo de <span class="math inline">\(SS(bloques)\)</span> reduce la variabilidad no expliacada, <span class="math inline">\(SS(dentro)\)</span>.</p>
+<p>Para el calculo de <span class="math inline">\(SS(dentro)\)</span> realizamos la siguiente operación, ya que el calculo de <span class="math inline">\(SS(bloques)\)</span> reduce la variabilidad no explicada, <span class="math inline">\(SS(dentro)\)</span>.</p>
 <p><span class="math display" id="eq:ssdentrob">\[\begin{equation}
 SS(dentro) = SS(total) - SS(tratamientos) - SS(bloques)
 \tag{7.23}
@@ -1007,7 +1007,7 @@ df(bloques) = 4-1 = 3
 <p><span class="math display">\[\begin{equation}
 MS(bloques) = \frac{4573}{3} = 1524.333
 \end{equation}\]</span></p>
-<p>Para el calculo de la <span class="math inline">\(SS(total)\)</span> realizamos la extración de la gran media poblacional a cada valor:</p>
+<p>Para el calculo de la <span class="math inline">\(SS(total)\)</span> realizamos la extracción de la gran media poblacional a cada valor:</p>
 <p><span class="math display">\[\begin{equation}
 SS(total) = (93.5-59.8)^2 + (102.9-59.8)^2 + (67.0-59.8)^2 + \cdots + (46.4-59.8)^2 = 5411
 \end{equation}\]</span></p>
@@ -1138,7 +1138,356 @@ Residuals
 </div>
 <div id="anova-de-dos-vías" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> ANOVA de dos vías</h2>
-<p>Algunos análisis de varianza requieren más de un factor o variable.</p>
+<p>Algunos análisis de varianza requieren más de un factor o variable. En el ejemplo anterior, nuestro <strong>factor</strong> era el tipo de variedad de cebada y los <strong>niveles</strong> eran 4: variedad 1, 2, 3 y 4.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Un fisiologo vegetal investiga al efecto del estrés mecánico en el crecimiento de plantas de soya. Las plantas fueron asignadas a uno de los cuatro tratamientos, con 13 plantulas por tratamiento. Las plantas de dos de los tratamientos fueron estresadas al agitarlas durante 20 minutos, dos veces al día, mientras que el grupo control no fue estresado. Aquí tenemos nuestro primer <strong>factor,</strong> con dos niveles: agitamiento y control. Además, las plantas crecieron en dos condiciones de luz: baja y moderada. Así que en este caso, nuestro segundo factor es la cantidad de luz, con dos niveles: baja y moderada. Nuestros tratamientos quedan de la siguiente manera:</p>
+</blockquote>
+<ul>
+<li><p>Tratamiento 1: Control, luz baja</p></li>
+<li><p>Tratamiento 2: Estrés, luz baja</p></li>
+<li><p>Tratamiento 3: Control, luz moderada</p></li>
+<li><p>Tratamiento 4: Estrés, luz moderada</p></li>
+</ul>
+<blockquote>
+<p>Después de 16 días las plantas fueron colectadas y se midió el área total de la hoja (cm<sup>2</sup>) de cada planta. Los resultados fueron los siguientes:</p>
+</blockquote>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-168">Tabla 7.6: </span>Área total de la hoja (cm<sup>2</sup>)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Control, luz baja
+</th>
+<th style="text-align:center;">
+Estrés, luz baja
+</th>
+<th style="text-align:center;">
+Control, luz moderada
+</th>
+<th style="text-align:center;">
+Estrés, luz moderada
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+264
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+235
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+314
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+283
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+200
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+188
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+320
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+312
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+225
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+195
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+310
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+291
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+268
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+205
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+340
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+259
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+215
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+212
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+299
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+216
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+241
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+214
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+268
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+201
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+232
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+182
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+345
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+267
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+256
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+215
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+271
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+326
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+229
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+272
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+285
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+241
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+288
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+163
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+309
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+291
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+253
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+230
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+337
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+269
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+288
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+255
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+282
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+282
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 2cm; ">
+230
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+202
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+273
+</td>
+<td style="text-align:center;min-width: 2cm; ">
+257
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-169"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-169-1.png" alt="Gráfica de puntos de los datos de crecimiento de plantas, la barra horizontal indica la media del tratamiento." width="672" />
+<p class="caption">
+Figura 7.2: Gráfica de puntos de los datos de crecimiento de plantas, la barra horizontal indica la media del tratamiento.
+</p>
+</div>
+<p>El modelo del ANOVA para este caso sería:</p>
+<p><span class="math display" id="eq:anovatwoway">\[\begin{equation}
+x_{ijk} = \mu + \tau_i + \beta_j + \epsilon_{ijk}
+\tag{7.25}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(x_{ijk}\)</span> es la <span class="math inline">\(k\)</span>-ésima observación en el nivel <span class="math inline">\(i\)</span> del primer factor y el nivel <span class="math inline">\(j\)</span> del segundo factor. El término <span class="math inline">\(\tau_i\)</span> representa el efecto del nivel <span class="math inline">\(i\)</span> del primer factor (en este caso, la condición de estrés), y el término <span class="math inline">\(\beta_j\)</span> representa el efecto del nivel <span class="math inline">\(j\)</span> del segundo factor (condición de luz).</p>
+<p>Si la influencia conjunta de dos factores es igual a la suma de sus influencias separadas, se dice que los dos factores son <strong>aditivos</strong> en cuanto a sus efectos. Visualizar esto es más sencillo con una tabla que incluya las medias de cada tratamiento.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Luz baja</strong></td>
+<td><strong>Luz moderada</strong></td>
+<td><strong>Diferencia</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Control</strong></td>
+<td>245.3</td>
+<td>304.1</td>
+<td>58.8</td>
+</tr>
+<tr class="odd">
+<td><strong>Estrés</strong></td>
+<td>212.9</td>
+<td>268.8</td>
+<td>55.9</td>
+</tr>
+<tr class="even">
+<td><strong>Diferencia</strong></td>
+<td>-32.4</td>
+<td>-35.3</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Por ejemplo, el efecto del estrés reduce el área de la hoja por casi la misma cantidad, por lo que podríamos decir que el estrés tiene un efecto aditivo negativo sobre el área. Véamos esto en una gráfica.</p>
+<div class="figure" style="text-align: center"><span id="fig:eff"></span>
+<img src="Curso_R_basico_files/figure-html/eff-1.png" alt="Efecto del estrés sobre la media del área de las hojas." width="672" />
+<p class="caption">
+Figura 7.3: Efecto del estrés sobre la media del área de las hojas.
+</p>
+</div>
+<p>Como podemos ver en la figura <a href="modelado-de-relaciones.html#fig:eff">7.3</a>, el efecto de los tratamientos 2 y 4 (que corresponden a ambos tratamientos con estrés) parece reducir de manera casi idéntica el área de las hojas de nuesetras plantas. Cuando los efectos de los factores son aditivos, decimos que no hay <strong>interacción</strong> entre los factores. Algunas veces, el efecto que un factor tiene sobre una variable depende del nivel del segundo factor. Cuando esto ocurre, decimos que los dos factores interactúan para generar el efecto de la variable de respuesta.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Investigadores condujeron un estudio sobre el enriquecimiento de bebidas frutales a base de leche con cantidades bajas y altas de hierro (Fe) y zinc (Zn). Las bebidas fueron digeridas en un tracto gastrointestintal simulado y la retención celular de hierro fue medida (<span class="math inline">\(\mu\)</span>g Fe/mg de proteína celular). La figura <a href="modelado-de-relaciones.html#fig:znfe">7.4</a> muestra la interacción del promedio obtenido de los cuatro tratamientos. Cuando el nivel de Zn fue bajo, el efecto en la retención de Fe es mucho menor a cuando el nivel de Zn fue alto.</p>
+</blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Zn bajo</strong></td>
+<td><strong>Zn alto</strong></td>
+<td><strong>Diferencia</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Fe bajo</strong></td>
+<td>0.707</td>
+<td>0.215</td>
+<td>-0.492</td>
+</tr>
+<tr class="odd">
+<td><strong>Fe alto</strong></td>
+<td>0.994</td>
+<td>1.412</td>
+<td>0.418</td>
+</tr>
+<tr class="even">
+<td><strong>Diferencia</strong></td>
+<td>0.287</td>
+<td>1.197</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>En este ejemplo, las líneas de interacción <strong>no son paralelas,</strong> lo que quiere decir que existe una interacción entre el factor 1 (nivel de Fe) y el factor 2 (nivel de Zn). Quiere decir que el nivel de retención de Fe depende de la cantidad de Zn utilizada.</p>
+<div class="figure" style="text-align: center"><span id="fig:znfe"></span>
+<img src="Curso_R_basico_files/figure-html/znfe-1.png" alt="Interacción entre el nivel de suplemento de Zn y Fe." width="672" />
+<p class="caption">
+Figura 7.4: Interacción entre el nivel de suplemento de Zn y Fe.
+</p>
+</div>
+<p>Para estos casos podemos ajustar nuestro modelo del ANOVA para tomar en cuenta la interacción entre estos dos factores.</p>
+<p><span class="math display" id="eq:anovatwoway2">\[\begin{equation}
+x_{ijk} = \mu + \tau_i + \beta_j + \gamma_{ij} + \epsilon_{ijk}
+\tag{7.26}
+\end{equation}\]</span></p>
+<p>Donde el nuevo término <span class="math inline">\(\gamma_{ij}\)</span> es el efecto de la interacción entre el nivel <span class="math inline">\(i\)</span> del primer factor y el nivel <span class="math inline">\(j\)</span> del segundo factor. De igual manera, si hay <span class="math inline">\(n\)</span> observaciones, entonces <span class="math inline">\(df(total) = n - 1\)</span>. Si hay <span class="math inline">\(I\)</span> niveles para el primer factor, entonces <span class="math inline">\(I - 1\)</span> nos da los grados de libertad y si hay <span class="math inline">\(J\)</span> niveles para el segundo factor, de nuevo, <span class="math inline">\(J - 1\)</span> nos da sus grados de libertad. Existen entonces <span class="math inline">\((I - 1) \times (J-1)\)</span> grados de libertad para la interacción. Con <span class="math inline">\(I\)</span> niveles en el primer factor y <span class="math inline">\(J\)</span> niveles en el segundo, hay <span class="math inline">\(IJ\)</span> combinaciones para los tratamientos, por lo tanto <span class="math inline">\(df(dentro) = n - IJ\)</span>.</p>
+<p>Una hipótesis nula de interés podría ser que las interacciones suman 0:</p>
+<p><span class="math display">\[\begin{equation}
+H_0: \gamma_{11} = \gamma_{12} = \cdots = \gamma_{IJ} = 0
+\end{equation}\]</span></p>
+<p>Para probar esta hipótesis calculamos el estadístico <span class="math inline">\(F_s\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+F_s = \frac{MS(interacción)}{MS(dentro)}
+\end{equation}\]</span></p>
+<p>Y rechazamos la <span class="math inline">\(H_0\)</span> si nuestro valor-<em>p</em> es pequeño. Por ejemplo, para los datos de nuestras plantas, vamos a crear una matriz con los datos y realizar el ANOVA de dos vías.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="modelado-de-relaciones.html#cb256-1" aria-hidden="true" tabindex="-1"></a>Luz <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Luz baja&quot;</span>, <span class="dv">26</span>), <span class="fu">rep</span>(<span class="st">&quot;Luz alta&quot;</span>, <span class="dv">26</span>)))</span>
+<span id="cb256-2"><a href="modelado-de-relaciones.html#cb256-2" aria-hidden="true" tabindex="-1"></a>Condicion <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>)))</span>
+<span id="cb256-3"><a href="modelado-de-relaciones.html#cb256-3" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">200</span>, <span class="dv">225</span>, <span class="dv">268</span>, <span class="dv">215</span>, <span class="dv">241</span>, <span class="dv">232</span>, <span class="dv">256</span>, <span class="dv">229</span>, <span class="dv">288</span>, <span class="dv">253</span>, <span class="dv">288</span>, <span class="dv">230</span>,</span>
+<span id="cb256-4"><a href="modelado-de-relaciones.html#cb256-4" aria-hidden="true" tabindex="-1"></a>       <span class="dv">235</span>, <span class="dv">188</span>, <span class="dv">195</span>, <span class="dv">205</span>, <span class="dv">212</span>, <span class="dv">214</span>, <span class="dv">182</span>, <span class="dv">215</span>, <span class="dv">272</span>, <span class="dv">163</span>, <span class="dv">230</span>, <span class="dv">255</span>, <span class="dv">202</span>, </span>
+<span id="cb256-5"><a href="modelado-de-relaciones.html#cb256-5" aria-hidden="true" tabindex="-1"></a>       <span class="dv">314</span>, <span class="dv">320</span>, <span class="dv">310</span>, <span class="dv">340</span>, <span class="dv">299</span>, <span class="dv">268</span>, <span class="dv">345</span>, <span class="dv">271</span>, <span class="dv">285</span>, <span class="dv">309</span>, <span class="dv">337</span>, <span class="dv">282</span>, <span class="dv">273</span>,</span>
+<span id="cb256-6"><a href="modelado-de-relaciones.html#cb256-6" aria-hidden="true" tabindex="-1"></a>       <span class="dv">283</span>, <span class="dv">312</span>, <span class="dv">291</span>, <span class="dv">259</span>, <span class="dv">216</span>, <span class="dv">201</span>, <span class="dv">267</span>, <span class="dv">326</span>, <span class="dv">241</span>, <span class="dv">291</span>, <span class="dv">269</span>, <span class="dv">282</span>, <span class="dv">257</span>)</span>
+<span id="cb256-7"><a href="modelado-de-relaciones.html#cb256-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-8"><a href="modelado-de-relaciones.html#cb256-8" aria-hidden="true" tabindex="-1"></a>Soya <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Luz, Condicion, Area)</span>
+<span id="cb256-9"><a href="modelado-de-relaciones.html#cb256-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-10"><a href="modelado-de-relaciones.html#cb256-10" aria-hidden="true" tabindex="-1"></a>plantas.anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz, Soya)</span>
+<span id="cb256-11"><a href="modelado-de-relaciones.html#cb256-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Condicion    1  14858   14858   16.93 0.000148 ***
+## Luz          1  42752   42752   48.71 7.14e-09 ***
+## Residuals   49  43003     878                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Este ANOVA que acabamos de realizar no toma en cuenta el efecto de la interacción, ¿cómo podemos incluirlo? Bueno para esto tenemos que agregar un argumento especial en nuestro anova, que sería <code>Condicion:Luz</code>, le cual toma en cuenta la interacción entre la condición de estrés y la cantidad de luz.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="modelado-de-relaciones.html#cb258-1" aria-hidden="true" tabindex="-1"></a>plantas.anova.int <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz <span class="sc">+</span> Condicion<span class="sc">:</span>Luz, Soya)</span>
+<span id="cb258-2"><a href="modelado-de-relaciones.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova.int)</span></code></pre></div>
+<pre><code>##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Condicion      1  14858   14858  16.595 0.000173 ***
+## Luz            1  42752   42752  47.749 1.01e-08 ***
+## Condicion:Luz  1     26      26   0.029 0.864570    
+## Residuals     48  42976     895                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Como podemos ver (y como ya sabíamos por la gráfica que realizamos), parece ser que la interacción entre el estrés y la condición de luz no es significativa, ya que obtenemos un valor-<em>p</em> muchísimo mayor a 0.05 (0.8646). Al parecer encontramos también diferencias significativas en nuestros dos factores (condición de estrés y cantidad de luz), de nuevo, algo que también ya habíamos observado en la figura <a href="modelado-de-relaciones.html#fig:eff">7.3</a>.</p>
+<p>Algo importante a considerar es que cuando existen interacciones entre los factores, como en la figura <a href="modelado-de-relaciones.html#fig:znfe">7.4</a>, la interpretación de los efectos de los factores no es la misma. Es difícil determinar el efecto independiente de un factor, por ejemplo, el efecto del Fe, ya que la naturaleza y la magntiud del efecto depende de un nivel particular de Zn. Debido a esto, primero buscamos la presencia de una interacción (a través de una gráfica o un ANOVA). Si encontramos una interacción entre los factores, usualmente detenemos el análisis en este punto. Si no hay una interacción (como en el caso de las plantas), procedemos a evaluar los efectos de los factores individuales.</p>
+<p>Ya que en el caso de las plantas era muy evidente que no existe una interacción entre ambos factores (corroborado por el estadístico <span class="math inline">\(F\)</span> para la interacción y la gráfica), pudimos concluir el ANOVA de dos vías y analizar el efecto de cada uno de los factores en donde, corroboramos que ambos parecen afectar el crecimiento de las plantas.</p>
 
 </div>
 </div>
