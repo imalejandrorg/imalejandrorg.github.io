@@ -9,6 +9,7 @@ biblio-style: apalike
 csl: apa.csl
 link-citations: yes
 nocite: "@*"
+favicon: "images/favicon.ico"
 description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
 ---
 

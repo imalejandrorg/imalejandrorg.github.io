@@ -49,7 +49,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: 'Suez One', serif;
-  color: #262d35;
+  color: #717c79;
 }
 
 .title {
@@ -60,5 +60,34 @@ h1, h2, h3, h4 {
 
 .subtitle {
   font-family: 'Suez One', serif;
-  color: #262d35;
+  color: #717c79;
+}
+
+.summary{
+font-family: 'Lato', sans-serif;
+}
+
+.summary a:hover {
+  color: #6d9d90 !important;
+} 
+
+.book .book-summary ul.summary li.active>a { /*active TOC links*/
+  color: #6d9d90 !important;
+  border-left: solid 4px;
+  border-color: #717c79;
+  padding-left: 11px !important;
+}  
+
+/*------------ TOC --------------*/
+
+.book .book-summary {
+  background: white;
+  border-right: none;
+}
+
+li.appendix span, li.part span { /* for TOC part names */
+  margin-top: 1em;
+  color: color: #1c3046 !important;
+  opacity: 1 !important;
+  text-transform: uppercase;
 }

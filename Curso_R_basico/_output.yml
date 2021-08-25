@@ -4,7 +4,6 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
-      collapse: section
       before: |
         <li><a href="./">Curso de R básico</a></li>
       after: |
