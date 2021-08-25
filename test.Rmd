@@ -1,0 +1,51 @@
+---
+title: "Distribuciones"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+runtime: shiny
+---
+
+## Distribución de $t$
+
+```{r eruptions, echo=FALSE}
+inputPanel(
+  sliderInput("df", label = "Grados de libertad:",
+              min = 1, max = 25, value = 1, step = 0.5)
+)
+
+data <- data.frame(x = c(-4,4))
+
+renderPlot({
+        g <- ggplot(data, aes(x = x))
+        g + stat_function(fun = dt, args = list(df = input$df), size = 0.6, color = "red") +
+            stat_function(fun =dnorm, size = 0.6, linetype = "dashed") +
+            scale_y_continuous(breaks = NULL) +
+            ylab("") +
+            xlab("") +
+            theme_minimal_hgrid(color = "black")
+    })
+```
+
+## Distribución de Chi
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+inputPanel(
+  sliderInput("df2", label = "Grados de libertad:",
+              min = 1, max = 25, value = 1, step = 0.5)
+)
+
+data <- data.frame(x = c(-4,4))
+
+renderPlot({
+  ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = input$df2), size = 0.6, color = "red") +
+  scale_y_continuous(breaks = NULL) +
+  ylab("") +
+  xlab("") +
+  theme_minimal_hgrid(color = "black")
+    })
+```
+
+
