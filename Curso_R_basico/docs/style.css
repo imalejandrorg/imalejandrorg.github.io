@@ -78,6 +78,17 @@ font-family: 'Lato', sans-serif;
   padding-left: 11px !important;
 }  
 
+/*-----Body Links-------*/
+
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #6d9d90;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal a:hover {
+color: #6d9d90; /* darker color when hovering */
+text-decoration: none;
+}
+
 /*------------ TOC --------------*/
 
 .book .book-summary {
