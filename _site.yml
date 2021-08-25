@@ -17,3 +17,4 @@ output:
   html_document:
     theme: cosmo
     highlight: textmate
+favicon: images/favicon.io
