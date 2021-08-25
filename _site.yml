@@ -11,7 +11,7 @@ navbar:
     - text: "Proyectos"
       menu:
       - text: "Tesis de Licenciatura"
-        href: 
+        href: tesis.html
 output_dir: "."
 output:
   html_document:

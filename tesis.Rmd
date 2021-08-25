@@ -1,0 +1,10 @@
+---
+title: "Tesis de Licenciatura"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Aquí encontrarás información acerca de la tesis de licenciatura que estoy realizando... ¡Proximamente!
