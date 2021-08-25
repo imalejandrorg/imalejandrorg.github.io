@@ -20,7 +20,7 @@ library(ggpubr)
 library(latex2exp)
 ```
 
-En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas.
+En esta lección veremos las nociones más básicas de `R` y `RStudio`, cómo escribir tablas, cómo importar datos, entre otras cosas. Antes que nada, este curso esta basado enormemente en información del libro @Samuels2016, *Statistics for Life Sciences,* con muchísimos ejemplos tomados prestados de él. Además, otro libro bastante recomendado (y en español) es el libro de *Estadística* de @Triola2018.
 
 ## Interfaz
 R Studio cuenta con 4 ventanas esenciales: 

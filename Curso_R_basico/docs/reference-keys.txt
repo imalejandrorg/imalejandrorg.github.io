@@ -140,6 +140,13 @@ eq:anovatwoway
 fig:eff
 fig:znfe
 eq:anovatwoway2
+eq:lc
+tab:fvc1
+tab:unnamed-chunk-172
+tab:unnamed-chunk-173
+eq:lcse
+eq:ICCL
+eq:clt
 requisitos
 descarga-de-r-y-rstudio
 introducción-a-r
@@ -225,3 +232,11 @@ prueba-de-f
 diseño-por-bloques-aleatorizados
 creando-los-bloques
 anova-de-dos-vías
+combinaciones-lineales-de-las-medias
+contrastes
+intervalos-de-confianza
+prueba-de-t
+pruebas-post-hoc
+diferencia-menos-significativa-de-fisher-lsd
+diferencia-significativa-honesta-de-tukey-hsd
+correlación-y-regresión-lineal

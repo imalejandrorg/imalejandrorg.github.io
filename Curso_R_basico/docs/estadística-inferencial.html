@@ -277,8 +277,20 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#creando-los-bloques"><i class="fa fa-check"></i><b>7.2.1</b> Creando los bloques</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#anova-de-dos-vías"><i class="fa fa-check"></i><b>7.3</b> ANOVA de dos vías</a></li>
+<li class="chapter" data-level="7.4" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#combinaciones-lineales-de-las-medias"><i class="fa fa-check"></i><b>7.4</b> Combinaciones lineales de las medias</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#contrastes"><i class="fa fa-check"></i><b>7.4.1</b> Contrastes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.4.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#prueba-de-t"><i class="fa fa-check"></i><b>7.4.3</b> Prueba de <span class="math inline">\(t\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="7.5" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>7.5</b> Pruebas post hoc</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diferencia-menos-significativa-de-fisher-lsd"><i class="fa fa-check"></i><b>7.5.1</b> Diferencia menos significativa de Fisher (LSD)</a></li>
+<li class="chapter" data-level="7.5.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diferencia-significativa-honesta-de-tukey-hsd"><i class="fa fa-check"></i><b>7.5.2</b> Diferencia significativa honesta de Tukey (HSD)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> Correlación y regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -1502,17 +1514,6 @@ Para este ejemplo, <span class="math inline">\(N_+ = 0\)</span> y <span class="m
 <blockquote>
 <p><strong>Ejemplo:</strong> En una investigación acerca de posible daño cerebral debido al alcoholísmo, un procedimo de rayos-X conocido como tomografía computarizada (TC) fue utilizado para medir la densidad del cerebro en 11 bebedores de alcohol crónicos. Para cada alcohólico, se selecciono una persona no alcohólica para empatar en edad, sexo, educación, etc.</p>
 </blockquote>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="estadística-inferencial.html#cb197-1" aria-hidden="true" tabindex="-1"></a>Alcoholico <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">40.1</span>, <span class="fl">38.5</span>, <span class="fl">36.9</span>, <span class="fl">41.4</span>, <span class="fl">40.6</span>, <span class="fl">42.3</span>, <span class="fl">37.2</span>, <span class="fl">38.6</span>, <span class="fl">38.5</span>, <span class="fl">38.4</span>, <span class="fl">38.1</span>)</span>
-<span id="cb197-2"><a href="estadística-inferencial.html#cb197-2" aria-hidden="true" tabindex="-1"></a>NoAlcoholico <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">41.3</span>, <span class="fl">40.2</span>, <span class="fl">37.4</span>, <span class="fl">46.1</span>, <span class="fl">43.9</span>, <span class="fl">41.9</span>, <span class="fl">39.9</span>, <span class="fl">40.4</span>, <span class="fl">38.6</span>, <span class="fl">38.1</span>, <span class="fl">39.5</span>)</span>
-<span id="cb197-3"><a href="estadística-inferencial.html#cb197-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb197-4"><a href="estadística-inferencial.html#cb197-4" aria-hidden="true" tabindex="-1"></a>Densidad <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Alcoholico, NoAlcoholico)</span>
-<span id="cb197-5"><a href="estadística-inferencial.html#cb197-5" aria-hidden="true" tabindex="-1"></a>Densidad2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Densidad, Grupo, Densidad)</span></code></pre></div>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="estadística-inferencial.html#cb198-1" aria-hidden="true" tabindex="-1"></a>DiferenciaDensidad <span class="ot">&lt;-</span> Alcoholico <span class="sc">-</span> NoAlcoholico</span>
-<span id="cb198-2"><a href="estadística-inferencial.html#cb198-2" aria-hidden="true" tabindex="-1"></a>Densidad3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Alcoholico, NoAlcoholico, DiferenciaDensidad)</span>
-<span id="cb198-3"><a href="estadística-inferencial.html#cb198-3" aria-hidden="true" tabindex="-1"></a>Densidad3 <span class="sc">%&gt;%</span> </span>
-<span id="cb198-4"><a href="estadística-inferencial.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="st">&quot;html&quot;</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Diferencia de densidad entre personas alcohólicas y no alcohólicas&quot;</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Alcohólico&quot;</span>, <span class="st">&quot;No Alcohólico&quot;</span>, <span class="st">&quot;Diferencia&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb198-5"><a href="estadística-inferencial.html#cb198-5" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">lightable_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span> </span>
-<span id="cb198-6"><a href="estadística-inferencial.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">width_min =</span> <span class="st">&quot;4cm&quot;</span>)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-126">Tabla 5.8: </span>Diferencia de densidad entre personas alcohólicas y no alcohólicas
@@ -1654,7 +1655,7 @@ Diferencia
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="estadística-inferencial.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="estadística-inferencial.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
 ## 
@@ -1662,7 +1663,7 @@ Diferencia
 ## V = 5, p-value = 0.009766
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Como podemos ver, nuestro valor-<em>p</em> quiere decir que hay diferencias significativas ya que <span class="math inline">\(valor-p &lt; 0.05\)</span>. Si quisiéramos usar una hipótesis unidireccional, podríamos escribir como argumento <code>alternative = "less"</code> para ver si el alcoholismo reduce la densidad del cerebro.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="estadística-inferencial.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="estadística-inferencial.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
 ## 

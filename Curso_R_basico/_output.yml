@@ -1,6 +1,7 @@
 bookdown::gitbook:
   split_bib: no
   css: style.css
+  notice: "@*"
   config:
     toc:
       before: |

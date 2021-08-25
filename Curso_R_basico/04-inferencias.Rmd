@@ -808,7 +808,7 @@ Esta prueba se puede llevar a cabo incluso cuando hay información incompleta. L
 
 >**Ejemplo:** En una investigación acerca de posible daño cerebral debido al alcoholísmo, un procedimo de rayos-X conocido como tomografía computarizada (TC) fue utilizado para medir la densidad del cerebro en 11 bebedores de alcohol crónicos. Para cada alcohólico, se selecciono una persona no alcohólica para empatar en edad, sexo, educación, etc.
 
-```{r}
+```{r echo=FALSE}
 Alcoholico <- c(40.1, 38.5, 36.9, 41.4, 40.6, 42.3, 37.2, 38.6, 38.5, 38.4, 38.1)
 NoAlcoholico <- c(41.3, 40.2, 37.4, 46.1, 43.9, 41.9, 39.9, 40.4, 38.6, 38.1, 39.5)
 
@@ -816,7 +816,7 @@ Densidad <- data.frame(Alcoholico, NoAlcoholico)
 Densidad2 <- gather(Densidad, Grupo, Densidad)
 ```
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 DiferenciaDensidad <- Alcoholico - NoAlcoholico
 Densidad3 <- data.frame(Alcoholico, NoAlcoholico, DiferenciaDensidad)
 Densidad3 %>% 

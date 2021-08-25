@@ -1,0 +1,26 @@
+---
+output:
+  bookdown:
+    html_document2:
+    fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Correlación y regresión lineal
+
+La **correlación lineal** y **regresión lineal** son técnicas basadas en ajustar una línea recta a nuestros datos.
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+library(cowplot)
+library(ggpubr)
+library(latex2exp)
+library(kableExtra)
+library(broom)
+```

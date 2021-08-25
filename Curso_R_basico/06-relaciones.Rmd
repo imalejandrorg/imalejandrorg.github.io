@@ -641,7 +641,7 @@ Si la influencia conjunta de dos factores es igual a la suma de sus influencias 
 | **Estrés**     | 212.9        | 268.8            | 55.9           |
 | **Diferencia** | -32.4        | -35.3            |                |
 
-Por ejemplo, el efecto del estrés reduce el área de la hoja por casi la misma cantidad, por lo que podríamos decir que el estrés tiene un efecto aditivo negativo sobre el área. Véamos esto en una gráfica. 
+Por ejemplo, el efecto del estrés reduce el área de la hoja por casi la misma cantidad, por lo que podríamos decir que el estrés tiene un efecto aditivo negativo sobre el área. Veamos esto en una gráfica. 
 
 ```{r eff, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Efecto del estrés sobre la media del área de las hojas."}
 plantas.graph2 <- plantas.graph[1:26, ]
@@ -657,7 +657,7 @@ ggplot(plantas.graph, aes(x = Tratamiento, y = Area, fill = Tratamiento)) +
   theme_classic()
 ```
 
-Como podemos ver en la figura \@ref(fig:eff), el efecto de los tratamientos 2 y 4 (que corresponden a ambos tratamientos con estrés) parece reducir de manera casi idéntica el área de las hojas de nuesetras plantas. Cuando los efectos de los factores son aditivos, decimos que no hay **interacción** entre los factores. Algunas veces, el efecto que un factor tiene sobre una variable depende del nivel del segundo factor. Cuando esto ocurre, decimos que los dos factores interactúan para generar el efecto de la variable de respuesta.
+Como podemos ver en la figura \@ref(fig:eff), el efecto de los tratamientos 2 y 4 (que corresponden a ambos tratamientos con estrés) parece reducir de manera casi idéntica el área de las hojas de nuestras plantas. Cuando los efectos de los factores son aditivos, decimos que no hay **interacción** entre los factores. Algunas veces, el efecto que un factor tiene sobre una variable depende del nivel del segundo factor. Cuando esto ocurre, decimos que los dos factores interactúan para generar el efecto de la variable de respuesta.
 
 >**Ejemplo:** Investigadores condujeron un estudio sobre el enriquecimiento de bebidas frutales a base de leche con cantidades bajas y altas de hierro (Fe) y zinc (Zn). Las bebidas fueron digeridas en un tracto gastrointestintal simulado y la retención celular de hierro fue medida ($\mu$g Fe/mg de proteína celular). La figura \@ref(fig:znfe) muestra la interacción del promedio obtenido de los cuatro tratamientos. Cuando el nivel de Zn fue bajo, el efecto en la retención de Fe es mucho menor a cuando el nivel de Zn fue alto.
 
@@ -733,6 +733,295 @@ summary(plantas.anova.int)
 
 Como podemos ver (y como ya sabíamos por la gráfica que realizamos), parece ser que la interacción entre el estrés y la condición de luz no es significativa, ya que obtenemos un valor-*p* muchísimo mayor a 0.05 (0.8646). Al parecer encontramos también diferencias significativas en nuestros dos factores (condición de estrés y cantidad de luz), de nuevo, algo que también ya habíamos observado en la figura \@ref(fig:eff). 
 
-Algo importante a considerar es que cuando existen interacciones entre los factores, como en la figura \@ref(fig:znfe), la interpretación de los efectos de los factores no es la misma. Es difícil determinar el efecto independiente de un factor, por ejemplo, el efecto del Fe, ya que la naturaleza y la magntiud del efecto depende de un nivel particular de Zn. Debido a esto, primero buscamos la presencia de una interacción (a través de una gráfica o un ANOVA). Si encontramos una interacción entre los factores, usualmente detenemos el análisis en este punto. Si no hay una interacción (como en el caso de las plantas), procedemos a evaluar los efectos de los factores individuales.
+Algo importante a considerar es que cuando existen interacciones entre los factores, como en la figura \@ref(fig:znfe), la interpretación de los efectos de los factores no es la misma. Es difícil determinar el efecto independiente de un factor, por ejemplo, el efecto del Fe, ya que la naturaleza y la magnitud del efecto depende de un nivel particular de Zn. Debido a esto, primero buscamos la presencia de una interacción (a través de una gráfica o un ANOVA). Si encontramos una interacción entre los factores, usualmente detenemos el análisis en este punto. Si no hay una interacción (como en el caso de las plantas), procedemos a evaluar los efectos de los factores individuales.
 
 Ya que en el caso de las plantas era muy evidente que no existe una interacción entre ambos factores (corroborado por el estadístico $F$ para la interacción y la gráfica), pudimos concluir el ANOVA de dos vías y analizar el efecto de cada uno de los factores en donde, corroboramos que ambos parecen afectar el crecimiento de las plantas.
+
+## Combinaciones lineales de las medias
+
+Algunas preguntas interesantes pueden ser abordadas considerando la **combinación lineal de las medias** de los grupos. Definida con el término $L$, es una cantidad que se obtiene de la siguiente manera:
+
+\begin{equation}
+L = m_1x_1 + m_2x_2 + \cdots + m_Ix_I
+(\#eq:lc)
+\end{equation}
+
+Donde $m$ son multiplicadores para $x_i$. 
+
+Uno de los usos de la combinación lineal es *ajustar* debido a una variable extraña.
+
+>**Ejemplo:** Una medida para evaluar la funcionalidad de los pulmones es la capacidad vital forzada (FVC), que mide la cantidad máxima de aire que una persona puede expirar en un solo aliento. En un estudio de salud pública, investigadores midieron la FVC de una gran muestra de personas. Los resultados de adultos ex-fumadores se muestran en la siguiente tabla.
+
+```{r fvc1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Edad <- c("25-34", "35-44", "45-54", "55-64", "65-74")
+n <- c(83, 102, 126, 97, 73)
+Media <- c(5.29, 5.05, 4.51, 4.24, 3.58)
+SD <- c(0.76, 0.77, 0.74, 0.80, 0.82)
+FVC <- data.frame(Edad, n, Media, SD)
+options(knitr.kable.NA = '')
+knitr::kable(FVC, "html", align = c("c", "c"), caption = "FVC en ex-fumadores hombres", col.names = c("Edad (años)", "n", "Media", "Desviación estándar")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>%
+  column_spec(1:4, width_min = "2cm")
+```
+
+En este caso, si calculásemos la gran media del conjunto de datos nos encontraríamos con un problema; no se puede comparar con otras poblaciones ya que podrían tener otra distribución de las edades. Si quisiéramos comparar nuestros datos con la FVC de no-fumadores. La diferencia observada en la FVC se vería distorsionada ya que, el grupo de ex-fumadores es (sin sorpresa alguna) más viejo que el grupo de no-fumadores.
+
+Podríamos optar por utilizar una media *ajustada a la edad,* que es un estimado de la media de la FVC en una población de referencia, con una distribución de edad específica. En este caso utilizaremos los valores de la siguiente tabla.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Edad <- c("25-34", "35-44", "45-54", "55-64", "65-74")
+Freq <- c(0.22, 0.22, 0.24, 0.20, 0.12)
+
+Ref <- data.frame(Edad, Freq)
+options(knitr.kable.NA = '')
+knitr::kable(Ref, "html", align = c("c", "c"), caption = "Distribución de edad en una población de referencia", col.names = c("Edad", "Frecuencia relativa")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>%
+  column_spec(1:2, width_min = "4cm")
+```
+
+La media *ajustada a la edad* de la FVC se obtendría de la siguiente manera:
+
+\begin{equation}
+L = 0.22\overline{x}_1 + 0.22\overline{x}_2 + 0.24\overline{x}_3 + 0.20\overline{x}_4 \overline{x}_5
+\end{equation}
+
+Como podemos ver, el valor de $m$ corresponde a la frecuencia relativa de la distribución de edades de nuestra población de referencia.
+
+\begin{equation}
+L = (0.22)(5.29) + (0.22)(5.05) + (0.24)(4.51) + (0.20)(4.24) + (0.12)(3.58) = 4.63 \space litros
+\end{equation}
+
+Este valor corresponde a una media de la FVC en una población idealizada donde hay personas que son biológicamente similares a hombres ex-fumadores, pero cuya distribución de edad es la de la población de referencia.
+
+### Contrastes
+
+Una combinación lineal cuyos multiplicadores $m$ suman 0 se conoce como **contraste.** 
+
+>**Ejemplo:** La siguiente tabla muestra la media de los tratamientos y el tamaño de muestra de un experimento en plantas de soya que vimos en secciones pasadas. Podemos utilizar contrastes para describir los efectos del estrés en las dos cantidades de luz.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Tratamiento <- c("Control, poca luz", "Estrés, poca luz", "Control, luz moderada", "Estrés, luz moderada")
+Media <- c(245.3, 212.9, 304.1, 268.8)
+n <- c(rep(13, 4))
+
+Soya <- data.frame(Tratamiento, Media, n)
+
+knitr::kable(Soya, "html", align = c("c", "c"), caption = "Datos de crecimiento de plantas de soya", col.names = c("Tratamiento", "Media del área de la hoja", "n")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>%
+  column_spec(1:3, width_min = "3.5cm")
+```
+
+Lo primero que debemos observar es que en este caso una diferencia entre pares es lo mismo que un contraste. Por lo tanto, para medir el efecto del estrés en bajas condiciones de luz podemos considerar el contraste:
+
+\begin{equation}
+L = \overline{x}_1 - \overline{x}_2 = 245.3 - 212.9 = 32.4
+\end{equation}
+
+Para este contraste, los multplicadores serán $m_1 = 1$, $m_2 = -1$, $m_3 = 0$ y $m_4 = 0$. Como podemos ver, dan como resultado 0.
+
+Para medir el efecto del estrés en condiciones del luz moderada consideramos el contraste:
+
+\begin{equation}
+L = \overline{x}_3 - \overline{x}_4 = 304.1 - 268.8 = 35.3
+\end{equation}
+
+Para este contraste, los multiplicadores serán $m_1 = 0$, $m_2 = 0$, $m_3 = 1$ y $m_4 = -1$. También dan como resultado 0. 
+
+Para medir el efecto general del estrés, podemos promediar lo contrastes en partes y obtener:
+\begin{equation}
+L = \frac{1}{2}(\overline{x}_1 - \overline{x}_2) + \frac{1}{2}(\overline{x}_3 - \overline{x}_4) = 33.85
+\end{equation}
+
+Para este contraste, los multiplicadores serán $m_1 = \frac{1}{2}$, $m_2 = -\frac{1}{2}$, $m_3 = \frac{1}{2}$ y $m_4 = -\frac{1}{2}$.
+
+Cada combinación lineal es un estimado, basado en $\overline{x}$, de la combinación lineal correspondiente a las medias de las poblaciones ($\mu$). Debemos entonces considerar el error estándar de la combinación lineal, calculado de la siguiente manera:
+
+\begin{equation}
+SE_L = s_{p} \sqrt{\sum_{i=1}^I\frac{m_i^2}{n_i}}
+(\#eq:lcse)
+\end{equation}
+
+Donde $s_p = \sqrt{MS(dentro)}$ de nuestro ANOVA. También podemos escribir nuestra fórmula de la siguiente manera:
+
+\begin{equation}
+SE_L = s_{p} \sqrt{\frac{m_1^2}{n_1} + \frac{m_2^2}{n_2} + \cdots + \frac{m_I^2}{n_I}}
+\end{equation}
+
+En caso de que $n_i$ sea igual en todas las muestras, entonces:
+
+\begin{equation}
+SE_L = s_{p} \sqrt{\frac{m_1^2 + m_2^2 + \cdots m_I^2}{n}} = s_{p} \sqrt{\frac{1}{n}\sum_{i=1}^Im_i^2}
+\end{equation}
+
+Para la combinación lineal del efecto general de los datos de las plantas de soya:
+
+\begin{equation}
+\sum_{i=1}^I m_i^2 = (\frac{1}{2})^2 + (-\frac{1}{2})^2 + (\frac{1}{2})^2 + (-\frac{1}{2})^2 = 1
+\end{equation}
+
+Sabemos por la sección anterior que $MS(entre) = 895$ por lo que $s_p = \sqrt{895} = 29.92$. Por lo tanto, el $SE_L$:
+
+\begin{equation}
+SE_L = s_p \sqrt{\frac{1}{13}} = 29.92 \times 0.277 = 8.299
+\end{equation}
+
+### Intervalos de confianza
+
+Las combinaciones lineales también se pueden utilizar en pruebas de hipótesis, con los valores críticos obtenidos a partir de la distribución $t$ de Student en donde $df = df(dentro)$. Los intervalos de confianza se construyen con el error estándar de la combinación lineal.
+
+\begin{equation}
+L \pm t_{0.025} SE_L
+(\#eq:ICCL)
+\end{equation}
+
+Ya que sabemos que $L = 33.85$, y que $SE_L = 8.299$, lo único que necesitamos son los $df(dentro)$, que están dados en la tabla de ANOVA que hicimos en el ejercicio de las plantas de soya. Entonces $df(dentro) = 48$. Encontramos el valor crítico con la función
+
+```{r}
+#Dividimos el valor de alfa entre dos, ya que nos interesan ambas colas de la distribución
+qt(0.025, df = 48, lower.tail = F)
+```
+
+Y tenemos nuestro intervalo:
+
+\begin{equation}
+33.85 \pm (2.011)(8.299) \\
+33.85 \pm 16.7
+\end{equation}
+
+Estamos 95% seguros de que el efecto del estrés, promediado sobre las condiciones de luz, es reducir el área de la hoja de las plantas por una cantidad que está entre 17.15 cm^2^ y 50.55 cm^2^.
+
+### Prueba de $t$
+
+Para una prueba de $t$ se utiliza la siguiente fórmula:
+
+\begin{equation}
+t_s = \frac{L}{SE_L}
+(\#eq:clt)
+\end{equation}
+
+Y la prueba de $t$ se realiza de manera usual.
+
+A veces un investigador quiere estudiar los efectos separados y en conjunto de dos o más factores sobre una variable de respuesta. Por ejemplo, a parte del ANOVA de dos vías, podemos analizar las interacciones entre dos factores gracias a los contrastes lineares. Para el caso de las plantas de soya, nuestros dos factores de interés son la condición de estrés y la cantidad luz.
+
+|                |              |                  |                |
+|----------------|--------------|------------------|----------------|
+|                | **Luz baja** | **Luz moderada** | **Diferencia** |
+| **Control**    | 245.3        | 304.1            | 58.8           |
+| **Estrés**     | 212.9        | 268.8            | 55.9           |
+| **Diferencia** | -32.4        | -35.3            |                |
+
+En cada nivel del luz, el efecto medio del estrés se puede medir como un contraste:
+
+\begin{equation}
+Efecto \space del \space estrés \space en \space luz \space baja: \overline{x}_2 - \overline{x}_1 = 212.9 - 245.3 = -32.4 \\
+Efecto \space del \space estrés \space en \space luz \space moderada: \overline{x}_4 - \overline{x}_3 = 268.8 - 304.1 = -35.3 \\
+\end{equation}
+
+Ahora consideremos la pregunta: ¿Es la reducción en el área de las hojas debida al estrés la misma en las dos condiciones de luz? Una forma de responder esto es comparar $(\overline{x}_2 - \overline{x_1})$ contra $(\overline{x}_4 - \overline{x}_3)$. 
+
+\begin{equation}
+L = (\overline{x}_2 - \overline{x_1}) - (\overline{x}_4 - \overline{x}_3) = -32.4 - (-35.3) = 2.9
+\end{equation}
+
+Este contraste se puede utilizar para realizar un intervalo de confianza o una prueba de hipótesis. Por ejemplo, para la prueba de hipótesis partimos de la idea $H_0: (\mu_2 - \mu_1) = (\mu_4 - \mu_3)$, o lo que es lo mismo $H_0$: El efecto del estrés es el mismo bajo ambas condiciones de luz. 
+
+Para el caso de esta contraste linear, $L$:
+
+\begin{equation}
+SE_L = s_p \sqrt{\sum_{i=1}^I \frac{m_i^2}{n_i}} = s_p \sqrt{\frac{4}{13}} = 29.922 \sqrt{\frac{4}{13}} = 16.6
+\end{equation}
+
+Por lo que nuestro estadístico es:
+
+\begin{equation}
+t_s = \frac{2.9}{16.6} = 0.2
+\end{equation}
+
+Simplemente encontramos nuestro valor $t_{48,0.05}$.
+
+```{r}
+qt(0.05, 48, lower.tail = F)
+```
+
+Como vemos nuestro $valor-p = 3.34$ muestra que no hay diferencia significativas (lo que coincide con el ANOVA de dos vías que hicimos anteriormente), por lo que el efecto del estrés es el mismo bajo ambas condiciones de luz.
+
+## Pruebas post hoc
+
+Usualmente estamos interesados en un análisis detallado de las medias muestrales $\overline{X}_1, \overline{X}_2, \dots, \overline{X}_I$, considerando todas las comparaciones entre pares posibles.
+
+Cuando consideramos múltiples comparaciones, podemos hablar de la oportunidad de un error tipo I para una comparación particular, por ejemplo, $H_0: \mu_1 = \mu_2$. Este tipo de error I se conoce como **ratio de error tipo I en sentido de la comparación,** $\alpha_{cw}$ o podemos hablar de la oportunidad de un error tipo I entre cualquiera de las comparaciones, llamado **ratio de error tipo I en sentido del experimento,** $\alpha_{ew}$.
+
+Algo que siempre se cumple es que $\alpha_{ew} \le k \times \alpha_{cw}$, donde $k$ es el número de comparaciones. Por ejemplo, si se hicieran seis comparaciones con un $\alpha = 0.05$, el ratio de error tipo I en sentido del experimento sería $\alpha_{ew} = 6 \times 0.05 = 0.30$. Debido a esto, realizar múltiples pruebas de $t$ es contraproducente. 
+
+### Diferencia menos significativa de Fisher (LSD)
+
+Se aprovecha del método de comparaciones lineales para producir interválos de confianza entre todos los pares de diferencias de las medias de la población, utilizando $\alpha_{cw} = \alpha$ la razón de error tipo I utilizada en el ANOVA.
+
+Para comparar dos de nuestras observaciones, definimos $D_{ab} = \overline{X}_a - \overline{X}_b$ de tal manera que tenemos un contraste lineal de la siguiente manera:
+
+\begin{equation}
+d_{ab} = 1\overline{x}_a + (-1)\overline{x}_b + 0 \overline{x}_c + \cdots 0 \overline{x}_I
+\end{equation}
+
+Donde los únicos multplicadores distintos a 0 serán los del contraste que queremos realizar.
+
+Posteriormente se calcula el error estándar para esta diferencia, $SE_{D_{ab}} = s_p \sqrt{\sum_{i=1}^I}{\frac{m_i^2}{n_i}}$.
+
+Después calculamos un intervalo de confianza al 95% para la diferencia de la media poblacional de nuestro contraste. 
+
+\begin{equation}
+d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
+\end{equation}
+
+Si nuestro intervalo de confianza no contiene 0, quiere decir que hay diferencias significativas en esta comparación.
+
+Por ejemplo, para el ANOVA de las plantas de soya que realizamos, podemos identificar los grupos con diferencias significativas. Para esto vamos a necestiar la librería `agricolae`.
+
+```{r}
+library(agricolae)
+
+#Asignamos nuestro resultado a una variable.
+lsd1 <- LSD.test(plantas.anova, "Condicion")
+lsd1
+plot(lsd1)
+
+lsd2 <- LSD.test(plantas.anova, "Luz")
+lsd2
+plot(lsd2)
+```
+
+Con el comando `$groups` podemos ver cuáles son los grupos donde hay diferencia. En el caso de la soya, hay diferencias significativas tanto para la cantidad de luz como para el nivel de estrés.
+
+Vamos a utilizar los datos de `PlantGrowth` para realizar un ANOVA y una prueba LSD.
+
+```{r}
+data(PlantGrowth)
+ANOVA.PG <- aov(weight ~ group, PlantGrowth)
+summary(ANOVA.PG)
+```
+
+Como vemos hay diferencias significativas, así que ahora vamos a realizar la prueba LSD.
+
+```{r}
+lsd3 <- LSD.test(ANOVA.PG, "group")
+lsd3
+plot(lsd3)
+```
+
+En este caso encontramos que el tratamiento 2 y el tratamiento 1 tienen diferencias significativas entre sí, pero no se diferencían del grupo control.
+
+### Diferencia significativa honesta de Tukey (HSD)
+
+Es un método muy similar al LSD, pero en lugar de utilizar $t$ en la fórmula del intervalo de confianza, valores de una distribución conocida como distribución del rango Estudentizada. Su cálculo en `R` es bastante sencillo. Veamos, de nuevo, el ejemplo con nuestros datos de las planta de soya.
+
+```{r}
+hsd1 <- TukeyHSD(plantas.anova)
+hsd1
+```
+
+Para los datos de las plantas, veamos cómo obtenemos nuestros resultados.
+
+```{r}
+hsd2 <- TukeyHSD(ANOVA.PG)
+hsd2
+plot(hsd2)
+```
+
+De nuevo, vemos que el valor-*p* para la comparación entre el tratamiento 1 y 2 es significativa ($valor-p < 0.05$). Pero las diferencias entre el control con ambos tratamientos no lo son.
