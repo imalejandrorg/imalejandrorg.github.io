@@ -1,7 +1,5 @@
 --- 
 title: "Curso de R básico"
-author: "Alejandro Ruiz-García"
-date: "15/3/2021"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography:
@@ -10,6 +8,7 @@ bibliography:
 biblio-style: apalike
 csl: apa.csl
 link-citations: yes
+nocite: "@*"
 description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
 ---
 

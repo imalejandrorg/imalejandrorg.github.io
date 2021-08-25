@@ -15,3 +15,50 @@ pre code {
 body {
   text-align: justify;
 }
+
+/* The next two rules make the horizontal line go straight across in top navbar */
+
+.summary > li:first-child {
+    height: 50px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.book .book-summary ul.summary li.divider {
+    height: 0px;
+}
+
+/*____Code Chunks____*/
+
+.sourceCode pre {
+  margin: 0 !important; /* makes space above and below symmetrical*/
+}
+
+.sourceCode {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
+/*------------- Body and header text---------------- */
+
+.book.font-family-1 {
+  font-family: 'Lato', sans-serif;
+ }
+
+h1, h2, h3, h4 {
+  font-family: 'Suez One', serif;
+  color: #262d35;
+}
+
+.title {
+  font-family: 'Suez One', serif;
+  font-size: 3em !important;
+  color: #262d35;
+ }
+
+.subtitle {
+  font-family: 'Suez One', serif;
+  color: #262d35;
+}
