@@ -287,7 +287,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.5.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diferencia-significativa-honesta-de-tukey-hsd"><i class="fa fa-check"></i><b>7.5.2</b> Diferencia significativa honesta de Tukey (HSD)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> Correlación y regresión lineal</a></li>
+<li class="chapter" data-level="8" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> Correlación y regresión lineal</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-coeficiente-de-correlación-r"><i class="fa fa-check"></i><b>8.1</b> El coeficiente de correlación <span class="math inline">\(r\)</span></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#midiendo-la-fuerza-de-la-asociación"><i class="fa fa-check"></i><b>8.1.1</b> Midiendo la fuerza de la asociación</a></li>
+<li class="chapter" data-level="8.1.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#inferencia-acerca-de-la-correlación"><i class="fa fa-check"></i><b>8.1.2</b> Inferencia acerca de la correlación</a></li>
+<li class="chapter" data-level="8.1.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#intervalo-de-confianza-para-rho"><i class="fa fa-check"></i><b>8.1.3</b> Intervalo de confianza para <span class="math inline">\(\rho\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#regresión-lineal"><i class="fa fa-check"></i><b>8.2</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#la-línea-sd"><i class="fa fa-check"></i><b>8.2.1</b> La línea SD</a></li>
+<li class="chapter" data-level="8.2.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#ecuación-de-la-regresión-lineal"><i class="fa fa-check"></i><b>8.2.2</b> Ecuación de la regresión lineal</a></li>
+<li class="chapter" data-level="8.2.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#gráfica-de-promedios"><i class="fa fa-check"></i><b>8.2.3</b> Gráfica de promedios</a></li>
+<li class="chapter" data-level="8.2.4" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#la-suma-de-cuadrados-de-los-residuales"><i class="fa fa-check"></i><b>8.2.4</b> La suma de cuadrados de los residuales</a></li>
+<li class="chapter" data-level="8.2.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#desviación-estándar-de-los-residuales"><i class="fa fa-check"></i><b>8.2.5</b> Desviación estándar de los residuales</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -310,8 +326,912 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="correlación-y-regresión-lineal" class="section level1" number="8">
 <h1><span class="header-section-number">Lección 8</span> Correlación y regresión lineal</h1>
-<p>La <strong>correlación lineal</strong> y <strong>regresión lineal</strong> son técnicas basadas en ajustar una línea recta a nuestros datos.</p>
+<p>La <strong>correlación lineal</strong> y <strong>regresión lineal</strong> son técnicas basadas en ajustar una línea recta a nuestros datos. Estos análisis usualmente consisten de un par de observaciones (<span class="math inline">\(X, Y\)</span>).</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> La anfetamina es una droga que suprime el apetito. En un estudio, investigadores alocaron aleatoriamente a 24 ratas a tres distintos grupos de tratamientos para recibir una inyección de anfetamina a distintas dosis y una inyección con solución salina. Se midió la cantidad de comida consumida por cada animal 3 horas después de la inyección. Los resultados (g de comida consumidos por kg de peso) se muestran en la siguiente tabla.</p>
+</blockquote>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:anf1">Tabla 8.1: </span>Consumo de comida (Y) de las ratas (g/kg). X = Dosis de anfetamina (mg/kg)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+X = 0
+</th>
+<th style="text-align:center;">
+X = 2.5
+</th>
+<th style="text-align:center;">
+X = 5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+112.6
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+73.3
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+38.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+102.1
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+84.8
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+81.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+90.2
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+67.3
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+57.1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+81.5
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+55.3
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+62.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+105.6
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+80.7
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+51.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+93.0
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+90.0
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+48.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+106.6
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+75.5
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+42.7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 5cm; ">
+108.3
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+77.1
+</td>
+<td style="text-align:center;min-width: 5cm; ">
+57.9
+</td>
+</tr>
+</tbody>
+</table>
+<p>A continuación tenemos una <strong>gráfica de dispersión</strong> con los valores de la tabla <a href="correlación-y-regresión-lineal.html#tab:anf1">8.1</a>.</p>
+<p><img src="Curso_R_basico_files/figure-html/anf2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Este es un ejemplo de dos variables que se encuentran en pares (Consumo de comida y dosis de anfetamina).</p>
+<div id="el-coeficiente-de-correlación-r" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> El coeficiente de correlación <span class="math inline">\(r\)</span></h2>
+<p>Supongamos que tenemos <span class="math inline">\(n\)</span> número de par de observaciones, con cada par representado por dos variables, <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>. Si realizamos un gráfico de dispersión y vemos una tendencia lineal general, es natural intentar describir la fuerza de la asociación. Para realizar esto utilizamos el <strong>coeficiente de correlación.</strong></p>
+<blockquote>
+<p><strong>Ejemplo:</strong> En un estudio de una población silvestre de la serpiente <em>Vipera bertis</em>, investigadores capturaron y midieron nueve hembras adultas. Se midió su peso así como su longitud. Estos valores se muestran en la tabla <a href="correlación-y-regresión-lineal.html#tab:snake1">8.2</a> y en el gráfico de dispersión de la figura <a href="correlación-y-regresión-lineal.html#fig:snake2">8.1</a>.</p>
+</blockquote>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:snake1">Tabla 8.2: </span>Longitud (X, en cm) y peso (Y, en g) de serpientes hembra
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+Longitud (cm)
+</th>
+<th style="text-align:center;">
+Peso (g)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+60.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+136.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+69.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+198.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+66.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+194.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+64.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+140.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+54.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+93.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+67.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+172.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+59.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+116.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+65.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+174.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+63.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+145.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Media
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+63.0
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+152.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+SD
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+4.6
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+35.3
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:snake2"></span>
+<img src="Curso_R_basico_files/figure-html/snake2-1.png" alt="Regresión lineal del peso y longitud de 9 serpientes hembra." width="480" />
+<p class="caption">
+Figura 8.1: Regresión lineal del peso y longitud de 9 serpientes hembra.
+</p>
+</div>
+<p>Como podemos ver, parece ser que existe una <strong>asociación positiva</strong> entre la longitud y el peso de las serpientes. Por lo tanto, si una serpiente es más larga que el promedio <span class="math inline">\(\overline{x} = 63\)</span> también tenderá a ser más pesada que el promedio <span class="math inline">\(\overline{y} = 152\)</span>. La línea que tenemos en el gráfico se conoce como <strong>línea de cuadrados mínimos</strong> o <strong>regresión lineal ajustada</strong> de <span class="math inline">\(Y\)</span> en <span class="math inline">\(X\)</span>.</p>
+<div id="midiendo-la-fuerza-de-la-asociación" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Midiendo la fuerza de la asociación</h3>
+<p>Para medir la fuerza de nuestra asociación utilizamos el <strong>coeficiente de correlación</strong>, <span class="math inline">\(r\)</span>. Carece de escala por lo que no es afectado por cambios en las unidades de medición. Para entender su funcionamiento, consideremos los datos de las serpientes transformados en valores <span class="math inline">\(Z\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:snake3"></span>
+<img src="Curso_R_basico_files/figure-html/snake3-1.png" alt="Gráfico de dispersión de la longitud estandarizada contra el peso estandarizado." width="576" />
+<p class="caption">
+Figura 8.2: Gráfico de dispersión de la longitud estandarizada contra el peso estandarizado.
+</p>
+</div>
+<p>Como podemos ver en la gráfica, la mayoría de nuestros puntos caen en el cuadrante superior derecho y el inferior izquierdo. Los puntos que caigan en estos cuadrantes tendrán valores <span class="math inline">\(Z\)</span> cuyos productos (<span class="math inline">\(z_x z_y\)</span>) son positivos. De igual manera, cualquier punto que caiga en el cuadrante superior izquierdo e inferior derecho tendrá valores <span class="math inline">\(Z\)</span> cuyos productos serán negativos.</p>
+<p>En nuestro caso, existe una <strong>asociación positiva</strong> entre la longitud y el peso de las serpientes, ya que la mayoría de nuestros puntos caen en cuadrantes con productos positivos, por ende, la suma de los productos estandarizados dará un valor positivo. Si no existiera una relación lineal en nuestros datos, los puntos estarían distribuidos de manera aleatoria en los cuadrantes y la suma de los productos sería 0.</p>
+<p>De hecho, el coeficiente de correlación está basado en esta suma. Se computa como el promedio de los productos de los valores estandarizados y se obtiene de la siguiente manera:</p>
+<p><span class="math display" id="eq:corr">\[\begin{equation}
+r = \frac{1}{n - 1}\sum_{i=1}^n (\frac{x_i - \overline{x}}{s_x})(\frac{y_i - \overline{y}}{s_y})
+\tag{8.1}
+\end{equation}\]</span></p>
+<p>Afortunadamente en <code>R</code> podemos obtener este coeficiente sin necesidad de hacer todas las transformaciones y operaciones correspondientes, simplemente utilizamos la función <code>cor()</code> en nuestros datos.</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="correlación-y-regresión-lineal.html#cb280-1" aria-hidden="true" tabindex="-1"></a>Longitud <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">69</span>, <span class="dv">66</span>, <span class="dv">64</span>, <span class="dv">54</span>, <span class="dv">67</span>, <span class="dv">59</span>, <span class="dv">65</span>, <span class="dv">63</span>)</span>
+<span id="cb280-2"><a href="correlación-y-regresión-lineal.html#cb280-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">136</span>, <span class="dv">198</span>, <span class="dv">194</span>, <span class="dv">140</span>, <span class="dv">93</span>, <span class="dv">172</span>, <span class="dv">116</span>, <span class="dv">174</span>, <span class="dv">145</span>)</span>
+<span id="cb280-3"><a href="correlación-y-regresión-lineal.html#cb280-3" aria-hidden="true" tabindex="-1"></a>Serpientes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Longitud, Peso)</span>
+<span id="cb280-4"><a href="correlación-y-regresión-lineal.html#cb280-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb280-5"><a href="correlación-y-regresión-lineal.html#cb280-5" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
+<pre><code>##   Longitud Peso
+## 1       60  136
+## 2       69  198
+## 3       66  194
+## 4       64  140
+## 5       54   93
+## 6       67  172
+## 7       59  116
+## 8       65  174
+## 9       63  145</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="correlación-y-regresión-lineal.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
+<pre><code>## [1] 0.9436756</code></pre>
+<p>Es importante que tengamos los datos arreglados en dos columnas, una con la variable <span class="math inline">\(x\)</span> (por ejemplo, longitud) y la otra con la variable <span class="math inline">\(y\)</span> (por ejemplo, peso). Como podemos ver, nuestro coeficiente <span class="math inline">\(r = 0.9437\)</span> lo que indica una fuerte correlación lineal. Normalmente, el valor de <span class="math inline">\(r\)</span> se sitúa entre -1 y 1. Valores cercanos a 1 indican una correlación positiva, como en el caso de las serpientes, mientras que valores cercanos a -1 indican una correlación negativa. Valores cercanos a 0 indican ausencia de correlación lineal (los datos pueden estar correlacionados de otras maneras).</p>
+<p>En caso de nuestra muestra, nos referimos a este coeficiente como la <strong>correlación muestral,</strong> ya que las medidas tomadas de estas 9 serpientes componen una muestra de una población más grande. Es decir nosotros estamos estimando la <strong>correlación poblacional,</strong> normalmente denotada con el símbolo <span class="math inline">\(\rho\)</span> (léase rho). Debe considerarse que, para que nuestro coeficiente <span class="math inline">\(r\)</span> pueda ser utilizado como una estimación de <span class="math inline">\(\rho\)</span>, tanto los valores de <span class="math inline">\(X\)</span> como <span class="math inline">\(Y\)</span> deben de ser seleccionados de manera aleatoria siguiendo el <strong>modelo de muestreo aleatorio bivariado,</strong> donde cada par de observaciones (<span class="math inline">\(x_i, y_i\)</span>) se considera una muestra aleatoria tomada a partir de una población (<span class="math inline">\(x, y\)</span>) de pares.</p>
+<p>En este modelo, los valores observados de <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> se toman como muestras aleatorias, así que los valores <span class="math inline">\(\overline{x}, \overline{y}, s_x\)</span> y <span class="math inline">\(s_y\)</span> son estimados de los valores poblacionales correspondientes, <span class="math inline">\(\mu_x, \mu_y, \sigma_x\)</span> y <span class="math inline">\(\sigma_y\)</span>. Aunque este modelo es razonable para muchos investigadores, quienes no lo consideran así, especialmente cuando cuando los valores de <span class="math inline">\(X\)</span> son especificados por el investigador, como en el caso de las ratas y las anfetaminas. Este modelo se conoce como <strong>modelo de submuestreo aleatorio.</strong></p>
+</div>
+<div id="inferencia-acerca-de-la-correlación" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Inferencia acerca de la correlación</h3>
+<p>Ya hemos visto como el coeficiente de correlación nos sirve para describir un conjunto de datos. Ahora consideraremos la estadística inferencial basada en <span class="math inline">\(r\)</span> para los datos de este modelo.</p>
+<p>Consideremos que cualquier patrón o tendencia aparente en nuestros datos es meramente ilusoria y que solamente refleja la variabilidad de nuestros datos. Para estos casos, <span class="math inline">\(H_0: X \space y \space Y no \space están \space correlacionadas\ space en \space la \space población\)</span> o de manera alterna, <span class="math inline">\(H_0: no \space existe \space correlación \space linear \space entre \space X \space y \space Y\)</span>. ¿Cómo podemos probar esto?</p>
+<p>Podemos realizar una prueba de <span class="math inline">\(t\)</span>. En este caso la fórmula para calcular nuestro estadístico es la siguiente:</p>
+<p><span class="math display" id="eq:corrt">\[\begin{equation}
+t_s = r\sqrt{\frac{n-2}{1-r^2}}
+\tag{8.2}
+\end{equation}\]</span></p>
+<p>Para este caso los grados de libertad <span class="math inline">\(df\)</span> se obtienen así:</p>
+<p><span class="math display" id="eq:corrdf">\[\begin{equation}
+df = n - 2
+\tag{8.3}
+\end{equation}\]</span></p>
+<p>¿Por qué <span class="math inline">\(n-2\)</span>? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, <span class="math inline">\(n=2\)</span>, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación.</p>
+<p>Para nuestros datos de las serpientes:</p>
+<p><span class="math display">\[\begin{equation}
+t_s = 0.9437 \sqrt{\frac{9 - 2}{1 - 0.9437^2}} = 7.549
+\end{equation}\]</span></p>
+<p>Ahora tendríamos que checar el valor crítico en nuestro valor de tablas o con la función de <span class="math inline">\(t\)</span>. Sin embargo, en <code>R</code> basta con utilizar la función <code>cor.test()</code> con los argumentos de nuestra correlación y obtenemos nuestro resultado, junto con nuestro valor-<em>p</em>.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="correlación-y-regresión-lineal.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  Serpientes$Longitud and Serpientes$Peso
+## t = 7.5459, df = 7, p-value = 0.0001321
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7489030 0.9883703
+## sample estimates:
+##       cor 
+## 0.9436756</code></pre>
+<p>Como podemos ver, hay una clara evidencia a favor de la correlación que estamos viendo pues nuestro <span class="math inline">\(valor-p &lt; 0.05\)</span> por lo que rechazaríamos la <span class="math inline">\(H_0\)</span> y diríamos que sí existe correlación lineal entre nuestras dos variables <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>.</p>
+</div>
+<div id="intervalo-de-confianza-para-rho" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Intervalo de confianza para <span class="math inline">\(\rho\)</span></h3>
+<p>Como vimos la función <code>cor.test()</code> nos construye el intervalo de confianza al 95% de nuestro valor para <span class="math inline">\(r\)</span>, es decir, podemos estar 95% seguros de que <span class="math inline">\(\rho\)</span> se encuentra entre <span class="math inline">\((0.749, 0.988)\)</span>. Sin embargo, veamos cómo se calcula esto de manera tradicional.</p>
+<p>Si nuestro tamaño de muestra es suficientemente grande, podemos realizar la construcción del intervalo. Ya que la distribución muestral del coeficiente de correlación muestral, <span class="math inline">\(r\)</span>, se encuentra sesgada, aplicamos una transformación conocida como <strong>la transformación de Fisher:</strong></p>
+<p><span class="math display">\[\begin{equation}
+z_r = \frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\ln\)</span> es un logaritmo natural base <span class="math inline">\(e\)</span>. Podemos construir el intervalo de confianza al 95% para este valor transformado <span class="math inline">\(\frac{1}{2}\ln \left[{\frac{1+\rho}{1-\rho}}\right]\)</span> de la siguiente manera:</p>
+<p><span class="math display">\[\begin{equation}
+z_r \pm 1.96 \frac{1}{\sqrt{n-3}}
+\end{equation}\]</span></p>
+<p>Debido a la transformación que hicimos, tenemos que convertir los limites de nuestro intervalo de confianza para <span class="math inline">\(\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]\)</span> a un intervalo de confianza para <span class="math inline">\(\rho\)</span>. Para hacer esto, resolvemos para <span class="math inline">\(\rho\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1}{2}\ln \left[{\frac{1+\rho}{1-\rho}}\right] = z_r \pm 1.96 \frac{1}{\sqrt{n-3}}
+\end{equation}\]</span></p>
+<p>En donde <span class="math inline">\(\rho\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\rho = \frac{e^{2(z_r - 1.96 \frac{1}{\sqrt{n-3}})}-1}{e^{2(z_r - 1.96 \frac{1}{\sqrt{n-3}})}+1} \\
+\rho = \frac{e^{2(z_r + 1.96 \frac{1}{\sqrt{n-3}})}-1}{e^{2(z_r + 1.96 \frac{1}{\sqrt{n-3}})}+1}
+\end{equation}\]</span></p>
+<p>Intentemos hacer el cálculo para nuestros datos:</p>
+<p><span class="math display">\[\begin{equation}
+z_r = \frac{1}{2} \ln \left[ {\frac{1+0.9437}{1-0.9437}} \right] = \frac{1}{2} \ln \left[ {\frac{1.9437}{0.0563}} \right] = 1.77085
+\end{equation}\]</span></p>
+<p>Bien ya sabemos que nuestro valor <span class="math inline">\(z_r = 1.77085\)</span>, ahora debemos calcular el intervalo:</p>
+<p><span class="math display">\[\begin{equation}
+1.77085 \pm 1.96 \frac{1}{\sqrt{9-3}} \\
+1.77085 \pm 0.8
+\end{equation}\]</span></p>
+<p>Entonces nuestros límites de nuestro intervalo para <span class="math inline">\(\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]\)</span> son <span class="math inline">\((0.971, 2.571)\)</span>, aproximadamente (tomando en cuenta los múltiples redondeos). Ahora simplemente transformamos el intervalo para <span class="math inline">\(\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]\)</span> en un intervalo para <span class="math inline">\(\rho\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\rho = \frac{e^{2(0.971)}-1}{e^{2(0.971)}+1} = 0.988 \\
+\rho = \frac{e^{2(2.571)}-1}{e^{2(2.571)}+1} = 0.75
+\end{equation}\]</span></p>
+<p>Más o menos el valor estimado que obtuvimos con la función de <code>R</code> y como pudimos ver es más sencillo obtener el intervalo de confianza para <span class="math inline">\(\rho\)</span> utilizando el comando <code>cor.test()</code>, que corresponde a <span class="math inline">\((0.749, 0.988)\)</span>.</p>
+</div>
+</div>
+<div id="regresión-lineal" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Regresión lineal</h2>
+<p>En esta sección aprenderemos a encontrar e interpretar la línea que mejor se ajuste a nuestros datos.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> Consideremos un conjunto de datos que tienen una relación linear perfecta entre <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, por ejemplo, la temperatura medida en <span class="math inline">\(X\)</span> = Celsius y <span class="math inline">\(Y\)</span> = Fahrenheit. Sabemos que la fórmula para transformar de grados Celsius a Fahrenheit es <span class="math inline">\(y = 32 + \frac{9}{5}x\)</span>, por lo que esta es la línea que describe esta relación.</p>
+</blockquote>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="correlación-y-regresión-lineal.html#cb286-1" aria-hidden="true" tabindex="-1"></a>Celsius <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.3</span>, <span class="fl">12.8</span>, <span class="fl">13.2</span>, <span class="fl">13.8</span>, <span class="fl">14.5</span>, <span class="fl">14.9</span>, <span class="dv">15</span>, <span class="fl">15.1</span>, <span class="fl">15.2</span>, <span class="fl">15.25</span>, <span class="fl">15.6</span>, <span class="fl">15.7</span>, <span class="fl">16.1</span>, <span class="fl">16.3</span>, <span class="fl">16.5</span>, <span class="dv">17</span>, <span class="fl">17.1</span>, <span class="fl">17.7</span>, <span class="fl">17.8</span>, <span class="fl">17.85</span>)</span>
+<span id="cb286-2"><a href="correlación-y-regresión-lineal.html#cb286-2" aria-hidden="true" tabindex="-1"></a>Fahrenheit <span class="ot">&lt;-</span> Celsius<span class="sc">*</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb286-3"><a href="correlación-y-regresión-lineal.html#cb286-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-4"><a href="correlación-y-regresión-lineal.html#cb286-4" aria-hidden="true" tabindex="-1"></a>Temperatura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Celsius, Fahrenheit)</span></code></pre></div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-185">Tabla 8.3: </span>Grados Celsius °C contra grados Fahrenheit °F
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+°C
+</th>
+<th style="text-align:center;">
+°F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+12.30
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+54.14
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+12.80
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+55.04
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+13.20
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+55.76
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+13.80
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+56.84
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+14.50
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+58.10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+14.90
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+58.82
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.00
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+59.00
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.10
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+59.18
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.20
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+59.36
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.25
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+59.45
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.60
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+60.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+15.70
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+60.26
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+16.10
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+60.98
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+16.30
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+61.34
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+16.50
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+61.70
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+17.00
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+62.60
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+17.10
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+62.78
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+17.70
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+63.86
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+17.80
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+64.04
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 4cm; ">
+17.85
+</td>
+<td style="text-align:center;min-width: 4cm; ">
+64.13
+</td>
+</tr>
+</tbody>
+</table>
+<p>La siguiente tabla muestra la relación entre las dos variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-186"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-186-1.png" alt="Gráfico de temperatura en °C contra °F" width="672" />
+<p class="caption">
+Figura 8.3: Gráfico de temperatura en °C contra °F
+</p>
+</div>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-187">Tabla 8.4: </span>Media y desviación estándar de los datos de temperatura
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+°C
+</th>
+<th style="text-align:center;">
+°F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+Media
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+15.48
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+59.87
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+SD
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+1.62
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+2.92
+</td>
+</tr>
+</tbody>
+</table>
+<p>Como ambas variables están midiendo lo mismo, cuando el valor <span class="math inline">\(X\)</span> aumente en una desviación estándar (<span class="math inline">\(s_x = 1.62\)</span>), es lógico pensar que también el valor <span class="math inline">\(y\)</span> aumentará una desviación estándar (<span class="math inline">\(s_y = 2.92\)</span>). Combinados estos dos valores, se puede describir la pendiente que se ajusta perfectamente a los datos:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{s_y}{s_x} = \frac{2.92}{1.62} = 1.80
+\end{equation}\]</span></p>
+<p>Ya conocíamos este valor antes, que equivale a la pendiente de <span class="math inline">\(\frac{9}{5} = 1.80\)</span> que vimos en la fórmula para convertir °C a °F.</p>
+<div id="la-línea-sd" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> La línea SD</h3>
+<p>Cuando existe una relación linear perfecta (<span class="math inline">\(r = \pm1\)</span>) la línea que se ajusta exactamente a los datos será <span class="math inline">\(\pm s_y/s_x\)</span>, con el signo de la pendiente correspondiendo al signo de la correlación y pasa a través del punto, (<span class="math inline">\(\overline{x}, \overline{y}\)</span>). Esta línea se le conoce como <strong>línea SD.</strong> Cuando no tenemos una correlación perfecta, la línea SD tiende a sobrestimar o infraestimar algunos valores.</p>
+<p>Se puede demostrar, de manera matemática, que la línea que mejor se ajusta para predecir <span class="math inline">\(Y\)</span> es la llamada <strong>línea de cuadrados mínimos</strong> o <strong>regresión lineal ajustada,</strong> que tiene una pendiente igual a <span class="math inline">\(r(s_y/s_x)\)</span> y pasa por el punto (<span class="math inline">\(\overline{x},\overline{y}\)</span>). Es decir, por cada valor de <span class="math inline">\(X\)</span> que se encuentra a una desviación estándar por encima del promedio, el valor de la media de <span class="math inline">\(Y\)</span> solo estará <span class="math inline">\(r\)</span> desviaciones estándar encima del promedio (asumiendo que <span class="math inline">\(r\)</span> es positivo, si es negativo, entonces por cada valor <span class="math inline">\(X\)</span> una desviación estándar encima del promedio, el valor de la media <span class="math inline">\(Y\)</span> estará <span class="math inline">\(r\)</span> desviaciones estándar debajo del promedio).</p>
+</div>
+<div id="ecuación-de-la-regresión-lineal" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Ecuación de la regresión lineal</h3>
+<p>La ecuación para una recta se puede escribir de la siguiente manera:</p>
+<p><span class="math display" id="eq:recta">\[\begin{equation}
+Y = b_0 + b_1X
+\tag{8.4}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(b_0\)</span> es el intercepto de <span class="math inline">\(y\)</span> y <span class="math inline">\(b_1\)</span> es la pendiente de la línea. <span class="math inline">\(b_1\)</span> también es la razón de cambio de <span class="math inline">\(Y\)</span> con respecto de <span class="math inline">\(X\)</span>. La regresión lineal ajustada de <span class="math inline">\(Y\)</span> en <span class="math inline">\(X\)</span> se escribe <span class="math inline">\(\hat{y} = b_0 + b_1x\)</span>. Escribimos <span class="math inline">\(\hat{y}\)</span> para recordar que la línea nos está dando solamente un estimado o predicción de los valores de <span class="math inline">\(Y\)</span>. La pendiente y el intercepto de la linea de regresión de los cuadrados mínimos se calcula a partir de los datos de la siguiente manera:</p>
+<p><span class="math display" id="eq:slope">\[\begin{equation}
+Pendiente: b_1 = r(\frac{s_y}{s_x})
+\tag{8.5}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:incercept">\[\begin{equation}
+Intercepto: b_0 = \overline{y} - b_1\overline{x}
+\tag{8.6}
+\end{equation}\]</span></p>
+<p>Por ejemplo, para nuestros datos de las serpientes, podemos encontrar la pendiente con nuestro coeficiente de correlación <span class="math inline">\(r\)</span> multiplicado por las desviaciones estándar de los datos de peso y longitud (4.6 y 35.3 respectivamente).</p>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-188">Tabla 8.5: </span>Media y desviación estándar de la longitud y peso de serpientes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+Longitud (cm)
+</th>
+<th style="text-align:center;">
+Peso (g)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3.5cm; ">
+Media
+</td>
+<td style="text-align:center;min-width: 3.5cm; ">
+63.0
+</td>
+<td style="text-align:center;min-width: 3.5cm; ">
+152.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3.5cm; ">
+SD
+</td>
+<td style="text-align:center;min-width: 3.5cm; ">
+4.6
+</td>
+<td style="text-align:center;min-width: 3.5cm; ">
+35.3
+</td>
+</tr>
+</tbody>
+</table>
+<p>Por ende, <span class="math inline">\(s_x = 4.6\)</span> y <span class="math inline">\(s_y = 35.3\)</span>. Además sabíamos que para estos datos, <span class="math inline">\(r = 0.9437\)</span>. Tenemos todos los elementos para encontrar nuestra pendiente <span class="math inline">\(b_1\)</span> y nuestro intercepto <span class="math inline">\(b_0\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+r(s_y/s_x) = 0.9437 \times (35.3/4.6) = 7.242
+\end{equation}\]</span></p>
+<p>Lo que equivale a un cambio de 7.242 g/cm. Es decir que un incremento en la longitud de una serpiente de 1 cm trae consigo un aumento en su peso de cerca de 7.242 g. Usando estos valores podemos encontrar el intercepto de <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+b_0 = 152 - 7.242 \times 4.6 = 118.6868
+\end{equation}\]</span></p>
+<p>Por ende, nuestra línea de regresión ajustada es <span class="math inline">\(\hat{y} = 118.6868 - 7.242x\)</span>.</p>
+</div>
+<div id="gráfica-de-promedios" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Gráfica de promedios</h3>
+<p>Si tenemos varias observaciones de <span class="math inline">\(Y\)</span> en un nivel dado de <span class="math inline">\(X\)</span>, como el caso del ejemplo de las anfetaminas y ratas, podemos estimar la media de la población <span class="math inline">\(Y\)</span> para un valor dado de <span class="math inline">\(X\)</span> (<span class="math inline">\(\mu_{Y|X}\)</span>) simplemente usando la media muestral de <span class="math inline">\(Y\)</span>, <span class="math inline">\(\overline{y}\)</span>, para ese valor dado de <span class="math inline">\(X\)</span>. Podemos denotar esta media muestral como <span class="math inline">\(\overline{y}|X\)</span>. Una gráfica de <span class="math inline">\(\overline{y}|X\)</span> se conoce como una <strong>gráfica de promedios,</strong> ya que muestra la media observada de <span class="math inline">\(Y\)</span> para distintos valores de <span class="math inline">\(X\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-189"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-189-1.png" alt="Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal." width="672" />
+<p class="caption">
+Figura 8.4: Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal.
+</p>
+</div>
+<p>Donde las líneas horizontales en los distintos niveles de <span class="math inline">\(X\)</span> representan la media para este conjunto de datos. Si los valores de <span class="math inline">\(\overline{y}\)</span> en la gráfica de promedios encaja exactamente como una línea, entonces esa línea es la regresión linear y <span class="math inline">\(\mu_{Y|X}\)</span> es estimado a partir de <span class="math inline">\(\overline{y}|X\)</span>. Sin embargo, usualmente los valores de <span class="math inline">\(\overline{y}\)</span> no son colineares. En este caso, la regresión es una versión <em>suavizada</em> de la gráfica de promedios, resultado en un modelo de ajuste en el cual todos los estimados de <span class="math inline">\(\mu_{Y|X}\)</span> caen en una línea. La ventaja de este proceso es que utilizamos toda la información disponible de todas las observaciones para estimar <span class="math inline">\(\mu_{Y|X}\)</span> en cualquier nivel de <span class="math inline">\(X\)</span>.</p>
+<p>Si aplicamos las fórmulas de regresión a nuestros datos de las ratas y las anfetaminas obtenemos que <span class="math inline">\(b_0 = 99.3\)</span> y <span class="math inline">\(b_1 = -9.01\)</span>. Entonces el estimado de <span class="math inline">\(\mu_{Y|X=0}\)</span> es <span class="math inline">\(99.3 \space g/kg\)</span>. Este valor es ligeramente distinto a <span class="math inline">\(\overline{y}|X = 0\)</span> de <span class="math inline">\(100 \space g/kg\)</span>. Este nuevo valor hace uso de los 8 datos obtenidos cuando <span class="math inline">\(X = 0\)</span> pero también de la tendencia lineal establecida por los otros 16 valores. De igual manera, <span class="math inline">\(\mu_{Y|X=2.5}\)</span> es <span class="math inline">\(99.3 - 9.01 \times 2.5 = 76.78 \space g/kg\)</span>, que difiere ligeramente del valor <span class="math inline">\(\overline{y}|X=2.5\)</span> de <span class="math inline">\(75.5 \space g/kg\)</span> y <span class="math inline">\(\mu_{Y|X=5}\)</span> que es <span class="math inline">\(99.3-9.01 \times 5 = 54.25 \space g/kg\)</span>, que difiere ligeramente de <span class="math inline">\(\overline{y}|X=5\)</span> que tiene un valor de <span class="math inline">\(55.0 \space g/kg\)</span>. Este es, a grandes rasgos, el procedimiento por el cuál <em>suavizamos</em> una línea recta sobre un gráfico de promedios.</p>
+</div>
+<div id="la-suma-de-cuadrados-de-los-residuales" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> La suma de cuadrados de los residuales</h3>
+<p>Ahora consideraremos un estadístico que describe la dispersión de los puntos respecto de la línea ajustada. Por cada valor <span class="math inline">\(x_i\)</span> de nuestros datos, existe una predicción del valor de <span class="math inline">\(Y\)</span> dado por <span class="math inline">\(\hat{y} = b_0 + b_1x_i\)</span>. Para encontrar nuestro valor predicho, simplemente utilizamos la fórmula de nuestra regresión:</p>
+<p><span class="math display" id="eq:valpred">\[\begin{equation}
+\hat{y}_i = b_0 + b_1x_i
+\tag{8.7}
+\end{equation}\]</span></p>
+<p>Además, asociado a cada observación, existe una cantidad llamada <strong>residual,</strong> definida como:</p>
+<p><span class="math display" id="eq:residual">\[\begin{equation}
+e_i = y_i - \hat{y}_i
+\tag{8.8}
+\end{equation}\]</span></p>
+<div class="figure" style="text-align: center"><span id="fig:resid"></span>
+<img src="Curso_R_basico_files/figure-html/resid-1.png" alt="Residuales para los datos de longitud y peso de serpientes." width="480" />
+<p class="caption">
+Figura 8.5: Residuales para los datos de longitud y peso de serpientes.
+</p>
+</div>
+<p>En este gráfico con los residuales de nuestros datos de las serpientes vemos que las líneas punteadas van desde nuestro valor observado hasta la línea de la regresión. La magnitud del residual corresponde al valor absoluto de la línea vertical. Los valores predichos <span class="math inline">\(\hat{y}_i\)</span> se encuentran en color azul en nuestra figura <a href="correlación-y-regresión-lineal.html#fig:resid">8.5</a>.</p>
+<p>Lo que nos importa principalmente es qué tan cerca está el valor observado, <span class="math inline">\(y_i\)</span>, de su valor predicho, <span class="math inline">\(\hat{y}_i\)</span>. Por esto medimos la distancia vertical de cada punto hasta la línea ajustada. Una medida que engloba a estos valores es la <strong>suma de cuadrados de los residuales</strong> o <span class="math inline">\(SS(residuales)\)</span>, que se obtiene de la siguiente manera:</p>
+<p><span class="math display" id="eq:residual2">\[\begin{equation}
+SS(residuales) = \sum_{i=1}^n(y_i - \hat{y}_i)^2 = \sum_{i=1}^n e_i^2
+\tag{8.9}
+\end{equation}\]</span></p>
+<p>La suma de cuadrados de los residuales será entonces más pequeña conforme mejor se ajuste la línea a nuestros datos. Veamos estos cálculos realizados con los datos de nuestras serpientes.</p>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-190">Tabla 8.6: </span>Residuales y valores predichos para los datos de serpientes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+<span class="math inline">\(x\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(y\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(\hat{y}\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(y-\hat{y}\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\((y-\hat{y})^2\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+60
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+136
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+130.42442
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+5.575581
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+31.087108
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+69
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+198
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+195.15116
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+2.848837
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+8.115873
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+66
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+194
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+173.57558
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+20.424419
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+417.156875
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+64
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+140
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+159.19186
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+-19.191861
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+368.327508
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+54
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+93
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+87.27326
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+5.726744
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+32.795599
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+67
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+172
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+180.76744
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+-8.767442
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+76.868037
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+59
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+116
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+123.23256
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+-7.232558
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+52.309897
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+65
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+174
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+166.38372
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+7.616279
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+58.007707
+</td>
+</tr>
+<tr>
+<td style="text-align:center;min-width: 3cm; ">
+63
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+145
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+152.00000
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+-7.000000
+</td>
+<td style="text-align:center;min-width: 3cm; ">
+49.000000
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>## [1] 1093.669</code></pre>
+<p>Donde <span class="math inline">\(x\)</span> es la longitud, <span class="math inline">\(y\)</span> el peso, <span class="math inline">\(\hat{y}\)</span> es el valor predicho de <span class="math inline">\(y\)</span> para un punto dado por <span class="math inline">\(x\)</span>, <span class="math inline">\(y-\hat{y}\)</span> son los residuales y <span class="math inline">\((y-\hat{y})^2\)</span> son los cuadrados de los residuales. Por lo tanto para nuestros datos <span class="math inline">\(SS(residuales) = 1093.669\)</span>.</p>
+<p>El <strong>criterio de mínimos cuadrados</strong> se basa en que la mejor línea recta es aquella que minimiza la suma de cuadrados de los residuales al mínimo. Debido a esto, la línea de regresión lineal ajustada también es conocida como <strong>la línea de mínimos cuadrados.</strong></p>
+</div>
+<div id="desviación-estándar-de-los-residuales" class="section level3" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> Desviación estándar de los residuales</h3>
 
+</div>
+</div>
 </div>
             </section>
 

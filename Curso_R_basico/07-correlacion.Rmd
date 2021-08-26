@@ -10,7 +10,7 @@ editor_options:
 
 # Correlación y regresión lineal
 
-La **correlación lineal** y **regresión lineal** son técnicas basadas en ajustar una línea recta a nuestros datos.
+La **correlación lineal** y **regresión lineal** son técnicas basadas en ajustar una línea recta a nuestros datos. Estos análisis usualmente consisten de un par de observaciones ($X, Y$).
 
 ```{r include=FALSE}
 library(knitr)
@@ -24,3 +24,397 @@ library(latex2exp)
 library(kableExtra)
 library(broom)
 ```
+
+>**Ejemplo:** La anfetamina es una droga que suprime el apetito. En un estudio, investigadores alocaron aleatoriamente a 24 ratas a tres distintos grupos de tratamientos para recibir una inyección de anfetamina a distintas dosis y una inyección con solución salina. Se midió la cantidad de comida consumida por cada animal 3 horas después de la inyección. Los resultados (g de comida consumidos por kg de peso) se muestran en la siguiente tabla.
+
+```{r anf1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Tr1 <- c(112.6, 102.1, 90.2, 81.5, 105.6, 93.0, 106.6, 108.3)
+Tr2 <- c(73.3, 84.8, 67.3, 55.3, 80.7, 90.0, 75.5, 77.1)
+Tr3 <- c(38.5, 81.3, 57.1, 62.3, 51.5, 48.3, 42.7, 57.9)
+
+Anfetamina <- data.frame(Tr1, Tr2, Tr3)
+knitr::kable(Anfetamina, "html", align = c("c", "c"), caption = "Consumo de comida (Y) de las ratas (g/kg). X = Dosis de anfetamina (mg/kg)", col.names = c("X = 0", "X = 2.5", "X = 5")) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "5cm")
+```
+
+A continuación tenemos una **gráfica de dispersión** con los valores de la tabla \@ref(tab:anf1).
+
+```{r anf2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Anfetamina2 <- gather(Anfetamina, Dosis, Comida)
+ggplot(Anfetamina2, aes(x = Dosis, y = Comida)) + 
+  geom_dotplot(aes(fill = Dosis), binaxis = "y", stackdir = "center", binwidth = 1.3, show.legend = F) +
+  labs(x = "X = Dosis de anfetamina (mg/kg)", y = "Consumo de comida (g/kg)") +
+  scale_x_discrete(labels = c("0", "2.5", "5")) +
+  theme_classic()
+```
+
+Este es un ejemplo de dos variables que se encuentran en pares (Consumo de comida y dosis de anfetamina).
+
+## El coeficiente de correlación $r$
+
+Supongamos que tenemos $n$ número de par de observaciones, con cada par representado por dos variables, $X$ y $Y$. Si realizamos un gráfico de dispersión y vemos una tendencia lineal general, es natural intentar describir la fuerza de la asociación. Para realizar esto utilizamos el **coeficiente de correlación.**
+
+>**Ejemplo:** En un estudio de una población silvestre de la serpiente *Vipera bertis*, investigadores capturaron y midieron nueve hembras adultas. Se midió su peso así como su longitud. Estos valores se muestran en la tabla \@ref(tab:snake1) y en el gráfico de dispersión de la figura \@ref(fig:snake2).
+
+```{r snake1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Longitud <- c(60, 69, 66, 64, 54, 67, 59, 65, 63, 63, 4.6)
+Peso <- c(136, 198, 194, 140, 93, 172, 116, 174, 145, 152, 35.3)
+Otros <- c(NA, NA, NA, NA, NA, NA, NA, NA, NA, "Media", "SD")
+
+Serpientes <- data.frame(Otros, Longitud, Peso)
+
+options(knitr.kable.NA = '')
+knitr::kable(Serpientes, "html", align = c("c", "c"), caption = "Longitud (X, en cm) y peso (Y, en g) de serpientes hembra", col.names = c("", "Longitud (cm)", "Peso (g)")) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(2:3, width_min = "4cm")
+```
+
+```{r snake2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Regresión lineal del peso y longitud de 9 serpientes hembra.", fig.height=5, fig.width=5}
+Longitud2 <- c(60, 69, 66, 64, 54, 67, 59, 65, 63)
+Peso2 <- c(136, 198, 194, 140, 93, 172, 116, 174, 145)
+Serpientes2 <- data.frame(Longitud2, Peso2)
+
+ggplot(Serpientes2, aes(x = Longitud2, y = Peso2)) +
+  geom_point(size = 1.5) +
+  labs(x = "X = Longitud (cm)", y = "Y = Peso (g)") +
+  geom_smooth(method = "lm", se = F, color = "black", size = 0.8) +
+  theme_classic()
+```
+
+Como podemos ver, parece ser que existe una **asociación positiva** entre la longitud y el peso de las serpientes. Por lo tanto, si una serpiente es más larga que el promedio $\overline{x} = 63$ también tenderá a ser más pesada que el promedio $\overline{y} = 152$. La línea que tenemos en el gráfico se conoce como **línea de cuadrados mínimos** o **regresión lineal ajustada** de $Y$ en $X$.
+
+### Midiendo la fuerza de la asociación
+
+Para medir la fuerza de nuestra asociación utilizamos el **coeficiente de correlación**, $r$. Carece de escala por lo que no es afectado por cambios en las unidades de medición. Para entender su funcionamiento, consideremos los datos de las serpientes transformados en valores $Z$. 
+
+```{r snake3, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=6, fig.width=6, fig.cap="Gráfico de dispersión de la longitud estandarizada contra el peso estandarizado."}
+Value <- c(60, 69, 66, 64, 54, 67, 59, 65, 63,
+            136, 198, 194, 140, 93, 172, 116, 174, 145)
+Variable <- c(rep("Longitud", 9), rep("Peso", 9))
+snakes <- data.frame(Variable, Value)
+
+Snakes.Z <- snakes %>% group_by(Variable) %>% mutate(Z = ((Value - mean(Value))/sd(Value)))
+Len.Z <- Snakes.Z$Z[1:9]
+Wei.Z <- Snakes.Z$Z[10:18]
+Snk.Z <- data.frame(Len.Z, Wei.Z)
+
+ggplot(Snk.Z, aes(x = Len.Z, y = Wei.Z)) + 
+  geom_point(size = 1.5) +
+  labs(x = "Longitud estandarizada", y = "Peso estandarizado") +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  geom_hline(aes(yintercept = 0), linetype = "dashed") +
+  geom_text(aes(x = 2, y = 2.2, label = "Valor Z para x es +"), size = 3) +
+  geom_text(aes(x = 2, y = 2, label = "Valor Z para y es +"), size = 3) +
+  geom_text(aes(x = 2, y = 1.8, label = "Producto +"), size = 3) +
+  geom_text(aes(x = -2, y = 2.2, label = "Valor Z para x es -"), size = 3) +
+  geom_text(aes(x = -2, y = 2, label = "Valor Z para y es +"), size = 3) +
+  geom_text(aes(x = -2, y = 1.8, label = "Producto -"), size = 3) +
+  geom_text(aes(x = 2, y = -2.2, label = "Valor Z para x es +"), size = 3) +
+  geom_text(aes(x = 2, y = -2, label = "Valor Z para y es -"), size = 3) +
+  geom_text(aes(x = 2, y = -1.8, label = "Producto -"), size = 3) +
+  geom_text(aes(x = -2, y = -2.2, label = "Valor Z para x es -"), size = 3) +
+  geom_text(aes(x = -2, y = -2, label = "Valor Z para y es -"), size = 3) +
+  geom_text(aes(x = -2, y = -1.8, label = "Producto +"), size = 3) +
+  scale_x_continuous(limits = c(-2.5,2.5), breaks = -2:2) +
+  scale_y_continuous(limits = c(-2.5,2.5), breaks = -2:2) +
+  theme_classic()
+```
+
+Como podemos ver en la gráfica, la mayoría de nuestros puntos caen en el cuadrante superior derecho y el inferior izquierdo. Los puntos que caigan en estos cuadrantes tendrán valores $Z$ cuyos productos ($z_x z_y$) son positivos. De igual manera, cualquier punto que caiga en el cuadrante superior izquierdo e inferior derecho tendrá valores $Z$ cuyos productos serán negativos.
+
+En nuestro caso, existe una **asociación positiva** entre la longitud y el peso de las serpientes, ya que la mayoría de nuestros puntos caen en cuadrantes con productos positivos, por ende, la suma de los productos estandarizados dará un valor positivo. Si no existiera una relación lineal en nuestros datos, los puntos estarían distribuidos de manera aleatoria en los cuadrantes y la suma de los productos sería 0.
+
+De hecho, el coeficiente de correlación está basado en esta suma. Se computa como el promedio de los productos de los valores estandarizados y se obtiene de la siguiente manera:
+
+\begin{equation}
+r = \frac{1}{n - 1}\sum_{i=1}^n (\frac{x_i - \overline{x}}{s_x})(\frac{y_i - \overline{y}}{s_y})
+(\#eq:corr)
+\end{equation}
+
+Afortunadamente en `R` podemos obtener este coeficiente sin necesidad de hacer todas las transformaciones y operaciones correspondientes, simplemente utilizamos la función `cor()` en nuestros datos.
+
+```{r}
+Longitud <- c(60, 69, 66, 64, 54, 67, 59, 65, 63)
+Peso <- c(136, 198, 194, 140, 93, 172, 116, 174, 145)
+Serpientes <- data.frame(Longitud, Peso)
+
+Serpientes
+
+cor(Serpientes$Longitud, Serpientes$Peso)
+```
+
+Es importante que tengamos los datos arreglados en dos columnas, una con la variable $x$ (por ejemplo, longitud) y la otra con la variable $y$ (por ejemplo, peso). Como podemos ver, nuestro coeficiente $r = 0.9437$ lo que indica una fuerte correlación lineal. Normalmente, el valor de $r$ se sitúa entre -1 y 1. Valores cercanos a 1 indican una correlación positiva, como en el caso de las serpientes, mientras que valores cercanos a -1 indican una correlación negativa. Valores cercanos a 0 indican ausencia de correlación lineal (los datos pueden estar correlacionados de otras maneras).
+
+En caso de nuestra muestra, nos referimos a este coeficiente como la **correlación muestral,** ya que las medidas tomadas de estas 9 serpientes componen una muestra de una población más grande. Es decir nosotros estamos estimando la **correlación poblacional,** normalmente denotada con el símbolo $\rho$ (léase rho). Debe considerarse que, para que nuestro coeficiente $r$ pueda ser utilizado como una estimación de $\rho$, tanto los valores de $X$ como $Y$ deben de ser seleccionados de manera aleatoria siguiendo el **modelo de muestreo aleatorio bivariado,** donde cada par de observaciones ($x_i, y_i$) se considera una muestra aleatoria tomada a partir de una población ($x, y$) de pares.
+
+En este modelo, los valores observados de $X$ y $Y$ se toman como muestras aleatorias, así que los valores $\overline{x}, \overline{y}, s_x$ y $s_y$ son estimados de los valores poblacionales correspondientes, $\mu_x, \mu_y, \sigma_x$ y $\sigma_y$. Aunque este modelo es razonable para muchos investigadores, quienes no lo consideran así, especialmente cuando cuando los valores de $X$ son especificados por el investigador, como en el caso de las ratas y las anfetaminas. Este modelo se conoce como **modelo de submuestreo aleatorio.**
+
+### Inferencia acerca de la correlación
+
+Ya hemos visto como el coeficiente de correlación nos sirve para describir un conjunto de datos. Ahora consideraremos la estadística inferencial basada en $r$ para los datos de este modelo.
+
+Consideremos que cualquier patrón o tendencia aparente en nuestros datos es meramente ilusoria y que solamente refleja la variabilidad de nuestros datos. Para estos casos, $H_0: X \space y \space Y no \space están \space correlacionadas\ space en \space la \space población$ o de manera alterna, $H_0: no \space existe \space correlación \space linear \space entre \space X \space y \space Y$. ¿Cómo podemos probar esto?
+
+Podemos realizar una prueba de $t$. En este caso la fórmula para calcular nuestro estadístico es la siguiente:
+
+\begin{equation}
+t_s = r\sqrt{\frac{n-2}{1-r^2}}
+(\#eq:corrt)
+\end{equation}
+
+Para este caso los grados de libertad $df$ se obtienen así:
+
+\begin{equation}
+df = n - 2
+(\#eq:corrdf)
+\end{equation}
+
+¿Por qué $n-2$? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, $n=2$, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación. 
+
+Para nuestros datos de las serpientes:
+
+\begin{equation}
+t_s = 0.9437 \sqrt{\frac{9 - 2}{1 - 0.9437^2}} = 7.549
+\end{equation}
+
+Ahora tendríamos que checar el valor crítico en nuestro valor de tablas o con la función de $t$. Sin embargo, en `R` basta con utilizar la función `cor.test()` con los argumentos de nuestra correlación y obtenemos nuestro resultado, junto con nuestro valor-*p*.
+
+```{r}
+cor.test(Serpientes$Longitud, Serpientes$Peso)
+```
+
+Como podemos ver, hay una clara evidencia a favor de la correlación que estamos viendo pues nuestro $valor-p < 0.05$ por lo que rechazaríamos la $H_0$ y diríamos que sí existe correlación lineal entre nuestras dos variables $X$ y $Y$. 
+
+### Intervalo de confianza para $\rho$
+
+Como vimos la función `cor.test()` nos construye el intervalo de confianza al 95% de nuestro valor para $r$, es decir, podemos estar 95% seguros de que $\rho$ se encuentra entre $(0.749, 0.988)$. Sin embargo, veamos cómo se calcula esto de manera tradicional.
+
+Si nuestro tamaño de muestra es suficientemente grande, podemos realizar la construcción del intervalo. Ya que la distribución muestral del coeficiente de correlación muestral, $r$, se encuentra sesgada, aplicamos una transformación conocida como **la transformación de Fisher:**
+
+\begin{equation}
+z_r = \frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]
+\end{equation}
+
+Donde $\ln$ es un logaritmo natural base $e$. Podemos construir el intervalo de confianza al 95% para este valor transformado $\frac{1}{2}\ln \left[{\frac{1+\rho}{1-\rho}}\right]$ de la siguiente manera:
+
+\begin{equation}
+z_r \pm 1.96 \frac{1}{\sqrt{n-3}}
+\end{equation}
+
+Debido a la transformación que hicimos, tenemos que convertir los limites de nuestro intervalo de confianza para $\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]$ a un intervalo de confianza para $\rho$. Para hacer esto, resolvemos para $\rho$:
+
+\begin{equation}
+\frac{1}{2}\ln \left[{\frac{1+\rho}{1-\rho}}\right] = z_r \pm 1.96 \frac{1}{\sqrt{n-3}}
+\end{equation}
+
+En donde $\rho$:
+
+\begin{equation}
+\rho = \frac{e^{2(z_r - 1.96 \frac{1}{\sqrt{n-3}})}-1}{e^{2(z_r - 1.96 \frac{1}{\sqrt{n-3}})}+1} \\
+\rho = \frac{e^{2(z_r + 1.96 \frac{1}{\sqrt{n-3}})}-1}{e^{2(z_r + 1.96 \frac{1}{\sqrt{n-3}})}+1}
+\end{equation}
+
+Intentemos hacer el cálculo para nuestros datos:
+
+\begin{equation}
+z_r = \frac{1}{2} \ln \left[ {\frac{1+0.9437}{1-0.9437}} \right] = \frac{1}{2} \ln \left[ {\frac{1.9437}{0.0563}} \right] = 1.77085
+\end{equation}
+
+Bien ya sabemos que nuestro valor $z_r = 1.77085$, ahora debemos calcular el intervalo:
+
+\begin{equation}
+1.77085 \pm 1.96 \frac{1}{\sqrt{9-3}} \\
+1.77085 \pm 0.8
+\end{equation}
+
+Entonces nuestros límites de nuestro intervalo para $\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]$ son $(0.971, 2.571)$, aproximadamente (tomando en cuenta los múltiples redondeos). Ahora simplemente transformamos el intervalo para $\frac{1}{2}\ln \left[{\frac{1+r}{1-r}}\right]$ en un intervalo para $\rho$:
+
+\begin{equation}
+\rho = \frac{e^{2(0.971)}-1}{e^{2(0.971)}+1} = 0.988 \\
+\rho = \frac{e^{2(2.571)}-1}{e^{2(2.571)}+1} = 0.75
+\end{equation}
+
+Más o menos el valor estimado que obtuvimos con la función de `R` y como pudimos ver es más sencillo obtener el intervalo de confianza para $\rho$ utilizando el comando `cor.test()`, que corresponde a $(0.749, 0.988)$.
+
+## Regresión lineal
+
+En esta sección aprenderemos a encontrar e interpretar la línea que mejor se ajuste a nuestros datos.
+
+>**Ejemplo:** Consideremos un conjunto de datos que tienen una relación linear perfecta entre $X$ y $Y$, por ejemplo, la temperatura medida en $X$ = Celsius y $Y$ = Fahrenheit. Sabemos que la fórmula para transformar de grados Celsius a Fahrenheit es $y = 32 + \frac{9}{5}x$, por lo que esta es la línea que describe esta relación.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+Celsius <- c(12.3, 12.8, 13.2, 13.8, 14.5, 14.9, 15, 15.1, 15.2, 15.25, 15.6, 15.7, 16.1, 16.3, 16.5, 17, 17.1, 17.7, 17.8, 17.85)
+Fahrenheit <- Celsius*(9/5) + 32
+
+Temperatura <- data.frame(Celsius, Fahrenheit)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::kable(Temperatura, "html", align = c("c", "c"), caption = "Grados Celsius °C contra grados Fahrenheit °F", col.names = c("°C", "°F")) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:2, width_min = "4cm")
+```
+
+La siguiente tabla muestra la relación entre las dos variables.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, fig.cap="Gráfico de temperatura en °C contra °F", fig.align='center'}
+ggplot(Temperatura, aes(x = Celsius, y = Fahrenheit)) +
+  geom_smooth(method = "lm", se = F, color = "black", size = 0.6) +
+  geom_point(size = 1.2) + 
+  labs(x = "°C", y = "°F") +
+  theme_classic()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+resumen.temp <- round(summarise(Temperatura, Celsius = c(mean(Temperatura$Celsius), sd(Temperatura$Celsius)), Fahrenheit = c(mean(Temperatura$Fahrenheit), sd(Temperatura$Fahrenheit))), 2)
+stats <- c("Media", "SD")
+
+resumen.temp <- data.frame(stats, resumen.temp)
+
+knitr::kable(resumen.temp, "html", align = c("c", "c"), caption = "Media y desviación estándar de los datos de temperatura", col.names = c("", "°C", "°F")) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "3cm")
+```
+
+Como ambas variables están midiendo lo mismo, cuando el valor $X$ aumente en una desviación estándar ($s_x = 1.62$), es lógico pensar que también el valor $y$ aumentará una desviación estándar ($s_y = 2.92$). Combinados estos dos valores, se puede describir la pendiente que se ajusta perfectamente a los datos:
+
+\begin{equation}
+\frac{s_y}{s_x} = \frac{2.92}{1.62} = 1.80
+\end{equation}
+
+Ya conocíamos este valor antes, que equivale a la pendiente de $\frac{9}{5} = 1.80$ que vimos en la fórmula para convertir °C a °F. 
+
+### La línea SD
+
+Cuando existe una relación linear perfecta ($r = \pm1$) la línea que se ajusta exactamente a los datos será $\pm s_y/s_x$, con el signo de la pendiente correspondiendo al signo de la correlación y pasa a través del punto, ($\overline{x}, \overline{y}$). Esta línea se le conoce como **línea SD.** Cuando no tenemos una correlación perfecta, la línea SD tiende a sobrestimar o infraestimar algunos valores.
+
+Se puede demostrar, de manera matemática, que la línea que mejor se ajusta para predecir $Y$ es la llamada **línea de cuadrados mínimos** o **regresión lineal ajustada,** que tiene una pendiente igual a $r(s_y/s_x)$ y pasa por el punto ($\overline{x},\overline{y}$). Es decir, por cada valor de $X$ que se encuentra a una desviación estándar por encima del promedio, el valor de la media de $Y$ solo estará $r$ desviaciones estándar encima del promedio (asumiendo que $r$ es positivo, si es negativo, entonces por cada valor $X$ una desviación estándar encima del promedio, el valor de la media $Y$ estará $r$ desviaciones estándar debajo del promedio).
+
+### Ecuación de la regresión lineal
+
+La ecuación para una recta se puede escribir de la siguiente manera:
+
+\begin{equation}
+Y = b_0 + b_1X
+(\#eq:recta)
+\end{equation}
+
+Donde $b_0$ es el intercepto de $y$ y $b_1$ es la pendiente de la línea. $b_1$ también es la razón de cambio de $Y$ con respecto de $X$. La regresión lineal ajustada de $Y$ en $X$ se escribe $\hat{y} = b_0 + b_1x$. Escribimos $\hat{y}$ para recordar que la línea nos está dando solamente un estimado o predicción de los valores de $Y$. La pendiente y el intercepto de la linea de regresión de los cuadrados mínimos se calcula a partir de los datos de la siguiente manera:
+
+\begin{equation}
+Pendiente: b_1 = r(\frac{s_y}{s_x})
+(\#eq:slope)
+\end{equation}
+
+\begin{equation}
+Intercepto: b_0 = \overline{y} - b_1\overline{x}
+(\#eq:incercept)
+\end{equation}
+
+Por ejemplo, para nuestros datos de las serpientes, podemos encontrar la pendiente con nuestro coeficiente de correlación $r$ multiplicado por las desviaciones estándar de los datos de peso y longitud (4.6 y 35.3 respectivamente).
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Longitud <- c(63, 4.6)
+Peso <- c(152, 35.3)
+Otros <- c("Media", "SD")
+
+Serpientes <- data.frame(Otros, Longitud, Peso)
+
+options(knitr.kable.NA = '')
+knitr::kable(Serpientes, "html", align = c("c", "c"), caption = "Media y desviación estándar de la longitud y peso de serpientes", col.names = c("", "Longitud (cm)", "Peso (g)")) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "3.5cm")
+```
+
+Por ende, $s_x = 4.6$ y $s_y = 35.3$. Además sabíamos que para estos datos, $r = 0.9437$. Tenemos todos los elementos para encontrar nuestra pendiente $b_1$ y nuestro intercepto $b_0$.
+
+\begin{equation}
+r(s_y/s_x) = 0.9437 \times (35.3/4.6) = 7.242
+\end{equation}
+
+Lo que equivale a un cambio de 7.242 g/cm. Es decir que un incremento en la longitud de una serpiente de 1 cm trae consigo un aumento en su peso de cerca de 7.242 g. Usando estos valores podemos encontrar el intercepto de $Y$.
+
+\begin{equation}
+b_0 = 152 - 7.242 \times 4.6 = 118.6868
+\end{equation}
+
+Por ende, nuestra línea de regresión ajustada es $\hat{y} = 118.6868 - 7.242x$.
+
+### Gráfica de promedios
+
+Si tenemos varias observaciones de $Y$ en un nivel dado de $X$, como el caso del ejemplo de las anfetaminas y ratas, podemos estimar la media de la población $Y$ para un valor dado de $X$ ($\mu_{Y|X}$) simplemente usando la media muestral de $Y$, $\overline{y}$, para ese valor dado de $X$. Podemos denotar esta media muestral como $\overline{y}|X$. Una gráfica de $\overline{y}|X$ se conoce como una **gráfica de promedios,** ya que muestra la media observada de $Y$ para distintos valores de $X$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal."}
+ggplot(Anfetamina2, aes(x = Dosis, y = Comida)) + 
+  geom_dotplot(aes(fill = Dosis), binaxis = "y", stackdir = "center", binwidth = 1.3, show.legend = F) +
+  stat_summary(fun = mean, geom = "crossbar", size = 0.15, width =0.15, show.legend = F) +
+  labs(x = "X = Dosis de anfetamina (mg/kg)", y = "Consumo de comida (g/kg)") +
+  scale_x_discrete(labels = c("0", "2.5", "5")) +
+  theme_classic()
+```
+
+Donde las líneas horizontales en los distintos niveles de $X$ representan la media para este conjunto de datos. Si los valores de $\overline{y}$ en la gráfica de promedios encaja exactamente como una línea, entonces esa línea es la regresión linear y $\mu_{Y|X}$ es estimado a partir de $\overline{y}|X$. Sin embargo, usualmente los valores de $\overline{y}$ no son colineares. En este caso, la regresión es una versión *suavizada* de la gráfica de promedios, resultado en un modelo de ajuste en el cual todos los estimados de $\mu_{Y|X}$ caen en una línea. La ventaja de este proceso es que utilizamos toda la información disponible de todas las observaciones para estimar $\mu_{Y|X}$ en cualquier nivel de $X$.
+
+Si aplicamos las fórmulas de regresión a nuestros datos de las ratas y las anfetaminas obtenemos que $b_0 = 99.3$ y $b_1 = -9.01$. Entonces el estimado de $\mu_{Y|X=0}$ es $99.3 \space g/kg$. Este valor es ligeramente distinto a $\overline{y}|X = 0$ de $100 \space g/kg$. Este nuevo valor hace uso de los 8 datos obtenidos cuando $X = 0$ pero también de la tendencia lineal establecida por los otros 16 valores. De igual manera, $\mu_{Y|X=2.5}$ es $99.3 - 9.01 \times 2.5 = 76.78 \space g/kg$, que difiere ligeramente del valor $\overline{y}|X=2.5$ de $75.5 \space g/kg$ y $\mu_{Y|X=5}$ que es $99.3-9.01 \times 5 = 54.25 \space g/kg$, que difiere ligeramente de $\overline{y}|X=5$ que tiene un valor de $55.0 \space g/kg$. Este es, a grandes rasgos, el procedimiento por el cuál *suavizamos* una línea recta sobre un gráfico de promedios.
+
+### La suma de cuadrados de los residuales
+
+Ahora consideraremos un estadístico que describe la dispersión de los puntos respecto de la línea ajustada. Por cada valor $x_i$ de nuestros datos, existe una predicción del valor de $Y$ dado por $\hat{y} = b_0 + b_1x_i$. Para encontrar nuestro valor predicho, simplemente utilizamos la fórmula de nuestra regresión:
+
+\begin{equation}
+\hat{y}_i = b_0 + b_1x_i
+(\#eq:valpred)
+\end{equation}
+
+Además, asociado a cada observación, existe una cantidad llamada **residual,** definida como:
+
+\begin{equation}
+e_i = y_i - \hat{y}_i
+(\#eq:residual)
+\end{equation}
+
+```{r resid, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Residuales para los datos de longitud y peso de serpientes.", fig.height=5, fig.width=5}
+Longitud <- c(60, 69, 66, 64, 54, 67, 59, 65, 63)
+Peso <- c(136, 198, 194, 140, 93, 172, 116, 174, 145)
+Serpientes <- data.frame(Longitud, Peso)
+Snakes.fit <- lm(Peso ~ Longitud, Serpientes) #Crea el modelo lineal
+Serpientes$Predecido <- predict(Snakes.fit) #Guarda los valores predichos
+Serpientes$Residuales <- residuals(Snakes.fit) #Guarda los residuales
+
+ggplot(Serpientes, aes(x = Longitud, y = Peso)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black", size = 0.8) +
+  geom_segment(aes(xend = Longitud, yend = Predecido), linetype = "dashed") +
+  geom_point() +
+  geom_point(aes(y = Predecido), color = "blue") +
+  labs(x = "X = Longitud (cm)", y = "Y = Peso (g)") +
+  theme_classic()
+```
+
+En este gráfico con los residuales de nuestros datos de las serpientes vemos que las líneas punteadas van desde nuestro valor observado hasta la línea de la regresión. La magnitud del residual corresponde al valor absoluto de la línea vertical. Los valores predichos $\hat{y}_i$ se encuentran en color azul en nuestra figura \@ref(fig:resid).
+
+Lo que nos importa principalmente es qué tan cerca está el valor observado, $y_i$, de su valor predicho, $\hat{y}_i$. Por esto medimos la distancia vertical de cada punto hasta la línea ajustada. Una medida que engloba a estos valores es la **suma de cuadrados de los residuales** o $SS(residuales)$, que se obtiene de la siguiente manera:
+
+\begin{equation}
+SS(residuales) = \sum_{i=1}^n(y_i - \hat{y}_i)^2 = \sum_{i=1}^n e_i^2
+(\#eq:residual2)
+\end{equation}
+
+La suma de cuadrados de los residuales será entonces más pequeña conforme mejor se ajuste la línea a nuestros datos. Veamos estos cálculos realizados con los datos de nuestras serpientes.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Serpientes$Residuales2 <- (Serpientes$Residuales)^2
+
+knitr::kable(Serpientes, "html", align = c("c", "c"), caption = "Residuales y valores predichos para los datos de serpientes", col.names = c("$x$", "$y$", "$\\hat{y}$", "$y-\\hat{y}$", "$(y-\\hat{y})^2$"), escape = F) %>% 
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:5, width_min = "3cm")
+
+sum(Serpientes$Residuales2)
+```
+
+Donde $x$ es la longitud, $y$ el peso, $\hat{y}$ es el valor predicho de $y$ para un punto dado por $x$, $y-\hat{y}$ son los residuales y $(y-\hat{y})^2$ son los cuadrados de los residuales. Por lo tanto para nuestros datos $SS(residuales) = 1093.669$.
+
+El **criterio de mínimos cuadrados** se basa en que la mejor línea recta es aquella que minimiza la suma de cuadrados de los residuales al mínimo. Debido a esto, la línea de regresión lineal ajustada también es conocida como **la línea de mínimos cuadrados.**
+
+### Desviación estándar de los residuales

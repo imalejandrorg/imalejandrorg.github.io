@@ -295,7 +295,7 @@ Como con el resto de distribuciones, tenemos una serie de comandos en `R` para t
 Para encontrar los valores críticos de nuestra distribución de $F$ simplemente utilizamos la función `qf()`. 
 
 ```{r}
-qf(0.05, df1 = 4, df = 20, lower.tail = F)
+qf(0.05, df1 = 4, df = 20, lower.tail = F) 
 ```
 
 Y listo, nuestro valor crítico de $F$ para un $F(4, 20)_{0.05}$ es 2.87. Estos comandos se utilizan como el resto que hemos visto con las demás distribuciones.

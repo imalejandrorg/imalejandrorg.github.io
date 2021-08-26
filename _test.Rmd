@@ -7,6 +7,19 @@ output:
 runtime: shiny
 ---
 
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+library(cowplot)
+library(ggpubr)
+library(latex2exp)
+library(kableExtra)
+library(broom)
+```
+
 ## Distribución de $t$
 
 ```{r eruptions, echo=FALSE}
@@ -33,13 +46,13 @@ renderPlot({
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 inputPanel(
   sliderInput("df2", label = "Grados de libertad:",
-              min = 1, max = 25, value = 1, step = 0.5)
+              min = 1, max = 100, value = 1, step = 0.5)
 )
 
 data <- data.frame(x = c(-4,4))
 
 renderPlot({
-  ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+  ggplot(data.frame(x = c(0, 100)), aes(x = x)) +
   stat_function(fun = dchisq, args = list(df = input$df2), size = 0.6, color = "red") +
   scale_y_continuous(breaks = NULL) +
   ylab("") +
