@@ -167,6 +167,8 @@ eq:residual
 fig:resid
 eq:residual2
 tab:unnamed-chunk-190
+eq:se
+eq:lm
 requisitos
 descarga-de-r-y-rstudio
 introducción-a-r
@@ -270,3 +272,8 @@ ecuación-de-la-regresión-lineal
 gráfica-de-promedios
 la-suma-de-cuadrados-de-los-residuales
 desviación-estándar-de-los-residuales
+el-coeficiente-de-determinación
+el-model-lineal
+estmiaciones-del-modelo-lineal
+interpolación-en-el-modelo-lineal
+inferencia-estadística-respecto-de-beta_1

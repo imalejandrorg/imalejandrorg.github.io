@@ -331,16 +331,16 @@ knitr::kable(Serpientes, "html", align = c("c", "c"), caption = "Media y desviac
 Por ende, $s_x = 4.6$ y $s_y = 35.3$. Además sabíamos que para estos datos, $r = 0.9437$. Tenemos todos los elementos para encontrar nuestra pendiente $b_1$ y nuestro intercepto $b_0$.
 
 \begin{equation}
-r(s_y/s_x) = 0.9437 \times (35.3/4.6) = 7.242
+r(s_y/s_x) = 0.9437 \times (35.337/4.637) = 7.1916
 \end{equation}
 
-Lo que equivale a un cambio de 7.242 g/cm. Es decir que un incremento en la longitud de una serpiente de 1 cm trae consigo un aumento en su peso de cerca de 7.242 g. Usando estos valores podemos encontrar el intercepto de $Y$.
+Lo que equivale a un cambio de 7.1916 g/cm. Es decir que un incremento en la longitud de una serpiente de 1 cm trae consigo un aumento en su peso de cerca de 7.1916 g. Usando estos valores podemos encontrar el intercepto de $Y$.
 
 \begin{equation}
-b_0 = 152 - 7.242 \times 4.6 = 118.6868
+b_0 = 152 - 7.7976 \times 63 = -301.08
 \end{equation}
 
-Por ende, nuestra línea de regresión ajustada es $\hat{y} = 118.6868 - 7.242x$.
+Por ende, nuestra línea de regresión ajustada es $\hat{y} = -301.08 + 7.1916x$.
 
 ### Gráfica de promedios
 
@@ -418,3 +418,124 @@ Donde $x$ es la longitud, $y$ el peso, $\hat{y}$ es el valor predicho de $y$ par
 El **criterio de mínimos cuadrados** se basa en que la mejor línea recta es aquella que minimiza la suma de cuadrados de los residuales al mínimo. Debido a esto, la línea de regresión lineal ajustada también es conocida como **la línea de mínimos cuadrados.**
 
 ### Desviación estándar de los residuales
+
+Esta es una medida derivada de la $SS(residuales)$, es más fácil de interpretar y se representa como $s_e$.
+
+\begin{equation}
+s_e = \sqrt{\frac{\sum_{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_{i=1}^ne_i^2}{n-2}} = \sqrt{\frac{SS(residuales)}{n-2}}
+(\#eq:se)
+\end{equation}
+
+Esta **desviación estándar de los residuales** nos dice que tan arriba o debajo de la línea de regresión tienden a estar. Para nuestros datos de las serpientes tenemos la siguiente $s_e$:
+
+\begin{equation}
+s_e = \sqrt{1093.669}{n-2} = 12.5
+\end{equation}
+
+Por lo tanto, la desviación estándar de los residuales (también conocido como error estándar de los residuales) nos da como resultado 12.5 g/cm. De nuestros datos, esperamos que el 68% de ellos se encuentren a $\pm1 s _e$ de la línea de regresión (de manera similar, el 95% de ellos se encontrará a $\pm2s_e$). 
+
+¿Cómo podemos hacer estos cálculos con `R`? Bueno, recordemos nuestra variable `Serpientes` que habíamos creado anteriormente.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Longitud <- c(60, 69, 66, 64, 54, 67, 59, 65, 63)
+Peso <- c(136, 198, 194, 140, 93, 172, 116, 174, 145)
+Serpientes <- data.frame(Longitud, Peso)
+```
+
+
+```{r}
+Serpientes
+```
+
+A partir de esta variable podemos construir un modelo lineal utilizando la función `lm()`.
+
+```{r}
+Regresion <- lm(Peso ~ Longitud, Serpientes) #Crea el modelo lineal
+summary(Regresion)
+```
+
+Como podemos ver, nos da el valor de la desviación estándar residual, pero, ¿Cómo hacemos para ver los valores predichos? ¿O para ver los residuales? Para esto vamos a agregar dos columnas a nuestra variable con los datos de las serpientes. Utilizamos `predict()` para extraer los valores de $\hat{y}$ y `residuals()` para extraer los residuales.
+
+```{r}
+Serpientes$Predecido <- predict(Regresion) #Guarda los valores predichos
+Serpientes$Residuales <- residuals(Regresion) #Guarda los residuales
+
+Serpientes
+```
+
+### El coeficiente de determinación
+
+Cuando elevamos $r$ al cuadrado, obtenemos información adicional de la regresión. El coeficiente de determinación, $r^2$, describe la proporción de la varianza en $Y$ que es explicada por la relación lineal entre $X$ y $Y$. El coeficiente de correlación $r$ obedece la siguiente aproximación:
+
+\begin{equation}
+r^2 \approx \frac{s_y^2-s_e^2}{s_y^2} = 1 - \frac{s_e^2}{s_y^2}
+\end{equation}
+
+El numerador $s_y^2 - s_e^2$ puede ser interpretado como la varianza total en $Y$ explicada por la línea de regresión. Si la línea de regresión se ajusta bien a los datos, entonces $s_e^2$ será cercano a 0, por lo que el numerador será cercano a $s_y^2$ y $r^2$ será cercano a 1. Nuestro valor de $r^2$ adquiere valores que van desde 0 a 1. Para nuestros datos de las serpientes, $r = 0.9437$, por lo que $r^2 = 0.8906$. Esto quiere decir que 89.06% de la varianza en el peso de las serpientes es explicada por esta relación.
+
+## El model lineal
+
+Podemos considerar realizar inferencia a partir de los datos sobre una población más grande. Una **población condicional** de $Y$ es una población en la cual los valores de $Y$ están asociados o fijos, dados un valor de $X$. Dentro de una población condicional, podemos hablar de una **distribución condicional** de $Y$. $\mu_{Y|X}$ corresponde a la media poblacional de $Y$ para un valor dado de $X$. $\sigma_{Y|X}$ corresponde a la desviación estándar poblacional para un valor dado de $X$.
+
+Por ejemplo, en el caso de las ratas y las anfetaminas, $\mu_{Y|X}$ y $\sigma_{Y|X}$ representan la media y la desviación estándar de los valores de consumo de comida para las ratas dada la dosis $X$ de anfetamina. Cabe aclarar que en estudios observacionales, las distribuciones condicionales corresponden a subpoblaciones más que a unidades experimentales.
+
+Para el modelo lineal, se le puede dar una interpretación paramétrica si se cumplen dos condiciones:
+
+**- Linearidad:** $Y = \mu_{Y|X} + \epsilon$ donde $\mu_{Y|X}$ es la función lineal de $X$, es decir, $\mu_{Y|X} = \beta_0 + \beta_1X$. Por ende $Y = \beta_0 + \beta_1X + \epsilon$.
+
+**- Constancia en la desviación estándar:** o sea, que $\sigma_{Y|X}$ no dependa de $X$. Denotamos este valor constante como $\sigma_\epsilon$.
+
+Por lo tanto, la fórmula general para el modelo lineal es:
+
+\begin{equation}
+Y = \beta_0 + \beta_1X + \epsilon
+(\#eq:lm)
+\end{equation}
+
+Como en el caso del ANOVA, el término $\epsilon$ representa el error aleatorio. La desviación estándar condicional es la que determina la variabilidad de $Y$ en un valor dado de $X$, sin embargo, ya que el modelo lineal determina que la desviación estándar es la misma para todos los valores de $X$, entonces la representamos como $\sigma_\epsilon$ y nos referimos a ella como la desviación estándar del error aleatorio.
+
+### Estmiaciones del modelo lineal
+
+Al aplicar el modelo lineal estamos dispuestos a asumir que también aceptamos el **modelo de submuestreo aleatorio,** el cuál dice que para cada par de observaciones ($x, y$), consideramos al valor de $y$ como si hubiese sido muestreado de manera aleatoria de la población condicional de los valores de $Y$ asociados al valor $x$ de $X$.
+
+Bajo este modelo, los valores $b_0, b_1$ y $s_e$ calculados en la regresión lineal se interpretan como estimadores de los parámetros poblacionales:
+
+-$b_0$ es un estimado de $\beta_0$
+
+-$b_1$ es un estimado de $\beta_1$
+
+-$s_e$ es un estimado de $\sigma_\epsilon$
+
+Gracias a la función `summary(Regresion)` y a los cálculos realizados anteriormente, sabemos que $b_0 = -301.08$, $b_1 = 7.1916$ y que $s_e = 12.5$ para los datos de nuestras serpientes.
+
+```{r}
+summary(Regresion)
+```
+
+La pendiente de la línea de regresión $b_0 = 7.1916$ g/cm es un estimado de un parámetro morfológico (cambios en unidades de peso por cada unidad de longitud). Además, encontramos una variabilidad estimada de  12.5 g en el peso de las serpientes para un valor fijo de $X$.
+
+### Interpolación en el modelo lineal
+
+Imaginemos que quisiéramos saber el peso de una hipotética serpiente que midiese 63.5 cm. Ya que en nuestros datos no tenemos ningún valor que nos de un estimado, tenemos que realizar una **interpolación** a partir de nuestra fórmula de regresión lineal. Para el caso de las serpientes, $\hat{y} = (-301.08) + 7.1916 \times 63.5 = 155.59$, lo que corresponde a un promedio estimado de 155.9 g con una desviación estándar $s_e = 12.5$ g (esto no quiere decir que el valor de $y$ será 155.59 g, pero si obtenemos múltiples observaciones de este valor cuando $X = 63.5$ en promedio, obtendremos 155.59 g).
+
+Cabe aclarar que lo que hicimos fue una interpolación porque, el dato estimado que queríamos saber se encuentra dentro del rango de nuestros datos. Cuando estimamos valores fuera del rango de nuestros datos, se le conoce como **extrapolación.** Aunque esto se recomienda evitar siempre que sea posible, ya que no hay garantía de que la linearidad se mantendrá fuera del conjunto de datos observados.
+
+La ventaja de realizar predicciones utilizando el modelo de la regresión lineal es que, este hace uso de **todo** el conjunto de datos que tenemos.
+
+>**Ejemplo:** Supongamos que capturamos una hembra de la serpiente *V. bertis* y queremos saber cuál es su peso. No hemos medido a la serpiente aún, así que no conocemos su longitud.
+
+Para este caso, nuestro mejor estimado sería utilizar la media para el peso, $\overline{y} = 152$ g.
+
+>**Ejemplo:** tras realizar la medición correspondiente, sabemos que la hembra de *V. bertis* mide 63 cm Tomando en cuenta esta información, ¿cuál es el mejor estimado de su peso?
+
+Sabemos por el grupo que capturamos anteriormente que el promedio del peso de las serpientes que miden 63 cm es, $\overline{y}|x = 145$ (ya que solamente capturamos una serpiente que midiera 63 cm). 
+
+>**Ejemplo:** los investigadores ajustan una línea para el conjunto de datos de *V. bertis* capturadas anteriormente, por lo que sabemos que la lína de regresión lineal de mínimos cuadrados es $Y = -301.08 - 7.1916X$.
+
+Ahora que sabemos esto, podemos dar un estimado mucho mejor sobre cuál será el promedio del peso de las serpientes cuando miden 63 cm. $\hat{y} = -301.08 + 7.1916 \times 63 = 151.9905$ cm.
+
+Esperamos que la última predicción sea la mejor, siempre y cuando creamos que existen una relación lineal entre las variables $Y$ y $X$. Además nos da resultados para valores que no se encuentren dentro del conjunto de datos. Es importante saber que esto será verdad siempre y cuando se mantenga la relación lineal de las variables.
+
+## Inferencia estadística respecto de $\beta_1$
+
+En esta parte consideraremos la inferencia acerca de la verdadera pendiente de $\beta_1$ de la regresión lineal. Basado en que la condición de que la distribución condicional de la población $Y$ para cada valor de $X$ tiene una distribución normal. Esto quiere decir que en el modelo lineal $Y = \beta_0 + \beta_1X + \epsilon$, el valor de $\epsilon$ tiene una distribución normal. 
