@@ -176,8 +176,6 @@ fig:resplot2
 eq:ICreg
 eq:ICreg2
 fig:confypred
-requisitos
-descarga-de-r-y-rstudio
 introducción-a-r
 interfaz
 creando-nuestro-primer-proyecto

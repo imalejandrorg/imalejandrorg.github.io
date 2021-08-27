@@ -22,10 +22,10 @@ library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
-# Requisitos
+# Requisitos {-#section-id}
 Antes de comenzar con el curso es necesario que descarguemos ciertos programas entre ellos están incluidos R y RStudio.
 
-## Descarga de R y RStudio
+## Descarga de R y RStudio {-#section-id}
 Tenemos que distinguir entre R y RStudio. Como tal, R es el lenguaje de programación y RStudio es el ambiente de trabajo donde utilizamos este lenguaje de programación.
 
 Para descargar R podemos acceder al link de [esta página.](https://cran.r-project.org/bin/windows/base/)
