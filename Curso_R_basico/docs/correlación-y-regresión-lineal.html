@@ -309,9 +309,31 @@ div.csl-indent {
 <li class="chapter" data-level="8.3.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#estmiaciones-del-modelo-lineal"><i class="fa fa-check"></i><b>8.3.1</b> Estmiaciones del modelo lineal</a></li>
 <li class="chapter" data-level="8.3.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#interpolación-en-el-modelo-lineal"><i class="fa fa-check"></i><b>8.3.2</b> Interpolación en el modelo lineal</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#inferencia-estadística-respecto-de-beta_1"><i class="fa fa-check"></i><b>8.4</b> Inferencia estadística respecto de <span class="math inline">\(\beta_1\)</span></a></li>
+<li class="chapter" data-level="8.4" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#inferencia-estadística-respecto-de-beta_1"><i class="fa fa-check"></i><b>8.4</b> Inferencia estadística respecto de <span class="math inline">\(\beta_1\)</span></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-error-estándar-de-b_1"><i class="fa fa-check"></i><b>8.4.1</b> El error estándar de <span class="math inline">\(b_1\)</span></a></li>
+<li class="chapter" data-level="8.4.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#intervalo-de-confianza-para-beta_1"><i class="fa fa-check"></i><b>8.4.2</b> Intervalo de confianza para <span class="math inline">\(\beta_1\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#prueba-de-hipótesis-para-h_0-beta_1-0"><i class="fa fa-check"></i><b>8.5</b> Prueba de hipótesis para <span class="math inline">\(H_0: \beta_1 = 0\)</span></a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#gráficos-de-residuales"><i class="fa fa-check"></i><b>8.5.1</b> Gráficos de residuales</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#intervalos-de-confianza-y-de-predicción"><i class="fa fa-check"></i><b>8.6</b> Intervalos de confianza y de predicción</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#computando-los-intervalos"><i class="fa fa-check"></i><b>8.6.1</b> Computando los intervalos</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="9" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html"><i class="fa fa-check"></i><b>9</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>9.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="9.2" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>9.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="9.3" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>9.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#anova-en-r"><i class="fa fa-check"></i><b>9.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#pruebas-post-hoc-1"><i class="fa fa-check"></i><b>9.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -1280,11 +1302,11 @@ s_e = \sqrt{1093.669}{n-2} = 12.5
 ## Multiple R-squared:  0.8905, Adjusted R-squared:  0.8749 
 ## F-statistic: 56.94 on 1 and 7 DF,  p-value: 0.0001321</code></pre>
 <p>Como podemos ver, nos da el valor de la desviación estándar residual, pero, ¿Cómo hacemos para ver los valores predichos? ¿O para ver los residuales? Para esto vamos a agregar dos columnas a nuestra variable con los datos de las serpientes. Utilizamos <code>predict()</code> para extraer los valores de <span class="math inline">\(\hat{y}\)</span> y <code>residuals()</code> para extraer los residuales.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="correlación-y-regresión-lineal.html#cb292-1" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Predecido <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion) <span class="co">#Guarda los valores predichos</span></span>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="correlación-y-regresión-lineal.html#cb292-1" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Predicho <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion) <span class="co">#Guarda los valores predichos</span></span>
 <span id="cb292-2"><a href="correlación-y-regresión-lineal.html#cb292-2" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Residuales <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Regresion) <span class="co">#Guarda los residuales</span></span>
 <span id="cb292-3"><a href="correlación-y-regresión-lineal.html#cb292-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb292-4"><a href="correlación-y-regresión-lineal.html#cb292-4" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
-<pre><code>##   Longitud Peso Predecido Residuales
+<pre><code>##   Longitud Peso  Predicho Residuales
 ## 1       60  136 130.42442   5.575581
 ## 2       69  198 195.15116   2.848837
 ## 3       66  194 173.57558  20.424419
@@ -1369,7 +1391,146 @@ Y = \beta_0 + \beta_1X + \epsilon
 <div id="inferencia-estadística-respecto-de-beta_1" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Inferencia estadística respecto de <span class="math inline">\(\beta_1\)</span></h2>
 <p>En esta parte consideraremos la inferencia acerca de la verdadera pendiente de <span class="math inline">\(\beta_1\)</span> de la regresión lineal. Basado en que la condición de que la distribución condicional de la población <span class="math inline">\(Y\)</span> para cada valor de <span class="math inline">\(X\)</span> tiene una distribución normal. Esto quiere decir que en el modelo lineal <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>, el valor de <span class="math inline">\(\epsilon\)</span> tiene una distribución normal.</p>
+<div id="el-error-estándar-de-b_1" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> El error estándar de <span class="math inline">\(b_1\)</span></h3>
+<p>En el contexto del modelo lineal, <span class="math inline">\(b_1\)</span> es un estimado de <span class="math inline">\(\beta_1\)</span> y como todo valor estimado, está sujeto a error de muestreo. La fórmula para calcularlo es la siguiente:</p>
+<p><span class="math display" id="eq:b1se">\[\begin{equation}
+SE_{b_1} = \frac{s_e}{s_x\sqrt{n-1}}
+\tag{8.12}
+\end{equation}\]</span></p>
+<p>Para los datos de las serpientes, tenemos que <span class="math inline">\(n = 9\)</span>, <span class="math inline">\(s_x = 4.637\)</span>, y que <span class="math inline">\(s_e = 12.5\)</span>. Entonces el error estándar de <span class="math inline">\(b_0\)</span> sería:</p>
+<p><span class="math display">\[\begin{equation}
+SE_{b_1} = \frac{12.5}{4.637 \sqrt{9-1}} = 0.9531
+\end{equation}\]</span></p>
+<p>Entonces, el error estándar de nuestra pendiente <span class="math inline">\(b_1 = 0.9531\)</span>. El valor de <span class="math inline">\(b_1\)</span> depende de varios aspectos de los datos. <span class="math inline">\(SE_{b_1}\)</span> depende de la dispersión de los datos sobre la regresión lineal (<span class="math inline">\(s_e\)</span>) y en el tamaño de muestreo <span class="math inline">\(n\)</span>. Datos con menor dispersión sobre la regresión lineal (una <span class="math inline">\(s_e\)</span> más pequeña) y tamaños de muestra más grandes, producen mejores estimadores de <span class="math inline">\(\beta_1\)</span>. Además de esto, existe un tercer factor que afecta al <span class="math inline">\(SE_{b_1}\)</span> y es la variabilidad de <span class="math inline">\(X\)</span>. Entre más dispresos estén los valores de <span class="math inline">\(X\)</span> (mayor <span class="math inline">\(s_x\)</span>), mayor será la precisión de nuestra estimación.</p>
+<p>Esto tiene implicaciones en el diseño experimental, ya que si podemos controlar la dispresión de los valores de <span class="math inline">\(X\)</span> preferiríamos datos que minimicen el valor del <span class="math inline">\(SE_{b_1}\)</span>.</p>
+</div>
+<div id="intervalo-de-confianza-para-beta_1" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Intervalo de confianza para <span class="math inline">\(\beta_1\)</span></h3>
+<p>Un intervalo de confianza para <span class="math inline">\(\beta_1\)</span> se puede construir basándose en la distribución <span class="math inline">\(t\)</span> de Student. Entonces, un intervalo de confianza al 95% sería:</p>
+<p><span class="math display">\[\begin{equation}
+b_1 \pm t_{0.025}SE_{b_1}
+\end{equation}\]</span></p>
+<p>En dónde el valor crítico de <span class="math inline">\(t\)</span> se determina por la distribución <span class="math inline">\(t\)</span> de Student con los grados de libertad:</p>
+<p><span class="math display">\[\begin{equation}
+df = n -2
+\end{equation}\]</span></p>
+<p>Para el caso de las serpientes, nuestro intervalo de confianza sería:</p>
+<p><span class="math display">\[\begin{equation}
+7.1916 \pm 2.365 \times 0.9531
+\end{equation}\]</span></p>
+<p>Por lo que nuestro intervalo sería <span class="math inline">\((4.94, 9.45)\)</span> g/cm. Podemos calcular el intervalo de confianza en <code>R</code> con la función `<code>confint()</code>.</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="correlación-y-regresión-lineal.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Regresion)</span></code></pre></div>
+<pre><code>##                   2.5 %      97.5 %
+## (Intercept) -443.410309 -158.764110
+## Longitud       4.938183    9.445538</code></pre>
+<p>Donde obtenemos el intervalo de confianza tanto para <span class="math inline">\(b_0\)</span> como para <span class="math inline">\(b_1\)</span>. En este caso nos interesa el de nuestra pendiente <span class="math inline">\(b_1\)</span>.</p>
+</div>
+</div>
+<div id="prueba-de-hipótesis-para-h_0-beta_1-0" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Prueba de hipótesis para <span class="math inline">\(H_0: \beta_1 = 0\)</span></h2>
+<p>En algunas investigaciones, no es una conclusión inevitable que exista una relación lineal entre <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>. Puede ser entonces importante considerar qu cualquier tendencia aparente surgió por azar, que sea ilusora y que solo refleje la variabilidad del muestreo. Entonces:</p>
+<p><span class="math display">\[\begin{equation}
+H_0: \mu_{Y|X} \space no \space depende \space de \space X
+\end{equation}\]</span></p>
+<p>Lo que se puede traducir a <span class="math inline">\(H_0: \beta_1 = 0\)</span>. Entonces nuestro estadístico de prueba sería:</p>
+<p><span class="math display" id="eq:b1test">\[\begin{equation}
+t_s = \frac{b_1 - 0}{SE_{b_1}}
+\tag{8.13}
+\end{equation}\]</span></p>
+<p>Y de nuevo, los valores críticos se calculan con los grados de libertad, <span class="math inline">\(df = n - 2\)</span>. En <code>R</code> este proceso ya lo hemos realizado con la función <code>summary()</code> aplicada a nuestro modelo. El valor <span class="math inline">\(0\)</span> en la fórmula <a href="correlación-y-regresión-lineal.html#eq:b1test">(8.13)</a> nos recuerda que estamos comparando el valor esperado bajo la <span class="math inline">\(H_0\)</span> con el valor obtenido.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="correlación-y-regresión-lineal.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Peso ~ Longitud, data = Serpientes)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -19.192  -7.233   2.849   5.727  20.424 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -301.0872    60.1885  -5.002 0.001561 ** 
+## Longitud       7.1919     0.9531   7.546 0.000132 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 12.5 on 7 degrees of freedom
+## Multiple R-squared:  0.8905, Adjusted R-squared:  0.8749 
+## F-statistic: 56.94 on 1 and 7 DF,  p-value: 0.0001321</code></pre>
+<p>En este caso podemos ver que el valor <span class="math inline">\(t\)</span> ya está dado en el apartado de los coeficientes (<span class="math inline">\(t_s = 7.546\)</span>), junto con nuestro valor-<em>p</em> denotado por el título <code>Pr(&gt;|t|)</code>, que en este caso corresponde a <span class="math inline">\(valor-p = 0.000132\)</span>, por lo tanto rechazamos la <span class="math inline">\(H_0\)</span> ya que <span class="math inline">\(valor-p &lt; 0.05\)</span>.</p>
+<p>Hay que interpretar esta prueba con cuidado. La prueba de hipótesis para <span class="math inline">\(\beta_1\)</span> no nos dice si existen una relación lineal entre <span class="math inline">\(\mu_{Y|X}\)</span> y <span class="math inline">\(X\)</span>, más bien, asume que el modelo linea es verdadero y nos dice si podemos concluir que la pendiente no es 0.</p>
+<div id="gráficos-de-residuales" class="section level3" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Gráficos de residuales</h3>
+<p>Son bastante útiles para detectar anomalías en los datos (como algún patrón distinto al patrón lineal). Estos gráficos, conocidos como <strong>gráficos de residuales</strong> es lo que queda después de que removemos la tendencia lineal, por lo que esperamos que sean gráficos sin un patrón conciso. Por ejemplo, la figura <a href="correlación-y-regresión-lineal.html#fig:resplot">8.6</a></p>
+<div class="figure" style="text-align: center"><span id="fig:resplot"></span>
+<img src="Curso_R_basico_files/figure-html/resplot-1.png" alt="Gráfico de residuales mostrando la ausencia de curvatura o patrón para los datos de serpientes." width="480" />
+<p class="caption">
+Figura 8.6: Gráfico de residuales mostrando la ausencia de curvatura o patrón para los datos de serpientes.
+</p>
+</div>
+<p>De igual manera si las condiciones de normalidad se cumplen, deberíamos ver esto en un gráfico en el que se comparan los valores de los residuales con los valores <span class="math inline">\(Z\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:resplot2"></span>
+<img src="Curso_R_basico_files/figure-html/resplot2-1.png" alt="Gráfico de residuales comparados con la valores Z teóricos para mostrar la normalidad." width="480" />
+<p class="caption">
+Figura 8.7: Gráfico de residuales comparados con la valores Z teóricos para mostrar la normalidad.
+</p>
+</div>
+<p>Como podemos ver también se sigue una distribución más o menos lineal cuando se compara con los valores <span class="math inline">\(Z\)</span> teóricos.</p>
+</div>
+</div>
+<div id="intervalos-de-confianza-y-de-predicción" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> Intervalos de confianza y de predicción</h2>
+<p>En esta parte veremos la diferencia entre la predicción de la media del valor de <span class="math inline">\(Y\)</span> para un valor <span class="math inline">\(X\)</span> dado con obtener un valor específico de <span class="math inline">\(Y\)</span> para un valor de <span class="math inline">\(X\)</span> dado.</p>
+<p>Por ejemplo, ya sabemos que si queremos predecir la media del peso de una de las serpientes con una longitud de 63.5 cm la media de nuestras observaciones será 155.59 g. Sin embargo, ¿qué valor obtendríamos si quisieramos calcular un valor puntual? Pues la respuesta es que obtendríamos el mismo valor de 155.59 g. Utilizamos la regresión lineal de la misma manera, sin embargo, la precisión de nuestras predicciones son distinas.</p>
+<div id="computando-los-intervalos" class="section level3" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Computando los intervalos</h3>
+<p>Supongamos que queremos predecir <span class="math inline">\(\mu_{Y|X=x^*}\)</span> o <span class="math inline">\(Y|X=x^*\)</span>. Es decir, predicr la media o el valor actual de <span class="math inline">\(Y\)</span> cuando el valor de <span class="math inline">\(X = x^*\)</span>.
+Las fórmulas para el intevalo de confianza (Fórmula @eq:ICreg) y el intervalo de la predicción (Fórmula @eq:ICreg) son:</p>
+<p><span class="math display" id="eq:ICreg">\[\begin{equation}
+\hat{y} \pm t_{0.025}s_e\sqrt{\frac{1}{n} + \frac{(x^*-\overline{x})^2}{(n-1)s_x^2}}
+\tag{8.14}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:ICreg2">\[\begin{equation}
+\hat{y} \pm t_{0.025}s_e\sqrt{1 + \frac{1}{n} + \frac{(x^*-\overline{x})^2}{(n-1)s_x^2}}
+\tag{8.15}
+\end{equation}\]</span></p>
+<p>Con el valor de <span class="math inline">\(t_{0.025}\)</span> determinado por la distribución de <span class="math inline">\(t\)</span> y los <span class="math inline">\(df = n - 2\)</span>. Aunque las fórmulas son muy parecidas, el <span class="math inline">\(1\)</span> agregado debajo de la raíz cuadrada factoriza la variabilidad asociada cuando intentamos hacer una predicción individual.</p>
+<div class="figure" style="text-align: center"><span id="fig:confypred"></span>
+<img src="Curso_R_basico_files/figure-html/confypred-1.png" alt="Intervalo de confianza al 95% (gris) e intervalo de la predicción al 95% (línea azul punteada) para los datos de serpientes." width="480" />
+<p class="caption">
+Figura 8.8: Intervalo de confianza al 95% (gris) e intervalo de la predicción al 95% (línea azul punteada) para los datos de serpientes.
+</p>
+</div>
+<p>Como podemos ver en la figura <a href="correlación-y-regresión-lineal.html#fig:confypred">8.8</a>, el intervalo de confianza es muchísimo más preciso que el intervalo de predicción, como se mencionó anteriormente. Para obtener los intervalos de confianza y de predicción en <code>R</code> podemos utilizar las siguientes funciones basadas en nuestro modelo lineal.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="correlación-y-regresión-lineal.html#cb300-1" aria-hidden="true" tabindex="-1"></a>Conf.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb300-2"><a href="correlación-y-regresión-lineal.html#cb300-2" aria-hidden="true" tabindex="-1"></a>Conf.int</span></code></pre></div>
+<pre><code>##         fit       lwr      upr
+## 1 130.42442 118.47544 142.3734
+## 2 195.15116 178.42057 211.8818
+## 3 173.57558 161.62660 185.5246
+## 4 159.19186 149.08515 169.2986
+## 5  87.27326  64.72396 109.8225
+## 6 180.76744 167.41336 194.1215
+## 7 123.23256 109.87848 136.5866
+## 8 166.38372 155.54939 177.2181
+## 9 152.00000 142.14777 161.8522</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="correlación-y-regresión-lineal.html#cb302-1" aria-hidden="true" tabindex="-1"></a>Pred.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval=</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in predict.lm(Regresion, interval = &quot;prediction&quot;): predictions on current data refer to _future_ responses</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="correlación-y-regresión-lineal.html#cb304-1" aria-hidden="true" tabindex="-1"></a>Pred.int</span></code></pre></div>
+<pre><code>##         fit       lwr      upr
+## 1 130.42442  98.54375 162.3051
+## 2 195.15116 161.18778 229.1145
+## 3 173.57558 141.69492 205.4562
+## 4 159.19186 127.95495 190.4288
+## 5  87.27326  50.09706 124.4494
+## 6 180.76744 148.33397 213.2009
+## 7 123.23256  90.79908 155.6660
+## 8 166.38372 134.90386 197.8636
+## 9 152.00000 120.84450 183.1555</code></pre>
+<p>Si vemos los resultados, los valores del intervalo de confianza son más estrechos que los del intervalo de predicción. El apartado <code>fit</code> corresponde al valor predicho para cierto valor de <span class="math inline">\(X\)</span>. Con el argumento <code>level</code> podemos cambiar el nivel de % para nuestros intervalos.</p>
 
+</div>
 </div>
 </div>
             </section>

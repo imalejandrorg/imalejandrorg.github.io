@@ -309,9 +309,31 @@ div.csl-indent {
 <li class="chapter" data-level="8.3.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#estmiaciones-del-modelo-lineal"><i class="fa fa-check"></i><b>8.3.1</b> Estmiaciones del modelo lineal</a></li>
 <li class="chapter" data-level="8.3.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#interpolación-en-el-modelo-lineal"><i class="fa fa-check"></i><b>8.3.2</b> Interpolación en el modelo lineal</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#inferencia-estadística-respecto-de-beta_1"><i class="fa fa-check"></i><b>8.4</b> Inferencia estadística respecto de <span class="math inline">\(\beta_1\)</span></a></li>
+<li class="chapter" data-level="8.4" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#inferencia-estadística-respecto-de-beta_1"><i class="fa fa-check"></i><b>8.4</b> Inferencia estadística respecto de <span class="math inline">\(\beta_1\)</span></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-error-estándar-de-b_1"><i class="fa fa-check"></i><b>8.4.1</b> El error estándar de <span class="math inline">\(b_1\)</span></a></li>
+<li class="chapter" data-level="8.4.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#intervalo-de-confianza-para-beta_1"><i class="fa fa-check"></i><b>8.4.2</b> Intervalo de confianza para <span class="math inline">\(\beta_1\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#prueba-de-hipótesis-para-h_0-beta_1-0"><i class="fa fa-check"></i><b>8.5</b> Prueba de hipótesis para <span class="math inline">\(H_0: \beta_1 = 0\)</span></a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#gráficos-de-residuales"><i class="fa fa-check"></i><b>8.5.1</b> Gráficos de residuales</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#intervalos-de-confianza-y-de-predicción"><i class="fa fa-check"></i><b>8.6</b> Intervalos de confianza y de predicción</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#computando-los-intervalos"><i class="fa fa-check"></i><b>8.6.1</b> Computando los intervalos</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="9" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html"><i class="fa fa-check"></i><b>9</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>9.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="9.2" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>9.2</b> Prueba de homocedasticidad</a></li>
+<li class="chapter" data-level="9.3" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#análisis-de-varianza-anova-de-una-vía"><i class="fa fa-check"></i><b>9.3</b> Análisis de varianza (ANOVA de una vía)</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#anova-en-r"><i class="fa fa-check"></i><b>9.3.1</b> ANOVA en R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="análisis-de-varianza-anova-1.html"><a href="análisis-de-varianza-anova-1.html#pruebas-post-hoc-1"><i class="fa fa-check"></i><b>9.4</b> Pruebas <em>post hoc</em></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -2397,7 +2419,7 @@ Figura 2.10: En este caso, solo con escribir las primeras letras del paquete des
 </div>
 <div id="importar-datos-a-r" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Importar datos a R</h2>
-<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="bibliografia.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="bibliografia.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="bibliografia.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="bibliografia.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>La mayor parte del tiempo lo que queremos hacer es importar nuestros propios datos a R. En este caso utilizaremos las matrices de datos presentadas en el libro de <span class="citation"><a href="análisis-de-varianza-anova-1.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="análisis-de-varianza-anova-1.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>. Utilizaremos una base de datos de aves del capítulo 6 del libro de <span class="citation"><a href="análisis-de-varianza-anova-1.html#ref-Palacio2020" role="doc-biblioref">Palacio et al.</a> (<a href="análisis-de-varianza-anova-1.html#ref-Palacio2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p><strong>Descargar:</strong> <a href="https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt">“Aves.txt”</a></p>
 <p>Una vez que tenemos nuestra base de datos en la carpeta de nuestro proyecto, la importamos a través de la función <code>read.table()</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introducción-a-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Aves.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>

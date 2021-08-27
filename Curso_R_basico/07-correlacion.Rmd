@@ -23,6 +23,7 @@ library(ggpubr)
 library(latex2exp)
 library(kableExtra)
 library(broom)
+library(ggpubr)
 ```
 
 >**Ejemplo:** La anfetamina es una droga que suprime el apetito. En un estudio, investigadores alocaron aleatoriamente a 24 ratas a tres distintos grupos de tratamientos para recibir una inyección de anfetamina a distintas dosis y una inyección con solución salina. Se midió la cantidad de comida consumida por cada animal 3 horas después de la inyección. Los resultados (g de comida consumidos por kg de peso) se muestran en la siguiente tabla.
@@ -380,14 +381,14 @@ Longitud <- c(60, 69, 66, 64, 54, 67, 59, 65, 63)
 Peso <- c(136, 198, 194, 140, 93, 172, 116, 174, 145)
 Serpientes <- data.frame(Longitud, Peso)
 Snakes.fit <- lm(Peso ~ Longitud, Serpientes) #Crea el modelo lineal
-Serpientes$Predecido <- predict(Snakes.fit) #Guarda los valores predichos
+Serpientes$Predicho <- predict(Snakes.fit) #Guarda los valores predichos
 Serpientes$Residuales <- residuals(Snakes.fit) #Guarda los residuales
 
 ggplot(Serpientes, aes(x = Longitud, y = Peso)) +
   geom_smooth(method = "lm", se = FALSE, color = "black", size = 0.8) +
-  geom_segment(aes(xend = Longitud, yend = Predecido), linetype = "dashed") +
+  geom_segment(aes(xend = Longitud, yend = Predicho), linetype = "dashed") +
   geom_point() +
-  geom_point(aes(y = Predecido), color = "blue") +
+  geom_point(aes(y = Predicho), color = "blue") +
   labs(x = "X = Longitud (cm)", y = "Y = Peso (g)") +
   theme_classic()
 ```
@@ -457,7 +458,7 @@ summary(Regresion)
 Como podemos ver, nos da el valor de la desviación estándar residual, pero, ¿Cómo hacemos para ver los valores predichos? ¿O para ver los residuales? Para esto vamos a agregar dos columnas a nuestra variable con los datos de las serpientes. Utilizamos `predict()` para extraer los valores de $\hat{y}$ y `residuals()` para extraer los residuales.
 
 ```{r}
-Serpientes$Predecido <- predict(Regresion) #Guarda los valores predichos
+Serpientes$Predicho <- predict(Regresion) #Guarda los valores predichos
 Serpientes$Residuales <- residuals(Regresion) #Guarda los residuales
 
 Serpientes
@@ -539,3 +540,143 @@ Esperamos que la última predicción sea la mejor, siempre y cuando creamos que 
 ## Inferencia estadística respecto de $\beta_1$
 
 En esta parte consideraremos la inferencia acerca de la verdadera pendiente de $\beta_1$ de la regresión lineal. Basado en que la condición de que la distribución condicional de la población $Y$ para cada valor de $X$ tiene una distribución normal. Esto quiere decir que en el modelo lineal $Y = \beta_0 + \beta_1X + \epsilon$, el valor de $\epsilon$ tiene una distribución normal. 
+
+### El error estándar de $b_1$
+
+En el contexto del modelo lineal, $b_1$ es un estimado de $\beta_1$ y como todo valor estimado, está sujeto a error de muestreo. La fórmula para calcularlo es la siguiente:
+
+\begin{equation}
+SE_{b_1} = \frac{s_e}{s_x\sqrt{n-1}}
+(\#eq:b1se)
+\end{equation}
+
+Para los datos de las serpientes, tenemos que $n = 9$, $s_x = 4.637$, y que $s_e = 12.5$. Entonces el error estándar de $b_0$ sería:
+
+\begin{equation}
+SE_{b_1} = \frac{12.5}{4.637 \sqrt{9-1}} = 0.9531
+\end{equation}
+
+Entonces, el error estándar de nuestra pendiente $b_1 = 0.9531$. El valor de $b_1$ depende de varios aspectos de los datos. $SE_{b_1}$ depende de la dispersión de los datos sobre la regresión lineal ($s_e$) y en el tamaño de muestreo $n$. Datos con menor dispersión sobre la regresión lineal (una $s_e$ más pequeña) y tamaños de muestra más grandes, producen mejores estimadores de $\beta_1$. Además de esto, existe un tercer factor que afecta al $SE_{b_1}$ y es la variabilidad de $X$. Entre más dispresos estén los valores de $X$ (mayor $s_x$), mayor será la precisión de nuestra estimación.
+
+Esto tiene implicaciones en el diseño experimental, ya que si podemos controlar la dispresión de los valores de $X$ preferiríamos datos que minimicen el valor del $SE_{b_1}$. 
+
+### Intervalo de confianza para $\beta_1$
+
+Un intervalo de confianza para $\beta_1$ se puede construir basándose en la distribución $t$ de Student. Entonces, un intervalo de confianza al 95% sería:
+
+\begin{equation}
+b_1 \pm t_{0.025}SE_{b_1}
+\end{equation}
+
+En dónde el valor crítico de $t$ se determina por la distribución $t$ de Student con los grados de libertad:
+
+\begin{equation}
+df = n -2
+\end{equation}
+
+Para el caso de las serpientes, nuestro intervalo de confianza sería:
+
+\begin{equation}
+7.1916 \pm 2.365 \times 0.9531
+\end{equation}
+
+Por lo que nuestro intervalo sería $(4.94, 9.45)$ g/cm. Podemos calcular el intervalo de confianza en `R` con la función ``confint()`.
+
+```{r}
+confint(Regresion)
+```
+
+Donde obtenemos el intervalo de confianza tanto para $b_0$ como para $b_1$. En este caso nos interesa el de nuestra pendiente $b_1$.
+
+## Prueba de hipótesis para $H_0: \beta_1 = 0$
+
+En algunas investigaciones, no es una conclusión inevitable que exista una relación lineal entre $X$ y $Y$. Puede ser entonces importante considerar qu cualquier tendencia aparente surgió por azar, que sea ilusora y que solo refleje la variabilidad del muestreo. Entonces:
+
+\begin{equation}
+H_0: \mu_{Y|X} \space no \space depende \space de \space X
+\end{equation}
+
+Lo que se puede traducir a $H_0: \beta_1 = 0$. Entonces nuestro estadístico de prueba sería:
+
+\begin{equation}
+t_s = \frac{b_1 - 0}{SE_{b_1}}
+(\#eq:b1test)
+\end{equation}
+
+Y de nuevo, los valores críticos se calculan con los grados de libertad, $df = n - 2$. En `R` este proceso ya lo hemos realizado con la función `summary()` aplicada a nuestro modelo. El valor $0$ en la fórmula \@ref(eq:b1test) nos recuerda que estamos comparando el valor esperado bajo la $H_0$ con el valor obtenido.
+
+```{r}
+summary(Regresion)
+```
+
+En este caso podemos ver que el valor $t$ ya está dado en el apartado de los coeficientes ($t_s = 7.546$), junto con nuestro valor-*p* denotado por el título `Pr(>|t|)`, que en este caso corresponde a $valor-p = 0.000132$, por lo tanto rechazamos la $H_0$ ya que $valor-p < 0.05$.
+
+Hay que interpretar esta prueba con cuidado. La prueba de hipótesis para $\beta_1$ no nos dice si existen una relación lineal entre $\mu_{Y|X}$ y $X$, más bien, asume que el modelo linea es verdadero y nos dice si podemos concluir que la pendiente no es 0.
+
+### Gráficos de residuales
+
+Son bastante útiles para detectar anomalías en los datos (como algún patrón distinto al patrón lineal). Estos gráficos, conocidos como **gráficos de residuales** es lo que queda después de que removemos la tendencia lineal, por lo que esperamos que sean gráficos sin un patrón conciso. Por ejemplo, la figura \@ref(fig:resplot)
+
+```{r resplot, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align="center", fig.width=5, fig.height=5, fig.cap="Gráfico de residuales mostrando la ausencia de curvatura o patrón para los datos de serpientes."}
+ggplot(Serpientes, aes(x = Predicho, y = Residuales)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_classic()
+```
+
+De igual manera si las condiciones de normalidad se cumplen, deberíamos ver esto en un gráfico en el que se comparan los valores de los residuales con los valores $Z$.
+
+```{r resplot2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico de residuales comparados con la valores Z teóricos para mostrar la normalidad.", fig.width=5, fig.height=5}
+ggqqplot(Serpientes$Residuales, conf.int.level = 0.0, xlab = "Valores Z", ylab = "Residuales", ggtheme = theme_classic())
+```
+
+Como podemos ver también se sigue una distribución más o menos lineal cuando se compara con los valores $Z$ teóricos.
+
+## Intervalos de confianza y de predicción
+
+En esta parte veremos la diferencia entre la predicción de la media del valor de $Y$ para un valor $X$ dado con obtener un valor específico de $Y$ para un valor de $X$ dado.
+
+Por ejemplo, ya sabemos que si queremos predecir la media del peso de una de las serpientes con una longitud de 63.5 cm la media de nuestras observaciones será 155.59 g. Sin embargo, ¿qué valor obtendríamos si quisieramos calcular un valor puntual? Pues la respuesta es que obtendríamos el mismo valor de 155.59 g. Utilizamos la regresión lineal de la misma manera, sin embargo, la precisión de nuestras predicciones son distinas.
+
+### Computando los intervalos
+
+Supongamos que queremos predecir $\mu_{Y|X=x^*}$ o $Y|X=x^*$. Es decir, predicr la media o el valor actual de $Y$ cuando el valor de $X = x^*$.
+Las fórmulas para el intevalo de confianza (Fórmula \@eq:ICreg) y el intervalo de la predicción (Fórmula \@eq:ICreg) son:
+
+\begin{equation}
+\hat{y} \pm t_{0.025}s_e\sqrt{\frac{1}{n} + \frac{(x^*-\overline{x})^2}{(n-1)s_x^2}}
+(\#eq:ICreg)
+\end{equation}
+
+\begin{equation}
+\hat{y} \pm t_{0.025}s_e\sqrt{1 + \frac{1}{n} + \frac{(x^*-\overline{x})^2}{(n-1)s_x^2}}
+(\#eq:ICreg2)
+\end{equation}
+
+Con el valor de $t_{0.025}$ determinado por la distribución de $t$ y los $df = n - 2$. Aunque las fórmulas son muy parecidas, el $1$ agregado debajo de la raíz cuadrada factoriza la variabilidad asociada cuando intentamos hacer una predicción individual.
+
+```{r confypred, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=5, fig.width=5, fig.cap="Intervalo de confianza al 95% (gris) e intervalo de la predicción al 95% (línea azul punteada) para los datos de serpientes."}
+Pred.int <- predict(Regresion, interval="prediction")
+
+Serpientes <- data.frame(Serpientes, Pred.int)
+
+ggplot(Serpientes, aes(x = Longitud, y = Peso)) +
+  geom_point(size = 1.5) +
+  labs(x = "X = Longitud (cm)", y = "Y = Peso (g)") +
+  geom_smooth(method = "lm", se = T, color = "black", size = 0.8) +
+  geom_line(aes(y=lwr), color = "blue", linetype = "dashed") +
+  geom_line(aes(y=upr), color = "blue", linetype = "dashed") +
+  theme_classic()
+```
+
+Como podemos ver en la figura \@ref(fig:confypred), el intervalo de confianza es muchísimo más preciso que el intervalo de predicción, como se mencionó anteriormente. Para obtener los intervalos de confianza y de predicción en `R` podemos utilizar las siguientes funciones basadas en nuestro modelo lineal.
+
+```{r}
+Conf.int <- predict(Regresion, interval = "confidence")
+Conf.int
+
+Pred.int <- predict(Regresion, interval= "prediction")
+Pred.int
+```
+
+Si vemos los resultados, los valores del intervalo de confianza son más estrechos que los del intervalo de predicción. El apartado `fit` corresponde al valor predicho para cierto valor de $X$. Con el argumento `level` podemos cambiar el nivel de % para nuestros intervalos.
