@@ -40,7 +40,6 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Patua+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
 /*------------- Body and header text---------------- */
 
 .book.font-family-1 {
@@ -48,18 +47,18 @@ body {
  }
 
 h1, h2, h3, h4 {
-  font-family: 'Suez One', serif;
+  font-family: 'Lora', serif;
   color: #717c79;
 }
 
 .title {
-  font-family: 'Suez One', serif;
+  font-family: 'Lora', serif;
   font-size: 3em !important;
   color: #262d35;
  }
 
 .subtitle {
-  font-family: 'Suez One', serif;
+  font-family: 'Lora', serif;
   color: #717c79;
 }
 
