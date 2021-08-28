@@ -174,7 +174,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#datos-y-estudios"><i class="fa fa-check"></i><b>2.1</b> Datos y estudios</a></li>
+<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#datos"><i class="fa fa-check"></i><b>2.1</b> Datos y estudios</a></li>
 <li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.2</b> Medidas de tendencia central</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>2.2.1</b> Media</a></li>
@@ -203,12 +203,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>3.4</b> Distribución binomial</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>3.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
-<li class="chapter" data-level="3.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>3.4.2</b> Distribución binomial en R</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal"><i class="fa fa-check"></i><b>3.5</b> Distribución normal</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>3.5.1</b> Distribución normal en R</a></li>
-<li class="chapter" data-level="3.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>3.5.2</b> Pruebas de normalidad en R</a></li>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad"><i class="fa fa-check"></i><b>3.5.1</b> Pruebas de normalidad</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>3.6</b> Distribución muestral</a>
 <ul>
@@ -367,12 +365,12 @@ La probabilidad de tener dos máquinas contaminadas es <span class="math inline"
 Por ende, hay un 68.89% de probabilidad de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.33, un 28% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.5 y 3% de que <span class="math inline">\(\tilde{P}\)</span> sea igual a 0.67.</p>
 <p>Imaginemos ahora que nuestra muestra pasa de <span class="math inline">\(n = 2\)</span> a <span class="math inline">\(n = 20\)</span>, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial.
 Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos <span class="math inline">\(p = 0.17\)</span> y <span class="math inline">\(n = 20\)</span>.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="inferencia-de-datos-categóricos.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="inferencia-de-datos-categóricos.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1345426</code></pre>
 <p>Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando <span class="math inline">\(\tilde{P}\)</span>, una muestra con 5 máquinas contaminadas sería <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span>, por lo que <span class="math inline">\(P(\tilde{P} = 0.2917) = 0.1345\)</span>.
 Con la distribución binomial, podemos determinar toda la distribución muestral de <span class="math inline">\(\tilde{P}\)</span>.</p>
 <p>Por ejemplo, podemos preguntar <em>¿Cuál es la probabilidad de que no más de 5 máquinas estén contaminadas?</em></p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="inferencia-de-datos-categóricos.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="inferencia-de-datos-categóricos.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="fl">0.17</span>)</span></code></pre></div>
 <pre><code>## [1] 0.8902245</code></pre>
 <p>Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245.
 Y como <span class="math inline">\(\tilde{p} = \frac{5+2}{20+4} = 0.2917\)</span> entonces <span class="math inline">\(P(\tilde{P} \leq 0.2917) = 0.8902\)</span>.
@@ -391,7 +389,7 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 \end{equation}\]</span></p>
 <p>Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos.
 Para eso podemos utilizar la función <code>qnorm()</code> en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="inferencia-de-datos-categóricos.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="inferencia-de-datos-categóricos.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1.644854</code></pre>
 <p>Como podemos ver, para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.</p>
 <p><span class="math display" id="eq:pic2">\[\begin{equation}
@@ -431,11 +429,11 @@ La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (
 La <span class="math inline">\(H_0\)</span> es que los venados no muestran preferencia por alguna de las áreas.
 La <span class="math inline">\(H_A\)</span> es que muestran cierta preferencia por alguna de las áreas.</p>
 </blockquote>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="inferencia-de-datos-categóricos.html#cb206-1" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">520</span>, <span class="dv">210</span>, <span class="dv">240</span>, <span class="dv">2030</span>)</span>
-<span id="cb206-2"><a href="inferencia-de-datos-categóricos.html#cb206-2" aria-hidden="true" tabindex="-1"></a>Zona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Área interior&quot;</span>, <span class="st">&quot;Área exterior&quot;</span>, <span class="st">&quot;Borde exterior&quot;</span>, <span class="st">&quot;No quemado&quot;</span>)</span>
-<span id="cb206-3"><a href="inferencia-de-datos-categóricos.html#cb206-3" aria-hidden="true" tabindex="-1"></a>Proporcion <span class="ot">&lt;-</span> <span class="fu">round</span>(Area<span class="sc">/</span><span class="fu">sum</span>(Area), <span class="dv">3</span>)</span>
-<span id="cb206-4"><a href="inferencia-de-datos-categóricos.html#cb206-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb206-5"><a href="inferencia-de-datos-categóricos.html#cb206-5" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Zona, Area, Proporcion)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="inferencia-de-datos-categóricos.html#cb208-1" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">520</span>, <span class="dv">210</span>, <span class="dv">240</span>, <span class="dv">2030</span>)</span>
+<span id="cb208-2"><a href="inferencia-de-datos-categóricos.html#cb208-2" aria-hidden="true" tabindex="-1"></a>Zona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Área interior&quot;</span>, <span class="st">&quot;Área exterior&quot;</span>, <span class="st">&quot;Borde exterior&quot;</span>, <span class="st">&quot;No quemado&quot;</span>)</span>
+<span id="cb208-3"><a href="inferencia-de-datos-categóricos.html#cb208-3" aria-hidden="true" tabindex="-1"></a>Proporcion <span class="ot">&lt;-</span> <span class="fu">round</span>(Area<span class="sc">/</span><span class="fu">sum</span>(Area), <span class="dv">3</span>)</span>
+<span id="cb208-4"><a href="inferencia-de-datos-categóricos.html#cb208-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-5"><a href="inferencia-de-datos-categóricos.html#cb208-5" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Zona, Area, Proporcion)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Ejemplo1">Tabla 5.1: </span>Áreas quemadas y no quemadas
@@ -515,10 +513,10 @@ P(Borde \space  exterior) \ne 0.080 \\
 P(No \space quemado) \ne 0.677
 \end{aligned}\]</span>
 <p>Los investigadores encontraron 75 venados en el área, distribuidos en distintas zonas como se muestra a continuación.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="inferencia-de-datos-categóricos.html#cb207-1" aria-hidden="true" tabindex="-1"></a>Venados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">43</span>)</span>
-<span id="cb207-2"><a href="inferencia-de-datos-categóricos.html#cb207-2" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Datos, Venados)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-138"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-138-1.png" alt="Zonas de avistamientos de venados, $n = 75$." width="672" />
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="inferencia-de-datos-categóricos.html#cb209-1" aria-hidden="true" tabindex="-1"></a>Venados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">43</span>)</span>
+<span id="cb209-2"><a href="inferencia-de-datos-categóricos.html#cb209-2" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Datos, Venados)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-139"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-139-1.png" alt="Zonas de avistamientos de venados, $n = 75$." width="672" />
 <p class="caption">
 Figura 5.1: Zonas de avistamientos de venados, <span class="math inline">\(n = 75\)</span>.
 </p>
@@ -610,8 +608,8 @@ No quemado
 \hat{P}(No \space quemado) = \frac{43}{75} = 0.573
 \end{align}\]</span></p>
 <p>Estas las podemos calcular fácilmente.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="inferencia-de-datos-categóricos.html#cb208-1" aria-hidden="true" tabindex="-1"></a>Prop_venados <span class="ot">&lt;-</span> <span class="fu">round</span>(Venados<span class="sc">/</span><span class="fu">sum</span>(Venados), <span class="dv">3</span>)</span>
-<span id="cb208-2"><a href="inferencia-de-datos-categóricos.html#cb208-2" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Datos, Prop_venados)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="inferencia-de-datos-categóricos.html#cb210-1" aria-hidden="true" tabindex="-1"></a>Prop_venados <span class="ot">&lt;-</span> <span class="fu">round</span>(Venados<span class="sc">/</span><span class="fu">sum</span>(Venados), <span class="dv">3</span>)</span>
+<span id="cb210-2"><a href="inferencia-de-datos-categóricos.html#cb210-2" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Datos, Prop_venados)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Ejemplo1b">Tabla 5.3: </span>Áreas quemadas y no quemadas y el número de venados observados con su proporción
@@ -714,9 +712,9 @@ Figura 5.2: Valores observados contra esperados en las proporciones de venados e
 </p>
 </div>
 <p>Ahora, para aplicar la fórmula de <span class="math inline">\(\chi^2\)</span> necesitamos los valores absolutos de nuestros datos, para esto simplemente multiplicamos la probabilidad calculada por la <span class="math inline">\(H_0\)</span>, <span class="math inline">\(p * n\)</span>.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="inferencia-de-datos-categóricos.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Usamos la función sum() para sumar todos los valores de la variable &quot;Venados&quot;.</span></span>
-<span id="cb209-2"><a href="inferencia-de-datos-categóricos.html#cb209-2" aria-hidden="true" tabindex="-1"></a>Venados_esperados <span class="ot">&lt;-</span> Proporcion <span class="sc">*</span> <span class="fu">sum</span>(Datos<span class="sc">$</span>Venados) </span>
-<span id="cb209-3"><a href="inferencia-de-datos-categóricos.html#cb209-3" aria-hidden="true" tabindex="-1"></a>Venados_esperados</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="inferencia-de-datos-categóricos.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Usamos la función sum() para sumar todos los valores de la variable &quot;Venados&quot;.</span></span>
+<span id="cb211-2"><a href="inferencia-de-datos-categóricos.html#cb211-2" aria-hidden="true" tabindex="-1"></a>Venados_esperados <span class="ot">&lt;-</span> Proporcion <span class="sc">*</span> <span class="fu">sum</span>(Datos<span class="sc">$</span>Venados) </span>
+<span id="cb211-3"><a href="inferencia-de-datos-categóricos.html#cb211-3" aria-hidden="true" tabindex="-1"></a>Venados_esperados</span></code></pre></div>
 <pre><code>## [1] 12.975  5.250  6.000 50.775</code></pre>
 <p>Como podemos ver, los valores son aproximadamente 13, 5.25, 6 y 50.78.
 Ahora simplemente aplicamos la fórmula para nuestros datos.</p>
@@ -726,8 +724,8 @@ Ahora simplemente aplicamos la fórmula para nuestros datos.</p>
 <p>Ahora tenemos que considerar la distribución nula de <span class="math inline">\(\chi_s^2\)</span>, que es la distribución muestral que se sigue en caso de que nuestra <span class="math inline">\(H_0\)</span> sea verdadera.
 Esta distribución muestral sigue la distribución de chi-cuadrada <span class="math inline">\(\chi^2\)</span> cuando el tamaño de muestra es suficientemente grande.
 La forma de la distribución de <span class="math inline">\(\chi^2\)</span> depende de los grados de libertad.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-141"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-141-1.png" alt="Distribución de $\chi^2$ con $df = 5$ en azul, $df = 8$ en rojo y $df = 10$ en verde." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-142"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-142-1.png" alt="Distribución de $\chi^2$ con $df = 5$ en azul, $df = 8$ en rojo y $df = 10$ en verde." width="672" />
 <p class="caption">
 Figura 5.3: Distribución de <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(df = 5\)</span> en azul, <span class="math inline">\(df = 8\)</span> en rojo y <span class="math inline">\(df = 10\)</span> en verde.
 </p>
@@ -739,11 +737,11 @@ Figura 5.3: Distribución de <span class="math inline">\(\chi^2\)</span> con <sp
 <p>-<code>rchisq()</code> genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.</p>
 <p>Sin embargo en este caso, en lugar de contar con el argumento <code>n</code> para el tamaño de muestra, contamos con otro argumento <code>df</code> para los grados de libertad.</p>
 <p>Por ejemplo, supongamos que quisiéramos encontrar el valor crítico <span class="math inline">\(\chi_{5,0.05}^2\)</span> cuando <span class="math inline">\(df = 5\)</span>, para esto utilizamos la función <code>qchisq()</code>.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="inferencia-de-datos-categóricos.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="inferencia-de-datos-categóricos.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 11.0705</code></pre>
 <p>Como podemos ver, el valor crítico es 11.07.
 Esto corresponde a un área de 0.05 por encima de la cola de la distribución de <span class="math inline">\(\chi^2\)</span>.</p>
-<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-143-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-144-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>El cálculo de los grados de libertad <span class="math inline">\(df\)</span> para una distribución de <span class="math inline">\(\chi^2\)</span> depende del número de categorías, <span class="math inline">\(k\)</span>.</p>
 <p><span class="math display" id="eq:chidf">\[\begin{align}
 df = k - 1
@@ -751,13 +749,13 @@ df = k - 1
 \end{align}\]</span></p>
 <p>Siguiendo el ejemplo de los venados, en este caso tenemos <span class="math inline">\(k = 4\)</span> por lo que <span class="math inline">\(df = 4 - 1 = 3\)</span>.
 Ya que el valor que habíamos obtenido de nuestra fórmula de <span class="math inline">\(\chi_s^2 = 43.2\)</span>, buscaremos el área debajo de la curva correspondiente a este valor.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="inferencia-de-datos-categóricos.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">43.2</span>, <span class="dv">3</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="inferencia-de-datos-categóricos.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">43.2</span>, <span class="dv">3</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
 <pre><code>## [1] 2.231754e-09</code></pre>
 <p>Como podemos ver el resultado es extremadamente pequeño y nuestro <span class="math inline">\(valor-p &lt; 0.0001\)</span> por lo que tenemos evidencia para rechazar la <span class="math inline">\(H_0\)</span> y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras.
 La prueba de <span class="math inline">\(\chi^2\)</span> se puede utilizar para cualquier número de categorías <span class="math inline">\(k\)</span>.</p>
 <p>Ahora todo esto se facilita gracias a la función <code>chisq.test()</code> que viene incluida en <code>R</code>.</p>
 <p>Para realizar la prueba de Chi-cuadrada con esta función, lo único que necesitamos es una variable con el valor absoluto de nuestras observaciones y otra con los valores relativos esperados como los de la tabla <a href="inferencia-de-datos-categóricos.html#tab:Ejemplo1d">5.4</a>.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="inferencia-de-datos-categóricos.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(Datos<span class="sc">$</span>Venados, Datos<span class="sc">$</span>Propocion)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="inferencia-de-datos-categóricos.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(Datos<span class="sc">$</span>Venados, Datos<span class="sc">$</span>Propocion)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
@@ -837,9 +835,9 @@ La cirugía podía ser real (<span class="math inline">\(n = 49\)</span>) o no (
 Los cirujanos esperan una reducción en los dolores de migraña (éxito).
 En la tabla <a href="#tab:Ej2a"><strong>??</strong></a> se pueden observar los datos.</p>
 </blockquote>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="inferencia-de-datos-categóricos.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos nuestra matriz de datos.</span></span>
-<span id="cb217-2"><a href="inferencia-de-datos-categóricos.html#cb217-2" aria-hidden="true" tabindex="-1"></a>cirugia <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">11</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb217-3"><a href="inferencia-de-datos-categóricos.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(cirugia) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Éxito&quot;</span>, <span class="st">&quot;Fracaso&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Falsa&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="inferencia-de-datos-categóricos.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos nuestra matriz de datos.</span></span>
+<span id="cb219-2"><a href="inferencia-de-datos-categóricos.html#cb219-2" aria-hidden="true" tabindex="-1"></a>cirugia <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">11</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb219-3"><a href="inferencia-de-datos-categóricos.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(cirugia) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Éxito&quot;</span>, <span class="st">&quot;Fracaso&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Falsa&quot;</span>))</span></code></pre></div>
 <p>Como podemos ver, tenemos nuestra tabla de contingencia lista.</p>
 <table>
 <tbody>
@@ -962,14 +960,14 @@ e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
 \chi_s^2 = \frac{(41-36.59)^2}{36.59} + \frac{(15-19.41)^2}{19.41} + \frac{(8-12.41)^2}{12.41} + \frac{(11-6.59)^2}{6.59} = 6.06
 \end{align}\]</span></p>
 <p>Todo este proceso se puede hacer de manera rapidísima con la función <code>chisq.test()</code>. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento <code>correct = F</code> para evitar aplicar correcciones.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="inferencia-de-datos-categóricos.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="inferencia-de-datos-categóricos.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  cirugia
 ## X-squared = 6.0619, df = 1, p-value = 0.01381</code></pre>
 <p>Como vemos el valor-<em>p</em> es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="inferencia-de-datos-categóricos.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)<span class="sc">$</span>p.value <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="inferencia-de-datos-categóricos.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)<span class="sc">$</span>p.value <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.00690659</code></pre>
 <p>Por lo que obtenemos un <span class="math inline">\(valor-p = 0.0069\)</span>. En este caso, si nuestro <span class="math inline">\(\alpha = 0.01\)</span> rechazaríamos la <span class="math inline">\(H_0\)</span> y diríamos que hay evidencias suficientes que apoyan que la cirugía real es mejor que la falsa para reducir los dolores de migraña.</p>
 </div>
@@ -1058,9 +1056,9 @@ H_0: P(C|G_1) = P(C|G_2)
 </ol>
 <p>La primer hipótesis compara dos grupos (plantas pequeñas con altas) respecto a la resistencia a la enfermedad. mientras que la hipótesis 5 es una afirmación acerca de la distribución de la resistencia a la enfermedad en solo un grupo (plantas bajas).</p>
 <p>Supongamos ahora que hacemos un muestreo aleatorio de 100 plantas de esta población.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="inferencia-de-datos-categóricos.html#cb222-1" aria-hidden="true" tabindex="-1"></a>plantas <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">28</span>, <span class="dv">42</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb222-2"><a href="inferencia-de-datos-categóricos.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(plantas) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;NR&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;T&quot;</span>))</span>
-<span id="cb222-3"><a href="inferencia-de-datos-categóricos.html#cb222-3" aria-hidden="true" tabindex="-1"></a>plantas</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="inferencia-de-datos-categóricos.html#cb224-1" aria-hidden="true" tabindex="-1"></a>plantas <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">28</span>, <span class="dv">42</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb224-2"><a href="inferencia-de-datos-categóricos.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(plantas) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;NR&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;T&quot;</span>))</span>
+<span id="cb224-3"><a href="inferencia-de-datos-categóricos.html#cb224-3" aria-hidden="true" tabindex="-1"></a>plantas</span></code></pre></div>
 <pre><code>##     S  T
 ## R  12 18
 ## NR 28 42</code></pre>
@@ -1203,10 +1201,10 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 <blockquote>
 <p><strong>Ejemplo:</strong> La oxigenación extracorpórea por membrana (ECMO) es un procedimiento con el potencial de salvar vidas de bebés recién nacidos que sufren de una falla respiratoria severa. En un experimento se trataron a 29 bebés recién nacidos con ECMO y a 10 bebés recién nacidos con terapia médica convencional (CMT).</p>
 </blockquote>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="inferencia-de-datos-categóricos.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos nuestra matriz de datos.</span></span>
-<span id="cb224-2"><a href="inferencia-de-datos-categóricos.html#cb224-2" aria-hidden="true" tabindex="-1"></a>Tratamientos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">28</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb224-3"><a href="inferencia-de-datos-categóricos.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(Tratamientos) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Muerto&quot;</span>, <span class="st">&quot;Vivo&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;CMT&quot;</span>, <span class="st">&quot;ECMO&quot;</span>))</span>
-<span id="cb224-4"><a href="inferencia-de-datos-categóricos.html#cb224-4" aria-hidden="true" tabindex="-1"></a>Tratamientos</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="inferencia-de-datos-categóricos.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos nuestra matriz de datos.</span></span>
+<span id="cb226-2"><a href="inferencia-de-datos-categóricos.html#cb226-2" aria-hidden="true" tabindex="-1"></a>Tratamientos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">28</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb226-3"><a href="inferencia-de-datos-categóricos.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(Tratamientos) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Muerto&quot;</span>, <span class="st">&quot;Vivo&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;CMT&quot;</span>, <span class="st">&quot;ECMO&quot;</span>))</span>
+<span id="cb226-4"><a href="inferencia-de-datos-categóricos.html#cb226-4" aria-hidden="true" tabindex="-1"></a>Tratamientos</span></code></pre></div>
 <pre><code>##        CMT ECMO
 ## Muerto   4    1
 ## Vivo     6   28</code></pre>
@@ -1246,7 +1244,7 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="inferencia-de-datos-categóricos.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="inferencia-de-datos-categóricos.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos)</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
@@ -1259,7 +1257,7 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 ## odds ratio 
 ##   16.78571</code></pre>
 <p>Como podemos ver, el <span class="math inline">\(valor-p = 0.01102\)</span> lo que quiere decir que rechazamos la <span class="math inline">\(H_0\)</span> y aceptamos la <span class="math inline">\(H_A: P(Muerto|ECMO) &lt; P(Muerto|CMT)\)</span>.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="inferencia-de-datos-categóricos.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="inferencia-de-datos-categóricos.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos)</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
@@ -1279,9 +1277,9 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 <blockquote>
 <p><strong>Ejemplo:</strong> Ecólogos que estudiaron los hábitats reproductivos del Chorlo Llanero (<em>Charadrius montanus</em>) durante 3 años y anotaron en dónde es que anidan. Encontraron 66 nidos en zonas agricolas (ZA), 67 en pastizales con perritos de las praderas (PP) y otros 20 en praderas (P). La siguiente tabla muestra las elecciones a través de los años.</p>
 </blockquote>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="inferencia-de-datos-categóricos.html#cb230-1" aria-hidden="true" tabindex="-1"></a>chorlos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">26</span>, <span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb230-2"><a href="inferencia-de-datos-categóricos.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(chorlos) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Zona Agricola (ZA)&quot;</span>, <span class="st">&quot;Pastizal con Perritos (PP)&quot;</span>, <span class="st">&quot;Praderas (P)&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;2004&quot;</span>, <span class="st">&quot;2005&quot;</span>, <span class="st">&quot;2006&quot;</span>))</span>
-<span id="cb230-3"><a href="inferencia-de-datos-categóricos.html#cb230-3" aria-hidden="true" tabindex="-1"></a>chorlos</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="inferencia-de-datos-categóricos.html#cb232-1" aria-hidden="true" tabindex="-1"></a>chorlos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">26</span>, <span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb232-2"><a href="inferencia-de-datos-categóricos.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(chorlos) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Zona Agricola (ZA)&quot;</span>, <span class="st">&quot;Pastizal con Perritos (PP)&quot;</span>, <span class="st">&quot;Praderas (P)&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;2004&quot;</span>, <span class="st">&quot;2005&quot;</span>, <span class="st">&quot;2006&quot;</span>))</span>
+<span id="cb232-3"><a href="inferencia-de-datos-categóricos.html#cb232-3" aria-hidden="true" tabindex="-1"></a>chorlos</span></code></pre></div>
 <pre><code>##                            2004 2005 2006
 ## Zona Agricola (ZA)           21   19   26
 ## Pastizal con Perritos (PP)   17   38   12
@@ -1455,7 +1453,7 @@ P(P|2004) = P(P|2005) = P(P|2006)
 df = (3-1)(3-1) = 4
 \end{equation}\]</span></p>
 <p>Si buscamos el valor de tablas, vemos que el valor-<em>p</em> se encuentra entre 0.01 y 0.001. Pero para facilitarnos la vida, simplemente ingresamos nuestra variable <code>chorlos</code> que creamos previamente a la función <code>chisq.test()</code> y obtenemos nuestro resultado. Podemos corroborar que el valor de <span class="math inline">\(\chi^2\)</span> calculado coincide al igual que los <span class="math inline">\(df\)</span>. Nuestro <span class="math inline">\(valor-p = 0.007\)</span> por lo tanto, <span class="math inline">\(valor-p &lt; 0.01\)</span>, tenemos evidencias significativas con un <span class="math inline">\(\alpha = 0.01\)</span> de de que los Chorlos Llaneros cambiaron de sitio de anidación. Para estos casos, nuestra <span class="math inline">\(H_A\)</span> siempre será no direccional.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="inferencia-de-datos-categóricos.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(chorlos)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="inferencia-de-datos-categóricos.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(chorlos)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -1474,7 +1472,7 @@ df = (3-1)(3-1) = 4
 <p>Consideremos una tabla de contingencia 2x2.</p>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-155">Tabla 5.5: </span>Dos muestra hipotéticas
+<span id="tab:unnamed-chunk-156">Tabla 5.5: </span>Dos muestra hipotéticas
 </caption>
 <thead>
 <tr>
@@ -1528,12 +1526,12 @@ SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2
 (\tilde{p_1} - \tilde{p_2}) \pm (1.96)SE_{\tilde{P_1} - \tilde{P_2}}
 \end{equation}\]</span></p>
 <p>Para calcular un intervalo de confianza de las proporciones o probabilidades en <code>R</code> utilizamos la función <code>prop.test()</code>. Para este comando es necesario que la matriz de datos sea 2x2. Por ejemplo.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="inferencia-de-datos-categóricos.html#cb234-1" aria-hidden="true" tabindex="-1"></a>prop.datos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">23</span>, <span class="dv">6</span>, <span class="dv">16</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb234-2"><a href="inferencia-de-datos-categóricos.html#cb234-2" aria-hidden="true" tabindex="-1"></a>prop.datos</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="inferencia-de-datos-categóricos.html#cb236-1" aria-hidden="true" tabindex="-1"></a>prop.datos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">23</span>, <span class="dv">6</span>, <span class="dv">16</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb236-2"><a href="inferencia-de-datos-categóricos.html#cb236-2" aria-hidden="true" tabindex="-1"></a>prop.datos</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   18   23
 ## [2,]    6   16</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="inferencia-de-datos-categóricos.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(prop.datos, <span class="at">correct =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="inferencia-de-datos-categóricos.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(prop.datos, <span class="at">correct =</span> F)</span></code></pre></div>
 <pre><code>## 
 ##  2-sample test for equality of proportions without continuity
 ##  correction
@@ -1653,14 +1651,14 @@ X_{s}^2 = \frac{(n_{12} - n_{21})^2}{n_{12} + n_{21}}
 \tag{5.16}
 \end{equation}\]</span></p>
 <p>Para realizar esta prueba en <code>R</code>, simplemente utilizamos el comando <code>mcnemar.test()</code> con el argumento con nuestra matriz de datos y el argumento <code>correct = F</code>, para evitar que<code>R</code> realice correcciones.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="inferencia-de-datos-categóricos.html#cb238-1" aria-hidden="true" tabindex="-1"></a>VIH <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">77</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb238-2"><a href="inferencia-de-datos-categóricos.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(VIH) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Hijo mayor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>), <span class="st">&quot;Hijo menor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>))</span>
-<span id="cb238-3"><a href="inferencia-de-datos-categóricos.html#cb238-3" aria-hidden="true" tabindex="-1"></a>VIH</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="inferencia-de-datos-categóricos.html#cb240-1" aria-hidden="true" tabindex="-1"></a>VIH <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">77</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb240-2"><a href="inferencia-de-datos-categóricos.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(VIH) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Hijo mayor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>), <span class="st">&quot;Hijo menor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>))</span>
+<span id="cb240-3"><a href="inferencia-de-datos-categóricos.html#cb240-3" aria-hidden="true" tabindex="-1"></a>VIH</span></code></pre></div>
 <pre><code>##           Hijo menor
 ## Hijo mayor VIH + VIH -
 ##      VIH +     2    17
 ##      VIH -    18    77</code></pre>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="inferencia-de-datos-categóricos.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(VIH, <span class="at">correct =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="inferencia-de-datos-categóricos.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(VIH, <span class="at">correct =</span> F)</span></code></pre></div>
 <pre><code>## 
 ##  McNemar&#39;s Chi-squared test
 ## 

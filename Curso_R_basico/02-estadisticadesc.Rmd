@@ -20,7 +20,7 @@ library(kableExtra)
 En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de `R` y RStudio.
 Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores Z.
 
-## Datos y estudios
+## Datos y estudios {#datos}
 
 Antes de empezar con la estadística descriptiva, repasemos un poco conceptos básicos.
 
@@ -543,3 +543,10 @@ Tratamiento1
 Tratamiento2
 ```
 
+Para filtrar por múltiples criterios, tenemos que agregar el símbolo `&` entre los nombres de las variables.
+
+```{r}
+PlantGrowth %>% dplyr::filter(group == "ctrl" & weight > 5)
+```
+
+En este caso filtramos todos los valores que tengan la etiqueta ctrl y que sean mayores a un valor de 5. Realmente es una herramienta sumamente poderosa.

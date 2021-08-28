@@ -174,7 +174,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#datos-y-estudios"><i class="fa fa-check"></i><b>2.1</b> Datos y estudios</a></li>
+<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#datos"><i class="fa fa-check"></i><b>2.1</b> Datos y estudios</a></li>
 <li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.2</b> Medidas de tendencia central</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>2.2.1</b> Media</a></li>
@@ -203,12 +203,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>3.4</b> Distribución binomial</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>3.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
-<li class="chapter" data-level="3.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>3.4.2</b> Distribución binomial en R</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal"><i class="fa fa-check"></i><b>3.5</b> Distribución normal</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>3.5.1</b> Distribución normal en R</a></li>
-<li class="chapter" data-level="3.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>3.5.2</b> Pruebas de normalidad en R</a></li>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad"><i class="fa fa-check"></i><b>3.5.1</b> Pruebas de normalidad</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>3.6</b> Distribución muestral</a>
 <ul>
@@ -348,7 +346,7 @@ div.csl-indent {
 <h1><span class="header-section-number">Lección 2</span> Estadística descriptiva</h1>
 <p>En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de <code>R</code> y RStudio.
 Veremos <strong>medidas de tendencia central</strong> como la media, mediana y moda, <strong>medidas de dispersión</strong> como el rango o la desviación estándar y <strong>medidas de posición relativa</strong> como los valores Z.</p>
-<div id="datos-y-estudios" class="section level2" number="2.1">
+<div id="datos" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Datos y estudios</h2>
 <p>Antes de empezar con la estadística descriptiva, repasemos un poco conceptos básicos.</p>
 <p>Un <strong>dato estadístico</strong> es una medición numérica tomada a partir de una muestra y que describe alguna característica de nuestra muestra. Por ejemplo, la media o la desviación estándar son estadísticos. Un <strong>parámetro</strong> es un valor numérico que describe algunas características de una población.</p>
@@ -904,6 +902,19 @@ Otra forma de seleccionar las variables es con el argumento <code>starts_with()<
 ##  8   5.26 trt2  -7.23
 ##  9   5.12 trt2  -7.37
 ## 10   4.92 trt2  -7.57</code></pre>
+<p>Para filtrar por múltiples criterios, tenemos que agregar el símbolo <code>&amp;</code> entre los nombres de las variables.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="estadística-descriptiva.html#cb103-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">&quot;ctrl&quot;</span> <span class="sc">&amp;</span> weight <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   group [1]
+##   weight group     Z
+##    &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
+## 1   6.11 ctrl  -2.52
+## 2   5.58 ctrl  -3.05
+## 3   5.33 ctrl  -3.30
+## 4   5.18 ctrl  -3.45
+## 5   5.17 ctrl  -3.46
+## 6   5.14 ctrl  -3.49</code></pre>
+<p>En este caso filtramos todos los valores que tengan la etiqueta ctrl y que sean mayores a un valor de 5. Realmente es una herramienta sumamente poderosa.</p>
 
 </div>
 </div>
