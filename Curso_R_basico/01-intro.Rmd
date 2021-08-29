@@ -244,7 +244,7 @@ De igual manera se recomienda copiar el código al script para saber exactamente
 
 ## Comentarios #
 
-Algo muy útil que podemos agregar a nuestro código o script son los comentarios. Estos pueden ayudarnos a recordar qué realiza alguna línea de código o alguna función o argumento en particular. La manera en la que agregamos comentarios es con el símbolo de gato #.
+Los comentarios nos permiten recordar la utilidad de algunas líneas de código, funciones o argumentos en particular, solo basta agregarlos a nuestro script tecleando el símbolo de "gato" o "hashtag" (#). Cualquiera que sea el texto escrito después del símbolo no será leído al momento de correr el programa y podemos consultaro en cualquier momento en la pantalla.
 
 ```{r}
 #Esta función sirve para importar archivos.
