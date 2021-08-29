@@ -331,7 +331,7 @@ Propiedades importantes de los **valores $Z$:**
 
 -   No tienen unidades de medida.
 
--   Si un valor es menor que la media, su valor Z será negativo.
+-   Si un valor es menor que la media, su valor $Z$ será negativo.
 
 Para el cálculo del valor $Z$ de algún número simplemente le extraemos la media $\overline{x}$ y lo dividimos entre la desviación estándar $s$.
 

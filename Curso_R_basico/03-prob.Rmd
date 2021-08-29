@@ -251,7 +251,7 @@ Antes de continuar, hay que saber que existen 4 distintos comandos (o funciones)
 
 - `pbinom()` nos da la probabilidad acumulada de un evento.
 
-- `qbinom()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad.
+- `qbinom()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad (también conocida como función cuantil).
 
 - `rbinom()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
 
@@ -264,13 +264,15 @@ dbinom(2, 5, 0.37)
 
 ```{r muts, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Distribución de probabilidad binomial para el ejercicio de alelos mutantes."}
 
-data.frame(mutantes = 0:5, prob = dbinom(x = 0:5, size = 5, prob = 0.37)) %>%
-  mutate(Mutantes = ifelse(mutantes == 2, "2", "otros")) %>%
-ggplot(aes(x = factor(mutantes), y = prob, width = 0.7)) +
-  geom_col(colour = "black", alpha = 0) +
-  geom_text(aes(label = round(prob,2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+mutantes <- data.frame(n = 0:5, prob = dbinom(x = 0:5, size = 5, prob = 0.37))
+mutantes$colour <- ifelse(mutantes$n == 2, "lightblue", "white")
+
+ggplot(mutantes, aes(x = factor(n), y = prob, width = 0.7, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Mutantes (x)", y = "Probabilidad") +
   scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
   theme_classic()
 
 ```
@@ -303,36 +305,219 @@ Como vemos ambas operaciones dan los mismos resultados, pero es más sencilla la
 ```{r}
 #Probabilidad de que 4 personas tengan Rh positivo.
 dbinom(4, 6, 0.85)
+```
 
+```{r rh3, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución binomial para los datos de Rh. En azul encontramos $P(X = 4)$."}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh == 4, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Personas con Rh +", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+```{r}
 #Probabilidad de que al menos 4 personas (pueden ser 4, 5 o 6) tengan Rh positivo.
 pbinom(3, 6, 0.85, lower.tail = FALSE)
+```
 
-#Probabilidad de que al menos 1 persona tenga Rh positivo.
+```{r rh4, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Distribución binomial para los datos de Rh. En azul encontramos la probabilidad al menos 4 personas sean Rh +."}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh >= 4, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Personas con Rh +", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+```{r}
+#Probabilidad de que al menos 1 persona tenga Rh negativo.
 dbinom(0, 6, 0.85) + dbinom(1, 6, 0.85) + dbinom(2, 6, 0.85) + dbinom(3, 6, 0.85) + dbinom(4, 6, 0.85) + dbinom(5, 6, 0.85)
 1 - dbinom(6, 6, 0.85)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución binomial de personas con Rh ++."}
 
-data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85)) %>%
-  mutate(Rh = ifelse(rh == 2, "2", "otros")) %>%
-ggplot(aes(x = factor(rh), y = prob, width = 0.7)) +
-  geom_col(colour = "black", alpha = 0) +
+```{r rh1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Distribución binomial para los datos de Rh. En azul se ve la probabilidad de que al menos una persona tenga Rh -."}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh < 6, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Personas con Rh +", y = "Probabilidad") +
   scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
   theme_classic()
 
 ```
 
 Como vemos en la distribución binomial, nuestra distribución de probabilidades está siempre representada por un histograma de probabilidades, a diferencia de las distribuciones de probabilidad de variables continuas que están representados por una curva de densidad.
 
+## Distribución de Poisson
+
+La **distribución de Poisson** es llamada así en honor al matemático francés Simeón Denis Poisson. Se utiliza para describir la probabilidad de variables discretas, al igual que la distribución binomial. Se utiliza para eventos aleatorios representados en un intervalo de tiempo determinado, aunque también es utilizada cuando el evento de interés se distribuye en un espacio plano o tridimensional. Nuestro suceso de interés ($X$) tiene valores discretos, mientras que nuestro intervalo tiene valores continuos. La fórmula de la distribución de Poisson (PMF) es:
+
+\begin{equation}
+P(X = k | \lambda) = \frac{e^{-\lambda}\lambda^k}{k!}
+(\#eq:poisson)
+\end{equation}
+
+Donde:
+
+* $P(X=k|\lambda)$ = número de observaciones $k$ dado la media $\lambda$.
+
+* $e$ = número de Euler (aproximadamente 2.7183). 
+
+* $\lambda$ = parámetro de la distribución de Poisson, corresponde al promedio de veces que ocurre el evento aleatorio.
+
+Para que una variable sea considerada una **variable aleatoria de Poisson** se deben de cumplir los siguientes requisitos:
+
+1. Cada evento tiene que ser independiente.
+
+2. Las ocurrencias del evento tienen que ser aleatorias.
+
+3. El número de eventos en un intervalo de tiempo o espacio es infinito ($k = 0, 1, 2, \cdots, \infty$).
+
+4. La probabilidad de que un evento se presente en un intervalo de tiempo es proporcional al intervalo de tiempo o espacio.
+
+5. Se considera que la probabilidad de que dos eventos se presenten en la misma fracción de tiempo es tan pequeña que se puede considerar inexistente.
+
+### Media y desviación estándar de la distribución de Poisson
+
+Algo interesante de la distribución de Poisson es que la varianza y la media corresponden al mismo valor ($\lambda$) por lo que la desviación estándar sería
+
+$$
+\sigma = \sqrt{\lambda}
+$$
+Uno de los usos que tiene la distribución de Poisson es su aproximación a la distribución binomial cuando se cumplen las siguientes condiciones:
+
+1. Cuando $p < 0.1$ o $p > 0.9$.
+
+2. Cuando $n \ge 20$. Es todavía mejor si $n \ge 100$.
+
+3. Cuando $np \le 10$.
+
+Si tenemos estas dos condiciones, la distribución de Poisson es un muy buen aproximado a la distribución binomial. En estos casos, la media se obtendría de la misma manera que obtenemos la media de la distribución binomial. Debido a esta dependencia de probabilidades muy bajas o muy elevadas, frecuentemente se utiliza la distribución de Poisson para la evaluación de eventos *raros.*
+
+\begin{equation}
+\mu =  \lambda = np
+(\#eq:poimean)
+\end{equation}
+
+>**Ejemplo:** En *Escherichia coli*, una célula de cada $10^9$ muta de ser sensible a la estreptomicina a ser resistente a ella. Si observamos $2 \times 10^9$ células, ¿Cuál es la probabilidad de que ninguna mute? ¿Cuál es la probabilidad de que al menos una mute?
+
+Como con la distribución binomial, `R` cuenta con funciones específicas para calcular los valores de una distribución de Poisson.
+
+- `dpois()` nos da un valor exacto de la distribución de Poisson en el punto indicado.
+
+- `ppois()` nos da la probabilidad acumulada de un evento.
+
+- `qpois()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad (también conocida como función cuantil).
+
+- `rpois()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
+
+Como estamos hablando de probabilidades demasiado pequeñas, ya que tenemos que encontrar 1 mutante entre $10^9$ células:
+
+$$
+p = \frac{1}{10^9} = 0.000000001
+$$
+
+Para este caso, podemos utilizar la aproximación a la probabilidad binomial:
+
+$$
+\mu = \lambda = np = (2\times10^9) \times \frac{1}{10^9} = 2
+$$
+
+Por lo tanto, $\lambda = 2$. Observemos que teníamos un valor de $n$ enorme ($2 \times 10^9$) y una $p$ extremadamente pequeña ($\frac{1}{10^9}$) y a pesar de eso, obtuvimos un valor de lambda relativamente pequeño.
+
+```{r}
+#Probabilidad de que 1 célula mute.
+dpois(1, 2, log = F)
+```
+
+```{r pois3, echo=FALSE, fig.align='center', fig.cap="Distribución de Poisson para datos de *E. coli.* En azul podemos ver la probabilidad de que 1 célula haya mutado.", message=FALSE, warning=FALSE, paged.print=FALSE, }
+
+Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
+Pois$colour <- ifelse(Pois$muts == 1, "lightblue", "white")
+
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+  geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Células mutantes", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.3)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+
+Por lo que la probabilidad de que al menos una célula mute dentro de $2 \times 10^9$ células de *E. coli* es de $P(X = 1) = 0.2707$. Para el caso de que ninguna célula mute:
+
+```{r}
+#Probabilidad de que ninguna célula mute.
+dpois(0, 2, log = F)
+```
+
+```{r pois2, echo=FALSE, fig.align='center', fig.cap="Distribución de Poisson para datos de *E. coli.* En azul podemos ver la probabilidad de que ninguna célula haya mutado.", message=FALSE, warning=FALSE, paged.print=FALSE, }
+
+Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
+Pois$colour <- ifelse(Pois$muts == 0, "lightblue", "white")
+
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+  geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Células mutantes", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.3)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+Por lo que $P(X = 0) = 0.1353$. Si por el contrario, quisiéramos encontrar la probabilidad de que al menos una célula mute:
+
+```{r}
+#Probabilidad de que al menos una célula mute.
+1 - dpois(0, 2, log = F)
+```
+
+Por lo que $P(X \ge 1) = 0.865$.
+
+```{r pois, echo=FALSE, fig.align='center', fig.cap="Distribución de Poisson para datos de *E. coli.* En azul podemos ver la probabilidad de que al menos 1 célula haya mutado (que corresponde a los valores mayores a 0.", message=FALSE, warning=FALSE, paged.print=FALSE, }
+
+Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
+Pois$colour <- ifelse(Pois$muts >= 1, "lightblue", "white")
+
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+  geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Células mutantes", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.3)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+Como podemos ver en la figura \@ref(fig:pois), la probabilidad de obtener 7 o más células mutantes se vuelve prácticamente 0.
+
 ## Distribución normal
 
-Una **distribución normal** corresponde a una curva *en forma de campana*, con ciertas características específicas.
+Una **distribución normal** corresponde a una curva *en forma de campana* o *gaussiana*, con ciertas características específicas.
 Se utiliza para representar la distribución de los valores de una variable $X$, de dos maneras distintas: (1) como una aproximación a un histograma basado en los valores muestreados de la variable $X$ o; (2) como una representación idealizada de la distribución poblacional de $X$.
 
-Las curvas con distribución normal toman su forma por dos elementos muy importantes: la **media** $\mu$ y su **desviación estándar** $\sigma$.
+Las curvas con distribución normal toman su forma por dos elementos muy importantes: la **media**, $\mu$ y su **desviación estándar**, $\sigma$.
 Cuando se tiene una curva con distribución normal, se expresa de la siguiente manera $X \sim N(\mu, \sigma)$.
 La fórmula de la distribución normal se encuentra en la fórmula \@ref(eq:norm).
 No se trata de cualquier curva simétrica, si no de una curva simétrica *específica*.
@@ -360,8 +545,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 
 Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva**.
 Para esto utilizamos la **escala estandarizada**, en el cual el valor del eje horizontal se denomina **valor Z**.
-La escala de Z mide las desviaciones estándar a partir de la media, por ejemplo, $z = 1$ corresponde a una desviación estándar de la media.
-Para transformar nuestros datos a la escala Z simplemente aplicamos la fórmula \@ref(eq:Z) y a la variable Z se le conoce como una variable de **distribución normal estándar**, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable Z es *adimensional*.
+La escala de $Z$ mide las desviaciones estándar a partir de la media, por ejemplo, $z = 1$ corresponde a una desviación estándar de la media.
+Para transformar nuestros datos a la escala $Z$ simplemente aplicamos la fórmula \@ref(eq:Z) y a la variable $Z$ se le conoce como una variable de **distribución normal estándar**, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable $Z$ es *adimensional*.
 
 
 \begin{equation}
@@ -369,7 +554,7 @@ Z = \frac{X - \mu}{\sigma}
 (\#eq:Z)
 \end{equation}
 
-Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar **tablas de Z** para realizar el cálculo debajo del área que corresponde al valor Z obtenido, aunque claro, también podemos hacer estos cálculos en `R`.
+Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar **tablas de Z** para realizar el cálculo debajo del área que corresponde al valor $Z$ obtenido, aunque claro, también podemos hacer estos cálculos en `R`.
 Hay que tener en cuenta que para una curva de distribución normal estándar:
 
 -  68% del área se encuentra entre $\pm$ 1 distribución estándar.
@@ -398,7 +583,7 @@ Para responder la primer pregunta, debemos transformar nuestros datos a valores 
 (60 - 54)/(4.5)
 ```
 
-Como podemos ver, el valor Z de 60 mm es igual a 1.33. Lo siguiente sería encontrar *el área bajo la curva* que corresponda a este valor Z. Para esto utilizamos la función `pnorm()`.
+Como podemos ver, el valor $Z$ de 60 mm es igual a 1.33. Lo siguiente sería encontrar *el área bajo la curva* que corresponda a este valor Z. Para esto utilizamos la función `pnorm()`.
 
 ```{r}
 pnorm(1.33, 0, 1, lower.tail = TRUE)
@@ -421,9 +606,9 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 ```
 
 
-De nuevo, el argumento `lower.tail = TRUE` significa que encontrará la probabilidad acumulada de valores Z menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.
+De nuevo, el argumento `lower.tail = TRUE` significa que encontrará la probabilidad acumulada de valores $Z$ menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.
 
-Para la segunda pregunta, primero debemos encontrar el valor de Z correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`. 
+Para la segunda pregunta, primero debemos encontrar el valor de $Z$ correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`. 
 
 ```{r}
 (51 - 54)/(4.5)
@@ -448,7 +633,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   theme_minimal_hgrid(color = "black")
 ```
 
-Ahora para la última pregunta, simplemente calculamos la probabilidad acumulada hasta nuestro valor Z más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor Z más pequeño, que corresponde -0.67.
+Ahora para la última pregunta, simplemente calculamos la probabilidad acumulada hasta nuestro valor $Z$ más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor $Z$ más pequeño, que corresponde -0.67.
 
 ```{r}
 pnorm(1.33, 0, 1) - pnorm(-0.67, 0, 1)
@@ -474,7 +659,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 ```
 
 
-En algunas ocasiones, queremos encontrar el valor Z correspondiente a un área bajo la curva determinada, para este tipo de ocasiones, utilizamos la función `qnorm()`.
+En algunas ocasiones, queremos encontrar el valor $Z$ correspondiente a un área bajo la curva determinada, para este tipo de ocasiones, utilizamos la función `qnorm()`.
 
 Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable $y$. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que $y$ y el 30% son mayores.
 
@@ -482,7 +667,7 @@ Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la di
 qnorm(0.7, 0, 1)
 ```
 
-Como podemos ver, el valor Z correspondiente es 0.5244. Ahora, utilizando la fórmula \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
+Como podemos ver, el valor $Z$ correspondiente es 0.5244. Ahora, utilizando la fórmula \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -589,19 +774,19 @@ ggplot(data.frame(x = c(9, 13)), aes(x = x)) +
   theme_minimal_hgrid(color = "black")
 ```
 
-Esta distribución muestral expresa distintas posibilidades para los valores de $\overline{X}$. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores Z para obtener nuestro resultado.
+Esta distribución muestral expresa distintas posibilidades para los valores de $\overline{X}$. Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores $Z$ para obtener nuestro resultado.
 
 \begin{equation}
 Z = \frac{\overline{x}-\mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 - 11}{0.49} = 1.0204
 \end{equation}
 
-Ya que nuestro valor Z = 1.0204, usamos la función `pnorm()` para encontrar nuestra área bajo la curva.
+Ya que nuestro valor $Z = 1.0204$, usamos la función `pnorm()` para encontrar nuestra área bajo la curva.
 
 ```{r}
 pnorm(1.0204, mean = 0, sd = 1, lower.tail = FALSE)
 ```
 
-De hecho, ni siquiera es necesario realizar la transformación a valores Z en `R` ya que podemos modificar los parámetros de la función `pnorm()`.
+De hecho, ni siquiera es necesario realizar la transformación a valores $Z$ en `R` ya que podemos modificar los parámetros de la función `pnorm()`.
 
 ```{r}
 pnorm(11.5, mean = 11, sd = 0.49, lower.tail = FALSE)
