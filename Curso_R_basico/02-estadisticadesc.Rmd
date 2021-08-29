@@ -251,7 +251,7 @@ resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight), Rango 
 resumen
 ```
 
-En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora.
+En esta tabla podemos ver todos los estadísticos que hemos calculado hasta ahora.
 Para calcular $\sigma$ necesitamos multiplicar el resultado obtenido por $\sqrt\frac{N-1}{N}$.
 
 ```{r}

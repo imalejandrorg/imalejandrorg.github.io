@@ -1361,7 +1361,7 @@ t_s = \frac{\overline{d}-0}{SE_\overline{D}}
 <span id="cb190-2"><a href="estadística-inferencial.html#cb190-2" aria-hidden="true" tabindex="-1"></a>Carolina <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">22</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">33</span>, <span class="dv">24</span>, <span class="dv">40</span>)</span>
 <span id="cb190-3"><a href="estadística-inferencial.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb190-4"><a href="estadística-inferencial.html#cb190-4" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Norteno, Carolina)</span></code></pre></div>
-<table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:signex">Tabla 4.7: </span>Número de veces que fue dominante un ave
 </caption>
@@ -1387,8 +1387,8 @@ Signo
 9
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1398,8 +1398,8 @@ Signo
 6
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1409,8 +1409,8 @@ Signo
 22
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1420,8 +1420,8 @@ Signo
 16
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1431,8 +1431,8 @@ Signo
 17
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1442,8 +1442,8 @@ Signo
 33
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1453,8 +1453,8 @@ Signo
 24
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 <tr>
 <td style="text-align:center;min-width: 3cm; ">
@@ -1464,20 +1464,12 @@ Signo
 40
 </td>
 <td style="text-align:center;min-width: 3cm; ">
-<ul>
-<li></td>
+negativo
+</td>
 </tr>
 </tbody>
 </table>
-Para este ejemplo, <span class="math inline">\(N_+ = 0\)</span> y <span class="math inline">\(N_- = 8\)</span>, por lo tanto <span class="math inline">\(B_s = 8\)</span>. Nuestro valor-<em>p</em> es la probabilidad de obtener 8 valores con signo -, en un experimento binomial con <span class="math inline">\(n = 8\)</span>. Para encontrar el valor-<em>p</em> podemos usar alguna tabla o la función <code>dbinom()</code>.</li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+<p>Para este ejemplo, <span class="math inline">\(N_+ = 0\)</span> y <span class="math inline">\(N_- = 8\)</span>, por lo tanto <span class="math inline">\(B_s = 8\)</span>. Nuestro valor-<em>p</em> es la probabilidad de obtener 8 valores con signo -, en un experimento binomial con <span class="math inline">\(n = 8\)</span>. Para encontrar el valor-<em>p</em> podemos usar alguna tabla o la función <code>dbinom()</code>.</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="estadística-inferencial.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">dbinom</span>(<span class="dv">8</span>, <span class="dv">8</span>, <span class="fl">0.5</span>) <span class="co">#Multiplicamos por dos, ya que hacemos una prueba de signos de dos colas.</span></span></code></pre></div>
 <pre><code>## [1] 0.0078125</code></pre>
 <p>Como podemos ver, el <span class="math inline">\(valor-p = 0.008\)</span>, por lo tanto el <span class="math inline">\(valor-p &lt; 0.05\)</span> y aceptamos la <span class="math inline">\(H_A\)</span> y vemos que hay diferencias significativas entre las dos subespecies en cuanto a la dominancia. También podemos hacer uso del paquete <code>BSDA</code>, `<code>DescTools</code> o <code>signmedia.test</code> con sus funciones correspondientes, como veremos en todos los casos obtenemos un resultado similar.</p>

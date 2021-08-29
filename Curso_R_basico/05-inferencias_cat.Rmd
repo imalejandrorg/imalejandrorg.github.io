@@ -184,6 +184,7 @@ Datos <- data.frame(Datos, Venados)
 ggplot(Datos, aes(reorder(Zona, Venados), Venados)) + geom_bar(stat = "identity", color = "Gray20", fill = "Gray80", width = 0.7) +
   xlab("Zona") +
   ylab("No. de venados") +
+  scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
 
@@ -233,6 +234,7 @@ ggplot(graph, aes(fill = reorder(Zona1, Prop), y = Prop, x = Condicion)) +
   xlab("") +
   ylab("Proporción") +
   labs(fill = "Zona") +
+  scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
 
@@ -265,7 +267,7 @@ ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
   geom_text(aes(x = 20, label = "df = 5", y = 0.1), color = "blue") +
   geom_text(aes(x = 20, label = "df = 8", y = 0.09), color = "red") +
   geom_text(aes(x = 20.2, label = "df = 10", y = 0.08), color = "darkgreen") +
-  scale_y_continuous(breaks = NULL) +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
   ylab("") +
   xlab("") +
   theme_minimal_hgrid(color = "black")
@@ -298,10 +300,11 @@ Esto corresponde a un área de 0.05 por encima de la cola de la distribución de
 ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
   stat_function(fun = dchisq, args = list(df = 5), geom = "area", fill = "lightblue", xlim = c(11.07,30)) +
   stat_function(fun = dchisq, args = list(df = 5), size = 0.6) +
-  geom_vline(aes(xintercept = 11.07), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = 11.07, y = 0, xend = 11.07, yend = 0.019), linetype = "dashed") +
+  #geom_vline(aes(xintercept = 11.07), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 15, y = 0.03, label = "Área = 0.05")) +
   geom_text(aes(x = 5, y = 0.03, label = "Área = 0.95")) +
-  scale_y_continuous(breaks = NULL) +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
   scale_x_continuous(limit = c(0, 30), breaks = c(0, 5, 11.07, 15, 20, 25, 30), labels = c("0" = "0", "5" = "5",  "11.07" = parse(text = TeX("$\\chi_{5, 0.025}^2$")), "15" = "15", "20" = "20", "25" = "25", "30" = "30")) +
   ylab("") +
   xlab("") +
@@ -738,6 +741,7 @@ ggplot(graph, aes(fill = reorder(Zona, Nidos), y = Nidos, x = Año)) +
   xlab("") +
   ylab("Proporción") +
   labs(fill = "Lugar de anidamiento") +
+  scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
 

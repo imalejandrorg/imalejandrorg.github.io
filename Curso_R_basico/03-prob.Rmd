@@ -594,7 +594,8 @@ pnorm(1.33, 0, 1, lower.tail = TRUE)
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-4, 1.33)) +
   stat_function(fun = dnorm, size = 0.6) +
-  geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = 1.33, y = 0, xend = 1.33, yend = 0.165), linetype = "dashed") +
+  #geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 2.2, label = "Área = 0.9082", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
   geom_text(aes(x = 2.25, label = "Z = 1.33", y = 0.26), color = "black", vjust = -3, size = 4.5) +
   xlim(-4, 4) +
@@ -622,7 +623,8 @@ Como podemos ver el resultado indica que 75.86% de los peces miden más de 51 mm
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-0.67, 4)) +
   stat_function(fun = dnorm, size = 0.6) +
-  geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = -0.67, y = 0, xend = -0.67, yend = 0.319), linetype = "dashed") +
+  #geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = -1.8, label = "Área = 0.7486", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
   geom_text(aes(x = -1.7, label = "Z = -0.67", y = 0.26), color = "black", vjust = -3, size = 4.5) +
   xlim(-4, 4) +
@@ -645,8 +647,10 @@ Como resultado obtenemos que el 65.68% de los peces se encuentran en longitudes 
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(-0.67, 1.33)) +
   stat_function(fun = dnorm, size = 0.6) +
-  geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.35) +
-  geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = -0.67, y = 0, xend = -0.67, yend = 0.319), linetype = "dashed") +
+  geom_segment(aes(x = 1.33, y = 0, xend = 1.33, yend = 0.165), linetype = "dashed") +
+  #geom_vline(aes(xintercept = -0.67), linetype = "dashed", size = 0.35) +
+  #geom_vline(aes(xintercept = 1.33), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = -1.8, label = "Área = 0.6568", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
   geom_text(aes(x = -1.7, label = "Z = -0.67", y = 0.26), color = "black", vjust = -3, size = 4.5) +
   geom_text(aes(x = 1.9, label = "Z = 1.33", y = 0.26), color = "black", vjust = -3, size = 4.5) +
@@ -673,8 +677,8 @@ Como podemos ver, el valor $Z$ correspondiente es 0.5244. Ahora, utilizando la f
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(0.5244, 4)) +
   stat_function(fun = dnorm, size = 0.6) +
-  #geom_segment(aes(x = 0.5244, y = 0, xend = 0.5244, yend = 0.347), linetype = "dashed") +
-  geom_vline(aes(xintercept = 0.5244), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = 0.5244, y = 0, xend = 0.5244, yend = 0.347), linetype = "dashed") +
+  #geom_vline(aes(xintercept = 0.5244), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 1.8, label = "Área = 0.3", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
   geom_text(aes(x = 2.18, label = "Z = 0.5244", y = 0.26), color = "black", vjust = -3, size = 4.5) +
   xlim(-4, 4) +
@@ -803,7 +807,8 @@ P(\overline{X} > 11.5) = P(Z > 1.0204) = 0.1538 \approx 0.15
 ggplot(data.frame(x = c(9, 13)), aes(x = x)) +
   stat_function(fun = dnorm, args = list(mean = 11, sd = 0.49), geom = "area", fill = "lightblue", xlim = c(11.5,13)) +
   stat_function(fun = dnorm, args = list(mean = 11, sd = 0.49), size = 0.6) +
-  geom_vline(aes(xintercept = 11.5), linetype = "dashed", size = 0.35) +
+  geom_segment(aes(x = 11.5, y = 0, xend = 11.5, yend = 0.484), linetype = "dashed") +
+  #geom_vline(aes(xintercept = 11.5), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 12, label = "Área = 0.1538", y = 0.4), color = "red", vjust = -0.8, size = 4.5) +
   geom_text(aes(x = 12.08, label = "Z = 1.0204", y = 0.4), color = "black", vjust = -2.6, size = 4.5) +
   xlim(9, 13) +

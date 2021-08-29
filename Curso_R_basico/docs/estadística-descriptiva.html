@@ -549,7 +549,7 @@ En caso de querer calcular la desviación estándar de cada tratamiento utilizam
 ## 1 ctrl  0.583  1.94  5.03    5.15    10
 ## 2 trt1  0.794  2.44  4.66    4.55    10
 ## 3 trt2  0.443  1.39  5.53    5.44    10</code></pre>
-<p>En esta tabla podemos ver todos lo estadísticos que hemos calculado hasta ahora.
+<p>En esta tabla podemos ver todos los estadísticos que hemos calculado hasta ahora.
 Para calcular <span class="math inline">\(\sigma\)</span> necesitamos multiplicar el resultado obtenido por <span class="math inline">\(\sqrt\frac{N-1}{N}\)</span>.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="estadística-descriptiva.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">*</span>(<span class="fu">sqrt</span>((<span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">length</span>(PlantGrowth<span class="sc">$</span>weight)))</span></code></pre></div>
 <pre><code>## [1] 0.6894063</code></pre>
