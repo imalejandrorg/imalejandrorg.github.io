@@ -267,7 +267,7 @@ dbinom(2, 5, 0.37)
 mutantes <- data.frame(n = 0:5, prob = dbinom(x = 0:5, size = 5, prob = 0.37))
 mutantes$colour <- ifelse(mutantes$n == 2, "lightblue", "white")
 
-ggplot(mutantes, aes(x = factor(n), y = prob, width = 0.7, fill = colour)) +
+ggplot(mutantes, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
  geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Mutantes (x)", y = "Probabilidad") +
@@ -312,7 +312,7 @@ dbinom(4, 6, 0.85)
 rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
 rh$colour <- ifelse(rh$rh == 4, "lightblue", "white")
 
-ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
  geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Personas con Rh +", y = "Probabilidad") +
@@ -332,7 +332,7 @@ pbinom(3, 6, 0.85, lower.tail = FALSE)
 rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
 rh$colour <- ifelse(rh$rh >= 4, "lightblue", "white")
 
-ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
  geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Personas con Rh +", y = "Probabilidad") +
@@ -354,7 +354,7 @@ dbinom(0, 6, 0.85) + dbinom(1, 6, 0.85) + dbinom(2, 6, 0.85) + dbinom(3, 6, 0.85
 rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
 rh$colour <- ifelse(rh$rh < 6, "lightblue", "white")
 
-ggplot(rh, aes(x = factor(rh), y = prob, width = 0.7, fill = colour)) +
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
  geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Personas con Rh +", y = "Probabilidad") +
@@ -453,7 +453,7 @@ dpois(1, 2, log = F)
 Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
 Pois$colour <- ifelse(Pois$muts == 1, "lightblue", "white")
 
-ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.9, fill = colour)) +
   geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Células mutantes", y = "Probabilidad") +
@@ -476,7 +476,7 @@ dpois(0, 2, log = F)
 Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
 Pois$colour <- ifelse(Pois$muts == 0, "lightblue", "white")
 
-ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.9, fill = colour)) +
   geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Células mutantes", y = "Probabilidad") +
@@ -500,7 +500,7 @@ Por lo que $P(X \ge 1) = 0.865$.
 Pois <- data.frame(muts = 0:9, prob = dpois(0:9, 2, log = F))
 Pois$colour <- ifelse(Pois$muts >= 1, "lightblue", "white")
 
-ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.7, fill = colour)) +
+ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.9, fill = colour)) +
   geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Células mutantes", y = "Probabilidad") +
