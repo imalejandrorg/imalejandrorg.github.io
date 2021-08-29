@@ -453,7 +453,7 @@ df = n - 1
 df = n - 1 = 14 - 1 = 13
 \end{equation}\]</span></p>
 <p>Como queremos un intervalo de confianza al 95%, utilizamos el valor crítico de <span class="math inline">\(t_{0.025}\)</span>. Para encontrar este valor podemos buscarlo en una tabla de <span class="math inline">\(t\)</span> o utilizar las funciones de <code>R</code>.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="estadística-inferencial.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="dv">13</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="estadística-inferencial.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="dv">13</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 2.160369</code></pre>
 <p>Por lo tanto el intervalo de confianza al 95% para nuestra muestra es</p>
 <p><span class="math display">\[\begin{equation}
@@ -462,9 +462,9 @@ df = n - 1 = 14 - 1 = 13
 32.8143 \pm 1.4293
 \end{equation}\]</span></p>
 <p>De nuevo, esto se puede calcular en <code>R</code> de manera sencilla.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="estadística-inferencial.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">+</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="estadística-inferencial.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">+</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 34.24348</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="estadística-inferencial.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">-</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="estadística-inferencial.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">-</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 31.38512</code></pre>
 <p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis (<span class="math inline">\(31.4, 34.2\)</span>). Con esta información sabemos entonces que <span class="math inline">\(31.4cm^2 &gt; \mu &gt; 34.2cm^2\)</span>.</p>
 <p>Una cosa importante a destacar es que es el propio intervalo de confianza el que es <strong>aleatorio</strong>. Si consideramos intervalos de confianza al 95%, entonces:</p>
@@ -600,7 +600,7 @@ Hembras
 </table>
 <p>En la siguiente figura se puede observar la distribución de los datos para los machos y las hembras. A simple vista parece ser que el tórax de los machos pesa ligeramente más que el de las hebras.</p>
 <p>Ahora tendremos que calcular ciertos valores para estos datos, como las medias y desviaciones estándar de cada grupo. Recuerden que para esto podemos usar la librería <code>dplyr</code>. Anteriormente creé una variable llamada <code>Sample2</code> que contiene los datos que vamos a necesitar.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="estadística-inferencial.html#cb153-1" aria-hidden="true" tabindex="-1"></a>Sample2</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="estadística-inferencial.html#cb155-1" aria-hidden="true" tabindex="-1"></a>Sample2</span></code></pre></div>
 <pre><code>##      Grupo Peso
 ## 1   Machos   67
 ## 2   Machos   73
@@ -618,13 +618,13 @@ Hembras
 ## 15 Hembras   75
 ## 16 Hembras   58</code></pre>
 <p>En este caso yo he redondeado los valores a solamente 1 dígito. Ahora para obtener el intervalo de confianza no hace falta que hagamos todas las fórmulas para obtener los grados de libertad, el error estándar, etc. Basta con usar la función <code>t.test()</code> para obtener nuestro intervalo de confianza.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="estadística-inferencial.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2)<span class="sc">$</span>conf.int</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="estadística-inferencial.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2)<span class="sc">$</span>conf.int</span></code></pre></div>
 <pre><code>## [1] -21.353087  -3.325484
 ## attr(,&quot;conf.level&quot;)
 ## [1] 0.95</code></pre>
 <p>Como podemos ver nuestro intervalo se encuentra entre (<span class="math inline">\(3.3, 21.4\)</span>) para un nivel de significancia del 95%. ¿Cómo se interpreta esto? Bueno, de la siguiente manera: de acuerdo a nuestro intervalo de confianza, podemos estar 95% seguros de que la media poblacional del tórax de los machos de Mariposa Monarca (<span class="math inline">\(\mu_1\)</span>) es más grande que la de las hembras (<span class="math inline">\(\mu_2\)</span>) por una cantidad tan pequeña como 3.3 mg o tan grande como 21.4 mg.</p>
 <p>Si quisiéramos ajustar el nivel de confianza de nuestro intervalo, también podemos hacerlo.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="estadística-inferencial.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2, <span class="at">conf.level =</span> <span class="fl">0.9</span>)<span class="sc">$</span>conf.int</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="estadística-inferencial.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Peso <span class="sc">~</span> Grupo,Sample2, <span class="at">conf.level =</span> <span class="fl">0.9</span>)<span class="sc">$</span>conf.int</span></code></pre></div>
 <pre><code>## [1] -19.716479  -4.962093
 ## attr(,&quot;conf.level&quot;)
 ## [1] 0.9</code></pre>
@@ -670,10 +670,10 @@ t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overli
 <blockquote>
 <p><strong>Ejemplo:</strong> Investigadores están interesados en los efectos que produce el tolueno. Para esto, midieron las concentraciones de varios químicos en el cerebro de ratas que habían sido expuestas a tolueno y ratas que no habían sido expuestas (control). En la siguiente tabla se muestran las concentraciones de norepinefrina (NE) de la región de la médula del cerebro. La <span class="math inline">\(H_0\)</span> de los investigadores es que el tolueno no tiene efecto en la concentración de NE en la médula de las ratas. Por ende, la <span class="math inline">\(H_A\)</span> es que el tolueno tiene un efecto en la médlua de las ratas.</p>
 </blockquote>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="estadística-inferencial.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb159-2"><a href="estadística-inferencial.html#cb159-2" aria-hidden="true" tabindex="-1"></a>Tolueno <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">540.8</span>, <span class="fl">66.1</span>), <span class="dv">1</span>)</span>
-<span id="cb159-3"><a href="estadística-inferencial.html#cb159-3" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">444.2</span>, <span class="fl">69.6</span>), <span class="dv">1</span>)</span>
-<span id="cb159-4"><a href="estadística-inferencial.html#cb159-4" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Tolueno)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="estadística-inferencial.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb161-2"><a href="estadística-inferencial.html#cb161-2" aria-hidden="true" tabindex="-1"></a>Tolueno <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">540.8</span>, <span class="fl">66.1</span>), <span class="dv">1</span>)</span>
+<span id="cb161-3"><a href="estadística-inferencial.html#cb161-3" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="fl">444.2</span>, <span class="fl">69.6</span>), <span class="dv">1</span>)</span>
+<span id="cb161-4"><a href="estadística-inferencial.html#cb161-4" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Tolueno)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-109">Tabla 4.2: </span>Concentración de NE en cerebro de ratas (ng/gm)
@@ -773,9 +773,9 @@ Tolueno
 </table>
 <p><img src="Curso_R_basico_files/figure-html/ex2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="estadística-inferencial.html#cb160-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(ex1, Grupo, Conc)</span>
-<span id="cb160-2"><a href="estadística-inferencial.html#cb160-2" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> ex2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Conc), <span class="at">SD =</span> <span class="fu">sd</span>(Conc), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb160-3"><a href="estadística-inferencial.html#cb160-3" aria-hidden="true" tabindex="-1"></a>ex3</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="estadística-inferencial.html#cb162-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(ex1, Grupo, Conc)</span>
+<span id="cb162-2"><a href="estadística-inferencial.html#cb162-2" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> ex2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Conc), <span class="at">SD =</span> <span class="fu">sd</span>(Conc), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb162-3"><a href="estadística-inferencial.html#cb162-3" aria-hidden="true" tabindex="-1"></a>ex3</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   Grupo       n Media    SD    SE
 ##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -790,7 +790,7 @@ SE_{(\overline{X}_1 - \overline{X}_2)} = \sqrt{\frac{63.04^2}{10} + \frac{72.26^
 t_s = \frac{(545.74 - 458.72) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
 \end{equation}\]</span></p>
 <p>Sin embargo, gracias a la función <code>t.test</code> no es necesario que hagamos este procedimiento paso a paso. Por ejemplo, si queremos obtener el estadístico <span class="math inline">\(t\)</span> simplemente escribimos lo siguiente.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="estadística-inferencial.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>statistic</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="estadística-inferencial.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>statistic</span></code></pre></div>
 <pre><code>##         t 
 ## -2.869561</code></pre>
 <p>Si agregamos <code>$statistic</code> al final de nuestra función obtenemos el estadístico de <span class="math inline">\(t\)</span> que en este caso es 2.87. Pero, ¿cómo sabemos que tenemos suficiente evidencia para aceptar o rechazar la <span class="math inline">\(H_A\)</span>? Bueno, si la <span class="math inline">\(H_0\)</span> es verdadera, la distribución muestral de <span class="math inline">\(t_s\)</span> se aproximará a una distribución <span class="math inline">\(t\)</span> de Student con los grados de libertad dados por la fórmula <a href="estadística-inferencial.html#eq:df2">(4.9)</a>.</p>
@@ -803,21 +803,21 @@ Figura 4.6: Valor-<em>p</em> para un valor de <span class="math inline">\(t_s\)<
 </p>
 </div>
 <p>Otra forma de definir el valor-<em>p</em> es como la probabilidad de obtener un valor tan extremo como el observado si la <span class="math inline">\(H_0\)</span> fuera verdadera. Para calcular el valor-<em>p</em> necesitamos encontrar el área bajo la distribución <span class="math inline">\(t\)</span> de Student que se encuentre más allá de <span class="math inline">\(\pm SE_{\overline{X}_1 - \overline{X}_2}\)</span>. Afortunadamente, la función <code>t.test()</code> también nos da el valor-<em>p</em>. Podemos corroborar esto a mano.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="estadística-inferencial.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>parameter</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="estadística-inferencial.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>parameter</span></code></pre></div>
 <pre><code>##      df 
 ## 17.6748</code></pre>
 <p>Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces simplemente en la distribución <span class="math inline">\(t\)</span> de Student buscamos el área correspondiente para un valor <span class="math inline">\(t_s = -2.87\)</span> con <span class="math inline">\(df = 17.67\)</span>.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="estadística-inferencial.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="estadística-inferencial.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
 <pre><code>## [1] 0.005160011</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="estadística-inferencial.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="estadística-inferencial.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">2.87</span>, <span class="fl">17.67</span>, <span class="at">lower.tail =</span> T)</span></code></pre></div>
 <pre><code>## [1] 0.005160011</code></pre>
 <p>Como en este caso se trata de un valor-<em>p</em> de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro <span class="math inline">\(valor-p = 0.0103\)</span>. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de <span class="math inline">\(t\)</span> en <code>R</code>. Simplemente escribimos <code>$p.value</code> al final de nuestro comando y este nos debería dar nuestro valor-<em>p</em>.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="estadística-inferencial.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>p.value</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="estadística-inferencial.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)<span class="sc">$</span>p.value</span></code></pre></div>
 <pre><code>## [1] 0.0103277</code></pre>
 <p>Como podemos ver el valor es aproximadamente igual (puede diferir debido a los decimales). Un valor-<em>p</em> cercano a 1 indica que el valor <span class="math inline">\(t_s\)</span> se encuentra cercano al centro de la distribución <span class="math inline">\(t\)</span>, que resultaría en una falta de evidencia para la <span class="math inline">\(H_A\)</span>. Un valor-<em>p</em> cercano a 0 indica que el valor <span class="math inline">\(t_s\)</span> se encuentra en una de las colas de la distribución <span class="math inline">\(t\)</span>, lo que daría evidencia para la <span class="math inline">\(H_A\)</span>.</p>
 <p>¿Cómo decidimos qué valores-<em>p</em> muestran evidencia para la <span class="math inline">\(H_A\)</span>? Para esto necesitamos elegir un <strong>nivel de significancia</strong> o <span class="math inline">\(\alpha\)</span>. Este valor lo elige, generalmente, quién realiza la decisión acerca del estudio. Valores <span class="math inline">\(\alpha\)</span> comunes son <span class="math inline">\(\alpha = 0.1, \space 0.05, \space 0.01\)</span>. Si nuestro valor-<em>p</em> es menor o igual a nuestro alfa (<span class="math inline">\(valor-p \leq \alpha\)</span>) nuestros datos muestran evidencia de una diferencia <strong>estadísticamente significativa</strong> a favor de <span class="math inline">\(H_A\)</span>. Decimos que la <span class="math inline">\(H_0\)</span> se rechaza. Si por el contrario el valor-<em>p</em> es mayor que nuestro alfa (<span class="math inline">\(valor-p \geq \alpha\)</span>), decimos que hay insuficiente evidencia para decir que <span class="math inline">\(H_A\)</span> es verdad, por lo tanto no se rechaza la <span class="math inline">\(H_0\)</span>.</p>
 <p>¿Cómo podemos ver toda está información? Bueno, si no agregamos ningún valor al final de nuestro comando <code>t.test()</code>, obtenemos toda la información condensada.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="estadística-inferencial.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="estadística-inferencial.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -853,7 +853,7 @@ Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) 
 <p>Las <span class="math inline">\(H_A\)</span> podrían ser <span class="math inline">\(H_{A}: \mu_1 &gt; \mu_2\)</span> o <span class="math inline">\(H_{A}: \mu_1 &lt; \mu_2\)</span>. Para este tipo de pruebas lo primero es checar la direccionalidad: ¿Nos interesa la parte inferior o superior de la distribución de <span class="math inline">\(t\)</span>? Después de eso, ver hacia que lado se desvían los datos. Si nuestros datos se desvían en dirección de la <span class="math inline">\(H_A\)</span> entonces podemos seguir con el procedimiento.</p>
 <p>En este caso, el valor-<em>p</em> de una prueba de <span class="math inline">\(t\)</span> de una cola será el área que se encuentre más allá de <span class="math inline">\(t_s\)</span>.</p>
 <p>Para hacer una prueba de una cola en R simplemente necesitamos cambiar un argumento en <code>t.test(alternative = "greater")</code> o <code>t.test(alternative = "less")</code>.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="estadística-inferencial.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="estadística-inferencial.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -865,7 +865,7 @@ Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) 
 ## sample estimates:
 ## mean in group Control mean in group Tolueno 
 ##                458.72                545.74</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="estadística-inferencial.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="estadística-inferencial.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Conc <span class="sc">~</span> Grupo, ex2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -887,8 +887,8 @@ Tamaño \space de \space efecto = \frac{|{\overline{x}_1-\overline{x}_2}|}{\sigm
 \tag{4.14}
 \end{equation}\]</span></p>
 <p>Los resultados están dados en desviaciones estándar y el valor se conoce como <strong>d de Cohen</strong>. Para calcular la d de Cohen en <code>R</code> necesitamos un paquete estadístico llamado <code>effsize</code> y la función <code>cohen.d()</code>.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="estadística-inferencial.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
-<span id="cb178-2"><a href="estadística-inferencial.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cohen.d</span>(Conc <span class="sc">~</span> Grupo, <span class="at">data =</span> ex2, <span class="at">pooled_sd =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="estadística-inferencial.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb180-2"><a href="estadística-inferencial.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cohen.d</span>(Conc <span class="sc">~</span> Grupo, <span class="at">data =</span> ex2, <span class="at">pooled_sd =</span> F)</span></code></pre></div>
 <pre><code>## 
 ## Cohen&#39;s d
 ## 
@@ -919,10 +919,10 @@ Figura 4.8: Diferencias entre las medias de ambas muestras utilizadas en el ejer
 <blockquote>
 <p><strong>Ejemplo:</strong> En un estudio farmacéutico, investigadores midieron la concentración de dopamina en el cerebro de seis ratas expuestas a tolueno y seis ratas que funcionaron como control. Las concentraciones se muestran en la tabla <a href="estadística-inferencial.html#tab:uex">4.3</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="estadística-inferencial.html#cb180-1" aria-hidden="true" tabindex="-1"></a>Tolueno1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3420</span>, <span class="dv">2314</span>, <span class="dv">1911</span>, <span class="dv">2464</span>, <span class="dv">2781</span>, <span class="dv">2803</span>)</span>
-<span id="cb180-2"><a href="estadística-inferencial.html#cb180-2" aria-hidden="true" tabindex="-1"></a>Control1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1843</span>, <span class="dv">1397</span>, <span class="dv">1803</span>, <span class="dv">2539</span>, <span class="dv">1990</span>)</span>
-<span id="cb180-3"><a href="estadística-inferencial.html#cb180-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-4"><a href="estadística-inferencial.html#cb180-4" aria-hidden="true" tabindex="-1"></a>Dopamina <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Tolueno1, Control1)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="estadística-inferencial.html#cb182-1" aria-hidden="true" tabindex="-1"></a>Tolueno1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3420</span>, <span class="dv">2314</span>, <span class="dv">1911</span>, <span class="dv">2464</span>, <span class="dv">2781</span>, <span class="dv">2803</span>)</span>
+<span id="cb182-2"><a href="estadística-inferencial.html#cb182-2" aria-hidden="true" tabindex="-1"></a>Control1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1843</span>, <span class="dv">1397</span>, <span class="dv">1803</span>, <span class="dv">2539</span>, <span class="dv">1990</span>)</span>
+<span id="cb182-3"><a href="estadística-inferencial.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="estadística-inferencial.html#cb182-4" aria-hidden="true" tabindex="-1"></a>Dopamina <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Tolueno1, Control1)</span></code></pre></div>
 <table class="kable_wrapper">
 <caption>
 <span id="tab:uex">Tabla 4.3: </span>Concentración de dopamina (ng/mg) y sus estadísticos descriptivos.
@@ -1055,9 +1055,9 @@ Tolueno1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="estadística-inferencial.html#cb181-1" aria-hidden="true" tabindex="-1"></a>Dopamina <span class="ot">&lt;-</span> <span class="fu">gather</span>(Dopamina, Tratamiento, Concentracion) <span class="co">#Organizamos los datos de manera que se puedan trabajar.</span></span>
-<span id="cb181-2"><a href="estadística-inferencial.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-3"><a href="estadística-inferencial.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Concentracion <span class="sc">~</span> Tratamiento, <span class="at">data =</span> Dopamina)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="estadística-inferencial.html#cb183-1" aria-hidden="true" tabindex="-1"></a>Dopamina <span class="ot">&lt;-</span> <span class="fu">gather</span>(Dopamina, Tratamiento, Concentracion) <span class="co">#Organizamos los datos de manera que se puedan trabajar.</span></span>
+<span id="cb183-2"><a href="estadística-inferencial.html#cb183-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-3"><a href="estadística-inferencial.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Concentracion <span class="sc">~</span> Tratamiento, <span class="at">data =</span> Dopamina)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum exact test
 ## 
@@ -1097,9 +1097,9 @@ SE_\overline{D} = \frac{s_D}{\sqrt{n_D}}
 <blockquote>
 <p><strong>Ejemplo:</strong> El adenosin monofosfato cíclico (cAMP) es una sustancia que regula la respuesta celular a las hormonas. En un estudio de maduración de ovarios en la rana <em>Xenopus laevis</em>, los oocitos de cada una de las 4 hembras fueron divdidos en dos grupos: un grupo fue expuesto a progesterona y el otro no. Después de 2 minutos, cada grupo fue analizado para encontrar el contenido de cAMP. Los datos se muestran en la siguiente tabla <a href="estadística-inferencial.html#tab:camp">4.4</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="estadística-inferencial.html#cb183-1" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.01</span>, <span class="fl">2.28</span>, <span class="fl">1.51</span>, <span class="fl">2.12</span>)</span>
-<span id="cb183-2"><a href="estadística-inferencial.html#cb183-2" aria-hidden="true" tabindex="-1"></a>Progesterona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.23</span>, <span class="fl">1.21</span>, <span class="fl">1.40</span>, <span class="fl">1.38</span>)</span>
-<span id="cb183-3"><a href="estadística-inferencial.html#cb183-3" aria-hidden="true" tabindex="-1"></a>Datos1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Progesterona)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="estadística-inferencial.html#cb185-1" aria-hidden="true" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.01</span>, <span class="fl">2.28</span>, <span class="fl">1.51</span>, <span class="fl">2.12</span>)</span>
+<span id="cb185-2"><a href="estadística-inferencial.html#cb185-2" aria-hidden="true" tabindex="-1"></a>Progesterona <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.23</span>, <span class="fl">1.21</span>, <span class="fl">1.40</span>, <span class="fl">1.38</span>)</span>
+<span id="cb185-3"><a href="estadística-inferencial.html#cb185-3" aria-hidden="true" tabindex="-1"></a>Datos1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Control, Progesterona)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:camp">Tabla 4.4: </span>Concentración de cAMP (pmol/oocito)
@@ -1150,13 +1150,13 @@ Progesterona
 </tbody>
 </table>
 <p>Ahora que tenemos nuestros datos, lo primero es encontrar las diferencias, <span class="math inline">\(d\)</span> entre los datos. Esto lo hacemos muy sencillo agregando una nueva columna <code>$d</code> a nuestra tabla.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="estadística-inferencial.html#cb184-1" aria-hidden="true" tabindex="-1"></a>Datos1<span class="sc">$</span>d <span class="ot">&lt;-</span> Control <span class="sc">-</span> Progesterona <span class="co">#Encontramos d sacando la diferencia entre nuestros datos.</span></span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="estadística-inferencial.html#cb186-1" aria-hidden="true" tabindex="-1"></a>Datos1<span class="sc">$</span>d <span class="ot">&lt;-</span> Control <span class="sc">-</span> Progesterona <span class="co">#Encontramos d sacando la diferencia entre nuestros datos.</span></span></code></pre></div>
 <p>Bien, ahora para poder encontrar la media y la desviación estándar de nuestras muestras de la diferencia <span class="math inline">\(d\)</span> necesitamos transformar la tabla en un formato que nos permita hacer estos análisis. Afortunadamente la función <code>gather()</code> nos ayuda con eso, que es parte del paquete <code>tidyr</code>.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="estadística-inferencial.html#cb185-1" aria-hidden="true" tabindex="-1"></a>Datos2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos1, Grupo, Concentracion)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="estadística-inferencial.html#cb187-1" aria-hidden="true" tabindex="-1"></a>Datos2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos1, Grupo, Concentracion)</span></code></pre></div>
 <p>La función <code>gather()</code> nos ayuda a reorganizar los datos para tenerlos de manera en que podamos trabajar con ellos. Ahora con la propia librería de <code>dplyr</code> deberíamos poder encontrar la media, tanto para los tratamientos como para <span class="math inline">\(d\)</span>.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="estadística-inferencial.html#cb186-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span> </span>
-<span id="cb186-2"><a href="estadística-inferencial.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> </span>
-<span id="cb186-3"><a href="estadística-inferencial.html#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="estadística-inferencial.html#cb188-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span> </span>
+<span id="cb188-2"><a href="estadística-inferencial.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span> </span>
+<span id="cb188-3"><a href="estadística-inferencial.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>))</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-126">Tabla 4.5: </span>Estadísticos descriptivos de cAMP
@@ -1226,9 +1226,9 @@ Progesterona
 <p><span class="math display">\[\begin{equation}
 SE_\overline{D} = \frac{0.404}{\sqrt{4}} = 0.202
 \end{equation}\]</span></p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="estadística-inferencial.html#cb187-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span></span>
-<span id="cb187-2"><a href="estadística-inferencial.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span></span>
-<span id="cb187-3"><a href="estadística-inferencial.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="estadística-inferencial.html#cb189-1" aria-hidden="true" tabindex="-1"></a>Datos3 <span class="ot">&lt;-</span> Datos2 <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="estadística-inferencial.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Grupo) <span class="sc">%&gt;%</span></span>
+<span id="cb189-3"><a href="estadística-inferencial.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">Media =</span> <span class="fu">mean</span>(Concentracion), <span class="at">SD =</span> <span class="fu">round</span>(<span class="fu">sd</span>(Concentracion), <span class="dv">3</span>), <span class="at">SE =</span> SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-128">Tabla 4.6: </span>Estadísticos descriptivos incluyendo el error estándar
@@ -1313,10 +1313,10 @@ Progesterona
 \end{equation}\]</span></p>
 <p>En donde <span class="math inline">\(t_{n_{D}-1, 0.025}\)</span> es una constante determinada a partir de la distribución <span class="math inline">\(t\)</span> de Student, utilizando como grados de libertad la fórmula <span class="math inline">\(df = n_D - 1\)</span>. Intervalos de confianza con otros coeficientes se construyen de la misma manera.</p>
 <p>Construir el intervalo de confianza correspondiente es relativamente sencillo. Vamos a utilizar la función <code>t.test()</code> pero con el argumento <code>paired = TRUE</code>.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="estadística-inferencial.html#cb188-1" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(Control, Progesterona)</span>
-<span id="cb188-2"><a href="estadística-inferencial.html#cb188-2" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos4, Grupo, Concentracion)</span>
-<span id="cb188-3"><a href="estadística-inferencial.html#cb188-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-4"><a href="estadística-inferencial.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Concentracion <span class="sc">~</span> Grupo, Datos4, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="estadística-inferencial.html#cb190-1" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(Control, Progesterona)</span>
+<span id="cb190-2"><a href="estadística-inferencial.html#cb190-2" aria-hidden="true" tabindex="-1"></a>Datos4 <span class="ot">&lt;-</span> <span class="fu">gather</span>(Datos4, Grupo, Concentracion)</span>
+<span id="cb190-3"><a href="estadística-inferencial.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-4"><a href="estadística-inferencial.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Concentracion <span class="sc">~</span> Grupo, Datos4, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -1357,10 +1357,10 @@ t_s = \frac{\overline{d}-0}{SE_\overline{D}}
 <blockquote>
 <p><strong>Ejemplo:</strong> Un investigador estudia la interacción entre dos subespecies de aves, el Junco de Carolina y el Junco Norteño. Puso a ambos en un aviario y observó el comportamiento durante 45 minutos. Este proceso fue repetido en varios días con distintos pares de individuos. Los resultados se muestran en la tabla <a href="estadística-inferencial.html#tab:signex">4.7</a>.</p>
 </blockquote>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="estadística-inferencial.html#cb190-1" aria-hidden="true" tabindex="-1"></a>Norteno <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb190-2"><a href="estadística-inferencial.html#cb190-2" aria-hidden="true" tabindex="-1"></a>Carolina <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">22</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">33</span>, <span class="dv">24</span>, <span class="dv">40</span>)</span>
-<span id="cb190-3"><a href="estadística-inferencial.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-4"><a href="estadística-inferencial.html#cb190-4" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Norteno, Carolina)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="estadística-inferencial.html#cb192-1" aria-hidden="true" tabindex="-1"></a>Norteno <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb192-2"><a href="estadística-inferencial.html#cb192-2" aria-hidden="true" tabindex="-1"></a>Carolina <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">22</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">33</span>, <span class="dv">24</span>, <span class="dv">40</span>)</span>
+<span id="cb192-3"><a href="estadística-inferencial.html#cb192-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-4"><a href="estadística-inferencial.html#cb192-4" aria-hidden="true" tabindex="-1"></a>Aves <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Norteno, Carolina)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:signex">Tabla 4.7: </span>Número de veces que fue dominante un ave
@@ -1470,19 +1470,19 @@ negativo
 </tbody>
 </table>
 <p>Para este ejemplo, <span class="math inline">\(N_+ = 0\)</span> y <span class="math inline">\(N_- = 8\)</span>, por lo tanto <span class="math inline">\(B_s = 8\)</span>. Nuestro valor-<em>p</em> es la probabilidad de obtener 8 valores con signo -, en un experimento binomial con <span class="math inline">\(n = 8\)</span>. Para encontrar el valor-<em>p</em> podemos usar alguna tabla o la función <code>dbinom()</code>.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="estadística-inferencial.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">dbinom</span>(<span class="dv">8</span>, <span class="dv">8</span>, <span class="fl">0.5</span>) <span class="co">#Multiplicamos por dos, ya que hacemos una prueba de signos de dos colas.</span></span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="estadística-inferencial.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">dbinom</span>(<span class="dv">8</span>, <span class="dv">8</span>, <span class="fl">0.5</span>) <span class="co">#Multiplicamos por dos, ya que hacemos una prueba de signos de dos colas.</span></span></code></pre></div>
 <pre><code>## [1] 0.0078125</code></pre>
 <p>Como podemos ver, el <span class="math inline">\(valor-p = 0.008\)</span>, por lo tanto el <span class="math inline">\(valor-p &lt; 0.05\)</span> y aceptamos la <span class="math inline">\(H_A\)</span> y vemos que hay diferencias significativas entre las dos subespecies en cuanto a la dominancia. También podemos hacer uso del paquete <code>BSDA</code>, `<code>DescTools</code> o <code>signmedia.test</code> con sus funciones correspondientes, como veremos en todos los casos obtenemos un resultado similar.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="estadística-inferencial.html#cb193-1" aria-hidden="true" tabindex="-1"></a>Diferencia <span class="ot">&lt;-</span> Norteno <span class="sc">-</span> Carolina <span class="co">#Obtenemos la diferencia de nuestros datos</span></span>
-<span id="cb193-2"><a href="estadística-inferencial.html#cb193-2" aria-hidden="true" tabindex="-1"></a>Diferencia</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="estadística-inferencial.html#cb195-1" aria-hidden="true" tabindex="-1"></a>Diferencia <span class="ot">&lt;-</span> Norteno <span class="sc">-</span> Carolina <span class="co">#Obtenemos la diferencia de nuestros datos</span></span>
+<span id="cb195-2"><a href="estadística-inferencial.html#cb195-2" aria-hidden="true" tabindex="-1"></a>Diferencia</span></code></pre></div>
 <pre><code>## [1]  -9  -6 -22 -14 -17 -31 -23 -40</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="estadística-inferencial.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="estadística-inferencial.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;BSDA&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:datasets&#39;:
 ## 
 ##     Orange</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="estadística-inferencial.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SIGN.test</span>(Diferencia, <span class="at">md =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="estadística-inferencial.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SIGN.test</span>(Diferencia, <span class="at">md =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One-sample Sign-Test
 ## 
@@ -1501,8 +1501,8 @@ negativo
 ## Lower Achieved CI     0.9297 -31.000 -9.000
 ## Interpolated CI       0.9500 -33.925 -8.025
 ## Upper Achieved CI     0.9922 -40.000 -6.000</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="estadística-inferencial.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
-<span id="cb200-2"><a href="estadística-inferencial.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(Diferencia, <span class="at">mu =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="estadística-inferencial.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb202-2"><a href="estadística-inferencial.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(Diferencia, <span class="at">mu =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One-sample Sign-Test
 ## 
@@ -1514,8 +1514,8 @@ negativo
 ## sample estimates:
 ## median of the differences 
 ##                     -19.5</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="estadística-inferencial.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(signmedian.test)</span>
-<span id="cb202-2"><a href="estadística-inferencial.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signmedian.test</span>(Diferencia, <span class="at">mu =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="estadística-inferencial.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(signmedian.test)</span>
+<span id="cb204-2"><a href="estadística-inferencial.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signmedian.test</span>(Diferencia, <span class="at">mu =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact sign test
 ## 
@@ -1683,7 +1683,7 @@ Diferencia
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="estadística-inferencial.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="estadística-inferencial.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
 ## 
@@ -1691,7 +1691,7 @@ Diferencia
 ## V = 5, p-value = 0.009766
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Como podemos ver, nuestro valor-<em>p</em> quiere decir que hay diferencias significativas ya que <span class="math inline">\(valor-p &lt; 0.05\)</span>. Si quisiéramos usar una hipótesis unidireccional, podríamos escribir como argumento <code>alternative = "less"</code> para ver si el alcoholismo reduce la densidad del cerebro.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="estadística-inferencial.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="estadística-inferencial.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Densidad <span class="sc">~</span> Grupo, Densidad2, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
 ## 
