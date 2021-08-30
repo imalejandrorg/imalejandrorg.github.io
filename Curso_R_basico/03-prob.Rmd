@@ -20,14 +20,13 @@ library(ggpubr)
 library(latex2exp)
 ```
 
-La **probabilidad** es una cantidad numérica que expresa qué tan factible es que ocurra un evento.
-Normalmente es expresada como $P(A)$, donde $A$ expresa un evento aleatorio.
-Siempre se encuentra entre un rango de 0 y 1, o expresado en porcentaje, entre 0% y 100%.
-Existen distintas interpretaciones de la probabilidad como la **frecuentista** o la **bayesiana.** En este caso, aprenderemos el enfoque frecuentista como una forma de asignar una probabilidad mensurable a un evento, es decir, la ocurrencia de el evento a la larga.
+La **probabilidad** es una cantidad numérica que expresa qué tan factible es que ocurra un evento. Normalmente es expresada como $P(A)$, donde $A$ es un evento aleatorio. Siempre se encuentra entre un rango de 0 y 1, o expresado en porcentaje, entre 0% y 100%. Existen distintos acercamientos a la probabilidad como el acercamiento **frecuentista** o el acercamiento **bayesiano.**
+
+En este caso, aprenderemos el enfoque frecuentista como una forma de asignar una probabilidad mensurable a un evento, es decir, la ocurrencia de el evento a la larga (qué tan *frecuentemente* ocurre).
 
 ## Probabilidad frecuentista
 
-En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento A ocurre en una serie de repeticiones indefinidamente largas.
+En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento $A$ ocurre en una serie de repeticiones indefinidamente largas.
 
 
 \begin{equation}
@@ -43,9 +42,9 @@ Estas son algunas reglas que nos pueden servir para determinar la probabilidad d
 
 1.  La probabilidad de un evento $A$ siempre se encuentra entre 0 y 1.
 
-2.  La suma de probabilidades de los eventos tiene que ser igual a 1.
+2.  La suma de probabilidades de los eventos tiene que ser igual a 1 (en caso de que sean complementarios).
 
-3.  La probabilidad de que el evento A no ocurra es $1 - P(A)$ y se denota con el símbolo $A_1^C$, indicando que es el complemento de $A_1$.
+3.  La probabilidad de que el evento $A$ no ocurra es $1 - P(A)$ y se denota con el símbolo $\overline{A}_1$, indicando que es el complemento de $A_1$. A este tipo de eventos se les conoce como **eventos complementarios.** 
 
 4.  Si dos eventos $A_1$ y $A_2$ son eventos que no ocurren en conjunto, entonces: 
 
@@ -89,7 +88,7 @@ P(OA) = 1050/1770
 $$
 
 La probabilidad de tener cabello negro y ojos azules $P(CN \cap OA)$ pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
-Entonces:
+Entonces si queremos saber la probabilidad de que alguien tenga cabello negro u ojos azules:
 
 $$
 P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770
@@ -117,15 +116,15 @@ Por ejemplo, de la tabla anterior, ¿Cuál es la probabilidad de que una persona
 En este caso: 
 
 $$
-P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770
+P(CR \cap OC) = P(CR) \times P(OC | CR) = 70/1770 \times 20/70 = 20/1770
 $$
 
 8.  Para dos eventos cualesquiera, $A_1$ y $A_2$:
 
 $$
-P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )
+P(A_1) = P(A_2) \times P(A_1 | A_2) + P(\overline{A}_2) \times P(A_1 | \overline{A}_2 )
 $$ 
-Donde $A_2^C$ es el complemento de $A_2$, es decir $1 - A_2$.
+Donde $\overline{A}_2$ es el complemento de $A_2$, es decir $1 - A_2$.
 
 ## Curvas de densidad
 
@@ -135,7 +134,7 @@ Un **histogramas de frecuencias relativas** representa las proporciones de las o
 
 Algunos de los requisitos de una distribución de probabilidad son:
 
-- Que exista una variable aleatoria numérica $x$, y que sus valores estén asociados con probabilidades correspondientes.
+- Que exista una variable aleatoria numérica $x$ y que sus valores estén asociados a una probabilidad.
 
 - Que $\sum P(x) = 1$, donde $x$ asume todos los los valores posibles. El área total bajo la curva de densidad debe ser igual a 1.
 
@@ -156,7 +155,9 @@ ggplot(data, aes(x = x)) +
   theme_minimal_hgrid(color = "black")
 ```
 
-La probabilidad correspondiente para una variable continua equivale al área debajo de la curva de densidad entre dos puntos. Si quisiéramos saber el valor de un punto exacto obtendríamos, de manera paradójica 0 ya que lo que equivale a la probabilidad es el área bajo la curva. Algunos de los parámetros de una distribución de probabilidad son:
+La probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos. Si quisiéramos saber el valor de un punto exacto, obtendríamos de manera un tanto paradójica 0, ya que lo que equivale a la probabilidad es el área bajo la curva. 
+
+Algunos de los parámetros de una distribución de probabilidad son:
 
 - **Media:** $\mu$
 
@@ -186,7 +187,7 @@ Normalmente, para que una variable aleatoria sea una **variable aleatoria binomi
 
 6.  **Resultados colectivamente exhaustivos:** Al menos uno de los dos resultados debe de ocurrir.
 
-Ahora bien, la **función de masa de probabilidad (PMF)** o fórmula de la distribución binomial se indica en la fórmula \@ref(eq:binom).
+La **función de masa de probabilidad (PMF)** o fórmula de la distribución binomial se indica en la fórmula \@ref(eq:binom).
 
 \begin{equation}
 P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
@@ -214,8 +215,7 @@ _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
 
 ### Media y desviación estándar de la distribución binomial
 
-Se pueden calcular tanto la **media** como la **desviación estándar** de una distribución binomial.
-La media es el número promedio de éxitos, y la desviación estándar es qué tanto se desvían de la media los valores.
+Se pueden calcular tanto la **media** como la **desviación estándar** de una distribución binomial. En este caso la media es el número promedio de éxitos ($k$) y la desviación estándar es qué tan lejos de esta media caen el resto de los valores de la distribución.
 
 La media de una distribución binomial se calcula con la fórmula \@ref(eq:meanbinom).
 
@@ -397,11 +397,12 @@ Para que una variable sea considerada una **variable aleatoria de Poisson** se d
 
 ### Media y desviación estándar de la distribución de Poisson
 
-Algo interesante de la distribución de Poisson es que la varianza y la media corresponden al mismo valor ($\lambda$) por lo que la desviación estándar sería
+Algo interesante de la distribución de Poisson es que la varianza y la media corresponden al mismo valor ($\lambda$) por lo que la desviación estándar sería:
 
 $$
 \sigma = \sqrt{\lambda}
 $$
+
 Uno de los usos que tiene la distribución de Poisson es su aproximación a la distribución binomial cuando se cumplen las siguientes condiciones:
 
 1. Cuando $p < 0.1$ o $p > 0.9$.
@@ -410,14 +411,14 @@ Uno de los usos que tiene la distribución de Poisson es su aproximación a la d
 
 3. Cuando $np \le 10$.
 
-Si tenemos estas dos condiciones, la distribución de Poisson es un muy buen aproximado a la distribución binomial. En estos casos, la media se obtendría de la misma manera que obtenemos la media de la distribución binomial. Debido a esta dependencia de probabilidades muy bajas o muy elevadas, frecuentemente se utiliza la distribución de Poisson para la evaluación de eventos *raros.*
+Si tenemos estas condiciones, la distribución de Poisson es un muy buen aproximado a la distribución binomial. En estos casos, la media se obtendría de la misma manera que obtenemos la media de la distribución binomial. Debido a esta dependencia de probabilidades muy bajas o muy elevadas, frecuentemente se utiliza la distribución de Poisson para la evaluación de eventos *raros.*
 
 \begin{equation}
 \mu =  \lambda = np
 (\#eq:poimean)
 \end{equation}
 
->**Ejemplo:** En *Escherichia coli*, una célula de cada $10^9$ muta de ser sensible a la estreptomicina a ser resistente a ella. Si observamos $2 \times 10^9$ células, ¿Cuál es la probabilidad de que ninguna mute? ¿Cuál es la probabilidad de que al menos una mute?
+>**Ejemplo:** En *Escherichia coli*, una célula de cada $10^9$ muta para desarrollar resistencia a la estreptomicina. Si observamos $2 \times 10^9$ células, ¿Cuál es la probabilidad de que ninguna mute? ¿Cuál es la probabilidad de que al menos una mute?
 
 Como con la distribución binomial, `R` cuenta con funciones específicas para calcular los valores de una distribución de Poisson.
 
@@ -441,7 +442,7 @@ $$
 \mu = \lambda = np = (2\times10^9) \times \frac{1}{10^9} = 2
 $$
 
-Por lo tanto, $\lambda = 2$. Observemos que teníamos un valor de $n$ enorme ($2 \times 10^9$) y una $p$ extremadamente pequeña ($\frac{1}{10^9}$) y a pesar de eso, obtuvimos un valor de lambda relativamente pequeño.
+Por lo tanto, $\lambda = 2$. Observemos que teníamos un valor de $n$ enorme ($2 \times 10^9$) y una $p$ extremadamente pequeña ($\frac{1}{10^9}$) y a pesar de eso, obtuvimos un valor de $\lambda$ relativamente pequeño, además de cumplir los supuestos para utilizar la distribución de Poisson como aproximación a la distribución binomial.
 
 ```{r}
 #Probabilidad de que 1 célula mute.
@@ -529,8 +530,7 @@ f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 
 La función $f(x)$ se conoce como **función de densidad de probabilidad (PDF)** y expresa la altura de la curva como una función de la posición en el eje horizontal. El área bajo la curva acumulada se conoce como **función de densidad acumulada (CDF).**
 El centro de una curva normal es $x = \mu$, los puntos de inflexión están en $x = \mu + \sigma$ y $x = \mu - \sigma$.
-En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños.
-El ancho y alto de una curva normal están determinados por la desviación estándar $\sigma$.
+En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños. El ancho y alto de una curva normal están determinados por la desviación estándar $\sigma$.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.cap = "Forma de la distribución normal."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -544,7 +544,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 ```
 
 Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva**.
-Para esto utilizamos la **escala estandarizada**, en el cual el valor del eje horizontal se denomina **valor Z**.
+Para esto utilizamos la **escala estandarizada**, en el cual el valor del eje horizontal se denomina **valor $Z$**.
 La escala de $Z$ mide las desviaciones estándar a partir de la media, por ejemplo, $z = 1$ corresponde a una desviación estándar de la media.
 Para transformar nuestros datos a la escala $Z$ simplemente aplicamos la fórmula \@ref(eq:Z) y a la variable $Z$ se le conoce como una variable de **distribución normal estándar**, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable $Z$ es *adimensional*.
 
@@ -554,7 +554,7 @@ Z = \frac{X - \mu}{\sigma}
 (\#eq:Z)
 \end{equation}
 
-Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar **tablas de Z** para realizar el cálculo debajo del área que corresponde al valor $Z$ obtenido, aunque claro, también podemos hacer estos cálculos en `R`.
+Una vez que nuestras variables se encuentran estandarizadas en el valor $Z$, podemos utilizar **tablas de $Z$** para realizar el cálculo debajo del área que corresponde al valor $Z$ obtenido, aunque claro, también podemos hacer estos cálculos en `R`.
 Hay que tener en cuenta que para una curva de distribución normal estándar:
 
 -  68% del área se encuentra entre $\pm$ 1 distribución estándar.
@@ -736,7 +736,7 @@ La variabilidad entre muestras aleatorias que provienen de una misma población 
 
 Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un **meta-estudio**, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño $n$ de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño $n$ de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.
 
-Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra $\overline{x}$ de la media de la población $\mu$? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable $\overline{X}$, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de $\mu$ es probable que este $\overline{X}$? Nuestra respuesta la encontramos en la **distribución muestral de $\overline{X}$**.
+Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra $\overline{x}$ a la media de la población $\mu$? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable $\overline{X}$, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de $\mu$ es probable que este $\overline{X}$? Nuestra respuesta la encontramos en la **distribución muestral de $\overline{X}$**.
 
 Tenemos que tener en cuenta que, en promedio, la **media de la distribución muestral** $\overline{X}$ equivale a la media de la población $\mu$. Esto se ve mejor en la fórmula \@ref(eq:samplemean).
 
@@ -796,7 +796,7 @@ De hecho, ni siquiera es necesario realizar la transformación a valores $Z$ en 
 pnorm(11.5, mean = 11, sd = 0.49, lower.tail = FALSE)
 ```
 
-Debido a que hemos redondeado la desviación estándar el valor es ligeramente distinto, pero en esencia el resultado es el mismo. Entonces podemos concluir que
+Debido a que hemos redondeado la desviación estándar el resultado es ligeramente distinto (cuestión de decimales). Entonces podemos concluir que:
 
 \begin{equation}
 P(\overline{X} > 11.5) = P(Z > 1.0204) = 0.1538 \approx 0.15

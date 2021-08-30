@@ -22,7 +22,7 @@ library(kableExtra)
 library(broom)
 ```
 
-En esta lección aprenderemos a hacer **inferencias**, basadas en un modelo de muestreo aleatorio. Usaremos información proveniente de nuestras muestras aleatorias para *inferir* hechos acerca de la población de la que fueron tomadas. Utilizamos datos para determinar alguna característica de la población original o para medir la precisión de nuestras estimaciones.
+En esta lección aprenderemos a hacer **inferencias** basadas en un modelo de muestreo aleatorio. Usaremos información proveniente de nuestras muestras aleatorias para *inferir* hechos acerca de la población de la que fueron tomadas. Utilizamos datos para determinar alguna característica de la población original o para medir la precisión de nuestras estimaciones.
 
 Sabemos que al tomar muestras de una población, nuestros datos son susceptibles a un error de muestreo. Cabe aclarar que este error no solamente tiene que ver con la precisión de medición, si no que este error surge por el hecho de que no estamos tomando en cuenta los datos de toda la población.
 
@@ -39,9 +39,9 @@ Como podemos ver, esta fórmula es bastante similar a la fórmula de la desviaci
 
 Normalmente, la diferencia entre $\mu$ y $\overline{x}$ es unos cuantos errores estándar. De hecho, encontramos a $\overline{x}$ a un error estándar de $\mu$ bastante seguido. Hay que destacar que el error estándar dependen de la desviación estándar muestral $s$ y del tamaño de muestra $n$.
 
-Es importante destacar la diferencia entre el error estándar y la desviación estándar. La desviación estándar describe la **dispersión** de los datos de una muestra, mientras que el error estándar describe la **falta de fidelidad** en la media de una muestra como estimación de la media poblacional, debido al error de muestreo. Una forma de disminuir el error estándar es incrementando el tamaño de muestra $n$.
+La desviación estándar describe la **dispersión** de los datos de una muestra, mientras que el error estándar describe la **falta de fidelidad** en la media de una muestra como estimación de la media poblacional, debido al error de muestreo. Una forma de disminuir el error estándar es incrementando el tamaño de muestra $n$.
 
-En las gráficas podemos ver el error estándar o la desviación estándar representadas como intervalos en nuestros puntos. Por ejemplo, las siguientes gráficas representan la desviación estándar en la figura \@ref(fig:sd-bar) y el error estándar en la figura \@ref(fig:se-bar). Como podemos ver, la dispersión de los datos es mayor al error estándar.
+Las siguientes gráficas representan la desviación estándar en la figura \@ref(fig:sd-bar) y el error estándar en la figura \@ref(fig:se-bar). Como podemos ver, la dispersión de los datos es mayor al error estándar. Quiere decir que la desviación estándar y el error estándar, aunque están relacionados, no representan lo mismo.
 
 ```{r sd-bar, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Gráfico con la desviación estándar representada en forma de intervalo."}
 data("PlantGrowth")
@@ -75,7 +75,7 @@ ggplot(resumen, aes(x = group, y = Media)) +
 Un **intervalo de confianza** nos sirve para determinar qué tan cerca está de $\mu$ nuestra media muestral $\overline{x}$. Ya que no podemos medir de manera directa $\mu$, utilizamos $\overline{x}$ adicional al error estándar $SE_\overline{X}$ como se indica en la fórmula \@ref(eq:IC).
 
 \begin{equation}
-\overline{x} \pm {2}*{SE_\overline{X}}
+\overline{x} \pm {2} \times {SE_\overline{X}}
 (\#eq:IC)
 \end{equation}
 
@@ -101,14 +101,14 @@ A partir de este despeje obtenemos la fórmula para un intervalo de confianza qu
 (\#eq:IC2)
 \end{equation}
 
-Si en este caso, cambiamos $\sigma$ por $s$, podemos calcular el intervalo de confianza para nuestra muestra. William Sealy Gosset, quién publicó sus hallazgos bajo el seudónimo de *Student*, descubrió un método para preservar la interpretación del 95% y desde entonces este método lleva su seudónimo. Básicamente, si la muestra proviene de una población normal, y si remplazamos $\sigma$ del intervalo por $s$, la interpretación del 95% se puede preservar utilizando la nueva cantidad denotada como $t_{0.025}$ y que está relacionada con una distribución conocida como **distribución $t$ de Student**.
+Si en este caso, cambiamos $\sigma$ por $s$, podemos calcular el intervalo de confianza para nuestra muestra. William Sealy Gosset, quién publicó sus hallazgos bajo el seudónimo de *Student*, descubrió un método para preservar la interpretación del 95% y desde entonces este método lleva su seudónimo. Básicamente, si la muestra proviene de una población normal, y si remplazamos $\sigma$ del intervalo por $s$, la interpretación del 95% se puede preservar utilizando como multiplicador la nueva cantidad de $t_{0.025}$, que está relacionada con una distribución conocida como **distribución $t$ de Student.**
 
 ### Distribución $t$ de Student
 
 La distribución $t$ de Student es una distribución teórica continua, usada para distintos propósitos en estadística, por ejemplo, para la construcción de intervalos de confianza. La distribución depende de una cantidad conocida como **grados de libertad** o **df**. La forma de una distribución $t$ de Student es de campana, similar a la distribución normal, pero con una desviación estándar mayor. Conforme los grados de libertad aumentan, la curva de una distribución $t$ de Student se asemeja más a una curva normal (podría decirse que una curva normal es una curva $t$ de Student con $df = \infty$). En la figura \@ref(fig:df-graph) podemos ver como la forma de una distribución $t$ de Student cambia conforme los $df$ aumentan. La línea punteada es una curva con distribución normal.
 
 ```{r df-graph, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curvas con distribución *t* de Student y cómo cambian dependiendo de los *df*."}
-ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+ggplot(data.frame(x = c(-7, 7)), aes(x = x)) +
   stat_function(fun = dt, args = list(df = 3), size = 0.6, color = "blue") +
   stat_function(fun = dt, args = list(df = 5), size = 0.6, color = "red") +
   stat_function(fun = dt, args = list(df = 10), size = 0.6, color = "darkgreen") +
@@ -149,9 +149,9 @@ Existen **tablas de distribución $t$ de Student** que se utilizan para encontra
 
 Estos son los siguientes:
 
--`dt()` nos da un valor de densidad en determinado punto de la distribución de $t$ (valor puntual de la función de densidad).
+-`dt()` nos da un valor de densidad determinado de la distribución de $t$ (PDF).
 
--`pt()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $t$ (área debajo de la curva).
+-`pt()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $t$ (CDF).
 
 -`qt()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
 
@@ -163,20 +163,24 @@ Para poder utilizar el método $t$ de Student, se necesitan cumplir ciertas cond
 
 - Las muestras deben de ser **aleatorias**.
 
-- Las observaciones de la muestra deben ser independientes unas de otras.
+- Las observaciones de la muestra deben ser **independientes** unas de otras.
 
-- Si $n$ es pequeña, la distribución de la población debe ser aproximadamente normal.
+- Si $n$ es pequeña, la distribución de la población debe ser **aproximadamente normal.**
 
-- Si $n$ es grande, la distribución de la población no necesita ser normal.
+- Si $n$ es grande, la distribución de la población **no necesita ser normal.**
 
 ### Construcción de un intervalo de confianza para $\mu$
 
 El primer paso para construir nuestro intervalo de confianza es elegir nuestro nivel de confianza (generalmente es 95% pero esto no quiere decir que siempre tenga que ser así). Si quisiéramos un nivel de confianza de 90% utilizamos un valor crítico de $t_{0.05}$. 
 
-Después tenemos que establecer los límites de nuestro intervalo utilizando la siguiente fórmula (para intervalos con 95% de confianza):
+Normalmente, el nuestro valor crítico $t$ depende de una cantidad denominada $\alpha$. Lo veremos más adelante pero, básicamente $\alpha$ establece el nivel de significancia de nuestro intervalo, por así decirlo, y nos protege de un error conocido como **error tipo I.** Cuando nos interesan ambas colas de la distribución de $t$ de Student, dividimos el valor $\alpha$ entre dos (correspondiente a las dos colas).
+
+Por ejemplo, para un intervalo de confianza al 95%, $\alpha = 0.05$. Como nos interesan ambas colas de la distribución de $t$, entonces nuestro valor crítico sería $t_{\alpha/2}$.
+
+Después tenemos que establecer los límites de nuestro intervalo utilizando la siguiente fórmula:
 
 \begin{equation}
-\overline{x} \pm t_{0.025}\frac{s}{\sqrt{n}}
+\overline{x} \pm t_{\alpha/2}\frac{s}{\sqrt{n}}
 (\#eq:IC3)
 \end{equation}
 
@@ -187,7 +191,7 @@ df = n - 1
 (\#eq:df)
 \end{equation}
 
-¿Por qué se calculan así los grados de libertad? Bueno, las desviaciones ($x_i - \overline{x}$) deben de sumar 0 en total, por lo que solamente una ($n - 1$) de estas desviaciones puede variar *libremente*.
+¿Por qué se calculan así los grados de libertad? Bueno, las desviaciones ($x_i - \overline{x}$) deben de sumar 0 en total, por lo que solamente $n - 1$ de estas desviaciones puede variar *libremente*, ya que al conocer el valor del resto de las desviaciones, la última queda *determinada,* aunque no la conozcamos.
 
 >**Ejemplo:** Una muestra del área de las alas obtenida de una población de la Mariposa Monarca (*Danaus plexippus*) de 14 ejemplares tiene una media $\overline{x} = 32.8143cm^2$ y una desviación estándar $s = 2.4757 cm^2$. Sabemos que los datos provienen de una población con distribución normal. ¿Cuál sería el intervalo de confianza al 95% para esta muestra?
 
@@ -197,7 +201,7 @@ El primer paso es calcular los grados de libertad.
 df = n - 1 = 14 - 1 = 13
 \end{equation}
 
-Como queremos un intervalo de confianza al 95%, utilizamos el valor crítico de $t_{0.025}$. Para encontrar este valor podemos buscarlo en una tabla de $t$ o utilizar las funciones de `R`.
+Como queremos un intervalo de confianza al 95%, $\alpha = 0.05$ y $t_{\alpha/2} = t_{0.025}$. Para encontrar este valor podemos buscarlo en una tabla de $t$ o utilizar las funciones de `R`.
 
 ```{r}
 qt(0.025, 13, lower.tail = FALSE)
@@ -217,26 +221,29 @@ De nuevo, esto se puede calcular en `R` de manera sencilla.
 32.8143 - 2.160*(2.4757/sqrt(14))
 ```
 
-Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis ($31.4, 34.2$). Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$.
+Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis $(31.4, 34.2)$. Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$.
 
-Una cosa importante a destacar es que es el propio intervalo de confianza el que es **aleatorio**. Si consideramos intervalos de confianza al 95%, entonces:
+Una cosa importante a destacar es que es el propio intervalo de confianza es el que es **aleatorio**. Si consideramos intervalos de confianza al 95%, entonces:
 
 \begin{equation}
 P(La\space siguiente\space muestra\space nos\space dará\space un\space intervalo\space de\space confianza\space que\space contenga\space a\space \mu) = 0.95
 \end{equation}
 
-Véanoslo de la siguiente manera. Si hiciéramos un meta-estudio y construyéramos un intervalo de confianza a 95% para cada una de las muestras, entonces el 95% de los intervalos de confianza contendrán a $\mu$. El nivel de confianza (90%, 95%, 99%) es una propiedad del método más que de un intervalo particular.
+Véamoslo de la siguiente manera. Si hiciéramos un meta-estudio y construyéramos un intervalo de confianza a 95% para cada una de las muestras, entonces el 95% de los intervalos de confianza contendrán a $\mu$. El nivel de confianza (90%, 95%, 99%) es una propiedad del método más que de un intervalo particular.
 
 ### Intervalos de confianza unilaterales
 
-Este tipo de intervalos de confianza se obtienen cuando solamente nos interesa el límite inferior o superior. Supongamos que queremos construir un intervalo de confianza con un límite inferior al 95%. Mientras que un intervalo de confianza bilateral está basado en usar el valor $\pm t_0.025$, un intervalo de confianza al 95% de un solo lado (en este caso inferior) solamente se preocupa por el área bajo la curva del lado correspondiente. Ya que $P(-t_{0.05} > t > \infty) = 0.95$, para un intervalo de confianza unilateral al 95% utilizamos un valor de $-t_{0.05}$ y establecemos el límite con la siguientes operaciones:
+Este tipo de intervalos de confianza se obtienen cuando solamente nos interesa el límite inferior o superior. Supongamos que queremos construir un intervalo de confianza con un límite inferior al 95%. Mientras que un intervalo de confianza bilateral está basado en usar el valor $\pm t_{0.025}$, un intervalo de confianza al 95% de un solo lado (en este caso inferior) solamente se preocupa por el área bajo la curva del lado correspondiente, entonces no tenemos que realizar $\alpha/2$ para el valor crítico de $t$. Ya que $P(-t_{0.05} > t > \infty) = 0.95$, para un intervalo de confianza unilateral al 95% utilizamos un valor de $-t_{0.05}$. Para un intervlao de confianza con límite inferior:
 
 \begin{equation}
-\overline{x} - t_{0.05}{SE_{\overline{X}}} \\
-\overline{x} + t_{0.05}{SE_{\overline{X}}}
+\overline{x} - t_{\alpha}{SE_{\overline{X}}}
 \end{equation}
 
-Estas serían las operaciones a realizar para un intervalo de confianza con límite inferior y superior, respectivamente.
+Y para un intervalo de confianza con límite superior:
+
+\begin{equation}
+\overline{x} + t_{\alpha}{SE_{\overline{X}}}
+\end{equation}
 
 ## Comparación de dos medias
 
@@ -268,21 +275,21 @@ En donde $SE_1 = SE_{\overline{X}_1} = \frac{s_1}{\sqrt{n_1}}$ y $SE_2 = SE_{\ov
 
 ### Intervalo de confianza para $\mu_1 - \mu_2$
 
-Podemos comprar las medias de dos muestras construyendo un intervalo de confianza para la diferencia de las medias. La fórmula para un intervalo de confianza de la diferencia de las medias es bastante similar a la usada para construir uno para una muestra.
+Podemos comprar las medias de dos muestras construyendo un intervalo de confianza para la diferencia de las medias. La fórmula para un intervalo de confianza de la diferencia de las medias es bastante similar a la usada para construir uno para una muestra, en caso de ser bidireccinal:
 
 \begin{equation}
-(\overline{X}_1 - \overline{X}_2) \pm t_{0.025} SE_{(\overline{X}_1 - \overline{X}_2)}
+(\overline{X}_1 - \overline{X}_2) \pm t_{\alpha/2} SE_{(\overline{X}_1 - \overline{X}_2)}
 (\#eq:IC4)
 \end{equation}
 
-El valor crítico de $t_{0.025}$ es determinado a partir de la distribución $t$ de Student utilizando los grados de libertad que en este caso se calculan de la siguiente manera:
+El valor crítico de $t_{\alpha/2}$ es determinado a partir de la distribución $t$ de Student utilizando los grados de libertad que en este caso se calculan de la siguiente manera:
 
 \begin{equation}
 df = \frac{(SE^2_1 + SE^2_2)^2}{SE^4_1/(n_1 - 1) + SE^4_2/(n_2 -1)}
 (\#eq:df2)
 \end{equation}
 
-Otros métodos se basan en obtener los grados de libertad utilizando el número más pequeño entre ($n_1 - 1$) y ($n_2 - 1$) o $n_1 + n_2 - 2$.
+Otros métodos se basan en obtener los grados de libertad utilizando el número más pequeño entre ($n_1 - 1$) y ($n_2 - 1$) o también se pueden obtener haciendo $n_1 + n_2 - 2$.
 
 >**Ejemplo:** Varios biólogos creen que el tórax de las mariposas monarca macho es mayor que el de las hembras. Una muestra de 7 machos y 8 hembras dan los resultados de la tabla \@ref(tab:ej1) y la figura \@ref(fig:a).
 
@@ -296,18 +303,33 @@ Sample1 %>%
   knitr::kable("html", align = c("c", "c"), caption = "Peso del torax (mg)") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
   column_spec(1:2, width_min = "3cm")
-
-Sample2 <- gather(Sample1, Grupo, Peso) %>% na.omit
 ```
 En la siguiente figura se puede observar la distribución de los datos para los machos y las hembras. A simple vista parece ser que el tórax de los machos pesa ligeramente más que el de las hebras. 
 
-Ahora tendremos que calcular ciertos valores para estos datos, como las medias y desviaciones estándar de cada grupo. Recuerden que para esto podemos usar la librería `dplyr`. Anteriormente creé una variable llamada `Sample2` que contiene los datos que vamos a necesitar.
+```{r a, echo=FALSE, fig.align='center', fig.cap="Peso del torax de Mariposas Monarca macho y hembra (mg)", message=FALSE, warning=FALSE, paged.print=FALSE}
+
+Grupo <- c(rep("Machos", 7), rep("Hembras", 8))
+Peso <- c(67, 73, 85, 84, 78, 63, 80, 73, 54, 61, 63, 66, 57, 75, 58)
+Sample2 <- data.frame(Grupo, Peso)
+Sample2
+
+ggplot(Sample2, aes(x = Grupo, y = Peso)) +
+  geom_dotplot(aes(fill = Grupo), binaxis = "y", stackdir = "center", binwidth = 0.6, show.legend = F) +
+  xlab("Sexo") +
+  ylab("Peso del torax (mg)") +
+  theme_classic()
+```
+
+Ahora tendremos que calcular ciertos valores para estos datos, como las medias y desviaciones estándar de cada grupo.   
 
 ```{r}
+Grupo <- c(rep("Machos", 7), rep("Hembras", 8))
+Peso <- c(67, 73, 85, 84, 78, 63, 80, 73, 54, 61, 63, 66, 57, 75, 58)
+Sample2 <- data.frame(Grupo, Peso)
 Sample2
 ```
 
-En este caso yo he redondeado los valores a solamente 1 dígito. Ahora para obtener el intervalo de confianza no hace falta que hagamos todas las fórmulas para obtener los grados de libertad, el error estándar, etc. Basta con usar la función `t.test()` para obtener nuestro intervalo de confianza.
+En este caso yo he redondeado los valores a solamente 1 dígito. Ahora para obtener el intervalo de confianza no hace falta que hagamos todas las fórmulas para obtener los grados de libertad, el error estándar, etc. Basta con usar la función `t.test()` seguido de `$conf.int` para obtener nuestro intervalo de confianza.
 
 ```{r}
 t.test(Peso ~ Grupo,Sample2)$conf.int
@@ -322,22 +344,13 @@ t.test(Peso ~ Grupo,Sample2, conf.level = 0.9)$conf.int
 
 Un intervalo de confianza al 90% se encuentra entre ($5.0, 19.7$).
 
-```{r a, echo=FALSE, fig.align='center', fig.cap="Peso del torax de Mariposas Monarca macho y hembra (mg)", message=FALSE, warning=FALSE, paged.print=FALSE}
-
-ggplot(Sample2, aes(x = Grupo, y = Peso)) +
-  geom_dotplot(aes(fill = Grupo), binaxis = "y", stackdir = "center", binwidth = 0.6, show.legend = F) +
-  xlab("Sexo") +
-  ylab("Peso del torax (mg)") +
-  theme_classic()
-```
-
 ## Pruebas de hipótesis
 
 ¿Qué tan diferentes tienen que ser dos muestras para concluir que las poblaciones de las que vienen son distintas? Una aproximación que podemos hacer es comparar las medias de las dos muestras y ver qué tanto difieren comparándolo con la diferencia que esperaríamos si fuese azar.
 
 ### $t$-test
 
-La idea general es formular una hipótesis para ver si $\mu_1$ y $\mu_2$ difieren, y ver la información que tenemos de nuestras muestras para ver si se apoya esta hipótesis. La hipótesis de que $\mu_1$ y $\mu_2$ no son iguales es, de manera general, nuestra **hipótesis alternativa** y se abrevia como $H_A$. 
+La idea general es formular una hipótesis para ver si $\mu_1$ y $\mu_2$ difieren y ver la información que tenemos de nuestras muestras para ver si se apoya esta hipótesis. La hipótesis de que $\mu_1$ y $\mu_2$ no son iguales es, de manera general, nuestra **hipótesis alternativa** y se abrevia como $H_A$. 
 
 \begin{equation}
 H_A: \mu_1 \neq \mu_2
@@ -372,7 +385,7 @@ t_s = \frac{(\overline{x}_1 - \overline{x}_2) - 0}{SE_{(\overline{X}_1 - \overli
 (\#eq:tstat)
 \end{equation}
 
-Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la $H_0$ fuese verdad $(\overline{x}_1 - \overline{x}_2) - 0$, expresada en relación con el error estándar de la diferencia $SE_{(\overline{X}_1 - \overline{X}_2)}$ (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias). Veamos un ejemplo.
+Este estadístico mide que tan larga es la diferencia de las medias de la diferencia que esperaríamos si la $H_0$ fuese verdad $(\overline{x}_1 - \overline{x}_2) - 0$, expresada en relación con el error estándar de la diferencia $SE_{(\overline{X}_1 - \overline{X}_2)}$ (la cantidad de variación que esperaríamos ver en la diferencias de muestras aleatorias). Se resta 0 en la fórmula, ya que es la diferencia que esperamos encontrar entre ambas medias si la $H_0$ es verdadera. Veamos un ejemplo.
 
 >**Ejemplo:** Investigadores están interesados en los efectos que produce el tolueno. Para esto, midieron las concentraciones de varios químicos en el cerebro de ratas que habían sido expuestas a tolueno y ratas que no habían sido expuestas (control). En la siguiente tabla se muestran las concentraciones de norepinefrina (NE) de la región de la médula del cerebro. La $H_0$ de los investigadores es que el tolueno no tiene efecto en la concentración de NE en la médula de las ratas. Por ende, la $H_A$ es que el tolueno tiene un efecto en la médlua de las ratas.
 
@@ -401,7 +414,7 @@ ggplot(ex2, aes(x = Grupo, y = Conc, fill = Grupo)) +
   theme_classic()
 ```
 
-En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de `dplyr`.
+En este caso tenemos que conocer la desviación estándar y la media de nuestros datos. Para esto podemos usar la librería de `dplyr` y la función `gather()` que reacomoda los datos de nuestro data frame.
 
 ```{r}
 ex2 <- gather(ex1, Grupo, Conc)
@@ -421,7 +434,7 @@ Posteriormente aplicaríamos la fórmula para encontrar el estadístico $t$.
 t_s = \frac{(545.74 - 458.72) - 0}{SE_{(\overline{X}_1 - \overline{X}_2)}}
 \end{equation}
 
-Sin embargo, gracias a la función `t.test` no es necesario que hagamos este procedimiento paso a paso. Por ejemplo, si queremos obtener el estadístico $t$ simplemente escribimos lo siguiente.
+Sin embargo, gracias a la función `t.test` no es necesario que hagamos este procedimiento paso a paso. Por ejemplo, si queremos obtener el estadístico $t$:
 
 ```{r}
 t.test(Conc ~ Grupo, ex2)$statistic
@@ -431,7 +444,7 @@ Si agregamos `$statistic` al final de nuestra función obtenemos el estadístico
 
 La esencia de de la prueba de $t$ es ver en qué parte de la distribución $t$ de Student cae el estadístico $t_s$. Si cae cercano al centro, entonces la evidencia de los datos es compatible con la $H_0$. Sin embargo, si $t_s$ cae en alguna de las colas, entonces, la evidencia de los datos es compatible con la $H_A$ y una observación como la obtenida no puede explicarse meramente por azar.
 
-Para juzgar si nuestro valor $t_s$ cae en la cola de la distribución $t$ de Student, usamos un valor conocido como **valor-p**. El valor-*p*  puede definirse como el área bajo la curva de una distribución $t$ de Student en cualquiera de las colas que se encuentra más allá de $-t_s$ o $t_s$ como se muestra en la figura \@ref(fig:pvalue).
+Para juzgar si nuestro valor $t_s$ cae en la cola de la distribución $t$ de Student, usamos un valor conocido como **valor-*p***. El valor-*p*  puede definirse como el área bajo la curva de una distribución $t$ de Student en cualquiera de las colas que se encuentra más allá de $-t_s$ o $t_s$ como se muestra en la figura \@ref(fig:pvalue).
 
 ```{r pvalue, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Valor-*p* para un valor de $t_s$."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -455,7 +468,8 @@ Otra forma de definir el valor-*p* es como la probabilidad de obtener un valor t
 ```{r}
 t.test(Conc ~ Grupo, ex2)$parameter
 ```
-Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces simplemente en la distribución $t$ de Student buscamos el área correspondiente para un valor $t_s = -2.87$ con $df = 17.67$.
+
+Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces simplemente en la distribución $t$ de Student buscamos el área correspondiente para un valor $t_s = 2.87$ con $df = 17.67$.
 
 ```{r}
 pt(2.87, 17.67, lower.tail = F)
@@ -469,7 +483,7 @@ t.test(Conc ~ Grupo, ex2)$p.value
 
 Como podemos ver el valor es aproximadamente igual (puede diferir debido a los decimales). Un valor-*p* cercano a 1 indica que el valor $t_s$ se encuentra cercano al centro de la distribución $t$, que resultaría en una falta de evidencia para la $H_A$. Un valor-*p* cercano a 0 indica que el valor $t_s$ se encuentra en una de las colas de la distribución $t$, lo que daría evidencia para la $H_A$. 
 
-¿Cómo decidimos qué valores-*p* muestran evidencia para la $H_A$? Para esto necesitamos elegir un **nivel de significancia** o $\alpha$. Este valor lo elige, generalmente, quién realiza la decisión acerca del estudio. Valores $\alpha$ comunes son $\alpha = 0.1, \space 0.05, \space 0.01$. Si nuestro valor-*p* es menor o igual a nuestro alfa ($valor-p \leq \alpha$) nuestros datos muestran evidencia de una diferencia **estadísticamente significativa** a favor de $H_A$. Decimos que la $H_0$ se rechaza. Si por el contrario el valor-*p* es mayor que nuestro alfa ($valor-p \geq \alpha$), decimos que hay insuficiente evidencia para decir que $H_A$ es verdad, por lo tanto no se rechaza la $H_0$.
+¿Cómo decidimos qué valores-*p* muestran evidencia para la $H_A$? Para esto necesitamos elegir un **nivel de significancia** o $\alpha$ (que vimos anteriormente en la construcción de intervalos de confianza). Este valor lo elige, generalmente, quién realiza la decisión acerca del estudio. Valores $\alpha$ comunes son $\alpha = 0.1, \space 0.05, \space 0.01$. Si nuestro valor-*p* es menor o igual a nuestro alfa ($valor-p \leq \alpha$) nuestros datos muestran evidencia de una diferencia **estadísticamente significativa** a favor de $H_A$. Decimos que la $H_0$ se rechaza. Si por el contrario el valor-*p* es mayor que nuestro alfa ($valor-p > \alpha$), decimos que hay insuficiente evidencia para decir que $H_A$ es verdad, por lo tanto no se rechaza la $H_0$.
 
 ¿Cómo podemos ver toda está información? Bueno, si no agregamos ningún valor al final de nuestro comando `t.test()`, obtenemos toda la información condensada.
 
@@ -528,7 +542,7 @@ t.test(Conc ~ Grupo, ex2, alternative = "less")
 t.test(Conc ~ Grupo, ex2, alternative = "greater")
 ```
 
-Ahora bien, algo importante a recalcar es que existan **diferencia significativas** no quiere decir que el efecto sea realmente **importante**. Una prueba de hipótesis solamente responde a la pregunta *¿Hay suficiente diferencia entre ambas muestras como para inferir que vinieron de dos poblaciones distintas?* sin embargo no nos dice qué tan grande o importante es la diferencia.
+Ahora bien, algo importante a recalcar es que existan **diferencia significativas** no quiere decir que el efecto sea realmente **importante**. Una prueba de hipótesis solamente responde a la pregunta *¿Hay suficiente diferencia entre ambas muestras como para inferir que vinieron de dos poblaciones distintas?* Sin embargo no nos dice qué tan grande o importante es la diferencia.
 
 ### Tamaño de efecto
 
@@ -565,13 +579,13 @@ También es utilizada para comprar dos muestras. A diferencia de la prueba de $t
 
 En el caso de esta prueba, una $H_0$ generalmente empleada es que las distribuciones de $X_1$ y $X_2$ son iguales, y la $H_A$ es que la distribución de $X_1$ es distinta a la distribución de la población $X_2$.
 
-Esta prueba es recomendable aplicarla cuando tenemos datos que no se pueden transformar a una distribución normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se denota como $U_s$ y mide el grado de separación entra ambas muestras.
+Esta prueba es recomendable aplicarla cuando tenemos datos que no se distribuyen de manera normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se simboliza como $U_s$ y mide el grado de separación entra ambas muestras.
 
 1. Lo primero es acomodar los datos en orden, de menor a mayor para ambas muestras. 
 
 2. Posteriormente determinamos $K_1$ y $K_2$. Para $K_1$, contamos el número de observaciones en la muestra 2 que son más pequeñas que la muestra 1. Si hay observaciones que sean iguales para ambas muestras, se cuenta como 1/2 punto. Luego contamos para $K_2$ el número de observaciones en la muestra 1 que son menores que la muestra 2 y de igual forma, 1/2 si hay alguna observación con valor igual.
 
-3. Para corroborar si nuestros cálculos son correctos la suma de $K_1$ y $K_2$ debe ser igual al producto de $n_1 * n_2$. 
+3. Para corroborar si nuestros cálculos son correctos la suma de $K_1$ y $K_2$ debe ser igual al producto de $n_1 \times n_2$. 
 
 4. El estadístico $U_s$ va a ser el más grande de los dos $K_1$ o $K_2$. 
 
@@ -629,11 +643,11 @@ Cuando tenemos datos pareados, son las diferencias en sí lo que queremos regist
 Lo mismo con la diferencia entre las medias  de la población.
 
 \begin{equation}
-\overline{D_\mu} = \mu_1 - \mu_2
+\overline{D}_\mu = \mu_1 - \mu_2
 (\#eq:diffmeanpop)
 \end{equation}
 
-Debido a esto podemos decir que la media de la diferencia es igual a la diferencia de las medias. Debido a esto podemos concentrarnos exclusivamente en $D$. Ya que $\overline{D}$ es la media de una sola muestra, para obtener el error estándar simplemente aplicamos la fórmula \@ref(eq:stderror).
+Podríamos decir que la media de la diferencia es igual a la diferencia de las medias. Debido a esto podemos concentrarnos exclusivamente en $D$. Ya que $\overline{D}$ es la media de una sola muestra, para obtener el error estándar simplemente aplicamos la fórmula \@ref(eq:stderror).
 
 \begin{equation}
 SE_\overline{D} = \frac{s_D}{\sqrt{n_D}}
@@ -709,11 +723,11 @@ Datos3 %>%
 A partir de aquí podemos construir un intervalo de confianza para $D$. La forma de hacerlo es igual a la que vimos anteriormente.
 
 \begin{equation}
-\overline{d} \pm t_{n_{D}-1, 0.025}SE_\overline{D}
+\overline{d} \pm t_{n_{D}-1, \space \alpha/2}SE_\overline{D}
 (\#eq:ICpair)
 \end{equation}
 
-En donde $t_{n_{D}-1, 0.025}$ es una constante determinada a partir de la distribución $t$ de Student, utilizando como grados de libertad la fórmula $df = n_D - 1$. Intervalos de confianza con otros coeficientes se construyen de la misma manera.
+En donde $t_{n_{D}-1, \space \alpha/2}$ es una constante determinada a partir de la distribución $t$ de Student, utilizando como grados de libertad la fórmula $df = n_D - 1$ y su $\alpha$ correspondiente.
 
 Construir el intervalo de confianza correspondiente es relativamente sencillo. Vamos a utilizar la función `t.test()` pero con el argumento `paired = TRUE`.
 

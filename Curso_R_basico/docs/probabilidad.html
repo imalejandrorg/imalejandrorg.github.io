@@ -348,13 +348,11 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="probabilidad" class="section level1" number="3">
 <h1><span class="header-section-number">Lección 3</span> Probabilidad</h1>
-<p>La <strong>probabilidad</strong> es una cantidad numérica que expresa qué tan factible es que ocurra un evento.
-Normalmente es expresada como <span class="math inline">\(P(A)\)</span>, donde <span class="math inline">\(A\)</span> expresa un evento aleatorio.
-Siempre se encuentra entre un rango de 0 y 1, o expresado en porcentaje, entre 0% y 100%.
-Existen distintas interpretaciones de la probabilidad como la <strong>frecuentista</strong> o la <strong>bayesiana.</strong> En este caso, aprenderemos el enfoque frecuentista como una forma de asignar una probabilidad mensurable a un evento, es decir, la ocurrencia de el evento a la larga.</p>
+<p>La <strong>probabilidad</strong> es una cantidad numérica que expresa qué tan factible es que ocurra un evento. Normalmente es expresada como <span class="math inline">\(P(A)\)</span>, donde <span class="math inline">\(A\)</span> es un evento aleatorio. Siempre se encuentra entre un rango de 0 y 1, o expresado en porcentaje, entre 0% y 100%. Existen distintos acercamientos a la probabilidad como el acercamiento <strong>frecuentista</strong> o el acercamiento <strong>bayesiano.</strong></p>
+<p>En este caso, aprenderemos el enfoque frecuentista como una forma de asignar una probabilidad mensurable a un evento, es decir, la ocurrencia de el evento a la larga (qué tan <em>frecuentemente</em> ocurre).</p>
 <div id="probabilidad-frecuentista" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Probabilidad frecuentista</h2>
-<p>En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento A ocurre en una serie de repeticiones indefinidamente largas.</p>
+<p>En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento <span class="math inline">\(A\)</span> ocurre en una serie de repeticiones indefinidamente largas.</p>
 <p><span class="math display" id="eq:prob">\[\begin{equation}
 P(A) = \frac{num_{A}}{num_{T}}
 \tag{3.1}
@@ -366,8 +364,8 @@ P(A) = \frac{num_{A}}{num_{T}}
 <p>Estas son algunas reglas que nos pueden servir para determinar la probabilidad de algunos eventos.</p>
 <ol style="list-style-type: decimal">
 <li><p>La probabilidad de un evento <span class="math inline">\(A\)</span> siempre se encuentra entre 0 y 1.</p></li>
-<li><p>La suma de probabilidades de los eventos tiene que ser igual a 1.</p></li>
-<li><p>La probabilidad de que el evento A no ocurra es <span class="math inline">\(1 - P(A)\)</span> y se denota con el símbolo <span class="math inline">\(A_1^C\)</span>, indicando que es el complemento de <span class="math inline">\(A_1\)</span>.</p></li>
+<li><p>La suma de probabilidades de los eventos tiene que ser igual a 1 (en caso de que sean complementarios).</p></li>
+<li><p>La probabilidad de que el evento <span class="math inline">\(A\)</span> no ocurra es <span class="math inline">\(1 - P(A)\)</span> y se denota con el símbolo <span class="math inline">\(\overline{A}_1\)</span>, indicando que es el complemento de <span class="math inline">\(A_1\)</span>. A este tipo de eventos se les conoce como <strong>eventos complementarios.</strong></p></li>
 <li><p>Si dos eventos <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span> son eventos que no ocurren en conjunto, entonces:</p></li>
 </ol>
 <p><span class="math display">\[
@@ -434,7 +432,7 @@ P(CC) = 1200/1770
 P(OA) = 1050/1770
 \]</span></p>
 <p>La probabilidad de tener cabello negro y ojos azules <span class="math inline">\(P(CN \cap OA)\)</span> pueden ocurrir en conjunto ya que hay 200 personas con ojos azules y cabello negro.
-Entonces:</p>
+Entonces si queremos saber la probabilidad de que alguien tenga cabello negro u ojos azules:</p>
 <p><span class="math display">\[
 P(CN \cup OA) = P(CN) + P(OA) - P(CN \cap OA) = 500/1770 + 1050/1770 - 200/1770 = 1350/1770
 \]</span></p>
@@ -457,15 +455,15 @@ P(A_1 \cap A_2) = P(A_1) \times P(A_2 | A_1)
 <p>Por ejemplo, de la tabla anterior, ¿Cuál es la probabilidad de que una persona tenga cabello rojo y ojos cafés?
 En este caso:</p>
 <p><span class="math display">\[
-P(CR \cap OA) = P(CR) * P(OA | CR) = 70/1770*20/70 = 20/1770
+P(CR \cap OC) = P(CR) \times P(OC | CR) = 70/1770 \times 20/70 = 20/1770
 \]</span></p>
 <ol start="8" style="list-style-type: decimal">
 <li>Para dos eventos cualesquiera, <span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>:</li>
 </ol>
 <p><span class="math display">\[
-P(A_1) = P(A_2) * P(A_1 | A_2) + P(A_2^C) * P(A_1 | A_2^C )
+P(A_1) = P(A_2) \times P(A_1 | A_2) + P(\overline{A}_2) \times P(A_1 | \overline{A}_2 )
 \]</span>
-Donde <span class="math inline">\(A_2^C\)</span> es el complemento de <span class="math inline">\(A_2\)</span>, es decir <span class="math inline">\(1 - A_2\)</span>.</p>
+Donde <span class="math inline">\(\overline{A}_2\)</span> es el complemento de <span class="math inline">\(A_2\)</span>, es decir <span class="math inline">\(1 - A_2\)</span>.</p>
 </div>
 <div id="curvas-de-densidad" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Curvas de densidad</h2>
@@ -473,7 +471,7 @@ Donde <span class="math inline">\(A_2^C\)</span> es el complemento de <span clas
 <p>Un <strong>histogramas de frecuencias relativas</strong> representa las proporciones de las observaciones en cada categoría, en lugar del total de observaciones. Sin embargo, para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una <strong>curva de densidad.</strong> La coordenada <span class="math inline">\(y\)</span> de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como áreas debajo de la curva.</p>
 <p>Algunos de los requisitos de una distribución de probabilidad son:</p>
 <ul>
-<li><p>Que exista una variable aleatoria numérica <span class="math inline">\(x\)</span>, y que sus valores estén asociados con probabilidades correspondientes.</p></li>
+<li><p>Que exista una variable aleatoria numérica <span class="math inline">\(x\)</span> y que sus valores estén asociados a una probabilidad.</p></li>
 <li><p>Que <span class="math inline">\(\sum P(x) = 1\)</span>, donde <span class="math inline">\(x\)</span> asume todos los los valores posibles. El área total bajo la curva de densidad debe ser igual a 1.</p></li>
 <li><p>Que la probabilidad de ver a <span class="math inline">\(x_i\)</span> se encuentre entre 0 y 1. Es decir, <span class="math inline">\(0 \le P(x_i) \le 1\)</span>.</p></li>
 </ul>
@@ -485,7 +483,8 @@ Donde <span class="math inline">\(A_2^C\)</span> es el complemento de <span clas
 Figura 3.1: Curva de densidad junto con un histograma de frecuencias relativas.
 </p>
 </div>
-<p>La probabilidad correspondiente para una variable continua equivale al área debajo de la curva de densidad entre dos puntos. Si quisiéramos saber el valor de un punto exacto obtendríamos, de manera paradójica 0 ya que lo que equivale a la probabilidad es el área bajo la curva. Algunos de los parámetros de una distribución de probabilidad son:</p>
+<p>La probabilidad para una variable continua equivale al área debajo de la curva de densidad entre dos puntos. Si quisiéramos saber el valor de un punto exacto, obtendríamos de manera un tanto paradójica 0, ya que lo que equivale a la probabilidad es el área bajo la curva.</p>
+<p>Algunos de los parámetros de una distribución de probabilidad son:</p>
 <ul>
 <li><p><strong>Media:</strong> <span class="math inline">\(\mu\)</span></p></li>
 <li><p><strong>Varianza:</strong> <span class="math inline">\(\sigma^2\)</span></p></li>
@@ -506,7 +505,7 @@ Figura 3.1: Curva de densidad junto con un histograma de frecuencias relativas.
 <li><p><strong>Resultados mutuamente excluyentes:</strong> Es decir, no se puede tener éxito y fracaso al mismo tiempo.</p></li>
 <li><p><strong>Resultados colectivamente exhaustivos:</strong> Al menos uno de los dos resultados debe de ocurrir.</p></li>
 </ol>
-<p>Ahora bien, la <strong>función de masa de probabilidad (PMF)</strong> o fórmula de la distribución binomial se indica en la fórmula <a href="probabilidad.html#eq:binom">(3.2)</a>.</p>
+<p>La <strong>función de masa de probabilidad (PMF)</strong> o fórmula de la distribución binomial se indica en la fórmula <a href="probabilidad.html#eq:binom">(3.2)</a>.</p>
 <p><span class="math display" id="eq:binom">\[\begin{equation}
 P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
 \tag{3.2}
@@ -526,8 +525,7 @@ _{n}C_{k} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
 \end{equation}\]</span></p>
 <div id="media-y-desviación-estándar-de-la-distribución-binomial" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Media y desviación estándar de la distribución binomial</h3>
-<p>Se pueden calcular tanto la <strong>media</strong> como la <strong>desviación estándar</strong> de una distribución binomial.
-La media es el número promedio de éxitos, y la desviación estándar es qué tanto se desvían de la media los valores.</p>
+<p>Se pueden calcular tanto la <strong>media</strong> como la <strong>desviación estándar</strong> de una distribución binomial. En este caso la media es el número promedio de éxitos (<span class="math inline">\(k\)</span>) y la desviación estándar es qué tan lejos de esta media caen el resto de los valores de la distribución.</p>
 <p>La media de una distribución binomial se calcula con la fórmula <a href="probabilidad.html#eq:meanbinom">(3.4)</a>.</p>
 <p><span class="math display" id="eq:meanbinom">\[\begin{equation}
 \mu = {n}{p}
@@ -643,23 +641,23 @@ P(X = k | \lambda) = \frac{e^{-\lambda}\lambda^k}{k!}
 </ol>
 <div id="media-y-desviación-estándar-de-la-distribución-de-poisson" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Media y desviación estándar de la distribución de Poisson</h3>
-<p>Algo interesante de la distribución de Poisson es que la varianza y la media corresponden al mismo valor (<span class="math inline">\(\lambda\)</span>) por lo que la desviación estándar sería</p>
+<p>Algo interesante de la distribución de Poisson es que la varianza y la media corresponden al mismo valor (<span class="math inline">\(\lambda\)</span>) por lo que la desviación estándar sería:</p>
 <p><span class="math display">\[
 \sigma = \sqrt{\lambda}
-\]</span>
-Uno de los usos que tiene la distribución de Poisson es su aproximación a la distribución binomial cuando se cumplen las siguientes condiciones:</p>
+\]</span></p>
+<p>Uno de los usos que tiene la distribución de Poisson es su aproximación a la distribución binomial cuando se cumplen las siguientes condiciones:</p>
 <ol style="list-style-type: decimal">
 <li><p>Cuando <span class="math inline">\(p &lt; 0.1\)</span> o <span class="math inline">\(p &gt; 0.9\)</span>.</p></li>
 <li><p>Cuando <span class="math inline">\(n \ge 20\)</span>. Es todavía mejor si <span class="math inline">\(n \ge 100\)</span>.</p></li>
 <li><p>Cuando <span class="math inline">\(np \le 10\)</span>.</p></li>
 </ol>
-<p>Si tenemos estas dos condiciones, la distribución de Poisson es un muy buen aproximado a la distribución binomial. En estos casos, la media se obtendría de la misma manera que obtenemos la media de la distribución binomial. Debido a esta dependencia de probabilidades muy bajas o muy elevadas, frecuentemente se utiliza la distribución de Poisson para la evaluación de eventos <em>raros.</em></p>
+<p>Si tenemos estas condiciones, la distribución de Poisson es un muy buen aproximado a la distribución binomial. En estos casos, la media se obtendría de la misma manera que obtenemos la media de la distribución binomial. Debido a esta dependencia de probabilidades muy bajas o muy elevadas, frecuentemente se utiliza la distribución de Poisson para la evaluación de eventos <em>raros.</em></p>
 <p><span class="math display" id="eq:poimean">\[\begin{equation}
 \mu =  \lambda = np
 \tag{3.8}
 \end{equation}\]</span></p>
 <blockquote>
-<p><strong>Ejemplo:</strong> En <em>Escherichia coli</em>, una célula de cada <span class="math inline">\(10^9\)</span> muta de ser sensible a la estreptomicina a ser resistente a ella. Si observamos <span class="math inline">\(2 \times 10^9\)</span> células, ¿Cuál es la probabilidad de que ninguna mute? ¿Cuál es la probabilidad de que al menos una mute?</p>
+<p><strong>Ejemplo:</strong> En <em>Escherichia coli</em>, una célula de cada <span class="math inline">\(10^9\)</span> muta para desarrollar resistencia a la estreptomicina. Si observamos <span class="math inline">\(2 \times 10^9\)</span> células, ¿Cuál es la probabilidad de que ninguna mute? ¿Cuál es la probabilidad de que al menos una mute?</p>
 </blockquote>
 <p>Como con la distribución binomial, <code>R</code> cuenta con funciones específicas para calcular los valores de una distribución de Poisson.</p>
 <ul>
@@ -676,7 +674,7 @@ p = \frac{1}{10^9} = 0.000000001
 <p><span class="math display">\[
 \mu = \lambda = np = (2\times10^9) \times \frac{1}{10^9} = 2
 \]</span></p>
-<p>Por lo tanto, <span class="math inline">\(\lambda = 2\)</span>. Observemos que teníamos un valor de <span class="math inline">\(n\)</span> enorme (<span class="math inline">\(2 \times 10^9\)</span>) y una <span class="math inline">\(p\)</span> extremadamente pequeña (<span class="math inline">\(\frac{1}{10^9}\)</span>) y a pesar de eso, obtuvimos un valor de lambda relativamente pequeño.</p>
+<p>Por lo tanto, <span class="math inline">\(\lambda = 2\)</span>. Observemos que teníamos un valor de <span class="math inline">\(n\)</span> enorme (<span class="math inline">\(2 \times 10^9\)</span>) y una <span class="math inline">\(p\)</span> extremadamente pequeña (<span class="math inline">\(\frac{1}{10^9}\)</span>) y a pesar de eso, obtuvimos un valor de <span class="math inline">\(\lambda\)</span> relativamente pequeño, además de cumplir los supuestos para utilizar la distribución de Poisson como aproximación a la distribución binomial.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="probabilidad.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Probabilidad de que 1 célula mute.</span></span>
 <span id="cb115-2"><a href="probabilidad.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="at">log =</span> F)</span></code></pre></div>
 <pre><code>## [1] 0.2706706</code></pre>
@@ -724,8 +722,7 @@ f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 \end{equation}\]</span></p>
 <p>La función <span class="math inline">\(f(x)\)</span> se conoce como <strong>función de densidad de probabilidad (PDF)</strong> y expresa la altura de la curva como una función de la posición en el eje horizontal. El área bajo la curva acumulada se conoce como <strong>función de densidad acumulada (CDF).</strong>
 El centro de una curva normal es <span class="math inline">\(x = \mu\)</span>, los puntos de inflexión están en <span class="math inline">\(x = \mu + \sigma\)</span> y <span class="math inline">\(x = \mu - \sigma\)</span>.
-En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños.
-El ancho y alto de una curva normal están determinados por la desviación estándar <span class="math inline">\(\sigma\)</span>.</p>
+En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños. El ancho y alto de una curva normal están determinados por la desviación estándar <span class="math inline">\(\sigma\)</span>.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-81"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-81-1.png" alt="Forma de la distribución normal." width="672" />
 <p class="caption">
@@ -733,14 +730,14 @@ Figura 3.9: Forma de la distribución normal.
 </p>
 </div>
 <p>Normalmente lo que nos interesa de una curva con distribución normal es el <strong>área debajo de la curva</strong>.
-Para esto utilizamos la <strong>escala estandarizada</strong>, en el cual el valor del eje horizontal se denomina <strong>valor Z</strong>.
+Para esto utilizamos la <strong>escala estandarizada</strong>, en el cual el valor del eje horizontal se denomina <strong>valor <span class="math inline">\(Z\)</span></strong>.
 La escala de <span class="math inline">\(Z\)</span> mide las desviaciones estándar a partir de la media, por ejemplo, <span class="math inline">\(z = 1\)</span> corresponde a una desviación estándar de la media.
 Para transformar nuestros datos a la escala <span class="math inline">\(Z\)</span> simplemente aplicamos la fórmula <a href="probabilidad.html#eq:Z">(3.10)</a> y a la variable <span class="math inline">\(Z\)</span> se le conoce como una variable de <strong>distribución normal estándar</strong>, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable <span class="math inline">\(Z\)</span> es <em>adimensional</em>.</p>
 <p><span class="math display" id="eq:Z">\[\begin{equation}
 Z = \frac{X - \mu}{\sigma}
 \tag{3.10}
 \end{equation}\]</span></p>
-<p>Una vez que nuestras variables se encuentran estandarizadas en el valor Z, podemos utilizar <strong>tablas de Z</strong> para realizar el cálculo debajo del área que corresponde al valor <span class="math inline">\(Z\)</span> obtenido, aunque claro, también podemos hacer estos cálculos en <code>R</code>.
+<p>Una vez que nuestras variables se encuentran estandarizadas en el valor <span class="math inline">\(Z\)</span>, podemos utilizar <strong>tablas de <span class="math inline">\(Z\)</span></strong> para realizar el cálculo debajo del área que corresponde al valor <span class="math inline">\(Z\)</span> obtenido, aunque claro, también podemos hacer estos cálculos en <code>R</code>.
 Hay que tener en cuenta que para una curva de distribución normal estándar:</p>
 <ul>
 <li><p>68% del área se encuentra entre <span class="math inline">\(\pm\)</span> 1 distribución estándar.</p></li>
@@ -909,7 +906,7 @@ Figura 3.14: Gráfico Q-Q comparando una muestra de datos contra una muestra te�
 <h2><span class="header-section-number">3.7</span> Distribución muestral</h2>
 <p>La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como <strong>variabilidad de muestreo</strong>. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como <strong>distribución muestral</strong>. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre entre la muestra y la población es probable que sea.</p>
 <p>Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un <strong>meta-estudio</strong>, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño <span class="math inline">\(n\)</span> de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.</p>
-<p>Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra <span class="math inline">\(\overline{x}\)</span> de la media de la población <span class="math inline">\(\mu\)</span>? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable <span class="math inline">\(\overline{X}\)</span>, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de <span class="math inline">\(\mu\)</span> es probable que este <span class="math inline">\(\overline{X}\)</span>? Nuestra respuesta la encontramos en la <strong>distribución muestral de <span class="math inline">\(\overline{X}\)</span></strong>.</p>
+<p>Una pregunta natural a realizar es, ¿Qué tan parecida es la media de la muestra <span class="math inline">\(\overline{x}\)</span> a la media de la población <span class="math inline">\(\mu\)</span>? Aunque con una sola muestra no podemos responder esta pregunta, si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable <span class="math inline">\(\overline{X}\)</span>, podemos hacer ciertas inferencias. Reformulamos nuestra pregunta a ¿Qué tan cerca de <span class="math inline">\(\mu\)</span> es probable que este <span class="math inline">\(\overline{X}\)</span>? Nuestra respuesta la encontramos en la <strong>distribución muestral de <span class="math inline">\(\overline{X}\)</span></strong>.</p>
 <p>Tenemos que tener en cuenta que, en promedio, la <strong>media de la distribución muestral</strong> <span class="math inline">\(\overline{X}\)</span> equivale a la media de la población <span class="math inline">\(\mu\)</span>. Esto se ve mejor en la fórmula <a href="probabilidad.html#eq:samplemean">(3.11)</a>.</p>
 <p><span class="math display" id="eq:samplemean">\[\begin{equation}
 \mu_{\overline{X}} = \mu
@@ -947,7 +944,7 @@ Z = \frac{\overline{x}-\mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 - 1
 <p>De hecho, ni siquiera es necesario realizar la transformación a valores <span class="math inline">\(Z\)</span> en <code>R</code> ya que podemos modificar los parámetros de la función <code>pnorm()</code>.</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="probabilidad.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">11.5</span>, <span class="at">mean =</span> <span class="dv">11</span>, <span class="at">sd =</span> <span class="fl">0.49</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1537675</code></pre>
-<p>Debido a que hemos redondeado la desviación estándar el valor es ligeramente distinto, pero en esencia el resultado es el mismo. Entonces podemos concluir que</p>
+<p>Debido a que hemos redondeado la desviación estándar el resultado es ligeramente distinto (cuestión de decimales). Entonces podemos concluir que:</p>
 <p><span class="math display">\[\begin{equation}
 P(\overline{X} &gt; 11.5) = P(Z &gt; 1.0204) = 0.1538 \approx 0.15
 \end{equation}\]</span></p>
