@@ -18,19 +18,19 @@ library(kableExtra)
 ```
 
 En esta lección veremos las nociones básicas de estadística descriptiva haciendo uso de `R` y RStudio.
-Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores Z.
+Veremos **medidas de tendencia central** como la media, mediana y moda, **medidas de dispersión** como el rango o la desviación estándar y **medidas de posición relativa** como los valores $Z$.
 
 ## Datos y estudios {#datos}
 
 Antes de empezar con la estadística descriptiva, repasemos un poco conceptos básicos.
 
-Un **dato estadístico** es una medición numérica tomada a partir de una muestra y que describe alguna característica de nuestra muestra. Por ejemplo, la media o la desviación estándar son estadísticos. Un **parámetro** es un valor numérico que describe algunas características de una población.
+Un **dato estadístico** es una medición numérica tomada a partir de una muestra y que describe alguna característica de la misma. Por ejemplo, la media o la desviación estándar son estadísticos. Un **parámetro** es un valor numérico que describe algunas características de una población.
 
 *¿Cuál es la diferencia entre una población y una muestra?*
 
 Bueno, la **población** es el conjunto total de datos, mientras que una **muestra** es un subconjunto de datos tomados de una población. Es importante recordar esto ya que nos será de mucha utilidad a lo largo del curso.
 
-También habremos de recordar que existen **datos continuos,** que resultan de una cantidad infinita de valores cuantitativos posibles, es decir, son valores que *no pueden contarse.* Ejemplos de esto son la temperatura, el peso, o la longitud. En cambio, los **datos discretos** son aquellos que que *sí pueden contarse* es decir, son finitos. Esto podría ser, por ejemplo, el número de aves en un bosque (aunque contarlos a todos sea, ciertamente, difícil).
+También habremos de recordar que existen **datos continuos,** que resultan de una cantidad infinita de valores cuantitativos posibles, es decir, son valores que *no pueden contarse.* Ejemplos de esto son la temperatura, el peso, o la longitud. En cambio, los **datos discretos** son aquellos que que *sí pueden contarse,* es decir que son finitos. Esto podría ser, por ejemplo, el número de aves en un bosque o el número de personas que reciben un tratamiento.
 
 Ahora es importante también que existen **estudios experimentales,** que son aquellos en los que el investigador aplica un tratamiento a un conjunto de objetos o individuos, que en estudios experimentales se conocen como **unidades experimentales.** En cambio, en un **estudio observacional,** medimos y registramos características pero no modificamos a los objetos estudiados.
 
@@ -43,7 +43,7 @@ Las tres medidas de tendencia central más utilizadas son: **media**, **mediana*
 
 Mide el promedio del valor de nuestros datos.
 Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
-Es representada como $\overline{x}$ (pronunciado $x$ barra) para datos muestrales y $\mu$ (pronunciado mu) para datos poblacionales.
+Es representada como $\overline{x}$ (léase $x$ barra) para datos muestrales y $\mu$ (pronunciado mu) para datos poblacionales.
 Para obtener la media muestral utilizamos la fórmula \@ref(eq:mean1) y para obtener la media poblacional se utiliza la fórmula \@ref(eq:mean2).
 
 
@@ -62,11 +62,11 @@ Donde $\sum_{i=1}^{n}{x_i}$ y $\sum_{i=1}^{N}{x_i}$ representan la sumatoria de 
 
 Propiedades importantes de la **media:**
 
--   No es un estadístico *robusto*, ya que es sensible a valores extremadamente grandes o pequeños.
+-   No es un estadístico *robusto*, ya que es sensible a valores extremos.
 
--   Utiliza todos los datos disponibles.
+-   Utiliza los valores de todos los datos disponibles.
 
--   Las medias muestrales ($\overline{x}$) de una población tienden a variar menos que otras medidas.
+-   La mediaa muestral ($\overline{x}$) de una población tiende a variar menos que otras medidas de tendencia central.
 
 El cálculo de la media en `R` es algo sencillo. Para esto, utilizamos la función `mean()`.
 
@@ -77,10 +77,11 @@ Se utilizará la base de datos `PlantGrowth` para este ejemplo.
 
 ```{r}
 data("PlantGrowth")
+PlantGrowth
 ```
 
 Es importante que conozcamos los datos que incluye nuestra matriz.
-En este caso tenemos dos columnas, *weight* que hace referencia al peso seco y *group* que hace referencia al tratamiento.
+En este caso tenemos dos columnas, `weight` que hace referencia al peso seco y `group` que hace referencia al tratamiento.
 Para sacar la media global (independiente del tratamiento) simplemente escribimos la función `mean()` y hacemos referencia al peso con el símbolo `$`.
 
 ```{r}
@@ -88,7 +89,8 @@ mean(PlantGrowth$weight)
 ```
 
 Lo que nos arroja una media de $\overline{x} = 5.073$.
-Ahora en caso de que quisiéramos sacar la media de cada uno de los tratamientos, tenemos que usar filtros y agrupaciones, para esto podemos utilizar la librería `dplyr` que viene incluida en el paquete de `tidyverse`.
+
+Ahora en caso de que quisiéramos sacar la media de cada uno de los tratamientos, tenemos que usar filtros y agrupaciones ya que la media calculada de la columna `weight`, sin importar los valores de la columna `group`. Para esto podemos utilizar la librería `dplyr` que viene incluida en el paquete de `tidyverse`.
 
 Vamos a usar el **pipeline** (`%>%`) de `dplyr` para hacer varias operaciones en cadena: 1) Utilizamos la función `group_by(group)` para agrupar nuestros datos por el tipo de tratamiento; 2) utilizamos la función `summarise(Media = mean(weight), n = n())` para indicar que saque la media de nuestro datos una vez agrupados y el número de observaciones de cada grupo.
 
@@ -167,8 +169,7 @@ Como tal no existe una función en `R` que calcule la moda pero en varias págin
 
 ## Medidas de dispersión
 
-A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión se basan en cómo se distribuyen los datos y qué tan esparcidos están.
-Las medidas que veremos son: **rango** y **desviación estándar**.
+A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión describen en cómo se distribuyen los datos. Las medidas que veremos son: **rango** y **desviación estándar**.
 
 ### Rango
 
@@ -195,7 +196,7 @@ resumen <- PlantGrowth %>% group_by(group) %>% summarise(Rango = max(weight) - m
 resumen
 ```
 
-Igualmente, podemos agregar las medidas de tendencia central.
+Igualmente, podemos agregar las medidas de tendencia central a esta variable para tener una descripción más completa de los datos.
 
 ```{r}
 resumen <- PlantGrowth %>% group_by(group) %>% summarise(Rango = max(weight) - min(weight), Media = mean(weight), Mediana = median(weight), n = n())
@@ -204,7 +205,7 @@ resumen
 
 ### Desviación estándar
 
-Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y se calcula con la fórmula \@ref(eq:sd1) y $\sigma$ para datos poblacionales y se calcula a partir de la fórmula \@ref(eq:sd2).
+Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y $\sigma$ para datos poblacionales. Se calculan con la fórmula \@ref(eq:sd1) y \@ref(eq:sd2), respectivamente.
 
 \begin{equation}
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
@@ -222,15 +223,15 @@ Propiedades importantes de la **desviación estándar:**
 
 - Nunca tiene un valor negativo.
 
-- Un valor elevado en $s$ indica mayor variación en los datos.
+- Un valor elevado en $s$ indica mayor dispersión en los datos.
 
-- Puede aumentar considerablemente con valores atípicos, es decir, no es *robusta.*
+- Puede aumentar considerablemente con valores atípicos, es decir, no es una medida *robusta.*
 
 - Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
 
 En `R` se utiliza la función `sd()` para su cálculo.
 
-> **Ejemplo:** Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango y las medidas de tendencia central.
+> **Ejemplo:** Queremos calcular la desviación estándar de las observaciones de la base de datos de plantas que utilizamos en la sección del rango y medidas de tendencia central.
 
 ```{r}
 sd(PlantGrowth$weight)
@@ -251,20 +252,7 @@ resumen <- PlantGrowth %>% group_by(group) %>% summarise(SD = sd(weight), Rango 
 resumen
 ```
 
-En esta tabla podemos ver todos los estadísticos que hemos calculado hasta ahora.
-Para calcular $\sigma$ necesitamos multiplicar el resultado obtenido por $\sqrt\frac{N-1}{N}$.
-
-```{r}
-sd(PlantGrowth$weight)*(sqrt((length(PlantGrowth$weight)-1)/length(PlantGrowth$weight)))
-```
-
-En caso de que se utilice frecuentemente la $\sigma$ se puede definir la función de la siguiente manera.
-
-```{r}
-sd.p = function(x){sd(x)*sqrt((length(x)-1)/length(x))}
-```
-
-Para calcular la **varianza** $s^2$, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente fórmula \@ref(eq:var).
+En esta tabla podemos ver todos los estadísticos que hemos calculado hasta ahora. Para calcular la **varianza** $s^2$, simplemente elevamos al cuadrado el valor obtenido de la desviación estándar, se calcula con la siguiente fórmula \@ref(eq:var).
 
 \begin{equation}
 Varianza = {s}^2
@@ -283,7 +271,7 @@ Propiedades importantes de la **varianza:**
 
 -   Nunca tiene valores negativos.
 
-Otro estadístico que nos puede interesare es el **coeficiente de variación** que se obtiene a partir de la fórmula \@ref(eq:cv).
+Otro estadístico que nos puede brindar más información es el **coeficiente de variación** que se obtiene a partir de la fórmula \@ref(eq:cv).
 
 \begin{equation}
 CV = \frac{S}{\overline{x}}*100
@@ -307,8 +295,8 @@ resumen
 
 ## Medidas de posición relativa
 
-Indican la posición relativa de los datos con respecto de los demás datos.
-Algunas de las más usadas son: **valores $Z$**, **frecuencia absoluta**, **frecuencia relativa** y **cuartiles**.
+Indican la posición relativa un dato respecto de los demás datos.
+Algunas de las medidas más usadas son: **valores $Z$**, **frecuencia absoluta**, **frecuencia relativa** y **cuartiles**.
 
 ### Valores $Z$
 
@@ -317,7 +305,7 @@ Se puede calcular el valor $Z$ muestral y poblacional con las ecuaciones \@ref(e
 
 
 \begin{equation}
-Z = \frac{X - \overline{x}}{s}
+Z = \frac{x_i - \overline{x}}{s}
 (\#eq:z1)
 \end{equation}
 
@@ -345,8 +333,7 @@ PlantGrowth
 
 ### Frecuencia absoluta
 
-Es el valor total de los datos observados.
-Por ejemplo, para los tratamientos de la base de datos de `PlantGrowth`, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. La frecuencia absoluta también nos dice el número de veces que se repite el valor de alguna observación.
+Es número total de observaciones. Por ejemplo, para los tratamientos de la base de datos de `PlantGrowth`, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. La frecuencia absoluta también nos dice el número de veces que se repite el valor de alguna observación.
 
 En `R` utilizamos la función `table()` para su cálculo.
 
@@ -354,8 +341,7 @@ En `R` utilizamos la función `table()` para su cálculo.
 table(PlantGrowth$group)
 ```
 
-Aquí se puede ver que cada tratamiento se realizo con 10 plantas.
-Ahora si quisiéramos ver cuántas veces se repite cada valor de los pesos, lo haríamos por la variable de `weight`.
+Aquí se puede ver que cada tratamiento se realizo con 10 plantas. Ahora si quisiéramos ver cuántas veces se repite cada valor de los pesos, lo haríamos por la variable de `weight`.
 
 ```{r}
 table(PlantGrowth$weight)

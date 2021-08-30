@@ -624,11 +624,11 @@ r = \frac{1}{n - 1}\sum_{i=1}^n (\frac{x_i - \overline{x}}{s_x})(\frac{y_i - \ov
 \tag{7.1}
 \end{equation}\]</span></p>
 <p>Afortunadamente en <code>R</code> podemos obtener este coeficiente sin necesidad de hacer todas las transformaciones y operaciones correspondientes, simplemente utilizamos la función <code>cor()</code> en nuestros datos.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="correlación-y-regresión-lineal.html#cb289-1" aria-hidden="true" tabindex="-1"></a>Longitud <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">69</span>, <span class="dv">66</span>, <span class="dv">64</span>, <span class="dv">54</span>, <span class="dv">67</span>, <span class="dv">59</span>, <span class="dv">65</span>, <span class="dv">63</span>)</span>
-<span id="cb289-2"><a href="correlación-y-regresión-lineal.html#cb289-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">136</span>, <span class="dv">198</span>, <span class="dv">194</span>, <span class="dv">140</span>, <span class="dv">93</span>, <span class="dv">172</span>, <span class="dv">116</span>, <span class="dv">174</span>, <span class="dv">145</span>)</span>
-<span id="cb289-3"><a href="correlación-y-regresión-lineal.html#cb289-3" aria-hidden="true" tabindex="-1"></a>Serpientes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Longitud, Peso)</span>
-<span id="cb289-4"><a href="correlación-y-regresión-lineal.html#cb289-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-5"><a href="correlación-y-regresión-lineal.html#cb289-5" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="correlación-y-regresión-lineal.html#cb287-1" aria-hidden="true" tabindex="-1"></a>Longitud <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">69</span>, <span class="dv">66</span>, <span class="dv">64</span>, <span class="dv">54</span>, <span class="dv">67</span>, <span class="dv">59</span>, <span class="dv">65</span>, <span class="dv">63</span>)</span>
+<span id="cb287-2"><a href="correlación-y-regresión-lineal.html#cb287-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">136</span>, <span class="dv">198</span>, <span class="dv">194</span>, <span class="dv">140</span>, <span class="dv">93</span>, <span class="dv">172</span>, <span class="dv">116</span>, <span class="dv">174</span>, <span class="dv">145</span>)</span>
+<span id="cb287-3"><a href="correlación-y-regresión-lineal.html#cb287-3" aria-hidden="true" tabindex="-1"></a>Serpientes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Longitud, Peso)</span>
+<span id="cb287-4"><a href="correlación-y-regresión-lineal.html#cb287-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-5"><a href="correlación-y-regresión-lineal.html#cb287-5" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
 <pre><code>##   Longitud Peso
 ## 1       60  136
 ## 2       69  198
@@ -639,7 +639,7 @@ r = \frac{1}{n - 1}\sum_{i=1}^n (\frac{x_i - \overline{x}}{s_x})(\frac{y_i - \ov
 ## 7       59  116
 ## 8       65  174
 ## 9       63  145</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="correlación-y-regresión-lineal.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="correlación-y-regresión-lineal.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## [1] 0.9436756</code></pre>
 <p>Es importante que tengamos los datos arreglados en dos columnas, una con la variable <span class="math inline">\(x\)</span> (por ejemplo, longitud) y la otra con la variable <span class="math inline">\(y\)</span> (por ejemplo, peso). Como podemos ver, nuestro coeficiente <span class="math inline">\(r = 0.9437\)</span> lo que indica una fuerte correlación lineal. Normalmente, el valor de <span class="math inline">\(r\)</span> se sitúa entre -1 y 1. Valores cercanos a 1 indican una correlación positiva, como en el caso de las serpientes, mientras que valores cercanos a -1 indican una correlación negativa. Valores cercanos a 0 indican ausencia de correlación lineal (los datos pueden estar correlacionados de otras maneras).</p>
 <p>En caso de nuestra muestra, nos referimos a este coeficiente como la <strong>correlación muestral,</strong> ya que las medidas tomadas de estas 9 serpientes componen una muestra de una población más grande. Es decir nosotros estamos estimando la <strong>correlación poblacional,</strong> normalmente denotada con el símbolo <span class="math inline">\(\rho\)</span> (léase rho). Debe considerarse que, para que nuestro coeficiente <span class="math inline">\(r\)</span> pueda ser utilizado como una estimación de <span class="math inline">\(\rho\)</span>, tanto los valores de <span class="math inline">\(X\)</span> como <span class="math inline">\(Y\)</span> deben de ser seleccionados de manera aleatoria siguiendo el <strong>modelo de muestreo aleatorio bivariado,</strong> donde cada par de observaciones (<span class="math inline">\(x_i, y_i\)</span>) se considera una muestra aleatoria tomada a partir de una población (<span class="math inline">\(x, y\)</span>) de pares.</p>
@@ -665,7 +665,7 @@ df = n - 2
 t_s = 0.9437 \sqrt{\frac{9 - 2}{1 - 0.9437^2}} = 7.549
 \end{equation}\]</span></p>
 <p>Ahora tendríamos que checar el valor crítico en nuestro valor de tablas o con la función de <span class="math inline">\(t\)</span>. Sin embargo, en <code>R</code> basta con utilizar la función <code>cor.test()</code> con los argumentos de nuestra correlación y obtenemos nuestro resultado, junto con nuestro valor-<em>p</em>.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="correlación-y-regresión-lineal.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="correlación-y-regresión-lineal.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(Serpientes<span class="sc">$</span>Longitud, Serpientes<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -722,13 +722,13 @@ z_r = \frac{1}{2} \ln \left[ {\frac{1+0.9437}{1-0.9437}} \right] = \frac{1}{2} \
 <blockquote>
 <p><strong>Ejemplo:</strong> Consideremos un conjunto de datos que tienen una relación linear perfecta entre <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, por ejemplo, la temperatura medida en <span class="math inline">\(X\)</span> = Celsius y <span class="math inline">\(Y\)</span> = Fahrenheit. Sabemos que la fórmula para transformar de grados Celsius a Fahrenheit es <span class="math inline">\(y = 32 + \frac{9}{5}x\)</span>, por lo que esta es la línea que describe esta relación.</p>
 </blockquote>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="correlación-y-regresión-lineal.html#cb295-1" aria-hidden="true" tabindex="-1"></a>Celsius <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.3</span>, <span class="fl">12.8</span>, <span class="fl">13.2</span>, <span class="fl">13.8</span>, <span class="fl">14.5</span>, <span class="fl">14.9</span>, <span class="dv">15</span>, <span class="fl">15.1</span>, <span class="fl">15.2</span>, <span class="fl">15.25</span>, <span class="fl">15.6</span>, <span class="fl">15.7</span>, <span class="fl">16.1</span>, <span class="fl">16.3</span>, <span class="fl">16.5</span>, <span class="dv">17</span>, <span class="fl">17.1</span>, <span class="fl">17.7</span>, <span class="fl">17.8</span>, <span class="fl">17.85</span>)</span>
-<span id="cb295-2"><a href="correlación-y-regresión-lineal.html#cb295-2" aria-hidden="true" tabindex="-1"></a>Fahrenheit <span class="ot">&lt;-</span> Celsius<span class="sc">*</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb295-3"><a href="correlación-y-regresión-lineal.html#cb295-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb295-4"><a href="correlación-y-regresión-lineal.html#cb295-4" aria-hidden="true" tabindex="-1"></a>Temperatura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Celsius, Fahrenheit)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="correlación-y-regresión-lineal.html#cb293-1" aria-hidden="true" tabindex="-1"></a>Celsius <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.3</span>, <span class="fl">12.8</span>, <span class="fl">13.2</span>, <span class="fl">13.8</span>, <span class="fl">14.5</span>, <span class="fl">14.9</span>, <span class="dv">15</span>, <span class="fl">15.1</span>, <span class="fl">15.2</span>, <span class="fl">15.25</span>, <span class="fl">15.6</span>, <span class="fl">15.7</span>, <span class="fl">16.1</span>, <span class="fl">16.3</span>, <span class="fl">16.5</span>, <span class="dv">17</span>, <span class="fl">17.1</span>, <span class="fl">17.7</span>, <span class="fl">17.8</span>, <span class="fl">17.85</span>)</span>
+<span id="cb293-2"><a href="correlación-y-regresión-lineal.html#cb293-2" aria-hidden="true" tabindex="-1"></a>Fahrenheit <span class="ot">&lt;-</span> Celsius<span class="sc">*</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb293-3"><a href="correlación-y-regresión-lineal.html#cb293-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb293-4"><a href="correlación-y-regresión-lineal.html#cb293-4" aria-hidden="true" tabindex="-1"></a>Temperatura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Celsius, Fahrenheit)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-193">Tabla 7.3: </span>Grados Celsius °C contra grados Fahrenheit °F
+<span id="tab:unnamed-chunk-191">Tabla 7.3: </span>Grados Celsius °C contra grados Fahrenheit °F
 </caption>
 <thead>
 <tr>
@@ -904,15 +904,15 @@ z_r = \frac{1}{2} \ln \left[ {\frac{1+0.9437}{1-0.9437}} \right] = \frac{1}{2} \
 </tbody>
 </table>
 <p>La siguiente tabla muestra la relación entre las dos variables.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-194"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-194-1.png" alt="Gráfico de temperatura en °C contra °F" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-192"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-192-1.png" alt="Gráfico de temperatura en °C contra °F" width="672" />
 <p class="caption">
 Figura 7.3: Gráfico de temperatura en °C contra °F
 </p>
 </div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-195">Tabla 7.4: </span>Media y desviación estándar de los datos de temperatura
+<span id="tab:unnamed-chunk-193">Tabla 7.4: </span>Media y desviación estándar de los datos de temperatura
 </caption>
 <thead>
 <tr>
@@ -980,7 +980,7 @@ Intercepto: b_0 = \overline{y} - b_1\overline{x}
 <p>Por ejemplo, para nuestros datos de las serpientes, podemos encontrar la pendiente con nuestro coeficiente de correlación <span class="math inline">\(r\)</span> multiplicado por las desviaciones estándar de los datos de peso y longitud (4.6 y 35.3 respectivamente).</p>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-196">Tabla 7.5: </span>Media y desviación estándar de la longitud y peso de serpientes
+<span id="tab:unnamed-chunk-194">Tabla 7.5: </span>Media y desviación estándar de la longitud y peso de serpientes
 </caption>
 <thead>
 <tr>
@@ -1032,8 +1032,8 @@ b_0 = 152 - 7.7976 \times 63 = -301.08
 <div id="gráfica-de-promedios" class="section level3" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Gráfica de promedios</h3>
 <p>Si tenemos varias observaciones de <span class="math inline">\(Y\)</span> en un nivel dado de <span class="math inline">\(X\)</span>, como el caso del ejemplo de las anfetaminas y ratas, podemos estimar la media de la población <span class="math inline">\(Y\)</span> para un valor dado de <span class="math inline">\(X\)</span> (<span class="math inline">\(\mu_{Y|X}\)</span>) simplemente usando la media muestral de <span class="math inline">\(Y\)</span>, <span class="math inline">\(\overline{y}\)</span>, para ese valor dado de <span class="math inline">\(X\)</span>. Podemos denotar esta media muestral como <span class="math inline">\(\overline{y}|X\)</span>. Una gráfica de <span class="math inline">\(\overline{y}|X\)</span> se conoce como una <strong>gráfica de promedios,</strong> ya que muestra la media observada de <span class="math inline">\(Y\)</span> para distintos valores de <span class="math inline">\(X\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-197"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-197-1.png" alt="Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-195"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-195-1.png" alt="Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal." width="672" />
 <p class="caption">
 Figura 7.4: Gráfica de promedios con los promedios de cada observación de X marcados por una línea horizontal.
 </p>
@@ -1068,7 +1068,7 @@ SS(residuales) = \sum_{i=1}^n(y_i - \hat{y}_i)^2 = \sum_{i=1}^n e_i^2
 <p>La suma de cuadrados de los residuales será entonces más pequeña conforme mejor se ajuste la línea a nuestros datos. Veamos estos cálculos realizados con los datos de nuestras serpientes.</p>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-198">Tabla 7.6: </span>Residuales y valores predichos para los datos de serpientes
+<span id="tab:unnamed-chunk-196">Tabla 7.6: </span>Residuales y valores predichos para los datos de serpientes
 </caption>
 <thead>
 <tr>
@@ -1262,7 +1262,7 @@ s_e = \sqrt{1093.669}{n-2} = 12.5
 \end{equation}\]</span></p>
 <p>Por lo tanto, la desviación estándar de los residuales (también conocido como error estándar de los residuales) nos da como resultado 12.5 g/cm. De nuestros datos, esperamos que el 68% de ellos se encuentren a <span class="math inline">\(\pm1 s _e\)</span> de la línea de regresión (de manera similar, el 95% de ellos se encontrará a <span class="math inline">\(\pm2s_e\)</span>).</p>
 <p>¿Cómo podemos hacer estos cálculos con <code>R</code>? Bueno, recordemos nuestra variable <code>Serpientes</code> que habíamos creado anteriormente.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="correlación-y-regresión-lineal.html#cb297-1" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="correlación-y-regresión-lineal.html#cb295-1" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
 <pre><code>##   Longitud Peso
 ## 1       60  136
 ## 2       69  198
@@ -1274,8 +1274,8 @@ s_e = \sqrt{1093.669}{n-2} = 12.5
 ## 8       65  174
 ## 9       63  145</code></pre>
 <p>A partir de esta variable podemos construir un modelo lineal utilizando la función <code>lm()</code>.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="correlación-y-regresión-lineal.html#cb299-1" aria-hidden="true" tabindex="-1"></a>Regresion <span class="ot">&lt;-</span> <span class="fu">lm</span>(Peso <span class="sc">~</span> Longitud, Serpientes) <span class="co">#Crea el modelo lineal</span></span>
-<span id="cb299-2"><a href="correlación-y-regresión-lineal.html#cb299-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="correlación-y-regresión-lineal.html#cb297-1" aria-hidden="true" tabindex="-1"></a>Regresion <span class="ot">&lt;-</span> <span class="fu">lm</span>(Peso <span class="sc">~</span> Longitud, Serpientes) <span class="co">#Crea el modelo lineal</span></span>
+<span id="cb297-2"><a href="correlación-y-regresión-lineal.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Peso ~ Longitud, data = Serpientes)
@@ -1295,10 +1295,10 @@ s_e = \sqrt{1093.669}{n-2} = 12.5
 ## Multiple R-squared:  0.8905, Adjusted R-squared:  0.8749 
 ## F-statistic: 56.94 on 1 and 7 DF,  p-value: 0.0001321</code></pre>
 <p>Como podemos ver, nos da el valor de la desviación estándar residual, pero, ¿Cómo hacemos para ver los valores predichos? ¿O para ver los residuales? Para esto vamos a agregar dos columnas a nuestra variable con los datos de las serpientes. Utilizamos <code>predict()</code> para extraer los valores de <span class="math inline">\(\hat{y}\)</span> y <code>residuals()</code> para extraer los residuales.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="correlación-y-regresión-lineal.html#cb301-1" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Predicho <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion) <span class="co">#Guarda los valores predichos</span></span>
-<span id="cb301-2"><a href="correlación-y-regresión-lineal.html#cb301-2" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Residuales <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Regresion) <span class="co">#Guarda los residuales</span></span>
-<span id="cb301-3"><a href="correlación-y-regresión-lineal.html#cb301-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb301-4"><a href="correlación-y-regresión-lineal.html#cb301-4" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="correlación-y-regresión-lineal.html#cb299-1" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Predicho <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion) <span class="co">#Guarda los valores predichos</span></span>
+<span id="cb299-2"><a href="correlación-y-regresión-lineal.html#cb299-2" aria-hidden="true" tabindex="-1"></a>Serpientes<span class="sc">$</span>Residuales <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Regresion) <span class="co">#Guarda los residuales</span></span>
+<span id="cb299-3"><a href="correlación-y-regresión-lineal.html#cb299-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb299-4"><a href="correlación-y-regresión-lineal.html#cb299-4" aria-hidden="true" tabindex="-1"></a>Serpientes</span></code></pre></div>
 <pre><code>##   Longitud Peso  Predicho Residuales
 ## 1       60  136 130.42442   5.575581
 ## 2       69  198 195.15116   2.848837
@@ -1340,7 +1340,7 @@ Y = \beta_0 + \beta_1X + \epsilon
 <p>-<span class="math inline">\(b_1\)</span> es un estimado de <span class="math inline">\(\beta_1\)</span></p>
 <p>-<span class="math inline">\(s_e\)</span> es un estimado de <span class="math inline">\(\sigma_\epsilon\)</span></p>
 <p>Gracias a la función <code>summary(Regresion)</code> y a los cálculos realizados anteriormente, sabemos que <span class="math inline">\(b_0 = -301.08\)</span>, <span class="math inline">\(b_1 = 7.1916\)</span> y que <span class="math inline">\(s_e = 12.5\)</span> para los datos de nuestras serpientes.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="correlación-y-regresión-lineal.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="correlación-y-regresión-lineal.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Peso ~ Longitud, data = Serpientes)
@@ -1413,7 +1413,7 @@ df = n -2
 7.1916 \pm 2.365 \times 0.9531
 \end{equation}\]</span></p>
 <p>Por lo que nuestro intervalo sería <span class="math inline">\((4.94, 9.45)\)</span> g/cm. Podemos calcular el intervalo de confianza en <code>R</code> con la función `<code>confint()</code>.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="correlación-y-regresión-lineal.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Regresion)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="correlación-y-regresión-lineal.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Regresion)</span></code></pre></div>
 <pre><code>##                   2.5 %      97.5 %
 ## (Intercept) -443.410309 -158.764110
 ## Longitud       4.938183    9.445538</code></pre>
@@ -1432,7 +1432,7 @@ t_s = \frac{b_1 - 0}{SE_{b_1}}
 \tag{7.13}
 \end{equation}\]</span></p>
 <p>Y de nuevo, los valores críticos se calculan con los grados de libertad, <span class="math inline">\(df = n - 2\)</span>. En <code>R</code> este proceso ya lo hemos realizado con la función <code>summary()</code> aplicada a nuestro modelo. El valor <span class="math inline">\(0\)</span> en la fórmula <a href="correlación-y-regresión-lineal.html#eq:b1test">(7.13)</a> nos recuerda que estamos comparando el valor esperado bajo la <span class="math inline">\(H_0\)</span> con el valor obtenido.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="correlación-y-regresión-lineal.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="correlación-y-regresión-lineal.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Regresion)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Peso ~ Longitud, data = Serpientes)
@@ -1496,8 +1496,8 @@ Figura 7.8: Intervalo de confianza al 95% (gris) e intervalo de la predicción a
 </p>
 </div>
 <p>Como podemos ver en la figura <a href="correlación-y-regresión-lineal.html#fig:confypred">7.8</a>, el intervalo de confianza es muchísimo más preciso que el intervalo de predicción, como se mencionó anteriormente. Para obtener los intervalos de confianza y de predicción en <code>R</code> podemos utilizar las siguientes funciones basadas en nuestro modelo lineal.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="correlación-y-regresión-lineal.html#cb309-1" aria-hidden="true" tabindex="-1"></a>Conf.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
-<span id="cb309-2"><a href="correlación-y-regresión-lineal.html#cb309-2" aria-hidden="true" tabindex="-1"></a>Conf.int</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="correlación-y-regresión-lineal.html#cb307-1" aria-hidden="true" tabindex="-1"></a>Conf.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb307-2"><a href="correlación-y-regresión-lineal.html#cb307-2" aria-hidden="true" tabindex="-1"></a>Conf.int</span></code></pre></div>
 <pre><code>##         fit       lwr      upr
 ## 1 130.42442 118.47544 142.3734
 ## 2 195.15116 178.42057 211.8818
@@ -1508,9 +1508,9 @@ Figura 7.8: Intervalo de confianza al 95% (gris) e intervalo de la predicción a
 ## 7 123.23256 109.87848 136.5866
 ## 8 166.38372 155.54939 177.2181
 ## 9 152.00000 142.14777 161.8522</code></pre>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="correlación-y-regresión-lineal.html#cb311-1" aria-hidden="true" tabindex="-1"></a>Pred.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval=</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="correlación-y-regresión-lineal.html#cb309-1" aria-hidden="true" tabindex="-1"></a>Pred.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(Regresion, <span class="at">interval=</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in predict.lm(Regresion, interval = &quot;prediction&quot;): predictions on current data refer to _future_ responses</code></pre>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="correlación-y-regresión-lineal.html#cb313-1" aria-hidden="true" tabindex="-1"></a>Pred.int</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="correlación-y-regresión-lineal.html#cb311-1" aria-hidden="true" tabindex="-1"></a>Pred.int</span></code></pre></div>
 <pre><code>##         fit       lwr      upr
 ## 1 130.42442  98.54375 162.3051
 ## 2 195.15116 161.18778 229.1145
