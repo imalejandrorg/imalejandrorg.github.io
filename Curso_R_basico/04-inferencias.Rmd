@@ -79,7 +79,7 @@ Un **intervalo de confianza** nos sirve para determinar qué tan cerca está de 
 (\#eq:IC)
 \end{equation}
 
-¿Por qué utilizar dos veces $SE_\overline{X}$? Porque al utilizarlo sabemos que el 95% de las veces $\mu$ se encontrará en este intervalo. Si utilizáramos solamente un $SE_\overline{X}$ solamente estaríamos seguros de que $\mu$ se encuentra en este intervalo el 68% de las veces. Esta idea está basada en la distribución muestral de $X$ que vimos en la lección anterior. Al estandarizar nuestra variable $X$ y transformarla en valores $Z$, lo que buscamos es un área de 0.95. Estos valores Z corresponden a -1.96 como límite inferior y 1.96 como limite superior.
+¿Por qué utilizar dos veces $SE_\overline{X}$? Porque al utilizarlo sabemos que el 95% de las veces $\mu$ se encontrará en este intervalo. Si utilizáramos solamente un $SE_\overline{X}$ solamente estaríamos seguros de que $\mu$ se encuentra en este intervalo el 68% de las veces. Esta idea está basada en la distribución muestral de $X$ que vimos en la lección anterior. Al estandarizar nuestra variable $X$ y transformarla en valores $Z$, lo que buscamos es un área de 0.95. Estos valores $z$ corresponden a -1.96 como límite inferior y 1.96 como limite superior.
 
 \begin{equation}
 P({-1.96}<{Z}<1.96) = 0.95 \\

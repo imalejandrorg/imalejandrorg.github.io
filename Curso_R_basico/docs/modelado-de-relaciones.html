@@ -392,7 +392,7 @@ s_{p} = \sqrt{\frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)}} = \sqrt
 <p>El numerador de la varianza agrupada se conoce como <strong>suma de cuadrados dentro de los grupos,</strong> <span class="math inline">\(SS(dentro)\)</span> mientras que el denominador son los <strong>grados de libertad dentro de los grupos,</strong> <span class="math inline">\(df(dentro)\)</span>.</p>
 <p>Así, entonces:</p>
 <p><span class="math display" id="eq:sswithin">\[\begin{equation}
-SS(dentro) = \sum_{i = 1}^k (n_i - 1)^2
+SS(dentro) = \sum_{i = 1}^k (n_i - 1)s_i^2
 \tag{6.3}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:dfwithin">\[\begin{equation}
@@ -413,13 +413,13 @@ MS(dentro) = \frac{SS(dentro)}{df(dentro)}
 MS(entre) = \frac{\sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2}{k - 1}
 \tag{6.6}
 \end{equation}\]</span></p>
-<p>De igual manera, el numerador y denominador tienen sus nombres respectivos. Al numerador se le conoce coo <strong>suma de cuadrados entre los grupos,</strong> <span class="math inline">\(SS(entre)\)</span> y al denominador como <strong>grados de libertad entre los grupos,</strong> <span class="math inline">\(df(entre)\)</span>.</p>
+<p>De igual manera, el numerador y denominador tienen sus nombres respectivos. Al numerador se le conoce como <strong>suma de cuadrados entre los grupos,</strong> <span class="math inline">\(SS(entre)\)</span> y al denominador como <strong>grados de libertad entre los grupos,</strong> <span class="math inline">\(df(entre)\)</span>.</p>
 <p><span class="math display" id="eq:ssbetween">\[\begin{equation}
 SS(entre) = \sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2
 \tag{6.7}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:dfbetween">\[\begin{equation}
-df(dentro) = k - 1
+df(entre) = k - 1
 \tag{6.8}
 \end{equation}\]</span></p>
 </div>
@@ -530,7 +530,7 @@ Total
 </tr>
 </tbody>
 </table>
-<p>Una tabla de ANOVA nos ayuda a organizar los datos y los valores de nuestro conjunto de datos. En la tabla <a href="modelado-de-relaciones.html#tab:anovatab">6.1</a> podemos ver las fórmulas que necesitamos utilizar para obtener los valores correspondientes. Por ejemplo, para obtener los grados de libertad entre tratamientos,<span class="math inline">\(df(entre)\)</span>, utilizaría la fórmula <span class="math inline">\(k - 1\)</span> y así sucesivamente. La suma de cuadrados y los cuadrados medios entre grupos son los que corresponden a los tratamientos y los que se dan dentro de los grupos son típicamente conocidos como <strong>residuales.</strong></p>
+<p>Una tabla de ANOVA nos ayuda a organizar los datos y los valores de nuestro conjunto de datos. En la tabla <a href="modelado-de-relaciones.html#tab:anovatab">6.1</a> podemos ver las fórmulas que necesitamos utilizar para obtener los valores correspondientes. Por ejemplo, para obtener los grados de libertad entre tratamientos, <span class="math inline">\(df(entre)\)</span>, utilizaría la fórmula <span class="math inline">\(k - 1\)</span> y así sucesivamente. La suma de cuadrados y los cuadrados medios entre grupos son los que corresponden a los tratamientos y los que se dan dentro de los grupos son típicamente conocidos como <strong>residuales.</strong></p>
 </div>
 <div id="modelo-del-anova" class="section level3" number="6.1.5">
 <h3><span class="header-section-number">6.1.5</span> Modelo del ANOVA</h3>
@@ -584,19 +584,19 @@ SS(dentro) = \sum_{i=1}^k \sum_{j=1}^{n_i} \hat{\epsilon}_{ij}^2
 <h3><span class="header-section-number">6.1.6</span> Distribución de <span class="math inline">\(F\)</span></h3>
 <p>Consideremos la hipótesis nula <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_i\)</span> y una hipótesis alternativa no direccional, <span class="math inline">\(H_A: Al \space menos \space una \space \mu_i \space no \space es \space igual\)</span>. El rechazo de la <span class="math inline">\(H_0\)</span> no nos dice cuál grupo es el que es diferente.</p>
 <p>La <strong>distribución de <span class="math inline">\(F\)</span></strong> fue nombrada así en honor del estadista y genetista R.A. Fisher y es utilizada en muchísimos análisis estadísticos. Su forma depende de dos parámetros: el <strong>numerador de los grados de libertad</strong> (<span class="math inline">\(df(entre)\)</span>) y el <strong>denominador de los grados de libertad</strong> (<span class="math inline">\(df(dentro)\)</span>). La siguiente figura muestra una distribución de <span class="math inline">\(F\)</span> con <span class="math inline">\(df(entre) = 4\)</span> y <span class="math inline">\(df(dentro) = 20\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-162"></span>
-<img src="Curso_R_basico_files/figure-html/unnamed-chunk-162-1.png" alt="Distribución de $F$ con $df(entre) = 4$ y $df(dentro) = 20$." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-163"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-163-1.png" alt="Distribución de $F$ con $df(entre) = 4$ y $df(dentro) = 20$." width="672" />
 <p class="caption">
 Figura 6.1: Distribución de <span class="math inline">\(F\)</span> con <span class="math inline">\(df(entre) = 4\)</span> y <span class="math inline">\(df(dentro) = 20\)</span>.
 </p>
 </div>
 <p>Como con el resto de distribuciones, tenemos una serie de comandos en <code>R</code> para trabajar con la distribución de <span class="math inline">\(F\)</span>.</p>
-<p>-<code>df()</code> nos da un valor de densidad en determinado punto de la distribución de <span class="math inline">\(F\)</span>.</p>
-<p>-<code>pf()</code> nos da un valor de densidad acumulado hasta cierto punto en la distribución de <span class="math inline">\(F\)</span> (área debajo de la curva).</p>
+<p>-<code>df()</code> nos da un valor de densidad de la distribución de <span class="math inline">\(F\)</span> (PDF).</p>
+<p>-<code>pf()</code> nos da un valor de densidad acumulado hasta cierto punto en la distribución de <span class="math inline">\(F\)</span> (área debajo de la curva, CDF).</p>
 <p>-<code>qf()</code> toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.</p>
 <p>-<code>rf()</code> genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.</p>
 <p>Para encontrar los valores críticos de nuestra distribución de <span class="math inline">\(F\)</span> simplemente utilizamos la función <code>qf()</code>.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="modelado-de-relaciones.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> F) </span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="modelado-de-relaciones.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> F) </span></code></pre></div>
 <pre><code>## [1] 2.866081</code></pre>
 <p>Y listo, nuestro valor crítico de <span class="math inline">\(F\)</span> para un <span class="math inline">\(F(4, 20)_{0.05}\)</span> es 2.87. Estos comandos se utilizan como el resto que hemos visto con las demás distribuciones.</p>
 </div>
@@ -610,11 +610,11 @@ F_s = \frac{MS(entre)}{MS(dentro)}
 <p>Esta claro que el valor de nuestra <span class="math inline">\(F_s\)</span> será mayor si las discrepancias entre las medias de los grupos (<span class="math inline">\(\overline{X}_i\)</span>) son grandes en relación a variabilidad dentro de los grupos. Valores grandes de <span class="math inline">\(F_s\)</span> tienden a proveer evidencia en contra de la <span class="math inline">\(H_0\)</span>.</p>
 <p>Veamos todo lo que hemos visto con un ejemplo.</p>
 <blockquote>
-<p><strong>Ejemplo:</strong> Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla @tab:ex1.</p>
+<p><strong>Ejemplo:</strong> Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla <a href="modelado-de-relaciones.html#tab:ex1">6.2</a>.</p>
 </blockquote>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-164">Tabla 6.2: </span>Ganancia de peso (lb) de los corderos
+<span id="tab:ex1">Tabla 6.2: </span>Ganancia de peso (lb) de los corderos
 </caption>
 <thead>
 <tr>
@@ -684,11 +684,11 @@ Dieta 3
 </tr>
 </tbody>
 </table>
-<p>En lugar de realizar todo el proceso manual (el cuál puede tomar cierto tiempo) vamos a utilizar la función <code>aov()</code> para analizar estos datos y ver si realmente existe alguna diferencia entre los datos. Para esto necesitamos generar nuestra variable con nuestros datos.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="modelado-de-relaciones.html#cb253-1" aria-hidden="true" tabindex="-1"></a>Tratamiento <span class="ot">&lt;-</span> <span class="fu">c</span>((<span class="fu">rep</span>(<span class="st">&quot;Dieta 1&quot;</span>, <span class="dv">3</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 2&quot;</span>, <span class="dv">5</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 3&quot;</span>, <span class="dv">4</span>)))</span>
-<span id="cb253-2"><a href="modelado-de-relaciones.html#cb253-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">21</span>, <span class="dv">11</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">17</span>, <span class="dv">6</span>)</span>
-<span id="cb253-3"><a href="modelado-de-relaciones.html#cb253-3" aria-hidden="true" tabindex="-1"></a>Corderos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Tratamiento, Peso)</span>
-<span id="cb253-4"><a href="modelado-de-relaciones.html#cb253-4" aria-hidden="true" tabindex="-1"></a>Corderos</span></code></pre></div>
+<p>En lugar de realizar todo el proceso manual (el cuál puede tomar cierto tiempo) vamos a utilizar la función <code>aov()</code> para analizar estos datos y ver si realmente existe alguna diferencia entre las medias de los mismos. Para esto necesitamos generar nuestra variable con nuestros datos.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="modelado-de-relaciones.html#cb255-1" aria-hidden="true" tabindex="-1"></a>Tratamiento <span class="ot">&lt;-</span> <span class="fu">c</span>((<span class="fu">rep</span>(<span class="st">&quot;Dieta 1&quot;</span>, <span class="dv">3</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 2&quot;</span>, <span class="dv">5</span>)), <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Dieta 3&quot;</span>, <span class="dv">4</span>)))</span>
+<span id="cb255-2"><a href="modelado-de-relaciones.html#cb255-2" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">21</span>, <span class="dv">11</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">17</span>, <span class="dv">6</span>)</span>
+<span id="cb255-3"><a href="modelado-de-relaciones.html#cb255-3" aria-hidden="true" tabindex="-1"></a>Corderos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Tratamiento, Peso)</span>
+<span id="cb255-4"><a href="modelado-de-relaciones.html#cb255-4" aria-hidden="true" tabindex="-1"></a>Corderos</span></code></pre></div>
 <pre><code>##    Tratamiento Peso
 ## 1      Dieta 1    8
 ## 2      Dieta 1   16
@@ -703,15 +703,15 @@ Dieta 3
 ## 11     Dieta 3   17
 ## 12     Dieta 3    6</code></pre>
 <p>Ahora que tenemos nuestra variable simplemente ingresamos el siguiente comando.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="modelado-de-relaciones.html#cb255-1" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Tratamiento, Corderos)</span></code></pre></div>
-<p>Si queremos observar nuestros valores-<em>p</em> calculados, y ver si existen diferencias significativas, tenemos que guardar el análisis en una variable, en este caso yo la nombre <em>ANOVA</em>. Posteriormente utilizamos la función <code>summary()</code>.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="modelado-de-relaciones.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="modelado-de-relaciones.html#cb257-1" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Tratamiento, Corderos)</span></code></pre></div>
+<p>Si queremos observar nuestros valores-<em>p</em> calculados, y ver si existen diferencias significativas, tenemos que guardar el análisis en una variable, en este caso yo la nombre <code>ANOVA</code>. Posteriormente utilizamos la función <code>summary()</code>.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="modelado-de-relaciones.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
 ## Tratamiento  2     36   18.00   0.771  0.491
 ## Residuals    9    210   23.33</code></pre>
-<p>Donde obtenemos una tabla de ANOVA con nuestros valores F esperados y F estimados. El apartado Pr(&gt;F) es nuestro valor-<em>p</em>. Si quisiéramos guardar nuestra tabla de ANOVA para algún reporte, podemos hacerlo a través de la librería <code>broom</code>.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="modelado-de-relaciones.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb258-2"><a href="modelado-de-relaciones.html#cb258-2" aria-hidden="true" tabindex="-1"></a>ANOVA.tabla <span class="ot">&lt;-</span> <span class="fu">tidy</span>(ANOVA)</span></code></pre></div>
+<p>Donde obtenemos una tabla de ANOVA con nuestros valores F esperados y F estimados. El apartado Pr(&gt;F) es nuestro valor-<em>p</em>. Si quisiéramos guardar nuestra tabla de ANOVA para algún reporte, podemos hacerlo utilizando la librería <code>broom</code>.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="modelado-de-relaciones.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb260-2"><a href="modelado-de-relaciones.html#cb260-2" aria-hidden="true" tabindex="-1"></a>ANOVA.tabla <span class="ot">&lt;-</span> <span class="fu">tidy</span>(ANOVA)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-169">Tabla 6.3: </span>Ganancia de peso (lb) de los corderos
@@ -779,7 +779,7 @@ Residuals
 </tr>
 </tbody>
 </table>
-<p>Por lo tanto nuestro estadístico <span class="math inline">\(F\)</span> calculado nos da un valor de 0.77, el área correspondiente a esta densidad valor <span class="math inline">\(F\)</span> es 0.4907, por lo que nuestro valor-<em>p</em> &gt; 0.05 y aceptamos la <span class="math inline">\(H_0\)</span>.</p>
+<p>Por lo tanto nuestro estadístico <span class="math inline">\(F\)</span> calculado nos da un valor de 0.77, el área correspondiente a esta densidad es 0.4907, por lo que nuestro <span class="math inline">\(valor-p &gt; 0.05\)</span> y aceptamos la <span class="math inline">\(H_0\)</span>, es decir, no hay diferencias significativas.</p>
 </div>
 </div>
 <div id="diseño-por-bloques-aleatorizados" class="section level2" number="6.2">
@@ -981,7 +981,7 @@ Media del bloque
 </tr>
 </tbody>
 </table>
-<p>Como podemos ver en los datos, existe claramente un gradiente de mayor fertilidad, partiendo del bloque 1 al bloque 4. Gracias al diseño por bloques aún podemos realizar la comparación entre las variedades.</p>
+<p>Como podemos ver en los datos, existe claramente un gradiente de mayor fertilidad, partiendo del bloque 1 al bloque 4.</p>
 <p>La hipótesis nula de nuestro ANOVA es que las medias de nuestras poblaciones son iguales, <span class="math inline">\(H_0: \mu_1 = \mu_2 = \cdots = \mu_k\)</span>. Por lo que nuestra hipótesis nula sería que todas las variedades son iguales.</p>
 <p>El modelo de ANOVA por bloques aleatorizados sufre ciertas alteraciones al modelo de una vía.</p>
 <p><span class="math display" id="eq:anovablock">\[\begin{equation}
@@ -992,7 +992,7 @@ x_{ijk} = \mu + \tau_i + \beta_{j} + \epsilon_{ijk}
 <p><span class="math display">\[\begin{equation}
 (x_{ijk} - \tau_i) = \mu + \beta_{j} + \epsilon_{ijk}
 \end{equation}\]</span></p>
-<p>Bueno, ahora la parte izquierda de esta ecuación toma describe los datos una vez que los efectos del tratamiento, <span class="math inline">\(\tau_i\)</span> son removidos, ¿cómo estimamos este lado izquierdo con nuestros datos? Bastante sencillo.</p>
+<p>Ahora la parte izquierda de esta ecuación describe los datos una vez que los efectos del tratamiento, <span class="math inline">\(\tau_i\)</span> son removidos, ¿Cómo estimamos este lado izquierdo con nuestros datos? Bastante sencillo.</p>
 <p><span class="math display">\[\begin{equation}
 x_{ijk} - \hat{\tau_i} = x_{ijk} - (\overline{x}_i - \overline{x})
 \end{equation}\]</span></p>
@@ -1041,7 +1041,7 @@ df(tratamientos) = 4-1 = 3
 \end{equation}\]</span></p>
 <p>Entonces:</p>
 <p><span class="math display">\[\begin{equation}
-Ms(tratamientos) = \frac{259}{3} = 86.333
+MS(tratamientos) = \frac{259}{3} = 86.333
 \end{equation}\]</span></p>
 <p>Ahora calculamos <span class="math inline">\(SS(bloques)\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
@@ -1076,16 +1076,16 @@ MS(dentro) = \frac{579}{9} = 64.333
 F_s = \frac{86.333}{64.333} = 1.342
 \end{equation}\]</span></p>
 <p>Vamos a ver qué resultado obtenemos con <code>R</code>, para realizar un ANOVA por bloques simplemente añadimos <code>+ Bloque</code> después del tratamiento en el argumento de la función <code>aov()</code>. ¡Recuerden guardar el ANOVA en una variable!</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="modelado-de-relaciones.html#cb259-1" aria-hidden="true" tabindex="-1"></a>Bloque <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">4</span>))</span>
-<span id="cb259-2"><a href="modelado-de-relaciones.html#cb259-2" aria-hidden="true" tabindex="-1"></a>Variedad <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Variedad 1&quot;</span>, <span class="st">&quot;Variedad 2&quot;</span>, <span class="st">&quot;Variedad 3&quot;</span>, <span class="st">&quot;Variedad 4&quot;</span>), <span class="dv">4</span>))</span>
-<span id="cb259-3"><a href="modelado-de-relaciones.html#cb259-3" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">93.5</span>, <span class="fl">102.9</span>, <span class="fl">67.0</span>, <span class="fl">86.3</span>,</span>
-<span id="cb259-4"><a href="modelado-de-relaciones.html#cb259-4" aria-hidden="true" tabindex="-1"></a>       <span class="fl">66.6</span>, <span class="fl">53.2</span>, <span class="fl">54.7</span>, <span class="fl">61.3</span>,</span>
-<span id="cb259-5"><a href="modelado-de-relaciones.html#cb259-5" aria-hidden="true" tabindex="-1"></a>       <span class="fl">50.5</span>, <span class="fl">47.4</span>, <span class="dv">50</span>, <span class="fl">50.7</span>,</span>
-<span id="cb259-6"><a href="modelado-de-relaciones.html#cb259-6" aria-hidden="true" tabindex="-1"></a>       <span class="fl">42.4</span>, <span class="fl">43.8</span>, <span class="fl">40.1</span>, <span class="fl">46.4</span>)</span>
-<span id="cb259-7"><a href="modelado-de-relaciones.html#cb259-7" aria-hidden="true" tabindex="-1"></a>Cebada <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Peso, Bloque, Variedad)</span>
-<span id="cb259-8"><a href="modelado-de-relaciones.html#cb259-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb259-9"><a href="modelado-de-relaciones.html#cb259-9" aria-hidden="true" tabindex="-1"></a>anova.bloque <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Variedad <span class="sc">+</span> Bloque, Cebada)</span>
-<span id="cb259-10"><a href="modelado-de-relaciones.html#cb259-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova.bloque)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="modelado-de-relaciones.html#cb261-1" aria-hidden="true" tabindex="-1"></a>Bloque <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">4</span>))</span>
+<span id="cb261-2"><a href="modelado-de-relaciones.html#cb261-2" aria-hidden="true" tabindex="-1"></a>Variedad <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Variedad 1&quot;</span>, <span class="st">&quot;Variedad 2&quot;</span>, <span class="st">&quot;Variedad 3&quot;</span>, <span class="st">&quot;Variedad 4&quot;</span>), <span class="dv">4</span>))</span>
+<span id="cb261-3"><a href="modelado-de-relaciones.html#cb261-3" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">93.5</span>, <span class="fl">102.9</span>, <span class="fl">67.0</span>, <span class="fl">86.3</span>,</span>
+<span id="cb261-4"><a href="modelado-de-relaciones.html#cb261-4" aria-hidden="true" tabindex="-1"></a>       <span class="fl">66.6</span>, <span class="fl">53.2</span>, <span class="fl">54.7</span>, <span class="fl">61.3</span>,</span>
+<span id="cb261-5"><a href="modelado-de-relaciones.html#cb261-5" aria-hidden="true" tabindex="-1"></a>       <span class="fl">50.5</span>, <span class="fl">47.4</span>, <span class="dv">50</span>, <span class="fl">50.7</span>,</span>
+<span id="cb261-6"><a href="modelado-de-relaciones.html#cb261-6" aria-hidden="true" tabindex="-1"></a>       <span class="fl">42.4</span>, <span class="fl">43.8</span>, <span class="fl">40.1</span>, <span class="fl">46.4</span>)</span>
+<span id="cb261-7"><a href="modelado-de-relaciones.html#cb261-7" aria-hidden="true" tabindex="-1"></a>Cebada <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Peso, Bloque, Variedad)</span>
+<span id="cb261-8"><a href="modelado-de-relaciones.html#cb261-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-9"><a href="modelado-de-relaciones.html#cb261-9" aria-hidden="true" tabindex="-1"></a>anova.bloque <span class="ot">&lt;-</span> <span class="fu">aov</span>(Peso <span class="sc">~</span> Variedad <span class="sc">+</span> Bloque, Cebada)</span>
+<span id="cb261-10"><a href="modelado-de-relaciones.html#cb261-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova.bloque)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Variedad     3    259    86.4   1.344 0.320294    
 ## Bloque       3   4573  1524.4  23.712 0.000131 ***
@@ -1093,8 +1093,8 @@ F_s = \frac{86.333}{64.333} = 1.342
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Como podemos ver, el valor-<em>p</em> obtenido es de 0.320294, por lo que aceptamos la <span class="math inline">\(H_0\)</span> y decimos que las cuatro variedades tienen el mismo rendimiento. ¡Observemos la cantidad de variabilidad explicada por <span class="math inline">\(SS(bloques)\)</span>!</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="modelado-de-relaciones.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb261-2"><a href="modelado-de-relaciones.html#cb261-2" aria-hidden="true" tabindex="-1"></a>ANOVA.tabla.bloque <span class="ot">&lt;-</span> <span class="fu">tidy</span>(anova.bloque)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="modelado-de-relaciones.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb263-2"><a href="modelado-de-relaciones.html#cb263-2" aria-hidden="true" tabindex="-1"></a>ANOVA.tabla.bloque <span class="ot">&lt;-</span> <span class="fu">tidy</span>(anova.bloque)</span></code></pre></div>
 <table class=" lightable-classic lightable-striped" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-173">Tabla 6.5: </span>Tabla de ANOVA por bloques para el rendimiento de cebada
@@ -1506,26 +1506,26 @@ H_0: \gamma_{11} = \gamma_{12} = \cdots = \gamma_{IJ} = 0
 F_s = \frac{MS(interacción)}{MS(dentro)}
 \end{equation}\]</span></p>
 <p>Y rechazamos la <span class="math inline">\(H_0\)</span> si nuestro valor-<em>p</em> es pequeño. Por ejemplo, para los datos de nuestras plantas, vamos a crear una matriz con los datos y realizar el ANOVA de dos vías.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="modelado-de-relaciones.html#cb262-1" aria-hidden="true" tabindex="-1"></a>Luz <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Luz baja&quot;</span>, <span class="dv">26</span>), <span class="fu">rep</span>(<span class="st">&quot;Luz alta&quot;</span>, <span class="dv">26</span>)))</span>
-<span id="cb262-2"><a href="modelado-de-relaciones.html#cb262-2" aria-hidden="true" tabindex="-1"></a>Condicion <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>)))</span>
-<span id="cb262-3"><a href="modelado-de-relaciones.html#cb262-3" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">200</span>, <span class="dv">225</span>, <span class="dv">268</span>, <span class="dv">215</span>, <span class="dv">241</span>, <span class="dv">232</span>, <span class="dv">256</span>, <span class="dv">229</span>, <span class="dv">288</span>, <span class="dv">253</span>, <span class="dv">288</span>, <span class="dv">230</span>,</span>
-<span id="cb262-4"><a href="modelado-de-relaciones.html#cb262-4" aria-hidden="true" tabindex="-1"></a>       <span class="dv">235</span>, <span class="dv">188</span>, <span class="dv">195</span>, <span class="dv">205</span>, <span class="dv">212</span>, <span class="dv">214</span>, <span class="dv">182</span>, <span class="dv">215</span>, <span class="dv">272</span>, <span class="dv">163</span>, <span class="dv">230</span>, <span class="dv">255</span>, <span class="dv">202</span>, </span>
-<span id="cb262-5"><a href="modelado-de-relaciones.html#cb262-5" aria-hidden="true" tabindex="-1"></a>       <span class="dv">314</span>, <span class="dv">320</span>, <span class="dv">310</span>, <span class="dv">340</span>, <span class="dv">299</span>, <span class="dv">268</span>, <span class="dv">345</span>, <span class="dv">271</span>, <span class="dv">285</span>, <span class="dv">309</span>, <span class="dv">337</span>, <span class="dv">282</span>, <span class="dv">273</span>,</span>
-<span id="cb262-6"><a href="modelado-de-relaciones.html#cb262-6" aria-hidden="true" tabindex="-1"></a>       <span class="dv">283</span>, <span class="dv">312</span>, <span class="dv">291</span>, <span class="dv">259</span>, <span class="dv">216</span>, <span class="dv">201</span>, <span class="dv">267</span>, <span class="dv">326</span>, <span class="dv">241</span>, <span class="dv">291</span>, <span class="dv">269</span>, <span class="dv">282</span>, <span class="dv">257</span>)</span>
-<span id="cb262-7"><a href="modelado-de-relaciones.html#cb262-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-8"><a href="modelado-de-relaciones.html#cb262-8" aria-hidden="true" tabindex="-1"></a>Soya <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Luz, Condicion, Area)</span>
-<span id="cb262-9"><a href="modelado-de-relaciones.html#cb262-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-10"><a href="modelado-de-relaciones.html#cb262-10" aria-hidden="true" tabindex="-1"></a>plantas.anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz, Soya)</span>
-<span id="cb262-11"><a href="modelado-de-relaciones.html#cb262-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="modelado-de-relaciones.html#cb264-1" aria-hidden="true" tabindex="-1"></a>Luz <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Luz baja&quot;</span>, <span class="dv">26</span>), <span class="fu">rep</span>(<span class="st">&quot;Luz alta&quot;</span>, <span class="dv">26</span>)))</span>
+<span id="cb264-2"><a href="modelado-de-relaciones.html#cb264-2" aria-hidden="true" tabindex="-1"></a>Condicion <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Control&quot;</span>, <span class="dv">13</span>), <span class="fu">rep</span>(<span class="st">&quot;Estrés&quot;</span>, <span class="dv">13</span>)))</span>
+<span id="cb264-3"><a href="modelado-de-relaciones.html#cb264-3" aria-hidden="true" tabindex="-1"></a>Area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">200</span>, <span class="dv">225</span>, <span class="dv">268</span>, <span class="dv">215</span>, <span class="dv">241</span>, <span class="dv">232</span>, <span class="dv">256</span>, <span class="dv">229</span>, <span class="dv">288</span>, <span class="dv">253</span>, <span class="dv">288</span>, <span class="dv">230</span>,</span>
+<span id="cb264-4"><a href="modelado-de-relaciones.html#cb264-4" aria-hidden="true" tabindex="-1"></a>       <span class="dv">235</span>, <span class="dv">188</span>, <span class="dv">195</span>, <span class="dv">205</span>, <span class="dv">212</span>, <span class="dv">214</span>, <span class="dv">182</span>, <span class="dv">215</span>, <span class="dv">272</span>, <span class="dv">163</span>, <span class="dv">230</span>, <span class="dv">255</span>, <span class="dv">202</span>, </span>
+<span id="cb264-5"><a href="modelado-de-relaciones.html#cb264-5" aria-hidden="true" tabindex="-1"></a>       <span class="dv">314</span>, <span class="dv">320</span>, <span class="dv">310</span>, <span class="dv">340</span>, <span class="dv">299</span>, <span class="dv">268</span>, <span class="dv">345</span>, <span class="dv">271</span>, <span class="dv">285</span>, <span class="dv">309</span>, <span class="dv">337</span>, <span class="dv">282</span>, <span class="dv">273</span>,</span>
+<span id="cb264-6"><a href="modelado-de-relaciones.html#cb264-6" aria-hidden="true" tabindex="-1"></a>       <span class="dv">283</span>, <span class="dv">312</span>, <span class="dv">291</span>, <span class="dv">259</span>, <span class="dv">216</span>, <span class="dv">201</span>, <span class="dv">267</span>, <span class="dv">326</span>, <span class="dv">241</span>, <span class="dv">291</span>, <span class="dv">269</span>, <span class="dv">282</span>, <span class="dv">257</span>)</span>
+<span id="cb264-7"><a href="modelado-de-relaciones.html#cb264-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-8"><a href="modelado-de-relaciones.html#cb264-8" aria-hidden="true" tabindex="-1"></a>Soya <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Luz, Condicion, Area)</span>
+<span id="cb264-9"><a href="modelado-de-relaciones.html#cb264-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-10"><a href="modelado-de-relaciones.html#cb264-10" aria-hidden="true" tabindex="-1"></a>plantas.anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz, Soya)</span>
+<span id="cb264-11"><a href="modelado-de-relaciones.html#cb264-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Condicion    1  14858   14858   16.93 0.000148 ***
 ## Luz          1  42752   42752   48.71 7.14e-09 ***
 ## Residuals   49  43003     878                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Este ANOVA que acabamos de realizar no toma en cuenta el efecto de la interacción, ¿cómo podemos incluirlo? Bueno para esto tenemos que agregar un argumento especial en nuestro anova, que sería <code>Condicion:Luz</code>, le cual toma en cuenta la interacción entre la condición de estrés y la cantidad de luz.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="modelado-de-relaciones.html#cb264-1" aria-hidden="true" tabindex="-1"></a>plantas.anova.int <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz <span class="sc">+</span> Condicion<span class="sc">:</span>Luz, Soya)</span>
-<span id="cb264-2"><a href="modelado-de-relaciones.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova.int)</span></code></pre></div>
+<p>Este ANOVA que acabamos de realizar no toma en cuenta el efecto de la interacción, ¿cómo podemos incluirlo? Bueno para esto tenemos que agregar un argumento especial en nuestro anova, que sería <code>Condicion:Luz</code>, el cual toma en cuenta la interacción entre la condición de estrés y la cantidad de luz.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="modelado-de-relaciones.html#cb266-1" aria-hidden="true" tabindex="-1"></a>plantas.anova.int <span class="ot">&lt;-</span> <span class="fu">aov</span>(Area <span class="sc">~</span> Condicion <span class="sc">+</span> Luz <span class="sc">+</span> Condicion<span class="sc">:</span>Luz, Soya)</span>
+<span id="cb266-2"><a href="modelado-de-relaciones.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantas.anova.int)</span></code></pre></div>
 <pre><code>##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Condicion      1  14858   14858  16.595 0.000173 ***
 ## Luz            1  42752   42752  47.749 1.01e-08 ***
@@ -1703,7 +1703,7 @@ Frecuencia relativa
 </table>
 <p>La media <em>ajustada a la edad</em> de la FVC se obtendría de la siguiente manera:</p>
 <p><span class="math display">\[\begin{equation}
-L = 0.22\overline{x}_1 + 0.22\overline{x}_2 + 0.24\overline{x}_3 + 0.20\overline{x}_4 \overline{x}_5
+L = 0.22\overline{x}_1 + 0.22\overline{x}_2 + 0.24\overline{x}_3 + 0.20\overline{x}_4 + 0.12\overline{x}_5
 \end{equation}\]</span></p>
 <p>Como podemos ver, el valor de <span class="math inline">\(m\)</span> corresponde a la frecuencia relativa de la distribución de edades de nuestra población de referencia.</p>
 <p><span class="math display">\[\begin{equation}
@@ -1821,12 +1821,12 @@ SE_L = s_p \sqrt{\frac{1}{13}} = 29.92 \times 0.277 = 8.299
 <h3><span class="header-section-number">6.4.2</span> Intervalos de confianza</h3>
 <p>Las combinaciones lineales también se pueden utilizar en pruebas de hipótesis, con los valores críticos obtenidos a partir de la distribución <span class="math inline">\(t\)</span> de Student en donde <span class="math inline">\(df = df(dentro)\)</span>. Los intervalos de confianza se construyen con el error estándar de la combinación lineal.</p>
 <p><span class="math display" id="eq:ICCL">\[\begin{equation}
-L \pm t_{0.025} SE_L
+L \pm t_{\alpha/2} SE_L
 \tag{6.29}
 \end{equation}\]</span></p>
 <p>Ya que sabemos que <span class="math inline">\(L = 33.85\)</span>, y que <span class="math inline">\(SE_L = 8.299\)</span>, lo único que necesitamos son los <span class="math inline">\(df(dentro)\)</span>, que están dados en la tabla de ANOVA que hicimos en el ejercicio de las plantas de soya. Entonces <span class="math inline">\(df(dentro) = 48\)</span>. Encontramos el valor crítico con la función</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="modelado-de-relaciones.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Dividimos el valor de alfa entre dos, ya que nos interesan ambas colas de la distribución</span></span>
-<span id="cb266-2"><a href="modelado-de-relaciones.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> <span class="dv">48</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="modelado-de-relaciones.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Dividimos el valor de alfa entre dos, ya que nos interesan ambas colas de la distribución</span></span>
+<span id="cb268-2"><a href="modelado-de-relaciones.html#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> <span class="dv">48</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
 <pre><code>## [1] 2.010635</code></pre>
 <p>Y tenemos nuestro intervalo:</p>
 <p><span class="math display">\[\begin{equation}
@@ -1891,7 +1891,7 @@ SE_L = s_p \sqrt{\sum_{i=1}^I \frac{m_i^2}{n_i}} = s_p \sqrt{\frac{4}{13}} = 29.
 t_s = \frac{2.9}{16.6} = 0.2
 \end{equation}\]</span></p>
 <p>Simplemente encontramos nuestro valor <span class="math inline">\(t_{48,0.05}\)</span>.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="modelado-de-relaciones.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="dv">48</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="modelado-de-relaciones.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="dv">48</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
 <pre><code>## [1] 1.677224</code></pre>
 <p>Como vemos nuestro <span class="math inline">\(valor-p = 3.34\)</span> muestra que no hay diferencia significativas (lo que coincide con el ANOVA de dos vías que hicimos anteriormente), por lo que el efecto del estrés es el mismo bajo ambas condiciones de luz.</p>
 </div>
@@ -1916,15 +1916,15 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 \end{equation}\]</span></p>
 <p>Si nuestro intervalo de confianza no contiene 0, quiere decir que hay diferencias significativas en esta comparación.</p>
 <p>Por ejemplo, para el ANOVA de las plantas de soya que realizamos, podemos identificar los grupos con diferencias significativas. Para esto vamos a necestiar la librería <code>agricolae</code>.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="modelado-de-relaciones.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="modelado-de-relaciones.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span></code></pre></div>
 <pre><code>## Registered S3 methods overwritten by &#39;klaR&#39;:
 ##   method      from 
 ##   predict.rda vegan
 ##   print.rda   vegan
 ##   plot.rda    vegan</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="modelado-de-relaciones.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Asignamos nuestro resultado a una variable.</span></span>
-<span id="cb272-2"><a href="modelado-de-relaciones.html#cb272-2" aria-hidden="true" tabindex="-1"></a>lsd1 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(plantas.anova, <span class="st">&quot;Condicion&quot;</span>)</span>
-<span id="cb272-3"><a href="modelado-de-relaciones.html#cb272-3" aria-hidden="true" tabindex="-1"></a>lsd1</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="modelado-de-relaciones.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Asignamos nuestro resultado a una variable.</span></span>
+<span id="cb274-2"><a href="modelado-de-relaciones.html#cb274-2" aria-hidden="true" tabindex="-1"></a>lsd1 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(plantas.anova, <span class="st">&quot;Condicion&quot;</span>)</span>
+<span id="cb274-3"><a href="modelado-de-relaciones.html#cb274-3" aria-hidden="true" tabindex="-1"></a>lsd1</span></code></pre></div>
 <pre><code>## $statistics
 ##    MSerror Df     Mean       CV  t.value      LSD
 ##   877.6048 49 257.7885 11.49175 2.009575 16.51133
@@ -1948,10 +1948,10 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;group&quot;</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="modelado-de-relaciones.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd1)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="modelado-de-relaciones.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd1)</span></code></pre></div>
 <p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-182-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="modelado-de-relaciones.html#cb275-1" aria-hidden="true" tabindex="-1"></a>lsd2 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(plantas.anova, <span class="st">&quot;Luz&quot;</span>)</span>
-<span id="cb275-2"><a href="modelado-de-relaciones.html#cb275-2" aria-hidden="true" tabindex="-1"></a>lsd2</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="modelado-de-relaciones.html#cb277-1" aria-hidden="true" tabindex="-1"></a>lsd2 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(plantas.anova, <span class="st">&quot;Luz&quot;</span>)</span>
+<span id="cb277-2"><a href="modelado-de-relaciones.html#cb277-2" aria-hidden="true" tabindex="-1"></a>lsd2</span></code></pre></div>
 <pre><code>## $statistics
 ##    MSerror Df     Mean       CV  t.value      LSD
 ##   877.6048 49 257.7885 11.49175 2.009575 16.51133
@@ -1975,21 +1975,21 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;group&quot;</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="modelado-de-relaciones.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd2)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="modelado-de-relaciones.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd2)</span></code></pre></div>
 <p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-182-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Con el comando <code>$groups</code> podemos ver cuáles son los grupos donde hay diferencia. En el caso de la soya, hay diferencias significativas tanto para la cantidad de luz como para el nivel de estrés.</p>
 <p>Vamos a utilizar los datos de <code>PlantGrowth</code> para realizar un ANOVA y una prueba LSD.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="modelado-de-relaciones.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(PlantGrowth)</span>
-<span id="cb278-2"><a href="modelado-de-relaciones.html#cb278-2" aria-hidden="true" tabindex="-1"></a>ANOVA.PG <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, PlantGrowth)</span>
-<span id="cb278-3"><a href="modelado-de-relaciones.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA.PG)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="modelado-de-relaciones.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(PlantGrowth)</span>
+<span id="cb280-2"><a href="modelado-de-relaciones.html#cb280-2" aria-hidden="true" tabindex="-1"></a>ANOVA.PG <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, PlantGrowth)</span>
+<span id="cb280-3"><a href="modelado-de-relaciones.html#cb280-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ANOVA.PG)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## group        2  3.766  1.8832   4.846 0.0159 *
 ## Residuals   27 10.492  0.3886                 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Como vemos hay diferencias significativas, así que ahora vamos a realizar la prueba LSD.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="modelado-de-relaciones.html#cb280-1" aria-hidden="true" tabindex="-1"></a>lsd3 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(ANOVA.PG, <span class="st">&quot;group&quot;</span>)</span>
-<span id="cb280-2"><a href="modelado-de-relaciones.html#cb280-2" aria-hidden="true" tabindex="-1"></a>lsd3</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="modelado-de-relaciones.html#cb282-1" aria-hidden="true" tabindex="-1"></a>lsd3 <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(ANOVA.PG, <span class="st">&quot;group&quot;</span>)</span>
+<span id="cb282-2"><a href="modelado-de-relaciones.html#cb282-2" aria-hidden="true" tabindex="-1"></a>lsd3</span></code></pre></div>
 <pre><code>## $statistics
 ##     MSerror Df  Mean       CV  t.value       LSD
 ##   0.3885959 27 5.073 12.28809 2.051831 0.5720126
@@ -2015,15 +2015,15 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;group&quot;</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="modelado-de-relaciones.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd3)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="modelado-de-relaciones.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lsd3)</span></code></pre></div>
 <p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-184-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>En este caso encontramos que el tratamiento 2 y el tratamiento 1 tienen diferencias significativas entre sí, pero no se diferencían del grupo control.</p>
 </div>
 <div id="diferencia-significativa-honesta-de-tukey-hsd" class="section level3" number="6.5.2">
 <h3><span class="header-section-number">6.5.2</span> Diferencia significativa honesta de Tukey (HSD)</h3>
 <p>Es un método muy similar al LSD, pero en lugar de utilizar <span class="math inline">\(t\)</span> en la fórmula del intervalo de confianza, valores de una distribución conocida como distribución del rango Estudentizada. Su cálculo en <code>R</code> es bastante sencillo. Veamos, de nuevo, el ejemplo con nuestros datos de las planta de soya.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="modelado-de-relaciones.html#cb283-1" aria-hidden="true" tabindex="-1"></a>hsd1 <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(plantas.anova)</span>
-<span id="cb283-2"><a href="modelado-de-relaciones.html#cb283-2" aria-hidden="true" tabindex="-1"></a>hsd1</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="modelado-de-relaciones.html#cb285-1" aria-hidden="true" tabindex="-1"></a>hsd1 <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(plantas.anova)</span>
+<span id="cb285-2"><a href="modelado-de-relaciones.html#cb285-2" aria-hidden="true" tabindex="-1"></a>hsd1</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -2037,8 +2037,8 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 ##                        diff       lwr       upr p adj
 ## Luz baja-Luz alta -57.34615 -73.85748 -40.83482     0</code></pre>
 <p>Para los datos de las plantas, veamos cómo obtenemos nuestros resultados.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="modelado-de-relaciones.html#cb285-1" aria-hidden="true" tabindex="-1"></a>hsd2 <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(ANOVA.PG)</span>
-<span id="cb285-2"><a href="modelado-de-relaciones.html#cb285-2" aria-hidden="true" tabindex="-1"></a>hsd2</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="modelado-de-relaciones.html#cb287-1" aria-hidden="true" tabindex="-1"></a>hsd2 <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(ANOVA.PG)</span>
+<span id="cb287-2"><a href="modelado-de-relaciones.html#cb287-2" aria-hidden="true" tabindex="-1"></a>hsd2</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -2049,7 +2049,7 @@ d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}
 ## trt1-ctrl -0.371 -1.0622161 0.3202161 0.3908711
 ## trt2-ctrl  0.494 -0.1972161 1.1852161 0.1979960
 ## trt2-trt1  0.865  0.1737839 1.5562161 0.0120064</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="modelado-de-relaciones.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hsd2)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="modelado-de-relaciones.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hsd2)</span></code></pre></div>
 <p><img src="Curso_R_basico_files/figure-html/unnamed-chunk-186-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>De nuevo, vemos que el valor-<em>p</em> para la comparación entre el tratamiento 1 y 2 es significativa (<span class="math inline">\(valor-p &lt; 0.05\)</span>). Pero las diferencias entre el control con ambos tratamientos no lo son.</p>
 

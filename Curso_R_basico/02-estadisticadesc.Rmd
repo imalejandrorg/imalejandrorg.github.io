@@ -327,9 +327,18 @@ Podemos utilizar la función de `mutate()` del paquete de `dplyr` para agregar u
 Al utilizar la función `group_by()` antes de la función `mutate()` nos aseguramos de que los valores $Z$ se calculen con la media y la desviación estándar de cada tratamiento y no con la media y desviación estándar resultante de todo el conjunto de datos.
 
 ```{r}
-PlantGrowth <- PlantGrowth %>% group_by(group) %>% mutate(Z = (weight - mean(weight)/sd(weight)))
+PlantGrowth <- PlantGrowth %>% group_by(group) %>% mutate(Z = ((weight - mean(weight))/sd(weight)))
 PlantGrowth
 ```
+
+Otra forma de obtener los valores $Z$ es utilizando la función `scale()`.
+
+```{r}
+ctrl.z <- PlantGrowth %>% dplyr::filter(group == "ctrl")
+ctrl.z <- scale(ctrl.z$weight)
+ctrl.z
+```
+
 
 ### Frecuencia absoluta
 

@@ -24,11 +24,11 @@ library(broom)
 
 ## Distribuciones de una muestra
 
-En esta sección consideraremos **variables categóricas**, es decir, variables que solamente tienen dos posibles valores, y su distribución muestral de la proporción de la muestra.
-Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, $p$, es la muestra de la proporción $\hat{p} = \frac{x}{n}$, donde $x$ es el número de observaciones en la muestra que cumplen con el atributo de interés, y $n$ es el tamaño de muestra.
+En esta sección consideraremos **variables categóricas.** Es decir, variables que solamente tienen dos posibles valores y su distribución muestral.
 
-La proporción de Wilson ajustada a la muestra, $\tilde{p}$, es otro estimado que utiliza la fórmula \@ref(eq:wilson).
-Esto equivale a sesgar la estimación hacia el valor 1/2.
+Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, $p$, es la muestra de la proporción $\hat{p} = \frac{x}{n}$ (léase $p$ sombrero), donde $x$ es el número de observaciones en la muestra que cumplen con el atributo de interés, y $n$ es el tamaño de muestra.
+
+La proporción de Wilson ajustada a la muestra, $\tilde{p}$ (léase $p$ tilde), es otro estimado que utiliza la fórmula \@ref(eq:wilson). Esto equivale a sesgar la estimación hacia el valor 1/2.
 
 \begin{equation}
 \tilde{p} = \frac{x + 2}{n + 4}
@@ -40,16 +40,28 @@ Veamos cómo funciona esto con un ejemplo.
 
 > **Ejemplo:** En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria *Chryseobacterium meningosepticum*.
 > Imaginemos que examinamos una muestra de dos máquinas dispensadoras.
-> La probabilidad de tener dos máquinas contaminadas es $0.17 * 0.17 = 0.0289$, la probabilidad de que ninguna este contaminada es de $1-0.17 * 1-0.17$ y la probabilidad de que una este contaminada y la otra no es $0.17 * (1-0.17) + 0.17 * (1-0.17)$.
+> La probabilidad de tener dos máquinas contaminadas es $0.17 \times 0.17 = 0.0289$, la probabilidad de que ninguna este contaminada es de $(1-0.17) \times (1-0.17)$ y la probabilidad de que una este contaminada y la otra no es $(0.17) \times (1-0.17) + (0.17) \times (1-0.17)$.
 
 Una muestra que contenga cero máquinas contaminadas, $\tilde{p} = \frac{0+2}{2+4} = 0.33$ ocurre con una probabilidad de 0.6889, una muestra con una máquina contaminada, $\tilde{p} = \frac{1+2}{2+4} = 0.5$ ocurre con una probabilidad de 0.2822 y una muestra con dos máquinas contaminadas, $\tilde{p} = \frac{2+2}{2+4} = 0.67$ ocurre con una probabilidad de 0.0289.
 Por ende, hay un 68.89% de probabilidad de que $\tilde{P}$ sea igual a 0.33, un 28% de que $\tilde{P}$ sea igual a 0.5 y 3% de que $\tilde{P}$ sea igual a 0.67.
 
-Imaginemos ahora que nuestra muestra pasa de $n = 2$ a $n = 20$, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas en nuestra muestra, acudimos a la distribución binomial.
-Por ejemplo, para calcular que 5 de las 20 máquinas están contaminadas usamos $p = 0.17$ y $n = 20$.
+Imaginemos ahora que nuestra muestra pasa de $n = 2$ a $n = 20$, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas, acudimos a la distribución binomial. Por ejemplo, para calcular la probabilidad que 5 de las 20 máquinas están contaminadas usamos $p = 0.17$ y $n = 20$.
 
 ```{r}
 dbinom(5, 20, 0.17)
+```
+
+```{r maquinascont, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Probabilidad de obtener 5 máquinas contaminadas."}
+maquinas <- data.frame(n = 0:20, prob = dbinom(x = 0:20, size = 20, prob = 0.17))
+maquinas$colour <- ifelse(maquinas$n == 5, "lightblue", "white")
+
+ggplot(maquinas, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Máquinas contaminadas", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
 ```
 
 Como vemos, la probabilidad de obtener 5 máquinas contaminadas es 0.1345, ahora, usando $\tilde{P}$, una muestra con 5 máquinas contaminadas sería $\tilde{p} = \frac{5+2}{20+4} = 0.2917$, por lo que $P(\tilde{P} = 0.2917) = 0.1345$.
@@ -61,14 +73,24 @@ Por ejemplo, podemos preguntar *¿Cuál es la probabilidad de que no más de 5 m
 pbinom(5, 20, 0.17)
 ```
 
-Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245.
-Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$.
-La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado.
-De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$.
+```{r maquinascont2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap= "Probabilidad de obtener no más de 5 máquinas contaminadas."}
+maquinas <- data.frame(n = 0:20, prob = dbinom(x = 0:20, size = 20, prob = 0.17))
+maquinas$colour <- ifelse(maquinas$n == 0:5, "lightblue", "white")
 
-Para la construcción de **intervalos de confianza** de la proporción de una población, necesitamos encontrar el error estándar de $\tilde{P}$.
-Para eso utilizamos la siguiente fórmula (para intervalos al 95%).
+ggplot(maquinas, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Máquinas contaminadas", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+```
 
+Como vemos, la probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245. Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$.
+
+La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado. De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$.
+
+Para la construcción de **intervalos de confianza** de la proporción de una población, necesitamos encontrar el error estándar de $\tilde{P}$. Para eso utilizamos la siguiente fórmula (para intervalos al 95%):
 
 \begin{equation}
 SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
@@ -92,14 +114,12 @@ qnorm(0.95, 0, 1)
 
 Como podemos ver, para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.
 
-
 \begin{equation}
 \tilde{p} \pm 1.645 \times SE_{\tilde{p}}
 (\#eq:pic2)
 \end{equation}
 
 Las fórmulas para intervalos de confianza generales son las siguientes:
-
 
 \begin{equation}
 \tilde{p} \pm z_{\alpha/2} \times SE_{\tilde{p}}
@@ -118,20 +138,16 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + z^2_{\alpha/2}}}
 
 ## Prueba de Chi-cuadrada
 
-Una **prueba de bondad de ajuste** se utiliza para ver la compatibilidad de los datos con una distribución o $H_0$ específica.
-Una de las más utilizadas es la **prueba de** $\chi^2$ (léase chi-cuadrada).
-Para esto se utilizan frecuencias absolutas de nuestros datos.
-Para cada nivel de categoría, $i$, dejamos que $o_i$ represente la frecuencia observada y $e_i$ la frecuencia esperada, es decir, la frecuencia que esperaríamos obtener bajo la $H_0$.
+Una **prueba de bondad de ajuste** se utiliza para ver la compatibilidad de los datos con una distribución o $H_0$ específica. Una de las más utilizadas es la **prueba de** $\chi^2$ (léase chi-cuadrada). Para esto se utilizan las frecuencias absolutas de nuestros datos. Para cada nivel de categoría, $i$, dejamos que $o_i$ represente la frecuencia observada y $e_i$ la frecuencia esperada (la frecuencia que esperaríamos obtener bajo la $H_0$).
 Las frecuencias esperadas $e_i$ se obtienen multiplicando las probabilidades dadas por la $H_0$ por $n$.
 Posteriormente utilizamos la fórmula \@ref(eq:chi) para calcular nuestro estadístico de prueba.
-
 
 \begin{equation}
 \chi^2 = \sum_{i = 1}^{k}\frac{(o_i - e_i)^2}{e_i}
 (\#eq:chi)
 \end{equation}
 
-Donde $k$ es el número total de categorías e $i$ es la *i*-ésima observación.
+Donde $k$ es el número total de categorías e $i$ es la $i$-ésima observación.
 
 > **Ejemplo:** Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada.
 > La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada.
@@ -184,7 +200,7 @@ Datos <- data.frame(Datos, Venados)
 ggplot(Datos, aes(reorder(Zona, Venados), Venados)) + geom_bar(stat = "identity", color = "Gray20", fill = "Gray80", width = 0.7) +
   xlab("Zona") +
   ylab("No. de venados") +
-  scale_y_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 50)) +
   theme_classic()
 ```
 
@@ -238,7 +254,11 @@ ggplot(graph, aes(fill = reorder(Zona1, Prop), y = Prop, x = Condicion)) +
   theme_classic()
 ```
 
-Ahora, para aplicar la fórmula de $\chi^2$ necesitamos los valores absolutos de nuestros datos, para esto simplemente multiplicamos la probabilidad calculada por la $H_0$, $p * n$.
+Ahora, para aplicar la fórmula de $\chi^2$ necesitamos los valores absolutos de nuestros datos, para esto simplemente multiplicamos la probabilidad calculada por la $H_0$:
+
+$$
+p \times n
+$$
 
 ```{r}
 #Usamos la función sum() para sumar todos los valores de la variable "Venados".
@@ -254,7 +274,7 @@ Ahora simplemente aplicamos la fórmula para nuestros datos.
 \chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
 \end{align}
 
-Ahora tenemos que considerar la distribución nula de $\chi_s^2$, que es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
+Ahora tenemos que considerar la distribución nula de $\chi_s^2$, es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
 Esta distribución muestral sigue la distribución de chi-cuadrada $\chi^2$ cuando el tamaño de muestra es suficientemente grande.
 La forma de la distribución de $\chi^2$ depende de los grados de libertad.
 
@@ -276,9 +296,9 @@ ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
 
 Al igual que las demás distribuciones de probabilidad en `R`, tenemos una serie de comandos para encontrar los valores de una distribución de chi-cuadrada fácilmente.
 
-\-`dchisq()` nos da un valor de densidad en determinado punto de la distribución de $\chi^2$.
+\-`dchisq()` nos da un valor de densidad de la distribución de $\chi^2$ (PDF).
 
-\-`pchisq()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $\chi^2$ (área debajo de la curva).
+\-`pchisq()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de $\chi^2$ (área debajo de la curva, CDF).
 
 \-`qchisq()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
 
@@ -427,7 +447,7 @@ Como podemos ver, estas probabilidades las obtenemos utilizando las columnas **R
 \hat{P}(Éxito|Real) \ne \hat{P}(Real|Éxito)
 \end{align}
 
-Ahora, el primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de contingencia es calcular las **frecuencias marginales**, es decir, las frecuencias de los totales de nuestra tabla de contingencia. Si nuestra $H_0$ es verdadera, entonces las columnas **Real** y **Falsa** son equivalentes, así que podemos agruparlas ($41 + 15$) y dividirlas sobre el total de observaciones ($\frac{56}{75} = 0.747$). Bien, ahora aplicamos esta probabilidad a nuestros valores observados para el grupo Real y Falso ($\frac{56}{75} \times 49 = 36.59$ éxitos esperados y $\frac{56}{75} \times 26 = 36.59$ éxitos esperados). De igual manera, aplicamos lo mismo para los fracasos esperados ($\frac{19}{75} = 0.253$). Para obtener nuestros fracasos esperados obtenemos, multiplicamos este valor por los de los grupos Real y Falso ($\frac{19}{75} \times 49$ fracasos esperados y $\frac{19}{75} \times 26$ fracasos esperados).
+Ahora, el primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de contingencia es calcular las **frecuencias marginales**, es decir, las frecuencias de los totales de nuestra tabla de contingencia. Si nuestra $H_0$ es verdadera, entonces las columnas **Real** y **Falsa** son equivalentes, así que podemos agruparlas ($41 + 15$) y dividirlas sobre el total de observaciones ($\frac{56}{75} = 0.747$). Bien, ahora aplicamos esta probabilidad a nuestros valores observados para el grupo Real y Falso ($\frac{56}{75} \times 49 = 36.59$ éxitos esperados y $\frac{56}{75} \times 26 = 19.41$ éxitos esperados). De igual manera, aplicamos lo mismo para los fracasos esperados ($\frac{19}{75} = 0.253$). Para obtener nuestros fracasos esperados, multiplicamos este valor por los de los grupos Real y Falso ($\frac{19}{75} \times 49 = 12.41$ fracasos esperados y $\frac{19}{75} \times 26 =6.59 $ fracasos esperados).
 
 +----------------+----------------+-----------------+-----------------+
 |                | **Real**       | **Falsa**       | **Total**       |
@@ -459,7 +479,7 @@ Ahora sí, podemos aplicar la fórmula de $\chi^2$.
 Todo este proceso se puede hacer de manera rapidísima con la función `chisq.test()`. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento `correct = F` para evitar aplicar correcciones.
 
 ```{r}
-chisq.test(cirugia, correct = F)
+chisq.test(cirugia, correct = F, )
 ```
 
 Como vemos el valor-*p* es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.
@@ -485,7 +505,7 @@ En algunas tablas de contingencia las filas y columnas juegan un papel muy disti
 
 Cuando un conjunto de datos es visto como una sola muestra con dos variable dicotómicas, la relación expresada por $H_0$ se conoce como **dependencia estadística** de las variables de columna y fila. Variables que no son independientes son llamadas **dependientes** o **asociadas**. Por eso a veces la prueba de Chi-cuadrada puede ser conocida como prueba de asociación o prueba de independencia.
 
->**Ejemplo:** Un antropólogo alemán que estidaba la relación entre el color de ojos y cabello observó una muestra de $n = 6800$ hombres con los resultados siguientes.
+>**Ejemplo:** Un antropólogo alemán que estudia la relación entre el color de ojos y cabello observó una muestra de $n = 6800$ hombres con los resultados siguientes.
 
 +---------------------+-------------------------+------------------------+-----------------+
 |                     | **Cabello oscuro (CO)** | **Cabello claro (CC)** | **Total**       |
@@ -526,7 +546,7 @@ La hipótesis nula de independencia puede decirse de la siguiente manera. Dos gr
 H_0: P(C|G_1) = P(C|G_2)
 \end{align}
 
->**Ejemplo:** Considere una especie ficticia de plantas, que se puede categorizar en pequeñas (S), y altas (T), así como resistentes (R) y no resistentes (NR) a una enfermedad.
+>**Ejemplo:** Considere una especie ficticia de plantas, que se pueden categorizar en pequeñas (S), y altas (T), así como resistentes (R) y no resistentes (NR) a una enfermedad.
 
 Consideremos las siguientes $H_0$:
 
@@ -542,7 +562,7 @@ Todas ellas son igual de válidas. Sin embargo la siguiente hipótesis no es val
 
 5. $H_0: P(R|S) = P(NR|S)$
 
-La primer hipótesis compara dos grupos (plantas pequeñas con altas) respecto a la resistencia a la enfermedad. mientras que la hipótesis 5 es una afirmación acerca de la distribución de la resistencia a la enfermedad en solo un grupo (plantas bajas). 
+La primer hipótesis compara dos grupos (plantas pequeñas con altas) respecto a la resistencia a la enfermedad, mientras que la hipótesis 5 es una afirmación acerca de la distribución de la resistencia a la enfermedad en solo un grupo (plantas bajas). 
 
 Supongamos ahora que hacemos un muestreo aleatorio de 100 plantas de esta población.
 
@@ -841,10 +861,10 @@ SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2
 (\#eq:stderrorp)
 \end{equation}
 
-Un intervalo de confianza al 95% sería de la siguiente manera.
+Un intervalo de confianza se obtiene de la siguiente manera:
 
 \begin{equation}
-(\tilde{p_1} - \tilde{p_2}) \pm (1.96)SE_{\tilde{P_1} - \tilde{P_2}}
+(\tilde{p_1} - \tilde{p_2}) \pm z_{\alpha/2} SE_{\tilde{P_1} - \tilde{P_2}}
 \end{equation}
 
 Para calcular un intervalo de confianza de las proporciones o probabilidades en `R` utilizamos la función `prop.test()`. Para este comando es necesario que la matriz de datos sea 2x2. Por ejemplo.
