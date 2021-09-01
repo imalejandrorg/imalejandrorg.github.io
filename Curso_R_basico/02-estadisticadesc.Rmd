@@ -66,7 +66,7 @@ Propiedades importantes de la **media:**
 
 -   Utiliza los valores de todos los datos disponibles.
 
--   La mediaa muestral ($\overline{x}$) de una población tiende a variar menos que otras medidas de tendencia central.
+-   La media muestral ($\overline{x}$) de una población tiende a variar menos que otras medidas de tendencia central.
 
 El cálculo de la media en `R` es algo sencillo. Para esto, utilizamos la función `mean()`.
 
