@@ -719,7 +719,7 @@ ggqqplot(Datos$weight) +
 
 Otra opción sería realizar el gráfico de densidad, pero muchas veces es difícil identificar la forma de campana en cierto conjunto de datos, así que los gráficos Q-Q son de gran ayuda.
 
-Otra opción para realizar una prueba de normalidad conocida como **prueba de Shapiro-Wilks** (aunque no se recomienda que para $n > 50$), pero es muy sensible a ligeras desviaciones de la normalidad, sobre todo con un tamaño de muestra grande. Es muy sencillo de realizar en `R`, simplemente utilizamos el comando `shapiro_test()` del paquete `rstatix`. En este caso, vamos a analizar si nuestros dos tratamientos y el control siguen una distribución normal. Para esto, vamos a hacer uso de la librería `dplyr`.
+Otra opción para realizar una prueba de normalidad conocida como **prueba de Shapiro-Wilks** (aunque no se recomienda que para $n > 50$), pero es muy sensible a ligeras desviaciones de la normalidad, sobre todo con un tamaño de muestra grande. Es muy sencillo de realizar en `R`, simplemente utilizamos el comando `shapiro_test()` del paquete `rstatix`. En este caso, vamos a analizar si nuestros dos tratamientos y el control siguen una distribución normal. Para esto, vamos a hacer uso de la librería `dplyr`. Aunque también podemos utilizar la función `shapiro.test()` que viene incluida en `R`.
 
 ```{r}
 library(rstatix)
@@ -727,12 +727,12 @@ library(rstatix)
 PlantGrowth %>% group_by(group) %>% shapiro_test(weight) #Agrupamos los datos por tipo de tratamiento y hacemos la prueba a la variable "weight".
 ```
 
-¿Cómo interpretamos los resultados y qué significa el valor-*p*? Bueno, ya que el control y los dos tratamientos tienen un valor-*p* > 0.05 decimos que se distribuyen de manera normal. Valores-*p* menores a 0.05 son indicativos fuertes de no-normalidad. Después de obtener un valor menor a 0.05, podríamos corroborar esto con un gráfico Q-Q o con un histograma para ver la forma de la distribución de nuestros datos.
+¿Cómo interpretamos los resultados y qué significa el valor-*p*? Bueno, ya que el control y los dos tratamientos tienen un $valor-p > 0.05$ decimos que se distribuyen de manera normal. Valores-*p* menores a 0.05 son indicativos fuertes de no-normalidad. Después de obtener un valor menor a 0.05, podríamos corroborar esto con un gráfico Q-Q o con un histograma para ver la forma de la distribución de nuestros datos.
 
 
 ## Distribución muestral
 
-La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como **variabilidad de muestreo**. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como **distribución muestral**. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre entre la muestra y la población es probable que sea.
+La variabilidad entre muestras aleatorias que provienen de una misma población se conoce como **variabilidad de muestreo**. Una distribución de probabilidad que caracteriza algún aspecto de la variabilidad de muestreo se conoce como **distribución muestral**. Usualmente los valores de una muestra se parecen a los de la población de la cuál provienen. Una distribución muestral nos indica qué tan cerca la resemblanza entre la muestra y la población es probable que sea.
 
 Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un **meta-estudio**, que consiste en repetir de manera indefinida, réplicas del mismo estudio. Por ejemplo, si un estudio consiste en extraer una muestra aleatoria de tamaño $n$ de una población, un meta-estudio consiste en repetir varias veces la extracción de una muestra de tamaño $n$ de una población. Por lo tanto, las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.
 

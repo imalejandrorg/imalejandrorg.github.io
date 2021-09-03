@@ -213,7 +213,7 @@ s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 \end{equation}
 
 \begin{equation}
-\sigma = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{N}}
+\sigma = \sqrt{\frac{\sum_{i = 1}^{N}( {x_i-\overline{x} ) ^2}}{N}}
 (\#eq:sd2)
 \end{equation}
 
@@ -274,7 +274,7 @@ Propiedades importantes de la **varianza:**
 Otro estadístico que nos puede brindar más información es el **coeficiente de variación** que se obtiene a partir de la fórmula \@ref(eq:cv).
 
 \begin{equation}
-CV = \frac{S}{\overline{x}}*100
+CV = \frac{S}{\overline{x}} \times 100
 (\#eq:cv)
 \end{equation}
 
@@ -342,7 +342,7 @@ ctrl.z
 
 ### Frecuencia absoluta
 
-Es número total de observaciones. Por ejemplo, para los tratamientos de la base de datos de `PlantGrowth`, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. La frecuencia absoluta también nos dice el número de veces que se repite el valor de alguna observación.
+Es el número total de observaciones. Por ejemplo, para los tratamientos de la base de datos de `PlantGrowth`, podemos ver que cada tratamiento tuvo 10 plantas en observación. La frecuencia de cada tratamiento es por ende de 10. La frecuencia absoluta también nos dice el número de veces que se repite el valor de alguna observación.
 
 En `R` utilizamos la función `table()` para su cálculo.
 
@@ -440,12 +440,12 @@ summary(trt2)
 Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
 
 \begin{equation}
-Q_3 + 1.5 \times RIQ
+Q_3 + 1.5 \times IQR
 (\#eq:outlier1)
 \end{equation}
 
 \begin{equation}
-Q_1 - 1.5 \times RIQ
+Q_1 - 1.5 \times IQR
 (\#eq:outlier2)
 \end{equation}
 
