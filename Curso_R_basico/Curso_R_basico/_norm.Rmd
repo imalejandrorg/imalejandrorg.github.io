@@ -1,0 +1,301 @@
+---
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+---
+
+# Análisis de Varianza (ANOVA)
+
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(vegan)
+library(tidyverse)
+library(kableExtra)
+```
+
+Para realizar un **análisis de varianza** o **ANOVA** es necesario cumplir con ciertos supuestos. Estos supuestos son similares para otro tipo de pruebas y se encuentran descritas en la sigueinte lista:
+
+-   Distribución normal de los datos.
+-   Homocedasticidad (varianzas iguales).
+-   Datos independientes.
+
+La distribución normal y la homocedasticidad son hasta cierto punto flexibles. Sin embargo, el ANOVA es sumamente sentitivo a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias (**$\mu$) de las muestras.
+
+Antes de hacer el ANOVa debemos buscar una manera de comprobar la distribución normal y la homocedasticidad de los datos. Esto es relativamente sencillo de hacer.
+
+## Prueba de normalidad
+
+Una de las pruebas de normalidad más utilizadas es la prueba de Shapiro-Wilk. El resultado de la prueba de Shapiro-Wilk es un valor-*p* que se puede interpretar de la siguiente manera:
+
+-   Valor-*p* $<$ 0.01: No normalidad.
+-   Valor-*p* $<$ 0.05: No normalidad.
+-   Valor-*p* $\ge$ 0.05: Sin evidencia concluyente de no normalidad.
+
+Usualmente un valor-*p* $<$ 0.05 es suficiente para indicar que nuestros datos no se distribuyen de manera normal. Esta base de datos incluye 2 variables, los valores del peso y el tratamiento que recibieron las plantas.
+
+Para esta ocasión vamos a trabajar con la base de datos `PlantGrowth` que viene incluida en R.
+
+```{r}
+data("PlantGrowth")
+```
+
+Vamos a realizar una gráfica de nuestros datos para darnos una idea de su comportamiento.
+
+```{r fig.align = "center", fig.cap = "Gráfica con los distintos tratamientos."}
+library(ggplot2)
+
+ggplot(PlantGrowth) + geom_point(aes(group, weight, color = group)) + 
+  xlab("Grupo") +
+  ylab("Peso") +
+  scale_color_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) +
+  theme_classic()
+```
+
+Otra forma de visualizar los datos es con un boxplot que puede ir dándonos idea más o menos de cómo se distribuyen nuestros datos.
+
+```{r fig.align = "center", fig.cap = "Graficos de boxplot para visualización de las distribuciones de los datos."}
+library(ggplot2)
+
+ggplot(PlantGrowth) + geom_boxplot(aes(group, weight, fill = group)) + 
+  xlab("Grupo") +
+  ylab("Peso") +
+  scale_fill_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) +
+  theme_classic()
+```
+
+Computar la prueba de normalidad de Shapiro-Wilk sumamente sencillo y se hace con la función `shapiro_test()` de la librería `rstatix`. Para esto primero tenemos que agrupar nuestros datos por tratamientos con la función `group_by()` del paquete de `dplyr`.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+library(rstatix)
+
+PlantGrowth %>% group_by(group) %>% shapiro_test(weight) #Agrupamos los datos por tratamiento.
+```
+
+Tanto el control como los dos tratamientos tienen un valor-*p* $>$ 0.05, lo que indica que se distribuyen de manera normal. El estadístico que obtenemos se conoce como $W$ y entre más cercano sea su valor a 1 más evidencia existe de que se trata de datos que se distribuyen de manera normal.
+
+Otra opción es realizar la prueba de Shapiro-Wilk con la función integrada en R, de nombre bastante similar, llamada `shapiro.test()`. Para esta prueba no es necesario agrupar los datos por tratamiento.
+
+```{r}
+PlantGrowth$weight %>% shapiro.test
+```
+
+Como podemos ver, el valor-*p* = 0.8915, lo que indica que nuestros datos se distribuyen de manera normal.
+
+Algo importante a tener en consideración es que para muestras con $n > 50$ es recomendable utilizar otra prueba ya que la prueba de Shapiro-Wilk es sensible a pequeñas desviaciones de la normalidad para muestras grandes. Una alternativa es la utilización de **gráficos Q-Q** o **Q-Q plot**. Los gráficos Q-Q nos muestran la correlación que existe entre una muestra dada y la distribución normal. Utilizaremos la librería `ggpubr` y la función `ggqqplot()`.
+
+```{r fig.align = "center", fig.cap = "Gráfico Q-Q que muestra la distribución normal de datos."}
+library(ggpubr)
+ggqqplot(PlantGrowth$weight) +
+  xlab("Teórico") +
+  ylab("Muestra")
+```
+
+Este gráfico nos muestra una distribución normal teórica vs. la de nuestros datos. Como podemos ver, todos los puntos caen dentro del intervalo de confianza al 95% de la recta, lo que quiere decir que nuestros datos se distribuyen de manera normal. Esto confirma los resultados obtenidos con la prueba de Shapiro-Wilk. Otra opción sería ver la **gráfica de densidad** para identificar la forma de la distribución.
+
+```{r fig.align = "center", fig.cap = "Gráfico de densidad que muestra una ligera forma de campana, lo que indica una distribución normal de los datos."}
+ggdensity(PlantGrowth$weight, fill = "lightblue") +
+  xlab("Peso") +
+  ylab("Densidad")
+```
+
+## Prueba de homocedasticidad
+
+Para la prueba de homocedasticidad existen varias aproximaciones. En este caso veremos pruebas estadísticas, ya que existen pruebas que se pueden realizar una vez realizamos el ANOVA.
+
+La prueba a utilizar es la prueba de Bartlett, que en R se escribe `bartlett.test()`. Es una prueba relativamente sencilla de realizar.
+
+```{r}
+bartlett.test(weight ~ group, PlantGrowth)
+```
+
+Indicamos que la variable `weight` va a ser evaluada bajo la variable `group`. Como resultados tenemos el estadístico Bartlett, los grados de libertad y el valor-*p*, que en este caso resulto ser valor-*p* $>$ 0.05 lo que significa que aceptamos la hipótesis de que nuestros datos tienen varianzas iguales. Un valor-*p* $<$ 0.05 indicaría que nuestros datos NO tienen varianzas iguales.
+
+Otra prueba que podemos utilizar que viene en la librería `car` es la prueba de Levene. Utilizamos la función `leveneTest()`.
+
+```{r message=FALSE, warning=FALSE}
+library(car)
+
+leveneTest(weight ~ group, PlantGrowth, mean)
+```
+
+En este caso nuestro valor-*p* es mayor a 0.05 (indicado en el outpot como `Pr(>F)`) lo que indica que no hay diferencias en las varianzas de nuestras muestras. Es importante que en nuestro último argumento (`center`) escribamos que queremos que los calculos se realicen con la media (`center = mean`). Si utilizamos la mediana, haremos una prueba modificada de Levene conocida como prueba de Brown-Forsythe, que es la prueba que realiza por defecto si no escribimos `mean`.
+
+```{r}
+leveneTest(weight ~ group, PlantGrowth)
+```
+
+Podemos ver que medida de tendencia central utilizó en la consola, después del título de la prueba. Una vez que hemos corroborado que nuestros datos presentan **homocedasticidad**, **distribución normal** y sabemos que son **independientes**, podemos proceder a hacer el ANOVA.
+
+## Análisis de varianza (ANOVA de una vía)
+
+Algo importante es que R requiere que las variables predictoras sean clasificadas como grupos de factores. Si corroboramos en nuestros datos de `PlantGrowth` veremos que efectivamente la variable predictora (el tratamiento) se encuentra como factor.
+
+```{r}
+str(PlantGrowth)
+```
+
+En caso de que nuestros datos no se encuentren como factores podemos transformarlos con la función `as.factor()` o `as_factor()`.
+
+```{r}
+datos <- as.factor(c("Tratamiento1", "Tratamiento2", "Control"))
+str(datos)
+```
+
+Cuando nos referimos a un *ANOVA de una vía* decimos que solamente consideramos una variable predictora o independiente. También se le conoce como *ANOVA de un factor*. En este caso, para la base de datos de `PlantGrowth` solo estamos considerando el tratamiento, por lo tanto lo lógico es hacer un ANOVA de una vía. Sin emabrgo, si además del tratamiento tuvieramos otra variable como la cantidad de luz, podríamos considerar hacer un *ANOVA de dos vías*.
+
+El ANOVA parte de la hipótesis de que todas las muestras vienen de una población con la misma media, es decir $H_0$: Las medias de todas las muestras son iguales: $\mu_1 = \mu_2 = \mu_3 = ... = \mu_n$. $H_A$: Al menos una de las medias de las muestras es distinta: $\mu_1 \neq \mu_n$.
+
+Antes de empezar a hacer el análisis recordemos un poco los fundamentos del ANOVA. Empecemos con cierta notación que nos será útil.
+
+-   $k$ = número de grupos/poblaciones/tratamientos.
+-   $n_i$ = número de muestras en el grupo/tratamiento *i*.
+-   $x_{ij}$ = el *j*-ésimo valor en el *i*-ésimo grupo/tratamiento.
+-   $\overline{x}_i$ = la media del *i*-ésimo grupo/tratamiento.
+-   $s_i$ = la desviación estándar del *i*-ésimo grupo/tratamiento.
+-   $n$ = el número total de muestras/observaciones independientemente del grupo.
+-   $\overline{x}$ = la media global de todos los grupos/poblaciones/tratamientos independientemente del grupo.
+
+El estadístico que calcula el ANOVA se conoce como $F_{ratio}$, ya que es una relación entre dos valores: los **cuadrados medios entre grupos** ($CM_{entre}$) y los **cuadrados medios dentro de los grupos** ($MS_{dentro}$). Para calcular el $F_{ratio}$ utilizamos la ecuación \ref@(eq:Fratio).
+
+```{=tex}
+\begin{equation}
+F_{ratio} = \frac{CM_{entre}}{CM_{dentro}}
+(\#eq:Fratio)
+\end{equation}
+```
+Cada uno de estos términos tiene su propia fórmula.
+
+```{=tex}
+\begin{equation}
+CM_{entre} = \frac{SC_{entre}}{gl_{entre}}
+(\#eq:CMentre)
+\end{equation}
+```
+Dónde $gl_{entre}$ hace referencia a los grados de libertad entre grupos y $SC_{entre}$ hace referencia a la suma de cuadrados entre grupos.
+
+```{=tex}
+\begin{equation}
+CM_{dentro} = \frac{SC_{dentro}}{gl_{dentro}}
+(\#eq:CMdentro)
+\end{equation}
+```
+Dónde $gl_{dentro}$ hace referencia a los grados de libertad dentro de los grupos\*\* y $SC_{dentro}$ hace referencia a la suma de cuadrados dentro de los grupos.
+
+Para calcular la **suma de cuadrados total** usamos la siguiente ecuación. La suma de cuadrados total hace referencia a la variación de todos los datos respecto de la media global ($\overline{x}$).
+
+```{=tex}
+\begin{equation}
+SC_{total} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij}-\overline{x})^2 = SC_{entre} + SC_{dentro}
+(\#eq:SCtotal)
+\end{equation}
+```
+Pues esta suma de cuadrados total está compuesta de dos valores: la suma de cuadrados entre grupos ($SC_{entre}$) y la suma de cuadrados dentro de los grupos ($SC_{dentro}$) aunque también se le conoce como el error o los residuales.
+
+Para calcular la **suma de cuadrados entre grupos** usamos la siguiente ecuación. Este valor hace referencia a la variación de las medias de cada grupo ($\overline{x}_i$) cada grupo respecto de la media global ($\overline{x}$).
+
+```{=tex}
+\begin{equation}
+SC_{entre} = \sum_{i = 1}^{k}n_{i}(\overline{x}_{i} - \overline{x})^2
+(\#eq:SCentre)
+\end{equation}
+```
+Para calcular la **suma de cuadrados dentro de los grupos** usamos la siguiente ecuación. Este valor hace referencia a la variación de cada muestra u observación dentro de un grupo respecto de la media de ese grupo ($\overline{x}_i$).
+
+```{=tex}
+\begin{equation}
+SC_{dentro} = \sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij} - \overline{x}_{i})^2 =  \sum_{i = 1}^{k}(n_i - 1)s_i^2 = SC_{total} - SC_{entre}
+(\#eq:SCdentro)
+\end{equation}
+```
+El calculo de los **grados de libertad** es algo relativamente sencillo y se puede hacer de la siguiente manera.
+
+Para los **grados de libertad entre grupos**:
+
+```{=tex}
+\begin{equation}
+gl_{entre} = k - 1
+(\#eq:glentre)
+\end{equation}
+```
+Para los **grados de libertad dentro de los grupos**:
+
+```{=tex}
+\begin{equation}
+gl_{dentro} = n - k
+(\#eq:gldentro)
+\end{equation}
+```
+Para los **grados de libertad totales**:
+
+```{=tex}
+\begin{equation}
+gl_{total} = n - 1
+(\#eq:gltotal)
+\end{equation}
+```
+Algo recomendado de hacer es construir una tabla con cada uno de los pasos a seguir con sus respectivas fórmulas. Los resultados que se presenta el ANOVA en R tiene un formato similar.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+anova.tabla <- data.frame(Fuentes = c("Entre grupos (Tratamientos)", "Dentro de grupos (Residuales)", "Total"))
+anova.tabla$gl <- c("$k - 1$", "$n - k$", "$n - 1$")
+anova.tabla$SC <- c("$\\sum_{i = 1}^{k}n_{i}(\\overline{x}_{i} - \\overline{x})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij} - \\overline{x}_{i})^2$",
+                    "$\\sum_{i = 1}^{k}\\sum_{j = 1}^{n_i}(x_{ij}-\\overline{x})^2$")
+anova.tabla$CM <- c("$\\frac{SC_{entre}}{gl_{entre}}$",
+                    "$\\frac{SC_{dentro}}{gl_{dentro}}$", NA)
+anova.tabla$F_ratio <- c("$\\frac{CM_{entre}}{CM_{dentro}}$", NA, NA)
+options(knitr.kable.NA = '')
+knitr::kable(anova.tabla, caption = "Tabla de ANOVA", escape = FALSE) %>% column_spec(1, bold = TRUE)
+```
+
+### ANOVA en R
+
+Una vez vistos los calculos necesarios para obtener el estadístico $F_{ratio}$ podemos hacer el ANOVA utilizando la función `aov()`. La función de ANOVA en R tiene una notación particular; primero escribimos la variable dependiente (en el caso de nuestros datos de `PlantGrowth`, el peso), posteriormente escribimos el símbolo `~` que significa *explicado por* seguido de nuestra variable independiente, en este caso, el tratamiento. Al final escribimos la base de datos de donde tomar estas variables.
+
+```{r}
+anova.plantas <- aov(weight ~ group, PlantGrowth)
+anova.plantas
+```
+
+Para observar el valor-*p* podemos utilizar la función `summary()` para obtener una tabla de ANOVA.
+
+```{r}
+summary(anova.plantas)
+```
+
+`Df` corresponde a los grados de libertad, `Sum Sq` corresponde a la suma de cuadrados, `Mean Sq` corresponde a los cuadrados medios y `F value` corresponde al valor F calculado. `Pr(>F)` corresponde al valor-*p*. En este caso nuestro valor-*p* $<$ 0.05 por lo que sabemos que hay diferencias entre grupos. Si quisieramos exportar esto a una tabla necesitamos utilizar la librería `broom`.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(broom)
+
+tabla.aov.plantas <- tidy(anova.plantas)
+```
+
+```{r echo=FALSE}
+options(knitr.kable.NA = '')
+knitr::kable(tabla.aov.plantas, caption = "Resultados del ANOVA de tratamientos de plantas") %>% kable_styling(full_width = F)
+```
+
+Después de hacer el ANOVA podemos comprobar la distribución normal con los **residuales**. Para esto tenemos que crear una variable nueva. Esto lo podemos hacer también con la librería `broom` y la función `augment()`.
+
+```{r fig.align = "center", fig.cap = "Histograma de residuales del ANOVA mostrando distribución normal."}
+residuales <- anova.plantas$residuals
+hist(residuales, xlab = "Residuales", ylab = "Frecuencia", main = "Histograma de Residuales")
+```
+
+```{r fig.align = "center", fig.cap ="Histograma de residuales del ANOVA a partir de los residuales obtenidos por la función augment().", message=FALSE, warning=FALSE}
+tabla.aov.plantas2 <- augment(anova.plantas)
+hist(tabla.aov.plantas2$.resid, xlab = "Residuales", ylab = "Frecuencia", main = "Histograma de Residuales")
+```
+
+Como podemos ver, los residuales tienen una distribución más o menos normal. Esto confirma lo que habíamos visto en las pruebas de normalidad y homocedasticidad. Podemos incluso mostrar la gráfica Q-Q de los residuales.
+
+```{r fig.align = "center", fig.cap = "Gráfico Q-Q de los residuales obtenidos por el ANOVA."}
+ggqqplot(tabla.aov.plantas2$.resid) +
+  xlab("Teórico") +
+  ylab("Residuales")
+```
+
+## Pruebas *post hoc*

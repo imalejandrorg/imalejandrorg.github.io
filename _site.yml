@@ -7,7 +7,7 @@ navbar:
     - text: "Cursos"
       menu:
       - text: "Curso de R básico"
-        href: Curso_R_basico/docs/index.html
+        href: Curso_R_basico/Curso_R_basico/docs/index.html
     - text: "Proyectos"
       menu:
       - text: "Tesis de Licenciatura"

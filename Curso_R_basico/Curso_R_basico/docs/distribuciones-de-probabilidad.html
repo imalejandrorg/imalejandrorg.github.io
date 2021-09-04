@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lección 5 Distribuciones de probabilidad | Análisis de Varianza</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lección 5 Distribuciones de probabilidad | Análisis de Varianza" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lección 5 Distribuciones de probabilidad | Análisis de Varianza" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="histogramas-y-gráficos-de-densidad.html"/>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Requisitos</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>0.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media-en-r"><i class="fa fa-check"></i><b>2.1.1</b> Media en R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana-en-r"><i class="fa fa-check"></i><b>2.1.2</b> Mediana en R</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#la-función-summary"><i class="fa fa-check"></i><b>2.1.3</b> La función <code>summary</code></a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#visualización-básica-de-datos"><i class="fa fa-check"></i><b>2.1.4</b> Visualización básica de datos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-atípicos"><i class="fa fa-check"></i><b>2.1.5</b> Valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango-en-r"><i class="fa fa-check"></i><b>2.2.1</b> Rango en R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar-en-r"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar en R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
+<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>3</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>3.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>4</b> Histogramas y gráficos de densidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>4.1</b> R y <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>4.1.1</b> Histogramas y gráficos de densidad en R</a></li>
+<li class="chapter" data-level="4.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>4.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html"><i class="fa fa-check"></i><b>5</b> Distribuciones de probabilidad</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>5.1</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#dbinom"><i class="fa fa-check"></i><b>5.1.1</b> <code>dbinom</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#pbinom"><i class="fa fa-check"></i><b>5.1.2</b> <code>pbinom</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#qbinom"><i class="fa fa-check"></i><b>5.1.3</b> <code>qbinom</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#rbinom"><i class="fa fa-check"></i><b>5.1.4</b> rbinom</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de Varianza</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="distribuciones-de-probabilidad" class="section level1" number="5">
+<h1><span class="header-section-number">Lección 5</span> Distribuciones de probabilidad</h1>
+<p>En esta lección veremos algunas nociones de probabilidad y su distribución correspondiente.</p>
+<div id="distribución-binomial" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Distribución binomial</h2>
+<p>En este tipo de distribución se toma en cuenta un tipo muy particular de variable discreta llamada <strong>binomial</strong>. Una variable binomial es simplemente aquella en la que tenemos solo dos resultados posibles (proceso dicotómico), por ejemplo, el lanzamiento de una moneda al aire.</p>
+<p>Cada “<em>corrida</em>” o prueba que se experimenta tiene dos posibles resultados: <em>éxito</em> o <em>fracaso</em> (cabe aclarar que estos términos son subjetivos). La probabilidad de cada éxito es escrita como <span class="math inline">\(p\)</span> y se mantiene constante con cada prueba (es decir, no es afectada por las veces que hagamos el experimento). Además, cada prueba es independiente de la anterior, es decir los resultados no se ven afectados por las pruebas anteriores. El número total de pruebas que hacemos se escribe con la letra <span class="math inline">\(n\)</span>.</p>
+<p>Una <strong>variable binomial aleatoria</strong> cumple con los siguientes requisitos:</p>
+<ul>
+<li><strong>Resultados binarios:</strong> Hay dos posibles resultados para cada prueba; <em>éxito</em> o <em>fracaso</em>.</li>
+<li><strong>Pruebas independientes:</strong> Los resultados de cada prueba son independientes ya que los resultados de pruebas anteriores no afectan a las siguientes pruebas.</li>
+<li><strong>El valor de</strong> <span class="math inline">\(n\)</span> <strong>es fijo:</strong> Se determina anteriormente el número de intentos que se van a realizar.</li>
+<li><strong>Mismo valor de</strong> <span class="math inline">\(p\)</span><strong>:</strong> La probabilidad de <em>éxito</em> en cada una de las pruebas es igual durante todo el experimento.</li>
+</ul>
+<p>Para calcular el número de éxitos de una variable binomial aleatoria utilizamos la fórmula binomial como se representa en la ecuación <a href="distribuciones-de-probabilidad.html#eq:binom">(5.1)</a>.</p>
+<p><span class="math display" id="eq:binom">\[\begin{equation}
+p\left(x\right) = \binom{n}{x} p^x\left(1-p\right)^{n-x}
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(n\)</span>, como se dijo anteriormente, es el número de pruebas que se realizan, <span class="math inline">\(p\)</span> es la probabilidad de éxito de cada una prueba y <span class="math inline">\(x\)</span> es el número de éxitos en la serie de pruebas y <span class="math inline">\(1-p\)</span> es la probabilidad de un fallo. <span class="math inline">\(\binom{n}{x}\)</span> se conce como el <strong>coeficiente binomial</strong> y se puede calcular a partir de la ecuación <a href="distribuciones-de-probabilidad.html#eq:binomco">(5.2)</a>.</p>
+<p><span class="math display" id="eq:binomco">\[\begin{equation}
+\binom{n}{x} = \frac{n!}{x!(n-x)!}
+\tag{5.2}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(n!\)</span> es equivalente al factorial del número de pruebas y <span class="math inline">\(x!\)</span> es el factorial del número de éxitos.</p>
+<div id="dbinom" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <code>dbinom</code></h3>
+<p>Como observamos en el ejemplo anterior, la función <code>dbinom()</code> nos regresa la <span class="math inline">\(p(x)\)</span> haciendo uso de la fórmula binomial <a href="distribuciones-de-probabilidad.html#eq:binom">(5.1)</a>. Los argumentos que usa la función <code>dbinom()</code> son tres, <code>x</code>: número de éxitos; <code>size</code>: número de pruebas; <code>prob</code>: probabilidad de éxito.</p>
+<p>Supongamos que lanzamos una moneda no trucada, es decir, tanto la probabilidad de cara o de cruz es de 50% (<code>prob</code> o <span class="math inline">\(p = 0.5\)</span>). Repetimos 10 lanzamientos (<code>size</code> o <span class="math inline">\(n = 10\)</span>) y queremos conocer la probabilidad de obtener cara exactamente 5 veces (<code>x</code> o <span class="math inline">\(x = 5\)</span>).</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="distribuciones-de-probabilidad.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2460938</code></pre>
+<p>Vemos que existe una probabilidad de más o menos 0.25 de obtener exactamente cara 5 veces. En caso de querer obtener el porcentaje simplemente multiplicamos nuestro resultado por 100.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="distribuciones-de-probabilidad.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="fl">0.5</span>) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] 24.60938</code></pre>
+<p>Podemos representar esto de manera gráfica utilizando la librería de <code>ggplot2</code>. La variable <code>n</code> contendrá el número de pruebas a realizar, la variable <code>x</code> contendrá el número de éxitos, que en el caso de este gráfico queremos que sean desde 0 hasta la n-ésima prueba y la variable <code>p</code> la probabilidad de éxito. A partir de esto construimos un <code>dataframe</code> con dos valores, <span class="math inline">\(x\)</span> y <span class="math inline">\(p(x)\)</span> (que será calculada a partir de la función <code>dbinom()</code>). Posteriormente construimos nuestro gráfico con las herramientas de <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="distribuciones-de-probabilidad.html#cb161-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb161-2"><a href="distribuciones-de-probabilidad.html#cb161-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n</span>
+<span id="cb161-3"><a href="distribuciones-de-probabilidad.html#cb161-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb161-4"><a href="distribuciones-de-probabilidad.html#cb161-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-5"><a href="distribuciones-de-probabilidad.html#cb161-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, <span class="at">px =</span> <span class="fu">dbinom</span>(x, n, prob))</span>
+<span id="cb161-6"><a href="distribuciones-de-probabilidad.html#cb161-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-7"><a href="distribuciones-de-probabilidad.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, px)) <span class="sc">+</span> </span>
+<span id="cb161-8"><a href="distribuciones-de-probabilidad.html#cb161-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb161-9"><a href="distribuciones-de-probabilidad.html#cb161-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Número de éxitos, x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb161-10"><a href="distribuciones-de-probabilidad.html#cb161-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probabilidad de éxito, p(x)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb161-11"><a href="distribuciones-de-probabilidad.html#cb161-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Distribución de probabilidad para&quot;</span>,n,<span class="st">&quot;pruebas,&quot;</span>,<span class="st">&quot;p=&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb161-12"><a href="distribuciones-de-probabilidad.html#cb161-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-104"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-104-1.png" alt="Distribución de probabilidad para lanzamiento de monedas." width="672" />
+<p class="caption">
+Figura 5.1: Distribución de probabilidad para lanzamiento de monedas.
+</p>
+</div>
+<blockquote>
+<p><strong>Ejemplo:</strong></p>
+</blockquote>
+<p>La probabilidad de que alguien acierte en el blanco es de 1/4 o 0.25. Si una persona dispara 10 veces.</p>
+<ol style="list-style-type: decimal">
+<li>¿Cuál es la probabilidad de que acierte exactamente en tres ocasiones?</li>
+</ol>
+<p>Empecemos por definir los valores que ingresaremos a la función <code>dbinom()</code>. La probabilidad de acertar es de 1/4, por lo tanto <span class="math inline">\(p = \frac{1}{4}\)</span>. Como disparas 10 veces, <span class="math inline">\(n = 10\)</span>. El número de éxitos estará definido por la pregunta en cuestión. En este caso buscamos que se acierte exactamente 3 veces, por lo tanto <span class="math inline">\(x = 3\)</span>.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="distribuciones-de-probabilidad.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2502823</code></pre>
+<p>Como podemos ver, la probabilidad de que se acierte exactamente 3 veces es de 0.25 o 25%. En caso que de queramos graficar la distribución de probabilidad utilizamos el siguiente script.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="distribuciones-de-probabilidad.html#cb164-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb164-2"><a href="distribuciones-de-probabilidad.html#cb164-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n</span>
+<span id="cb164-3"><a href="distribuciones-de-probabilidad.html#cb164-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb164-4"><a href="distribuciones-de-probabilidad.html#cb164-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-5"><a href="distribuciones-de-probabilidad.html#cb164-5" aria-hidden="true" tabindex="-1"></a>ej1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, <span class="at">px =</span> <span class="fu">dbinom</span>(x, n, prob))</span>
+<span id="cb164-6"><a href="distribuciones-de-probabilidad.html#cb164-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-7"><a href="distribuciones-de-probabilidad.html#cb164-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ej1, <span class="fu">aes</span>(x, px)) <span class="sc">+</span> </span>
+<span id="cb164-8"><a href="distribuciones-de-probabilidad.html#cb164-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb164-9"><a href="distribuciones-de-probabilidad.html#cb164-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Número de disparos acertados, x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb164-10"><a href="distribuciones-de-probabilidad.html#cb164-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probabilidad de acertar, p(x)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb164-11"><a href="distribuciones-de-probabilidad.html#cb164-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Distribución de probabilidad para&quot;</span>,n,<span class="st">&quot;disparos,&quot;</span>,<span class="st">&quot;p=&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb164-12"><a href="distribuciones-de-probabilidad.html#cb164-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pdist"></span>
+<img src="Curso_R_basico_files/figure-html/pdist-1.png" alt="Distribución de probabilidad para el ejercicio anterior, x = 3, n = 10, p = 1/4." width="672" />
+<p class="caption">
+Figura 5.2: Distribución de probabilidad para el ejercicio anterior, x = 3, n = 10, p = 1/4.
+</p>
+</div>
+<p>Como se puede observar en la gráfica, acertar los 10 blancos es sumamente improbable y su valor es tan bajo que ni siquiera se muestra en el histograma.</p>
+</div>
+<div id="pbinom" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <code>pbinom</code></h3>
+<p>Esta función es la versión acumulativa de la fórmula binomial. Si quisiéramos del ejercicio anterior saber cuál es la probabilidad de que se acierten al menos 2 disparos, <span class="math inline">\(x \le 2\)</span> necesitamos encontrar las probabilidades de acertar 0, 1 y 2 disparos y sumarlas. Esto con la función <code>dbinom</code> se puede hacer de la siguiente manera.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="distribuciones-de-probabilidad.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.05631351 0.18771172 0.28156757</code></pre>
+<p>Y a estos resultados simplemente se les realiza una suma. Además, vamos a redondear el resultado a 4 dígitos (Para este tipo de operaciones el <code>dplyr</code> y el pipeline <code>%&gt;%</code> vienen de maravilla).</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="distribuciones-de-probabilidad.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb167-2"><a href="distribuciones-de-probabilidad.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">sum</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5256</code></pre>
+<p>El resultado es más o menos 0.5256 o 52.56%. Sin embargo, existe una forma muchísimo más sencillo de hacer esto, a través de la función <code>pbinom()</code>, la cual esta basada en la ecuación <a href="distribuciones-de-probabilidad.html#eq:pbinom">(5.3)</a>.</p>
+<p><span class="math display" id="eq:pbinom">\[\begin{equation}
+p\left(x\right) = \sum_{i = 0}^{x}{\binom{n}{x} p^x\left(1-p\right)^{n-x}}
+\tag{5.3}
+\end{equation}\]</span></p>
+<p>Con el mismo ejercicio anterior, vamos a calcular la probabilidad de acertar por lo menos dos tiros <span class="math inline">\(x \le 2\)</span>. La función <code>pbinom()</code> utiliza los argumentos <code>q</code>: cuartil del cuál queremos saber la probabilidad (en este caso, 0, 1 y 2); <code>size</code>: número de intentos o pruebas; <code>prob</code>: la probabilidad individual de éxito y <code>lower.tail</code>: si se deja en <code>TRUE</code>, obtenemos la probabilidad acumulada hasta el cuartil indicado (<span class="math inline">\(p(x) \le x\)</span>), si se deja en <code>FALSE</code> obtenemos el valor contrario, es decir, la probabilidad de obtener un valor mayor al del cuartil (<span class="math inline">\(p(x) \ge x\)</span>). De nuevo, vamos a redondear a 4 dígitos.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="distribuciones-de-probabilidad.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5256</code></pre>
+<p>Como podemos ver, obtenemos el mismo resultado que con el método anterior, pero sin utilizar tantas funciones. Podemos graficar de nueva cuenta cuál es la probabilidad acumulada con el siguiente script.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="distribuciones-de-probabilidad.html#cb171-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb171-2"><a href="distribuciones-de-probabilidad.html#cb171-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n</span>
+<span id="cb171-3"><a href="distribuciones-de-probabilidad.html#cb171-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb171-4"><a href="distribuciones-de-probabilidad.html#cb171-4" aria-hidden="true" tabindex="-1"></a>disparos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;aciertos&quot;</span>, <span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">&quot;fallos&quot;</span>, <span class="dv">8</span>))</span>
+<span id="cb171-5"><a href="distribuciones-de-probabilidad.html#cb171-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-6"><a href="distribuciones-de-probabilidad.html#cb171-6" aria-hidden="true" tabindex="-1"></a>ej2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, <span class="at">px =</span> <span class="fu">pbinom</span>(x, n, prob), <span class="at">disp =</span> disparos)</span>
+<span id="cb171-7"><a href="distribuciones-de-probabilidad.html#cb171-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-8"><a href="distribuciones-de-probabilidad.html#cb171-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ej2, <span class="fu">aes</span>(x, px)) <span class="sc">+</span> </span>
+<span id="cb171-9"><a href="distribuciones-de-probabilidad.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> disp)) <span class="sc">+</span></span>
+<span id="cb171-10"><a href="distribuciones-de-probabilidad.html#cb171-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Número de disparos acertados, x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-11"><a href="distribuciones-de-probabilidad.html#cb171-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probabilidad de acertar, p(x)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-12"><a href="distribuciones-de-probabilidad.html#cb171-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Distribución de probabilidad para&quot;</span>,n,<span class="st">&quot;disparos,&quot;</span>,<span class="st">&quot;p=&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb171-13"><a href="distribuciones-de-probabilidad.html#cb171-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-109"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-109-1.png" alt="Distribución de probabilidad acumulada para acertar al menos 2 disparos." width="672" />
+<p class="caption">
+Figura 5.3: Distribución de probabilidad acumulada para acertar al menos 2 disparos.
+</p>
+</div>
+<p>En esta gráfica el color salmón representa la probabilidad acumulada y el color turquesa representa la probabilidad restante. Como corresponde, la probabilidad acumulada alcanza un poco más del 50%, valor que calculamos con la función <code>pbinom()</code>.</p>
+<p>Si la pregunta fuese ¿Qué tan probable es que una persona acierte más de 6 disparos? Para esta pregunta podemos hacer el calculo con el argumento <code>lower.tail = FALSE</code>.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="distribuciones-de-probabilidad.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0035</code></pre>
+<p>Esto quiere decir que la probabilidad de acertar 6 o más disparos es de 0.0035 o 0.35%, por lo que posiblemente la persona disparando sea alguien con entrenamiento y su probabilidad de éxito individual <span class="math inline">\(p\)</span> sea mayor que <span class="math inline">\(\frac{1}{4}\)</span>. Si graficamos esto se vería de la siguiente manera.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="distribuciones-de-probabilidad.html#cb174-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb174-2"><a href="distribuciones-de-probabilidad.html#cb174-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n</span>
+<span id="cb174-3"><a href="distribuciones-de-probabilidad.html#cb174-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb174-4"><a href="distribuciones-de-probabilidad.html#cb174-4" aria-hidden="true" tabindex="-1"></a>disparos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;fallos&quot;</span>, <span class="dv">6</span>), <span class="fu">rep</span>(<span class="st">&quot;aciertos&quot;</span>, <span class="dv">5</span>))</span>
+<span id="cb174-5"><a href="distribuciones-de-probabilidad.html#cb174-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-6"><a href="distribuciones-de-probabilidad.html#cb174-6" aria-hidden="true" tabindex="-1"></a>ej3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, <span class="at">px =</span> <span class="fu">pbinom</span>(x, n, prob, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="at">disp =</span> disparos)</span>
+<span id="cb174-7"><a href="distribuciones-de-probabilidad.html#cb174-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-8"><a href="distribuciones-de-probabilidad.html#cb174-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ej3, <span class="fu">aes</span>(x, px)) <span class="sc">+</span> </span>
+<span id="cb174-9"><a href="distribuciones-de-probabilidad.html#cb174-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> disp)) <span class="sc">+</span></span>
+<span id="cb174-10"><a href="distribuciones-de-probabilidad.html#cb174-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Número de disparos acertados, x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb174-11"><a href="distribuciones-de-probabilidad.html#cb174-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probabilidad de acertar, p(x)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb174-12"><a href="distribuciones-de-probabilidad.html#cb174-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Distribución de probabilidad para&quot;</span>,n,<span class="st">&quot;disparos,&quot;</span>,<span class="st">&quot;p=&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb174-13"><a href="distribuciones-de-probabilidad.html#cb174-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-111-1.png" alt="Distribución de probabilidad acumulada para acertar al menos 2 disparos." width="672" />
+<p class="caption">
+Figura 5.4: Distribución de probabilidad acumulada para acertar al menos 2 disparos.
+</p>
+</div>
+<p>Se observa que la probabilidad de acertar 6 o más disparos es muy baja, tanto que casi ni se aprecia el color salmón en el gráfico.</p>
+</div>
+<div id="qbinom" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> <code>qbinom</code></h3>
+<p><code>qinom()</code> es la función inversa de <code>pbinom()</code> y nos da como resultado el número de éxitos en un rango de probabilidad. En este caso, el argumento <code>q</code> es reemplazado por el argumento <code>p</code>, que hace referencia a una probabilidad.</p>
+<p>Supongamos que queremos saber cuántos aciertos se dan dentro del 50% de la distribución de la probabilidad. Nosotros sabemos que ese resultado es 2 debido al ejercicio anterior. Sin embargo, vamos a corroborarlo.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="distribuciones-de-probabilidad.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbinom</span>(<span class="fl">0.50</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Vamos a graficar esto con el siguiente script.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="distribuciones-de-probabilidad.html#cb177-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb177-2"><a href="distribuciones-de-probabilidad.html#cb177-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb177-3"><a href="distribuciones-de-probabilidad.html#cb177-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb177-4"><a href="distribuciones-de-probabilidad.html#cb177-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-5"><a href="distribuciones-de-probabilidad.html#cb177-5" aria-hidden="true" tabindex="-1"></a>ej4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(p, <span class="at">q=</span><span class="fu">qbinom</span>(p, n, prob)) </span>
+<span id="cb177-6"><a href="distribuciones-de-probabilidad.html#cb177-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-7"><a href="distribuciones-de-probabilidad.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ej4, <span class="fu">aes</span>(p, q)) <span class="sc">+</span> </span>
+<span id="cb177-8"><a href="distribuciones-de-probabilidad.html#cb177-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-9"><a href="distribuciones-de-probabilidad.html#cb177-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Probabilidad de acertar, p(x)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-10"><a href="distribuciones-de-probabilidad.html#cb177-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de disparos acertados, x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-11"><a href="distribuciones-de-probabilidad.html#cb177-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Aciertos para la probabilidad acumulada de&quot;</span>,n,<span class="st">&quot;disparos,&quot;</span>,<span class="st">&quot;p =&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb177-12"><a href="distribuciones-de-probabilidad.html#cb177-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-113-1.png" alt="Gráfica de la función `qbinom`." width="672" />
+<p class="caption">
+Figura 5.5: Gráfica de la función <code>qbinom</code>.
+</p>
+</div>
+<p>Como se puede observar, con solo 5 disparos acertados estamos abarcando cerca del 100% de toda la probabilidad de los datos, lo que hace que acertar 6 o más disparos sea sumamente improbable. En caso de tener un resultado de 6 aciertos o más, como se mencionó anteriormente, posiblemente se trate de una persona con entrenamiento y su probabilidad de acertar es mayor.</p>
+</div>
+<div id="rbinom" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> rbinom</h3>
+<p>Esta función simula de manera aleatoria <span class="math inline">\(n\)</span> pruebas. El resultado es el número de éxitos por prueba. Por ejemplo, vamos a simular que una persona dispara 10 veces, con la probabilidad de <span class="math inline">\(\frac{1}{4}\)</span> que vimos anteriormente. Para hacer esto vamos a reemplazar el argumento <code>x</code> de la función con el argumento <code>n</code> que hace referencia al número de observaciones (en este caso, como solo una persona dispara, decimos que n es 1).</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="distribuciones-de-probabilidad.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Cada que hagamos esto obtendremos un resultado distinto que se encontrará dentro de los rangos más probables. Imaginemos ahora que queremos hacer que 10,000 personas disparen 10 veces y registrar su número de éxitos. Esto lo podemos graficar ya que el resultado en la consola va a consistir de 10,000 números. Para hacer el gráfico utilizamos el siguiente script.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="distribuciones-de-probabilidad.html#cb180-1" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb180-2"><a href="distribuciones-de-probabilidad.html#cb180-2" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb180-3"><a href="distribuciones-de-probabilidad.html#cb180-3" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb180-4"><a href="distribuciones-de-probabilidad.html#cb180-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-5"><a href="distribuciones-de-probabilidad.html#cb180-5" aria-hidden="true" tabindex="-1"></a>ej5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rbinom</span>(reps, size, prob))</span>
+<span id="cb180-6"><a href="distribuciones-de-probabilidad.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-7"><a href="distribuciones-de-probabilidad.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ej5, <span class="fu">aes</span>(x)) <span class="sc">+</span> </span>
+<span id="cb180-8"><a href="distribuciones-de-probabilidad.html#cb180-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb180-9"><a href="distribuciones-de-probabilidad.html#cb180-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Número de disparos acertados, x&quot;</span>)<span class="sc">+</span></span>
+<span id="cb180-10"><a href="distribuciones-de-probabilidad.html#cb180-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Personas&quot;</span>)<span class="sc">+</span></span>
+<span id="cb180-11"><a href="distribuciones-de-probabilidad.html#cb180-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Aciertos de&quot;</span>,reps,<span class="st">&quot;personas, &quot;</span>,<span class="st">&quot;p =&quot;</span>,prob)) <span class="sc">+</span></span>
+<span id="cb180-12"><a href="distribuciones-de-probabilidad.html#cb180-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-115"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-115-1.png" alt="Número de aciertos de una simulación con 10,000 personas disparando un total de 10 veces." width="672" />
+<p class="caption">
+Figura 5.6: Número de aciertos de una simulación con 10,000 personas disparando un total de 10 veces.
+</p>
+</div>
+<p>Si comparamos este gráfico, podemos ver que se asemeja mucho al de la figura <a href="distribuciones-de-probabilidad.html#fig:pdist">5.2</a>. De hecho entre más simulaciones corramos más se van a asemejar ambos gráficos.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-Palacio2020" class="csl-entry">
+Palacio, F. X., Apodaca, M. J., &amp; Crisci, J. V. (2020). <em>Análisis multivariado para datos biológicos. Teoría y su aplicación utilizando el lenguaje r</em>. Fundación Azara.
+</div>
+<div id="ref-Samuels2016" class="csl-entry">
+Samuels, M. L., Witmer, J. A., &amp; Schaffner, A. A. (2016). <em>Statistics for the life sciences</em> (5th Edition). Pearson.
+</div>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="histogramas-y-gráficos-de-densidad.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

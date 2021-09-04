@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Curso de R básico</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Curso de R básico" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Curso de R básico" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="correlación-y-regresión-linear.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Requisitos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>2</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>2.1</b> Interfaz</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>2.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>2.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>2.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>2.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>2.6</b> Comentarios</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>2.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>2.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>3</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>3.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media"><i class="fa fa-check"></i><b>3.1.1</b> Media</a></li>
+<li class="chapter" data-level="3.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana"><i class="fa fa-check"></i><b>3.1.2</b> Mediana</a></li>
+<li class="chapter" data-level="3.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#moda"><i class="fa fa-check"></i><b>3.1.3</b> Moda</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango"><i class="fa fa-check"></i><b>3.2.1</b> Rango</a></li>
+<li class="chapter" data-level="3.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar"><i class="fa fa-check"></i><b>3.2.2</b> Desviación estándar</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición-relativa"><i class="fa fa-check"></i><b>3.3</b> Medidas de posición relativa</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-z"><i class="fa fa-check"></i><b>3.3.1</b> Valores Z</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-absoluta"><i class="fa fa-check"></i><b>3.3.2</b> Frecuencia absoluta</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#frecuencia-relativa"><i class="fa fa-check"></i><b>3.3.3</b> Frecuencia relativa</a></li>
+<li class="chapter" data-level="3.3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#cuartiles"><i class="fa fa-check"></i><b>3.3.4</b> Cuartiles</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>3.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probabilidad.html"><a href="probabilidad.html"><i class="fa fa-check"></i><b>4</b> Probabilidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probabilidad.html"><a href="probabilidad.html#probabilidad-frecuentista"><i class="fa fa-check"></i><b>4.1</b> Probabilidad frecuentista</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad.html"><a href="probabilidad.html#reglas-de-probabilidad"><i class="fa fa-check"></i><b>4.2</b> Reglas de probabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="probabilidad.html"><a href="probabilidad.html#curvas-de-densidad"><i class="fa fa-check"></i><b>4.3</b> Curvas de densidad</a></li>
+<li class="chapter" data-level="4.4" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>4.4</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="probabilidad.html"><a href="probabilidad.html#media-y-desviación-estándar-de-la-distribución-binomial"><i class="fa fa-check"></i><b>4.4.1</b> Media y desviación estándar de la distribución binomial</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probabilidad.html"><a href="probabilidad.html#distribución-binomial-en-r"><i class="fa fa-check"></i><b>4.4.2</b> Distribución binomial en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal"><i class="fa fa-check"></i><b>4.5</b> Distribución normal</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="probabilidad.html"><a href="probabilidad.html#distribución-normal-en-r"><i class="fa fa-check"></i><b>4.5.1</b> Distribución normal en R</a></li>
+<li class="chapter" data-level="4.5.2" data-path="probabilidad.html"><a href="probabilidad.html#pruebas-de-normalidad-en-r"><i class="fa fa-check"></i><b>4.5.2</b> Pruebas de normalidad en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probabilidad.html"><a href="probabilidad.html#distribución-muestral"><i class="fa fa-check"></i><b>4.6</b> Distribución muestral</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="probabilidad.html"><a href="probabilidad.html#poblaciones-muestras-y-distribuciones-muestrales"><i class="fa fa-check"></i><b>4.6.1</b> Poblaciones, muestras y distribuciones muestrales</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html"><i class="fa fa-check"></i><b>5</b> Estadística inferencial</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#error-estándar-de-la-media"><i class="fa fa-check"></i><b>5.1</b> Error estándar de la media</a></li>
+<li class="chapter" data-level="5.2" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#intervalo-de-confianza-para-mu"><i class="fa fa-check"></i><b>5.2</b> Intervalo de confianza para <span class="math inline">\(\mu\)</span></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#distribución-t-de-student"><i class="fa fa-check"></i><b>5.2.1</b> Distribución <span class="math inline">\(t\)</span> de Student</a></li>
+<li class="chapter" data-level="5.2.2" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#construcción-de-un-intervalo-de-confianza-para-mu"><i class="fa fa-check"></i><b>5.2.2</b> Construcción de un intervalo de confianza para <span class="math inline">\(\mu\)</span></a></li>
+<li class="chapter" data-level="5.2.3" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#intervalos-de-confianza-unilaterales"><i class="fa fa-check"></i><b>5.2.3</b> Intervalos de confianza unilaterales</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#comparación-de-dos-medias"><i class="fa fa-check"></i><b>5.3</b> Comparación de dos medias</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#intervalo-de-confianza-para-mu_1---mu_2"><i class="fa fa-check"></i><b>5.3.1</b> Intervalo de confianza para <span class="math inline">\(\mu_1 - \mu_2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>5.4</b> Pruebas de hipótesis</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#t-test"><i class="fa fa-check"></i><b>5.4.1</b> <span class="math inline">\(t\)</span>-test</a></li>
+<li class="chapter" data-level="5.4.2" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#t-test-de-una-cola"><i class="fa fa-check"></i><b>5.4.2</b> <span class="math inline">\(t\)</span> test de una cola</a></li>
+<li class="chapter" data-level="5.4.3" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#tamaño-de-efecto"><i class="fa fa-check"></i><b>5.4.3</b> Tamaño de efecto</a></li>
+<li class="chapter" data-level="5.4.4" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#prueba-de-wilcoxon-mann-whitney"><i class="fa fa-check"></i><b>5.4.4</b> Prueba de Wilcoxon-Mann-Whitney</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#comparación-de-muestras-pareadas"><i class="fa fa-check"></i><b>5.5</b> Comparación de muestras pareadas</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#prueba-de-t-pareada"><i class="fa fa-check"></i><b>5.5.1</b> Prueba de <span class="math inline">\(t\)</span> pareada</a></li>
+<li class="chapter" data-level="5.5.2" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#prueba-de-signos"><i class="fa fa-check"></i><b>5.5.2</b> Prueba de signos</a></li>
+<li class="chapter" data-level="5.5.3" data-path="estadística-inferencial.html"><a href="estadística-inferencial.html#prueba-de-rangos-con-signos-de-wilcoxon"><i class="fa fa-check"></i><b>5.5.3</b> Prueba de rangos con signos de Wilcoxon</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html"><i class="fa fa-check"></i><b>6</b> Inferencia de datos categóricos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#distribuciones-de-una-muestra"><i class="fa fa-check"></i><b>6.1</b> Distribuciones de una muestra</a></li>
+<li class="chapter" data-level="6.2" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-de-chi-cuadrada"><i class="fa fa-check"></i><b>6.2</b> Prueba de Chi-cuadrada</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#hipótesis-compuestas-y-direccionales"><i class="fa fa-check"></i><b>6.2.1</b> Hipótesis compuestas y direccionales</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-de-chi-cuadrada-para-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.3</b> Prueba de Chi-cuadrada para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.4" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#interpretación-de-las-tablas-de-contingencia"><i class="fa fa-check"></i><b>6.4</b> Interpretación de las tablas de contingencia</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#cuestiones-acerca-de-las-columnas-y-filas"><i class="fa fa-check"></i><b>6.4.1</b> Cuestiones acerca de las columnas y filas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#prueba-exacta-de-fisher"><i class="fa fa-check"></i><b>6.5</b> Prueba exacta de Fisher</a></li>
+<li class="chapter" data-level="6.6" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#tablas-de-contingencia-r-times-k"><i class="fa fa-check"></i><b>6.6</b> Tablas de contingencia <span class="math inline">\(r \times k\)</span></a></li>
+<li class="chapter" data-level="6.7" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#intervalos-de-confianza-para-la-diferencia-entre-probabilidades"><i class="fa fa-check"></i><b>6.7</b> Intervalos de confianza para la diferencia entre probabilidades</a></li>
+<li class="chapter" data-level="6.8" data-path="inferencia-de-datos-categóricos.html"><a href="inferencia-de-datos-categóricos.html#datos-pareados-en-tablas-2x2"><i class="fa fa-check"></i><b>6.8</b> Datos pareados en tablas 2x2</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html"><i class="fa fa-check"></i><b>7</b> Modelado de relaciones</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#análisis-de-varianza-anova"><i class="fa fa-check"></i><b>7.1</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#variación-dentro-de-los-grupos"><i class="fa fa-check"></i><b>7.1.1</b> Variación dentro de los grupos</a></li>
+<li class="chapter" data-level="7.1.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#variación-entre-los-grupos"><i class="fa fa-check"></i><b>7.1.2</b> Variación entre los grupos</a></li>
+<li class="chapter" data-level="7.1.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#una-relación-importante-en-el-anova"><i class="fa fa-check"></i><b>7.1.3</b> Una relación importante en el ANOVA</a></li>
+<li class="chapter" data-level="7.1.4" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#tabla-de-anova"><i class="fa fa-check"></i><b>7.1.4</b> Tabla de ANOVA</a></li>
+<li class="chapter" data-level="7.1.5" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#modelo-del-anova"><i class="fa fa-check"></i><b>7.1.5</b> Modelo del ANOVA</a></li>
+<li class="chapter" data-level="7.1.6" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#distribución-de-f"><i class="fa fa-check"></i><b>7.1.6</b> Distribución de <span class="math inline">\(F\)</span></a></li>
+<li class="chapter" data-level="7.1.7" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#prueba-de-f"><i class="fa fa-check"></i><b>7.1.7</b> Prueba de <span class="math inline">\(F\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diseño-por-bloques-aleatorizados"><i class="fa fa-check"></i><b>7.2</b> Diseño por bloques aleatorizados</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#creando-los-bloques"><i class="fa fa-check"></i><b>7.2.1</b> Creando los bloques</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#anova-de-dos-vías"><i class="fa fa-check"></i><b>7.3</b> ANOVA de dos vías</a></li>
+<li class="chapter" data-level="7.4" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#combinaciones-lineales-de-las-medias"><i class="fa fa-check"></i><b>7.4</b> Combinaciones lineales de las medias</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#contrastes"><i class="fa fa-check"></i><b>7.4.1</b> Contrastes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.4.3" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#prueba-de-t"><i class="fa fa-check"></i><b>7.4.3</b> Prueba de <span class="math inline">\(t\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>7.5</b> Pruebas post hoc</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diferencia-menos-significativa-de-fisher-lsd"><i class="fa fa-check"></i><b>7.5.1</b> Diferencia menos significativa de Fisher (LSD)</a></li>
+<li class="chapter" data-level="7.5.2" data-path="modelado-de-relaciones.html"><a href="modelado-de-relaciones.html#diferencia-significativa-honesta-de-tukey-hsd"><i class="fa fa-check"></i><b>7.5.2</b> Diferencia significativa honesta de Tukey (HSD)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="correlación-y-regresión-linear.html"><a href="correlación-y-regresión-linear.html"><i class="fa fa-check"></i><b>8</b> Correlación y regresión linear</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Curso de R básico</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-Palacio2020" class="csl-entry">
+Palacio, F. X., Apodaca, M. J., &amp; Crisci, J. V. (2020). <em>Análisis multivariado para datos biológicos. Teoría y su aplicación utilizando el lenguaje r</em>. Fundación Azara.
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlación-y-regresión-linear.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

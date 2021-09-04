@@ -1,0 +1,41 @@
+--- 
+title: "Curso de R básico"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+csl: apa.csl
+link-citations: yes
+nocite: "@*"
+favicon: "images/favicon.ico"
+description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
+---
+
+```{r setup, include=TRUE, cache = FALSE}
+library(knitr)
+library(bookdown)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Requisitos {-}
+Antes de comenzar con el curso es necesario que descarguemos ciertos programas entre ellos están incluidos `R` y RStudio.
+
+## Descarga de `R` y RStudio {-}
+Tenemos que distinguir entre `R` y RStudio. Como tal, `R` es el lenguaje de programación y RStudio es el ambiente de trabajo donde utilizamos este lenguaje de programación.
+
+Para descargar `R` podemos acceder al link de [esta página.](https://cran.r-project.org/bin/windows/base/)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.asp = 5}
+  knitr::include_graphics("descargaR.png", dpi = 100)
+```
+
+
+Una vez descargado e instalado `R`, procedemos a descargar RStudio desde [esta página.](https://rstudio.com/products/rstudio/download/#download)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align = "center", fig.asp = 5}
+  knitr::include_graphics("descargaRStudio.png", dpi = 120)
+```
+
+Con estas herramientas podemos comenzar a trabajar en RStudio.

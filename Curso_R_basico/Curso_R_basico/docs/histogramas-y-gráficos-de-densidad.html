@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lección 4 Histogramas y gráficos de densidad | Análisis de Varianza</title>
+  <meta name="description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lección 4 Histogramas y gráficos de densidad | Análisis de Varianza" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lección 4 Histogramas y gráficos de densidad | Análisis de Varianza" />
+  
+  <meta name="twitter:description" content="Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos." />
+  
+
+<meta name="author" content="Alejandro Ruiz-García" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="references.html"/>
+<link rel="next" href="distribuciones-de-probabilidad.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso de R básico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Requisitos</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#descarga-de-r-y-rstudio"><i class="fa fa-check"></i><b>0.1</b> Descarga de R y RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#interfaz"><i class="fa fa-check"></i><b>1.1</b> Interfaz</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#creando-nuestro-primer-proyecto"><i class="fa fa-check"></i><b>1.2</b> Creando nuestro primer proyecto</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#objetos-y-variables"><i class="fa fa-check"></i><b>1.3</b> Objetos y variables</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#instalar-paquetes"><i class="fa fa-check"></i><b>1.4</b> Instalar paquetes</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#importar-datos-a-r"><i class="fa fa-check"></i><b>1.5</b> Importar datos a R</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#comentarios"><i class="fa fa-check"></i><b>1.6</b> Comentarios</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#exportar-datos"><i class="fa fa-check"></i><b>1.7</b> Exportar datos</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-r.html"><a href="introducción-a-r.html#pedir-ayuda"><i class="fa fa-check"></i><b>1.8</b> Pedir ayuda</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html"><i class="fa fa-check"></i><b>2</b> Estadística descriptiva</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-tendencia-central"><i class="fa fa-check"></i><b>2.1</b> Medidas de tendencia central</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#media-en-r"><i class="fa fa-check"></i><b>2.1.1</b> Media en R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#mediana-en-r"><i class="fa fa-check"></i><b>2.1.2</b> Mediana en R</a></li>
+<li class="chapter" data-level="2.1.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#la-función-summary"><i class="fa fa-check"></i><b>2.1.3</b> La función <code>summary</code></a></li>
+<li class="chapter" data-level="2.1.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#visualización-básica-de-datos"><i class="fa fa-check"></i><b>2.1.4</b> Visualización básica de datos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#valores-atípicos"><i class="fa fa-check"></i><b>2.1.5</b> Valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>2.2</b> Medidas de dispersión</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#rango-en-r"><i class="fa fa-check"></i><b>2.2.1</b> Rango en R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#desviación-estándar-en-r"><i class="fa fa-check"></i><b>2.2.2</b> Desviación estándar en R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#medidas-de-posición"><i class="fa fa-check"></i><b>2.3</b> Medidas de posición</a></li>
+<li class="chapter" data-level="2.4" data-path="estadística-descriptiva.html"><a href="estadística-descriptiva.html#el-uso-de-la-librería-dplyr"><i class="fa fa-check"></i><b>2.4</b> El uso de la librería <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html"><i class="fa fa-check"></i><b>3</b> Análisis de Varianza (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>3.1</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-varianza-anova.html"><a href="análisis-de-varianza-anova.html#prueba-de-homocedasticidad"><i class="fa fa-check"></i><b>3.2</b> Prueba de homocedasticidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html"><i class="fa fa-check"></i><b>4</b> Histogramas y gráficos de densidad</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#r-y-ggplot2"><i class="fa fa-check"></i><b>4.1</b> R y <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-r"><i class="fa fa-check"></i><b>4.1.1</b> Histogramas y gráficos de densidad en R</a></li>
+<li class="chapter" data-level="4.1.2" data-path="histogramas-y-gráficos-de-densidad.html"><a href="histogramas-y-gráficos-de-densidad.html#histogramas-y-gráficos-de-densidad-en-ggplot2"><i class="fa fa-check"></i><b>4.1.2</b> Histogramas y gráficos de densidad en <code>ggplot2</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html"><i class="fa fa-check"></i><b>5</b> Distribuciones de probabilidad</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#distribución-binomial"><i class="fa fa-check"></i><b>5.1</b> Distribución binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#dbinom"><i class="fa fa-check"></i><b>5.1.1</b> <code>dbinom</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#pbinom"><i class="fa fa-check"></i><b>5.1.2</b> <code>pbinom</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#qbinom"><i class="fa fa-check"></i><b>5.1.3</b> <code>qbinom</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="distribuciones-de-probabilidad.html"><a href="distribuciones-de-probabilidad.html#rbinom"><i class="fa fa-check"></i><b>5.1.4</b> rbinom</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de Varianza</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="histogramas-y-gráficos-de-densidad" class="section level1" number="4">
+<h1><span class="header-section-number">Lección 4</span> Histogramas y gráficos de densidad</h1>
+<p>Un <strong>histograma</strong> es una representación de la distribución de datos de una variable numérica. Un histograma nos puede mostrar la forma de la distribución de los datos de nuestra variable. Las áreas dentro de un histograma corresponden a las frecuencias de dichas clases.</p>
+<p>De igual manera, la forma de un histograma puede ser muy útil al momento de interpretar datos. Se dice que un histograma es <em>unimodal</em> cuando solamente se aprecia un pico máximo en los datos y <em>bimodal</em> cuando se observan dos. Además un histograma puede estar <em>sesgado</em> cuando los datos se cargan hacia uno de los extremos. Se dice que un histograma está <em>sesgado hacia la izquierda</em> cuando la el modo (pico) esta cargado a la derecha, dejando una cola larga hacia la izquierda y que está <em>sesgado hacia la derecha</em> cuando ocurre lo contrario. Podemos ver en la figura <a href="histogramas-y-gráficos-de-densidad.html#fig:histdist">4.1</a> los distintos tipos de distribuciones que se pueden formar si trazamos una línea sobre los histogramas, tomado de <span class="citation"><a href="distribuciones-de-probabilidad.html#ref-Samuels2016" role="doc-biblioref">Samuels et al.</a> (<a href="distribuciones-de-probabilidad.html#ref-Samuels2016" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:histdist"></span>
+<img src="distributions.png" alt="Formas de distribución." width="662" />
+<p class="caption">
+Figura 4.1: Formas de distribución.
+</p>
+</div>
+<p>Una <strong>curva de densidad</strong> es una forma de representar la distribución de frecuencias de variables continuas, generalmente con una línea curva. El eje de las abscisas generalmente está representado por una escala llamada <em>escala de densidad</em>. Cuando esto es así, las frecuencias relativas están representadas como el <em>área debajo de la curva</em>. El área total debajo de la curva debe ser igual a 1.</p>
+<div id="r-y-ggplot2" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> R y <code>ggplot2</code></h2>
+<p>En esta sección aprenderemos a utilizar las herramientas incluidas en R para la elaboración de histogramas y gráficos de densidad. Sin embargo, también utilizaremos una librería que nos permitirá visualizar mejor los datos llamada <code>gplot2</code>.</p>
+<div id="histogramas-y-gráficos-de-densidad-en-r" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Histogramas y gráficos de densidad en R</h3>
+<p>En esta ocasión utilizaremos la base de datos <code>mtcars</code> que viene incluida en el paquete <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="histogramas-y-gráficos-de-densidad.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb146-2"><a href="histogramas-y-gráficos-de-densidad.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span></code></pre></div>
+<p>Para crear un histograma con las herramientas básicas de R simplemente escribimos el siguiente código. El argumento <code>prob = TRUE</code> hace que la abscisa (y) este representado por una escala de densidad en lugar de los valores de las variables.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="histogramas-y-gráficos-de-densidad.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">prob =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-91-1.png" alt="Histograma de la matriz de datos `mtcars`. El eje de la x representa las millas por galón y el eje y repesenta la escala de densidad." width="672" />
+<p class="caption">
+Figura 4.2: Histograma de la matriz de datos <code>mtcars</code>. El eje de la x representa las millas por galón y el eje y repesenta la escala de densidad.
+</p>
+</div>
+<p>En caso de que queramos hacer un gráfico de densidad en lugar de un histograma podemos utilizar el siguiente código. La función <code>density()</code> nos muestra la información acerca de la distribución de los datos. Para ver el gráfico debemos utilizar la función <code>plot()</code>.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="histogramas-y-gráficos-de-densidad.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(mtcars<span class="sc">$</span>mpg))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-92-1.png" alt="Gráfico de densidad de la matriz de datos `mtcars`. El eje de la x representa las millas por galón y el eje y repesenta la escala de densidad." width="672" />
+<p class="caption">
+Figura 4.3: Gráfico de densidad de la matriz de datos <code>mtcars</code>. El eje de la x representa las millas por galón y el eje y repesenta la escala de densidad.
+</p>
+</div>
+<p>Podemos visualizar tanto el histograma como la línea de densidad en el mismo gráfico. Para esto graficamos el histograma de manera normal con la función <code>hist()</code> pero después de esto utilizamos la función <code>lines()</code>.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="histogramas-y-gráficos-de-densidad.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">prob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb149-2"><a href="histogramas-y-gráficos-de-densidad.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(mtcars<span class="sc">$</span>mpg), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-93"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-93-1.png" alt="Histograma y gráfico de densidad de la matriz de datos `mtcars`." width="672" />
+<p class="caption">
+Figura 4.4: Histograma y gráfico de densidad de la matriz de datos <code>mtcars</code>.
+</p>
+</div>
+</div>
+<div id="histogramas-y-gráficos-de-densidad-en-ggplot2" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Histogramas y gráficos de densidad en <code>ggplot2</code></h3>
+<p>Como ya hemos cargado <code>ggplot2</code> en el ejemplo anterior para poder importar la base de datos, no es necesario volver a cargarlo. Empecemos entonces con el gráfico más básico de nuestros datos utilizando las funciones <code>ggplot()</code> y <code>geom_density()</code>.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="histogramas-y-gráficos-de-densidad.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb150-2"><a href="histogramas-y-gráficos-de-densidad.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-94"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-94-1.png" alt="Gráfico de densidad utilizando `ggplot2`." width="672" />
+<p class="caption">
+Figura 4.5: Gráfico de densidad utilizando <code>ggplot2</code>.
+</p>
+</div>
+<p>Podemos agregar etiquetas a los valores de <em>x</em> y <em>y</em>.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="histogramas-y-gráficos-de-densidad.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb151-2"><a href="histogramas-y-gráficos-de-densidad.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb151-3"><a href="histogramas-y-gráficos-de-densidad.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Milas por galón&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-95"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-95-1.png" alt="Gráfico de densidad utilizando `ggplot2` con las etiquetas modificadas." width="672" />
+<p class="caption">
+Figura 4.6: Gráfico de densidad utilizando <code>ggplot2</code> con las etiquetas modificadas.
+</p>
+</div>
+<p>Además podemos rellenar el área debajo de la curva con el argumento <code>fill</code>.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="histogramas-y-gráficos-de-densidad.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb152-2"><a href="histogramas-y-gráficos-de-densidad.html#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb152-3"><a href="histogramas-y-gráficos-de-densidad.html#cb152-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Milas por galón&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-96"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-96-1.png" alt="Gráfico de densidad utilizando `ggplot2` con el área bajo la curva rellena." width="672" />
+<p class="caption">
+Figura 4.7: Gráfico de densidad utilizando <code>ggplot2</code> con el área bajo la curva rellena.
+</p>
+</div>
+<p>Adicionalmente podemos modificar la transparencia con el argumento <code>alpha</code>.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="histogramas-y-gráficos-de-densidad.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb153-2"><a href="histogramas-y-gráficos-de-densidad.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb153-3"><a href="histogramas-y-gráficos-de-densidad.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Milas por galón&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-97"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-97-1.png" alt="Gráfico de densidad utilizando `ggplot2` relleno y con transparencia modificada." width="672" />
+<p class="caption">
+Figura 4.8: Gráfico de densidad utilizando <code>ggplot2</code> relleno y con transparencia modificada.
+</p>
+</div>
+<p>De igual manera, podemos indicar la posición de la media en este gráfico. Primero debemos de caluclar la media con la función <code>mean()</code>.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="histogramas-y-gráficos-de-densidad.html#cb154-1" aria-hidden="true" tabindex="-1"></a>mpg.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(mtcars<span class="sc">$</span>mpg)</span></code></pre></div>
+<p>Una vez calculada la media, podemos utilizar otra función llamada <code>geom_vline</code> en el gráfico que ya habíamos creado.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="histogramas-y-gráficos-de-densidad.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb155-2"><a href="histogramas-y-gráficos-de-densidad.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb155-3"><a href="histogramas-y-gráficos-de-densidad.html#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Milas por galón&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb155-4"><a href="histogramas-y-gráficos-de-densidad.html#cb155-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mpg.mean, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-99"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-99-1.png" alt="Gráfico de densidad utilizando `ggplot2` en donde se indica la media." width="672" />
+<p class="caption">
+Figura 4.9: Gráfico de densidad utilizando <code>ggplot2</code> en donde se indica la media.
+</p>
+</div>
+<p>Adicionalmente podemos explorar distintos temas que <code>ggplot2</code> ofrece.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="histogramas-y-gráficos-de-densidad.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg)) <span class="sc">+</span> </span>
+<span id="cb156-2"><a href="histogramas-y-gráficos-de-densidad.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb156-3"><a href="histogramas-y-gráficos-de-densidad.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Milas por galón&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb156-4"><a href="histogramas-y-gráficos-de-densidad.html#cb156-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mpg.mean, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
+<span id="cb156-5"><a href="histogramas-y-gráficos-de-densidad.html#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-100"></span>
+<img src="Curso_R_basico_files/figure-html/unnamed-chunk-100-1.png" alt="Gráfico de densidad utilizando `ggplot2` modificando los temas.." width="672" />
+<p class="caption">
+Figura 4.10: Gráfico de densidad utilizando <code>ggplot2</code> modificando los temas..
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="distribuciones-de-probabilidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

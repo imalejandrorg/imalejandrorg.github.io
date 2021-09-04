@@ -1,0 +1,21 @@
+book_filename: "Curso_R_basico"
+delete_merged_file: true
+output_dir: "docs"
+language:
+  label:
+    fig: "Figura "
+    tab: "Tabla "
+    eq: "Ecuación "
+    thm: "Teorema "
+    lem: "Lemma "
+    cor: "Corolario "
+    prp: "Proposición "
+    cnj: "Conjectura "
+    def: "Definición "
+    exm: "Ejemplo "
+    exr: "Ejercicio "
+    proof: "Prueba. "
+    remark: "Remark. "
+    solution: "Solución. "
+  ui:
+    chapter_name: "Lección "
