@@ -4,7 +4,7 @@ author: "Alejandro Ruiz"
 output:
   ioslides_presentation:
     widescreen: yes
-    incremental: yes
+    incremental: no
     transition: faster
     logo: O:/Imágenes/favicon_io/android-chrome-512x512.png
 ---
@@ -57,7 +57,7 @@ getwd()
 ```
 
 ```{r include=FALSE}
-setwd("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01")
+setwd("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Presentaciones/Clase-01")
 ```
 
 ## Objetos y variables {.smaller}
@@ -77,7 +77,7 @@ setwd("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/presentaciones/
 ## Objetos y variables
 
 ```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
-knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/images/DataType.png", dpi = 120)
+knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/DataType.png", dpi = 120)
 ```
 
 ## Instalar paquetes
@@ -97,17 +97,17 @@ library(vegan)
 Personalmente prefiero instalar los paquetes desde la ventana de *Packages.*
 
 ```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
-knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/images/Package1.png", dpi = 120)
+knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/Package1.png", dpi = 120)
 ```
 
-## Importar datos
+## Importar datos {.smaller   }
 
 Importaremos los datos de Palacio et al. (2020). Una base de datos de aves del capítulo 6.
 
 **Descargar:** ["Aves.txt"](https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt)
 
 ```{r echo=TRUE}
-Aves <- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.txt",
+Aves <- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.txt",
                    header = TRUE)
 View(Aves)
 ```
@@ -127,10 +127,11 @@ Para otros formatos utilizamos:
 * **.xlsx:** read_excel(), del paquete readxl.
 
 ```{r echo=TRUE}
-Aves_csv <- read.csv("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.csv", header = TRUE)
+Aves_csv <- read.csv("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.csv",
+                     header = TRUE)
 
 library(readxl)
-Aves_xlsx <- read_excel("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.xlsx")
+Aves_xlsx <- read_excel("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.xlsx")
 ```
 
 ## Comentarios
@@ -166,4 +167,3 @@ Cuando no sepamos cómo fuciona exactamente algo, podemos pedir ayuda agregando 
 ?mean()
 
 ```
-
