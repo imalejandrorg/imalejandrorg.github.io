@@ -7,7 +7,7 @@ editor_options:
     wrap: sentence
 ---
 
-# Introducción a R
+# Introducción a R y RStudio
 ```{r include=FALSE}
 library(knitr)
 library(bookdown)
@@ -19,8 +19,6 @@ library(cowplot)
 library(ggpubr)
 library(latex2exp)
 ```
-
-
 
 ## Interfaz
 R Studio cuenta con **4 ventanas esenciales:**
@@ -96,6 +94,10 @@ Existen en total **6 tipos distintos de objetos:**
 - **Factor:** Son objetos que se utilizan para para categorizar y almacenar datos en ciertos niveles. Pueden ser strings o integers. Son usados frecuentemente en análisis estadísticos.
 
 - **Dataframe:** Es una estructuración de datos en dos dimensiones, donde cada columna consiste del valor de una variable y cada fila consiste de un conjunto de valores de las columnas.
+
+```{r echo=FALSE, fig.align="center", fig.cap= "Tipos de datos principales.", message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("images/DataType.png", dpi = 120)
+```
 
 Para que un comando que queramos ejecutar permanezca almacenado, debemos de crear una **variable**. La manera en la que `R` hace esto es a través de los símbolos `<-` o `=` (cuyo atajo de escritura es `Alt` + `-`). Por ejemplo, si queremos realizar una suma de 5 + 5 pondríamos el siguiente código en la consola.
 

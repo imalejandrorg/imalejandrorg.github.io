@@ -1,0 +1,169 @@
+---
+title: "Curso de R básico"
+author: "Alejandro Ruiz"
+output:
+  ioslides_presentation:
+    widescreen: yes
+    incremental: yes
+    transition: faster
+    logo: O:/Imágenes/favicon_io/android-chrome-512x512.png
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Clase 1: Introducción a R
+
+## Interfaz {.build}
+
+R Studio cuenta con **4 ventanas esenciales:**
+
+* La *consola*.
+
+* Los *scripts*.
+
+* El *Envirnoment* y el *History*.
+
+* Los *Files*, *Packages*, *Plots* y *Help*.
+
+También podemos modificar la apariencia y la fuente de nuestro RStudio en la ventana *Global Options.*
+
+## Creando nuestro primer proyecto {.build}
+
+Elegimos *New Directory* para crear una nueva carpeta para nuestro directorio.
+
+Se recomienda **no dejar espacios** en los nombres de nuestros archivos.
+
+Una vez creado nuestro nuevo proyecto, podemos crear un nuevo script tecleando Ctrl + Shift + N.
+
+## Directorio de trabajo
+
+Para esto utilizamos la función **getwd().**
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+getwd()
+```
+
+## Directorio de trabajo
+
+Para cambiar el directorio de trabajo utilizamos la función **setwd()** seguido de la nueva dirección que queremos establecer.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+setwd("O:/Documentos/R_Basico")
+getwd()
+```
+
+```{r include=FALSE}
+setwd("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01")
+```
+
+## Objetos y variables {.smaller}
+
+- **Vector:** Es uno de los elementos básicos. Existen distintos de vectores, los cuales pueden ser: lógicos, integers, caracteres y complejos. 
+
+- **Lista:** Son objetos que contienen distintos elementos que pueden incluir strings, números, vectores e incluso listas anidadas, así como matrices y o funciones como elementos. 
+
+- **Matriz:** Objetos arreglados en un espacio bidimensional. Un requisito es que contengan elementos del mismo tipo. Usualmente las usamos para realizar operaciones matemáticas.
+
+- **Array:** Para almacenar datos en más de dos dimensiones.
+
+- **Factor:** Son objetos que se utilizan para para categorizar y almacenar datos en ciertos niveles. Pueden ser strings o integers. Son usados frecuentemente en análisis estadísticos.
+
+- **Dataframe:** Es una estructuración de datos en dos dimensiones, donde cada columna consiste del valor de una variable y cada fila consiste de un conjunto de valores de las columnas.
+
+## Objetos y variables
+
+```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/images/DataType.png", dpi = 120)
+```
+
+## Instalar paquetes
+
+Los **paquetes** incluyen funciones escritas por otras personas de los cuales podemos hacer uso. 
+
+**install.package()**
+
+Para llamar a un paquete...
+
+```{r echo=TRUE}
+library(vegan)
+```
+
+## Instalar paquetes
+
+Personalmente prefiero instalar los paquetes desde la ventana de *Packages.*
+
+```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/images/Package1.png", dpi = 120)
+```
+
+## Importar datos
+
+Importaremos los datos de Palacio et al. (2020). Una base de datos de aves del capítulo 6.
+
+**Descargar:** ["Aves.txt"](https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt)
+
+```{r echo=TRUE}
+Aves <- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.txt",
+                   header = TRUE)
+View(Aves)
+```
+
+## Importar datos {.smaller}
+
+```{r echo=FALSE}
+knitr::kable(Aves, align = "c") %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% scroll_box(width = "900px")
+```
+
+## Importar datos {.smaller .build}
+
+Para otros formatos utilizamos:
+
+* **.csv:** read.csv()
+
+* **.xlsx:** read_excel(), del paquete readxl.
+
+```{r echo=TRUE}
+Aves_csv <- read.csv("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.csv", header = TRUE)
+
+library(readxl)
+Aves_xlsx <- read_excel("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Aves.xlsx")
+```
+
+## Comentarios
+
+Los comentarios nos permiten recordar la utilidad de algunas líneas de código, funciones o argumentos en particular, solo basta agregarlos a nuestro script tecleando el símbolo de “gato” o “hashtag” (#).
+
+```{r echo=TRUE}
+# Creamos una variable que contenga la suma de 5 + 5.
+x <- 5 + 5
+
+```
+
+## Exportar datos
+
+Aunque trabajando con **R Markdown** casi nunca exportamos datos, podemos hacer esto...
+
+```{r echo=TRUE}
+#Filtramos nuestro archivo para tener solo las abundancias.
+Abun <- Aves[,4:35]
+
+#Exportamos nuestro archivo en formato .csv
+write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE)
+```
+
+Si no se especifica una ruta, se guardará el archivo en el directorio de trabajo.
+
+## Pedir ayuda
+
+Cuando no sepamos cómo fuciona exactamente algo, podemos pedir ayuda agregando el símbolo de pregunta ?.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+?mean()
+
+```
+
