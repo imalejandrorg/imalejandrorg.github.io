@@ -1,0 +1,30 @@
+---
+title: "Presentaciones y scripts"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, así como material de apoyo extra.
+
+### [Curso de R básico](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html)
+
+- [Lección 1: Introducción a R](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1)
+
+- [Lección 2: Estadística descriptiva](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02.html#1)
+
+- [Lección 3: Probabilidad](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03.html#1)
+
+- Lección 4
+
+- Lección 5
+
+- Lección 6
+
+- Lección 7
+
+### Curso de ggplot2
+
+¡Proximamente!
