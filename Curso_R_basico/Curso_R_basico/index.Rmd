@@ -1,5 +1,5 @@
 --- 
-title: "Curso de R básico"
+title: "Bioestadística con R"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography:
