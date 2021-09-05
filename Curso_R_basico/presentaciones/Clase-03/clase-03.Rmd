@@ -1,5 +1,5 @@
 ---
-title: "Curso de R básico"
+title: "Bioestadística con R"
 author: "Alejandro Ruiz"
 output:
   ioslides_presentation:
