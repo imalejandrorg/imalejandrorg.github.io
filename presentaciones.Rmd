@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, así como material de apoyo extra.
 
-### [Curso de R básico](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html)
+### [Curso de bioestadística con R](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html)
 
 - [Lección 1: Introducción a R](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1)
 

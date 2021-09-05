@@ -6,7 +6,7 @@ navbar:
       href: index.html
     - text: "Cursos"
       menu:
-      - text: "Curso de R básico"
+      - text: "Bioestadística con R"
         href: Curso_R_basico/Curso_R_basico/docs/index.html
     - text: "Proyectos"
       menu:
