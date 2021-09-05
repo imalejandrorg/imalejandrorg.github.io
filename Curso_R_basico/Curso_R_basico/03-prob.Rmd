@@ -72,7 +72,7 @@ $$
 En este caso, la probabilidad de que alguien tenga el cabello café (CC) o rojo (CR): 
 
 $$
-P(CC \cup CR) = P(CC) + P(CR) = 500/1770 + 70 / 1770
+P(CC \cup CR) = P(CC) + P(CR) = 1200/1770 + 70 / 1770
 $$
 
 La probabilidad de que alguien tenga el cabello café:
@@ -268,7 +268,7 @@ mutantes <- data.frame(n = 0:5, prob = dbinom(x = 0:5, size = 5, prob = 0.37))
 mutantes$colour <- ifelse(mutantes$n == 2, "lightblue", "white")
 
 ggplot(mutantes, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
- geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_bar(stat = "identity", colour = "black", show.legend = F) +
   geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
   labs(x = "Mutantes (x)", y = "Probabilidad") +
   scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
@@ -465,7 +465,7 @@ ggplot(Pois, aes(x = factor(muts), y = prob, width = 0.9, fill = colour)) +
 ```
 
 
-Por lo que la probabilidad de que al menos una célula mute dentro de $2 \times 10^9$ células de *E. coli* es de $P(X = 1) = 0.2707$. Para el caso de que ninguna célula mute:
+Por lo que la probabilidad de que una célula mute dentro de $2 \times 10^9$ células de *E. coli* es de $P(X = 1) = 0.2707$. Para el caso de que ninguna célula mute:
 
 ```{r}
 #Probabilidad de que ninguna célula mute.
@@ -519,9 +519,10 @@ Una **distribución normal** corresponde a una curva *en forma de campana* o *ga
 Se utiliza para representar la distribución de los valores de una variable $X$, de dos maneras distintas: (1) como una aproximación a un histograma basado en los valores muestreados de la variable $X$ o; (2) como una representación idealizada de la distribución poblacional de $X$.
 
 Las curvas con distribución normal toman su forma por dos elementos muy importantes: la **media**, $\mu$ y su **desviación estándar**, $\sigma$.
+
 Cuando se tiene una curva con distribución normal, se expresa de la siguiente manera $X \sim N(\mu, \sigma)$.
 La fórmula de la distribución normal se encuentra en la fórmula \@ref(eq:norm).
-No se trata de cualquier curva simétrica, si no de una curva simétrica *específica*.
+No se trata de cualquier curva simétrica, si no de una curva simétrica *específica.*
 
 \begin{equation}
 f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
@@ -543,8 +544,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   theme_minimal_hgrid(color = "black")
 ```
 
-Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva**.
-Para esto utilizamos la **escala estandarizada**, en el cual el valor del eje horizontal se denomina **valor $Z$**.
+Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva.**
+Para esto utilizamos la **escala estandarizada,** en el cual el valor del eje horizontal se denomina **valor $Z$.**
 La escala de $Z$ mide las desviaciones estándar a partir de la media, por ejemplo, $z = 1$ corresponde a una desviación estándar de la media.
 Para transformar nuestros datos a la escala $Z$ simplemente aplicamos la fórmula \@ref(eq:Z) y a la variable $Z$ se le conoce como una variable de **distribución normal estándar**, ya que se encuentra estandarizada y no importa en que valor se encuentren los datos originales (kg, °C, cm, mmHg, etc.), la variable $Z$ es *adimensional*.
 
@@ -577,7 +578,7 @@ Intentemos resolver algunos ejercicios.
 
 > **Ejemplo:** En una población de peces de la especie *Pomolobus aestivalis*, la longitud de los individuos sigue una distribución normal. La media de la longitud es de 54.0 mm, y la desviación estándar es de 4.5 mm^2^. ¿Qué porcentaje de los peces mide menos de 60 mm? ¿Qué porcentaje de los peces mide más de 51 mm? ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?
 
-Para responder la primer pregunta, debemos transformar nuestros datos a valores Z, ya que se encuentran en mm. Para esto aplicamos la fórmula \@ref(eq:Z). En `R` es una operación relativamente sencilla de hacer.
+Para responder la primer pregunta, debemos transformar nuestros datos a valores $Z$, ya que se encuentran en mm. Para esto aplicamos la fórmula \@ref(eq:Z). En `R` es una operación relativamente sencilla de hacer.
 
 ```{r}
 (60 - 54)/(4.5)
@@ -607,9 +608,9 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 ```
 
 
-De nuevo, el argumento `lower.tail = TRUE` significa que encontrará la probabilidad acumulada de valores $Z$ menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.
+De nuevo, el argumento `lower.tail = TRUE` significa que encontrará la probabilidad acumulada de valores $z$ menores a 1.33 hasta 1.33. Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de 90.82%.
 
-Para la segunda pregunta, primero debemos encontrar el valor de $Z$ correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`. 
+Para la segunda pregunta, primero debemos encontrar el valor de $z$ correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`. 
 
 ```{r}
 (51 - 54)/(4.5)
@@ -671,14 +672,13 @@ Del ejemplo anterior, supongamos que queremos encontrar el percentil 70 de la di
 qnorm(0.7, 0, 1)
 ```
 
-Como podemos ver, el valor $Z$ correspondiente es 0.5244. Ahora, utilizando la fórmula \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z* \sigma + \mu = 0.5244 * 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
+Como podemos ver, el valor $z$ correspondiente es 0.5244. Ahora, utilizando la fórmula \@ref(eq:Z) podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z \times \sigma + \mu = 0.5244 \times 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Curva de distribución normal con el área sombreada correspondiente a un valor Z = -0.67, pero partiendo desde el lado positivo de la curva."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dnorm, geom = "area", fill = "lightblue", xlim = c(0.5244, 4)) +
   stat_function(fun = dnorm, size = 0.6) +
   geom_segment(aes(x = 0.5244, y = 0, xend = 0.5244, yend = 0.347), linetype = "dashed") +
-  #geom_vline(aes(xintercept = 0.5244), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 1.8, label = "Área = 0.3", y = 0.26), color = "red", vjust = -1.2, size = 4.5) +
   geom_text(aes(x = 2.18, label = "Z = 0.5244", y = 0.26), color = "black", vjust = -3, size = 4.5) +
   xlim(-4, 4) +

@@ -299,3 +299,10 @@ prueba-de-hipótesis-para-h_0-beta_1-0
 gráficos-de-residuales
 intervalos-de-confianza-y-de-predicción
 computando-los-intervalos
+fig:unnamed-chunk-9
+fig:unnamed-chunk-12
+fig:unnamed-chunk-18
+fig:unnamed-chunk-21
+fig:unnamed-chunk-26
+fig:unnamed-chunk-27-1
+fig:unnamed-chunk-27-2
