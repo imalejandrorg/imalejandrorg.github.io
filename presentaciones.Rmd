@@ -12,13 +12,13 @@ Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, a
 
 ### [Curso de bioestadística con R](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html)
 
-- [Lección 1: Introducción a R](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1)
+- [Presentación 1: Introducción a R](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1)
 
-- [Lección 2: Estadística descriptiva](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02.html#1)
+- [Presentación 2: Estadística descriptiva](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02.html#1)
 
-- [Lección 3: Probabilidad](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03.html#1)
+- [Presentación 3: Probabilidad](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03.html#1)
 
-- Lección 4
+- [Presentación 4: Estadística inferencial](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04.html#1)
 
 - Lección 5
 
