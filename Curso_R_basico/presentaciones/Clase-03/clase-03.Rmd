@@ -109,7 +109,7 @@ P(B|A) = \frac{P(A \cap B)}{P(A)} \\
 P(A|B) \ne P(B|A)
 $$
 
-## Reglas de probabilida {.build}
+## Reglas de probabilidad {.build}
 
 8- Para dos eventos cualesquiera:
 
@@ -127,7 +127,7 @@ Para variables continuas normalmente se utilizan clases muy estrechas para repre
 
 La coordenada $y$ de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como **áreas debajo de la curva.**
 
-## Curva de densidad {.build}
+## Curvas de densidad {.build}
 
 Algunos de los requisitos de una distribución de probabilidad son:
 

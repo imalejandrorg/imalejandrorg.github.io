@@ -216,12 +216,13 @@ Por lo tanto el intervalo de confianza al 95% para nuestra muestra es
 \end{equation}
 
 De nuevo, esto se puede calcular en `R` de manera sencilla.
+
 ```{r}
 32.8143 + 2.160*(2.4757/sqrt(14))
 32.8143 - 2.160*(2.4757/sqrt(14))
 ```
 
-Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis $(31.4, 34.2)$. Con esta información sabemos entonces que $31.4cm^2 > \mu > 34.2cm^2$.
+Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis $(31.4, 34.2)$. Con esta información sabemos entonces que $31.4 \space cm^2 > \mu > 34.2 \space cm^2$.
 
 Una cosa importante a destacar es que es el propio intervalo de confianza es el que es **aleatorio**. Si consideramos intervalos de confianza al 95%, entonces:
 
@@ -444,7 +445,7 @@ Si agregamos `$statistic` al final de nuestra función obtenemos el estadístico
 
 La esencia de de la prueba de $t$ es ver en qué parte de la distribución $t$ de Student cae el estadístico $t_s$. Si cae cercano al centro, entonces la evidencia de los datos es compatible con la $H_0$. Sin embargo, si $t_s$ cae en alguna de las colas, entonces, la evidencia de los datos es compatible con la $H_A$ y una observación como la obtenida no puede explicarse meramente por azar.
 
-Para juzgar si nuestro valor $t_s$ cae en la cola de la distribución $t$ de Student, usamos un valor conocido como **valor-*p***. El valor-*p*  puede definirse como el área bajo la curva de una distribución $t$ de Student en cualquiera de las colas que se encuentra más allá de $-t_s$ o $t_s$ como se muestra en la figura \@ref(fig:pvalue).
+Para juzgar si nuestro valor $t_s$ cae en la cola de la distribución $t$ de Student, usamos un valor conocido como **valor-*p***. El valor-*p* puede definirse como el área bajo la curva de una distribución $t$ de Student en cualquiera de las colas que se encuentra más allá de $-t_s$ o $t_s$ como se muestra en la figura \@ref(fig:pvalue).
 
 ```{r pvalue, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.cap="Valor-*p* para un valor de $t_s$."}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
@@ -475,6 +476,7 @@ Como podemos ver, para nuestros datos tenemos 17.67 grados de libertad. Entonces
 pt(2.87, 17.67, lower.tail = F)
 pt(-2.87, 17.67, lower.tail = T)
 ```
+
 Como en este caso se trata de un valor-*p* de dos colas, tenemos que sumar el área que obtenemos de la cola inferior y superior, que dan como resultado cerca de 0.0103. Por ende, nuestro $valor-p = 0.0103$. Afortunadamente no tenemos que hacer esto cada vez que realizamos una prueba de $t$ en `R`. Simplemente escribimos `$p.value` al final de nuestro comando y este nos debería dar nuestro valor-*p*.
 
 ```{r}
@@ -501,8 +503,6 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   stat_function(fun = dt, args = list(df = 17.675), size = 0.6, color = "black") +
   geom_segment(aes(x = -2.8696, y = 0, xend = -2.8696, yend = 0.011), linetype = "dashed") +
   geom_segment(aes(x = 2.8696, y = 0, xend = 2.8696, yend = 0.011), linetype = "dashed") +
-  #geom_vline(aes(xintercept = -2.8696), linetype = "dashed", size = 0.35) +
-  #geom_vline(aes(xintercept = 2.8696), linetype = "dashed", size = 0.35) +
   geom_text(aes(x = 0, y = 0.1, label = "99.98967")) +
   geom_text(aes(x = -3.5, y = 0.1, label = "0.005165")) +
   geom_text(aes(x = 3.5, y = 0.1, label = "0.005165")) +
@@ -520,7 +520,7 @@ Algo importante a tener en consideración es que, incluso cuando nuestro valor-*
 
 - **Tipo de error II:** cuando la $H_A$ es verdadera, pero no obtenemos suficiente información que demuestre esto. Las muestras con tamaños de muestra pequeños son particularmente vulnerables a este tipo de error. La probabilidad de cometer este tipo de error se conoce como $\beta$.
 
-La posibilidad de no cometer un error tipo II cuando la $H_A$ es verdadera se conoce como **poder**.
+La posibilidad de no cometer un error tipo II cuando la $H_A$ es verdadera se conoce como **poder.**
 
 \begin{equation}
 Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) \space si \space H_{A} \space es \space verdad
@@ -575,7 +575,7 @@ ggplot(data.frame(x = c(0, 1000)), aes(x = x)) +
 
 ### Prueba de Wilcoxon-Mann-Whitney
 
-También es utilizada para comprar dos muestras. A diferencia de la prueba de $t$, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas **no paramétricas**.
+También es utilizada para comprar dos muestras. A diferencia de la prueba de $t$, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas **no paramétricas.**
 
 En el caso de esta prueba, una $H_0$ generalmente empleada es que las distribuciones de $X_1$ y $X_2$ son iguales, y la $H_A$ es que la distribución de $X_1$ es distinta a la distribución de la población $X_2$.
 
@@ -640,7 +640,7 @@ Cuando tenemos datos pareados, son las diferencias en sí lo que queremos regist
 (\#eq:diffmean)
 \end{equation}
 
-Lo mismo con la diferencia entre las medias  de la población.
+Lo mismo con la diferencia entre las medias de la población.
 
 \begin{equation}
 \overline{D}_\mu = \mu_1 - \mu_2
