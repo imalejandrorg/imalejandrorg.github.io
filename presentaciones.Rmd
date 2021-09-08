@@ -20,7 +20,7 @@ Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, a
 
 - [Presentación 4: Estadística inferencial](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04.html#1)
 
-- Lección 5
+- [Presentación 5: Inferencias de datos categóricos](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05.html#1)
 
 - Lección 6
 
