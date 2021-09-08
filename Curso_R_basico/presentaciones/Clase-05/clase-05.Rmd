@@ -1,0 +1,1057 @@
+---
+title: "Bioestadística con R"
+author: "Alejandro Ruiz"
+output:
+  ioslides_presentation:
+    widescreen: yes
+    incremental: no
+    transition: faster
+    logo: O:/Imágenes/favicon_io/android-chrome-512x512.png
+---
+
+```{r setup, include=FALSE, fig.align='center'}
+library(tidyverse)
+library(patchwork)
+library(kableExtra)
+library(cowplot)
+library(latex2exp)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Inferencias de datos categóricos
+
+## Distribuciones de una muestra {.build}
+
+En esta sección consideraremos **variables categóricas** que solamente tienen dos posibles valores y su distribución muestral.
+
+Normalmente, al tomar muestras de una población dicotómica grande, un estimado de la proporción, $p$, es la muestra de la proporción $\hat{p} = \frac{x}{n}$ (léase $p$ sombrero), donde $x$ es el número de observaciones en la muestra que cumplen con el atributo de interés, y $n$ es el tamaño de muestra.
+
+## Proporción de Wilson ajustada {.build}
+
+La proporción de Wilson ajustada a la muestra, $\tilde{p}$ (léase $p$ tilde), es otro estimado que utiliza la fórmula:
+
+$$
+\tilde{p} = \frac{x + 2}{n + 4}
+$$
+
+Esto equivale a sesgar la estimación hacia el valor 1/2. La distribución binomial determina la distribución muestral de $\tilde{P}$.
+
+
+## Máquinas contaminadas {.build}
+
+En una región de Estados Unidos, el 17% de las máquinas dispensadoras de bebidas están contaminadas por la bacteria *Chryseobacterium meningosepticum*.
+
+Imaginemos que examinamos una muestra de dos máquinas dispensadoras.
+
+La probabilidad de tener dos máquinas contaminadas es $0.17 \times 0.17 = 0.0289$, la probabilidad de que ninguna este contaminada es de $(1-0.17) \times (1-0.17)$ y la probabilidad de que una este contaminada y la otra no es $(0.17) \times (1-0.17) + (0.17) \times (1-0.17)$.
+
+
+## Máquinas contaminadas {.build}
+
+Una muestra que contenga cero máquinas contaminadas, $\tilde{p} = \frac{0+2}{2+4} = 0.33$ ocurre con una probabilidad de 0.6889.
+
+Una muestra con una máquina contaminada, $\tilde{p} = \frac{1+2}{2+4} = 0.5$ ocurre con una probabilidad de 0.2822.
+
+Una muestra con dos máquinas contaminadas, $\tilde{p} = \frac{2+2}{2+4} = 0.67$ ocurre con una probabilidad de 0.0289.
+
+Por ende, hay un 68.89% de probabilidad de que $\tilde{P}$ sea igual a 0.33, un 28% de que $\tilde{P}$ sea igual a 0.5 y 3% de que $\tilde{P}$ sea igual a 0.67.
+
+## Máquinas contaminadas {.build .smaller}
+
+Imaginemos ahora que nuestra muestra pasa de $n = 2$ a $n = 20$, para encontrar la probabilidad de cuántas máquinas podríamos esperar que estén contaminadas, acudimos a la distribución binomial. Por ejemplo, para calcular la probabilidad que 5 de las 20 máquinas están contaminadas usamos $p = 0.17$ y $n = 20$.
+
+```{r}
+dbinom(5, 20, 0.17)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=3}
+maquinas <- data.frame(n = 0:20, prob = dbinom(x = 0:20, size = 20, prob = 0.17))
+maquinas$colour <- ifelse(maquinas$n == 5, "lightblue", "white")
+
+ggplot(maquinas, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Máquinas contaminadas", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+```
+
+## Máquinas contaminadas {.build}
+
+La probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245. Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$.
+
+La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto error de muestreo esperar en nuestro estimado.
+
+De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$.
+
+
+## Intervalos de confianza {.build}
+
+Para la construcción de **intervalos de confianza** de la proporción de una población, necesitamos encontrar el error estándar de $\tilde{P}$. 
+
+Para eso utilizamos la siguiente fórmula...
+
+$$
+SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + z_{\alpha/2}^2}}
+$$
+
+Posteriormente, realizamos el intervalo de confianza correspondiente con la siguiente fórmula.
+
+$$
+\tilde{p} \pm z_{\alpha/2} \times SE_{\tilde{p}}
+$$
+
+## Intervalo de confianza unilateral {.build}
+
+Para eso podemos utilizar la función **qnorm()** en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor $z$.
+
+```{r}
+qnorm(0.95, 0, 1)
+```
+
+para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.
+
+$$
+\tilde{p} \pm 1.645 \times SE_{\tilde{p}}
+$$
+
+## Otra forma de calcular $\tilde{p}$ {.build}
+
+En este caso lo calculamos a partir de los valores $z$.
+
+$$
+\tilde{p} = \frac{x + 0.5(z^2_{\alpha/2})}{n + z^2_{\alpha/2}}
+$$
+
+# Prueba de Chi-cuadrada
+
+## Prueba de Chi-cuadrada {.build}
+
+Una **prueba de bondad de ajuste** se utiliza para ver la compatibilidad de los datos con una distribución o $H_0$ específica.
+
+Una de las más utilizadas es la **prueba de** $\chi^2$ (léase chi-cuadrada). Para esto se utilizan las frecuencias absolutas de nuestros datos.
+
+Para cada nivel de categoría, $i$, dejamos que $o_i$ represente la frecuencia observada y $e_i$ la frecuencia esperada (la frecuencia que esperaríamos obtener bajo la $H_0$).
+
+Las frecuencias esperadas $e_i$ se obtienen multiplicando las probabilidades dadas por la $H_0$ por $n$.
+
+## Fórmula de Chi-cuadrada {.build}
+
+De esta manera calculamos el estadístico de prueba...
+
+$$
+\chi^2 = \sum_{i = 1}^{k}\frac{(o_i - e_i)^2}{e_i}
+$$
+
+Donde $k$ es el número total de categorías e $i$ es la $i$-ésima observación.
+
+## Incendios y venados {.build}
+
+Después de seis meses de un incendio, los investigadores muestrearon una parcela de 3000 acres al rededor del área quemada.
+
+La dividieron en cuatro regiones: (1) el área cercana al centro del incendio, (2) el área interior cercana al incendio, (3) el área exterior cercana al incendio y (4) área fuera de la zona quemada.
+
+
+La $H_0$ es que los venados no muestran preferencia por alguna de las áreas.
+
+La $H_A$ es que muestran cierta preferencia por alguna de las áreas.
+
+## Incendios y venados {.build}
+
+```{r}
+Area <- c(520, 210, 240, 2030)
+Zona <- c("Área interior", "Área exterior", "Borde exterior", "No quemado")
+Proporcion <- round(Area/sum(Area), 3)
+
+Datos <- data.frame(Zona, Area, Proporcion)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos %>% 
+  knitr::kable("html", align = "c", col.names = c("Zona", "Área", "Proporción")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "4cm")
+```
+
+## Si la $H_0$ es verdadera entonces... {.build}
+
+$$
+H_0: P(Área \space interior) = \frac{520}{3000} = 0.173 \\
+P(Área \space exterior) = \frac{210}{3000} = 0.070 \\
+P(Borde \space  exterior) = \frac{240}{3000} = 0.080 \\
+P(No \space quemado) = \frac{2030}{3000} = 0.677
+$$
+
+## ¿Y qué pasa con la $H_A$? {.build}
+
+$$
+H_A: P(Área \space interior) \ne 0.173 \\
+P(Área \space exterior) \ne 0.070 \\
+P(Borde \space  exterior) \ne 0.080 \\
+P(No \space quemado) \ne 0.677
+$$
+
+## Los resultados {.build}
+
+Los investigadores encontraron 75 venados en el área, distribuidos en distintas zonas como se muestra a continuación.
+
+```{r}
+Venados <- c(2, 12, 18, 43)
+Datos <- data.frame(Datos, Venados)
+```
+
+```{r Ejemplo1a, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos %>% 
+  knitr::kable("html", align = "c", col.names = c("Zona", "Área", "Proporción", "No. de venados")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "4cm")
+```
+
+## Los resultados {.build}
+
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE}
+ggplot(Datos, aes(reorder(Zona, Venados), Venados)) + geom_bar(stat = "identity", color = "Gray20", fill = "Gray80", width = 0.7) +
+  xlab("Zona") +
+  ylab("No. de venados") +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 50)) +
+  theme_classic()
+```
+
+## Probabilidades estimadas {.build}
+
+$$
+\hat{P}(Área \space interior) = \frac{2}{75} = 0.027 \\
+\hat{P}(Área \space exterior) = \frac{12}{75} = 0.160 \\
+\hat{P}(Borde \space  exterior) = \frac{18}{75} = 0.240 \\
+\hat{P}(No \space quemado) = \frac{43}{75} = 0.573
+$$
+
+```{r}
+Prop_venados <- round(Venados/sum(Venados), 3)
+Datos <- data.frame(Datos, Prop_venados)
+```
+
+## Probabilidades estimadas {.build}
+
+```{r Ejemplo1b, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos %>% 
+  knitr::kable("html", align = "c",col.names = c("Zona", "Área", "Proporción esperada", "No. de venados", "Proporción observada")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:3, width_min = "3.5cm")
+```
+
+## ¿Se cumple el modelo de la $H_0$? {.build}
+
+Las proporciones observadas $\hat{P}$ difieren de las que esperaríamos en el modelo de la $H_0$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center'}
+Condicion <- c(rep("Esperado", 4), rep("Observado", 4))
+Zona1 <- rep(c("Área interior", "Área exterior", "Borde exterior", "No quemado"), 2)
+Prop <- c(Proporcion, Prop_venados)
+
+graph <- data.frame(Condicion, Zona1, Prop)
+
+ggplot(graph, aes(fill = reorder(Zona1, Prop), y = Prop, x = Condicion)) + 
+  geom_bar(position = position_fill(reverse = T), stack = "dodge", stat = "identity",  color = "Grey5", width = 0.6) +
+  scale_fill_grey(start = 0.2, end = 0.8) +
+  xlab("") +
+  ylab("Proporción") +
+  labs(fill = "Zona") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+```
+
+## Calculo del estadístico de Chi {.build}
+
+Necesitamos los valores absolutos de nuestros datos, para esto simplemente multiplicamos la probabilidad calculada por la $H_0$:
+
+$$
+p \times n
+$$
+
+```{r}
+#Usamos la función sum() para sumar todos los valores de la variable "Venados".
+Venados_esperados <- Proporcion * sum(Datos$Venados) 
+Venados_esperados
+```
+
+## Estadístico de Chi {.build}
+
+$$
+\chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
+$$
+
+## Distribución de Chi {.build}
+
+Ahora tenemos que considerar la distribución nula de $\chi_s^2$, que es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
+
+Esta distribución muestral sigue la distribución de chi-cuadrada $\chi^2$ cuando el tamaño de muestra es suficientemente grande.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=3.5}
+
+ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 5), size = 0.6, color = "blue") +
+  stat_function(fun = dchisq, args = list(df = 8), size = 0.6, color = "red") +
+  stat_function(fun = dchisq, args = list(df = 10), size = 0.6, color = "darkgreen") +
+  geom_text(aes(x = 20, label = "df = 5", y = 0.1), color = "blue") +
+  geom_text(aes(x = 20, label = "df = 8", y = 0.09), color = "red") +
+  geom_text(aes(x = 20.2, label = "df = 10", y = 0.08), color = "darkgreen") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  ylab("") +
+  xlab("") +
+  theme_minimal_hgrid(color = "black")
+
+```
+
+## Funciones de la distribución de Chi {.build}
+
+- **dchisq()** nos da un valor de densidad de la distribución de $\chi^2$ (PDF).
+
+- **pchisq()** nos da un valor de densidad acumulado hasta cierto punto en la distribución de $\chi^2$ (área debajo de la curva, CDF).
+
+- **qchisq()** toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
+
+- **rchisq()** genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
+
+## qchisq {.build}
+
+Supongamos que quisiéramos encontrar el valor crítico $\chi_{5,0.05}^2$ cuando $df = 5$, para esto utilizamos la función **qchisq().**
+
+```{r}
+qchisq(0.95, 5)
+```
+Esto corresponde a un área de 0.05 por encima de la cola de la distribución de $\chi^2$.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.2}
+
+ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 5), geom = "area", fill = "lightblue", xlim = c(11.07,30)) +
+  stat_function(fun = dchisq, args = list(df = 5), size = 0.6) +
+  geom_segment(aes(x = 11.07, y = 0, xend = 11.07, yend = 0.019), linetype = "dashed") +
+  #geom_vline(aes(xintercept = 11.07), linetype = "dashed", size = 0.35) +
+  geom_text(aes(x = 15, y = 0.03, label = "Área = 0.05")) +
+  geom_text(aes(x = 5, y = 0.03, label = "Área = 0.95")) +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  scale_x_continuous(limit = c(0, 30), breaks = c(0, 5, 11.07, 15, 20, 25, 30), labels = c("0" = "0", "5" = "5",  "11.07" = parse(text = TeX("$\\chi_{5, 0.025}^2$")), "15" = "15", "20" = "20", "25" = "25", "30" = "30")) +
+  ylab("") +
+  xlab("") +
+  theme_minimal_hgrid(color = "black")
+
+```
+
+## ¿Y los grados de libertad? {.build}
+
+Dependen del número de categorías, $k$.
+
+$$
+df = k - 1
+$$
+
+## El caso de los venados {.build}
+
+En este caso tenemos $k = 4$ por lo que $df = 4 - 1 = 3$.
+
+Ya que el valor que habíamos obtenido de nuestra fórmula de $\chi_s^2 = 43.2$, buscaremos el área debajo de la curva correspondiente a este valor.
+
+```{r}
+pchisq(43.2, 3, lower.tail = F)
+```
+El resultado es extremadamente pequeño y nuestro $valor \space p < 0.0001$ por lo que tenemos evidencia para rechazar la $H_0$ y aceptar la hipótesis de que los venados prefieren ciertas zonas sobre otras.
+
+La prueba de $\chi^2$ se puede utilizar para cualquier número de categorías $k$.
+
+## chisq.test {.build}
+
+Todo esto se facilita gracias a la función **chisq.test()** que viene incluida en **R.**
+
+```{r}
+chisq.test(Datos$Venados, Datos$Propocion)
+```
+
+Estos valores los podemos obtener de la matriz de datos que habíamos creado previamente, simplemente los seleccionamos con el símbolo **$** seguido del nombre de la variable (**Venados** y **Proporcion,** en mí caso).
+
+## chisq.test {.build}
+
+```{r Ejemplo1d, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Datos %>% 
+  dplyr::select(-Zona, -Area, -Prop_venados) %>% 
+  knitr::kable("html", align = "c", col.names = c("Proporción esperada", "No. de venados")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:2, width_min = "5.2cm")
+```
+
+# Hipótesis compuestas y direccionales
+
+## Hipótesis compuestas {.build}
+
+Hacen múltiples afirmaciones, a diferencia de las hipótesis que hacíamos en las pruebas de $t$ ($H_0: \mu_1 = \mu_2$).
+
+Para los venados... Las primeras tres afirmaciones de nuestra hipótesis nula $H_0$ son independientes, $P(Área \space interior) = 0.173$, $P(Área \space exterior) = 0.070$, $P(Borde \space exterior) = 0.080$ pero nuestra última afirmación, $P(No \space quemado) = 0.677$, es **dependiente** de las demás afirmaciones realizadas.
+
+Cuando esto ocurre, la hipótesis alternativa es necesariamente no direccional.
+
+Otra cosa interesante es que cuando se rechaza la $H_0$, la prueba no nos dice la dirección de la conclusión.
+
+## Variables dicotómicas {.build}
+
+Cuando una variable es dicotómica, la $H_0$ no es compuesta y por lo tanto, alternativas direccionales o conclusiones direccionales no suponen un problema.
+
+Para una variable dicotómica, una prueba de hipótesis direccional de Chi-cuadrada se realizaría de la misma manera que en pruebas pasadas.
+
+1.  Primero elegimos la direccionalidad y corroboramos que los datos se desvían de la $H_0$ en la dirección especificada por la $H_A$.
+    Si es así realizamos el siguiente paso.
+
+2.  Encontramos el valor p, el cuál será la mitad de lo que sería si nuestra $H_A$ fuese no direccional.
+
+# Tablas de contingencia
+
+## Tabla de contingencia {.build}
+
+Una **tabla de contingencia** muestra los datos de tal manera que existe una asociación entre las variables de las filas y columnas.
+
+## Dolores de migraña {.build}
+
+Un grupo de 75 pacientes fueron asignados de manera aleatoria para recibir una cirugía para tratar dolores de migraña. La cirugía podía ser real ($n = 49$) o no ($n = 26$). Los cirujanos esperan una reducción en los dolores de migraña (éxito).
+
+```{r}
+#Creamos nuestra matriz de datos.
+cirugia <- matrix(c(41, 15, 8, 11), nrow = 2, ncol = 2, byrow = T)
+dimnames(cirugia) <- list(c("Éxito", "Fracaso"), c("Real", "Falsa"))
+```
+
++----------------+----------------+-----------------+----------------+
+|                | **Real**       | **Falsa**       | **Total**      |
++----------------+----------------+-----------------+----------------+
+| **Éxito**      | 41             | 15              | 56             |
++----------------+----------------+-----------------+----------------+
+| **Fracaso**    | 8              | 11              | 19             |
++----------------+----------------+-----------------+----------------+
+| **Total**      | 49             | 26              | 75             |
++----------------+----------------+-----------------+----------------+
+
+
+## Hipótesis... {.build}
+
+Nuestra hipótesis nula es que la probabilidad de éxito dado que la cirugía fue real es la misma que la probabilidad de éxito dado que la cirugía fue falsa, $H_0: P(Éxito|Real) = P(Éxito|Falsa)$.
+
+Este tipo de probabilidad se conoce como **condicional** y predice qué tan seguido un evento ocurre bajo condiciones específicas.
+
+$$
+P(A|B)
+$$
+
+Nos dice cuál es la probabilidad de que A ocurra, dado que B ha ocurrido. Cuando una probabilidad condicional se estima de los datos, normalmente se denota con el símbolo ^.
+
+$$
+\hat{P}(A|B)
+$$
+
+## Para los datos de la cirugía {.build}
+
+$$
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Éxito|Falsa) = \frac{15}{26} = 0.577
+$$  
+
+Estas probabilidades las obtenemos utilizando las columnas **Real** y **Falsa** de nuestra tabla de contingencia y sus respectivos totales.
+
+## $P(Éxito|Real)$ y $P(Real|Éxito)$ {.build}
+
+No es lo mismo $P(Éxito|Real)$ que $P(Real|Éxito)$. Puedes comprobarlo tú mismo.
+
+$$
+\hat{P}(Éxito|Real) = \frac{41}{49} = 0.837 \\
+\hat{P}(Real|Éxito) = \frac{41}{56} = 0.7321 \\
+\hat{P}(Éxito|Real) \ne \hat{P}(Real|Éxito)
+$$
+
+## Prueba de Chi-cuadrada para tablas de contingencia {.build .smaller}
+
+El primer paso para aplicar la prueba de Chi-cuadrada a nuestra tabla de contingencia es calcular las **frecuencias marginales,** es decir, las frecuencias de los totales de nuestra tabla de contingencia.
+
+Si nuestra $H_0$ es verdadera, entonces las columnas **Real** y **Falsa** son equivalentes, así que podemos agruparlas ($41 + 15$) y dividirlas sobre el total de observaciones ($\frac{56}{75} = 0.747$).
+
+Ahora aplicamos esta probabilidad a nuestros valores observados para el grupo Real y Falso ($\frac{56}{75} \times 49 = 36.59$ éxitos esperados y $\frac{56}{75} \times 26 = 19.41$ éxitos esperados).
+
+Para obtener nuestros fracasos esperados, multiplicamos este valor por los de los grupos Real y Falso ($\frac{19}{75} \times 49 = 12.41$ fracasos esperados y $\frac{19}{75} \times 26 = 6.59 $ fracasos esperados).
+
+## Prueba de Chi-cuadrada para tablas de contingencia {.build}
+
++----------------+----------------+-----------------+-----------------+
+|                | **Real**       | **Falsa**       | **Total**       |
++----------------+----------------+-----------------+-----------------+
+| **Éxito**      | 41 (36.59)     | 15 (19.41)      | 56              |
++----------------+----------------+-----------------+-----------------+
+| **Fracaso**    | 8 (12.41)      | 11 (6.59)       | 19              |
++----------------+----------------+-----------------+-----------------+
+| **Total**      | 49             | 26              | 75              |
++----------------+----------------+-----------------+-----------------+
+
+Ya que estos cálculos se realizan exclusivamente con los valores marginales, los valores esperados $e$ se pueden obtener de la siguiente manera.
+
+$$
+e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
+$$
+
+## Grados de libertad de una tabla de contingencia {.build}
+
+Los grados de libertad para nuestra tabla de contingencia de 2x2 son 1. 
+
+De las 4 celdas disponibles, solamente una de ellas es libre de variar. En este sentido, **solo una celda es libre de variar** y por ende $df = 1$ para una tabla de contingencia de 2x2.
+
+## Tipo de hipótesis {.build}
+
+La hipótesis puede ser direccional o no direccional. 
+
+En el caso de nuestro ejemplo, nos interesa saber si el efecto de la cirugía reduce el dolor de migraña (hipótesis direccional), así que al calcular el valor p simplemente hay que dividirlo entre 2 y obtendremos el valor direccional.
+
+## Chi-cuadrada para ejemplo de migraña {.build .smaller}
+
+Podemos aplicar la fórmula de $\chi^2$.
+
+$$
+\chi_s^2 = \frac{(41-36.59)^2}{36.59} + \frac{(15-19.41)^2}{19.41} + \frac{(8-12.41)^2}{12.41} + \frac{(11-6.59)^2}{6.59} = 6.06
+$$
+
+
+Todo este proceso se puede hacer de manera rapidísima con la función **chisq.test().** Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento **correct = F** para evitar aplicar correcciones.
+
+```{r}
+chisq.test(cirugia, correct = F)
+```
+
+## Hipótesis direccional {.build}
+
+Como vemos el valor p es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.
+
+```{r}
+chisq.test(cirugia, correct = F)$p.value / 2
+```
+
+# Interpretación de las tablas de contingencia
+
+## Interpretación de las tablas de contingencia {.build}
+
+Una tabla de contingencia 2x2 se puede interpretar de dos maneras:
+
+1. Dos muestras independientes con una variable dicotómica.
+
+2. Una muestra con dos variable dicotómicas.
+
+La aritmética de la prueba de Chi-cuadrada es la misma para ambos contextos, pero la interpretación de la hipótesis y las conclusiones son distintas.
+
+En algunas tablas de contingencia las filas y columnas juegan un papel muy distinto. Por ejemplo, puede que las columnas sean un tratamiento y las filas una respuesta. En otros casos, las columnas y las filas pueden jugar papeles intercambiables.
+
+## Dependencia estadística {.build}
+
+Cuando un conjunto de datos es visto como una sola muestra con dos variable dicotómicas, la relación expresada por $H_0$ se conoce como **dependencia estadística** de las variables de columna y fila. 
+
+Variables que no son independientes son llamadas **dependientes** o **asociadas**. Por eso a veces la prueba de Chi-cuadrada puede ser conocida como prueba de asociación o prueba de independencia.
+
+## Color de ojos y cabello {.build}
+
+Un antropólogo alemán que estudia la relación entre el color de ojos y cabello observó una muestra de $n = 6800$ hombres con los resultados siguientes.
+
++---------------------+-------------------------+------------------------+-----------------+
+|                     | **Cabello oscuro (CO)** | **Cabello claro (CC)** | **Total**       |
++=====================+=========================+========================+=================+
+| **Ojo oscuro (OO)** | 726                     | 131                    | 857             |
++---------------------+-------------------------+------------------------+-----------------+
+| **Ojo claro (OC)**  | 3129                    | 2814                   | 5943            |
++---------------------+-------------------------+------------------------+-----------------+
+| **Total**           | 3855                    | 2945                   | 6800            |
++---------------------+-------------------------+------------------------+-----------------+
+
+$$
+\hat{P} = (OO|CO) = \frac{726}{3855} = 0.19 \\
+\hat{P} = (OO|CC) = \frac{131}{2945} = 0.04
+$$
+
+## También de esta forma se puede...
+
+$$
+\hat{P} = (CO|OO) = \frac{726}{857} = 0.85 \\
+\hat{P} = (CO|OC) = \frac{3129}{5943} = 0.53
+$$
+
+Por ende nuestra hipótesis puede tomar ambas formas...
+
+$$
+H_0: P(OO|CO) = P(OO|CC) \\
+H_0: P(CO|OO) = P(CO|OC)
+$$
+
+## Hipótesis {.build}
+
+Esto es lo mismo que decir que $H_0: El \space color \space de \space ojos \space es \space independiente \space del \space color \space de \space cabello$
+
+$H_0: El \space color \space del \space cabello \space es \space independiente \space del \space color \space de \space ojos$.
+
+Que es lo mismo que decir $H_0: El \space color \space de \space ojos \space y \space el \space color \space del \space cabello \space son \space independientes$.
+
+La hipótesis nula de independencia puede decirse de la siguiente manera. Dos grupos, $G_1$ y $G_2$ son comparados con respecto de la probabilidad de la característica $C$. La hipótesis nula es entonces:
+
+$$
+H_0: P(C|G_1) = P(C|G_2)
+$$
+
+## Plantas y enfermedades {.build}
+
+Considere una especie ficticia de plantas, que se pueden categorizar en pequeñas (S), y altas (T), así como resistentes (R) y no resistentes (NR) a una enfermedad.
+
+Consideremos las siguientes $H_0$:
+
+- $H_0: P(R|S) = P(R|T)$
+
+- $H_0: P(NR|S) = P(NR|T)$
+
+- $H_0: P(S|R) = P(S|NR)$
+
+- $H_0: P(T|R) = P(T|NR)$
+
+Todas ellas son igual de válidas. Sin embargo la siguiente hipótesis no es valida.
+
+- $H_0: P(R|S) = P(NR|S)$
+
+
+## Plantas y enfermedades {.build .smaller}
+
+La primer hipótesis compara dos grupos (plantas pequeñas con altas) respecto a la resistencia a la enfermedad, mientras que la hipótesis 5 es una afirmación acerca de la distribución de la resistencia a la enfermedad en solo un grupo (plantas bajas). 
+
+Supongamos ahora que hacemos un muestreo aleatorio de 100 plantas de esta población.
+
+```{r}
+plantas <- matrix(c(12, 18, 28, 42), nrow = 2, ncol = 2, byrow = T)
+dimnames(plantas) <- list(c("R", "NR"), c("S", "T"))
+```
+
++----------------+-------------------+------------------+-------------+
+|                | S                 | T                | **Total**   |
++================+===================+==================+=============+
+| **R**          | 12                | 18               | 30          |
++----------------+-------------------+------------------+-------------+
+| **NR**         | 28                | 42               | 70          |
++----------------+-------------------+------------------+-------------+
+| **Total**      | 40                | 60               | 100         |
++----------------+-------------------+------------------+-------------+
+
+## Plantas y enfermedades {.build}
+
+Vamos a corroborar las hipótesis antes generadas:
+
+- $H_0: P(R|S) = P(R|T) = \frac{12}{40} = \frac{18}{60} = 0.30$
+
+- $H_0: P(NR|S) = P(NR|T) = \frac{28}{40} = \frac{42}{60} = 0.70$
+
+- $H_0: P(S|R) = P(S|NR) = \frac{12}{30} = \frac{28}{70} = 0.40$
+
+- $H_0: P(T|R) = P(T|NR) = \frac{18}{30} = \frac{42}{70} = 0.30$
+
+Sin embargo, con la hipótesis 5.
+
+- $H_0: P(R|S) = \frac{12}{40} = 0.40$ y $H_0: P(NR|S) = \frac{28}{40} = 0.70$
+
+## Acerca de las columnas y las filas {.build}
+
+El hecho de que la tabla anterior muestre la independencia vista tanto por medio de las filas o columnas no es casualidad, como se demuestra en la siguiente tabla.
+
++----------------+-------------------+------------------+-------------+
+|                |                   |                  | **Total**   |
++================+===================+==================+=============+
+|                | a                 | b                | a + b       |
++----------------+-------------------+------------------+-------------+
+|                | c                 | d                | c + d       |
++----------------+-------------------+------------------+-------------+
+| **Total**      | a + c             | b + d            |             |
++----------------+-------------------+------------------+-------------+
+
+## Acerca de las columnas y las filas {.build}
+
+Entonces...
+
+$$
+\frac{a}{c} = \frac{b}{d}
+$$
+
+si y solo si
+
+$$
+\frac{a}{b} = \frac{c}{d}
+$$
+
+## Acerca de las columnas y las filas {.build}
+
+Otra forma en la que esto se puede expresar es
+
+$$
+\frac{a}{a+c} = \frac{b}{b+d}
+$$
+
+si y solo si
+
+$$
+\frac{a}{a+b} = \frac{c}{c+d}
+$$
+
+## Acerca de las columnas y las filas {.build}
+
+Si $a$, $b$, $c$ y $d$ son números positivos, entonces...
+
+$$
+\frac{a}{a+c} > \frac{b}{b+d}
+$$
+
+si y solo si
+
+$$
+\frac{a}{a+b} > \frac{c}{c+d}
+$$
+
+# Prueba exacta de Fisher
+
+## Prueba exacta de Fisher {.build}
+
+Con esta prueba se encuentra la probabilidad de que la tabla de contingencia que tengamos, haya surgido por mero azar, dado que las probabilidades marginales de la tabla son fijas. Se utiliza especialmente con muestras pequeñas.
+
+$$
+p = \frac{\binom{a+b}{a}\binom{c+d}{c}}{\binom{n}{a+c}} = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a! \space b! \space c! \space d!  \space n!}
+$$
+
+Donde $\binom{n}{k}$ es el coeficiente binomial ($_{n}C_{k}$).
+
+$$
+_{n}C_{k} = \frac{n!}{k!(n-k)!}
+$$
+
+## Coeficientes binomiales {.build}
+
+Para el primer y segundo coeficiente...
+
+$$
+_{a+b}C_{a} = \frac{a+b!}{a!(a+b-a)!} \\
+_{a+b}C_{a} = \frac{c+d!}{c!(c+d-c)!} 
+$$
+
+Para el último...
+
+$$
+_{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!} 
+$$
+
+## Hipótesis {.build}
+
+Necesitamos encontrar la probabilidad de todas las tablas de datos (teniendo los mismos margenes que la tabla observada) que provean evidencia al menos tan fuerte en contra de $H_0$, en la dirección predicha por la $H_A$, como la tabla observada.
+
+Posteriormente calculamos el valor p como la suma de las probabilidades de obtener tablas tan extremas como las obtenidas, si la $H_0$ es verdad. 
+
+Afortunadamente no tenemos que buscar los valores de todas las tablas posibles una por una y en su lugar podemos utilizar el comando **fisher.test().**
+
+## fisher.test {.build}
+
+La oxigenación extracorpórea por membrana (ECMO) es un procedimiento con el potencial de salvar vidas de bebés recién nacidos que sufren de una falla respiratoria severa. En un experimento se trataron a 29 bebés recién nacidos con ECMO y a 10 bebés recién nacidos con terapia médica convencional (CMT).
+
+```{r}
+#Creamos nuestra matriz de datos.
+Tratamientos <- matrix(c(4, 1, 6, 28), nrow = 2, ncol = 2, byrow = T)
+dimnames(Tratamientos) <- list(c("Muerto", "Vivo"), c("CMT", "ECMO"))
+```
+
+
++----------------+-------------------+------------------+--------------+
+|                | CMT               | ECMO             | **Total**    |
++================+===================+==================+==============+
+| **Muerto**     | 4                 | 1                | 5            |
++----------------+-------------------+------------------+--------------+
+| **Vivo**       | 6                 | 28               | 34           |
++----------------+-------------------+------------------+--------------+
+| **Total**      | 10                | 29               | 39           |
++----------------+-------------------+------------------+--------------+
+
+## fisher.test {.build}
+
+```{r}
+fisher.test(Tratamientos)
+```
+
+Como podemos ver, el $valor \space p = 0.01102$ lo que quiere decir que rechazamos la $H_0$ y aceptamos la $H_A: P(Muerto|ECMO) < P(Muerto|CMT)$.
+
+Para cambiar la direccionalidad de nuestra hipótesis basta con que agreguemos el argumento **alternative = "two.sided"** para una $H_A$ no direccional y **alternative = "less"** o **alternative = "greater"** para una $H_A$ direccional.
+
+# Tablas de contingencia $r \times k$
+
+## Tablas de contingencia $r \times k$
+
+En esta sección consideraremos tablas de contingencia más grandes, con $r$ filas y $k$ columnas.
+
+Veamos el siguiente ejemplo.
+
+## Chorlos {.build .smaller}
+
+Ecólogos que estudiaron los hábitats reproductivos del Chorlo Llanero (*Charadrius montanus*) durante 3 años y anotaron en dónde es que anidan. Encontraron 66 nidos en zonas agricolas (ZA), 67 en pastizales con perritos de las praderas (PP) y otros 20 en praderas (P). La siguiente tabla muestra las elecciones a través de los años.
+
+```{r}
+chorlos <- matrix(c(21, 19, 26, 17, 38, 12, 5, 6, 9), nrow = 3, ncol = 3, byrow = T)
+dimnames(chorlos) <- list(c("Zona Agricola (ZA)", "Pastizal con Perritos (PP)", "Praderas (P)"), c("2004", "2005", "2006"))
+```
+
++--------------------------------+----------+----------+----------+-----------+
+|                                | **2004** | **2005** | **2006** | **Total** |
++--------------------------------+----------+----------+----------+-----------+
+| **Zona Agrícola (ZA)**         | 21       | 19       | 26       | 66        |
++--------------------------------+----------+----------+----------+-----------+
+| **Pastizal con Perritos (PP)** | 17       | 38       | 12       | 67        |
++--------------------------------+----------+----------+----------+-----------+
+| **Praderas (P)**               | 5        | 6        | 9        | 20        |
++--------------------------------+----------+----------+----------+-----------+
+| **Total**                      | 43       | 63       | 47       | 153       |
++--------------------------------+----------+----------+----------+-----------+
+
+## Chorlos {.build}
+
+En este caso, podemos transformar los valores absolutos en relativos haciendo uso del total que se encuentra en las columnas. Por ejemplo, en el caso de *2004* y la *ZA* tendríamos algo como $\frac{21}{43} = 0.488$ y así sucesivamente.
+
++--------------------------------+----------+----------+----------+
+|                                | **2004** | **2005** | **2006** |
++--------------------------------+----------+----------+----------+
+| **Zona Agrícola (ZA)**         | 48.8     | 30.2     | 55.3     |
++--------------------------------+----------+----------+----------+
+| **Pastizal con Perritos (PP)** | 39.5     | 60.3     | 25.5     |
++--------------------------------+----------+----------+----------+
+| **Praderas (P)**               | 11.6     | 9.5      | 19.1     |
++--------------------------------+----------+----------+----------+
+| **Total**                      | 99.9     | 100      | 99.9     |
++--------------------------------+----------+----------+----------+
+
+## Chorlos {.build}
+
+Estos porcentajes que tenemos en la tabla son nuestras probabilidades condicionales, es decir $P(ZA|2004) = 0.488$, $P(PP|2004) = 0.395$, $P(P|2004) = 0.116$ y así sucesivamente...
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center'}
+graph <- data.frame(Año = c(rep("2004", 3), rep("2005", 3), rep("2006", 3)), Zona = rep(c("Zona Agricola (ZA)", "Pastizal con Perritos (PP)", "Praderas (P)"), 3), Nidos = c(48.8, 39.5, 11.6, 30.2, 60.3, 9.5, 55.3, 25.5, 19.1))
+
+ggplot(graph, aes(fill = reorder(Zona, Nidos), y = Nidos, x = Año)) + 
+  geom_bar(position = position_fill(reverse = F), stack = "dodge", stat = "identity",  color = "Grey5", width = 0.6) +
+  scale_fill_grey(start = 0.8, end = 0.4) +
+  xlab("") +
+  ylab("Proporción") +
+  labs(fill = "Lugar de anidamiento") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+```
+
+## Chorlos {.build}
+
+Simplemente aplicamos la fórmula de Chi-cuadrada.
+
+$$
+\sum_{r \times k} = \frac{(o_i - e_i)^2}{e_i}
+$$
+
+Donde $r \times k$ son todas las celdas de nuestra tabla de contingencia. Los valores $e$ se calculan con la fórmula vista anteriormente. Para los grados de libertad $df$ utilizaríamos la siguiente fórmula...
+
+$$
+df = (r-1)(k-1)
+$$
+
+## Hipótesis {.build}
+
+Nuestra $H_0$ para los Chorlos sería que la preferencia de anidamiento es igual en todos los años y la $H_A$ sería que son distintas.
+
+$$
+H_0:
+\begin{Bmatrix}
+P(ZA|2004) = P(ZA|2005) = P(ZA|2006) \\
+P(PP|2004) = P(PP|2005) = P(PP|2006) \\
+P(P|2004) = P(P|2005) = P(P|2006)
+\end{Bmatrix}
+$$
+
+Igual que con la tabla de contingencia de 2x2, multiplicamos la probabilidad marginal por el total para obtener el valor esperado. Es decir, del total chorlos en la Zona Agrícola (ZA) $\frac{66}{153} \times 43 = 18.55$ y así sucesivamente.
+
+## Chorlos {.build}
+
++--------------------------------+------------+------------+------------+-----------+
+|                                | **2004**   | **2005**   | **2006**   | **Total** |
++--------------------------------+------------+------------+------------+-----------+
+| **Zona Agrícola (ZA)**         | 21 (18.55) | 19 (21.18) | 26 (20.27) | 66        |
++--------------------------------+------------+------------+------------+-----------+
+| **Pastizal con Perritos (PP)** | 17 (18.83) | 38 (27.59) | 12 (20.58) | 67        |
++--------------------------------+------------+------------+------------+-----------+
+| **Praderas (P)**               | 5 (5.62)   | 6 (8.24)   | 9 (6.14)   | 20        |
++--------------------------------+------------+------------+------------+-----------+
+| **Total**                      | 43         | 63         | 47         | 153       |
++--------------------------------+------------+------------+------------+-----------+
+
+## Chorlos {.build}
+
+Ahora simplemente aplicamos la fórmula de Chi-cuadrada para obtener nuestro estadístico $\chi_s^2$. 
+
+$$
+\chi_s^2 = \frac{(21-18.55)^2}{18.55} + \frac{(19-21.18)^2}{21.18} + \cdots + \frac{(9-6.14)^2}{6.14} = 14.09
+$$
+
+Nuestros $df$ son los siguientes, dado que $r = 3$ y $k = 3$...
+
+$$
+df = (3-1)(3-1) = 4
+$$
+
+## El valor p {.build}
+
+Si buscamos el valor de tablas, vemos que el valor p se encuentra entre 0.01 y 0.001. 
+
+Simplemente ingresamos nuestra variable **chorlos** que creamos previamente a la función **chisq.test()** y obtenemos nuestro resultado.
+
+```{r}
+chisq.test(chorlos)
+```
+
+Nuestro $valor \space p = 0.007$ por lo tanto, $valor \space p < 0.01$, tenemos evidencias significativas con un $\alpha = 0.01$ de de que los Chorlos Llaneros cambiaron de sitio de anidación. Para estos casos, nuestra $H_A$ siempre será no direccional.
+
+## Interpretación de las tablas $r \times k$ {.build}
+
+Al igual que con las tablas de contingencia 2x2, las tabla $r \times k$ pueden ser vistas bajo dos contextos.
+
+1. $k$ muestras independientes; una variable categórica observada con $r$ categorías
+
+2. Una muestra; dos variables categóricas observadas --- una con $k$ categorías y otra con $r$ categorías.
+
+Y al igual que las tablas 2x2, el cálculo del valor $\chi^2$ es el mismo para ambos contexto pero la interpretación de las hipótesis cambia.
+
+# Intervalos de confianza para la diferencia entre probabilidades
+
+## Intervalos de confianza para la diferencia entre probabilidades {.build}
+
+Un modo de análisis complementario para la prueba de Chi-cuadrada es la construcción de intervalos de confianza para la magnitud de diferencia ($p_1 - p_2$). 
+
+Para esto vamos a definir nuevas estimaciones que están basadas en la idea de añadir 1 observación a cada celda de nuestra tabla. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Muestra1 <- c("$x_1$", "$n_1 - x_1$", "$n_1$")
+Muestra2 <- c("$x_2$", "$n_2 - x_2$", "$n_2$")
+Table <- data.frame(Muestra1, Muestra2)
+
+Table %>% 
+  knitr::kable("html", align = "c", col.names = c("Muestra 1", "Muestra 2")) %>%
+  kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
+  column_spec(1:2, width_min = "4cm")
+```
+
+## Intervalos de confianza para la diferencia entre probabilidades {.build}
+
+Definimos entonces
+
+$$
+\tilde{p_1} = \frac{x_1 + 1}{n_1 + 2} \\
+\tilde{p_2} = \frac{x_2 + 1}{n_2 + 2}
+$$
+
+Y usaremos la diferencia entre $\tilde{p_1} - \tilde{p_2}$ para construir el intervalo de confianza para ($p_1 - p_2$).
+
+## Error de muestreo de $\tilde{P_1} - \tilde{P_2}$ {.build}
+
+$\tilde{P_1} - \tilde{P_2}$ esta sujeta a error de muestreo. Para calcular este error usamos la fórmula de error estándar para $\tilde{P_1} - \tilde{P_2}$. 
+
+$$
+SE_{\tilde{P_1} - \tilde{P_2}} = \sqrt{\frac{\tilde{p_1}(1-\tilde{p_1})}{n_1 + 2} + \frac{\tilde{p_2}(1-\tilde{p_2})}{n_2 + 2}}
+$$
+
+## Ahora sí el intervalo... {.build}
+
+Un intervalo de confianza se obtiene de la siguiente manera:
+
+$$
+(\tilde{p_1} - \tilde{p_2}) \pm z_{\alpha/2} SE_{\tilde{P_1} - \tilde{P_2}}
+$$
+
+Para calcular un intervalo de confianza de las proporciones o probabilidades en **R** utilizamos la función **prop.test().**
+
+Para este comando es necesario que la matriz de datos sea 2x2.
+
+## prop.test {.build}
+
+```{r}
+prop.datos <- matrix(c(18, 23, 6, 16), nrow = 2, ncol = 2, byrow = T)
+prop.test(prop.datos, correct = F)
+```
+
+## Datos pareados en tablas 2x2 {.build}
+
+Para datos pareados en tablas de 2x2 necesitamos reconstruir nuestra tabla de cierta manera. Veamos esto con un ejemplo.
+
+Se conduce un estudio para determinar el riesgo de que una mujer transmita el VIH a sus hijos no nacidos. De una muestra de 114 mujeres infectadas con VIH que dieron a luz a dos hijos, se encontró que la infección por VIH ocurrió en 19 de los 114 hijos mayores y en 20 de los 114 hijos menores.
+
++-----------+----------------+----------------+
+|           | **Hijo mayor** | **Hijo menor** |
++-----------+----------------+----------------+
+| **VIH +** | 19             | 20             |
++-----------+----------------+----------------+
+| **VIH -** | 95             | 94             |
++-----------+----------------+----------------+
+| **Total** | 114            | 114            |
++-----------+----------------+----------------+
+
+## Reconstrucción de la tabla {.build}
+
++--------------------------+--------------------------+--------------------------+
+|                          | **Hijo menor con VIH +** | **Hijo menor con VIH -** |
++--------------------------+--------------------------+--------------------------+
+| **Hijo mayor con VIH +** | 2                        | 17                       |
++--------------------------+--------------------------+--------------------------+
+| **Hijo mayor con VIH -** | 18                       | 77                       |
++--------------------------+--------------------------+--------------------------+
+| **Total**                | 114                      | 114                      |
++--------------------------+--------------------------+--------------------------+
+
+Hay dos casos que corresponden a una respuesta *sí/sí* y 77 casos que corresponden a una respuesta *no/no.* Estos no nos ayudan a determinar si el VIH ocurre con mayor frecuencia en hijos menores que en mayores, y se les conoce como **pares concordantes.**
+
+Tenemos a su vez 17 casos *sí/no* y 18 *no/sí.* Estos se conocen como **pares discordantes** y nos ayudan a  determinar si la infección por VIH ocurre con mayor frecuencia en uno de los dos casos (hijos mayores vs menores).
+
+## Hipótesis {.build}
+
+Por lo tanto, nuestra *$H_0:$ la probabilidad de infección por VIH es la misma para hijos mayores y menores.*
+
+$$
+H_0: entre \space pares \space discordantes, \space P(sí/no) = P(no/sí) = \frac{1}{2}
+$$
+
+Para este tipo de pruebas se utiliza la **prueba de Chi-cuadrada de McNemar.**
+
+## Prueba de Chi-cuadrada de McNemar {.build}
+
+Imaginemos que $n_{11}$ corresponde al número de pares *sí/sí*, $n_{12}$ corresponde al número de pares *sí/no*, $n_{21}$ al número de pares *no/sí* y $n_{22}$ al número de pares *no/no.*
+
++-----------------------+-----------------------+-----------------------+
+|                       | **+**                 | **-**                 |
++-----------------------+-----------------------+-----------------------+
+| **+**                 | *n~11~*               | *n~12~*               |
++-----------------------+-----------------------+-----------------------+
+| **-**                 | *n~21~*               | *n~22~*               |
++-----------------------+-----------------------+-----------------------+
+
+## Cómo encontrar el estadístico {.build}
+
+La fórmula para encontrar nuestro estadístico $X_{s}^2$ sería:
+
+$$
+X_{s}^2 = \frac{(n_{12} - \frac{(n_{12} + n_{21})}{2})^2}{\frac{(n_{12} - n_{21})}{2}} + \frac{(n_{21} - \frac{(n_{12} + n_{21})^2}{2})^2}{\frac{(n_{12} - n_{21})^2}{2}}
+$$
+
+Esto se simplifica de la siguiente manera:
+
+$$
+X_{s}^2 = \frac{(n_{12} - n_{21})^2}{n_{12} + n_{21}}
+$$
+
+Para realizar esta prueba en **R,** simplemente utilizamos el comando **mcnemar.test().**
+
+## mcnemar.test() {.build}
+
+Nuestra matriz de datos es el primer argumento y aplicamos **correct = F,** para evitar que **R** realice correcciones.
+
+```{r}
+VIH <- matrix(c(2, 17, 18, 77), nrow = 2, ncol = 2, byrow = T)
+dimnames(VIH) <- list("Hijo mayor" = c("VIH +", "VIH -"), "Hijo menor" = c("VIH +", "VIH -"))
+mcnemar.test(VIH, correct = F)
+```

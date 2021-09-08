@@ -99,14 +99,13 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 
 Posteriormente, realizamos el intervalo de confianza correspondiente con la siguiente fórmula (esto para un intervalo de confianza al 95%).
 
-
 \begin{equation}
 \tilde{p} \pm 1.96 \times SE_{\tilde{p}}
 (\#eq:pic)
 \end{equation}
 
 Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos.
-Para eso podemos utilizar la función `qnorm()` en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.
+Para eso podemos utilizar la función `qnorm()` en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor $z$.
 
 ```{r}
 qnorm(0.95, 0, 1)
@@ -274,7 +273,7 @@ Ahora simplemente aplicamos la fórmula para nuestros datos.
 \chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
 \end{align}
 
-Ahora tenemos que considerar la distribución nula de $\chi_s^2$, es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
+Ahora tenemos que considerar la distribución nula de $\chi_s^2$, que es la distribución muestral que se sigue en caso de que nuestra $H_0$ sea verdadera.
 Esta distribución muestral sigue la distribución de chi-cuadrada $\chi^2$ cuando el tamaño de muestra es suficientemente grande.
 La forma de la distribución de $\chi^2$ depende de los grados de libertad.
 
@@ -479,7 +478,7 @@ Ahora sí, podemos aplicar la fórmula de $\chi^2$.
 Todo este proceso se puede hacer de manera rapidísima con la función `chisq.test()`. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento `correct = F` para evitar aplicar correcciones.
 
 ```{r}
-chisq.test(cirugia, correct = F, )
+chisq.test(cirugia, correct = F)
 ```
 
 Como vemos el valor-*p* es igual a 0.01381, pero como nuestra hipótesis es direccional debemos de dividirlo en 2.
@@ -707,7 +706,7 @@ fisher.test(Tratamientos)
 Como podemos ver, el $valor-p = 0.01102$ lo que quiere decir que rechazamos la $H_0$ y aceptamos la $H_A: P(Muerto|ECMO) < P(Muerto|CMT)$.
 
 ```{r}
-fisher.test(Tratamientos)
+fisher.test(Tratamientos, alternative = "greater")
 ```
 
 Para cambiar la direccionalidad de nuestra hipótesis basta con que agreguemos el argumento `alternative = "two.sided"` para una $H_A$ no direccional y `alternative = "less"` o `alternative = "greater"` para una $H_A$ direccional.
@@ -935,7 +934,7 @@ X_{s}^2 = \frac{(n_{12} - n_{21})^2}{n_{12} + n_{21}}
 (\#eq:mcnemar2)
 \end{equation}
 
-Para realizar esta prueba en `R`, simplemente utilizamos el comando `mcnemar.test()` con el argumento con nuestra matriz de datos y el argumento `correct = F`, para evitar que`R` realice correcciones.
+Para realizar esta prueba en `R`, simplemente utilizamos el comando `mcnemar.test()` con el argumento con nuestra matriz de datos y el argumento `correct = F`, para evitar que `R` realice correcciones.
 
 ```{r}
 VIH <- matrix(c(2, 17, 18, 77), nrow = 2, ncol = 2, byrow = T)
