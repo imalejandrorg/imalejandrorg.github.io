@@ -1,0 +1,21 @@
+---
+title: "Bioestadística con R"
+author: "Alejandro Ruiz"
+output:
+  ioslides_presentation:
+    widescreen: yes
+    incremental: no
+    transition: faster
+    logo: O:/Imágenes/favicon_io/android-chrome-512x512.png
+---
+
+```{r setup, include=FALSE, fig.align='center'}
+library(tidyverse)
+library(patchwork)
+library(kableExtra)
+library(cowplot)
+library(latex2exp)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Correlación y regresión lineal

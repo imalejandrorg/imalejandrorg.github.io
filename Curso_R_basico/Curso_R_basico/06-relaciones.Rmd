@@ -415,6 +415,7 @@ options(knitr.kable.NA = "")
 knitr::kable(Cebada, "html", align = c("c", "c"), caption = "Rendimiento (lb) de las variedades de cebada", col.names = c("", "Bloque 1", "Bloque 2", "Bloque 3", "Bloque 4", "Media de la variedad")) %>% kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
   column_spec(1:6, width_min = "2cm")
 ```
+
 Como podemos ver en los datos, existe claramente un gradiente de mayor fertilidad, partiendo del bloque 1 al bloque 4.
 
 La hipótesis nula de nuestro ANOVA es que las medias de nuestras poblaciones son iguales, $H_0: \mu_1 = \mu_2 = \cdots = \mu_k$. Por lo que nuestra hipótesis nula sería que todas las variedades son iguales.
@@ -838,7 +839,7 @@ SE_L = s_{p} \sqrt{\sum_{i=1}^I\frac{m_i^2}{n_i}}
 (\#eq:lcse)
 \end{equation}
 
-Donde $s_p = \sqrt{MS(dentro)}$ de nuestro ANOVA. También podemos escribir nuestra fórmula de la siguiente manera:
+Donde $s_p = \sqrt{MS(dentro)}$ lo obtenemos de nuestro ANOVA. También podemos escribir nuestra fórmula de la siguiente manera:
 
 \begin{equation}
 SE_L = s_{p} \sqrt{\frac{m_1^2}{n_1} + \frac{m_2^2}{n_2} + \cdots + \frac{m_I^2}{n_I}}
@@ -922,7 +923,7 @@ L = (\overline{x}_2 - \overline{x_1}) - (\overline{x}_4 - \overline{x}_3) = -32.
 
 Este contraste se puede utilizar para realizar un intervalo de confianza o una prueba de hipótesis. Por ejemplo, para la prueba de hipótesis partimos de la idea $H_0: (\mu_2 - \mu_1) = (\mu_4 - \mu_3)$, o lo que es lo mismo $H_0$: El efecto del estrés es el mismo bajo ambas condiciones de luz. 
 
-Para el caso de esta contraste linear, $L$:
+Para el caso de este contraste linear, $L$:
 
 \begin{equation}
 SE_L = s_p \sqrt{\sum_{i=1}^I \frac{m_i^2}{n_i}} = s_p \sqrt{\frac{4}{13}} = 29.922 \sqrt{\frac{4}{13}} = 16.6
@@ -987,7 +988,7 @@ lsd2
 plot(lsd2)
 ```
 
-Con el comando `$groups` podemos ver cuáles son los grupos donde hay diferencia. En el caso de la soya, hay diferencias significativas tanto para la cantidad de luz como para el nivel de estrés.
+Con la opción  `$groups` podemos ver cuáles son los grupos donde hay diferencia. En el caso de la soya, hay diferencias significativas tanto para la cantidad de luz como para el nivel de estrés.
 
 Vamos a utilizar los datos de `PlantGrowth` para realizar un ANOVA y una prueba LSD.
 

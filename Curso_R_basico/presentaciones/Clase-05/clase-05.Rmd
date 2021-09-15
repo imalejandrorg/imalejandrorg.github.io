@@ -77,7 +77,11 @@ ggplot(maquinas, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
   theme_classic()
 ```
 
-## Máquinas contaminadas {.build}
+## ¿Cuál es la probabilidad de que no más de 5 máquinas estén contaminadas? {.build}
+
+```{r}
+pbinom(5, 20, 0.17)
+```
 
 La probabilidad de que no más de 5 máquinas estén contaminadas es de 0.8902245. Y como $\tilde{p} = \frac{5+2}{20+4} = 0.2917$ entonces $P(\tilde{P} \leq 0.2917) = 0.8902$.
 
@@ -85,6 +89,20 @@ La distribución muestral de $\tilde{P}$ se puede utilizar para predecir cuánto
 
 De igual manera, entre mayor sea nuestro $n$ mayor posibilidades hay de que $\tilde{P}$ se encuentre cercano a $p$.
 
+## ¿Cuál es la probabilidad de que no más de 5 máquinas estén contaminadas?
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center'}
+maquinas <- data.frame(n = 0:20, prob = dbinom(x = 0:20, size = 20, prob = 0.17))
+maquinas$colour <- ifelse(maquinas$n == 0:5, "lightblue", "white")
+
+ggplot(maquinas, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Máquinas contaminadas", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+```
 
 ## Intervalos de confianza {.build}
 
