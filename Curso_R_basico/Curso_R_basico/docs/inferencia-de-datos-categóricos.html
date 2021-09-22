@@ -307,7 +307,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#desviación-estándar-de-los-residuales"><i class="fa fa-check"></i><b>7.2.5</b> Desviación estándar de los residuales</a></li>
 <li class="chapter" data-level="7.2.6" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-coeficiente-de-determinación"><i class="fa fa-check"></i><b>7.2.6</b> El coeficiente de determinación</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-model-lineal"><i class="fa fa-check"></i><b>7.3</b> El model lineal</a>
+<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-modelo-lineal"><i class="fa fa-check"></i><b>7.3</b> El modelo lineal</a>
 <ul>
 <li class="chapter" data-level="7.3.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#estmiaciones-del-modelo-lineal"><i class="fa fa-check"></i><b>7.3.1</b> Estmiaciones del modelo lineal</a></li>
 <li class="chapter" data-level="7.3.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#interpolación-en-el-modelo-lineal"><i class="fa fa-check"></i><b>7.3.2</b> Interpolación en el modelo lineal</a></li>
@@ -399,7 +399,7 @@ SE_\tilde{p} = \sqrt{\frac{\tilde{p}(1-\tilde{p})}{n + 4}}
 \tag{5.3}
 \end{equation}\]</span></p>
 <p>Al igual que con otros métodos, podemos construir un intervalo de confianza unilateral si así lo deseamos.
-Para eso podemos utilizar la función <code>qnorm()</code> en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor Z.</p>
+Para eso podemos utilizar la función <code>qnorm()</code> en la cuál indicamos el valor de densidad (o probabilidad) que deseamos y así obtener un valor <span class="math inline">\(z\)</span>.</p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="inferencia-de-datos-categóricos.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1.644854</code></pre>
 <p>Como podemos ver, para casos de intervalos de confianza unilaterales al 95% utilizaríamos un multiplicador de 1.645.</p>
@@ -732,7 +732,7 @@ Ahora simplemente aplicamos la fórmula para nuestros datos.</p>
 <p><span class="math display">\[\begin{align}
 \chi_s^2 = \frac{(2-13)^2}{13} + \frac{(12-5.25)^2}{5.25} + \frac{(18-6)^2}{6} + \frac{(43-50.78)^2}{50.78} = 43.2
 \end{align}\]</span></p>
-<p>Ahora tenemos que considerar la distribución nula de <span class="math inline">\(\chi_s^2\)</span>, es la distribución muestral que se sigue en caso de que nuestra <span class="math inline">\(H_0\)</span> sea verdadera.
+<p>Ahora tenemos que considerar la distribución nula de <span class="math inline">\(\chi_s^2\)</span>, que es la distribución muestral que se sigue en caso de que nuestra <span class="math inline">\(H_0\)</span> sea verdadera.
 Esta distribución muestral sigue la distribución de chi-cuadrada <span class="math inline">\(\chi^2\)</span> cuando el tamaño de muestra es suficientemente grande.
 La forma de la distribución de <span class="math inline">\(\chi^2\)</span> depende de los grados de libertad.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-146"></span>
@@ -971,7 +971,7 @@ e = \frac{(Total \space columna) \times (Total \space fila)}{Gran \space total}
 \chi_s^2 = \frac{(41-36.59)^2}{36.59} + \frac{(15-19.41)^2}{19.41} + \frac{(8-12.41)^2}{12.41} + \frac{(11-6.59)^2}{6.59} = 6.06
 \end{align}\]</span></p>
 <p>Todo este proceso se puede hacer de manera rapidísima con la función <code>chisq.test()</code>. Lo único que tenemos que hacer es poner nuestra matriz de datos y el argumento <code>correct = F</code> para evitar aplicar correcciones.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="inferencia-de-datos-categóricos.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F, )</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="inferencia-de-datos-categóricos.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cirugia, <span class="at">correct =</span> F)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -1268,15 +1268,15 @@ _{n}C_{a+c} = \frac{n!}{a+c!(n-a+c)!}
 ## odds ratio 
 ##   16.78571</code></pre>
 <p>Como podemos ver, el <span class="math inline">\(valor-p = 0.01102\)</span> lo que quiere decir que rechazamos la <span class="math inline">\(H_0\)</span> y aceptamos la <span class="math inline">\(H_A: P(Muerto|ECMO) &lt; P(Muerto|CMT)\)</span>.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="inferencia-de-datos-categóricos.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="inferencia-de-datos-categóricos.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(Tratamientos, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
 ## data:  Tratamientos
 ## p-value = 0.01102
-## alternative hypothesis: true odds ratio is not equal to 1
+## alternative hypothesis: true odds ratio is greater than 1
 ## 95 percent confidence interval:
-##    1.366318 944.080411
+##  1.833681      Inf
 ## sample estimates:
 ## odds ratio 
 ##   16.78571</code></pre>
@@ -1661,7 +1661,7 @@ X_{s}^2 = \frac{(n_{12} - \frac{(n_{12} + n_{21})}{2})^2}{\frac{(n_{12} - n_{21}
 X_{s}^2 = \frac{(n_{12} - n_{21})^2}{n_{12} + n_{21}}
 \tag{5.16}
 \end{equation}\]</span></p>
-<p>Para realizar esta prueba en <code>R</code>, simplemente utilizamos el comando <code>mcnemar.test()</code> con el argumento con nuestra matriz de datos y el argumento <code>correct = F</code>, para evitar que<code>R</code> realice correcciones.</p>
+<p>Para realizar esta prueba en <code>R</code>, simplemente utilizamos el comando <code>mcnemar.test()</code> con el argumento con nuestra matriz de datos y el argumento <code>correct = F</code>, para evitar que <code>R</code> realice correcciones.</p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="inferencia-de-datos-categóricos.html#cb249-1" aria-hidden="true" tabindex="-1"></a>VIH <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">77</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
 <span id="cb249-2"><a href="inferencia-de-datos-categóricos.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(VIH) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Hijo mayor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>), <span class="st">&quot;Hijo menor&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VIH +&quot;</span>, <span class="st">&quot;VIH -&quot;</span>))</span>
 <span id="cb249-3"><a href="inferencia-de-datos-categóricos.html#cb249-3" aria-hidden="true" tabindex="-1"></a>VIH</span></code></pre></div>

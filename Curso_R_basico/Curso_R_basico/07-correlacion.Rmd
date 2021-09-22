@@ -171,7 +171,7 @@ df = n - 2
 (\#eq:corrdf)
 \end{equation}
 
-¿Por qué $n-2$? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, $n=2$, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación. 
+¿Por qué $n-2$? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, $n = 2$, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación. 
 
 Para nuestros datos de las serpientes:
 
@@ -257,7 +257,7 @@ knitr::kable(Temperatura, "html", align = c("c", "c"), caption = "Grados Celsius
   column_spec(1:2, width_min = "4cm")
 ```
 
-La siguiente tabla muestra la relación entre las dos variables.
+La siguiente gráfica muestra la relación entre las dos variables.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, fig.cap="Gráfico de temperatura en °C contra °F", fig.align='center'}
 ggplot(Temperatura, aes(x = Celsius, y = Fahrenheit)) +
@@ -474,9 +474,9 @@ r^2 \approx \frac{s_y^2-s_e^2}{s_y^2} = 1 - \frac{s_e^2}{s_y^2}
 
 El numerador $s_y^2 - s_e^2$ puede ser interpretado como la varianza total en $Y$ explicada por la línea de regresión. Si la línea de regresión se ajusta bien a los datos, entonces $s_e^2$ será cercano a 0, por lo que el numerador será cercano a $s_y^2$ y $r^2$ será cercano a 1. Nuestro valor de $r^2$ adquiere valores que van desde 0 a 1. Para nuestros datos de las serpientes, $r = 0.9437$, por lo que $r^2 = 0.8906$. Esto quiere decir que 89.06% de la varianza en el peso de las serpientes es explicada por esta relación.
 
-## El model lineal
+## El modelo lineal
 
-Podemos considerar realizar inferencia a partir de los datos sobre una población más grande. Una **población condicional** de $Y$ es una población en la cual los valores de $Y$ están asociados o fijos, dados un valor de $X$. Dentro de una población condicional, podemos hablar de una **distribución condicional** de $Y$. $\mu_{Y|X}$ corresponde a la media poblacional de $Y$ para un valor dado de $X$. $\sigma_{Y|X}$ corresponde a la desviación estándar poblacional para un valor dado de $X$.
+Podemos considerar realizar inferencias a partir de los datos sobre una población más grande. Una **población condicional** de $Y$ es una población en la cual los valores de $Y$ están asociados o fijos, dados un valor de $X$. Dentro de una población condicional, podemos hablar de una **distribución condicional** de $Y$. $\mu_{Y|X}$ corresponde a la media poblacional de $Y$ para un valor dado de $X$. $\sigma_{Y|X}$ corresponde a la desviación estándar poblacional para un valor dado de $X$.
 
 Por ejemplo, en el caso de las ratas y las anfetaminas, $\mu_{Y|X}$ y $\sigma_{Y|X}$ representan la media y la desviación estándar de los valores de consumo de comida para las ratas dada la dosis $X$ de anfetamina. Cabe aclarar que en estudios observacionales, las distribuciones condicionales corresponden a subpoblaciones más que a unidades experimentales.
 

@@ -307,7 +307,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#desviación-estándar-de-los-residuales"><i class="fa fa-check"></i><b>7.2.5</b> Desviación estándar de los residuales</a></li>
 <li class="chapter" data-level="7.2.6" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-coeficiente-de-determinación"><i class="fa fa-check"></i><b>7.2.6</b> El coeficiente de determinación</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-model-lineal"><i class="fa fa-check"></i><b>7.3</b> El model lineal</a>
+<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-modelo-lineal"><i class="fa fa-check"></i><b>7.3</b> El modelo lineal</a>
 <ul>
 <li class="chapter" data-level="7.3.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#estmiaciones-del-modelo-lineal"><i class="fa fa-check"></i><b>7.3.1</b> Estmiaciones del modelo lineal</a></li>
 <li class="chapter" data-level="7.3.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#interpolación-en-el-modelo-lineal"><i class="fa fa-check"></i><b>7.3.2</b> Interpolación en el modelo lineal</a></li>
@@ -468,7 +468,7 @@ df = n - 1 = 14 - 1 = 13
 <pre><code>## [1] 34.24348</code></pre>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="estadística-inferencial.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fl">32.8143</span> <span class="sc">-</span> <span class="fl">2.160</span><span class="sc">*</span>(<span class="fl">2.4757</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 31.38512</code></pre>
-<p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis <span class="math inline">\((31.4, 34.2)\)</span>. Con esta información sabemos entonces que <span class="math inline">\(31.4cm^2 &gt; \mu &gt; 34.2cm^2\)</span>.</p>
+<p>Una forma compacta de escribir el intervalo de confianza es con el límite inferior y superior separados por una coma y entre paréntesis <span class="math inline">\((31.4, 34.2)\)</span>. Con esta información sabemos entonces que <span class="math inline">\(31.4 \space cm^2 &gt; \mu &gt; 34.2 \space cm^2\)</span>.</p>
 <p>Una cosa importante a destacar es que es el propio intervalo de confianza es el que es <strong>aleatorio</strong>. Si consideramos intervalos de confianza al 95%, entonces:</p>
 <p><span class="math display">\[\begin{equation}
 P(La\space siguiente\space muestra\space nos\space dará\space un\space intervalo\space de\space confianza\space que\space contenga\space a\space \mu) = 0.95
@@ -864,7 +864,7 @@ Figura 4.7: Gráfico con el valor-<em>p</em> (área sombreada) correspondiente a
 <li><p><strong>Tipo de error I:</strong> Cuando decimos que los datos proveen evidencia significativa a favor de la <span class="math inline">\(H_A\)</span>, cuando en realidad <span class="math inline">\(H_0\)</span> es verdad. Este tipo de error se contrarresta cuando elegimos nuestro <span class="math inline">\(\alpha\)</span>.</p></li>
 <li><p><strong>Tipo de error II:</strong> cuando la <span class="math inline">\(H_A\)</span> es verdadera, pero no obtenemos suficiente información que demuestre esto. Las muestras con tamaños de muestra pequeños son particularmente vulnerables a este tipo de error. La probabilidad de cometer este tipo de error se conoce como <span class="math inline">\(\beta\)</span>.</p></li>
 </ul>
-<p>La posibilidad de no cometer un error tipo II cuando la <span class="math inline">\(H_A\)</span> es verdadera se conoce como <strong>poder</strong>.</p>
+<p>La posibilidad de no cometer un error tipo II cuando la <span class="math inline">\(H_A\)</span> es verdadera se conoce como <strong>poder.</strong></p>
 <p><span class="math display" id="eq:power">\[\begin{equation}
 Poder = 1 - \beta =  P(evidencia \space significativa \space para \space H_{A}) \space si \space H_{A} \space es \space verdad
 \tag{4.13}
@@ -929,7 +929,7 @@ Figura 4.8: Diferencias entre las medias de ambas muestras utilizadas en el ejer
 </div>
 <div id="prueba-de-wilcoxon-mann-whitney" class="section level3" number="4.4.4">
 <h3><span class="header-section-number">4.4.4</span> Prueba de Wilcoxon-Mann-Whitney</h3>
-<p>También es utilizada para comprar dos muestras. A diferencia de la prueba de <span class="math inline">\(t\)</span>, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas <strong>no paramétricas</strong>.</p>
+<p>También es utilizada para comprar dos muestras. A diferencia de la prueba de <span class="math inline">\(t\)</span>, incluso cuando las distribuciones de las poblaciones no son normales. Este tipo de pruebas no se enfocan en un parámetro particular como la media o la mediana, por esta razón se conocen como pruebas <strong>no paramétricas.</strong></p>
 <p>En el caso de esta prueba, una <span class="math inline">\(H_0\)</span> generalmente empleada es que las distribuciones de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> son iguales, y la <span class="math inline">\(H_A\)</span> es que la distribución de <span class="math inline">\(X_1\)</span> es distinta a la distribución de la población <span class="math inline">\(X_2\)</span>.</p>
 <p>Esta prueba es recomendable aplicarla cuando tenemos datos que no se distribuyen de manera normal aunque realicemos transformaciones (como logaritmos u otra transformación). El estadístico de esta prueba se simboliza como <span class="math inline">\(U_s\)</span> y mide el grado de separación entra ambas muestras.</p>
 <ol style="list-style-type: decimal">

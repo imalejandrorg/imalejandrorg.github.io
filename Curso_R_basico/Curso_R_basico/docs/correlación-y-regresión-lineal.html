@@ -307,7 +307,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.5" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#desviación-estándar-de-los-residuales"><i class="fa fa-check"></i><b>7.2.5</b> Desviación estándar de los residuales</a></li>
 <li class="chapter" data-level="7.2.6" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-coeficiente-de-determinación"><i class="fa fa-check"></i><b>7.2.6</b> El coeficiente de determinación</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-model-lineal"><i class="fa fa-check"></i><b>7.3</b> El model lineal</a>
+<li class="chapter" data-level="7.3" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#el-modelo-lineal"><i class="fa fa-check"></i><b>7.3</b> El modelo lineal</a>
 <ul>
 <li class="chapter" data-level="7.3.1" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#estmiaciones-del-modelo-lineal"><i class="fa fa-check"></i><b>7.3.1</b> Estmiaciones del modelo lineal</a></li>
 <li class="chapter" data-level="7.3.2" data-path="correlación-y-regresión-lineal.html"><a href="correlación-y-regresión-lineal.html#interpolación-en-el-modelo-lineal"><i class="fa fa-check"></i><b>7.3.2</b> Interpolación en el modelo lineal</a></li>
@@ -659,7 +659,7 @@ t_s = r\sqrt{\frac{n-2}{1-r^2}}
 df = n - 2
 \tag{7.3}
 \end{equation}\]</span></p>
-<p>¿Por qué <span class="math inline">\(n-2\)</span>? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, <span class="math inline">\(n=2\)</span>, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación.</p>
+<p>¿Por qué <span class="math inline">\(n-2\)</span>? Bueno, dos puntos cualesquiera determinan una linea recta, sin embargo, con esa cantidad de datos, <span class="math inline">\(n = 2\)</span>, no obtenemos información acerca de la variabilidad inherente de los datos. Es hasta que observamos un tercer punto que podemos comenzar a estimar la fuerza de la correlación.</p>
 <p>Para nuestros datos de las serpientes:</p>
 <p><span class="math display">\[\begin{equation}
 t_s = 0.9437 \sqrt{\frac{9 - 2}{1 - 0.9437^2}} = 7.549
@@ -903,7 +903,7 @@ z_r = \frac{1}{2} \ln \left[ {\frac{1+0.9437}{1-0.9437}} \right] = \frac{1}{2} \
 </tr>
 </tbody>
 </table>
-<p>La siguiente tabla muestra la relación entre las dos variables.</p>
+<p>La siguiente gráfica muestra la relación entre las dos variables.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-193"></span>
 <img src="Curso_R_basico_files/figure-html/unnamed-chunk-193-1.png" alt="Gráfico de temperatura en °C contra °F" width="672" />
 <p class="caption">
@@ -1319,9 +1319,9 @@ r^2 \approx \frac{s_y^2-s_e^2}{s_y^2} = 1 - \frac{s_e^2}{s_y^2}
 <p>El numerador <span class="math inline">\(s_y^2 - s_e^2\)</span> puede ser interpretado como la varianza total en <span class="math inline">\(Y\)</span> explicada por la línea de regresión. Si la línea de regresión se ajusta bien a los datos, entonces <span class="math inline">\(s_e^2\)</span> será cercano a 0, por lo que el numerador será cercano a <span class="math inline">\(s_y^2\)</span> y <span class="math inline">\(r^2\)</span> será cercano a 1. Nuestro valor de <span class="math inline">\(r^2\)</span> adquiere valores que van desde 0 a 1. Para nuestros datos de las serpientes, <span class="math inline">\(r = 0.9437\)</span>, por lo que <span class="math inline">\(r^2 = 0.8906\)</span>. Esto quiere decir que 89.06% de la varianza en el peso de las serpientes es explicada por esta relación.</p>
 </div>
 </div>
-<div id="el-model-lineal" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> El model lineal</h2>
-<p>Podemos considerar realizar inferencia a partir de los datos sobre una población más grande. Una <strong>población condicional</strong> de <span class="math inline">\(Y\)</span> es una población en la cual los valores de <span class="math inline">\(Y\)</span> están asociados o fijos, dados un valor de <span class="math inline">\(X\)</span>. Dentro de una población condicional, podemos hablar de una <strong>distribución condicional</strong> de <span class="math inline">\(Y\)</span>. <span class="math inline">\(\mu_{Y|X}\)</span> corresponde a la media poblacional de <span class="math inline">\(Y\)</span> para un valor dado de <span class="math inline">\(X\)</span>. <span class="math inline">\(\sigma_{Y|X}\)</span> corresponde a la desviación estándar poblacional para un valor dado de <span class="math inline">\(X\)</span>.</p>
+<div id="el-modelo-lineal" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> El modelo lineal</h2>
+<p>Podemos considerar realizar inferencias a partir de los datos sobre una población más grande. Una <strong>población condicional</strong> de <span class="math inline">\(Y\)</span> es una población en la cual los valores de <span class="math inline">\(Y\)</span> están asociados o fijos, dados un valor de <span class="math inline">\(X\)</span>. Dentro de una población condicional, podemos hablar de una <strong>distribución condicional</strong> de <span class="math inline">\(Y\)</span>. <span class="math inline">\(\mu_{Y|X}\)</span> corresponde a la media poblacional de <span class="math inline">\(Y\)</span> para un valor dado de <span class="math inline">\(X\)</span>. <span class="math inline">\(\sigma_{Y|X}\)</span> corresponde a la desviación estándar poblacional para un valor dado de <span class="math inline">\(X\)</span>.</p>
 <p>Por ejemplo, en el caso de las ratas y las anfetaminas, <span class="math inline">\(\mu_{Y|X}\)</span> y <span class="math inline">\(\sigma_{Y|X}\)</span> representan la media y la desviación estándar de los valores de consumo de comida para las ratas dada la dosis <span class="math inline">\(X\)</span> de anfetamina. Cabe aclarar que en estudios observacionales, las distribuciones condicionales corresponden a subpoblaciones más que a unidades experimentales.</p>
 <p>Para el modelo lineal, se le puede dar una interpretación paramétrica si se cumplen dos condiciones:</p>
 <p><strong>- Linearidad:</strong> <span class="math inline">\(Y = \mu_{Y|X} + \epsilon\)</span> donde <span class="math inline">\(\mu_{Y|X}\)</span> es la función lineal de <span class="math inline">\(X\)</span>, es decir, <span class="math inline">\(\mu_{Y|X} = \beta_0 + \beta_1X\)</span>. Por ende <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>.</p>
