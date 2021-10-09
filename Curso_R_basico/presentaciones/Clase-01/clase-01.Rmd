@@ -162,7 +162,7 @@ Si no se especifica una ruta, se guardará el archivo en el directorio de trabaj
 
 Cuando no sepamos cómo fuciona exactamente algo, podemos pedir ayuda agregando el símbolo de pregunta ?.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval = FALSE}
 
 ?mean()
 

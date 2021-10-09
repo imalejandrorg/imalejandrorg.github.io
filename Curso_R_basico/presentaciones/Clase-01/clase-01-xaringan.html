@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bioestadística con R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alejandro Ruiz" />
+    <meta name="date" content="2021-10-09" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bioestadística con R
+### Alejandro Ruiz
+### 2021-10-09
+
+---
+
+class: inverse, middle, center
+
+
+
+
+
+
+# Introducción a R y RStudio
+
+---
+# Interfaz
+R Studio cuenta con **4 ventanas esenciales:**
+
+--
+
+- La **consola.**
+
+--
+
+- Los **scripts.**
+
+--
+
+- El **Envirnoment** y el **History.**
+
+--
+
+- Los **Files, Packages, Plots** y **Help.**
+
+&lt;br&gt;
+También podemos modificar la apariencia y la fuente de nuestro `RStudio` en la ventana **Global Options.**
+&lt;/br&gt;
+
+---
+# Creando nuestro primer proyecto
+--
+
+**1)** Clic en **File,** segudio de **New Project** para crear nuestro nuevo proyecto.
+
+--
+
+**2) New Directory** para crear una nueva carpeta para nuestro directorio&lt;sup&gt;1&lt;/sup&gt;.
+
+--
+
+**3)** Una vez creado nuestro nuevo proyecto, podemos crear un nuevo script tecleando `Ctrl + Shift + N.`
+
+--
+
+Veamos cómo se hace esto en `RStudio.`
+
+.footnote[
+[1] Se recomienda no dejar espacios en los nombres del proyecto o del directorio.
+]
+
+---
+# Directorio de trabajo
+Para esto utilizamos la función `getwd()`.
+
+--
+
+```r
+getwd()
+```
+
+```
+## [1] "O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Presentaciones/Clase-01"
+```
+
+---
+# Directorio de trabajo
+Para cambiar el directorio de trabajo utilizamos la función `setwd()` seguido de la nueva dirección que queremos establecer.
+
+--
+
+```r
+setwd("O:/Documentos/R_Basico")
+getwd()
+```
+
+```
+## [1] "O:/Documentos/R_Basico"
+```
+
+
+
+---
+# Objetos y variables
+--
+
+- **Vector:** Es uno de los elementos básicos. Existen distintos de vectores, los cuales pueden ser: lógicos, integers, caracteres y complejos. 
+--
+
+- **Lista:** Son objetos que contienen distintos elementos que pueden incluir strings, números, vectores e incluso listas anidadas, así como matrices y o funciones como elementos. 
+
+--
+
+- **Matriz:** Objetos arreglados en un espacio bidimensional. Un requisito es que contengan elementos del mismo tipo. Usualmente las usamos para realizar operaciones matemáticas.
+
+--
+
+- **Array:** Para almacenar datos en más de dos dimensiones.
+
+--
+
+- **Factor:** Son objetos que se utilizan para para categorizar y almacenar datos en ciertos niveles. Pueden ser strings o integers. Son usados frecuentemente en análisis estadísticos.
+
+--
+
+- **Dataframe:** Es una estructuración de datos en dos dimensiones, donde cada columna consiste del valor de una variable y cada fila consiste de un conjunto de valores de las columnas.
+
+---
+# Objetos y variables
+--
+
+.center[![DataType](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/DataType.png)]
+
+---
+#Instalar paquetes
+
+Los **paquetes** incluyen funciones escritas por otras personas de los cuales podemos hacer uso. 
+
+--
+
+`install.package()`
+
+--
+
+Para llamar a un paquete...
+
+
+--
+
+
+```r
+library(vegan)
+```
+
+---
+# Instalar paquetes
+
+Personalmente prefiero instalar los paquetes desde la ventana de **Packages.**
+
+
+--
+
+&lt;img src="https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/Package1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Importar datos
+
+Importaremos los datos de Palacio et al. (2020). Una base de datos de aves del capítulo 6.
+
+--
+
+**Descargar:** ["Aves.txt"](https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt)
+
+--
+
+```r
+Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.txt",
+                   header = TRUE)
+```
+
+---
+
+# Importar datos
+
+<div id="pmsyqtrusq" style="overflow-x:auto;overflow-y:auto;width:100%;height:55%;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#pmsyqtrusq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pmsyqtrusq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pmsyqtrusq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pmsyqtrusq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pmsyqtrusq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pmsyqtrusq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pmsyqtrusq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pmsyqtrusq .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pmsyqtrusq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pmsyqtrusq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pmsyqtrusq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pmsyqtrusq .gt_row {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pmsyqtrusq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#pmsyqtrusq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pmsyqtrusq .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pmsyqtrusq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pmsyqtrusq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#pmsyqtrusq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pmsyqtrusq .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#pmsyqtrusq .gt_left {
+  text-align: left;
+}
+
+#pmsyqtrusq .gt_center {
+  text-align: center;
+}
+
+#pmsyqtrusq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pmsyqtrusq .gt_font_normal {
+  font-weight: normal;
+}
+
+#pmsyqtrusq .gt_font_bold {
+  font-weight: bold;
+}
+
+#pmsyqtrusq .gt_font_italic {
+  font-style: italic;
+}
+
+#pmsyqtrusq .gt_super {
+  font-size: 65%;
+}
+
+#pmsyqtrusq .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">sitio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">estacion</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">ambiente</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">agebad</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amabra</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">rupmag</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">spimag</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">chlluc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">colmel</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">patpic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">cycguj</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">elapar</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">furruf</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">geoaeq</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ictcay</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">lepang</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">mimsat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">molbon</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">myimac</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">myimon</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">pacpol</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">phastr</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">pitsul</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">poldum</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">poomel</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">rossoc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">sicfla</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">siclut</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">spocae</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">synspi</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">troaed</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">turruf</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">viroli</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">zenaur</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">zoncap</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">5</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">14</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">37</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">5</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">bosque</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">9</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">8</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">13</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">31</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">inv</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">14</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">oto</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">7</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">pri</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">11</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">ver</td>
+<td class="gt_row gt_left">arbustal</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">12</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+---
+# Importar datos
+
+Para otros formatos utilizamos:
+--
+
+- **.csv:** `read.csv()`
+--
+
+- **.xlsx:** `read_excel()`, del paquete `readxl`.
+
+
+```r
+Aves_csv &lt;- read.csv("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.csv",
+                     header = TRUE)
+
+library(readxl)
+Aves_xlsx &lt;- read_excel("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.xlsx")
+```
+
+---
+# Comentarios
+
+Los comentarios nos permiten recordar la utilidad de algunas líneas de código, funciones o argumentos en particular, solo basta agregarlos a nuestro script tecleando el símbolo de **gato** o **hashtag** (#).
+
+--
+
+
+```r
+# Creamos una variable que contenga la suma de 5 + 5.
+x &lt;- 5 + 5
+```
+
+---
+#  Exportar datos
+
+Aunque trabajando con **R Markdown** casi nunca exportamos datos, podemos hacer esto...
+
+--
+
+
+```r
+#Filtramos nuestro archivo para tener solo las abundancias.
+Abun &lt;- Aves[,4:35]
+
+#Exportamos nuestro archivo en formato .csv
+write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE)
+```
+
+Si no se especifica una ruta, se guardará el archivo en el directorio de trabajo.
+
+---
+# Pedir ayuda
+
+Cuando no sepamos cómo fuciona exactamente algo, podemos pedir ayuda agregando el símbolo de pregunta ?.
+
+--
+
+
+```r
+?mean()
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

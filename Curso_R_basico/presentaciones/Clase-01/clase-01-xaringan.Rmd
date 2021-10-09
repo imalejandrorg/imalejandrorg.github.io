@@ -1,0 +1,261 @@
+---
+title: "Bioestadística con R"
+author: "Alejandro Ruiz"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      beforeInit: "macros.js"
+---
+class: inverse, middle, center
+
+```{r setup, include=FALSE}
+library(gt)
+library(tidyverse)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	eval = TRUE,
+	fig.retina = 3
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Fira Sans"),
+  code_font_google = google_font("Fira Mono"),
+  base_font_size = "22px",
+  code_highlight_color = "rgba(126, 191, 160, 0.5)"
+)
+```
+
+
+# Introducción a R y RStudio
+
+---
+# Interfaz
+R Studio cuenta con **4 ventanas esenciales:**
+
+--
+
+- La **consola.**
+
+--
+
+- Los **scripts.**
+
+--
+
+- El **Envirnoment** y el **History.**
+
+--
+
+- Los **Files, Packages, Plots** y **Help.**
+
+<br>
+También podemos modificar la apariencia y la fuente de nuestro `RStudio` en la ventana **Global Options.**
+</br>
+
+---
+# Creando nuestro primer proyecto
+--
+
+**1)** Clic en **File,** segudio de **New Project** para crear nuestro nuevo proyecto.
+
+--
+
+**2) New Directory** para crear una nueva carpeta para nuestro directorio<sup>1</sup>.
+
+--
+
+**3)** Una vez creado nuestro nuevo proyecto, podemos crear un nuevo script tecleando `Ctrl + Shift + N.`
+
+--
+
+Veamos cómo se hace esto en `RStudio.`
+
+.footnote[
+[1] Se recomienda no dejar espacios en los nombres del proyecto o del directorio.
+]
+
+---
+# Directorio de trabajo
+Para esto utilizamos la función `getwd()`.
+
+--
+```{r getwd, echo=TRUE, message=TRUE, warning=FALSE}
+getwd()
+```
+
+---
+# Directorio de trabajo
+Para cambiar el directorio de trabajo utilizamos la función `setwd()` seguido de la nueva dirección que queremos establecer.
+
+--
+```{r setwd, echo=TRUE, message=TRUE, warning=FALSE}
+setwd("O:/Documentos/R_Basico")
+getwd()
+```
+
+```{r setwd_hidden, include=FALSE}
+setwd("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Presentaciones/Clase-01")
+```
+
+---
+# Objetos y variables
+--
+
+- **Vector:** Es uno de los elementos básicos. Existen distintos de vectores, los cuales pueden ser: lógicos, integers, caracteres y complejos. 
+--
+
+- **Lista:** Son objetos que contienen distintos elementos que pueden incluir strings, números, vectores e incluso listas anidadas, así como matrices y o funciones como elementos. 
+
+--
+
+- **Matriz:** Objetos arreglados en un espacio bidimensional. Un requisito es que contengan elementos del mismo tipo. Usualmente las usamos para realizar operaciones matemáticas.
+
+--
+
+- **Array:** Para almacenar datos en más de dos dimensiones.
+
+--
+
+- **Factor:** Son objetos que se utilizan para para categorizar y almacenar datos en ciertos niveles. Pueden ser strings o integers. Son usados frecuentemente en análisis estadísticos.
+
+--
+
+- **Dataframe:** Es una estructuración de datos en dos dimensiones, donde cada columna consiste del valor de una variable y cada fila consiste de un conjunto de valores de las columnas.
+
+---
+# Objetos y variables
+--
+
+.center[![DataType](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/DataType.png)]
+
+---
+#Instalar paquetes
+
+Los **paquetes** incluyen funciones escritas por otras personas de los cuales podemos hacer uso. 
+
+--
+
+`install.package()`
+
+--
+
+Para llamar a un paquete...
+
+
+--
+
+```{r call-package, echo=TRUE, message=TRUE, warning=FALSE}
+library(vegan)
+```
+
+---
+# Instalar paquetes
+
+Personalmente prefiero instalar los paquetes desde la ventana de **Packages.**
+
+
+--
+
+```{r image1, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/images/Package1.png")
+```
+
+---
+# Importar datos
+
+Importaremos los datos de Palacio et al. (2020). Una base de datos de aves del capítulo 6.
+
+--
+
+**Descargar:** ["Aves.txt"](https://fundacionazara.org.ar/img/libros/analisis-multivariado-para-datos-biologicos/Aves.txt)
+
+--
+```{r import_data, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+Aves <- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.txt",
+                   header = TRUE)
+```
+
+---
+
+# Importar datos
+
+```{r tabla1, echo=FALSE}
+Aves %>% gt() %>% tab_options(container.width = pct(100), container.height = pct(55), data_row.padding = px(2))
+```
+
+---
+# Importar datos
+
+Para otros formatos utilizamos:
+--
+
+- **.csv:** `read.csv()`
+--
+
+- **.xlsx:** `read_excel()`, del paquete `readxl`.
+
+```{r import_data_2, echo=TRUE}
+Aves_csv <- read.csv("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.csv",
+                     header = TRUE)
+
+library(readxl)
+Aves_xlsx <- read_excel("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/Aves.xlsx")
+```
+
+---
+# Comentarios
+
+Los comentarios nos permiten recordar la utilidad de algunas líneas de código, funciones o argumentos en particular, solo basta agregarlos a nuestro script tecleando el símbolo de **gato** o **hashtag** (#).
+
+--
+
+```{r comentarios, echo=TRUE}
+# Creamos una variable que contenga la suma de 5 + 5.
+x <- 5 + 5
+
+```
+
+---
+#  Exportar datos
+
+Aunque trabajando con **R Markdown** casi nunca exportamos datos, podemos hacer esto...
+
+--
+
+```{r exportar, echo=TRUE}
+#Filtramos nuestro archivo para tener solo las abundancias.
+Abun <- Aves[,4:35]
+
+#Exportamos nuestro archivo en formato .csv
+write.table(Abun, file = "Abundancias.csv", sep = ",", row.names = FALSE)
+```
+
+Si no se especifica una ruta, se guardará el archivo en el directorio de trabajo.
+
+---
+# Pedir ayuda
+
+Cuando no sepamos cómo fuciona exactamente algo, podemos pedir ayuda agregando el símbolo de pregunta ?.
+
+--
+
+```{r ayuda, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+
+?mean()
+
+```
