@@ -180,150 +180,101 @@ Sirven para describir los valores del centro o valores medios de algún conjunto
 
 ---
 # Media
-
+.panelset[
+.panel[.panel-name[General]
 Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
-
---
 
 **Muestral:**
 $$
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 $$
 
---
-
 **Poblacional:**
 $$
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
 $$
-
----
-# Propiedades de la media
-
---
-
+]
+.panel[.panel-name[Propiedades]
 - No es un estadístico **robusto.**
-
---
 
 - Utiliza los valores de todos los datos disponibles.
 
---
-
 - La media muestral ( $\bar{x}$ ) de una población tiende a variar menos que otras medidas de tendencia central.
-
---
-
-<br>
-
+]
+.panel[.panel-name[Ejemplo]
 >**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media del grupo control (usar base de datos PlantGrowth).
-
-</br>
-
----
-#  Ejemplo con PlantGrowth
-
---
 
 ```{r echo=TRUE}
 data(PlantGrowth)
 head(PlantGrowth)
 ```
-
----
-#  Ejemplo con PlantGrowth
-
-Filtramos los datos para solamente tener los valores del grupo control. Los corchetes sirven para seleccionar datos en formato [filas, columnas].
-
---
-
+]
+.panel[.panel-name[Función mean()]
 ```{r echo=TRUE}
 control <- PlantGrowth[0:10,1]
 control
 ```
 
----
-# Función `mean()`
-
---
-
 ```{r echo=TRUE}
 mean(control)
 ```
+]
+]
 
 ---
 # Mediana
-
+.panelset[
+.panel[.panel-name[General]
 Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se representa con el símbolo $\tilde{x}$ (léase $x$ tilde).
-
---
 
 $$
 1, \space 2, \space 3, \space 4, \space 5
 $$
 
---
-
 La mediana correspondería al valor de en medio, que en este caso es 3.
+]
+.panel[.panel-name[Propiedades]
+- No cambia al añadir valores extremos. Es un estadístico **robusto.**
 
+- No utiliza todo el conjunto de datos.
+]
+.panel[.panel-name[Función median()]
 ```{r echo=TRUE}
 median(c(1,2,3,4,5))
 ```
-
----
-# Mediana
-
+]
+.panel[.panel-name[Observaciones impares]
 En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
 
 $$
 5, \space 6, \space 7, \space 8, \space 9, \space 10
 $$
 
---
-
-```{r echo=TRUE}
-median(c(5, 6, 7, 8, 9, 10))
-```
-
---
-
 En este caso, la media se calculó así...
 
 $$
 \tilde{x} = \frac{7+8}{2} = 7.5
 $$
-
----
-# Ejemplo con PlantGrowth
-
+]
+.panel[.panel-name[Ejemplo]
 En el caso de la mediana del grupo control de plantas... Primero podemos ajustar nuestros datos de menor a mayor con la función **sort().**
 
 ```{r echo=TRUE}
 sort(control)
 ```
 
---
-
 Al ser número par de observaciones la mediana será el resultado del promedio de los dos valores centrales.
 
 ```{r echo=TRUE}
 median(control)
 ```
-
----
-# Propiedades de la mediana
-
---
-
-- No cambia al añadir valores extremos. Es un estadístico **robusto.**
-
---
-
-- No utiliza todo el conjunto de datos.
+]
+]
 
 ---
 # La media y la mediana
-
+.panelset[
+.panel[.panel-name[Código]
 ```{r echo=TRUE}
 #Genera 100 observaciones aleatorias
 set.seed(123)
@@ -332,12 +283,9 @@ x <- round(rnorm(100, 5, 2))
 mean(x)
 median(x)
 ```
-
----
-# La media y la mediana
-
-
-```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9}
+]
+.panel[.panel-name[Gráfica]
+```{r echo=FALSE, fig.align='center', fig.height=6.2, fig.width=9}
 ggplot(data.frame(x), aes(x)) + 
   geom_histogram(binwidth = 1, color = "gray20", fill = "lightblue") +
   geom_vline(xintercept = mean(x), linetype = "dashed", size = 1, color = "red") +
@@ -348,6 +296,7 @@ ggplot(data.frame(x), aes(x)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
+]]
 
 ---
 # Moda
@@ -406,33 +355,25 @@ max(control) - min(control)
 
 ---
 # Desviación estándar
-
-Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y $\sigma$ para datos poblacionales.
-
---
+.panelset[
+.panel[.panel-name[General]Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y $\sigma$ para datos poblacionales.
 
 **Muestral:**
 $$
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 $$
 
---
-
 **Poblacional:**
 $$
 \sigma = \sqrt{\frac{\sum_{i = 1}^{N}( {x_i-\overline{x} ) ^2}}{N}}
 $$
-
----
-# Desviación estándar
-
+]
+.panel[.panel-name[Desviación]
 La operación $x_i - \overline{x}$ corresponde a la **desviación** de nuestros datos respecto de la media.
-
---
 
 Para nuestras 100 observaciones aleatorias...
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=6.1, fig.width=10}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=5.1, fig.width=10}
 ggplot(data.frame(x), aes(x)) +
   geom_vline(xintercept = mean(x), size = 0.5, color = "gray20", linetype = "dashed") +
   geom_text(aes(x = mean(x) + 0.3, y = 0.5, label = "bar(x)"), parse = TRUE, size = 5) +
@@ -446,11 +387,9 @@ ggplot(data.frame(x), aes(x)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
-
----
-# Desviación estándar
-
-```{r echo=FALSE, fig.align='center', fig.width=11}
+]
+.panel[.panel-name[Visualización]
+```{r echo=FALSE, fig.align='center', fig.width=11, fig.height=6}
 ggplot(data.frame(x), aes(x)) + 
   geom_histogram(binwidth = 1, color = "gray20", fill = "lightblue") +
   geom_segment(aes(x = mean(x), y = 5, xend = mean(x) + sd(x), yend = 5), color = "gray20", linetype = "dashed", size = 1) +
@@ -467,36 +406,29 @@ ggplot(data.frame(x), aes(x)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
-
----
-# Propiedades de la desviación estándar
---
-
+]
+.panel[.panel-name[Propiedades]
 - Nunca tiene un valor negativo.
-
---
 
 - Un valor elevado en $s$ indica mayor dispersión en los datos.
 
---
-
 - Puede aumentar considerablemente con valores atípicos, es decir, no es una medida robusta.
 
---
-
 - Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos de control de PlantGrowth...
 
 ```{r echo=TRUE}
 sd(control)
 ```
+]
+]
 
 ---
 # Varianza
-
+.panelset[
+.panel[.panel-name[General]
 Corresponde a la desviación estándar elevada al cuadrado.
 
 $$
@@ -506,38 +438,41 @@ $$
 $$
 \sigma
 $$
-
---
-
+]
+.panel[.panel-name[Propiedades]
 Propiedades de la varianza:
 
 - Unidades elevadas al cuadrado.
 
---
-
 - No es un estadístico robusto.
 
---
-
 - Nunca tiene valores negativos.
+]
+.panel[.panel-name[Ejemplo]
+```{r echo=TRUE}
+sd(control)^2
+```
+]
+]
 
 ---
 # Coeficiente de variación
-
+.panelset[
+.panel[.panel-name[General]
 Mide en forma de porcentaje qué tanto varían los datos.
 
 $$
 CV = \frac{s}{\overline{x}} \times 100
 $$
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos de control de PlantGrowth...
 
 ```{r echo=TRUE}
 sd(control)/mean(control)*100
 ```
-
+]
+]
 ---
 class: inverse, middle, center
 
@@ -557,41 +492,34 @@ Indican la posición relativa un dato respecto de los demás datos. Algunas de l
 
 ---
 # Valores $Z$
-
+.panelset[
+.panel[.panel-name[General]
 Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ( $s$ ) a las que se encuentra un valor dado.
-
---
 
 **Muestral:**
 $$
 z = \frac{x_i - \overline{x}}{s}
 $$
 
---
-
 **Poblacional:**
 $$
 Z = \frac{X - \mu}{\sigma}
 $$
-
----
-# Propiedades de los valores $Z$
-
+]
+.panel[.panel-name[Propiedades]
 - No tienen unidades de medida. Son **adimensionales.**
 
-- Si un valor es menor que la media ($\overline{x}$) su valor $z$ será negativo.
-
----
-# Su cálculo en `R`...
-
-Utilizamos la función **scale().**
-
---
+- Si un valor es menor que la media ( $\overline{x}$ ) su valor $z$ será negativo.
+]
+.panel[.panel-name[Función scale()]
+Utilizamos la función `scale()`.
 
 ```{r}
 z <- scale(control)
 z
 ```
+]
+]
 
 ---
 # Frecuencia absoluta
@@ -622,31 +550,27 @@ prop.table(table(control))
 ---
 # Cuartiles
 
+.panelset[
+.panel[.panel-name[General]
 Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil. $Q_2$ es equivalente a la mediana ( $Q_2 = \tilde{x}$ ).
-
---
-
+]
+.panel[.panel-name[IQR]
 Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ( $IQR$ ) como se indica en la siguiente fórmula.
 
 $$
 IQR = Q_3 - Q_1
 $$
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos del grupo control de PlantGrowth...
 
 ```{r echo=TRUE}
 summary(control)
 ```
 
---
-
-A partir de estos datos nosotros podemos construir un **gráfico de cajas.**
-
----
-# Valores atípicos
-
+A partir de estos datos podemos construir un **gráfico de cajas.**
+]
+.panel[.panel-name[Valores atípicos]
 Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
 
 $$
@@ -654,9 +578,9 @@ Q_3 + 1.5 \times IQR \\
 Q_1 - 1.5 \times IQR
 $$
 
---
-
 Con estos valores se pueden realizar **gráficas de cajas modificadas.**
+]
+]
 
 ---
 # Gráficos de cajas modificadas
@@ -679,7 +603,7 @@ ggplot(data = PlantGrowth) +
 ---
 class: middle, center, inverse
 
-# La librería `dplyr`
+# La librería dplyr
 
 ---
 
@@ -727,22 +651,17 @@ library(dplyr)
 - `rename`: renombra columnas.
 
 ---
-# `group_by`
-
+#Librería `dplyr`
+.panelset[
+.panel[.panel-name[group_by]
 Agrupa nuestros datos dependiendo de alguna variable que asignemos.
-
---
 
 ```{r echo=TRUE}
 Plant_Ordenado <- group_by(PlantGrowth, group)
 ```
-
----
-# `summarize` o `summarise`
-
+]
+.panel[.panel-name[summarise]
 Crea un nuevo data frame con una o más columnas para una combinación de variables. Se utiliza en conjunto con `group_by()`.
-
---
 
 ```{r}
 Plant_Resumen <- summarise(Plant_Ordenado, Media = mean(weight),
@@ -753,25 +672,33 @@ Plant_Resumen <- summarise(Plant_Ordenado, Media = mean(weight),
                            Observaciones = n())
 ```
 
---
-
 ¿Qué pasará si hacemos esto en nuestro data frame no agrupado...?
+]
+.panel[.panel-name[filter]
+Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
 
----
-# `summarize` o `summarise`
-
-```{r}
-Plant_Resumen2 <- summarise(PlantGrowth, Media = mean(weight),
-                           Mediana = median(weight),
-                           Desviacion_estandar = sd(weight),
-                           Varianza = var(weight),
-                           IQR = IQR(weight),
-                           Observaciones = n())
+```{r echo=TRUE}
+control <- PlantGrowth %>% dplyr::filter(group == "ctrl")
+tratamiento1 <- PlantGrowth %>% dplyr::filter(group == "trt1")
+tratamiento2 <- PlantGrowth %>% dplyr::filter(group == "trt2")
 ```
+]
+.panel[.panel-name[select]
+Elegimos con qué variables trabajar.
 
----
-# `%>%` pipeline
+```{r echo=TRUE}
+data("mtcars")
+variables <- mtcars %>% select(mpg, cyl, wt)
+```
+]
+.panel[.panel-name[mutate]
+Nos permite generar nuevas variables en un data frame.
 
+```{r echo=TRUE}
+Plant_Resumen <- Plant_Resumen %>% mutate(Coef_var = Desviacion_estandar/Media*100)
+```
+]
+.panel[.panel-name[%>% pipeline]
 Podemos utilizar esto para realizar varias operaciones en cadena...
 
 ```{r echo=TRUE}
@@ -786,41 +713,8 @@ Plant_Resumen <- PlantGrowth %>%
 ```
 
 Pasamos de una estructura `f(x, y)` a `x %>% f(y)`.
-
-
----
-# `filter`
-
-Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
-
-```{r echo=TRUE}
-control <- PlantGrowth %>% dplyr::filter(group == "ctrl")
-tratamiento1 <- PlantGrowth %>% dplyr::filter(group == "trt1")
-tratamiento2 <- PlantGrowth %>% dplyr::filter(group == "trt2")
-```
-
----
-# `select`
-
-Elegimos con qué variables trabajar.
-
-```{r echo=TRUE}
-data("mtcars")
-variables <- mtcars %>% select(mpg, cyl, wt)
-```
-
----
-# `mutate`
-
-Nos permite generar nuevas variables en un data frame.
-
-```{r echo=TRUE}
-Plant_Resumen <- Plant_Resumen %>% mutate(Coef_var = Desviacion_estandar/Media*100)
-```
-
----
-# `arrange`
-
+]
+.panel[.panel-name[arrenge]
 Ordena datos. Importante escribir el argumento `.by_group = TRUE` para que se respete el agrupamiento.
 
 Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor), podemos utilizar el argumento `desc()`.
@@ -829,12 +723,8 @@ Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor),
 PlantGrowth <- PlantGrowth %>% group_by(group) %>% arrange(weight, .by_group = TRUE)
 head(PlantGrowth)
 ```
-
----
-# `rename`
-
-Nos sirve para renombrar alguna columna.
-
+]
+.panel[.panel-name[rename]
 ```{r echo=TRUE}
 Plant_Resumen <- Plant_Resumen %>% rename(SD = Desviacion_estandar)
 ```
@@ -844,3 +734,5 @@ knitr::kable(Plant_Resumen, "html", align = "c") %>%
   kableExtra::kable_classic(lightable_options = "striped", full_width = F) %>% 
   column_spec(1:7, width_min = "2.2cm")
 ```
+]
+]

@@ -134,50 +134,29 @@ Sirven para describir los valores del centro o valores medios de algún conjunto
 
 ---
 # Media
-
+.panelset[
+.panel[.panel-name[General]
 Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
-
---
 
 **Muestral:**
 $$
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 $$
 
---
-
 **Poblacional:**
 $$
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
 $$
-
----
-# Propiedades de la media
-
---
-
+]
+.panel[.panel-name[Propiedades]
 - No es un estadístico **robusto.**
-
---
 
 - Utiliza los valores de todos los datos disponibles.
 
---
-
 - La media muestral ( `\(\bar{x}\)` ) de una población tiende a variar menos que otras medidas de tendencia central.
-
---
-
-&lt;br&gt;
-
+]
+.panel[.panel-name[Ejemplo]
 &gt;**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media del grupo control (usar base de datos PlantGrowth).
-
-&lt;/br&gt;
-
----
-#  Ejemplo con PlantGrowth
-
---
 
 
 ```r
@@ -194,14 +173,8 @@ head(PlantGrowth)
 ## 5   4.50  ctrl
 ## 6   4.61  ctrl
 ```
-
----
-#  Ejemplo con PlantGrowth
-
-Filtramos los datos para solamente tener los valores del grupo control. Los corchetes sirven para seleccionar datos en formato [filas, columnas].
-
---
-
+]
+.panel[.panel-name[Función mean()]
 
 ```r
 control &lt;- PlantGrowth[0:10,1]
@@ -212,11 +185,6 @@ control
 ##  [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14
 ```
 
----
-# Función `mean()`
-
---
-
 
 ```r
 mean(control)
@@ -225,22 +193,27 @@ mean(control)
 ```
 ## [1] 5.032
 ```
+]
+]
 
 ---
 # Mediana
-
+.panelset[
+.panel[.panel-name[General]
 Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se representa con el símbolo `\(\tilde{x}\)` (léase `\(x\)` tilde).
-
---
 
 $$
 1, \space 2, \space 3, \space 4, \space 5
 $$
 
---
-
 La mediana correspondería al valor de en medio, que en este caso es 3.
+]
+.panel[.panel-name[Propiedades]
+- No cambia al añadir valores extremos. Es un estadístico **robusto.**
 
+- No utiliza todo el conjunto de datos.
+]
+.panel[.panel-name[Función median()]
 
 ```r
 median(c(1,2,3,4,5))
@@ -249,38 +222,21 @@ median(c(1,2,3,4,5))
 ```
 ## [1] 3
 ```
-
----
-# Mediana
-
+]
+.panel[.panel-name[Observaciones impares]
 En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
 
 $$
 5, \space 6, \space 7, \space 8, \space 9, \space 10
 $$
 
---
-
-
-```r
-median(c(5, 6, 7, 8, 9, 10))
-```
-
-```
-## [1] 7.5
-```
-
---
-
 En este caso, la media se calculó así...
 
 $$
 \tilde{x} = \frac{7+8}{2} = 7.5
 $$
-
----
-# Ejemplo con PlantGrowth
-
+]
+.panel[.panel-name[Ejemplo]
 En el caso de la mediana del grupo control de plantas... Primero podemos ajustar nuestros datos de menor a mayor con la función **sort().**
 
 
@@ -292,8 +248,6 @@ sort(control)
 ##  [1] 4.17 4.50 4.53 4.61 5.14 5.17 5.18 5.33 5.58 6.11
 ```
 
---
-
 Al ser número par de observaciones la mediana será el resultado del promedio de los dos valores centrales.
 
 
@@ -304,21 +258,13 @@ median(control)
 ```
 ## [1] 5.155
 ```
-
----
-# Propiedades de la mediana
-
---
-
-- No cambia al añadir valores extremos. Es un estadístico **robusto.**
-
---
-
-- No utiliza todo el conjunto de datos.
+]
+]
 
 ---
 # La media y la mediana
-
+.panelset[
+.panel[.panel-name[Código]
 
 ```r
 #Genera 100 observaciones aleatorias
@@ -339,12 +285,10 @@ median(x)
 ```
 ## [1] 5
 ```
-
----
-# La media y la mediana
-
-
-&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Gráfica]
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+]]
 
 ---
 # Moda
@@ -413,59 +357,39 @@ max(control) - min(control)
 
 ---
 # Desviación estándar
-
-Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo `\(s\)` para datos muestrales y `\(\sigma\)` para datos poblacionales.
-
---
+.panelset[
+.panel[.panel-name[General]Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo `\(s\)` para datos muestrales y `\(\sigma\)` para datos poblacionales.
 
 **Muestral:**
 $$
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 $$
 
---
-
 **Poblacional:**
 $$
 \sigma = \sqrt{\frac{\sum_{i = 1}^{N}( {x_i-\overline{x} ) ^2}}{N}}
 $$
-
----
-# Desviación estándar
-
+]
+.panel[.panel-name[Desviación]
 La operación `\(x_i - \overline{x}\)` corresponde a la **desviación** de nuestros datos respecto de la media.
-
---
 
 Para nuestras 100 observaciones aleatorias...
 
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Visualización]
 &lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Desviación estándar
-
-&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Propiedades de la desviación estándar
---
-
+]
+.panel[.panel-name[Propiedades]
 - Nunca tiene un valor negativo.
-
---
 
 - Un valor elevado en `\(s\)` indica mayor dispersión en los datos.
 
---
-
 - Puede aumentar considerablemente con valores atípicos, es decir, no es una medida robusta.
 
---
-
 - Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos de control de PlantGrowth...
 
 
@@ -476,10 +400,13 @@ sd(control)
 ```
 ## [1] 0.5830914
 ```
+]
+]
 
 ---
 # Varianza
-
+.panelset[
+.panel[.panel-name[General]
 Corresponde a la desviación estándar elevada al cuadrado.
 
 $$
@@ -489,32 +416,39 @@ $$
 $$
 \sigma
 $$
-
---
-
+]
+.panel[.panel-name[Propiedades]
 Propiedades de la varianza:
 
 - Unidades elevadas al cuadrado.
 
---
-
 - No es un estadístico robusto.
 
---
-
 - Nunca tiene valores negativos.
+]
+.panel[.panel-name[Ejemplo]
+
+```r
+sd(control)^2
+```
+
+```
+## [1] 0.3399956
+```
+]
+]
 
 ---
 # Coeficiente de variación
-
+.panelset[
+.panel[.panel-name[General]
 Mide en forma de porcentaje qué tanto varían los datos.
 
 $$
 CV = \frac{s}{\overline{x}} \times 100
 $$
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos de control de PlantGrowth...
 
 
@@ -525,7 +459,8 @@ sd(control)/mean(control)*100
 ```
 ## [1] 11.58767
 ```
-
+]
+]
 ---
 class: inverse, middle, center
 
@@ -545,36 +480,27 @@ Indican la posición relativa un dato respecto de los demás datos. Algunas de l
 
 ---
 # Valores `\(Z\)`
-
+.panelset[
+.panel[.panel-name[General]
 Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ( `\(s\)` ) a las que se encuentra un valor dado.
-
---
 
 **Muestral:**
 $$
 z = \frac{x_i - \overline{x}}{s}
 $$
 
---
-
 **Poblacional:**
 $$
 Z = \frac{X - \mu}{\sigma}
 $$
-
----
-# Propiedades de los valores `\(Z\)`
-
+]
+.panel[.panel-name[Propiedades]
 - No tienen unidades de medida. Son **adimensionales.**
 
-- Si un valor es menor que la media ($\overline{x}$) su valor `\(z\)` será negativo.
-
----
-# Su cálculo en `R`...
-
-Utilizamos la función **scale().**
-
---
+- Si un valor es menor que la media ( `\(\overline{x}\)` ) su valor `\(z\)` será negativo.
+]
+.panel[.panel-name[Función scale()]
+Utilizamos la función `scale()`.
 
 
 ```r
@@ -599,6 +525,8 @@ z
 ## attr(,"scaled:scale")
 ## [1] 0.5830914
 ```
+]
+]
 
 ---
 # Frecuencia absoluta
@@ -643,18 +571,18 @@ prop.table(table(control))
 ---
 # Cuartiles
 
+.panelset[
+.panel[.panel-name[General]
 Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos `\(Q_1\)`, `\(Q_2\)` y `\(Q_3\)`, para el primer, segundo y tercer cuartil. `\(Q_2\)` es equivalente a la mediana ( `\(Q_2 = \tilde{x}\)` ).
-
---
-
+]
+.panel[.panel-name[IQR]
 Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ( `\(IQR\)` ) como se indica en la siguiente fórmula.
 
 $$
 IQR = Q_3 - Q_1
 $$
-
---
-
+]
+.panel[.panel-name[Ejemplo]
 Para los datos del grupo control de PlantGrowth...
 
 
@@ -667,13 +595,9 @@ summary(control)
 ##   4.170   4.550   5.155   5.032   5.293   6.110
 ```
 
---
-
-A partir de estos datos nosotros podemos construir un **gráfico de cajas.**
-
----
-# Valores atípicos
-
+A partir de estos datos podemos construir un **gráfico de cajas.**
+]
+.panel[.panel-name[Valores atípicos]
 Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
 
 $$
@@ -681,9 +605,9 @@ Q_3 + 1.5 \times IQR \\
 Q_1 - 1.5 \times IQR
 $$
 
---
-
 Con estos valores se pueden realizar **gráficas de cajas modificadas.**
+]
+]
 
 ---
 # Gráficos de cajas modificadas
@@ -709,7 +633,7 @@ ggplot(data = PlantGrowth) +
 ---
 class: middle, center, inverse
 
-# La librería `dplyr`
+# La librería dplyr
 
 ---
 
@@ -758,23 +682,18 @@ library(dplyr)
 - `rename`: renombra columnas.
 
 ---
-# `group_by`
-
+#Librería `dplyr`
+.panelset[
+.panel[.panel-name[group_by]
 Agrupa nuestros datos dependiendo de alguna variable que asignemos.
-
---
 
 
 ```r
 Plant_Ordenado &lt;- group_by(PlantGrowth, group)
 ```
-
----
-# `summarize` o `summarise`
-
+]
+.panel[.panel-name[summarise]
 Crea un nuevo data frame con una o más columnas para una combinación de variables. Se utiliza en conjunto con `group_by()`.
-
---
 
 
 ```r
@@ -786,26 +705,36 @@ Plant_Resumen &lt;- summarise(Plant_Ordenado, Media = mean(weight),
                            Observaciones = n())
 ```
 
---
-
 ¿Qué pasará si hacemos esto en nuestro data frame no agrupado...?
-
----
-# `summarize` o `summarise`
+]
+.panel[.panel-name[filter]
+Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
 
 
 ```r
-Plant_Resumen2 &lt;- summarise(PlantGrowth, Media = mean(weight),
-                           Mediana = median(weight),
-                           Desviacion_estandar = sd(weight),
-                           Varianza = var(weight),
-                           IQR = IQR(weight),
-                           Observaciones = n())
+control &lt;- PlantGrowth %&gt;% dplyr::filter(group == "ctrl")
+tratamiento1 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt1")
+tratamiento2 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt2")
 ```
+]
+.panel[.panel-name[select]
+Elegimos con qué variables trabajar.
 
----
-# `%&gt;%` pipeline
 
+```r
+data("mtcars")
+variables &lt;- mtcars %&gt;% select(mpg, cyl, wt)
+```
+]
+.panel[.panel-name[mutate]
+Nos permite generar nuevas variables en un data frame.
+
+
+```r
+Plant_Resumen &lt;- Plant_Resumen %&gt;% mutate(Coef_var = Desviacion_estandar/Media*100)
+```
+]
+.panel[.panel-name[%&gt;% pipeline]
 Podemos utilizar esto para realizar varias operaciones en cadena...
 
 
@@ -821,44 +750,8 @@ Plant_Resumen &lt;- PlantGrowth %&gt;%
 ```
 
 Pasamos de una estructura `f(x, y)` a `x %&gt;% f(y)`.
-
-
----
-# `filter`
-
-Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
-
-
-```r
-control &lt;- PlantGrowth %&gt;% dplyr::filter(group == "ctrl")
-tratamiento1 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt1")
-tratamiento2 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt2")
-```
-
----
-# `select`
-
-Elegimos con qué variables trabajar.
-
-
-```r
-data("mtcars")
-variables &lt;- mtcars %&gt;% select(mpg, cyl, wt)
-```
-
----
-# `mutate`
-
-Nos permite generar nuevas variables en un data frame.
-
-
-```r
-Plant_Resumen &lt;- Plant_Resumen %&gt;% mutate(Coef_var = Desviacion_estandar/Media*100)
-```
-
----
-# `arrange`
-
+]
+.panel[.panel-name[arrenge]
 Ordena datos. Importante escribir el argumento `.by_group = TRUE` para que se respete el agrupamiento.
 
 Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor), podemos utilizar el argumento `desc()`.
@@ -881,12 +774,8 @@ head(PlantGrowth)
 ## 5   5.14 ctrl 
 ## 6   5.17 ctrl
 ```
-
----
-# `rename`
-
-Nos sirve para renombrar alguna columna.
-
+]
+.panel[.panel-name[rename]
 
 ```r
 Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
@@ -902,7 +791,6 @@ Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
    &lt;th style="text-align:center;"&gt; Varianza &lt;/th&gt;
    &lt;th style="text-align:center;"&gt; IQR &lt;/th&gt;
    &lt;th style="text-align:center;"&gt; Observaciones &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Coef_var &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -914,7 +802,6 @@ Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.3399956 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.7425 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 11.587666 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; trt1 &lt;/td&gt;
@@ -924,7 +811,6 @@ Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.6299211 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.6625 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 17.028013 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; trt2 &lt;/td&gt;
@@ -934,10 +820,11 @@ Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.1958711 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.4675 &lt;/td&gt;
    &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 8.008927 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+]
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
