@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bioestadística con R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alejandro Ruiz" />
+    <meta name="date" content="2021-10-13" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bioestadística con R
+### Alejandro Ruiz
+### 2021-10-13
+
+---
+
+class: inverse, middle, center
+
+
+
+
+
+
+# Estadística descriptiva
+
+---
+# Variable
+
+Una **variable** es una característica de una persona o de un objeto a la que se le puede asignar un número o categoría.
+
+--
+&lt;img src="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/tipos_variable.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+# Unidades observacionales
+
+Cuando colectamos una muestra de `\(n\)` cosas y medimos una o más variables, llamamos a esas cosas o individuos **unidades observacionales.** 
+
+--
+
+Denotamos a las variables con una letra mayúscula (ej. `\(X\)`) y las observaciones con letras minúsculas (ej. `\(x\)`).
+
+---
+# Distribuciones de frecuencia
+.panelset[
+.panel[.panel-name[Variables continuas]
+Nos muestran la **frecuencia** de cada uno de los valores de nuestros datos. Normalmente esta información es presentada en un **gráfico de barras** (para datos categóricos) o un **histograma** (para datos continuos).
+
+&lt;img src="clase-02-xaringan_files/figure-html/idioma-hablantes-1.png" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Variables categóricas]
+Para una variable categórica ordinal...
+
+&lt;img src="clase-02-xaringan_files/figure-html/clientes-semana-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+# Gráfico de barras vs histograma
+
+Los histogramas son muy parecidos a los gráficos de barras, pero muestran variables numéricas en lugar de categóricas...
+
+--
+&lt;img src="histo_partes.png" width="564" style="display: block; margin: auto;" /&gt;
+
+---
+# Datos y estudios
+
+Repasemos un poco conceptos básicos:
+
+--
+
+- **Estadístico:** medición numérica tomada a partir de una muestra y que describe alguna característica de la misma.
+
+--
+
+- **Parámetro:** valor numérico que describe algunas características de una población.
+
+---
+class: inverse, middle, center
+
+# ¿Cuál es la diferencia entre una *población* y una *muestra*?
+
+---
+# Poblaciones y muestras
+
+La **población** es el conjunto total de datos, mientras que una **muestra** es un subconjunto de datos tomados de una población.
+
+--
+
+&lt;img src="pob_muestra.png" width="866" style="display: block; margin: auto;" /&gt;
+
+---
+# Poblaciones y muestras
+
+&lt;img src="pob_muestra2.png" width="1026" style="display: block; margin: auto;" /&gt;
+
+---
+# Tipos de estudio
+
+Los **estudios experimentales** son aquellos en los que el investigador aplica un tratamiento a un conjunto de objetos o individuos, que se conocen como **unidades experimentales.** 
+
+En cambio, en un **estudio observacional,** medimos y registramos características pero no modificamos a los objetos estudiados.
+
+---
+class: inverse, middle, center
+
+# Medidas de tendencia central
+
+---
+# Medidas de tendencia central
+
+Sirven para describir los valores del centro o valores medios de algún conjunto de datos. Las tres medidas de tendencia central más utilizadas son: 
+
+--
+
+- **Media**
+
+--
+
+- **Mediana**
+
+--
+
+- **Moda**
+
+---
+# Media
+
+Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
+
+--
+
+**Muestral:**
+$$
+\overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
+$$
+
+--
+
+**Poblacional:**
+$$
+\mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
+$$
+
+---
+# Propiedades de la media
+
+--
+
+- No es un estadístico **robusto.**
+
+--
+
+- Utiliza los valores de todos los datos disponibles.
+
+--
+
+- La media muestral ( `\(\bar{x}\)` ) de una población tiende a variar menos que otras medidas de tendencia central.
+
+--
+
+&lt;br&gt;
+
+&gt;**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media del grupo control (usar base de datos PlantGrowth).
+
+&lt;/br&gt;
+
+---
+#  Ejemplo con PlantGrowth
+
+--
+
+
+```r
+data(PlantGrowth)
+head(PlantGrowth)
+```
+
+```
+##   weight group
+## 1   4.17  ctrl
+## 2   5.58  ctrl
+## 3   5.18  ctrl
+## 4   6.11  ctrl
+## 5   4.50  ctrl
+## 6   4.61  ctrl
+```
+
+---
+#  Ejemplo con PlantGrowth
+
+Filtramos los datos para solamente tener los valores del grupo control. Los corchetes sirven para seleccionar datos en formato [filas, columnas].
+
+--
+
+
+```r
+control &lt;- PlantGrowth[0:10,1]
+control
+```
+
+```
+##  [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14
+```
+
+---
+# Función `mean()`
+
+--
+
+
+```r
+mean(control)
+```
+
+```
+## [1] 5.032
+```
+
+---
+# Mediana
+
+Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se representa con el símbolo `\(\tilde{x}\)` (léase `\(x\)` tilde).
+
+--
+
+$$
+1, \space 2, \space 3, \space 4, \space 5
+$$
+
+--
+
+La mediana correspondería al valor de en medio, que en este caso es 3.
+
+
+```r
+median(c(1,2,3,4,5))
+```
+
+```
+## [1] 3
+```
+
+---
+# Mediana
+
+En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
+
+$$
+5, \space 6, \space 7, \space 8, \space 9, \space 10
+$$
+
+--
+
+
+```r
+median(c(5, 6, 7, 8, 9, 10))
+```
+
+```
+## [1] 7.5
+```
+
+--
+
+En este caso, la media se calculó así...
+
+$$
+\tilde{x} = \frac{7+8}{2} = 7.5
+$$
+
+---
+# Ejemplo con PlantGrowth
+
+En el caso de la mediana del grupo control de plantas... Primero podemos ajustar nuestros datos de menor a mayor con la función **sort().**
+
+
+```r
+sort(control)
+```
+
+```
+##  [1] 4.17 4.50 4.53 4.61 5.14 5.17 5.18 5.33 5.58 6.11
+```
+
+--
+
+Al ser número par de observaciones la mediana será el resultado del promedio de los dos valores centrales.
+
+
+```r
+median(control)
+```
+
+```
+## [1] 5.155
+```
+
+---
+# Propiedades de la mediana
+
+--
+
+- No cambia al añadir valores extremos. Es un estadístico **robusto.**
+
+--
+
+- No utiliza todo el conjunto de datos.
+
+---
+# La media y la mediana
+
+
+```r
+#Genera 100 observaciones aleatorias
+set.seed(123)
+x &lt;- round(rnorm(100, 5, 2))
+
+mean(x)
+```
+
+```
+## [1] 5.21
+```
+
+```r
+median(x)
+```
+
+```
+## [1] 5
+```
+
+---
+# La media y la mediana
+
+
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Moda
+
+Es el valor que más se repite en un conjunto de datos.
+
+--
+
+Propiedades de la moda:
+
+--
+
+- Se puede aplicar a datos cualitativos.
+
+--
+
+- Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
+
+--
+
+Como tal no existe una función que calcule la moda pero en varias páginas y foros como [StackOverflow](https://stackoverflow.com/) se pueden encontrar scripts para su cálculo.
+
+---
+class: inverse, middle, center
+# Medidas de dispersion
+
+---
+# Medidas de dispersión
+
+A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión describen en cómo se distribuyen los datos. Las medidas que veremos son:
+
+--
+
+- Rango
+
+--
+
+- Desviación estándar ( `\(s\)` )
+
+---
+# Rango
+
+Corresponde a los valores inferiores y superiores de nuestros datos. Utilizamos la función **range().**
+
+
+```r
+range(control)
+```
+
+```
+## [1] 4.17 6.11
+```
+
+--
+
+Sin embargo esta función solamente nos otorga el valor máximo y mínimo. Para calcular nuestro rango...
+
+
+```r
+max(control) - min(control)
+```
+
+```
+## [1] 1.94
+```
+
+---
+# Desviación estándar
+
+Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo `\(s\)` para datos muestrales y `\(\sigma\)` para datos poblacionales.
+
+--
+
+**Muestral:**
+$$
+s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
+$$
+
+--
+
+**Poblacional:**
+$$
+\sigma = \sqrt{\frac{\sum_{i = 1}^{N}( {x_i-\overline{x} ) ^2}}{N}}
+$$
+
+---
+# Desviación estándar
+
+La operación `\(x_i - \overline{x}\)` corresponde a la **desviación** de nuestros datos respecto de la media.
+
+--
+
+Para nuestras 100 observaciones aleatorias...
+
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Desviación estándar
+
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Propiedades de la desviación estándar
+--
+
+- Nunca tiene un valor negativo.
+
+--
+
+- Un valor elevado en `\(s\)` indica mayor dispersión en los datos.
+
+--
+
+- Puede aumentar considerablemente con valores atípicos, es decir, no es una medida robusta.
+
+--
+
+- Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
+
+--
+
+Para los datos de control de PlantGrowth...
+
+
+```r
+sd(control)
+```
+
+```
+## [1] 0.5830914
+```
+
+---
+# Varianza
+
+Corresponde a la desviación estándar elevada al cuadrado.
+
+$$
+s^2
+$$
+
+$$
+\sigma
+$$
+
+--
+
+Propiedades de la varianza:
+
+- Unidades elevadas al cuadrado.
+
+--
+
+- No es un estadístico robusto.
+
+--
+
+- Nunca tiene valores negativos.
+
+---
+# Coeficiente de variación
+
+Mide en forma de porcentaje qué tanto varían los datos.
+
+$$
+CV = \frac{s}{\overline{x}} \times 100
+$$
+
+--
+
+Para los datos de control de PlantGrowth...
+
+
+```r
+sd(control)/mean(control)*100
+```
+
+```
+## [1] 11.58767
+```
+
+---
+class: inverse, middle, center
+
+# Medidas de posición relativa
+
+---
+# Medidas de posición relativa
+
+Indican la posición relativa un dato respecto de los demás datos. Algunas de las medidas más usadas son: 
+
+--
+
+- Valores `\(Z\)`
+- Frecuencia absoluta
+- Frecuencia relativa 
+- Cuartiles
+
+---
+# Valores `\(Z\)`
+
+Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ( `\(s\)` ) a las que se encuentra un valor dado.
+
+--
+
+**Muestral:**
+$$
+z = \frac{x_i - \overline{x}}{s}
+$$
+
+--
+
+**Poblacional:**
+$$
+Z = \frac{X - \mu}{\sigma}
+$$
+
+---
+# Propiedades de los valores `\(Z\)`
+
+- No tienen unidades de medida. Son **adimensionales.**
+
+- Si un valor es menor que la media ($\overline{x}$) su valor `\(z\)` será negativo.
+
+---
+# Su cálculo en `R`...
+
+Utilizamos la función **scale().**
+
+--
+
+
+```r
+z &lt;- scale(control)
+z
+```
+
+```
+##             [,1]
+##  [1,] -1.4783275
+##  [2,]  0.9398184
+##  [3,]  0.2538196
+##  [4,]  1.8487668
+##  [5,] -0.9123784
+##  [6,] -0.7237288
+##  [7,]  0.2366696
+##  [8,] -0.8609285
+##  [9,]  0.5110691
+## [10,]  0.1852197
+## attr(,"scaled:center")
+## [1] 5.032
+## attr(,"scaled:scale")
+## [1] 0.5830914
+```
+
+---
+# Frecuencia absoluta
+
+Es el número total de observaciones.
+
+--
+
+
+```r
+table(control)
+```
+
+```
+## control
+## 4.17  4.5 4.53 4.61 5.14 5.17 5.18 5.33 5.58 6.11 
+##    1    1    1    1    1    1    1    1    1    1
+```
+
+---
+# Frecuencia relativa
+
+Es el valor relativo de cada dato respecto del total. Si se le multiplica por 100% se obtiene su valor en porcentaje.
+
+$$
+f_i = \frac{n_i}{N}
+$$
+
+--
+
+
+```r
+prop.table(table(control))
+```
+
+```
+## control
+## 4.17  4.5 4.53 4.61 5.14 5.17 5.18 5.33 5.58 6.11 
+##  0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1
+```
+
+---
+# Cuartiles
+
+Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos `\(Q_1\)`, `\(Q_2\)` y `\(Q_3\)`, para el primer, segundo y tercer cuartil. `\(Q_2\)` es equivalente a la mediana ( `\(Q_2 = \tilde{x}\)` ).
+
+--
+
+Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ( `\(IQR\)` ) como se indica en la siguiente fórmula.
+
+$$
+IQR = Q_3 - Q_1
+$$
+
+--
+
+Para los datos del grupo control de PlantGrowth...
+
+
+```r
+summary(control)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   4.170   4.550   5.155   5.032   5.293   6.110
+```
+
+--
+
+A partir de estos datos nosotros podemos construir un **gráfico de cajas.**
+
+---
+# Valores atípicos
+
+Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
+
+$$
+Q_3 + 1.5 \times IQR \\
+Q_1 - 1.5 \times IQR
+$$
+
+--
+
+Con estos valores se pueden realizar **gráficas de cajas modificadas.**
+
+---
+# Gráficos de cajas modificadas
+
+Para realizar estas gráficas utilizaremos la librería `ggplot2` que está incluido en el paquete `tidyverse`.
+
+--
+
+
+```r
+library(tidyverse)
+ggplot(data = PlantGrowth) + 
+  geom_boxplot(aes(x = group, y = weight, fill = group)) + 
+  xlab("") + 
+  ylab("Peso") + 
+  scale_x_discrete(labels = c("Control", "Tratamiento 1", "Tratamiento 2")) + 
+  scale_fill_discrete(name = "Tratamientos", labels = c("Control", "Tratamiento 1", "Tratamiento 2")) + 
+  theme_classic()
+```
+
+&lt;img src="clase-02-xaringan_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle, center, inverse
+
+# La librería `dplyr`
+
+---
+
+# El uso de `dplyr`
+
+Podemos facilitarnos la vida muchísimo si utilizamos el paquete **dplyr** incluido en el **tidyverse.**
+
+
+```r
+library(dplyr)
+```
+
+---
+# Funciones principales
+
+--
+
+- `group_by`: agrupa datos.
+
+--
+
+- `summarize` o `summarise`: resumen de datos agrupados.
+
+--
+
+- `filter`: encuentra filas con ciertas condiciones.
+
+--
+
+- `select`: junto a 'starts_with', 'ends_with' o 'contains'
+
+--
+
+- `mutate`: genera nuevas variables.
+
+--
+
+- `%&gt;%`: pipeline.
+
+--
+
+- `arrange`: ordena.
+
+--
+
+- `rename`: renombra columnas.
+
+---
+# `group_by`
+
+Agrupa nuestros datos dependiendo de alguna variable que asignemos.
+
+--
+
+
+```r
+Plant_Ordenado &lt;- group_by(PlantGrowth, group)
+```
+
+---
+# `summarize` o `summarise`
+
+Crea un nuevo data frame con una o más columnas para una combinación de variables. Se utiliza en conjunto con `group_by()`.
+
+--
+
+
+```r
+Plant_Resumen &lt;- summarise(Plant_Ordenado, Media = mean(weight),
+                           Mediana = median(weight),
+                           Desviacion_estandar = sd(weight),
+                           Varianza = var(weight),
+                           IQR = IQR(weight),
+                           Observaciones = n())
+```
+
+--
+
+¿Qué pasará si hacemos esto en nuestro data frame no agrupado...?
+
+---
+# `summarize` o `summarise`
+
+
+```r
+Plant_Resumen2 &lt;- summarise(PlantGrowth, Media = mean(weight),
+                           Mediana = median(weight),
+                           Desviacion_estandar = sd(weight),
+                           Varianza = var(weight),
+                           IQR = IQR(weight),
+                           Observaciones = n())
+```
+
+---
+# `%&gt;%` pipeline
+
+Podemos utilizar esto para realizar varias operaciones en cadena...
+
+
+```r
+Plant_Resumen &lt;- PlantGrowth %&gt;%
+  group_by(group) %&gt;% 
+  summarise(Media = mean(weight),
+            Mediana = median(weight),
+            Desviacion_estandar = sd(weight),
+            Varianza = var(weight),
+            IQR = IQR(weight),
+            Observaciones = n())
+```
+
+Pasamos de una estructura `f(x, y)` a `x %&gt;% f(y)`.
+
+
+---
+# `filter`
+
+Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
+
+
+```r
+control &lt;- PlantGrowth %&gt;% dplyr::filter(group == "ctrl")
+tratamiento1 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt1")
+tratamiento2 &lt;- PlantGrowth %&gt;% dplyr::filter(group == "trt2")
+```
+
+---
+# `select`
+
+Elegimos con qué variables trabajar.
+
+
+```r
+data("mtcars")
+variables &lt;- mtcars %&gt;% select(mpg, cyl, wt)
+```
+
+---
+# `mutate`
+
+Nos permite generar nuevas variables en un data frame.
+
+
+```r
+Plant_Resumen &lt;- Plant_Resumen %&gt;% mutate(Coef_var = Desviacion_estandar/Media*100)
+```
+
+---
+# `arrange`
+
+Ordena datos. Importante escribir el argumento `.by_group = TRUE` para que se respete el agrupamiento.
+
+Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor), podemos utilizar el argumento `desc()`.
+
+
+```r
+PlantGrowth &lt;- PlantGrowth %&gt;% group_by(group) %&gt;% arrange(weight, .by_group = TRUE)
+head(PlantGrowth)
+```
+
+```
+## # A tibble: 6 x 2
+## # Groups:   group [1]
+##   weight group
+##    &lt;dbl&gt; &lt;fct&gt;
+## 1   4.17 ctrl 
+## 2   4.5  ctrl 
+## 3   4.53 ctrl 
+## 4   4.61 ctrl 
+## 5   5.14 ctrl 
+## 6   5.17 ctrl
+```
+
+---
+# `rename`
+
+Nos sirve para renombrar alguna columna.
+
+
+```r
+Plant_Resumen &lt;- Plant_Resumen %&gt;% rename(SD = Desviacion_estandar)
+```
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; group &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Media &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Mediana &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; SD &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Varianza &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; IQR &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Observaciones &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coef_var &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; ctrl &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 5.032 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 5.155 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.5830914 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.3399956 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.7425 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11.587666 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; trt1 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 4.661 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 4.550 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.7936757 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.6299211 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.6625 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17.028013 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; trt2 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 5.526 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 5.435 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.4425733 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.1958711 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 0.4675 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8.008927 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

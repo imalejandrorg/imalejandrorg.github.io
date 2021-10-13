@@ -1,0 +1,54 @@
+---
+title: "Presentation Ninja"
+subtitle: "&#x2694;&#xFE0F; xaringan +<br/>&#x1F60E; xaringanthemer"  
+author: 
+  - "Yihui Xie"
+  - "Garrick Aden-Buie"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+class: inverse, middle, center
+
+```{r setup, include=FALSE}
+library(gt)
+library(tidyverse)
+library(xaringanExtra)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Fira Sans"),
+  code_font_google = google_font("Fira Mono"),
+  base_font_size = "22px",
+  code_highlight_color = "rgba(126, 191, 160, 0.5)"
+)
+```
+
+---
+#  Ejemplo con PlantGrowth
+
+Filtramos los datos para solamente tener los valores del grupo control. Los corchetes sirven para seleccionar datos en formato [filas, columnas].
+
+```{r echo=TRUE}
+data(PlantGrowth)
+```
+

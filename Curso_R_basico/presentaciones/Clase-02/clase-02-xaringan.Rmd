@@ -1,42 +1,79 @@
 ---
 title: "Bioestadística con R"
 author: "Alejandro Ruiz"
+date: "`r Sys.Date()`"
 output:
-  ioslides_presentation:
-    widescreen: yes
-    incremental: no
-    transition: faster
-    logo: O:/Imágenes/favicon_io/android-chrome-512x512.png
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      beforeInit: "macros.js"
 ---
+class: inverse, middle, center
 
 ```{r setup, include=FALSE}
+library(gt)
 library(tidyverse)
-library(patchwork)
+library(xaringanExtra)
 library(kableExtra)
-knitr::opts_chunk$set(echo = TRUE)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
 ```
 
-# Clase 2: Estadística descriptiva
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Fira Sans"),
+  code_font_google = google_font("Fira Mono"),
+  base_font_size = "22px",
+  code_highlight_color = "rgba(126, 191, 160, 0.5)"
+)
+```
 
-## Variable {.smaller}
+```{r xaringan-extra, include=FALSE}
+xaringanExtra::use_panelset()
+```
+# Estadística descriptiva
+
+---
+# Variable
 
 Una **variable** es una característica de una persona o de un objeto a la que se le puede asignar un número o categoría.
 
-```{r echo=FALSE}
-knitr::include_graphics("tipos_variable.png", dpi = 150)
+--
+```{r variables, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE, out.width="50%"}
+knitr::include_graphics("https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/tipos_variable.png", dpi = 200)
 ```
 
-## Unidades observacionales
+---
+# Unidades observacionales
 
 Cuando colectamos una muestra de $n$ cosas y medimos una o más variables, llamamos a esas cosas o individuos **unidades observacionales.** 
 
+--
+
 Denotamos a las variables con una letra mayúscula (ej. $X$) y las observaciones con letras minúsculas (ej. $x$).
 
-## Distribuciones de frecuencia {.smaller}
-
+---
+# Distribuciones de frecuencia
+.panelset[
+.panel[.panel-name[Variables continuas]
 Nos muestran la **frecuencia** de cada uno de los valores de nuestros datos. Normalmente esta información es presentada en un **gráfico de barras** (para datos categóricos) o un **histograma** (para datos continuos).
 
-```{r echo=FALSE, fig.align='center', fig.height=4, fig.width=5}
+```{r idioma-hablantes, echo=FALSE, fig.align='center', fig.height=5, fig.width=9, message=FALSE, warning=FALSE, paged.print=FALSE}
 Idioma <- c("Francés", "Inglés", "Japonés")
 Hablantes <- c(27, 67, 4)
 x <- data.frame(Idioma, Hablantes)
@@ -47,12 +84,11 @@ ggplot(x, aes(x = Idioma, y = Hablantes)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
-
-## Distribuciones de frecuencias {.smaller}
-
+]
+.panel[.panel-name[Variables categóricas]
 Para una variable categórica ordinal...
 
-```{r echo=FALSE, fig.align='center', fig.height=5, fig.width=6}
+```{r clientes-semana, echo=FALSE, fig.align='center', fig.height=5, fig.width=8}
 Dia <- c("Lunes", "Martes", "Miércoles", "Jueves", "Viernes")
 Ventas <- c(100, 120, 82, 98, 143)
 y <- data.frame(Dia, Ventas)
@@ -64,109 +100,169 @@ ggplot(y, aes(x = Dia, y = Ventas)) +
   labs(x = "", y = "Ventas", title = "No. de ventas a la semana") +
   theme_classic()
 ```
+]
+]
 
-
-
-## Distribuciones de frecuencias
+---
+# Gráfico de barras vs histograma
 
 Los histogramas son muy parecidos a los gráficos de barras, pero muestran variables numéricas en lugar de categóricas...
 
-```{r echo=FALSE, fig.align='center'}
+--
+```{r partes-histo, echo=FALSE, fig.align='center'}
 knitr::include_graphics("histo_partes.png", dpi = 120)
 ```
 
-
-## Datos y estudios
+---
+# Datos y estudios
 
 Repasemos un poco conceptos básicos:
 
-* **Estadístico:** medición numérica tomada a partir de una muestra y que describe alguna característica de la misma.
-* **Parámetro:** valor numérico que describe algunas características de una población.
+--
 
-# ¿Cuál es la diferencia entre una *población* y una *muestra?*
+- **Estadístico:** medición numérica tomada a partir de una muestra y que describe alguna característica de la misma.
 
-## Poblaciones y muestras
+--
+
+- **Parámetro:** valor numérico que describe algunas características de una población.
+
+---
+class: inverse, middle, center
+
+# ¿Cuál es la diferencia entre una *población* y una *muestra*?
+
+---
+# Poblaciones y muestras
 
 La **población** es el conjunto total de datos, mientras que una **muestra** es un subconjunto de datos tomados de una población.
 
-```{r echo=FALSE, fig.align='center'}
-knitr::include_graphics("pob_muestra.png", dpi = 120)
+--
+
+```{r pop-samp, echo=FALSE, fig.align='center'}
+knitr::include_graphics("pob_muestra.png", dpi = 110)
 ```
 
-## Poblaciones y muestras
+---
+# Poblaciones y muestras
 
-```{r echo=FALSE, fig.align='center'}
+```{r pop-samp2, echo=FALSE, fig.align='center'}
 knitr::include_graphics("pob_muestra2.png", dpi = 120)
 ```
 
-
-## Tipos de estudio
+---
+# Tipos de estudio
 
 Los **estudios experimentales** son aquellos en los que el investigador aplica un tratamiento a un conjunto de objetos o individuos, que se conocen como **unidades experimentales.** 
 
 En cambio, en un **estudio observacional,** medimos y registramos características pero no modificamos a los objetos estudiados.
 
+---
+class: inverse, middle, center
+
 # Medidas de tendencia central
 
-## Medidas de tendencia central
+---
+# Medidas de tendencia central
 
 Sirven para describir los valores del centro o valores medios de algún conjunto de datos. Las tres medidas de tendencia central más utilizadas son: 
 
-* **Media**
-* **Mediana**
-* **Moda**
+--
 
-## Media {.build}
+- **Media**
+
+--
+
+- **Mediana**
+
+--
+
+- **Moda**
+
+---
+# Media
 
 Mide el promedio del valor de nuestros datos. Se calcula como la suma de los valores de las observaciones dividida entre el número de observaciones.
+
+--
 
 **Muestral:**
 $$
 \overline{x} = \frac{\sum_{i = 1}^{n}{x_i}}{n}
 $$
 
+--
+
 **Poblacional:**
 $$
 \mu = \frac{\sum_{i = 1}^{N}{x_i}}{N}
 $$
 
-## Propiedades de la media {.build}
+---
+# Propiedades de la media
+
+--
 
 - No es un estadístico **robusto.**
+
+--
+
 - Utiliza los valores de todos los datos disponibles.
-- La media muestral ($\overline{x}$) de una población tiende a variar menos que otras medidas de tendencia central.
+
+--
+
+- La media muestral ( $\bar{x}$ ) de una población tiende a variar menos que otras medidas de tendencia central.
+
+--
+
+<br>
 
 >**Ejemplo:** En un experimento se administraron distintos tratamientos a un grupo de plantas y se midió el peso seco de todas ellas. Supongamos que queremos saber cuál fue la media del grupo control (usar base de datos PlantGrowth).
 
-## Media
+</br>
+
+---
+#  Ejemplo con PlantGrowth
+
+--
 
 ```{r echo=TRUE}
-data("PlantGrowth")
+data(PlantGrowth)
 head(PlantGrowth)
 ```
 
-## Media
+---
+#  Ejemplo con PlantGrowth
 
 Filtramos los datos para solamente tener los valores del grupo control. Los corchetes sirven para seleccionar datos en formato [filas, columnas].
+
+--
 
 ```{r echo=TRUE}
 control <- PlantGrowth[0:10,1]
 control
 ```
 
-## Media
+---
+# Función `mean()`
+
+--
 
 ```{r echo=TRUE}
 mean(control)
 ```
 
-## Mediana
+---
+# Mediana
 
 Es el valor que se encuentra justo por la mitad de la distribución de nuestros datos. Se representa con el símbolo $\tilde{x}$ (léase $x$ tilde).
+
+--
 
 $$
 1, \space 2, \space 3, \space 4, \space 5
 $$
+
+--
 
 La mediana correspondería al valor de en medio, que en este caso es 3.
 
@@ -174,7 +270,8 @@ La mediana correspondería al valor de en medio, que en este caso es 3.
 median(c(1,2,3,4,5))
 ```
 
-## Mediana
+---
+# Mediana
 
 En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
 
@@ -182,9 +279,13 @@ $$
 5, \space 6, \space 7, \space 8, \space 9, \space 10
 $$
 
+--
+
 ```{r echo=TRUE}
 median(c(5, 6, 7, 8, 9, 10))
 ```
+
+--
 
 En este caso, la media se calculó así...
 
@@ -192,7 +293,8 @@ $$
 \tilde{x} = \frac{7+8}{2} = 7.5
 $$
 
-## Mediana
+---
+# Ejemplo con PlantGrowth
 
 En el caso de la mediana del grupo control de plantas... Primero podemos ajustar nuestros datos de menor a mayor con la función **sort().**
 
@@ -200,19 +302,27 @@ En el caso de la mediana del grupo control de plantas... Primero podemos ajustar
 sort(control)
 ```
 
+--
+
 Al ser número par de observaciones la mediana será el resultado del promedio de los dos valores centrales.
 
 ```{r echo=TRUE}
 median(control)
 ```
 
-## Propiedades de la mediana
+---
+# Propiedades de la mediana
+
+--
 
 - No cambia al añadir valores extremos. Es un estadístico **robusto.**
 
+--
+
 - No utiliza todo el conjunto de datos.
 
-## Media y mediana {.smaller}
+---
+# La media y la mediana
 
 ```{r echo=TRUE}
 #Genera 100 observaciones aleatorias
@@ -223,9 +333,11 @@ mean(x)
 median(x)
 ```
 
-## Media y mediana {.smaller}
+---
+# La media y la mediana
 
-```{r echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
+
+```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9}
 ggplot(data.frame(x), aes(x)) + 
   geom_histogram(binwidth = 1, color = "gray20", fill = "lightblue") +
   geom_vline(xintercept = mean(x), linetype = "dashed", size = 1, color = "red") +
@@ -237,29 +349,46 @@ ggplot(data.frame(x), aes(x)) +
   theme_classic()
 ```
 
-
-## Moda
+---
+# Moda
 
 Es el valor que más se repite en un conjunto de datos.
 
+--
+
 Propiedades de la moda:
 
-* Se puede aplicar a datos cualitativos.
+--
 
-* Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
+- Se puede aplicar a datos cualitativos.
+
+--
+
+- Puede existir una moda (unimodal), dos modas (bimodal), múltiples modas (multimodal) o ninguna moda.
+
+--
 
 Como tal no existe una función que calcule la moda pero en varias páginas y foros como [StackOverflow](https://stackoverflow.com/) se pueden encontrar scripts para su cálculo.
 
-# Medidas de dispersión
+---
+class: inverse, middle, center
+# Medidas de dispersion
 
-## Medidas de dispersión
+---
+# Medidas de dispersión
 
 A diferencia de los estadísticos de tendencia central, los estadísticos de dispersión describen en cómo se distribuyen los datos. Las medidas que veremos son:
 
-- Rango
-- Desviación estándar ($s$)
+--
 
-## Rango
+- Rango
+
+--
+
+- Desviación estándar ( $s$ )
+
+---
+# Rango
 
 Corresponde a los valores inferiores y superiores de nuestros datos. Utilizamos la función **range().**
 
@@ -267,35 +396,43 @@ Corresponde a los valores inferiores y superiores de nuestros datos. Utilizamos 
 range(control)
 ```
 
+--
+
 Sin embargo esta función solamente nos otorga el valor máximo y mínimo. Para calcular nuestro rango...
 
 ```{r echo=TRUE}
 max(control) - min(control)
 ```
 
-## Desviación estándar
+---
+# Desviación estándar
 
 Mide qué tanto se desvían los valores de los datos de la media. Es representada por el símbolo $s$ para datos muestrales y $\sigma$ para datos poblacionales.
+
+--
 
 **Muestral:**
 $$
 s = \sqrt{\frac{\sum_{i = 1}^{n}( {x_i-\overline{x} ) ^2}}{n-1}}
 $$
 
+--
+
 **Poblacional:**
 $$
 \sigma = \sqrt{\frac{\sum_{i = 1}^{N}( {x_i-\overline{x} ) ^2}}{N}}
 $$
 
-## Desviación estándar
+---
+# Desviación estándar
 
 La operación $x_i - \overline{x}$ corresponde a la **desviación** de nuestros datos respecto de la media.
 
+--
+
 Para nuestras 100 observaciones aleatorias...
 
-## Desviación estándar
-
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=6.1, fig.width=10}
 ggplot(data.frame(x), aes(x)) +
   geom_vline(xintercept = mean(x), size = 0.5, color = "gray20", linetype = "dashed") +
   geom_text(aes(x = mean(x) + 0.3, y = 0.5, label = "bar(x)"), parse = TRUE, size = 5) +
@@ -310,9 +447,10 @@ ggplot(data.frame(x), aes(x)) +
   theme_classic()
 ```
 
-## Desviación estándar
+---
+# Desviación estándar
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE, fig.align='center', fig.width=11}
 ggplot(data.frame(x), aes(x)) + 
   geom_histogram(binwidth = 1, color = "gray20", fill = "lightblue") +
   geom_segment(aes(x = mean(x), y = 5, xend = mean(x) + sd(x), yend = 5), color = "gray20", linetype = "dashed", size = 1) +
@@ -330,41 +468,61 @@ ggplot(data.frame(x), aes(x)) +
   theme_classic()
 ```
 
-## Propiedades de la desviación estándar
+---
+# Propiedades de la desviación estándar
+--
 
 - Nunca tiene un valor negativo.
 
+--
+
 - Un valor elevado en $s$ indica mayor dispersión en los datos.
+
+--
 
 - Puede aumentar considerablemente con valores atípicos, es decir, no es una medida robusta.
 
+--
+
 - Las unidades de la desviación estándar son iguales a las unidades de los datos originales.
 
-## Desviación estándar
+--
 
-Para los datos de control...
+Para los datos de control de PlantGrowth...
 
 ```{r echo=TRUE}
 sd(control)
 ```
 
-
-## Varianza
+---
+# Varianza
 
 Corresponde a la desviación estándar elevada al cuadrado.
 
 $$
-s^2 \\
-\sigma^2
+s^2
 $$
+
+$$
+\sigma
+$$
+
+--
 
 Propiedades de la varianza:
 
 - Unidades elevadas al cuadrado.
+
+--
+
 - No es un estadístico robusto.
+
+--
+
 - Nunca tiene valores negativos.
 
-## Coeficiente de variación
+---
+# Coeficiente de variación
 
 Mide en forma de porcentaje qué tanto varían los datos.
 
@@ -372,61 +530,82 @@ $$
 CV = \frac{s}{\overline{x}} \times 100
 $$
 
-Para los datos de control...
+--
+
+Para los datos de control de PlantGrowth...
 
 ```{r echo=TRUE}
 sd(control)/mean(control)*100
 ```
 
+---
+class: inverse, middle, center
+
 # Medidas de posición relativa
 
-## Medidas de posición relativa
+---
+# Medidas de posición relativa
 
 Indican la posición relativa un dato respecto de los demás datos. Algunas de las medidas más usadas son: 
+
+--
 
 - Valores $Z$
 - Frecuencia absoluta
 - Frecuencia relativa 
 - Cuartiles
 
-## Valores $Z$
+---
+# Valores $Z$
 
-Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ($s$) a las que se encuentra un valor dado.
+Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ( $s$ ) a las que se encuentra un valor dado.
+
+--
 
 **Muestral:**
 $$
 z = \frac{x_i - \overline{x}}{s}
 $$
 
+--
+
 **Poblacional:**
 $$
 Z = \frac{X - \mu}{\sigma}
 $$
 
-## Propiedades de los valores $Z$
+---
+# Propiedades de los valores $Z$
 
 - No tienen unidades de medida. Son **adimensionales.**
 
 - Si un valor es menor que la media ($\overline{x}$) su valor $z$ será negativo.
 
-## Valores $Z$ {.smaller}
+---
+# Su cálculo en `R`...
 
 Utilizamos la función **scale().**
+
+--
 
 ```{r}
 z <- scale(control)
 z
 ```
 
-## Frecuencia absoluta
+---
+# Frecuencia absoluta
 
 Es el número total de observaciones.
+
+--
 
 ```{r}
 table(control)
 ```
 
-## Frecuencia relativa
+---
+# Frecuencia relativa
 
 Es el valor relativo de cada dato respecto del total. Si se le multiplica por 100% se obtiene su valor en porcentaje.
 
@@ -434,31 +613,39 @@ $$
 f_i = \frac{n_i}{N}
 $$
 
+--
+
 ```{r echo=TRUE}
 prop.table(table(control))
 ```
 
-## Cuartiles
+---
+# Cuartiles
 
-Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil. $Q_2$ es equivalente a la mediana ($Q_2 = \tilde{x}$).
+Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos $Q_1$, $Q_2$ y $Q_3$, para el primer, segundo y tercer cuartil. $Q_2$ es equivalente a la mediana ( $Q_2 = \tilde{x}$ ).
 
-Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ($IQR$) como se indica en la siguiente fórmula.
+--
+
+Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ( $IQR$ ) como se indica en la siguiente fórmula.
 
 $$
 IQR = Q_3 - Q_1
 $$
 
-## Cuartiles
+--
 
-Para los datos del grupo control...
+Para los datos del grupo control de PlantGrowth...
 
 ```{r echo=TRUE}
 summary(control)
 ```
 
+--
+
 A partir de estos datos nosotros podemos construir un **gráfico de cajas.**
 
-## Valores atípicos
+---
+# Valores atípicos
 
 Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
 
@@ -467,11 +654,16 @@ Q_3 + 1.5 \times IQR \\
 Q_1 - 1.5 \times IQR
 $$
 
+--
+
 Con estos valores se pueden realizar **gráficas de cajas modificadas.**
 
-## Gráficos de cajas modificadas {.smaller}
+---
+# Gráficos de cajas modificadas
 
-Para realizar estas gráficas utilizaremos la librería **ggplot2** que está incluido en el paquete **tidyverse.**
+Para realizar estas gráficas utilizaremos la librería `ggplot2` que está incluido en el paquete `tidyverse`.
+
+--
 
 ```{r echo=TRUE, fig.height=3, fig.width=5.5, fig.align='center'}
 library(tidyverse)
@@ -484,7 +676,14 @@ ggplot(data = PlantGrowth) +
   theme_classic()
 ```
 
-## El uso de **dplyr** {.smaller}
+---
+class: middle, center, inverse
+
+# La librería `dplyr`
+
+---
+
+# El uso de `dplyr`
 
 Podemos facilitarnos la vida muchísimo si utilizamos el paquete **dplyr** incluido en el **tidyverse.**
 
@@ -492,35 +691,58 @@ Podemos facilitarnos la vida muchísimo si utilizamos el paquete **dplyr** inclu
 library(dplyr)
 ```
 
-Las funciones principales de este paquete son:
+---
+# Funciones principales
 
-- **group_by:** agrupa datos.
+--
 
-- **summarize** o **summarise:** resumen de datos agrupados.
+- `group_by`: agrupa datos.
 
-- **filter:** encuentra filas con ciertas condiciones.
+--
 
-- **select:** junto a 'starts_with', 'ends_with' o 'contains'
+- `summarize` o `summarise`: resumen de datos agrupados.
 
-- **mutate:** genera nuevas variables.
+--
 
-- **%>%:** pipeline.
+- `filter`: encuentra filas con ciertas condiciones.
 
-- **arrange:** ordena.
+--
 
-- **rename:** renombra columnas.
+- `select`: junto a 'starts_with', 'ends_with' o 'contains'
 
-## group_by
+--
+
+- `mutate`: genera nuevas variables.
+
+--
+
+- `%>%`: pipeline.
+
+--
+
+- `arrange`: ordena.
+
+--
+
+- `rename`: renombra columnas.
+
+---
+# `group_by`
 
 Agrupa nuestros datos dependiendo de alguna variable que asignemos.
+
+--
 
 ```{r echo=TRUE}
 Plant_Ordenado <- group_by(PlantGrowth, group)
 ```
 
-## summarize o summarise
+---
+# `summarize` o `summarise`
 
-Crea un nuevo data frame con una o más columnas para una combinación de variables. Se utiliza en conjunto con **group_by().**
+Crea un nuevo data frame con una o más columnas para una combinación de variables. Se utiliza en conjunto con `group_by()`.
+
+--
 
 ```{r}
 Plant_Resumen <- summarise(Plant_Ordenado, Media = mean(weight),
@@ -531,9 +753,12 @@ Plant_Resumen <- summarise(Plant_Ordenado, Media = mean(weight),
                            Observaciones = n())
 ```
 
+--
+
 ¿Qué pasará si hacemos esto en nuestro data frame no agrupado...?
 
-## summarize o summarise
+---
+# `summarize` o `summarise`
 
 ```{r}
 Plant_Resumen2 <- summarise(PlantGrowth, Media = mean(weight),
@@ -544,7 +769,8 @@ Plant_Resumen2 <- summarise(PlantGrowth, Media = mean(weight),
                            Observaciones = n())
 ```
 
-## %>% pipeline
+---
+# `%>%` pipeline
 
 Podemos utilizar esto para realizar varias operaciones en cadena...
 
@@ -559,9 +785,11 @@ Plant_Resumen <- PlantGrowth %>%
             Observaciones = n())
 ```
 
-Pasamos de una estructura **f(x, y)** a **x %>% f(y).**
+Pasamos de una estructura `f(x, y)` a `x %>% f(y)`.
 
-## filter
+
+---
+# `filter`
 
 Filtra nuestros datos según un criterio específico. Existen distintos operadores lógicos que se pueden utilizar, estos los podemos ver en el ["Cheat Sheet"](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) de dplyr.
 
@@ -571,7 +799,8 @@ tratamiento1 <- PlantGrowth %>% dplyr::filter(group == "trt1")
 tratamiento2 <- PlantGrowth %>% dplyr::filter(group == "trt2")
 ```
 
-## select
+---
+# `select`
 
 Elegimos con qué variables trabajar.
 
@@ -580,7 +809,8 @@ data("mtcars")
 variables <- mtcars %>% select(mpg, cyl, wt)
 ```
 
-## mutate
+---
+# `mutate`
 
 Nos permite generar nuevas variables en un data frame.
 
@@ -588,18 +818,20 @@ Nos permite generar nuevas variables en un data frame.
 Plant_Resumen <- Plant_Resumen %>% mutate(Coef_var = Desviacion_estandar/Media*100)
 ```
 
-## arrange {.smaller}
+---
+# `arrange`
 
-Ordena datos. Importante escribir el argumento **.by_group = TRUE** para que se respete el agrupamiento.
+Ordena datos. Importante escribir el argumento `.by_group = TRUE` para que se respete el agrupamiento.
 
-Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor), podemos utilizar el argumento **desc().**
+Por defecto ordena de menor a mayor. Para hacer lo contrario (de mayor a menor), podemos utilizar el argumento `desc()`.
 
 ```{r echo=TRUE}
 PlantGrowth <- PlantGrowth %>% group_by(group) %>% arrange(weight, .by_group = TRUE)
 head(PlantGrowth)
 ```
 
-## rename
+---
+# `rename`
 
 Nos sirve para renombrar alguna columna.
 
