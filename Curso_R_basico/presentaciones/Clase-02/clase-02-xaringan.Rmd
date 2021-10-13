@@ -373,7 +373,7 @@ La operación $x_i - \overline{x}$ corresponde a la **desviación** de nuestros 
 
 Para nuestras 100 observaciones aleatorias...
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=5.1, fig.width=10}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=4.8, fig.width=10}
 ggplot(data.frame(x), aes(x)) +
   geom_vline(xintercept = mean(x), size = 0.5, color = "gray20", linetype = "dashed") +
   geom_text(aes(x = mean(x) + 0.3, y = 0.5, label = "bar(x)"), parse = TRUE, size = 5) +
