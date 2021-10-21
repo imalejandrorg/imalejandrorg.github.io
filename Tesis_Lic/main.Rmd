@@ -1,0 +1,121 @@
+---
+title: " "
+output:
+  pdf_document:
+    number_sections: TRUE
+geometry: "left = 2.5cm, right = 2cm, top = 2cm, bottom = 2cm"
+fontsize: 12pt
+mainfont: Arial
+bibliography: biblio.bib
+csl: apa.csl
+header-includes:
+- \usepackage{fancyhdr}
+- \usepackage{lastpage}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{centering}
+
+\huge
+{\bf UNIVERSIDAD DE GUADALAJARA}
+
+\vspace{0.1cm}
+
+\large
+{\bf CENTRO UNIVERSITARIO DE CIENCIAS BIOLÓGICAS Y AGROPECUARIAS}
+
+\large
+{\bf DIVISION DE CIENCIAS BIOLÓGICAS Y AMBIENTALES}
+
+\vspace{0.5cm}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', out.width="35%"}
+knitr::include_graphics("img/udglogo.png")
+```
+\vspace{0.5cm}
+
+\Large
+{\bf Diversidad funcional y taxonómica de aves en cultivos de aguacate (\emph{Persea americana}) en el Nevado de Colima, Jalisco, México}
+
+\vspace{1cm}
+
+\large
+{\bf Tesis para obtener el Título de Licenciado en Biología}
+
+\large
+{\bf Presenta: Alejandro Antonio Ruiz García}
+
+\vspace{2cm}
+
+\large
+{\bf Director de tesis: Mtra. Sonia Navarro Pérez}
+
+\large
+{\bf Codirector de tesis: Dr. Enrique Sánchez Ramos}
+
+\vspace{1cm}
+
+\normalsize
+{\bf Zapopan, Jalisco, julio de 2021}
+
+\end{centering}
+
+\newpage
+
+\renewcommand{\contentsname}{}
+# INDICE {.unlisted .unnumbered}
+\tableofcontents
+
+\newpage
+
+## Índice de figuras
+\renewcommand{\listfigurename}{}
+\listoffigures
+
+## Índice de tablas
+\renewcommand{\listtablename}{}
+\listoftables
+
+\newpage
+
+# RESUMEN {.center}
+
+\newpage
+
+# INTRODUCCIÓN
+
+\newpage
+
+# OBJETIVOS
+
+\newpage
+
+# JUSTIFICACIÓN
+
+\newpage
+
+# HIPÓTESIS
+
+\newpage
+
+# MARCO TEÓRICO
+
+\newpage
+
+# MATERIALES
+
+\newpage
+
+# METODOLOGÍA
+
+\newpage
+
+# CONCLUSIONES
+
+\newpage
+
+# BIBLIOGRAFÍA

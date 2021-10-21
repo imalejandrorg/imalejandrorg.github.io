@@ -1,0 +1,544 @@
+---
+title: "Bioestadística con R"
+author: "Alejandro Ruiz"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      beforeInit: "macros.js"
+---
+class: inverse, middle, center
+
+```{r setup, include=FALSE}
+library(gt)
+library(tidyverse)
+library(xaringanExtra)
+library(kableExtra)
+library(patchwork)
+library(cowplot)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Fira Sans"),
+  code_font_google = google_font("Fira Mono"),
+  base_font_size = "22px",
+  code_highlight_color = "rgba(126, 191, 160, 0.5)"
+)
+```
+
+```{r xaringan-extra, include=FALSE}
+xaringanExtra::use_panelset()
+```
+
+# Probabilidad
+
+---
+# Probabilidad
+
+--
+
+Una **distribución de probabilidad** corresponde a una descripción que da la probabilidad para cada valor de una variable aleatoria. La variable aleatoria puede ser **discreta** o puede ser **continua.**
+
+--
+
+Un **histogramas de frecuencias relativas** representa las proporciones de las observaciones en cada categoría. 
+
+--
+
+Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una **curva de densidad.** 
+
+--
+
+La coordenada $y$ de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como **áreas debajo de la curva.**
+
+---
+#  Probabilidad frecuentista
+
+En este enfoque, la probabilidad de un evento se determina a través por el número de veces que el evento $A$ ocurre en una serie de repeticiones indefinidamente largas.
+
+--
+
+$$
+P(A) = \frac{Veces \space que \space ocurre \space A}{Número \space total \space de \space repeticiones}
+$$
+
+---
+class: middle, center, inverse
+# Reglas de probabilidad
+
+---
+# Reglas de probabilidad
+
+--
+
+1- La probabilidad de que un evento $A$ ocurra está siempre entre 0 y 1. 
+
+$$
+0 \le P(A) \le 1
+$$
+
+--
+
+2- Siempre y cuando dos eventos sean complementarios, la suma de probabilidades debe ser igual a 1.
+
+$$
+P(A) + P(\bar{A}) = 1
+$$
+
+--
+
+3- La probabilidad de que el evento $A$ no ocurra es...
+
+$$
+P(\bar{A}) = 1 - P(A)
+$$
+
+Donde $P(\bar{A})$ es el **complemento** de $P(A)$.
+
+---
+# Reglas de probabilidad
+
+--
+
+4- Si $A$ y $B$ son eventos **disjuntos** (no ocurren en conjunto):
+
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+
+--
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("no_conjuntos.png", dpi = 120)
+```
+
+---
+# Reglas de probabilidad
+
+--
+
+5- Si $A$ y $B$ son eventos que ocurren en **conjunto:**
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+Donde $P(A \cap B)$ es la probabilidad de que ocurra $A$ y $B$ al mismo tiempo.
+
+--
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("cojnuntos.png", dpi = 140)
+```
+
+---
+# Reglas de probabilidad
+
+--
+
+6- Si dos eventos son **independientes,** entonces:
+
+$$
+P(A \cap B) = P(A) \times P(B)
+$$
+
+--
+
+7- Si dos eventos son **dependientes** entonces:
+
+$$
+P(A \cap B) = P(A) \times P(B|A)
+$$
+
+--
+
+El valor $P(B|A)$ corresponde a la probabilidad condicional, y nos dice cuál es la probabilidad de que el evento $B$ ocurra dado que ha ocurrido ya el evento $A$. Para calcular la probabilidad condicional utilizamos:
+
+--
+
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+--
+
+$$
+P(B|A) = \frac{P(A \cap B)}{P(A)}
+$$
+
+--
+
+$$
+P(A|B) \ne P(B|A)
+$$
+
+---
+# Reglas de probabilidad
+
+--
+
+8- Para dos eventos cualesquiera:
+
+$$
+P(A) = P(B) \times P(A|B) + P(\bar{B}) \times P(A|\bar{B})
+$$
+
+---
+# Curvas de densidad
+
+Una **distribución de probabilidad** corresponde a una descripción que da la probabilidad para cada valor de una variable aleatoria. La variable aleatoria puede ser **discreta** o puede ser **continua.**
+
+--
+
+Un **histogramas de frecuencias relativas** representa las proporciones de las observaciones en cada categoría. 
+
+--
+
+Para variables continuas normalmente se utilizan clases muy estrechas para representar al histograma como una **curva de densidad.** 
+
+--
+
+La coordenada $y$ de una curva de densidad representa la escala de densidad y a menudo las frecuencias relativas se representan como **áreas debajo de la curva.**
+
+---
+# Curvas de densidad
+
+Algunos de los requisitos de una distribución de probabilidad son:
+
+--
+
+- Que exista una variable aleatoria numérica $x$ y que sus valores estén asociados a una probabilidad.
+
+--
+
+- Que $\sum P(x) = 1$, donde $x$ asume todos los los valores posibles. El área total bajo la curva de densidad debe ser igual a 1.
+
+--
+
+- Que la probabilidad de ver a $x_i$ se encuentre entre 0 y 1. Es decir, $0 \le P(x_i) \le 1$.
+
+---
+# Ejemplos
+
+.pull-left[
+- **Distribución normal**
+
+- **Distribución $t$ de Student** 
+
+- **Distribución de $F$** 
+
+- **Distribución de Chi**
+]
+
+.pull-right[
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.width=10}
+data <- data.frame("x" = rnorm(100000, mean = 0, sd = 1))
+ggplot(data, aes(x = x)) +
+  geom_histogram(aes(y=..density..), colour="black", fill="white") +
+  geom_density(size = 0.6) +
+  ylab("") +
+  xlab("") +
+  scale_y_continuous(expand = c(0,0), breaks = NULL) +
+  theme_minimal_hgrid(color = "black")
+```
+]
+
+---
+# Parámetros de una distribución de probabilidad
+
+- **Media:** $\mu$
+
+- **Varianza:** $\sigma^2$
+
+- **Desviación estándar:** $\sigma$
+
+- **Tamaño de muestra:** $n$
+
+---
+class: inverse, middle, center
+# Distribución binomial
+
+---
+# Distribución binomial
+
+--
+
+- Distribución de probabilidad para una **variable discreta.**
+
+--
+
+- Cuenta el número de éxitos $(k)$ tras realizar $n$ veces un experimento. 
+
+--
+
+- Cada *intento* debe ser independiente entre sí. La probabilidad de éxito es fija entre cada intento y se denota con la letra $p$.
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("ejemplos.png", dpi = 120)
+```
+
+---
+# Variable aleatoria binomial
+
+--
+
+1.  **Resultados binarios:** Solamente existen dos posibilidades para cada intento (éxito o fracaso, cara o cruz, dominante o recesivo, muerto o vivo, niño o niña, etc.).
+
+--
+
+2.  **Intentos independientes:** Cada prueba o intento deben ser independientes del anterior.
+
+--
+
+3.  **El valor de** $n$ es fijo: Se sabe con antelación el número de pruebas $n$.
+
+--
+
+4.  **Mismo valor** $p$: En todos los casos, la probabilidad de éxito o fracaso no debe cambiar, es decir $p$ debe permanecer constante.
+
+--
+
+5.  **Resultados mutuamente excluyentes:** Es decir, no se puede tener éxito y fracaso al mismo tiempo.
+
+--
+
+6.  **Resultados colectivamente exhaustivos:** Al menos uno de los dos resultados debe de ocurrir.
+
+---
+# Función de masa de probabilidad (PMF)
+
+La **función de masa de probabilidad (PMF)** o fórmula de la distribución binomial.
+
+$$
+P(X = k) = {\binom{n}{k}}{p^{k}}{q^{n-k}}
+$$
+
+--
+
+Donde:
+
+-   $P(X = k)$ = probabilidad de obtener $k$ éxitos.
+
+-   $\binom{n}{k}$ = coeficiente binomial.
+
+-   $k$ = número de éxitos.
+
+-   $p$ = probabilidad de éxito.
+
+-   $q$ = probabilidad de fracaso.
+
+-   $n$ = número de pruebas.
+
+---
+# Coeficiente binomial
+
+Corresponde al número de formas en las que se puede acomodar un conjunto dado.
+
+$$
+{\binom{n}{k}} = \frac{n!}{k!(n-k)!}
+$$
+
+---
+# Media y desviación estándar de la distribución binomial
+
+En este caso la media es el número promedio de éxitos $(k)$ y la desviación estándar es qué tan lejos de esta media caen el resto de los valores de la distribución.
+
+--
+
+$$
+\mu = {n}{p}
+$$
+
+$$
+\sigma = \sqrt{{n}{p}{(1-p)}} = \sqrt{{n}{p}{q}}
+$$
+
+--
+
+También podemos calcular la varianza...
+
+--
+
+$$
+\sigma^2 = {n}{p}{(1-p)} = {n}{p}{q}
+$$
+
+---
+# Ejemplo
+
+> Supongamos que analizamos a 5 individuos de una población en la que el 37% de las personas presentan un alelo mutante. Las probabilidades de las distintas configuraciones están dadas por la distribución binomial, en donde $n$ = 5 y $p$ = 0.37. ¿Cuál es la probabilidad de que exactamente 2 personas sean mutantes?
+
+Para esto utilizamos las funciones de `R`...
+
+--
+
+- `dbinom()` nos da un valor exacto de la distribución binomial en el punto indicado.
+
+--
+
+- `pbinom()` nos da la probabilidad acumulada de un evento.
+
+--
+
+- `qbinom()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad (también conocida como función cuantil).
+
+--
+
+- `rbinom()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
+
+
+---
+# Probabilidad de que exactamente 2 personas sean mutantes
+
+¿Qué función podríamos utilizar...?
+
+¡¡`dbinom()`!!
+
+--
+
+En este caso $n = 5$, $p = 0.37$ y $k = 2$.
+
+```{r}
+dbinom(2, 5, 0.37)
+```
+
+---
+# Probabilidad de que exactamente 2 personas sean mutantes
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=6.2, fig.width=10}
+
+mutantes <- data.frame(n = 0:5, prob = dbinom(x = 0:5, size = 5, prob = 0.37))
+mutantes$colour <- ifelse(mutantes$n == 2, "lightblue", "white")
+
+ggplot(mutantes, aes(x = factor(n), y = prob, width = 0.9, fill = colour)) +
+  geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Mutantes (x)", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+---
+# Otro ejemplo...
+
+En Estados Unidos, 85% de la población tiene sangre Rh positivo. Supongamos que tomamos 6 personas y contamos cuántos tiene Rh positivo. En este caso $Y$ representará cuántas personas tienen Rh positivo dentro del grupo de 6.
+
+--
+
+1. ¿Cuál es la probabilidad de $Y$ = 4?
+
+--
+
+2. ¿Y la probabilidad de que *al menos* 4 personas sean Rh positivo?
+
+--
+
+3. ¿Y la probabilidad de que haya *al menos* 1 persona con Rh negativo?
+
+---
+# Otro ejemplo...
+
+Para el punto 1 buscamos una probabilidad **exacta**, $P(Y = 4)$. Es decir podemos utilizar `dbinom()`.
+
+```{r}
+#Probabilidad de que 4 personas tengan Rh positivo.
+dbinom(4, 6, 0.85)
+```
+
+--
+
+```{r echo=FALSE, fig.align='center', fig.height=4.4, fig.width=10}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh == 4, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Personas con Rh +", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+
+```
+
+---
+# Otro ejemplo...
+
+Para el punto 2, buscamos que *al menos* 4 personas tengan Rh +, es decir $P(Y \ge 4) = P(Y = 4) + P(Y=5) + P(Y=6)$.
+
+```{r}
+#Probabilidad de que al menos 4 personas (pueden ser 4, 5 o 6) tengan Rh positivo.
+pbinom(3, 6, 0.85, lower.tail = FALSE)
+```
+
+--
+
+```{r echo=FALSE, fig.align='center', fig.height=4.1, fig.width=10}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh >= 4, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Personas con Rh +", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```
+
+---
+# Otro ejemplo...
+
+Para el punto 3, buscamos que *al menos* una persona tenga Rh -. Por ende buscamos el complemento de nuestro evento, $P(Y = 0) + P(Y = 1) + P(Y = 2) \cdots + P(Y = 5)$, o lo que es lo mismo $1 - P(Y = 6)$. 
+
+```{r}
+#Probabilidad de que al menos 1 persona tenga Rh negativo.
+dbinom(0, 6, 0.85) + dbinom(1, 6, 0.85) + dbinom(2, 6, 0.85) + dbinom(3, 6, 0.85) + dbinom(4, 6, 0.85) + dbinom(5, 6, 0.85)
+
+1 - dbinom(6, 6, 0.85)
+
+pbinom(5, 6, 0.85)
+```
+
+---
+# Otro ejemplo...
+
+```{r echo=FALSE, fig.align='center', fig.height=6.5, fig.width=10}
+
+rh <- data.frame(rh = 0:6, prob = dbinom(x = 0:6, size = 6, prob = 0.85))
+rh$colour <- ifelse(rh$rh < 6, "lightblue", "white")
+
+ggplot(rh, aes(x = factor(rh), y = prob, width = 0.9, fill = colour)) +
+ geom_bar(stat = "identity", colour = "black", show.legend = F) +
+  geom_text(aes(label = round(prob, 2), y = prob + 0.01), position = position_dodge(0.9), size = 3, vjust = 0) +
+  labs(x = "Personas con Rh +", y = "Probabilidad") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.5)) +
+  scale_fill_manual(values = c("lightblue", "white")) +
+  theme_classic()
+
+```

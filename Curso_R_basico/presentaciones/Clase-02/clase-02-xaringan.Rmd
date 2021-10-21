@@ -70,7 +70,7 @@ Denotamos a las variables con una letra mayúscula (ej. $X$) y las observaciones
 ---
 # Distribuciones de frecuencia
 .panelset[
-.panel[.panel-name[Variables continuas]
+.panel[.panel-name[Variables nominales]
 Nos muestran la **frecuencia** de cada uno de los valores de nuestros datos. Normalmente esta información es presentada en un **gráfico de barras** (para datos categóricos) o un **histograma** (para datos continuos).
 
 ```{r idioma-hablantes, echo=FALSE, fig.align='center', fig.height=5, fig.width=9, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -85,7 +85,7 @@ ggplot(x, aes(x = Idioma, y = Hablantes)) +
   theme_classic()
 ```
 ]
-.panel[.panel-name[Variables categóricas]
+.panel[.panel-name[Variables ordinales]
 Para una variable categórica ordinal...
 
 ```{r clientes-semana, echo=FALSE, fig.align='center', fig.height=5, fig.width=8}
@@ -243,7 +243,7 @@ La mediana correspondería al valor de en medio, que en este caso es 3.
 median(c(1,2,3,4,5))
 ```
 ]
-.panel[.panel-name[Observaciones impares]
+.panel[.panel-name[Observaciones pares]
 En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
 
 $$
