@@ -4,7 +4,7 @@
     <title>Bioestadística con R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alejandro Ruiz" />
-    <meta name="date" content="2021-10-19" />
+    <meta name="date" content="2022-02-02" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 
 # Bioestadística con R
 ### Alejandro Ruiz
-### 2021-10-19
+### 2022-02-02
 
 ---
 
@@ -485,6 +485,745 @@ pbinom(5, 6, 0.85)
 # Otro ejemplo...
 
 &lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+# Distribución de Poisson
+
+---
+# Distribución de Poisson
+
+Llamada así en honor al matemático francés **Simeón Denis Poisson.** Para eventos aleatorios representados en un intervalo de tiempo determinado, aunque también es utilizada cuando el evento de interés se distribuye en un espacio plano o tridimensional.
+
+--
+
+&lt;img src="ejemplos2.png" width="666" style="display: block; margin: auto;" /&gt;
+
+--
+
+Nuestro suceso de interés `\((X)\)` tiene valores discretos, mientras que nuestro intervalo tiene valores continuos.
+
+---
+# Función de masa de probabilidad (PMF)
+
+La fórmula de la distribución de Poisson (PMF) es...
+
+--
+
+$$
+P(X = k | \lambda) = \frac{e^{-\lambda}\lambda^k}{k!}
+$$
+
+--
+
+Donde:
+
+* `\(P(X=k|\lambda)\)` = número de observaciones `\(k\)` dado la media `\(\lambda\)`.
+
+* `\(e\)` = número de Euler (aproximadamente 2.7183). 
+
+* `\(\lambda\)` = parámetro de la distribución de Poisson, corresponde al promedio de veces que ocurre el evento aleatorio.
+
+---
+# Variable aleatoria de Poisson
+
+Para que una variable sea considerada una **variable aleatoria de Poisson** se deben de cumplir los siguientes requisitos:
+
+--
+
+1. Cada evento tiene que ser independiente.
+
+--
+
+2. Las ocurrencias del evento tienen que ser aleatorias.
+
+--
+
+3. El número de eventos en un intervalo de tiempo o espacio es infinito `\((k = 0, 1, 2, \cdots, \infty)\)`.
+
+--
+
+4. La probabilidad de que un evento se presente en un intervalo de tiempo es proporcional al intervalo de tiempo o espacio.
+
+--
+
+5. Se considera que la probabilidad de que dos eventos se presenten en la misma fracción de tiempo es tan pequeña que se puede considerar inexistente.
+
+---
+# Media y desviación estándar de la distribución de Poisson
+
+La varianza y la media corresponden al mismo valor `\((\lambda)\)` por lo que la desviación estándar sería...
+
+--
+
+$$
+\sigma = \sqrt{\lambda}
+$$
+
+---
+# Aproximación a la distribución binomial
+
+Cuando se cumplen las siguientes condiciones:
+
+--
+
+1. Cuando `\(p &lt; 0.1\)` o `\(p &gt; 0.9\)`.
+
+--
+
+2. Cuando `\(n \ge 20\)`. Es todavía mejor si `\(n \ge 100\)`.
+
+--
+
+3. Cuando `\(np \le 10\)`.
+
+--
+
+Utilizada para **eventos raros.**
+
+$$
+\mu =  \lambda = np
+$$
+
+---
+# Ejemplo con *Escherichia coli*
+
+En *Escherichia coli*, una célula de cada `\(10^9\)` muta para desarrollar resistencia a la estreptomicina. Si observamos `\(2 \times 10^9\)` células... 
+
+--
+
+1. ¿Cuál es la probabilidad de que ninguna mute, `\(P(X = 0|\lambda)\)`?
+
+--
+
+2. ¿Cuál es la probabilidad de que al menos una mute, `\(P(X \ge 1|\lambda)\)`?
+
+---
+# Ejemplo con *Escherichia coli*
+
+Estamos hablando de probabilidades demasiado pequeñas, ya que tenemos que encontrar 1 mutante entre `\(10^9\)` células:
+
+--
+
+$$
+p = \frac{1}{10^9} = 0.000000001
+$$
+
+--
+
+Para este caso, podemos utilizar la aproximación a la probabilidad binomial:
+
+--
+
+$$
+\mu = \lambda = np = (2\times10^9) \times \frac{1}{10^9} = 2 \\
+$$
+
+--
+
+Por lo tanto, `\(\lambda = 2\)`. Observemos que teníamos un valor de `\(n\)` enorme `\((2 \times 10^9)\)` y una `\(p\)` extremadamente pequeña `\((\frac{1}{10^9})\)` y a pesar de eso, obtuvimos un valor de `\(\lambda\)` relativamente pequeño.
+
+---
+# Funciones de la distribución de Poisson
+
+Como con la distribución binomial, `R` cuenta con funciones específicas para calcular los valores de una distribución de Poisson.
+
+- `dpois()` nos da un valor exacto de la distribución de Poisson en el punto indicado.
+
+- `ppois()` nos da la probabilidad acumulada de un evento.
+
+- `qpois()` toma el valor de probabilidad que le ponemos como primer argumento y nos da como regreso un número cuya probabilidad acumulada empate con el valor de la probabilidad (también conocida como función cuantil).
+
+- `rpois()` genera cierta cantidad de número aleatorios de acuerdo con la probabilidad y el número de pruebas realizadas.
+
+---
+# Otro ejemplo...
+
+Para el primer punto, `\(P(X = 0|\lambda)\)`...
+
+--
+
+```r
+#Probabilidad de que ninguna célula mute.
+dpois(0, 2)
+```
+
+```
+## [1] 0.1353353
+```
+
+--
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Otro ejemplo...
+Para el punto 2, `\(P(X \ge 1|\lambda)\)`...
+
+--
+
+```r
+#Probabilidad de que al menos una célula mute.
+1 - dpois(0, 2)
+```
+
+```
+## [1] 0.8646647
+```
+
+--
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+# Distribución normal
+
+---
+# Distribución normal
+Corresponde a una curva en *forma de campana* o *gaussiana*, con ciertas características específicas.
+
+Se utiliza para representar la distribución de los valores de una variable `\(X\)`, de dos maneras distintas: 
+
+--
+
+* Como una aproximación a un histograma basado en los valores muestreados de la variable `\(X\)`.
+
+--
+
+* Como una representación idealizada de la distribución poblacional de `\(X\)`.
+
+--
+
+Las curvas con distribución normal toman su forma por dos elementos muy importantes: la **media**, `\(\mu\)` y su **desviación estándar**, `\(\sigma\)`. Se expresa de la siguiente manera `\(X \sim N(\mu, \sigma)\)`.
+
+--
+
+No se trata de cualquier curva simétrica, si no de una curva simétrica *específica,* eso lo veremos en su **función de densidad de probabilidad (PDF).**
+
+---
+# Función de densidad de probabilidad (PDF)
+Expresa la altura de la curva como una función de la posición en el eje horizontal. El área bajo la curva acumulada se conoce como **función de densidad acumulada (CDF).**
+
+--
+
+$$
+f(x) = \frac{1}{{\sigma}{\sqrt{2 \pi}}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+$$
+
+--
+
+El centro de una curva normal es `\(x = \mu\)`, los puntos de inflexión están en `\(x = \mu + \sigma\)` y `\(x = \mu - \sigma\)`.
+
+--
+
+En principio la curva se extiende hasta el infinito, pero tres desviaciones estándar de la media hacia el valor negativo o positivo da como resultado valores demasiado pequeños. El ancho y alto de una curva normal están determinados por la desviación estándar `\(\sigma\)`.
+
+---
+# Curva de la distribución normal
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Distribución normal
+
+Normalmente lo que nos interesa de una curva con distribución normal es el **área debajo de la curva.** Para esto utilizamos la **escala estandarizada,** en el cual el valor del eje horizontal se denomina **valor `\(z\)`.**
+
+--
+
+La escala de `\(z\)` mide las desviaciones estándar a partir de la media, por ejemplo, `\(z = 1\)` corresponde a una desviación estándar de la media.
+
+--
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Escala de `\(z\)`
+
+Una vez que nuestras variables se encuentran estandarizadas en el valor `\(z\)`, podemos utilizar **tablas de `\(z\)`** para realizar el cálculo debajo del área que corresponde al valor `\(z\)` obtenido, aunque claro, también podemos hacer estos cálculos en `R.`
+
+--
+
+&lt;img src="tabla_z.png" width="446" style="display: block; margin: auto;" /&gt;
+
+---
+# Propiedades de una curva normal estándar
+
+--
+
+-  **68%** del área se encuentra entre `\(\pm\)` 1 distribución estándar.
+
+--
+
+-  **95%** del área se encuentra entre `\(\pm\)` 2 distribuciones estándar.
+
+--
+
+-  **99.7%** del área se encuentra entre `\(\pm\)` 3 distribuciones estándar.
+
+---
+# Funciones de la distribución normal
+
+- `dnorm()` nos da un valor de densidad normal (PDF).
+
+- `pnorm()` nos da un valor de densidad normal acumulado hasta cierto punto (área debajo de la curva, CDF).
+
+- `qnorm()` toma el valor de densidad normal que le ponemos como primer argumento y nos da como regreso un número cuya densidad normal acumulada empate con el valor de densidad normal ingresado.
+
+- `rnorm()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad normal.
+
+---
+# Ejemplo con peces...
+
+En una población de peces de la especie *Pomolobus aestivalis*, la longitud de los individuos sigue una distribución normal. La media de la longitud es de `\(\bar{x} = 54.0 \space mm\)`, y la desviación estándar es de `\(s = 4.5 \space mm^2\)`. 
+
+--
+
+1. ¿Qué porcentaje de los peces mide menos de 60 mm?
+
+--
+
+2. ¿Qué porcentaje de los peces mide más de 51 mm?
+
+--
+
+3. ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?
+
+&lt;img src="Alosa_aestivalis.jpg" width="512" style="display: block; margin: auto;" /&gt;
+
+---
+# ¿Qué porcentaje de los peces mide menos de 60 mm?
+
+Para responder la primer pregunta, debemos transformar nuestros datos a valores `\(z\)`, ya que se encuentran en mm.
+
+--
+
+
+```r
+(60 - 54)/(4.5)
+```
+
+```
+## [1] 1.333333
+```
+
+--
+
+Ya que `\(z = 1.33\)`, ahora buscamos el área bajo la curva con la función `pnorm().`
+
+
+```r
+pnorm(1.33, 0, 1, lower.tail = TRUE)
+```
+
+```
+## [1] 0.9082409
+```
+
+---
+# ¿Qué porcentaje de los peces mide menos de 60 mm?
+
+Como podemos ver la probabilidad de que un pez mida menos de 60 mm es de `\(90.82%\)`.
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# ¿Qué porcentaje de los peces mide más de 51 mm?
+
+Para la segunda pregunta, primero debemos encontrar el valor de `\(z\)` correspondiente a 51 mm y después basta con cambiar el argumento `lower.tail` a `FALSE`.
+
+--
+
+
+```r
+(51 - 54)/(4.5)
+```
+
+```
+## [1] -0.6666667
+```
+
+```r
+pnorm(-0.67, 0, 1, lower.tail = FALSE)
+```
+
+```
+## [1] 0.7485711
+```
+
+---
+# ¿Qué porcentaje de los peces mide más de 51 mm?
+
+El resultado indica que `\(75.86%\)` de los peces miden más de 51 mm. Bastante sencillo, ¿no?
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?
+
+Simplemente calculamos la probabilidad acumulada hasta nuestro valor `\(z\)` más grande, que en este caso corresponde a 1.33 y le restamos la probabilidad acumulada del valor `\(z\)` más pequeño, que corresponde -0.67.
+
+
+```r
+pnorm(1.33, 0, 1) - pnorm(-0.67, 0, 1)
+```
+
+```
+## [1] 0.656812
+```
+
+---
+# ¿Qué porcentaje de los peces miden entre 51 mm y 60 mm?
+
+Como resultado obtenemos que el `\(65.68%\)` de los peces se encuentran en longitudes de entre 51 mm y 60 mm.
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# La otra interpretación de la distribución normal
+
+Si nos damos cuenta, la distribución normal puede, de cierta manera, interpretarse también como una **distribución de probabilidad continua.**
+
+--
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# qnorm()
+
+Supongamos que queremos encontrar el percentil 70 de la distribución de la longitud de los peces. Supongamos que este valor está representado por la variable `\(y\)`. En otras palabras, queremos encontrar el valor tal que el 70% de las longitudes de los peces son menores que `\(y\)` y el 30% son mayores.
+
+--
+
+
+```r
+qnorm(0.7, 0, 1)
+```
+
+```
+## [1] 0.5244005
+```
+
+--
+
+El valor `\(z\)` correspondiente es `\(z = 0.5244\)`. Realizamos un despeje y obtenemos la fórmula `\(y = Z \times \sigma + \mu = 0.5244 \times 4.5 + 54 = 56.3\)`. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
+
+---
+# qnorm()
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+# Pruebas de normalidad
+
+---
+# Pruebas de normalidad
+Ya que muchos procedimientos estadísticos se basan en datos provenientes de una población con distribución normal, es importante saber si nuestros datos siguen está distribución.
+
+--
+
+Uno de los métodos más utilizados son los **gráficos cuantil-cuantil**, **gráficos Q-Q** o **Q-Q plot**. Veamos un ejemplo con datos de plantas que vienen incluidas en `ggplot2.`
+
+---
+# Gráficos Q-Q...
+
+
+```r
+data("PlantGrowth")
+PlantGrowth
+```
+
+```
+##    weight group
+## 1    4.17  ctrl
+## 2    5.58  ctrl
+## 3    5.18  ctrl
+## 4    6.11  ctrl
+## 5    4.50  ctrl
+## 6    4.61  ctrl
+## 7    5.17  ctrl
+## 8    4.53  ctrl
+## 9    5.33  ctrl
+## 10   5.14  ctrl
+## 11   4.81  trt1
+## 12   4.17  trt1
+## 13   4.41  trt1
+## 14   3.59  trt1
+## 15   5.87  trt1
+## 16   3.83  trt1
+## 17   6.03  trt1
+## 18   4.89  trt1
+## 19   4.32  trt1
+## 20   4.69  trt1
+## 21   6.31  trt2
+## 22   5.12  trt2
+## 23   5.54  trt2
+## 24   5.50  trt2
+## 25   5.37  trt2
+## 26   5.29  trt2
+## 27   4.92  trt2
+## 28   6.15  trt2
+## 29   5.80  trt2
+## 30   5.26  trt2
+```
+
+---
+# Gráficos Q-Q...
+
+
+Vamos a enfocarnos solamente en los datos del grupo control.
+
+--
+
+
+```r
+# Filtramos los datos del grupo 'ctrl'.
+control &lt;- PlantGrowth %&gt;% dplyr::filter(group == "ctrl")
+```
+
+Ahora vamos a hacer uso de la librería `ggpubr.`
+
+---
+# Gráficos Q-Q...
+
+
+```r
+library(ggpubr)
+
+ggqqplot(control$weight) +
+  labs(x = "Muestra", y = "Teórico")
+```
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Prueba de Shapiro-Wilks
+
+Otra opción para realizar una prueba de normalidad conocida como **prueba de Shapiro-Wilks** (aunque no se recomienda que para `\(n &gt; 50\)`). Es muy sensible a ligeras desviaciones de la normalidad, sobre todo con un tamaño de muestra grande.
+
+--
+
+
+```r
+#Indicamos nuestra variable con el símbolo de $.
+shapiro.test(control$weight)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  control$weight
+## W = 0.95668, p-value = 0.7475
+```
+
+¿Qué pasa con el valor p?
+
+---
+# Prueba de Shapiro-Wilks
+
+Valores p menores a 0.05 son indicativos fuertes de **no-normalidad.**
+
+Después de obtener un valor menor a 0.05, podríamos corroborar esto con un **gráfico Q-Q** o con un **histograma** para ver la forma de la distribución de nuestros datos.
+
+--
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+# Distribución muestral
+
+---
+# Distribución muestral
+
+Imaginemos que muestreamos de una población de *Chondestes grammacus* o gorrión arlequín.
+
+--
+
+&lt;img src="dist_muestral.png" width="931" style="display: block; margin: auto;" /&gt;
+
+---
+# Se basa en repetir el muestreo
+
+Ahora imaginemos que hacemos el muestreo 50 veces... O tal vez 100, ¿O 200?
+
+&lt;img src="dist_muestral.png" width="931" style="display: block; margin: auto;" /&gt;
+
+---
+# Distribución muestral
+
+Normalmente tomamos solamente una muestra aleatoria de una población. Pero para visualizar la distribución muestral, necesitamos realizar un **meta-estudio,** que consiste en repetir de manera indefinida, réplicas del mismo estudio.
+
+Un meta-estudio consiste en **repetir varias veces** la extracción de una muestra de tamaño `\(n\)` de una población.
+
+Las probabilidades relativas de una muestra aleatoria se pueden interpretar como frecuencias relativas en un meta-estudio. Conocer la distribución muestral nos permite hacer afirmaciones de probabilidad de otras posibles muestras.
+
+---
+# ¿Qué tan parecidas son `\(\overline{X}\)` y `\(\mu\)`?
+
+Si pensamos en un modelo de muestreo aleatorio y tomamos la media muestral como una variable `\(\overline{X}\)`, podemos hacer ciertas inferencias.
+
+Reformulamos nuestra pregunta a ¿Qué tan cerca de `\(\mu\)` es probable que este `\(\overline{X}\)`? Nuestra respuesta la encontramos en la **distribución muestral de `\(\overline{X}\)`.**
+
+--
+
+En promedio, la **media de la distribución muestral** `\(\overline{X}\)` equivale a la media de la población `\(\mu\)`.
+
+$$
+\mu_{\overline{X}} = \mu
+$$
+
+---
+# La desviación estándar de una distribución muestral
+
+La fórmula de la **desviación estándar de la muestra** es un poco menos intuitiva, aunque si se analiza de manera detallada tiene sentido.
+
+$$
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+$$
+
+--
+
+Mientras el tamaño de muestra incrementa, la desviación estándar de `\(\overline{X}\)` disminuye. Es decir para muestras más grandes existe menos variación.
+
+La **forma** está determinada por el tamaño de muestra y la naturaleza de la población. Si la población `\(X\)` se distribuye de manera normal, entonces la distribución muestral de `\(\overline{X}\)` será también normal, sin importar el tamaño de nuestra `\(n\)`.
+
+---
+# Teorema del limite central
+
+### ¡OJO AQUÍ!
+Indica que si obtenemos una `\(n\)` suficientemente grande, la distribución muestral de `\(\overline{X}\)` será aproximadamente normal incluso para muestras cuya población `\(X\)` no se distribuye de manera normal.
+
+---
+# De regreso a los gorriones...
+
+Supongamos que tenemos una población del Gorrión Arlequín (*Chondestes grammacus*) en la cuál el peso medio es de `\(\mu = 11 \space g\)` y la desviación estándar `\(\sigma = 1.2 \space g\)`.
+
+Tomamos una muestra aleatoria de seis aves ($n = 6$). Dejemos que `\(\overline{x}\)` represente la media del peso de las seis aves. Ya que sabemos que el peso de esta ave sigue una distribución normal en la población, también nuestras muestras seguirán una distribución normal.
+
+$$
+\mu_{\overline{X}} = \mu = 11 \space g
+$$
+
+$$
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}} = \frac{1.2}{\sqrt{6}} = 0.49 \space g
+$$
+
+---
+# De regreso a los gorriones...
+En este caso `\(\mu_{\overline{X}} = 11 \space g\)` y `\(\sigma_{\overline{X}} = \space 0.49 \space g\)`. De tal manera que, en promedio la media de la muestra será 11 g, sin embargo, el 68% de las veces `\(\overline{X}\)` se encontrará entre `\(11 \space g \pm 0.49 \space g\)` y el 95% de las veces se encontrará entre `\(11 \space g \pm 0.98 \space g\)`.
+
+--
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# De regreso a los gorriones...
+Esta distribución muestral expresa distintas posibilidades para los valores de `\(\overline{X}\)`.
+
+--
+
+Supongamos que quisiéramos saber la probabilidad de que la media de una muestra de seis aves sea mayor a 11.5 g. Ya que nuestros datos son normales, podemos usar la transformación a valores `\(z\)` para obtener nuestro resultado.
+
+--
+
+`\(z = \frac{\overline{x} - \mu_\overline{X}}{\sigma_{\overline{X}}} = \frac{11.5 \space g - 11 \space g}{0.49 \space g} = 1.0204\)`
+
+---
+# De regreso a los gorriones...
+Ya que nuestro valor `\(z = 1.0204\)`, usamos la función `pnorm()` para encontrar nuestra área bajo la curva.
+
+
+```r
+pnorm(1.0204, mean = 0, sd = 1, lower.tail = FALSE)
+```
+
+```
+## [1] 0.1537694
+```
+
+--
+
+De hecho, ni siquiera es necesario realizar la transformación a valores `\(z\)` en `R` ya que podemos modificar los parámetros de la función `pnorm()`.
+
+
+```r
+pnorm(11.5, mean = 11, sd = 0.49, lower.tail = FALSE)
+```
+
+```
+## [1] 0.1537675
+```
+
+---
+# Continúamos con los gorriones...
+
+Si eligiéramos muchas muestras aleatorias provenientes de esta población cerca del 15% de las muestras tendrían una media mayor a 11.5 g. 
+
+$$
+P(\overline{X} &gt; 11.5) = P(Z &gt; 1.0204) = 0.1538 \approx 0.15
+$$
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## La importancia del tamaño... de la muestra
+
+El **tamaño de la muestra** tiene un efecto directo sobre la forma de nuestra curva. Básicamente, muestras más grandes dan un `\(\sigma_\overline{X}\)` menor, y por ende dan un menor error de muestreo. 
+
+En seguida se muestran distintas gráficas con distintas `\(\mu_\overline{X}\)`. Para este caso hipotético, `\(\mu = 100, \sigma = 40\)`.
+
+&lt;img src="clase-03-xaringan_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## La importancia del tamaño de la muestra
+
+Qué tan cerca esta `\(\overline{X}\)` de `\(\mu\)` depende del tamaño de la muestra `\(n\)`.
+
+La media de una muestra grande no necesariamente está más cerca a la media poblacional que la media de una muestra pequeña, pero existe mayor probabilidad de que lo este.
+
+---
+# Poblaciones, muestras y distribuciones muestrales
+
+En una **población**, los estadísticos descriptivos como la media y la desviación estándar se representan por los siguientes símbolos:
+
+--
+
+- `\(\mu\)`: media poblacional.   
+
+--
+
+- `\(\sigma\)`: desviación estándar poblacional.
+
+--
+
+En una **muestra**, los mismos estadísticos se representan por los siguientes símbolos:
+
+--
+
+- `\(\overline{x}\)`: media muestral.
+
+--
+
+- `\(s\)`: desviación estándar poblacional.
+
+---
+# Poblaciones, muestras y distribuciones muestrales
+
+En una **distribución muestral** lo que nosotros hacemos es repetir un muestreo indefinidas veces y de cada muestreo extraer la media muestral `\(\overline{x}\)`. La distribución muestral representa una distribución de medias.
+
+--
+
+- `\(\mu_\overline{X}\)`: media de una distribución muestral.
+
+--
+
+- `\(\sigma_\overline{X}\)`: desviación estándar de una distribución muestral.
+
+---
+# Ejemplo con aves... :)
+
+&lt;img src="dist_muestra2.png" width="2560" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

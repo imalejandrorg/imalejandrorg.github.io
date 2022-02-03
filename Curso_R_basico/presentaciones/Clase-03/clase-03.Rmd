@@ -767,7 +767,7 @@ qnorm(0.7, 0, 1)
 
 Como podemos ver, el valor $z$ correspondiente es $z = 0.5244$. Podemos realizar un despeje muy sencillo y obtener la fórmula $y = Z \times \sigma + \mu = 0.5244 \times 4.5 + 54 = 56.3$. Esto quiere decir que 56.3 mm es el percentil 70 de la distribución de nuestros datos.
 
-## qnorm () {.build}
+## qnorm() {.build}
 
 ```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE}
 ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
