@@ -26,21 +26,23 @@ Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, a
 
 - [Presentación 7: Correlación y regresión lineal](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07.html#1)
 
-### [Curso de bioestadística con R (presentado en xaringan)](https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html)
+
+
+##### Presentaciones disponibles en formato **xaringan:**
 
 - [Presentación 1: Introducción a R (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01-xaringan.html#1)
 
-- [Presentación 2: Estadística descriptiva](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02-xaringan.html#1)
+- [Presentación 2: Estadística descriptiva (xaringa)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02-xaringan.html#1)
 
-- [Presentación 3: Probabilidad](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03-xaringan.html#1)
+- [Presentación 3: Probabilidad (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03-xaringan.html#1)
 
-- [Presentación 4: Estadística inferencial](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04.html#1)
+- [Presentación 4: Estadística inferencial (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04-xaringan.html#1)
 
-- [Presentación 5: Inferencias de datos categóricos](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05.html#1)
+- [Presentación 5: Inferencias de datos categóricos (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05-xaringan.html#1)
 
-- [Presentación 6: Modelado de relaciones](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06.html#1)
+- [Presentación 6: Modelado de relaciones (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06-xaringan.html#1)
 
-- [Presentación 7: Correlación y regresión lineal](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07.html#1)
+- [Presentación 7: Correlación y regresión lineal (xaringan)](https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07-xaringan.html#1)
 
 ### Curso de ggplot2
 
