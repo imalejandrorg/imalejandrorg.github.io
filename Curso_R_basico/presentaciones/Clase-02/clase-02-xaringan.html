@@ -473,16 +473,25 @@ Indican la posición relativa un dato respecto de los demás datos. Algunas de l
 
 --
 
-- Valores `\(Z\)`
-- Frecuencia absoluta
-- Frecuencia relativa 
-- Cuartiles
+- **Valores `\(z\)`**
+
+--
+
+- **Frecuencia absoluta**
+
+--
+
+- **Frecuencia relativa**
+
+--
+
+- **Cuartiles**
 
 ---
-# Valores `\(Z\)`
+# Valores `\(z\)`
 .panelset[
 .panel[.panel-name[General]
-Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar ( `\(s\)` ) a las que se encuentra un valor dado.
+Se obtienen al estandarizar los valores de nuestros datos. Es el número de desviaciones estándar `\((s)\)` a las que se encuentra un valor dado.
 
 **Muestral:**
 $$
@@ -497,7 +506,7 @@ $$
 .panel[.panel-name[Propiedades]
 - No tienen unidades de medida. Son **adimensionales.**
 
-- Si un valor es menor que la media ( `\(\overline{x}\)` ) su valor `\(z\)` será negativo.
+- Si un valor es menor que la media `\((\overline{x})\)` su valor `\(z\)` será negativo.
 ]
 .panel[.panel-name[Función scale()]
 Utilizamos la función `scale()`.
@@ -573,10 +582,10 @@ prop.table(table(control))
 
 .panelset[
 .panel[.panel-name[General]
-Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos `\(Q_1\)`, `\(Q_2\)` y `\(Q_3\)`, para el primer, segundo y tercer cuartil. `\(Q_2\)` es equivalente a la mediana ( `\(Q_2 = \tilde{x}\)` ).
+Son medidas que dividen el conjunto de datos en cuatro grupos, con 25% de los valores en cada uno de ellos. Se representan por los símbolos `\(Q_1\)`, `\(Q_2\)` y `\(Q_3\)`, para el primer, segundo y tercer cuartil. `\(Q_2\)` es equivalente a la mediana `\((Q_2 = \tilde{x})\)`.
 ]
 .panel[.panel-name[IQR]
-Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil ( `\(IQR\)` ) como se indica en la siguiente fórmula.
+Existen otros estadísticos que pueden ser calculados a partir de los cuartiles como el Rango Intercuartil `\((IQR)\)` como se indica en la siguiente fórmula.
 
 $$
 IQR = Q_3 - Q_1
@@ -633,13 +642,13 @@ ggplot(data = PlantGrowth) +
 ---
 class: middle, center, inverse
 
-# La librería dplyr
+# La librería `dplyr`
 
 ---
 
 # El uso de `dplyr`
 
-Podemos facilitarnos la vida muchísimo si utilizamos el paquete **dplyr** incluido en el **tidyverse.**
+Podemos facilitarnos la vida muchísimo si utilizamos el paquete `dplyr` incluido en el `tidyverse`.
 
 
 ```r
