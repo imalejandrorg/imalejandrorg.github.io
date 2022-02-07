@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bioestadística con R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alejandro Ruiz" />
+    <meta name="date" content="2022-02-06" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bioestadística con R
+### Alejandro Ruiz
+### 2022-02-06
+
+---
+
+class: inverse, middle, center
+
+
+
+
+
+
+
+# Modelado de relaciones
+
+---
+# Análisis de Varianza (ANOVA)
+
+El análisis clásico para realizar observaciones de múltiples muestras es el **análisis de varianza** o **ANOVA.**
+
+Supuestos:
+
+--
+
+-   Distribución normal de los datos.
+
+--
+
+-   Homocedasticidad (varianzas iguales).
+
+--
+
+-   Datos independientes.
+
+--
+
+La distribución normal y la homocedasticidad son hasta cierto punto flexibles.
+
+---
+# ANOVA
+
+Sumamente sensible a muestras no independientes. Pese a su nombre, el análisis de varianza en realidad busca **diferencias en las medias** `\((\mu)\)` de las muestras.
+
+--
+
+Empezaremos con el ANOVA de una vía, es decir, un ANOVA en el cuál una sola variable define los grupos o tratamientos.
+
+--
+
+El ANOVA de `\(k\)` muestras o grupos inicia con el cálculo de las cantidades que describen la variabilidad de los datos *entre* los grupos y *dentro* de los grupos. Antes de empezar con esto, veamos un poco de notación utilizada en un ANOVA.
+
+---
+# Notación del ANOVA
+
+- `\(x_{ij}\)`: observación `\(j\)` en el `\(i\)`-ésimo grupo. Por ejemplo la primer observación del primer grupo o muestra sería `\(x_{11}\)`, la segunda `\(x_{12}\)` y así sucesivamente. 
+
+- `\(k\)`: Número total de grupos, muestras o tratamientos.
+
+- `\(n_i\)`: número de observaciones en el `\(i\)`-ésimo grupo.
+
+- `\(\overline{x}_i\)`: la media del `\(i\)`-ésimo grupo.
+
+- `\(s_i\)`: la desviación estándar del `\(i\)`-ésimo grupo.
+
+- `\(n\)`: el número total de observaciones, dado por la fórmula:
+
+$$
+n = \sum_{i = 1}^k n_i
+$$
+
+---
+# Notación del ANOVA
+
+- `\(\overline{x}\)`: la gran media o promedio de todas las observaciones, dado por la fórmula:
+
+`$$\overline{x} = \frac{\sum_{i = 1}^k \sum_{j = 1}^{n_i}n_{ij}}{n} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{\sum_{i}^k n_i} = \frac{\sum_{i = 1}^k n_{i} \overline{x}_i}{n}$$`
+
+---
+# Variación dentro de los grupos
+
+Una medida de variación dentro de los grupos es la **varianza agrupada,** denotada como `\(s_{p}^2\)`. Su cálculo se obtiene de la siguiente manera:
+
+`$$s_{p}^2 = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{\sum_{i=1}^k(n_i - 1)} = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k}$$`
+
+--
+
+Mientras que para obtener la desviación estándar agrupada simplemente obtenemos la raíz cuadrada.
+
+El valor de la desviación estándar agrupada solamente depende de la variabilidad dentro de los datos y no de sus medias.
+
+---
+# Cuadrados medios
+
+El numerador de la varianza agrupada se conoce como **suma de cuadrados dentro de los grupos,** `\(SS(dentro)\)` mientras que el denominador son los **grados de libertad dentro de los grupos,** `\(df(dentro)\)`.
+
+$$
+SS(dentro) = \sum_{i = 1}^k (n_i - 1)s_i^2
+$$
+
+$$
+df(dentro) = n - k
+$$
+
+--
+
+La razón entre estos dos valores se conoce como **cuadrados medios dentro de los grupos,** `\(MS(dentro)\)`.
+
+`$$s_{p}^2 = \frac{\sum_{i=1}^k (n_i - 1)s_i^2}{n - k} = \frac{SS(dentro)}{df(dentro)} = MS(dentro)$$`
+
+---
+# Cuadrados medios
+
+Por lo tanto `\(MS(dentro)\)` mide la variabilidad dentro de los grupos. 
+
+&lt;img src="entreydentro.png" width="581" style="display: block; margin: auto;" /&gt;
+
+---
+# Variación entre los grupos
+
+Utilizamos los **cuadrados medios entre los grupos,** `\(MS(entre)\)`. Su cálculo se obtiene de la siguiente manera:
+
+$$
+MS(entre) = \frac{\sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2}{k - 1}
+$$
+
+Al numerador se le conoce como **suma de cuadrados entre los grupos,** `\(SS(entre)\)` y al denominador como **grados de libertad entre los grupos,** `\(df(entre)\)`.
+
+$$
+SS(entre) = \sum_{i=1}^k n_i(\overline{x}_i - \overline{x})^2
+$$
+
+$$
+df(entre) = k - 1
+$$
+
+---
+# Una relación importante en el ANOVA
+
+El nombre *análisis de varianza* viene de la comparación entre `\(SS(entre)\)` y `\(SS(dentro)\)`. Consideremos un valor, `\(x_{ij}\)`.
+
+`$$x_{ij} - \overline{x} = (x_{ij} - \overline{x}_i) + (x_{ij} - \overline{x})$$`
+
+Esta ecuación expresa la desviación que hay en una observación `\((x_{ij})\)` de la gran media `\((\overline{x})\)` como la suma de dos partes: una desviación dentro del grupo `\((x_{ij} - \overline{x}_i)\)` y una desviación entre grupos `\((\overline{x}_i - \overline{x})\)`.
+
+Esta relación se mantiene para la suma de cuadrados correspondiente:
+
+`$$\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k \sum_{j=1}^{n_i}(x_{ij} - \overline{x}_i)^2 + \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2$$`
+
+---
+# Una relación importante en el ANOVA
+
+Al reescribirse se puede expresar como:
+
+`$$\sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2 = \sum_{i=1}^k (n_i - 1)s_{i}^2 + \sum_{i=1}^k n_i (\overline{x}_i - \overline{x})^2$$`
+
+--
+
+Esta cantidad se conoce como **suma de cuadrados totales,** `\(SS(total)\)`. 
+
+`$$SS(total) = \sum_{i=1}^k\sum_{j=1}^{n_i}(x_{ij} - \overline{x})^2$$`
+
+--
+
+Este valor mide la cantidad de variabilidad entre todas las `\(n\)` observaciones en los grupos `\(k\)`.
+
+$$
+SS(total) = SS(entre) + SS(dentro)
+$$
+
+---
+# Grados de libertad totales
+
+Para los grados de libertad totales `\(df(total)\)` se utiliza la siguiente fórmula:
+
+$$
+df(total) = n - 1
+$$
+
+--
+
+Y al igual que la suma de cuadrados, se pueden calcular sumando los grados de libertad entre y dentro de los grupos:
+
+$$
+df(total) = df(dentro) + df(entre) \\
+df(total) = (n - k) + (k - 1)
+$$
+
+---
+# Tablas de ANOVA
+En estas tablas vamos anotando los resultados de nuestras sumas de cuadrados, nuestros grados de libertad y nuestros cuadrados medios, de la siguiente manera.
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Valores &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; MS &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; Entre los grupos (Tratamientos) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(k - 1\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(\sum_{i = 1}^{k}n_{i}(\overline{x}_{i} - \overline{x})^2\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(\frac{SS(entre)}{df(entre)}\)` &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; Dentro de los grupos (Residuales) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(n - k\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(\sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij} - \overline{x}_{i})^2\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(\frac{SS(dentro)}{df(dentro)}\)` &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(n - 1\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; `\(\sum_{i = 1}^{k}\sum_{j = 1}^{n_i}(x_{ij}-\overline{x})^2\)` &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Modelo del ANOVA
+
+Pensamos acerca de `\(x_{ij}\)` como una observación aleatoria del grupo `\(i\)`, donde la media poblacional del grupo `\(i\)` es `\(\mu_i\)`. Utilizamos el ANOVA para investigar la hipótesis nula, `\(H_0: \mu_1 = \mu_2  = \cdots = \mu_i\)`. El siguiente modelo describe al ANOVA:
+
+`$$x_{ij} = \mu + \tau_i + \epsilon_{ij}$$`
+
+`\(\mu\)` representa la gran media poblacional, es decir la media de todos los grupos combinados. Si la `\(H_0\)` es verdadera entonces `\(\mu\)` es la media en común para todos los grupos. 
+
+Si es falsa, entonces al menos una de las `\(\mu_i\)` difiere de la gran media poblacional `\(\mu\)`.
+
+---
+# El valor de `\(\tau_i\)`
+
+El término `\(\tau_i\)` (tau) representa el efecto que tiene el grupo `\(i\)`, es decir, la diferencia entre la media poblacional para el grupo `\(i\)`, `\(\mu_i\)` y la gran media poblacional, `\(\mu\)`. Por ende:
+
+$$
+\tau_i = \mu_i - \mu
+$$
+
+--
+
+Esto es equivalente a decir que `\(H_0: \tau_1 = \tau_2 = \cdots = \tau_n = 0\)`. Si la `\(H_0\)` es falsa, entonces al menos alguno de los grupos o tratamientos difiere de los demás. Si `\(\tau_i\)` es positivo, entonces, las observaciones del grupo `\(i\)` tienden a ser mayores que el promedio, en cambio, si es negativo, las observaciones tienden a ser menores que el promedio.
+
+---
+# El término `\(\epsilon\)`
+
+El término `\(\epsilon_{ij}\)` (epsilon) representa el error aleatorio asociado con la observación `\(j\)` en el grupo `\(i\)`. Por lo que nuestro modelo puede ser interpretado como:
+
+$$
+observación = gran \space media + efecto \space de \space grupo + error \space aleatorio
+$$
+
+Estimamos la media general, `\(\mu\)`, con la gran media de los datos `\(\overline{x}\)`:
+
+$$
+\hat{\mu} = \overline{x}
+$$
+
+De igual manera, estimamos la media poblacional del grupo `\(i\)` con la media muestral del grupo `\(i\)`:
+
+$$
+\hat{\mu}_i = \overline{x}_i
+$$
+
+---
+# Efecto de grupo 
+
+Entonces, efecto de grupo es:
+
+$$
+\hat{\tau}_i = \overline{x}_i - \overline{x}
+$$
+
+--
+
+Finalmente, para el error aleatorio de la observación `\(j\)` en el grupo `\(i\)`:
+
+`$$\hat{\epsilon}_{ij} = x_{ij} - \overline{x}_i$$`
+
+---
+# El modelo
+Poniendo todos estos valores juntos obtenemos:
+
+`$$x_{ij} = \overline{x} + (\overline{x}_i - \overline{x}) + (x_{ij} + \overline{x}_i) = \hat{\mu} + \hat{\tau_i} + \hat{\epsilon}_{ij}$$`
+
+--
+
+En algunos libros e incluso algunos software, se utiliza la terminología `\(SS(error)\)` en lugar de `\(SS(dentro)\)` ya que este componente, `\(x_{ij} - \overline{x}_i\)`, es la parte del error aleatorio en el modelo del ANOVA.
+
+--
+
+Cuando hacemos un análisis de varianza, ANOVA, comparamos el tamaño del efecto de grupo de la muestra, `\(\hat{\tau}_i\)`, al tamaño del error aleatorio de los datos, `\(\hat{\epsilon}_{ij}\)`.
+
+---
+# Distribución de `\(F\)`
+
+Nombrada así en honor del estadista y genetista R.A. Fisher y es utilizada en muchísimos análisis estadísticos. Su forma depende de dos parámetros: el **numerador de los grados de libertad** `\((df(entre))\)` y el **denominador de los grados de libertad** `\((df(dentro))\)`. La siguiente figura muestra una distribución de `\(F\)` con `\(df(entre) = 4\)` y `\(df(dentro) = 20\)`.
+
+&lt;img src="clase-06-xaringan_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Funciones de la distribución de `\(F\)`
+
+- `df()` nos da un valor de densidad de la distribución de `\(F\)` (PDF).
+
+- `pf()` nos da un valor de densidad acumulado hasta cierto punto en la distribución de `\(F\)` (área debajo de la curva, CDF).
+
+- `qf()` toma el valor de densidad que le ponemos como primer argumento y nos da como regreso un número cuya densidad acumulada empate con el valor de densidad ingresado.
+
+- `rf()` genera cierta cantidad de número aleatorios de acuerdo al valor de densidad.
+
+---
+# Valor crítico de `\(F\)`
+
+Para encontrar los valores críticos de nuestra distribución de `\(F\)` simplemente utilizamos la función `qf()`. 
+
+
+```r
+qf(0.05, df1 = 4, df = 20, lower.tail = F) 
+```
+
+```
+## [1] 2.866081
+```
+
+Nuestro valor crítico de `\(F\)` para un `\(F(4, 20)_{0.05}\)` es 2.87. Estos comandos se utilizan como el resto que hemos visto con las demás distribuciones.
+
+---
+# Prueba de `\(F\)`
+
+Para obtener nuestro **estadístico de `\(F\)`** utilizamos la siguiente fórmula:
+
+$$
+F_s = \frac{MS(entre)}{MS(dentro)}
+$$
+
+Nuestra `\(F_s\)` será mayor si las discrepancias entre las medias de los grupos `\((\overline{X}_i)\)` son grandes en relación a variabilidad dentro de los grupos. Valores grandes de `\(F_s\)` tienden a proveer evidencia en contra de la `\(H_0\)`.
+
+---
+# Tipos de dieta
+
+Se realizó un experimento sobre la alimentación de corderos con tres dietas distintas. Las ganancias de peso se muestran en la tabla...
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Dieta 1 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Dieta 2 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Dieta 3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Función `aov()`
+
+Para esto necesitamos generar nuestra variable con nuestros datos.
+
+
+```r
+Tratamiento &lt;- c((rep("Dieta 1", 3)), c(rep("Dieta 2", 5)), c(rep("Dieta 3", 4)))
+Peso &lt;- c(8, 16, 9, 9, 16, 21, 11, 18, 15, 10, 17, 6)
+Corderos &lt;- data.frame(Tratamiento, Peso)
+ANOVA &lt;- aov(Peso ~ Tratamiento, Corderos)
+```
+
+---
+# summary y broom
+
+Utilizamos la función `summary()` para observar si hay diferencias en nuestros datos
+
+
+```r
+summary(ANOVA)
+```
+
+```
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Tratamiento  2     36   18.00   0.771  0.491
+## Residuals    9    210   23.33
+```
+
+También podemos utilizar el paquete `broom` para insertar los resultados en un formato compatible con la investigación reproducible.
+
+
+```r
+library(broom)
+ANOVA.tabla &lt;- tidy(ANOVA)
+```
+
+---
+# summary y broom
+
+Por lo tanto nuestro estadístico `\(F\)` calculado nos da un valor de 0.77, el área correspondiente a esta densidad es 0.4907, por lo que nuestro `\(valor \space p &gt; 0.05\)` y aceptamos la `\(H_0\)`, es decir, **no hay diferencias significativas.**
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Término &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; MS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Estadístico de F &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Valor p &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; Tratamiento &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 18.00000 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.7714286 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.490658 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 210 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 23.33333 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: inverse, middle, center
+# Diseño por bloques aleatorizados
+
+---
+# Diseño por bloques aleatorizados
+Primero agrupamos las unidades experimentales en bloques de unidades relativamente similares y después alocamos tratamientos de manera aleatoria dentro de cada bloque.
+
+Para llevar a cabo este tipo de diseños, el investigador debe de crear o identificar bloques adecuados de unidades experimentales y posteriormente asignar tratamientos de manera aleatoria dentro de cada bloque de tal manera que cada tratamiento aparece en el bloque (al menos para un diseño de bloques completo).
+
+--
+
+### ¿Por qué crear bloques?
+Ayuda a reducir o eliminar variabilidad causada por variables extrañas, por lo tanto, aumenta la precisión de los experimentos. Podemos observar el diseño experimental de manera tabular, de la siguiente manera.
+
+---
+# Diseño por bloques aleatorizados
+
+&lt;img src="tabla1.png" width="786" style="display: block; margin: auto;" /&gt;
+
+
+Donde `\(X_{i,j}\)` representa la observación `\(i\)` que recibió el tratamiento `\(j\)`.
+
+
+---
+# Creando los bloques
+
+Es una forma de organizar la variación inherente que existe entre las unidades experimentales. De manera ideal, los bloques incrementan la información disponible del experimento. Para esto se deben crear bloques lo más homogéneos posibles entre sí para que la variación inherente entre las unidades experimentales sea, dentro de lo posible, variación entre bloques más que dentro de los bloques.
+
+Una vez que los bloques se han generado, lo que ocurre dentro de cada bloque es como un "mini-experimento". La aleatorización se hace para cada bloque de manera separada. Para el análisis de los bloques utilizamos un **ANOVA por bloques aleatorizados.**
+
+---
+# Variedades de semillas
+
+Un agrónomo se encuentra comparando variedades de cebada, por lo que genera distintas parcelas de cada variedad para así medir su eficiencia. Sin embargo, el arreglo espacial de las parcelas es muy importante, ya que pueden surgir diferencias por el tipo de suelo, pH, etc., por lo que el área de cultivo fue dividida en varias regiones (los bloques) y después, cada bloque fue subdividido en distintas parcelas. Dentro de cada bloque las variades de granos son sembradas de manera aleatoria, con una aleatorización echa para cada bloque. Se obtienen los siguientes resultados.
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Bloque 1 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Bloque 2 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Bloque 3 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Bloque 4 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Media de la variedad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; Variedad 1 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 93.5 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 66.6 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 50.5 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 42.4 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 63.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; Variedad 2 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 102.9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 53.2 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 47.4 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 43.8 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 61.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; Variedad 3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 67.0 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 54.7 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 50.0 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 40.1 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 53.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; Variedad 4 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 86.3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 61.3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 50.7 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 46.4 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 61.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; Media del bloque &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 87.4 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 59.0 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 49.7 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt; 43.2 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2.2cm; "&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Hipótesis
+
+La hipótesis nula de nuestro ANOVA es que las medias de nuestras poblaciones son iguales, `\(H_0: \mu_1 = \mu_2 = \cdots = \mu_k\)`. Por lo que nuestra hipótesis nula sería que todas las variedades son iguales.
+
+--
+### Modelo de ANOVA por bloques
+
+El modelo de ANOVA por bloques aleatorizados sufre ciertas alteraciones al modelo de una vía.
+
+`$$x_{ijk} = \mu + \tau_i + \beta_{j} + \epsilon_{ijk}$$`
+
+Donde `\(x_{ijk}\)` representa la `\(k\)`-ésima observación, cuando el tratamiento `\(i\)` es aplicado al bloque `\(j\)`. `\(\mu\)` representa la gran media poblacional, y `\(\tau_i\)` el efecto del grupo `\(i\)`. El nuevo término, `\(\beta_{j}\)` representa el efecto de `\(j\)`-ésimo bloque. Podemos repensar este modelo de la siguiente manera:
+
+`$$(x_{ijk} - \tau_i) = \mu + \beta_{j} + \epsilon_{ijk}$$`
+
+---
+# Modelo de ANOVA por bloques
+
+Ahora la parte izquierda de esta ecuación describe los datos una vez que los efectos del tratamiento, `\(\tau_i\)` son removidos.
+
+¿Cómo estimamos este lado izquierdo con nuestros datos?
+
+--
+
+`$$x_{ijk} - \hat{\tau_i} = x_{ijk} - (\overline{x}_i - \overline{x})$$`
+
+Dentro de cada tratamiento, la media del tratamiento es extraída de cada valor. Si viésemos las desviaciones de la media de los tratamientos de nuestros datos, veríamos que existe todavía bastante variabilidad atribuible a los bloques.
+
+---
+# Las sumas de cuadrados
+
+Para este caso, escribiremos la `\(SS(entre)\)` como `\(SS(tratmientos)\)` para distinguir nuestra suma de cuadrados de los tratamientos de la de los bloques. Para este caso vamos a partir nuestra `\(SS(dentro)\)` en dos partes: `\(SS(bloques)\)`, que mide la variabilidad entre la media de los bloques y `\(SS(dentro)\)`, que mide el resto de variabilidad no explicada de los datos.
+
+$$
+SS(total) = SS(tratamientos) + SS(bloques) + SS(dentro)
+$$
+
+---
+# SS(bloques)
+
+`$$SS(bloques) = {\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}$$`
+
+Donde `\(\overline{x}_{bloque}\)` es la media de las observaciones del bloque `\(j\)`, `\(J\)` es el número total de bloques y `\(m_j\)` es el número de observaciones en el bloque `\(j\)`. Los grados de libertad serían:
+
+$$
+df(bloques) = J - 1
+$$
+
+---
+# Cuadrados medios
+
+Y de manera análoga al ANOVA de una vía, `\(SS(bloques)\)` es el numerador y `\(df(bloques)\)` es el denominador para el calculo de los cuadrados medios de los bloques, `\(MS(bloques)\)`. 
+
+`$$MS(bloques) = \frac{\sum_{j=1}^J m_j (\overline{x}_{bloque} - \overline{x})^2}{J - 1}$$`
+
+---
+# SS(dentro)
+
+Para el calculo de `\(SS(dentro)\)` realizamos la siguiente operación, ya que el calculo de `\(SS(bloques)\)` reduce la variabilidad no explicada, `\(SS(dentro)\)`.
+
+$$
+SS(dentro) = SS(total) - SS(tratamientos) - SS(bloques)
+$$
+
+De igual manera, para calcular los grados de libertad utilizamos:
+
+$$
+df(dentro) = df(total) - df(tratamiento) - df(bloques)
+$$
+
+---
+# Variedades de semillas
+
+Para el caso de nuestros datos, el valor de nuestra gran media poblacional, `\(\overline{x}\)` es:
+
+$$
+\overline{x} = \frac {93.5 + 102.9 + 67.0 + 86.3 + \cdots + 40.1 + 46.4}{16} = \frac{956.8}{16} = 59.8
+$$
+
+Ahora calculamos la suma de cuadrados de los tratamientos `\(SS(tratamientos)\)` como en el ANOVA de una sola vía.
+
+`$$SS(tratamientos) = 4(63.3 - 59.8)^2 + 4(61.8 - 59.8)^2+ 4(53.0 - 59.8)^2 + 4(61.2 - 59.8)^2 = 259$$`
+
+---
+# Variedades de semillas
+
+Ya que el número de tratamientos es 4, `\(df(tratamientos)\)`:
+
+$$
+df(tratamientos) = 4-1 = 3
+$$
+
+Entonces:
+
+$$
+MS(tratamientos) = \frac{259}{3} = 86.333
+$$
+
+---
+### SS(bloques) para variedades de semillas
+
+Ahora calculamos `\(SS(bloques)\)`:
+
+$$
+SS(bloques) = 4(87.4 - 59.8)^2 + 4(59.0 - 59.8)^2 + 4(49.7 - 59.8)^2 + 4(43.2-59.8)^2 = 4573
+$$
+
+Ya que tenemos cuatro bloques, `\(J = 4\)` y los `\(df(bloques)\)` son:
+
+$$
+df(bloques) = 4-1 = 3
+$$
+
+--
+
+### MS(bloques) para variedades de semillas
+
+Ahora calculamos `\(MS(bloques)\)`:
+
+$$
+MS(bloques) = \frac{4573}{3} = 1524.333
+$$
+
+---
+### SS(total) para variedades de semillas
+
+Para el calculo de la `\(SS(total)\)` realizamos la extracción de la gran media poblacional a cada valor:
+
+$$
+SS(total) = (93.5-59.8)^2 + (102.9-59.8)^2 + (67.0-59.8)^2 + \cdots + (46.4-59.8)^2 = 5411
+$$
+
+--
+
+### SS(dentro) para variedades de semillas
+
+Por lo tanto, `\(SS(dentro)\)` se obtiene restando las demás `\(SS\)` a `\(SS(total)\)`.
+
+$$
+SS(dentro) = 5411 - 259 - 4573 = 579
+$$
+
+Y nuestros `\(df(dentro)\)` se calculan restando el resto de `\(df\)`.
+
+$$
+df(dentro) = 15 - 3 - 3 = 9
+$$
+
+---
+### MS(dentro) para variedades de semillas
+
+Por lo tanto, `\(MS(dentro)\)`  se obtiene así:
+
+$$
+MS(dentro) = \frac{579}{9} = 64.333
+$$
+
+--
+
+### Estadístico de `\(F\)` para variedades de semillas
+
+Ahora sí, podemos calcular nuestro estadístico de `\(F\)`.
+
+$$
+F_s = \frac{86.333}{64.333} = 1.342
+$$
+
+---
+### ANOVA por bloques en `R`
+
+Simplemente añadimos `+ Bloque` después del tratamiento en el argumento de la función `aov()`. El valor p obtenido es de 0.320294, aceptamos la `\(H_0\)`. Las cuatro variedades tienen el mismo rendimiento. ¡Observemos la cantidad de variabilidad explicada por `\(SS(bloques)\)`!
+
+
+```r
+Bloque &lt;- factor(rep(1:4, each = 4))
+Variedad &lt;- factor(rep(c("Variedad 1", "Variedad 2", "Variedad 3", "Variedad 4"), 4))
+Peso &lt;- c(93.5, 102.9, 67.0, 86.3,
+       66.6, 53.2, 54.7, 61.3,
+       50.5, 47.4, 50, 50.7,
+       42.4, 43.8, 40.1, 46.4)
+Cebada &lt;- data.frame(Peso, Bloque, Variedad)
+
+anova.bloque &lt;- aov(Peso ~ Variedad + Bloque, Cebada)
+summary(anova.bloque)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Variedad     3    259    86.4   1.344 0.320294    
+## Bloque       3   4573  1524.4  23.712 0.000131 ***
+## Residuals    9    579    64.3                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+# Broom
+
+
+```r
+library(broom)
+ANOVA.tabla.bloque &lt;- tidy(anova.bloque)
+```
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Término &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; MS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Estadístico de F &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Valor p &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; Variedad &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 259.265 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 86.42167 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 1.344294 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.3202945 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; Bloque &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 4573.105 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 1524.36833 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 23.711635 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.0001314 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 578.590 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 64.28778 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: middle, inverse, center
+# ANOVA de dos vías
+
+---
+# ANOVA de dos vías
+
+Algunos análisis de varianza requieren más de un factor o variable. En el ejemplo anterior, nuestro **factor** era el tipo de variedad de cebada y los **niveles** eran 4: variedad 1, 2, 3 y 4.
+
+--
+
+### Cantidad de luz y estrés en plantas
+
+Un fisiologo vegetal investiga al efecto del estrés mecánico en el crecimiento de plantas de soya. Las plantas fueron asignadas a uno de los cuatro tratamientos, con 13 plantulas por tratamiento. Las plantas de dos de los tratamientos fueron estresadas al agitarlas durante 20 minutos, dos veces al día, mientras que el grupo control no fue estresado. Aquí tenemos nuestro primer **factor,** con dos niveles: agitamiento y control. Además, las plantas crecieron en dos condiciones de luz: baja y moderada. Así que en este caso, nuestro segundo factor es la cantidad de luz, con dos niveles: baja y moderada. Nuestros tratamientos quedan de la siguiente manera:
+
+---
+## Cantidad de luz y estrés en plantas
+- Tratamiento 1: Control, luz baja
+
+- Tratamiento 2: Estrés, luz baja
+
+- Tratamiento 3: Control, luz moderada
+
+- Tratamiento 4: Estrés, luz moderada
+
+Después de 16 días las plantas fueron colectadas y se midió el área total de la hoja (cm^2^) de cada planta. Los resultados fueron los siguientes:
+
+---
+## Cantidad de luz y estrés en plantas
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Control, luz baja &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Estrés, luz baja &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Control, luz moderada &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Estrés, luz moderada &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 264 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 235 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 314 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 283 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 188 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 320 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 312 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 225 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 195 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 310 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 291 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 268 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 205 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 340 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 259 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 215 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 212 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 299 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 216 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 214 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 268 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 201 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 232 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 182 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 345 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 267 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 215 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 271 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 326 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 229 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 272 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 285 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 241 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 288 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 163 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 309 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 291 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 253 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 230 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 337 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 269 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 288 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 255 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 282 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 282 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 230 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 202 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 273 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 257 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## Cantidad de luz y estrés en plantas
+
+&lt;img src="clase-06-xaringan_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Modelo de ANOVA dos vías
+
+El modelo del ANOVA para este caso sería:
+
+`$$x_{ijk} = \mu + \tau_i + \beta_j + \epsilon_{ijk}$$`
+
+Donde `\(x_{ijk}\)` es la `\(k\)`-ésima observación en el nivel `\(i\)` del primer factor y el nivel `\(j\)` del segundo factor. El término `\(\tau_i\)` representa el efecto del nivel `\(i\)` del primer factor (en este caso, la condición de estrés), y el término `\(\beta_j\)` representa el efecto del nivel `\(j\)` del segundo factor (condición de luz).
+
+---
+# Factores aditivos
+
+Si la influencia conjunta de dos factores es igual a la suma de sus influencias separadas, se dice que los dos factores son **aditivos** en cuanto a sus efectos. Visualizar esto es más sencillo con una tabla que incluya las medias de cada tratamiento.
+
+&lt;img src="tabla2.png" width="945" style="display: block; margin: auto;" /&gt;
+
+El efecto del estrés reduce el área de la hoja por casi la misma cantidad, por lo que podríamos decir que el estrés tiene un efecto aditivo negativo sobre el área.
+
+---
+## Cantidad de luz y estrés en plantas
+
+&lt;img src="clase-06-xaringan_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Interacciones
+Cuando los efectos de los factores son aditivos, decimos que no hay **interacción** entre los factores. Algunas veces, el efecto que un factor tiene sobre una variable depende del nivel del segundo factor. Cuando esto ocurre, decimos que los dos factores interactúan para generar el efecto de la variable de respuesta.
+
+--
+
+### Zinc y hierro
+Investigadores condujeron un estudio sobre el enriquecimiento de bebidas frutales a base de leche con cantidades bajas y altas de hierro (Fe) y zinc (Zn). Las bebidas fueron digeridas en un tracto gastrointestintal simulado y la retención celular de hierro fue medida `\((\mu\)`g Fe/mg de proteína celular).
+
+&lt;img src="tabla3.png" width="858" style="display: block; margin: auto;" /&gt;
+
+---
+# Zinc y hierro
+
+&lt;img src="clase-06-xaringan_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Modelo de ANOVA con interacciones
+
+`$$x_{ijk} = \mu + \tau_i + \beta_j + \gamma_{ij} + \epsilon_{ijk}$$`
+
+Donde el nuevo término `\(\gamma_{ij}\)` es el efecto de la interacción entre el nivel `\(i\)` del primer factor y el nivel `\(j\)` del segundo factor.
+
+Si hay `\(n\)` observaciones, entonces `\(df(total) = n - 1\)`. 
+
+Si hay `\(I\)` niveles para el primer factor, entonces `\(I - 1\)` nos da los grados de libertad y si hay `\(J\)` niveles para el segundo factor, de nuevo, `\(J - 1\)` nos da sus grados de libertad.
+
+Existen entonces `\((I - 1) \times (J-1)\)` grados de libertad para la interacción. Con `\(I\)` niveles en el primer factor y `\(J\)` niveles en el segundo, hay `\(IJ\)` combinaciones para los tratamientos, por lo tanto `\(df(dentro) = n - IJ\)`.
+
+---
+# Hipótesis
+
+Una hipótesis nula de interés podría ser que las interacciones suman 0:
+
+`$$H_0: \gamma_{11} = \gamma_{12} = \cdots = \gamma_{IJ} = 0$$`
+
+Para probar esta hipótesis calculamos el estadístico `\(F_s\)`:
+
+$$
+F_s = \frac{MS(interacción)}{MS(dentro)}
+$$
+
+Y rechazamos la `\(H_0\)` si nuestro valor p es pequeño.
+
+---
+## Luz y estrés en plantas
+
+
+```r
+Luz &lt;- factor(c(rep("Luz baja", 26), rep("Luz alta", 26)))
+Condicion &lt;- factor(c(rep("Control", 13), rep("Estrés", 13), rep("Control", 13), rep("Estrés", 13)))
+Area &lt;- c(264, 200, 225, 268, 215, 241, 232, 256, 229, 288, 253, 288, 230,
+       235, 188, 195, 205, 212, 214, 182, 215, 272, 163, 230, 255, 202, 
+       314, 320, 310, 340, 299, 268, 345, 271, 285, 309, 337, 282, 273,
+       283, 312, 291, 259, 216, 201, 267, 326, 241, 291, 269, 282, 257)
+
+Soya &lt;- data.frame(Luz, Condicion, Area)
+
+plantas.anova &lt;- aov(Area ~ Condicion + Luz, Soya)
+summary(plantas.anova)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Condicion    1  14858   14858   16.93 0.000148 ***
+## Luz          1  42752   42752   48.71 7.14e-09 ***
+## Residuals   49  43003     878                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+# Agregando el efecto de la interacción
+
+Para esto tenemos que agregar un argumento especial en nuestro anova, que sería `Condicion:Luz`, el cual toma en cuenta la interacción entre la condición de estrés y la cantidad de luz.
+
+
+```r
+plantas.anova.int &lt;- aov(Area ~ Condicion + Luz + Condicion:Luz, Soya)
+summary(plantas.anova.int)
+```
+
+```
+##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Condicion      1  14858   14858  16.595 0.000173 ***
+## Luz            1  42752   42752  47.749 1.01e-08 ***
+## Condicion:Luz  1     26      26   0.029 0.864570    
+## Residuals     48  42976     895                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+# Interpretación de las interacciones
+
+Es difícil determinar el efecto independiente de un factor, por ejemplo, el efecto del Fe, ya que la naturaleza y la magnitud del efecto depende de un nivel particular de Zn. 
+
+Debido a esto, primero buscamos la presencia de una interacción (a través de una gráfica o un ANOVA). Si encontramos una interacción entre los factores, usualmente detenemos el análisis en este punto. Si no hay una interacción (como en el caso de las plantas), procedemos a evaluar los efectos de los factores individuales.
+
+---
+class: middle, center, inverse
+# Combinaciones lineales
+
+---
+# Combinaciones lineales
+Preguntas interesantes pueden ser abordadas considerando la **combinación lineal de las medias** de los grupos. Definida con el término `\(L\)`, es una cantidad que se obtiene de la siguiente manera:
+
+$$
+L = m_1x_1 + m_2x_2 + \cdots + m_Ix_I
+$$
+
+Donde `\(m\)` son multiplicadores para `\(x_i\)`. 
+
+Uno de los usos de la combinación lineal es *ajustar* debido a una variable extraña.
+
+---
+# FVC
+
+Es una medida para evaluar la funcionalidad de los pulmones es la capacidad vital forzada (FVC), que mide la cantidad máxima de aire que una persona puede expirar en un solo aliento. En un estudio de salud pública, investigadores midieron la FVC de una gran muestra de personas. Los resultados de adultos ex-fumadores se muestran en la siguiente tabla.
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Edad (años) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Media &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Desviación estándar &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 25-34 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 83 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 5.29 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.76 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 35-44 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 102 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 5.05 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 45-54 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 4.51 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 55-64 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 97 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 4.24 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 65-74 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 73 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 3.58 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 2cm; "&gt; 0.82 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# FVC
+Si calculásemos la gran media del conjunto de datos nos encontraríamos con un problema; no se puede comparar con otras poblaciones ya que podrían tener otra distribución de las edades. Si quisiéramos comparar nuestros datos con la FVC de no-fumadores. La diferencia observada en la FVC se vería distorsionada ya que, el grupo de ex-fumadores es (sin sorpresa alguna) más viejo que el grupo de no-fumadores.
+
+--
+
+Podríamos optar por utilizar una media *ajustada a la edad,* que es un estimado de la media de la FVC en una población de referencia, con una distribución de edad específica. En este caso utilizaremos los valores de la siguiente tabla.
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Frecuencia relativa &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 25-34 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 0.22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 35-44 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 0.22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 45-54 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 0.24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 55-64 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 0.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 65-74 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 4cm; "&gt; 0.12 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Media ajustada de la edad
+
+La media *ajustada a la edad* de la FVC se obtendría de la siguiente manera:
+
+$$
+L = 0.22\overline{x}_1 + 0.22\overline{x}_2 + 0.24\overline{x}_3 + 0.20\overline{x}_4 + 0.12\overline{x}_5
+$$
+
+Como podemos ver, el valor de `\(m\)` corresponde a la frecuencia relativa de la distribución de edades de nuestra población de referencia.
+
+---
+# Media ajustada de la edad
+
+$$
+L = (0.22)(5.29) + (0.22)(5.05) + (0.24)(4.51) + (0.20)(4.24) + (0.12)(3.58) = 4.63 \space litros
+$$
+
+Este valor corresponde a una media de la FVC en una población idealizada donde hay personas que son biológicamente similares a hombres ex-fumadores, pero cuya distribución de edad es la de la población de referencia.
+
+---
+# Contrastes
+
+Una combinación lineal cuyos multiplicadores `\(m\)` suman 0 se conoce como **contraste.** 
+
+--
+
+Por ejemplo...
+
+--
+
+La siguiente tabla muestra la media de los tratamientos y el tamaño de muestra de un experimento en plantas de soya que vimos en secciones pasadas. Podemos utilizar contrastes para describir los efectos del estrés en las dos cantidades de luz.
+
+&lt;table class=" lightable-classic lightable-striped" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Tratamiento &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Media del área de la hoja &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; Control, poca luz &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 245.3 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; Estrés, poca luz &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 212.9 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; Control, luz moderada &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 304.1 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; Estrés, luz moderada &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 268.8 &lt;/td&gt;
+   &lt;td style="text-align:center;min-width: 3.5cm; "&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+# Contrastes
+
+Lo primero que debemos observar es que en este caso una diferencia entre pares es lo mismo que un contraste. Por lo tanto, para medir el efecto del estrés en bajas condiciones de luz podemos considerar el contraste:
+
+$$
+L = \overline{x}_1 - \overline{x}_2 = 245.3 - 212.9 = 32.4
+$$
+
+Para este contraste, los multplicadores serán `\(m_1 = 1\)`, `\(m_2 = -1\)`, `\(m_3 = 0\)` y `\(m_4 = 0\)`. Como podemos ver, dan como resultado 0.
+
+---
+# Contrastes
+
+Para medir el efecto del estrés en condiciones del luz moderada consideramos el contraste:
+
+$$
+L = \overline{x}_3 - \overline{x}_4 = 304.1 - 268.8 = 35.3
+$$
+
+Para este contraste, los multiplicadores serán `\(m_1 = 0\)`, `\(m_2 = 0\)`, `\(m_3 = 1\)` y `\(m_4 = -1\)`. También dan como resultado 0.
+
+---
+# Contrastes
+
+Para medir el efecto general del estrés, podemos promediar lo contrastes en partes y obtener:
+
+$$
+L = \frac{1}{2}(\overline{x}_1 - \overline{x}_2) + \frac{1}{2}(\overline{x}_3 - \overline{x}_4) = 33.85
+$$
+
+Para este contraste, los multiplicadores serán `\(m_1 = \frac{1}{2}\)`, `\(m_2 = -\frac{1}{2}\)`, `\(m_3 = \frac{1}{2}\)` y `\(m_4 = -\frac{1}{2}\)`.
+
+Cada combinación lineal es un estimado, basado en `\(\overline{x}\)`, de la combinación lineal correspondiente a las medias de las poblaciones `\((\mu)\)`.
+
+---
+# Error estándar de la combinación lineal
+
+Debemos entonces considerar el error estándar de la combinación lineal, calculado de la siguiente manera:
+
+`$$SE_L = s_{p} \sqrt{\sum_{i=1}^I\frac{m_i^2}{n_i}}$$`
+
+Donde `\(s_p = \sqrt{MS(dentro)}\)` lo obtenemos de nuestro ANOVA. También podemos escribir nuestra fórmula de la siguiente manera:
+
+`$$SE_L = s_{p} \sqrt{\frac{m_1^2}{n_1} + \frac{m_2^2}{n_2} + \cdots + \frac{m_I^2}{n_I}}$$`
+
+---
+# Error estándar de la combinación lineal
+
+En caso de que `\(n_i\)` sea igual en todas las muestras, entonces:
+
+`$$SE_L = s_{p} \sqrt{\frac{m_1^2 + m_2^2 + \cdots m_I^2}{n}} = s_{p} \sqrt{\frac{1}{n}\sum_{i=1}^Im_i^2}$$`
+
+---
+# Las plantas de soya
+
+Para la combinación lineal del efecto general de los datos de las plantas de soya:
+
+$$
+\sum_{i=1}^I m_i^2 = (\frac{1}{2})^2 + (-\frac{1}{2})^2 + (\frac{1}{2})^2 + (-\frac{1}{2})^2 = 1
+$$
+
+Sabemos por la sección anterior que `\(MS(entre) = 895\)` por lo que `\(s_p = \sqrt{895} = 29.92\)`. Por lo tanto, el `\(SE_L\)`:
+
+$$
+SE_L = s_p \sqrt{\frac{1}{13}} = 29.92 \times 0.277 = 8.299
+$$
+
+---
+## Intervalo de confianza para la combinación lineal
+
+Las combinaciones lineales también se pueden utilizar en pruebas de hipótesis, con los valores críticos obtenidos a partir de la distribución `\(t\)` de Student en donde `\(df = df(dentro)\)`. Los intervalos de confianza se construyen con el error estándar de la combinación lineal.
+
+$$
+L \pm t_{\alpha/2} SE_L
+$$
+
+--
+
+Ya que sabemos que `\(L = 33.85\)`, y que `\(SE_L = 8.299\)`, lo único que necesitamos son los `\(df(dentro)\)`, que están dados en la tabla de ANOVA que hicimos en el ejercicio de las plantas de soya. Entonces `\(df(dentro) = 48\)`. Encontramos el valor crítico con la función
+
+
+```r
+#Dividimos el valor de alfa entre dos, ya que nos interesan ambas colas de la distribución
+qt(0.025, df = 48, lower.tail = F)
+```
+
+```
+## [1] 2.010635
+```
+
+---
+## Intervalo de confianza para los datos de la soya
+
+Y tenemos nuestro intervalo:
+
+`$$33.85 \pm (2.011)(8.299)$$`
+`$$33.85 \pm 16.7$$`
+
+Estamos 95% seguros de que el efecto del estrés, promediado sobre las condiciones de luz, es reducir el área de la hoja de las plantas por una cantidad que está entre `\(17.15 \space cm^2\)` y `\(50.55 \space cm^2\)`.
+
+---
+# Prueba de `\(t\)`
+
+Para una prueba de `\(t\)` se utiliza la siguiente fórmula:
+
+$$
+t_s = \frac{L}{SE_L}
+$$
+
+Y la prueba de `\(t\)` se realiza de manera usual.
+
+---
+# Efectos
+
+A parte del ANOVA de dos vías, podemos analizar las interacciones entre dos factores gracias a los contrastes lineares. Para el caso de las plantas de soya, nuestros dos factores de interés son la condición de estrés y la cantidad luz.
+
+&lt;img src="tabla2.png" width="1181" style="display: block; margin: auto;" /&gt;
+
+---
+# Efectos
+
+En cada nivel del luz, el efecto medio del estrés se puede medir como un contraste:
+
+`$$Efecto \space del \space estrés \space en \space luz \space baja: \overline{x}_2 - \overline{x}_1 = 212.9 - 245.3 = -32.4$$`
+`$$Efecto \space del \space estrés \space en \space luz \space moderada: \overline{x}_4 - \overline{x}_3 = 268.8 - 304.1 = -35.3$$`
+
+¿Es la reducción en el área de las hojas debida al estrés la misma en las dos condiciones de luz?
+
+Una forma de responder esto es comparar `\((\overline{x}_2 - \overline{x_1})\)` contra `\((\overline{x}_4 - \overline{x}_3)\)`. 
+
+`$$L = (\overline{x}_2 - \overline{x_1}) - (\overline{x}_4 - \overline{x}_3) = -32.4 - (-35.3) = 2.9$$`
+
+Este contraste se puede utilizar para realizar un intervalo de confianza o una prueba de hipótesis. Por ejemplo, para la prueba de hipótesis partimos de la idea `\(H_0: (\mu_2 - \mu_1) = (\mu_4 - \mu_3)\)`, o lo que es lo mismo `\(H_0\)`: El efecto del estrés es el mismo bajo ambas condiciones de luz. 
+
+---
+# Efectos
+Para el caso de esta contraste linear, `\(L\)`:
+
+`$$SE_L = s_p \sqrt{\sum_{i=1}^I \frac{m_i^2}{n_i}} = s_p \sqrt{\frac{4}{13}} = 29.922 \sqrt{\frac{4}{13}} = 16.6$$`
+
+Por lo que nuestro estadístico es:
+
+$$
+t_s = \frac{2.9}{16.6} = 0.2
+$$
+
+---
+# Valor de `\(t_s\)`
+
+Simplemente encontramos nuestro valor `\(t_{48,0.05}\)`.
+
+
+```r
+qt(0.05, 48, lower.tail = F)
+```
+
+```
+## [1] 1.677224
+```
+
+Como vemos nuestro `\(valor \space p = 3.34\)` muestra que no hay diferencia significativas (lo que coincide con el ANOVA de dos vías que hicimos anteriormente), por lo que el efecto del estrés es el mismo bajo ambas condiciones de luz.
+
+---
+class: inverse, middle, center
+# Pruebas post hoc
+
+---
+# Error
+Análisis detallado de las medias muestrales `\(\overline{X}_1, \overline{X}_2, \dots, \overline{X}_I\)`, considerando todas las comparaciones entre pares posibles.
+
+### Ratio de error tipo I
+
+Cuando consideramos múltiples comparaciones, podemos hablar de la oportunidad de un error tipo I para cada comparación particular. Este tipo de error I se conoce como **ratio de error tipo I en sentido de la comparación,** `\(\alpha_{cw}\)` o podemos hablar de la oportunidad de un error tipo I entre cualquiera de las comparaciones, llamado **ratio de error tipo I en sentido del experimento,** `\(\alpha_{ew}\)`.
+
+Algo que siempre se cumple es que `\(\alpha_{ew} \le k \times \alpha_{cw}\)`, donde `\(k\)` es el número de comparaciones. Por ejemplo, si se hicieran seis comparaciones con un `\(\alpha = 0.05\)`, el ratio de error tipo I en sentido del experimento sería `\(\alpha_{ew} = 6 \times 0.05 = 0.30\)`. Debido a esto, realizar múltiples pruebas de `\(t\)` es contraproducente.
+
+---
+# Diferencia menos significativa de Fisher (LSD)
+
+Se aprovecha del método de comparaciones lineales para producir interválos de confianza entre todos los pares de diferencias de las medias de la población, utilizando `\(\alpha_{cw} = \alpha\)` la razón de error tipo I utilizada en el ANOVA.
+
+Para comparar dos de nuestras observaciones, definimos `\(D_{ab} = \overline{X}_a - \overline{X}_b\)` de tal manera que tenemos un contraste lineal de la siguiente manera:
+
+$$
+d_{ab} = 1\overline{x}_a + (-1)\overline{x}_b + 0 \overline{x}_c + \cdots 0 \overline{x}_I
+$$
+
+Donde los únicos multplicadores distintos a 0 serán los del contraste que queremos realizar.
+
+---
+# Diferencia menos significativa de Fisher (LSD)
+
+Posteriormente se calcula el error estándar para esta diferencia, `\(SE_{D_{ab}} = s_p \sqrt{\sum_{i=1}^I}{\frac{m_i^2}{n_i}}\)`.
+
+Después calculamos un intervalo de confianza al 95% para la diferencia de la media poblacional de nuestro contraste. 
+
+`$$d_{ab} \pm t_{df,\alpha/2} \times SE_{D_{ab}}$$`
+
+Si nuestro intervalo de confianza no contiene 0, quiere decir que hay diferencias significativas en esta comparación.
+
+---
+# Plantas de soya
+
+Para el ANOVA de las plantas de soya que realizamos, podemos identificar los grupos con diferencias significativas. Para esto vamos a necestiar la librería `agricolae`.
+
+---
+### `LSD.test()` para condición
+
+
+```r
+library(agricolae)
+
+#Asignamos nuestro resultado a una variable.
+lsd1 &lt;- LSD.test(plantas.anova, "Condicion")
+lsd1
+```
+
+```
+## $statistics
+##    MSerror Df     Mean       CV  t.value      LSD
+##   877.6048 49 257.7885 11.49175 2.009575 16.51133
+## 
+## $parameters
+##         test p.ajusted    name.t ntr alpha
+##   Fisher-LSD      none Condicion   2  0.05
+## 
+## $means
+##             Area      std  r      LCL      UCL Min Max    Q25 Q50    Q75
+## Control 274.6923 39.95574 26 263.0170 286.3676 200 345 244.00 272 306.50
+## Estrés  240.8846 42.82180 26 229.2093 252.5599 163 326 206.75 238 271.25
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##             Area groups
+## Control 274.6923      a
+## Estrés  240.8846      b
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+---
+### `LSD.test()` para condición
+
+```r
+plot(lsd1)
+```
+
+![](clase-06-xaringan_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+
+---
+### `LSD.test()` para luz
+
+
+```r
+lsd2 &lt;- LSD.test(plantas.anova, "Luz")
+lsd2
+```
+
+```
+## $statistics
+##    MSerror Df     Mean       CV  t.value      LSD
+##   877.6048 49 257.7885 11.49175 2.009575 16.51133
+## 
+## $parameters
+##         test p.ajusted name.t ntr alpha
+##   Fisher-LSD      none    Luz   2  0.05
+## 
+## $means
+##              Area     std  r      LCL      UCL Min Max    Q25   Q50   Q75
+## Luz alta 286.4615 35.5879 26 274.7863 298.1368 201 345 268.25 284.0 311.5
+## Luz baja 229.1154 32.3720 26 217.4401 240.7907 163 288 206.75 229.5 254.5
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##              Area groups
+## Luz alta 286.4615      a
+## Luz baja 229.1154      b
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+---
+### `LSD.test()` para luz
+
+
+```r
+plot(lsd2)
+```
+
+![](clase-06-xaringan_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+
+---
+### `LSD.test()`
+
+Con la opción `$groups` podemos ver cuáles son los grupos donde hay diferencia. En el caso de la soya, hay diferencias significativas tanto para la cantidad de luz como para el nivel de estrés.
+
+
+```r
+data(PlantGrowth)
+ANOVA.PG &lt;- aov(weight ~ group, PlantGrowth)
+summary(ANOVA.PG)
+```
+
+```
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## group        2  3.766  1.8832   4.846 0.0159 *
+## Residuals   27 10.492  0.3886                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+### `LSD.test()` 
+
+Como vemos hay diferencias significativas, así que ahora vamos a realizar la prueba LSD.
+
+
+```r
+lsd3 &lt;- LSD.test(ANOVA.PG, "group")
+lsd3$groups
+```
+
+```
+##      weight groups
+## trt2  5.526      a
+## ctrl  5.032     ab
+## trt1  4.661      b
+```
+
+---
+### `LSD.test()`
+
+
+```r
+plot(lsd3)
+```
+
+![](clase-06-xaringan_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+
+---
+# Diferencia significativa honesta de Tukey (HSD)
+
+Es un método muy similar al LSD, pero en lugar de utilizar `\(t\)` en la fórmula del intervalo de confianza, valores de una distribución conocida como distribución del rango Estudentizada. Su cálculo en `R` es bastante sencillo. Veamos, de nuevo, el ejemplo con nuestros datos de las planta de soya.
+
+
+```r
+hsd1 &lt;- TukeyHSD(plantas.anova)
+hsd1
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Area ~ Condicion + Luz, data = Soya)
+## 
+## $Condicion
+##                     diff       lwr       upr     p adj
+## Estrés-Control -33.80769 -50.31902 -17.29636 0.0001479
+## 
+## $Luz
+##                        diff       lwr       upr p adj
+## Luz baja-Luz alta -57.34615 -73.85748 -40.83482     0
+```
+
+---
+# `TukeyHSD()`
+
+Para los datos de las plantas, veamos cómo obtenemos nuestros resultados.
+
+
+```r
+hsd2 &lt;- TukeyHSD(ANOVA.PG)
+hsd2
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = weight ~ group, data = PlantGrowth)
+## 
+## $group
+##             diff        lwr       upr     p adj
+## trt1-ctrl -0.371 -1.0622161 0.3202161 0.3908711
+## trt2-ctrl  0.494 -0.1972161 1.1852161 0.1979960
+## trt2-trt1  0.865  0.1737839 1.5562161 0.0120064
+```
+
+---
+# `TukeyHSD()`
+De nuevo, vemos que el valor p para la comparación entre el tratamiento 1 y 2 es significativa `\((valor \space p &lt; 0.05)\)`. Pero las diferencias entre el control con ambos tratamientos no lo son.
+
+
+```r
+library(ggiraphExtra)
+  ggHSD(hsd2) +
+    labs(y = "Diferencias en los niveles de las medias de grupo", title = "Intervalo de confianza al 95%") +
+    scale_x_discrete(labels = c("Tratamiento 1 - Tratamiento 2", "Tratamiento 2 - Control", "Tratamiento 1 - Control")) +
+    theme_classic()
+```
+
+&lt;img src="clase-06-xaringan_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
