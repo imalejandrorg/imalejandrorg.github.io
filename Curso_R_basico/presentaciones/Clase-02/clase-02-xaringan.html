@@ -4,7 +4,7 @@
     <title>Bioestadística con R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alejandro Ruiz" />
-    <meta name="date" content="2021-10-13" />
+    <meta name="date" content="2022-02-06" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 
 # Bioestadística con R
 ### Alejandro Ruiz
-### 2021-10-13
+### 2022-02-06
 
 ---
 
@@ -51,12 +51,12 @@ Denotamos a las variables con una letra mayúscula (ej. `\(X\)`) y las observaci
 ---
 # Distribuciones de frecuencia
 .panelset[
-.panel[.panel-name[Variables continuas]
+.panel[.panel-name[Variables nominales]
 Nos muestran la **frecuencia** de cada uno de los valores de nuestros datos. Normalmente esta información es presentada en un **gráfico de barras** (para datos categóricos) o un **histograma** (para datos continuos).
 
 &lt;img src="clase-02-xaringan_files/figure-html/idioma-hablantes-1.png" style="display: block; margin: auto;" /&gt;
 ]
-.panel[.panel-name[Variables categóricas]
+.panel[.panel-name[Variables ordinales]
 Para una variable categórica ordinal...
 
 &lt;img src="clase-02-xaringan_files/figure-html/clientes-semana-1.png" style="display: block; margin: auto;" /&gt;
@@ -223,7 +223,7 @@ median(c(1,2,3,4,5))
 ## [1] 3
 ```
 ]
-.panel[.panel-name[Observaciones impares]
+.panel[.panel-name[Observaciones pares]
 En caso de tener un número par de observaciones, la mediana se puede calcular como un promedio de los dos valores centrales.
 
 $$

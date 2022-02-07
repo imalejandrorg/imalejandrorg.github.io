@@ -45,7 +45,7 @@ style_mono_accent(
 
 ---
 # Antes de comenzar...
-Puedes encontrar los archivos necesarios para este módulo en ["este enlace."](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Curso_R_basico/presentaciones/Clase-01/Recursos)
+Puedes encontrar los archivos necesarios para este módulo en [este enlace.](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Curso_R_basico/presentaciones/Clase-01/Recursos)
 
 ---
 # Interfaz
