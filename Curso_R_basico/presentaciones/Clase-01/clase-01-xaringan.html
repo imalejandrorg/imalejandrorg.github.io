@@ -4,7 +4,7 @@
     <title>Bioestadística con R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alejandro Ruiz" />
-    <meta name="date" content="2021-10-09" />
+    <meta name="date" content="2022-02-06" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Bioestadística con R
 ### Alejandro Ruiz
-### 2021-10-09
+### 2022-02-06
 
 ---
 
@@ -26,6 +26,10 @@ class: inverse, middle, center
 
 
 # Introducción a R y RStudio
+
+---
+# Antes de comenzar...
+Puedes encontrar los archivos necesarios para este módulo en ["este enlace."](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Curso_R_basico/presentaciones/Clase-01/Recursos)
 
 ---
 # Interfaz
@@ -156,6 +160,18 @@ Para llamar a un paquete...
 library(vegan)
 ```
 
+```
+## Loading required package: permute
+```
+
+```
+## Loading required package: lattice
+```
+
+```
+## This is vegan 2.5-7
+```
+
 ---
 # Instalar paquetes
 
@@ -186,12 +202,12 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
 
 # Importar datos
 
-<div id="pmsyqtrusq" style="overflow-x:auto;overflow-y:auto;width:100%;height:55%;">
+<div id="bxpwsvmjqo" style="overflow-x:auto;overflow-y:auto;width:100%;height:55%;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#pmsyqtrusq .gt_table {
+#bxpwsvmjqo .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -216,7 +232,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-left-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_heading {
+#bxpwsvmjqo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -228,7 +244,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-right-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_title {
+#bxpwsvmjqo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -238,7 +254,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-bottom-width: 0;
 }
 
-#pmsyqtrusq .gt_subtitle {
+#bxpwsvmjqo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -248,13 +264,13 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-top-width: 0;
 }
 
-#pmsyqtrusq .gt_bottom_border {
+#bxpwsvmjqo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_col_headings {
+#bxpwsvmjqo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -269,7 +285,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-right-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_col_heading {
+#bxpwsvmjqo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -289,7 +305,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   overflow-x: hidden;
 }
 
-#pmsyqtrusq .gt_column_spanner_outer {
+#bxpwsvmjqo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -301,15 +317,15 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   padding-right: 4px;
 }
 
-#pmsyqtrusq .gt_column_spanner_outer:first-child {
+#bxpwsvmjqo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pmsyqtrusq .gt_column_spanner_outer:last-child {
+#bxpwsvmjqo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pmsyqtrusq .gt_column_spanner {
+#bxpwsvmjqo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -321,7 +337,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   width: 100%;
 }
 
-#pmsyqtrusq .gt_group_heading {
+#bxpwsvmjqo .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -343,7 +359,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   vertical-align: middle;
 }
 
-#pmsyqtrusq .gt_empty_group_heading {
+#bxpwsvmjqo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -358,15 +374,15 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   vertical-align: middle;
 }
 
-#pmsyqtrusq .gt_from_md > :first-child {
+#bxpwsvmjqo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pmsyqtrusq .gt_from_md > :last-child {
+#bxpwsvmjqo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pmsyqtrusq .gt_row {
+#bxpwsvmjqo .gt_row {
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 5px;
@@ -385,7 +401,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   overflow-x: hidden;
 }
 
-#pmsyqtrusq .gt_stub {
+#bxpwsvmjqo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -397,7 +413,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   padding-left: 12px;
 }
 
-#pmsyqtrusq .gt_summary_row {
+#bxpwsvmjqo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -407,7 +423,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   padding-right: 5px;
 }
 
-#pmsyqtrusq .gt_first_summary_row {
+#bxpwsvmjqo .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -417,7 +433,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-top-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_grand_summary_row {
+#bxpwsvmjqo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -427,7 +443,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   padding-right: 5px;
 }
 
-#pmsyqtrusq .gt_first_grand_summary_row {
+#bxpwsvmjqo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -437,11 +453,11 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-top-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_striped {
+#bxpwsvmjqo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pmsyqtrusq .gt_table_body {
+#bxpwsvmjqo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -450,7 +466,7 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-bottom-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_footnotes {
+#bxpwsvmjqo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -464,13 +480,13 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-right-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_footnote {
+#bxpwsvmjqo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#pmsyqtrusq .gt_sourcenotes {
+#bxpwsvmjqo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -484,41 +500,41 @@ Aves &lt;- read.table("O:/Tesis/R/Webpage/imalejandrorg.github.io/Curso_R_basico
   border-right-color: #D3D3D3;
 }
 
-#pmsyqtrusq .gt_sourcenote {
+#bxpwsvmjqo .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#pmsyqtrusq .gt_left {
+#bxpwsvmjqo .gt_left {
   text-align: left;
 }
 
-#pmsyqtrusq .gt_center {
+#bxpwsvmjqo .gt_center {
   text-align: center;
 }
 
-#pmsyqtrusq .gt_right {
+#bxpwsvmjqo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pmsyqtrusq .gt_font_normal {
+#bxpwsvmjqo .gt_font_normal {
   font-weight: normal;
 }
 
-#pmsyqtrusq .gt_font_bold {
+#bxpwsvmjqo .gt_font_bold {
   font-weight: bold;
 }
 
-#pmsyqtrusq .gt_font_italic {
+#bxpwsvmjqo .gt_font_italic {
   font-style: italic;
 }
 
-#pmsyqtrusq .gt_super {
+#bxpwsvmjqo .gt_super {
   font-size: 65%;
 }
 
-#pmsyqtrusq .gt_footnote_marks {
+#bxpwsvmjqo .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

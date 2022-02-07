@@ -44,6 +44,10 @@ style_mono_accent(
 # Introducción a R y RStudio
 
 ---
+# Antes de comenzar...
+Puedes encontrar los archivos necesarios para este módulo en ["este enlace."](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Curso_R_basico/presentaciones/Clase-01/Recursos)
+
+---
 # Interfaz
 R Studio cuenta con **4 ventanas esenciales:**
 
