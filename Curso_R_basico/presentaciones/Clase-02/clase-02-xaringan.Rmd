@@ -612,7 +612,7 @@ ggplot(data = PlantGrowth) +
 ---
 class: middle, center, inverse
 
-# La librería `dplyr`
+# La librería dplyr
 
 ---
 
