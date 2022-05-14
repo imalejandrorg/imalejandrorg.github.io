@@ -1,0 +1,183 @@
+---
+title: "**Lección 2:** Estadística descriptiva"
+author: "Bioestadística con R"
+header-includes:
+  - \usepackage{amsmath}
+output:
+  pdf_document:
+    toc: no
+    toc_depth: '4'
+    df_print: kable
+    fig_caption: yes
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Ejercicios
+
+**Ejercicio 1:** Un botánico hizo crecer 15 pimientos en el mismo invernadero y manteniendo las condiciones de cada pimiento constantes durante 21 días. Una vez transcurridos los 21 días, ella midió la longitud total del tallo (cm) de cada planta, y obtuvo los siguientes resultados:
+
+\begin{equation*}
+  \begin{matrix}
+  12.4 & 10.9 & 11.8 & 14.1 & 12.6 \\
+  12.2 & 12.2 & 13.5 & 12.7 & 11.9 \\
+  13.4 & 12.1 & 12.0 & 13.2 & 13.1 
+  \end{matrix}
+\end{equation*}
+
+A partir de estos valores calcular:
+
+* Calcular la media y mediana.
+* Calcular el rango, la desviación estándar y la varianza.
+* Calcular los tres cuartiles.
+* Calcular el límite superior e inferior de los valores atípicos.
+
+* *Actividad extra:* Realizar un gráfico de cajas utilizando `ggplot2`. 
+
+**Ejercicio 2:** Un genetista contó el número de cerdas en una región del abdomen de la mosca *Drosophila melanogaster*. El resultado de 119 individuos fue el siguiente:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+cerdas1 <- c(29, 30, 31, 32, 33, 34, 35, 36, 37)
+individuos1 <- c(1, 0, 1, 2, 2, 6, 9, 11, 12)
+cerdas2 <- c(38, 39, 40, 41, 42, 43, 44, 45, 46)
+individuos2 <- c(18, 13, 10, 15, 10, 2, 2, 3, 2)
+
+ej2 <- data.frame(cerdas1, individuos1, cerdas2, individuos2)
+column_names <- c("Cerdas", "Individuos", "Cerdas", "Individuos")
+ej2 %>% knitr::kable(booktabs = T, col.names = column_names) %>% kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8)
+```
+
+Con base en estos resultados calcular:
+
+* Media del número de cerdas.
+* La desviación estándar de la muestra.
+* ¿Cuál es el coeficiente de variación?
+
+* *Actividad extra:* Realizar un gráfico de cajas utilizando `ggplot2`. 
+
+**Ejercicio 3:** Científicos midieron la concentración de calcio (nM) en la sangre de muestras de 38 personas. Los datos son los siguientes:
+
+\begin{equation*}
+  \begin{matrix}
+  95 & 110 & 135 & 120 & 88 & 125 \\
+  112 & 100 & 130 & 107 & 86 & 130 \\
+  122 & 122 & 127 & 107 & 107 & 107 \\
+  126 & 125 & 112 & 78 & 115 & 78 \\
+  102 & 103 & 93 & 88 & 110 & 104 \\
+  122 & 112 & 80 & 121 & 126 & 90 \\
+  96 & 88
+  \end{matrix}
+\end{equation*}
+
+Con base en estos datos:
+
+* Calcular medidas de tendencia central y dispersión.
+* Describir la forma de la distribución.
+
+* *Actividad extra:* Realizar un gráfico de cajas utilizando `ggplot2`. 
+
+## Soluciones
+
+**Ejercicio 1:**
+Primero creamos un vector con nuestros datos:
+```{r}
+ej1 <- c(12.4, 10.9, 11.8, 14.1, 12.6,
+         12.2, 12.2, 13.5, 12.7, 11.9,
+         13.4, 12.1, 12.0, 13.2, 13.1)
+```
+
+Una vez que tenemos nuestro vector, podemos calcular la media y la mediana con las funciones `mean()` y `median()`:
+
+```{r}
+mean(ej1)
+median(ej1)
+```
+
+Para el rango, podemos utilizar las funciones `max()` y `min()`, así como la función `range()` para conocer el valor mínimo y máximo.
+
+```{r}
+range(ej1)
+max(ej1) - min(ej1)
+```
+
+Los cuartiles podemos calcularos usando la función `summary()`:
+
+```{r}
+summary(ej1)
+```
+
+Para el rango intercuartil, utilizamos el valor del 1er y 3er cuartil:
+
+```{r}
+13.15 + 1.5 * (max(ej1) - min(ej1))
+12.05 - 1.5 * (max(ej1) - min(ej1))
+```
+
+**Ejercicio 2:**
+Creamos un vector con los valores de las cerdas. Nos apoyamos de la función `rep()` para el número de individuos:
+```{r}
+ej2 <- c(29, 31, rep(32, 2), rep(33, 2), rep(34, 6), rep(35, 9), rep(36, 11),
+         rep(37, 12), rep(38, 18), rep(39, 13), rep(40, 10), rep(41, 15), rep(42, 10),
+         rep(43, 2), rep(44, 2), rep(45, 3), rep(46, 2))
+```
+
+Con este nuevo vector, podemos hacer el calculo de nuestra media y desviación estándar:
+```{r}
+mean(ej2)
+sd(ej2)
+```
+
+Para calcular el coeficiente de variación, sacamos la desviación estándar, la dividimos entre la media y multiplicamos por 100:
+```{r}
+sd(ej2)/mean(ej2)*100
+```
+
+**Ejercicio 3:**
+Primero creamos nuestro vector con los datos:
+```{r}
+ej3 <- c(95, 110, 135, 120, 88, 125, 112, 100, 130, 107, 86, 130, 122, 122, 
+         127, 107, 107, 107, 88, 126, 125, 112, 78, 115, 78, 102, 103, 93, 
+         88, 110, 104, 122, 112, 80, 121, 126, 90, 96)
+```
+
+
+Posteriormente calculamos las medidas de tendencia central (media y mediana):
+```{r}
+mean(ej3)
+median(ej3)
+```
+
+Ahora calculamos las medidas de dispersión (rango, desviación estándar y varianza):
+```{r}
+max(ej3) - min(ej3)
+sd(ej3)
+sd(ej3)^2
+```
+
+Para visualizar la distribución, podemos generar un histograma de manera rápida:
+```{r}
+hist(ej3)
+```
+
+**Actividades extra:**
+Primero necesitamos cargar la librería `ggplot2`.
+```{r}
+library(ggplot2)
+```
+
+Realizaremos el gráfico de caja del primer ejercicio:
+```{r, fig.width=3, fig.height = 6, fig.align='center'}
+ggplot(mapping = aes(y = ej1, x = "")) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(fill = "lightblue") +
+  theme_bw() +
+  labs(x = "", y = "Altura (cm)")
+```
+
+Para el resto de ejercicios podemos utilizar el mismo código, cambiando el nombre de la variable a utilizar.
+

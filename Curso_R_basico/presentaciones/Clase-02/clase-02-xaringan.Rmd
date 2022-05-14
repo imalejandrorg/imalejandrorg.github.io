@@ -583,7 +583,10 @@ A partir de estos datos podemos construir un **gráfico de cajas.**
 Son aquellos valores que se encuentran por encima o debajo de un umbral establecido por la siguientes formulas:
 
 $$
-Q_3 + 1.5 \times IQR \\
+Q_3 + 1.5 \times IQR
+$$
+
+$$
 Q_1 - 1.5 \times IQR
 $$
 
