@@ -756,7 +756,7 @@ $$
 $$
 
 ---
-# # Acerca de las columnas y las filas
+# Acerca de las columnas y las filas
 
 Si $a$, $b$, $c$ y $d$ son números positivos, entonces...
 
@@ -1036,7 +1036,7 @@ Hay dos casos que corresponden a una respuesta *sí/sí* y 77 casos que correspo
 Tenemos a su vez 17 casos *sí/no* y 18 *no/sí.* Estos se conocen como **pares discordantes** y nos ayudan a  determinar si la infección por VIH ocurre con mayor frecuencia en uno de los dos casos (hijos mayores vs menores).
 
 ---
-# Hipótesis {.build}
+# Hipótesis
 
 Por lo tanto, nuestra $H_0:$ la probabilidad de infección por VIH es la misma para hijos mayores y menores.
 

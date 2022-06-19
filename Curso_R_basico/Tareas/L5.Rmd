@@ -1,0 +1,53 @@
+---
+title: "**Lección 5:** Inferencias de datos categóricos"
+author: "Bioestadística con R"
+header-includes:
+  - \usepackage{amsmath}
+output:
+  pdf_document:
+    toc: no
+    toc_depth: '4'
+    df_print: kable
+    fig_caption: yes
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = "")
+```
+## Ejercicios
+
+**Ejercicio 1:** ¿Puede el ataque de un organismo inducir resistencia a ataques subsecuentes por otro organismo distinto? En un estudio, individuos de la planta de algodón (*Gossypium*) fueron alocadas de manera aleatoria a dos grupos. Cada planta de un grupo recibió una infestación por ácaros araña roja (*Tetranychus*); el otro grupo se mantuvo como control. Después de 2 semanas, los ácaros fueron removidos y todas las plantas fueron inoculadas con *Verticillium*, un hongo que causa marchitez. La siguiente tabla muestra el número de plantas que desarrollaron síntomas de la marchitez.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+ej1 <- matrix(c(11, 17, 15, 4), ncol = 2, byrow = T)
+colnames(ej1) <- c("Ácaros", "Sin ácaros")
+rownames(ej1) <- c("Marchitez", "Sin marchitez")
+ej1
+```
+Nuestra hipótesis es $H_0:$ Infección por termitas no induce resistencia, mientras que nuestra hipótesis alternativa sería $H_A:$ Infección por termitas induce resistencia. Otra forma de representar nuestra hipótesis es en probabilidades, es decir, $H_0:$ P(Resistencia | Termitas) = P(Resistencia | No termitas), por lo que nuestra hipótesis alternativa sería $H_A:$ P(Resistencia | Termitas) $\ne$ P(Resistencia | No termitas).
+
+* Realizar una prueba de Chi-cuadrada direccional con un $\alpha = 0.01$. 
+
+
+## Soluciones
+
+**Ejercicio 1:** Para este caso vamos a crear una **tabla de contingencia,** es decir, un objeto tipo `matrix` y hacer uso de la función `chisq.test()`.
+
+```{r}
+ej1 <- matrix(c(11, 17, 15, 4), ncol = 2, byrow = T)
+colnames(ej1) <- c("Ácaros", "Sin ácaros")
+rownames(ej1) <- c("Marchitez", "Sin marchitez")
+ej1
+```
+
+Una vez que tenemos nuestra matriz, podemos proceder a usar la función `chisq.test()`. Como nuestra hipótesis es direccional, vamos a dividir el resultado entre 2.
+```{r}
+chisq.test(ej1, correct = F)$p.value / 2 
+```
+
+Vemos que nuestro valor-p = 0.0036, por lo que con nuestro $\alpha = 0.01$ podemos rechazar la hipótesis nula $H_0:$ P(Resistencia | Termitas) = (Resistencia | No termitas), y decir que los datos tienen suficiente evidencia para aceptar la hipótesis alternativa $H_A:$ P(Resistencia | Termitas) $\ne$ P(Resistencia | No termitas).

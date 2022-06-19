@@ -1,0 +1,86 @@
+---
+title: "**Lección 4:** Estadística inferencial"
+author: "Bioestadística con R"
+header-includes:
+  - \usepackage{amsmath}
+output:
+  pdf_document:
+    toc: no
+    toc_depth: '4'
+    df_print: kable
+    fig_caption: yes
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Ejercicios
+
+**Ejercicio 1:** En un estudio, se midió el desarrollo del timo. Los investigadores pesaron 10 embriones de gallinas. Cinco de los embriones se incubaron durante 14 días y otros cinco se incubaron 15 días. Los pesos fueron los siguientes:
+
+```{r echo=FALSE}
+var1 <- c(29.6, 21.5, 28.0, 34.6, 44.9)
+var2 <- c(32.7, 40.3, 23.7, 25.2, 24.2)
+Ej1 <- data.frame(var1, var2)
+kbl(Ej1, booktabs = T, col.names = c("14 días", "15 días"), caption = "Pesos de las gallinas (en g)") %>% kable_styling(latex_options = c("hold_position"))
+```
+
+* Obtener la media ($\bar{x}$) y desviación estándar ($s$).
+* Realizar una prueba de $t$ para comprar las medias, con un $\alpha = 0.10$.
+* ¿Existen diferencias estadísitcamente significativas entre los dos grupos?
+
+**Ejercicio 2:** La siguiente tabla muestra el número de colonias de bacterias presentes en distintos platos de Petri después de haber sido inoculados con *E. coli* e incubados por 24 horas. El tratamiento "jabón" son aquellos que contienen una solución basada en jabón, mientras que "control" son aquellos que contienen agua destilada.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+options(knitr.kable.NA = "")
+var3 <- c(30, 36, 66, 21, 63, 38, 35, 45)
+var4 <- c(76, 27, 16, 30, 26, 46, 6, NA)
+Ej2 <- data.frame(var3, var4)
+kbl(Ej2, booktabs = T, col.names = c("Control", "Jabón"), caption = "Colonias de E. coli") %>% kable_styling(latex_options = c("hold_position"))
+```
+ 
+* Realizar una prueba de $t$ con un $\alpha = 0.05$.
+
+## Soluciones
+
+**Ejercicio 1:** Para este ejercicio utilizaremos la función `t.test()`. Primero necesitamos crear un data frame con nuestros datos.
+
+```{r}
+days <- c(rep("14d", 5), rep("15d", 5))
+peso <- c(29.6, 21.5, 28.0, 34.6, 44.9, 32.7, 40.3, 23.7, 25.2, 24.2)
+ej1 <- data.frame(days, peso)
+ej1
+```
+
+Es *muy importante* que tengamos 2 columnas, una con nuestro grupo y otra con el peso. Posterior a esto podemos calcular la media. Para esto vamos a echarnos una manita con la librería `dplyr`. Llamaremos a nuestra variable `desc`, porque son nuestros estadísticos descriptivos.
+
+```{r}
+library(dplyr)
+desc <- ej1 %>% group_by(days) %>% summarise(media = mean(peso), sd = sd(peso))
+desc
+```
+
+Podemos ahora utilizar la función `t.test()` y obtener nuestro resultado. Sin embargo, como nuestro $\alpha = 0.10$ necesitamos añadir el argumento `conf.level` para indicar que queremos un nivel de confianza del 0.9.
+```{r}
+t.test(peso ~ days, ej1, conf.level = 0.9)
+```
+
+Como podemos ver en este caso, no existe suficiente información para rechazar la hipótesis nula ($H_0:\mu_1 = \mu_2$), por lo que decimos que se acepta.
+
+**Ejercicio 2:** Simplemente utilizamos la función `t.test()`, sin agregar el argumento `conf.level`.
+
+```{r}
+tratamiento <- c(rep("control", 8), rep("jabon", 7))
+colonias <- c(30, 36, 66, 21, 63, 38, 35, 45, 76, 27, 16, 30, 26, 46, 6)
+ej2 <- data.frame(tratamiento, colonias)
+ej2
+```
+
+Ahora que tenemos nuestros datos, simplemente hacemos una prueba de $t$ usando la función `t.test()`.
+```{r}
+t.test(colonias ~ tratamiento, ej2)
+```

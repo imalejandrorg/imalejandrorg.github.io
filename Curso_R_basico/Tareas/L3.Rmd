@@ -1,0 +1,91 @@
+---
+title: "**Lección 3:** Probabilidad"
+author: "Bioestadística con R"
+header-includes:
+  - \usepackage{amsmath}
+output:
+  pdf_document:
+    toc: no
+    toc_depth: '4'
+    df_print: kable
+    fig_caption: yes
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Ejercicios
+
+**Ejercicio 1:** En Estados Unidos, cerca del 44% de la población tiene sangre de tipo A. Considera que se toma una muestra de 4 personas y que $Y$ representa el número de personas con sangre tipo A. Encuentra:
+
+* $P(Y = 0)$
+* $P(Y = 1)$
+* $P(Y = 2)$
+* $P(0 \le Y \le 2)$
+* $P(0 < Y \le 2)$
+
+**Ejercicio 2:** Los pesos del cerebro de una población se distribuye de manera normal, con una media de 1,400 g y una desviación estándar de 100 g. Con base en esto, calcular qué porcentajes de los cerebros:
+
+* Pesan 1,500 g o menos.
+* Pesan entre 1,325 y 1,500 g.
+* Pesan 1,325 g o más.
+* Pesan 1,475 g o más.
+* Pesan entre 1,475 g y 1,600 g.
+* Pesan entre 1,200 y 1,325 g.
+
+## Soluciones
+
+**Ejercicio 1:**
+En este caso, lo primero que queremos es calcular la probabilidad de que ninguna muestra de sangre sea de tipo A. Para esto utilizamos la función `dbinom()` que nos da un valor exacto de nuestra distribución binomial:
+```{r}
+dbinom(0, 4, 0.44)
+```
+
+Por esto, sabemos que es muy poco probable que no obtengamos ningún tipo de sangre A, ya que $P(Y=0)=0.0983$. Para los siguientes dos puntos debemos de repetir el mismo proceso:
+```{r}
+dbinom(1, 4, 0.44)
+```
+
+Por lo que obtener una muestra con tipo de sangre tipo A es $P(Y=1)=0.3091$.
+```{r}
+dbinom(2, 4, 0.44)
+```
+
+Esto quiere decir que $P(Y=2)=0.3643$. Para los útlimos dos puntos debemos utilizar otra función. Primero queremos saber la probabilidad de que obtengamos 0, 1 o 2 personas positivas para tipo de sangre A ($P(0\le Y\le 2)$), por lo que en realidad queremos saber la probabilidad acumulada desde 0 hasta 2:
+```{r}
+pbinom(2, 4, 0.44)
+```
+
+Por ende, $P(0 \le Y \le 2) = 0.7717$. Para el último caso, queremos saber la probabilidad de que las muestras sean mayores a 0 e iguales o menores a 2, es decir, queremos conocer la probabilidad acumulada de 1 y 2:
+```{r}
+pbinom(2, 4, 0.44) - dbinom(0, 4, 0.44)
+```
+
+**Ejercicio 2:** En este caso, para el primer punto necesitamos utilizar la función `pnorm()`:
+```{r}
+pnorm(1500, 1400, 100, lower.tail = T)
+```
+Así vemos que la probabilidad acumulada es de 0.84. Para el punto 2, necesitamos encontrar la probabilidad entre dos puntos:
+```{r}
+pnorm(1500, 1400, 100, lower.tail = T) - pnorm(1325, 1400, 100, lower.tail = T)
+```
+
+Para el caso de 1,325 g y 1,425 g o más, simplemente cambiamos el argumento `lower.tail` a `FALSE` o `F`:
+```{r}
+pnorm(1325, 1400, 100, lower.tail = F)
+pnorm(1475, 1400, 100, lower.tail = F)
+```
+
+Y para los últimos dos puntos, es bastante similar al punto 2:
+```{r}
+pnorm(1600, 1400, 100, lower.tail = T) - pnorm(1475, 1400, 100, lower.tail = T)
+pnorm(1325, 1400, 100, lower.tail = T) - pnorm(1200, 1400, 100, lower.tail = T)
+```
+
+
+
+
