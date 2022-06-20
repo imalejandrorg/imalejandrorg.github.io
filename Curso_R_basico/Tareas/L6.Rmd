@@ -21,8 +21,121 @@ options(knitr.kable.NA = "")
 ```
 ## Ejercicios
 
-**Ejercicio 1:** 
+**Ejercicio 1:** La beta endorfina humana (HBE) es una hormona secretada por la glándula pituitaria bajo condiciones de estrés. Un fisiólogo mide la concentración de HBE en estado de reposo de tres grupos de personas: 15 que acaban de inscribirse en un programa de ejercicio, 11 que corre de manera regular y 10 personas sedentarias. Los niveles de HBE (pg/ml) se muestran en la siguiente tabla.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+info <- c("Media", "SD", "n")
+var1 <- c(38.7, 16.1, 15)
+var2 <- c(35.7, 13.4, 11)
+var3 <- c(42.5, 12.8, 10)
+Ej1 <- data.frame(info, var1, var2, var3)
+kbl(Ej1, booktabs = T, col.names = c("", "Programa de ejercicio", "Corredores", "Sedentarios"), caption = "Concentración de HBE (pg/ml)") %>% kable_styling(latex_options = c("hold_position"))
+```
+
+A partir de esta información:
+
+* Escribir una hipótesis nula dado el contexto de los datos.
+* Representar la hipótesis nula como una fórmula matemática.
+* Realizar un ANOVA y probar la hipótesis nula con un $\alpha = 0.05$.1
+
+**Ejercicio 2:** El volumen espiratorio forzado (FEV) es una medida del ritmo de flujo de aire (L/min) durante una exhalación profunda. A 75 estudiantes se les midió el FEV tres veces y esos resultados fueron promediados y mostrados en la siguiente tabla. Algunos de los estudiantes pertenecían al club de fútbol de la Universidad. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+var2.1 <- c(396, 14)
+var2.2 <- c(472, 17)
+var2.3 <- c(560, 20)
+var2.4 <- c(653, 24)
+info <- c("Media", "SD")
+Ej2 <- data.frame(info, var2.1, var2.2, var2.3, var2.4)
+kbl(Ej2, booktabs = T, col.names = c("", "Mujer, no fútbol", "Mujer, fútbol", "Hombre, no fútbol", "Hombre, fútbol"), caption = "Media de FEV en L/min") %>% kable_styling(latex_options = c("hold_position"))
+```
+
+* Realizar un ANOVA de dos vías de estos datos.
+* *Actividad extra:* Realizar un gráfico de interacciones con `ggplot2`.
+
 
 ## Soluciones
 
-**Ejercicio 1:** 
+**Ejercicio 1:** Lo primero sería establecer nuestra hipótesis nula, que podría quedar de la siguiente manera $H_0:$ Los valores medios de los niveles de la concentración de HBE de los tres grupos de personas es igual.
+
+Para representar esto de manera matemática, lo que decimos es que las medias de los tres grupos son iguales, por ende, $H_0: \mu_{programa} = \mu_{corredor} = \mu_{sedentario}$. De igual manera, la hipótesis alternativa sería que realmente sí existen diferencias en al menos uno de los grupos, por ende, $H_A: \mu_{programa} \ne \mu_{corredor} \ne \mu_{sedentario}$.
+
+Con esto tenemos los primeros dos puntos resueltos, ahora tenemos que realizar el ANOVA. Primero, como se nos dieron valores medios y desviaciones estándares, debemos generar números aleatorios que correspondan a dichos valores. Para eso utilizamos la función `rnorm()` con los argumentos `mean`, `sd` y `n`.
+
+```{r}
+set.seed(2023) # Creamos una semilla para trabajar siempre con los mismos números aleatorios.
+programa <- rnorm(n = 15, mean = 38.7, sd = 16.1)
+corredor <- rnorm(n = 11, mean = 35.7, sd = 13.4)
+sedentario <- rnorm(n = 10, mean = 42.5, sd = 12.8)
+ej1 <- data.frame(HBE = c(programa, corredor, sedentario),
+                    Grupo = factor(rep(c("Programa", "Corredor", "Sedentario"),
+                                       times = c(length(programa),
+                                                 length(corredor),
+                                                 length(sedentario)))))
+```
+
+Ahora sí, podemos calcular nuestro ANOVA con la función `aov()`.
+```{r}
+ANOVA.ej1 <- aov(HBE ~ Grupo, ej1)
+ANOVA.ej1
+```
+
+Para ver un resumen de nuestros datos utilizamos la función `summary()`.
+```{r}
+summary(ANOVA.ej1)
+```
+
+**Ejercicio 2:** En este caso, lo primero es generar los datos.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+mujer.nof <- rnorm(n = 14, mean = 396)
+mujer.f <- rnorm(n = 17, mean = 472)
+hombre.nof <- rnorm(n = 20, mean = 560)
+hombre.f <- rnorm(n = 24, mean = 653)
+ej2 <- data.frame(FEV = c(mujer.nof, mujer.f, hombre.nof, hombre.f),
+                  Sexo = factor(c(rep("Mujer", length(mujer.nof)),
+                                  rep(("Mujer"), length(mujer.f)),
+                               rep("Hombre", length(hombre.nof)),
+                               rep(("Hombre"), length(hombre.f)))),
+                  Condicion = factor(c(rep("No futbol", length(mujer.nof)),
+                                       rep(("Futbol"), length(mujer.f)), 
+                                    rep(("No futbol"), length(hombre.nof)),
+                                    rep(("Futbol"), length(hombre.f)))))
+```
+
+Aunque el código de arriba se ve terrorífico, en realidad son cosas muy sencillas, **¡Pero cuidado con los paréntesis!** Ahora podemos realizar nuestro ANOVA de dos vías.
+```{r}
+ANOVA.ej2 <- aov(FEV ~ Sexo + Condicion, ej2)
+ANOVA.ej2
+```
+
+Utilizamos la función `summary()` para ver el resumen de nuestros resultados y nuestra tabla de ANOVA.
+```{r}
+summary(ANOVA.ej2)
+```
+
+**Actividad extra:** Para el gráfico de interacción del ejercicio 2 vamos a necesitar de la librería de `ggplot2` y `dplyr`.
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+Ahora obtenemos la media de cada uno de nuestros grupos, por sexo y por condición.
+```{r}
+Sexo <- factor(c("Mujer", "Mujer", "Hombre", "Hombre"))
+Condicion <- factor(c("No fútbol", "Fútbol", "No fútbol", "Fútbol"))
+FEV <- c(396, 472, 560, 653)
+ej2.grafico <- data.frame(Sexo, Condicion, FEV)
+```
+
+Ahora podemos utilizar `ggplot2` para nuestro gráfico. Utilizaremos dos geometrías, `geom_line` y `geom_dotplot`.
+```{r}
+ggplot(ej2.grafico, aes(x = Condicion, y = FEV, fill = Sexo)) +
+  geom_line(aes(group = Sexo)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 15) +
+  scale_y_continuous(limits = c(0,700), breaks = seq(0, 700, by = 100)) +
+  labs(x = "", y = "Volumen espiratorio forzado (FEV) (L/min)") +
+  theme_classic()
+```
+
+En este caso vemos que el valor del FEV es independiente del sexo, pues en el gráfico de interacción estos valores no se cruzan.
