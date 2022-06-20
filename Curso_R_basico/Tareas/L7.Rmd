@@ -21,8 +21,67 @@ options(knitr.kable.NA = "")
 ```
 ## Ejercicios
 
-**Ejercicio 1:** 
+**Ejercicio 1:** En un estudio de la síntesis de proteína en el oocito de la rana *Xenopus laevis*, un biólogo inyectó oocitos con leucina marcada radiactivamente. En distintos tiempos tras la inyección, hizo las mediciones de radioactividad y calculó cuánto de la leucina había sido incorporada a proteínas. Los resultados son los siguientes. Cada valor de leucina es la cantidad de leucina marcada en dos oocitos. Todos los oocitos fueron de la misma hembra.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+tiempo <- c(0, 10, 20, 30, 40, 50, 60)
+leucina <- c(0.02, 0.25, 0.54, 0.69, 1.07, 1.50, 1.74)
+ej1 <- data.frame(Tiempo = tiempo, Leucina = leucina)
+kbl(ej1, booktabs = T, col.names = c("Tiempo (min)", "Leucina")) %>% kable_styling(latex_options = c("hold_position"))
+```
+
+A partir de estos datos:
+
+* Hacer un gráfico de dispersión donde se muestre la relación entre el tiempo y la cantidad de leucina.
+* Hacer una regresión lineal para estimar el ritmo al que se incorpora la leucina.
+* Obtener el error estándar de los residuales.
+* Calcular el coeficiente de correlación.
+* *Actividad extra:* Realizar una interpolación para estimar el valor esperado pasado 45 minutos.
+* *Actividad extra:* Calcular los residuales.
 
 ## Soluciones
 
-**Ejercicio 1:** 
+**Ejercicio 1:** Primero vamos a realizar el gráfico de nuestra relación entre las dos variables, para esto vamos a utilizar `ggplot2`.
+```{r}
+# Cargamos nuestros datos
+tiempo <- c(0, 10, 20, 30, 40, 50, 60)
+leucina <- c(0.02, 0.25, 0.54, 0.69, 1.07, 1.50, 1.74)
+ej1 <- data.frame(Tiempo = tiempo, Leucina = leucina)
+
+# Realizamos el gráfico
+ggplot(ej1, aes(x = Tiempo, y = Leucina)) +
+  geom_point(size = 1.5) +
+  labs(x = "Tiempo", y = "Leucina") +
+  geom_smooth(method = "lm", se = F, color = "black", size = 0.8) +
+  theme_classic() +
+  theme(aspect.ratio = 1)
+```
+
+Como podemos ver, parece que existe una relación lineal en cuanto al tiempo y la cantidad de leucina. Vamos a generar un modelo lineal para corroborar esto.
+```{r}
+ej1.lm <- lm(Leucina ~ Tiempo, ej1)
+summary(ej1.lm)
+```
+El ritmo de incorporación viene dado por el valor de la pendiente $b_1$, que en este caso corresponde a 0.2925 como se pueden observar en los resultados de nuestro modelo lineal.
+
+También podemos observar el error estándar de nuestros residuales cuando tenemos $df = 5$, que corresponde a $s_e$. En este caso vale 0.0839. Por último calculamos el coeficiente de correlación.
+```{r}
+cor.test(ej1$Tiempo, ej1$Leucina)
+```
+
+Como podemos ver, el valor de nuestra correlación es de 0.9927, un valor casi perfecto y positivo. Esto quiere decir que conforme aumenta el tiempo aumenta el nivel de leucina, al menos con los datos observados, siguiendo un patrón lineal.
+
+**Actividad extra:** Para calcular el valor estimado pasado 45 minutos, es decir, entre los valores conocidos de 40 y 50, necesitamos realizar una *interpolación.* Para esto utilizamos la función `approx()`, con el argumento `xout` para indicar qué valor es el que queremos calcular.
+```{r}
+approx(ej1$Tiempo, ej1$Leucina, xout = 45)
+```
+
+El valor aproximado pasados 45 minutos es de 1.285.
+
+Para calcular los residuales utilizamos la función `residuals()`, que nos dará los residuales de cada uno de nuestros puntos.
+```{r}
+residuals(ej1.lm)
+```
+
+
+

@@ -122,15 +122,13 @@ library(dplyr)
 
 Ahora obtenemos la media de cada uno de nuestros grupos, por sexo y por condición.
 ```{r}
-Sexo <- factor(c("Mujer", "Mujer", "Hombre", "Hombre"))
-Condicion <- factor(c("No fútbol", "Fútbol", "No fútbol", "Fútbol"))
-FEV <- c(396, 472, 560, 653)
-ej2.grafico <- data.frame(Sexo, Condicion, FEV)
+ej2.grafico <- ej2 %>% group_by(Sexo, Condicion) %>% summarise(media = mean(FEV))
+ej2.grafico$Condicion <- factor(ej2.grafico$Condicion, levels = c("Futbol", "No futbol"))
 ```
 
 Ahora podemos utilizar `ggplot2` para nuestro gráfico. Utilizaremos dos geometrías, `geom_line` y `geom_dotplot`.
 ```{r}
-ggplot(ej2.grafico, aes(x = Condicion, y = FEV, fill = Sexo)) +
+ggplot(ej2.grafico, aes(x = Condicion, y = media, fill = Sexo)) +
   geom_line(aes(group = Sexo)) +
   geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 15) +
   scale_y_continuous(limits = c(0,700), breaks = seq(0, 700, by = 100)) +
