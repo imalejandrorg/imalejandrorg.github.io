@@ -13,7 +13,7 @@
 
 <title>Presentaciones y scripts</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -245,7 +249,7 @@ $(document).ready(function () {
   <a href="index.html">Inicio</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Cursos
      
     <span class="caret"></span>
@@ -254,10 +258,13 @@ $(document).ready(function () {
     <li>
       <a href="Curso_R_basico/Curso_R_basico/docs/index.html">Bioestadística con R</a>
     </li>
+    <li>
+      <a href="Curso_R_graficas/ggplot2/">Gráficos con ggplot2</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Proyectos
      
     <span class="caret"></span>
@@ -285,28 +292,61 @@ $(document).ready(function () {
 </div>
 
 
-<p>Aquí encontrarás las presentaciones y scripts de los distintos cursos dados, así como material de apoyo extra.</p>
+<p>Aquí encontrarás las presentaciones y scripts de los distintos cursos
+dados, así como material de apoyo extra.</p>
 <div id="curso-de-bioestadística-con-r" class="section level3">
-<h3><a href="https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html">Curso de bioestadística con R</a></h3>
+<h3><a
+href="https://imalejandrorg.github.io/Curso_R_basico/Curso_R_basico/docs/index.html">Curso
+de bioestadística con R</a></h3>
 <ul>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1">Presentación 1: Introducción a R</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02.html#1">Presentación 2: Estadística descriptiva</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03.html#1">Presentación 3: Probabilidad</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04.html#1">Presentación 4: Estadística inferencial</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05.html#1">Presentación 5: Inferencias de datos categóricos</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06.html#1">Presentación 6: Modelado de relaciones</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07.html#1">Presentación 7: Correlación y regresión lineal</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01.html#1">Presentación
+1: Introducción a R</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02.html#1">Presentación
+2: Estadística descriptiva</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03.html#1">Presentación
+3: Probabilidad</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04.html#1">Presentación
+4: Estadística inferencial</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05.html#1">Presentación
+5: Inferencias de datos categóricos</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06.html#1">Presentación
+6: Modelado de relaciones</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07.html#1">Presentación
+7: Correlación y regresión lineal</a></p></li>
 </ul>
-<div id="presentaciones-disponibles-en-formato-xaringan" class="section level5">
-<h5>Presentaciones disponibles en formato <strong>xaringan:</strong></h5>
+<div id="presentaciones-disponibles-en-formato-xaringan"
+class="section level5">
+<h5>Presentaciones disponibles en formato
+<strong>xaringan:</strong></h5>
 <ul>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01-xaringan.html#1">Presentación 1: Introducción a R (xaringan)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02-xaringan.html#1">Presentación 2: Estadística descriptiva (xaringa)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03-xaringan.html#1">Presentación 3: Probabilidad (xaringan)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04-xaringan.html#1">Presentación 4: Estadística inferencial (xaringan)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05-xaringan.html#1">Presentación 5: Inferencias de datos categóricos (xaringan)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06-xaringan.html#1">Presentación 6: Modelado de relaciones (xaringan)</a></p></li>
-<li><p><a href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07-xaringan.html#1">Presentación 7: Correlación y regresión lineal (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-01/clase-01-xaringan.html#1">Presentación
+1: Introducción a R (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-02/clase-02-xaringan.html#1">Presentación
+2: Estadística descriptiva (xaringa)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-03/clase-03-xaringan.html#1">Presentación
+3: Probabilidad (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-04/clase-04-xaringan.html#1">Presentación
+4: Estadística inferencial (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-05/clase-05-xaringan.html#1">Presentación
+5: Inferencias de datos categóricos (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-06/clase-06-xaringan.html#1">Presentación
+6: Modelado de relaciones (xaringan)</a></p></li>
+<li><p><a
+href="https://imalejandrorg.github.io/Curso_R_basico/presentaciones/Clase-07/clase-07-xaringan.html#1">Presentación
+7: Correlación y regresión lineal (xaringan)</a></p></li>
 </ul>
 </div>
 </div>

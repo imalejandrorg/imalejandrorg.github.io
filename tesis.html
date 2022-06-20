@@ -13,7 +13,7 @@
 
 <title>Tesis de Licenciatura</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -245,7 +249,7 @@ $(document).ready(function () {
   <a href="index.html">Inicio</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Cursos
      
     <span class="caret"></span>
@@ -254,10 +258,13 @@ $(document).ready(function () {
     <li>
       <a href="Curso_R_basico/Curso_R_basico/docs/index.html">Bioestadística con R</a>
     </li>
+    <li>
+      <a href="Curso_R_graficas/ggplot2/">Gráficos con ggplot2</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Proyectos
      
     <span class="caret"></span>
@@ -285,7 +292,8 @@ $(document).ready(function () {
 </div>
 
 
-<p>Aquí encontrarás información acerca de la tesis de licenciatura que estoy realizando… ¡Proximamente!</p>
+<p>Aquí encontrarás información acerca de la tesis de licenciatura que
+estoy realizando… ¡Proximamente!</p>
 
 
 

@@ -13,7 +13,7 @@
 
 <title>Inicio</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -245,7 +249,7 @@ $(document).ready(function () {
   <a href="index.html">Inicio</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Cursos
      
     <span class="caret"></span>
@@ -254,10 +258,13 @@ $(document).ready(function () {
     <li>
       <a href="Curso_R_basico/Curso_R_basico/docs/index.html">Bioestadística con R</a>
     </li>
+    <li>
+      <a href="Curso_R_graficas/ggplot2/">Gráficos con ggplot2</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Proyectos
      
     <span class="caret"></span>
@@ -287,14 +294,35 @@ $(document).ready(function () {
 
 <div id="bienvenida" class="section level3">
 <h3>Bienvenida</h3>
-<p>¡Hola! Bienvenidos a la página web. En un futuro estaré subiendo scripts, tutoriales y guías de R para trabajar con datos biológicos. Cabe aclarar que no soy un experto, simplemente un estudiante apasionado de la computación y la biología.</p>
+<p>¡Hola! Bienvenidos a la página web. En un futuro estaré subiendo
+scripts, tutoriales y guías de R para trabajar con datos biológicos.
+Cabe aclarar que no soy un experto, simplemente un estudiante apasionado
+de la computación y la biología.</p>
 <p><strong>¿Quién soy?</strong></p>
 <p><img src="profile.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>Mi nombre es <strong>Alejandro Ruiz,</strong> biólogo por parte de la Universidad de Guadalajara, en Jalisco, México. He tomado algunos cursos y guías de R para el análisis de datos biológicos y a partir de ahí comencé a interesarme muchísimo y comencé a estudiar más por mi cuenta. Actualmente me encuentro realizando mi tesis de licenciatura, trabajando con aves en el Nevado de Colima, Jalisco, México y debido a ello he tenido que aprender a usar R.</p>
-<p>He participado como voluntario en distintos laboratorios uno de ellos de neurociencias, donde asistí al congreso <em>Neuroscience 2018</em>, para presentar un póster sobre una técnica que desarrollamos para detectar un neurotransmisor.</p>
-<p>A finales de 2018 transicioné a la ecología y la conservación biológica, trabajando principalmente en el Complejo Volcánico de Colima (CVC) que incluye al Nevado de Colima y Volcán de Colima así como su zona de influencia.</p>
-<p>Como dije en un principio, no soy experto y seguro hay formas muchísimo más sencillas de obtener los resultados que yo obtengo, sin embargo, el lenguaje de programación, como su nombre indica, es un lenguaje y podemos expresar lo mismo de muchísimas maneras. Esta es la mía.</p>
-<p>Actualmente me encuentro desarrollando un curso de R para mis colegas de la universidad. Espero que a ti que estás viendo esto también te sirva un poco.</p>
+<p>Mi nombre es <strong>Alejandro Ruiz,</strong> biólogo por parte de la
+Universidad de Guadalajara, en Jalisco, México. He tomado algunos cursos
+y guías de R para el análisis de datos biológicos y a partir de ahí
+comencé a interesarme muchísimo y comencé a estudiar más por mi cuenta.
+Actualmente me encuentro realizando mi tesis de licenciatura, trabajando
+con aves en el Nevado de Colima, Jalisco, México y debido a ello he
+tenido que aprender a usar R.</p>
+<p>He participado como voluntario en distintos laboratorios uno de ellos
+de neurociencias, donde asistí al congreso <em>Neuroscience 2018</em>,
+para presentar un póster sobre una técnica que desarrollamos para
+detectar un neurotransmisor.</p>
+<p>A finales de 2018 transicioné a la ecología y la conservación
+biológica, trabajando principalmente en el Complejo Volcánico de Colima
+(CVC) que incluye al Nevado de Colima y Volcán de Colima así como su
+zona de influencia.</p>
+<p>Como dije en un principio, no soy experto y seguro hay formas
+muchísimo más sencillas de obtener los resultados que yo obtengo, sin
+embargo, el lenguaje de programación, como su nombre indica, es un
+lenguaje y podemos expresar lo mismo de muchísimas maneras. Esta es la
+mía.</p>
+<p>Actualmente me encuentro desarrollando un curso de R para mis colegas
+de la universidad. Espero que a ti que estás viendo esto también te
+sirva un poco.</p>
 <p>¡Saludos!</p>
 </div>
 
