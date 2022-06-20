@@ -692,7 +692,7 @@ Donde obtenemos el intervalo de confianza tanto para $b_0$ como para $b_1$. En e
 ---
 # Prueba de hipótesis para $H_0: \beta_1 = 0$
 
-En algunas investigaciones, no es una conclusión inevitable que exista una relación lineal entre $X$ y $Y$. Puede ser entonces importante considerar qu cualquier tendencia aparente surgió por azar, que sea ilusora y que solo refleje la variabilidad del muestreo. Entonces:
+En algunas investigaciones, no es una conclusión inevitable que exista una relación lineal entre $X$ y $Y$. Puede ser entonces importante considerar que cualquier tendencia aparente surgió por azar, que sea ilusora y que solo refleje la variabilidad del muestreo. Entonces:
 
 $$H_0: \mu_{Y|X} \space no \space depende \space de \space X$$
 

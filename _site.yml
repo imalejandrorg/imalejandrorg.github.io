@@ -8,6 +8,8 @@ navbar:
       menu:
       - text: "Bioestadística con R"
         href: Curso_R_basico/Curso_R_basico/docs/index.html
+      - text: "Gráficos con ggplot2"
+        href:
     - text: "Proyectos"
       menu:
       - text: "Tesis de Licenciatura"
