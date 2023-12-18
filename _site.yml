@@ -14,6 +14,8 @@ navbar:
       menu:
       - text: "Tesis de Licenciatura"
         href: tesis.html
+      - text: "Conectividad en el AMG"
+        href: Conectividad_AMG/conectividad_AMG.html
 output_dir: "."
 output:
   html_document:

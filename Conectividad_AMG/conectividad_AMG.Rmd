@@ -1,0 +1,14 @@
+---
+title: "Conectividad del Área Metropolitana de Guadalajara (AMG)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Estudio de conectividad**
+
+Si bien en este Proyecto como tal, no tuve que trabajar directamente con el uso de R ni RStudio, me gustaría compartirles un poco de lo que fue el estudio de conectividad del **Área Metropolitana de Guadalajara (AMG).**
+
+[EN CONSTRUCCIÓN]
