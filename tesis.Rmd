@@ -39,4 +39,10 @@ Opté por realizar los análisis en R por dos razones:
 
 2.  **Facilidad para los análisis:** Yo sé que muchas veces nos vemos abrumados por el uso de `R` y pareciera que la curva de aprendizaje es infinita pero, una vez que entiendes la poderosa herramienta que es, no hay vuelta atrás, tarde o temprano, le dices adiós al *Excel*.
 
-Ahora bien, los scripts se pueden encontrar todos en mi carpeta de Github, haciendo clic aquí.
+Ahora bien, los scripts se pueden encontrar todos en mi carpeta de Github:
+
+-   [Scripts](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Tesis_Lic/scripts)
+
+-   [Bases de datos](https://github.com/imalejandrorg/imalejandrorg.github.io/tree/main/Tesis_Lic/Archivos)
+
+De tal manera que se pueden descargar ambas cosas, tanto los scripts como las bases de datos. Espero que te sean de utilidad :).
