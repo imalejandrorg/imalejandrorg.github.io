@@ -124,3 +124,4 @@ y <- rnorm(25, 63, 12.2)
 library(rstatix)
 shapiro_test(y)
 shapiro.test(y)
+

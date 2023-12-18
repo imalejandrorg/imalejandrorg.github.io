@@ -1,0 +1,417 @@
+---
+title: "Gráficos con ggplot2"
+author: "Alejandro Ruiz"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      beforeInit: "macros.js"
+---
+class: inverse, middle, center
+
+```{r setup, include=FALSE}
+library(gt)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	eval = TRUE,
+	fig.retina = 3
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(tidyverse)
+style_mono_accent(
+  base_color = "#0f2f50",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Fira Sans"),
+  code_font_google = google_font("Fira Mono"),
+  base_font_size = "24px",
+  code_highlight_color = "rgba(126, 191, 160, 0.5)",
+  code_font_size = "20px",
+  text_slide_number_font_size = "16px")
+```
+
+
+# Introducción a la grámatica de ggplot2
+
+---
+## Antes de comenzar...
+--
+
+Primero será necesario cargar el paquete `tidyverse` que contiene `ggplot2` y otros paquetes que nos serán de muchísima ayuda.
+
+--
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=TRUE}
+library(tidyverse)
+```
+
+---
+## La gramática básica de ggplot2
+Está basada en el libro ***The Gramma of Graphics* de Wilkinson (2005)** y se compone de distintos elementos que se pueden componer de maneras muy distintas.
+
+--
+
+Las "capas" de un gráfico de ggplot básico se pueden dividir de la siguiente manera:
+
+--
+
+```{r imagen1, echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("ge_themes.png", dpi = 300)
+```
+
+---
+## La gramática básica de ggplot2
+La **gramática de los gráficos** (Wilkinson 2005) nos dice que un gráfico estadístico no es más que un mapeo de nuestros datos a valores estéticos (e.g. color, forma, tamaño) de objetos geométricos (e.g. puntos, líneas, barras) (Wickham et al. 2017).
+
+--
+
+El gráfico puede contener transformaciones estadísticas y es proyectado en un sistema específico de coordenadas.
+
+--
+
+```{r imagen2, echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE}
+knitr::include_graphics("ge_themes.png", dpi = 300)
+```
+
+---
+## Composición de un gráfico
+Como ya vimos, todos los gráficos están compuestos de:
+
+--
+
+- **Datos:** La información que queremos visualizar y mapear a través de ciertos **valores estéticos.**
+
+--
+
+- **Capas:** Conformadas de figuras geométricas **(geoms)** o de transformaciones estadísticas **(stats).**
+
+--
+
+- **Escalas:** Mapean los valores de de los datos a valores estéticos, ya se en color, tamaño o forma. 
+
+--
+
+- **Sistema de coordenadas:** Describe cómo las coordenadas de los datos se proyectan en el gráfico.
+
+--
+
+- **Facet:** Ayuda a partir un gráfico en subgrupos de gráficos con la misma configuración.
+
+--
+
+- **Tema:** Que ayuda a controlar detalles finos del gráfico en cuestión.
+
+---
+## Creando nuestro primer gráfico.
+Vamos a utilizar la base de datos `mpg` de la librería de `ggplot2`.
+
+--
+
+```{r mpg-load, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+data(mtcars)
+```
+
+--
+
+```{r mpg-table, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+data(mtcars)
+knitr::kable(head(mtcars), format = "html")
+```
+
+---
+## Componentes clave
+
+```{r grafica-1, echo=TRUE, fig.align='center', dpi = 150, fig.height=2.5, fig.width=4}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point()
+```
+
+---
+## Otros atributos estéticos
+**ggplot** se puede encargar de transformar las distintas clases en colores de manera automática. Este proceso se conoce como **escalamiento.** Con el escalamiento obtenemos un **gráfico 3D.** En este caso, representando el desplazamiento del motor (disp), las millas por galón (mpg) y el número de cilindros (cyl).
+
+--
+
+```{r grafica-2, echo=TRUE, fig.align='center', dpi = 150, fig.height=1.8, fig.width=6}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg, color = cyl)) +
+  geom_point()
+```
+
+---
+## Otros atributos estéticos
+Podemos asignar valores fijos para valores estéticos, sin hacer escalamiento, simplemente hay que incluirlo fuera de la función `aes()`.
+--
+
+```{r grafica-3, echo=TRUE, fig.align='center', dpi = 150, fig.height=2, fig.width=6}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point(color = "blue")
+```
+
+---
+## Facetting
+Nos sirve para mostrar una variable categórica, volviendo escencialmente nuestro gráfico un **gráfico 3D.** El "faceteo" crea subgráficas a partir de una gráfica principal.
+
+--
+
+```{r grafica-4, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.1, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  facet_wrap(~cyl)
+```
+
+---
+## Otro tipo de geoms
+Existe un sin número de geoms que podemos utilizar. Por ejemplo, dentro de los geoms más utilizados están:
+
+--
+
+- `geom_smooth()`: ajusta una línea a la distribución de los datos y también muestra su error estándar.
+
+--
+
+- `geom_boxplot()`: produce un gráfico de cajas modificado.
+
+--
+
+- `geom_histogram()` y `geom_freqpoly()`: muestran la distribución de variables continuas.
+
+--
+
+- `geom_bar()`: muestra la distribución de variables categóricas.
+
+--
+
+- `geom_path()` y `geom_line()`: dibujan líneas entre dos puntos.
+
+---
+## Líneas de regresión o de ajuste
+Útil para ver el patrón de nuestros datos en un gráfico de dispersión.
+
+--
+
+```{r grafica-5, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.1, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth()
+```
+
+---
+## `geom_smooth()`
+Si no nos interesa el intervalo de confianza mostrado en gris, podemos quitarlo de la proyección con el argumento `geom_smooth(se = FALSE)`. 
+
+```{r grafica-6, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.1, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+---
+## `geom_smooth()`
+Otro argumento importante es el método de la regresión. `method = "loess"` se utiliza para tamaños de $n$ pequeños y está basado en la regresión local. Qué tan ondulado es un gráfico depende mucho del valor del argumento `span` que varía de 0 a 1.
+
+--
+.pull-left[ `span = 0.2`
+```{r grafica-7, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.1, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", span = 0.2)
+```
+]
+
+.pull-right[ `span = 1`
+```{r grafica-8, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.1, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", span = 1)
+```
+]
+
+---
+## `geom_smooth()`
+Otro método usado cuando tenemos $n$ muy grandes es `method = "gam"` que utiliza un modelo generalizado aditivo. Es utilizado de manera automática por ggplot cuando hay más de 1,000 observaciones.
+
+--
+
+```{r grafica-9, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x))
+```
+
+---
+## `geom_smooth()`
+Los últimos dos métodos que podemos usar son `method = "lm"` y `method = "rlm"`. Ambos son **modelos lineales**, sin embargo **"rlm"** utiliza una linea de regresión robusta para evitar el efecto de los valores atípicos.
+
+```{r grafica-10, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=6, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+---
+## Gráficos de caja y gráficos con jitter
+Se utilizan cuando en los gráficos de puntos, varias de las observaciones se enciman unas con otras. La función `geom_jitter()` dispersa los puntos en el eje de las x para poder visualizar mejor la distribución, esto funciona para variables categóricas. Para `geom_jitter()` tenemos los atributos estéticos `shape`, `size` y `color`.
+
+--
+
+```{r grafica-11, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=4, dpi = 150}
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_jitter()
+```
+
+---
+## `geom_boxplot()` y `geom_violin()`
+`geom_boxplot()` y `geom_violin()` nos sirven para visualizar de manera más directa la distribución de nuestros datos. Para estas funciones tenemos atributos estéticos adicionales como `fill`, que cambia el relleno y `color` que cambia el contorno.
+
+--
+
+.pull-left[
+```{r grafica-12, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=3, dpi = 150}
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_boxplot()
+```
+]
+
+.pull-right[
+```{r grafica-13, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=3, dpi = 150}
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_violin()
+```
+]
+
+---
+## Histogramas y polígonos de frecuencias
+Muestran la distribución de una variable numérica. Ambas funciones compartimentalizan (los llamados `bin`).
+
+--
+
+.pull-left[
+```{r grafica-14, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=3, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_histogram()
+```
+]
+
+.pull-right[
+```{r grafica-15, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=3, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_freqpoly()
+```
+]
+
+---
+## `geom_histogram()` y `geom_freqpoly()`
+Se puede controlar el ancho de los bins con el argumento `bindwidth`.
+
+--
+
+```{r grafica-16, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.2, fig.width=5, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_histogram(binwidth = 5)
+```
+
+---
+## `geom_density()`
+Es una alternativa del `geom_freqpoly()` que muestra la distribución de probabilidad de nuestra variable.
+
+--
+
+```{r grafica-17, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.2, fig.width=5, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_density()
+```
+
+---
+## El argumento `fill`
+Se puede utilizar para comparar las distribuciones de múltiples grupos.
+
+--
+
+```{r grafica-18, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2.2, fig.width=5, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg, color = factor(cyl))) +
+  geom_density()
+```
+
+---
+## Gráficos de barra
+Es el análogo a un histograma pero para **variables discretas.** Se utiliza la función `geom_bar()`. Estos gráficos pueden mostrarnos datos **sin resumir** o datos **resumidosm** (como la media o mediana).
+
+--
+
+```{r grafica-19, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=1.8, fig.width=6, dpi = 150}
+data(mpg)
+ggplot(data = mpg, mapping = aes(x = manufacturer)) +
+  geom_bar()
+```
+
+---
+## Series temporales
+Se utilizan típicamente los geoms `geom_line()` y `geom_path()`. Usualmente estos gráficos representa el tiempo en el eje de las x.
+
+--
+
+```{r grafica-20, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2, fig.width=6, dpi = 150}
+data(economics)
+ggplot(data = economics, mapping = aes(x = date, y = unemploy / pop)) +
+  geom_line()
+```
+
+---
+## Modificando los ejes
+Se pueden modificar las **etiquetas de los ejes** con tres funciones distintas: `xlab()`, `ylab()` o `labs(x = "", y = "")`.
+
+--
+
+```{r grafica-21, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2, fig.width=4, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)")
+```
+
+---
+## Modificando los ejes
+Las funciones `xlim()` y `ylim` modifican los límites de los ejes.
+
+--
+
+```{r grafica-22, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2, fig.width=4, dpi = 150}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)") +
+  xlim(NA, 40) + # Para variables continuas podemos utilizar 'NA' para indicar solo un límite.
+  ylim(0, 10)
+```
+
+---
+## Guardando un gráfico
+Para guardar un gráfico necesitamos **asignarlo a una variable** y utilizar la función `ggsave()`.
+
+```{r grafica-23, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2, fig.width=4, dpi = 150}
+p <- ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)")
+
+ggsave("mpg.png", width = 8, height = 5, dpi = 300)
+```
+
+---
+## Gráfico rápidos
+La función `qplot()` nos sirve para generar un gráfico rápido de nuestros datos, es bastante útil en la **fase exploratoria** de un análisis.
+
+--
+
+```{r grafica-24, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center', fig.height=2, fig.width=4, dpi = 150}
+qplot(x = mpg, y = wt, data = mtcars)
+```
+

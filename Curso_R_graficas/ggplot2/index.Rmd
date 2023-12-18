@@ -1,0 +1,39 @@
+--- 
+title: "Gráficos con ggplot2"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+csl: apa.csl
+link-citations: yes
+nocite: "@*"
+favicon: "images/favicon.ico"
+description: Curso de R cubriendo los aspectos básicos para el análisis de datos biológicos.
+---
+
+```{r setup, include=TRUE, cache = FALSE}
+library(knitr)
+library(bookdown)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Requisitos {-}
+Para este curso estaremos trabajando muchísimo con `ggplot2`, sin embargo, también usaremos otros paquetes del `tidyverse`, por lo que recomiendo ampliamente que instalemos esta librería que incluye a `ggplot2`.
+```{r}
+#install.packages(tidyverse)
+```
+
+También se recomienda tener un poco de experiencia con la sintaxis básica de `R` y el uso de `RStudio` como ambiente de programación, sin embargo, si no se cuenta con experiencia, tampoco es obstáculo para tomar este curso.
+
+## Interfaz básica de RStudio {-}
+A continuación se describen las 4 ventanas básicas que estaremos utilizando en `RStudio` para trabajar con nuestros archivos, paquetes, líneas de código y scripts.
+
+### Environment {-}
+
+### Files {-}
+
+### Console {-}
+
+### Scripts {-}

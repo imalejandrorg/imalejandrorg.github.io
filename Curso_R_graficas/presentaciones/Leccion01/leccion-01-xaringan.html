@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Gráficos con ggplot2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alejandro Ruiz" />
+    <meta name="date" content="2022-08-29" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Gráficos con ggplot2
+]
+.author[
+### Alejandro Ruiz
+]
+.date[
+### 2022-08-29
+]
+
+---
+
+class: inverse, middle, center
+
+
+
+
+
+
+# Introducción a la grámatica de ggplot2
+
+---
+## Antes de comenzar...
+--
+
+Primero será necesario cargar el paquete `tidyverse` que contiene `ggplot2` y otros paquetes que nos serán de muchísima ayuda.
+
+--
+
+
+```r
+library(tidyverse)
+```
+
+---
+## La gramática básica de ggplot2
+Está basada en el libro ***The Gramma of Graphics* de Wilkinson (2005)** y se compone de distintos elementos que se pueden componer de maneras muy distintas.
+
+--
+
+Las "capas" de un gráfico de ggplot básico se pueden dividir de la siguiente manera:
+
+--
+
+&lt;img src="ge_themes.png" width="316" style="display: block; margin: auto;" /&gt;
+
+---
+## La gramática básica de ggplot2
+La **gramática de los gráficos** (Wilkinson 2005) nos dice que un gráfico estadístico no es más que un mapeo de nuestros datos a valores estéticos (e.g. color, forma, tamaño) de objetos geométricos (e.g. puntos, líneas, barras) (Wickham et al. 2017).
+
+--
+
+El gráfico puede contener transformaciones estadísticas y es proyectado en un sistema específico de coordenadas.
+
+--
+
+&lt;img src="ge_themes.png" width="316" style="display: block; margin: auto;" /&gt;
+
+---
+## Composición de un gráfico
+Como ya vimos, todos los gráficos están compuestos de:
+
+--
+
+- **Datos:** La información que queremos visualizar y mapear a través de ciertos **valores estéticos.**
+
+--
+
+- **Capas:** Conformadas de figuras geométricas **(geoms)** o de transformaciones estadísticas **(stats).**
+
+--
+
+- **Escalas:** Mapean los valores de de los datos a valores estéticos, ya se en color, tamaño o forma. 
+
+--
+
+- **Sistema de coordenadas:** Describe cómo las coordenadas de los datos se proyectan en el gráfico.
+
+--
+
+- **Facet:** Ayuda a partir un gráfico en subgrupos de gráficos con la misma configuración.
+
+--
+
+- **Tema:** Que ayuda a controlar detalles finos del gráfico en cuestión.
+
+---
+## Creando nuestro primer gráfico.
+Vamos a utilizar la base de datos `mpg` de la librería de `ggplot2`.
+
+--
+
+
+```r
+data(mtcars)
+```
+
+--
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; drat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wt &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; qsec &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; vs &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; am &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; gear &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; carb &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.620 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.875 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.320 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet 4 Drive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.215 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet Sportabout &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 360 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 175 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.440 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Valiant &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 225 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 105 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.460 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## Componentes clave
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-1-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+## Otros atributos estéticos
+**ggplot** se puede encargar de transformar las distintas clases en colores de manera automática. Este proceso se conoce como **escalamiento.** Con el escalamiento obtenemos un **gráfico 3D.** En este caso, representando el desplazamiento del motor (disp), las millas por galón (mpg) y el número de cilindros (cyl).
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg, color = cyl)) +
+  geom_point()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-2-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Otros atributos estéticos
+Podemos asignar valores fijos para valores estéticos, sin hacer escalamiento, simplemente hay que incluirlo fuera de la función `aes()`.
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point(color = "blue")
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-3-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Facetting
+Nos sirve para mostrar una variable categórica, volviendo escencialmente nuestro gráfico un **gráfico 3D.** El "faceteo" crea subgráficas a partir de una gráfica principal.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  facet_wrap(~cyl)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-4-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Otro tipo de geoms
+Existe un sin número de geoms que podemos utilizar. Por ejemplo, dentro de los geoms más utilizados están:
+
+--
+
+- `geom_smooth()`: ajusta una línea a la distribución de los datos y también muestra su error estándar.
+
+--
+
+- `geom_boxplot()`: produce un gráfico de cajas modificado.
+
+--
+
+- `geom_histogram()` y `geom_freqpoly()`: muestran la distribución de variables continuas.
+
+--
+
+- `geom_bar()`: muestra la distribución de variables categóricas.
+
+--
+
+- `geom_path()` y `geom_line()`: dibujan líneas entre dos puntos.
+
+---
+## Líneas de regresión o de ajuste
+Útil para ver el patrón de nuestros datos en un gráfico de dispersión.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-5-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## `geom_smooth()`
+Si no nos interesa el intervalo de confianza mostrado en gris, podemos quitarlo de la proyección con el argumento `geom_smooth(se = FALSE)`. 
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-6-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## `geom_smooth()`
+Otro argumento importante es el método de la regresión. `method = "loess"` se utiliza para tamaños de `\(n\)` pequeños y está basado en la regresión local. Qué tan ondulado es un gráfico depende mucho del valor del argumento `span` que varía de 0 a 1.
+
+--
+.pull-left[ `span = 0.2`
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", span = 0.2)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-7-1.png" width="900" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[ `span = 1`
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", span = 1)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-8-1.png" width="900" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## `geom_smooth()`
+Otro método usado cuando tenemos `\(n\)` muy grandes es `method = "gam"` que utiliza un modelo generalizado aditivo. Es utilizado de manera automática por ggplot cuando hay más de 1,000 observaciones.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x))
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-9-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## `geom_smooth()`
+Los últimos dos métodos que podemos usar son `method = "lm"` y `method = "rlm"`. Ambos son **modelos lineales**, sin embargo **"rlm"** utiliza una linea de regresión robusta para evitar el efecto de los valores atípicos.
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-10-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Gráficos de caja y gráficos con jitter
+Se utilizan cuando en los gráficos de puntos, varias de las observaciones se enciman unas con otras. La función `geom_jitter()` dispersa los puntos en el eje de las x para poder visualizar mejor la distribución, esto funciona para variables categóricas. Para `geom_jitter()` tenemos los atributos estéticos `shape`, `size` y `color`.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_jitter()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-11-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+## `geom_boxplot()` y `geom_violin()`
+`geom_boxplot()` y `geom_violin()` nos sirven para visualizar de manera más directa la distribución de nuestros datos. Para estas funciones tenemos atributos estéticos adicionales como `fill`, que cambia el relleno y `color` que cambia el contorno.
+
+--
+
+.pull-left[
+
+```r
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_boxplot()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-12-1.png" width="450" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+ggplot(data = mtcars, mapping = aes(y = disp, x = factor(am))) +
+  geom_violin()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-13-1.png" width="450" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Histogramas y polígonos de frecuencias
+Muestran la distribución de una variable numérica. Ambas funciones compartimentalizan (los llamados `bin`).
+
+--
+
+.pull-left[
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_histogram()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-14-1.png" width="450" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_freqpoly()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-15-1.png" width="450" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## `geom_histogram()` y `geom_freqpoly()`
+Se puede controlar el ancho de los bins con el argumento `bindwidth`.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_histogram(binwidth = 5)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-16-1.png" width="750" style="display: block; margin: auto;" /&gt;
+
+---
+## `geom_density()`
+Es una alternativa del `geom_freqpoly()` que muestra la distribución de probabilidad de nuestra variable.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg)) +
+  geom_density()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-17-1.png" width="750" style="display: block; margin: auto;" /&gt;
+
+---
+## El argumento `fill`
+Se puede utilizar para comparar las distribuciones de múltiples grupos.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg, color = factor(cyl))) +
+  geom_density()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-18-1.png" width="750" style="display: block; margin: auto;" /&gt;
+
+---
+## Gráficos de barra
+Es el análogo a un histograma pero para **variables discretas.** Se utiliza la función `geom_bar()`. Estos gráficos pueden mostrarnos datos **sin resumir** o datos **resumidosm** (como la media o mediana).
+
+--
+
+
+```r
+data(mpg)
+ggplot(data = mpg, mapping = aes(x = manufacturer)) +
+  geom_bar()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-19-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Series temporales
+Se utilizan típicamente los geoms `geom_line()` y `geom_path()`. Usualmente estos gráficos representa el tiempo en el eje de las x.
+
+--
+
+
+```r
+data(economics)
+ggplot(data = economics, mapping = aes(x = date, y = unemploy / pop)) +
+  geom_line()
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-20-1.png" width="900" style="display: block; margin: auto;" /&gt;
+
+---
+## Modificando los ejes
+Se pueden modificar las **etiquetas de los ejes** con tres funciones distintas: `xlab()`, `ylab()` o `labs(x = "", y = "")`.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)")
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-21-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+## Modificando los ejes
+Las funciones `xlim()` y `ylim` modifican los límites de los ejes.
+
+--
+
+
+```r
+ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)") +
+  xlim(NA, 40) + # Para variables continuas podemos utilizar 'NA' para indicar solo un límite.
+  ylim(0, 10)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-22-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+## Guardando un gráfico
+Para guardar un gráfico necesitamos **asignarlo a una variable** y utilizar la función `ggsave()`.
+
+
+```r
+p &lt;- ggplot(data = mtcars, mapping = aes(x = mpg, y = wt)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Millas por galón (mpg)", y = "Peso (ton)")
+
+ggsave("mpg.png", width = 8, height = 5, dpi = 300)
+```
+
+---
+## Gráfico rápidos
+La función `qplot()` nos sirve para generar un gráfico rápido de nuestros datos, es bastante útil en la **fase exploratoria** de un análisis.
+
+--
+
+
+```r
+qplot(x = mpg, y = wt, data = mtcars)
+```
+
+&lt;img src="leccion-01-xaringan_files/figure-html/grafica-24-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

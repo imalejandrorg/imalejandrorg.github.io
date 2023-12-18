@@ -13,7 +13,7 @@
 
 <title>Tesis de Licenciatura</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -141,11 +141,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -174,8 +178,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -183,16 +187,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -292,8 +289,59 @@ $(document).ready(function () {
 </div>
 
 
-<p>Aquí encontrarás información acerca de la tesis de licenciatura que
-estoy realizando… ¡Proximamente!</p>
+<div id="calificación-final" class="section level3">
+<h3><strong>Calificación final</strong></h3>
+<p>La <strong>tesis de licenciatura</strong> escrita por mí, fue
+presentada el 03 de julio del 2023 en el Centro Universitario de
+Ciencias Biológicas y Agropecuarias (CUCBA) de la Universidad de
+Guadalajara, en Zapopan, Jalisco, México.</p>
+<p>Afortunadamente, la tesis obtuvo el grado de EXELENCIA por parte de
+los sinodales evaluadores y un 100 como calificación final, obteniendo
+así el título como Licenciado en Biología.</p>
+<p>Si tienes curiosidad y deseas leerla, puedes encontrar una copia
+digital de la misma en el <a
+href="https://drive.google.com/file/d/1gALRxEFG7ExOv6n2jR9t9Phrtw9nUG-L/view?usp=drive_link">link
+de aquí.</a></p>
+<center>
+<div class="float">
+<img src="Tesis_Lic/img/Tesis_1.jpg"
+alt="Mis sinodales, la Mtra. Ana Luisa Santiago Pérez, el Dr. Fabián Alejandro Rodríguez Zaragoza y el Dr. Guillermo Barba Calvillo y mi director de tesis, Dr. Luis Enrique Sánchez Ramos." />
+<div class="figcaption">Mis sinodales, la <em>Mtra. Ana Luisa Santiago
+Pérez</em>, el <em>Dr. Fabián Alejandro Rodríguez Zaragoza</em> y el
+<em>Dr. Guillermo Barba Calvillo</em> y mi director de tesis,
+<em>Dr. Luis Enrique Sánchez Ramos.</em></div>
+</div>
+</center>
+<p><br> </br></p>
+<center>
+<div class="float">
+<img src="Tesis_Lic/img/Tesis_1.jpg"
+alt="Mi director, Dr. Luis Enrique Sánchez Ramos y mi asesora, Dra. Sonia Navarro Pérez." />
+<div class="figcaption">Mi director, <em>Dr. Luis Enrique Sánchez
+Ramos</em> y mi asesora, <em>Dra. Sonia Navarro Pérez.</em></div>
+</div>
+</center>
+<p><br> </br></p>
+</div>
+<div id="los-análisis" class="section level3">
+<h3><strong>Los análisis</strong></h3>
+<p>Opté por realizar los análisis en R por dos razones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Reproducibilidad:</strong> Quería que los datos de mi
+tesis, así como los scripts implementados, sirvan de ayuda a otras
+personas que se encuentren realizando estudios similares, ya que, sé que
+no existe mucha información sobre el tema y si bien, mis scripts no
+están pensados para ser una guía como tal, creo que pueden surgir buenas
+ideas a partir de ellos.</p></li>
+<li><p><strong>Facilidad para los análisis:</strong> Yo sé que muchas
+veces nos vemos abrumados por el uso de <code>R</code> y pareciera que
+la curva de aprendizaje es infinita pero, una vez que entiendes la
+poderosa herramienta que es, no hay vuelta atrás, tarde o temprano, le
+dices adiós al <em>Excel</em>.</p></li>
+</ol>
+<p>Ahora bien, los scripts se pueden encontrar todos en mi carpeta de
+Github, haciendo clic aquí.</p>
+</div>
 
 
 

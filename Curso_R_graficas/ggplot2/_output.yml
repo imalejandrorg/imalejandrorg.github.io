@@ -1,0 +1,10 @@
+bookdown::gitbook:
+  highlight: tango
+  split_bib: no
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Gráficos con ggplot2</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>

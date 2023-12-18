@@ -254,9 +254,8 @@ Algunos de los requisitos de una distribución de probabilidad son:
 data <- data.frame("x" = rnorm(100000, mean = 0, sd = 1))
 ggplot(data, aes(x = x)) +
   geom_histogram(aes(y=..density..), colour="black", fill="white") +
-  geom_density(size = 0.6) +
-  ylab("") +
-  xlab("") +
+  geom_density(size = 0.6, color = "blue") +
+  labs(x = "", y = "") +
   scale_y_continuous(expand = c(0,0), breaks = NULL) +
   theme_minimal_hgrid(color = "black")
 ```

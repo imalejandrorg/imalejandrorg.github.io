@@ -7,4 +7,36 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Aquí encontrarás información acerca de la tesis de licenciatura que estoy realizando... ¡Proximamente!
+### **Calificación final**
+
+La **tesis de licenciatura** escrita por mí, fue presentada el 03 de julio del 2023 en el Centro Universitario de Ciencias Biológicas y Agropecuarias (CUCBA) de la Universidad de Guadalajara, en Zapopan, Jalisco, México.
+
+Afortunadamente, la tesis obtuvo el grado de EXELENCIA por parte de los sinodales evaluadores y un 100 como calificación final, obteniendo así el título como Licenciado en Biología.
+
+Si tienes curiosidad y deseas leerla, puedes encontrar una copia digital de la misma en el [link de aquí.](https://drive.google.com/file/d/1gALRxEFG7ExOv6n2jR9t9Phrtw9nUG-L/view?usp=drive_link)
+
+<center>
+
+![Mis sinodales, la *Mtra. Ana Luisa Santiago Pérez*, el *Dr. Fabián Alejandro Rodríguez Zaragoza* y el *Dr. Guillermo Barba Calvillo* y mi director de tesis, *Dr. Luis Enrique Sánchez Ramos.*](Tesis_Lic/img/Tesis_1.jpg)
+
+</center>
+
+<br> </br>
+
+<center>
+
+![Mi director, *Dr. Luis Enrique Sánchez Ramos* y mi asesora, *Dra. Sonia Navarro Pérez.*](Tesis_Lic/img/Tesis_1.jpg)
+
+</center>
+
+<br> </br>
+
+### **Los análisis**
+
+Opté por realizar los análisis en R por dos razones:
+
+1.  **Reproducibilidad:** Quería que los datos de mi tesis, así como los scripts implementados, sirvan de ayuda a otras personas que se encuentren realizando estudios similares, ya que, sé que no existe mucha información sobre el tema y si bien, mis scripts no están pensados para ser una guía como tal, creo que pueden surgir buenas ideas a partir de ellos.
+
+2.  **Facilidad para los análisis:** Yo sé que muchas veces nos vemos abrumados por el uso de `R` y pareciera que la curva de aprendizaje es infinita pero, una vez que entiendes la poderosa herramienta que es, no hay vuelta atrás, tarde o temprano, le dices adiós al *Excel*.
+
+Ahora bien, los scripts se pueden encontrar todos en mi carpeta de Github, haciendo clic aquí.

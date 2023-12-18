@@ -1,0 +1,18 @@
+---
+output:
+  bookdown::html_document2:
+    fig.caption: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# La gramática de ggplot2
+```{r include=FALSE}
+library(knitr)
+library(bookdown)
+library(tidyverse)
+library(kableExtra)
+```
+
+## Cargando el paquete de `ggplot2`
